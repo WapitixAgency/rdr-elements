@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 5d38046",
- "livreLe": "2026-09-19T20:50:04.950Z",
+ "source": "WapitixAgency/route-du-rhum 52f081a",
+ "livreLe": "2026-09-19T21:17:34.408Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -12,7 +12,7 @@
    "priorite": "high",
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18476,
+   "brotli": 18538,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -65,7 +65,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17509,
+   "brotli": 17529,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,7 +108,7 @@
    "priorite": "high",
    "octets": 509651,
    "gzip": 120822,
-   "brotli": 97033,
+   "brotli": 97002,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139234,
+   "brotli": 139199,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -145,18 +145,21 @@
    ]
   },
   "skipper": {
-   "quoi": "la fiche skipper (page dynamique) ; sa charge utile est déjà dans le HTML servi",
+   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
-   "chemins": [],
+   "chemins": [
+    "/skippers",
+    "/en/skippers"
+   ],
    "prefixes": [
     "/skippers/",
     "/en/skippers/"
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 367950,
-   "gzip": 87507,
-   "brotli": 71020,
+   "octets": 457653,
+   "gzip": 107622,
+   "brotli": 85352,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -168,6 +171,14 @@
       "skippers-carousel",
       "rdr-espace-promo",
       "rdr-skipper"
+     ]
+    },
+    {
+     "fichier": "skippers-list.js",
+     "octets": 89665,
+     "sha": "31d8589e5159",
+     "balises": [
+      "skippers-list"
      ]
     }
    ]
