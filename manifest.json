@@ -1,5 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 7b951f7",
+ "source": "WapitixAgency/route-du-rhum 691a3c9",
+ "livreLe": "2026-09-19T18:48:52.530Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -8,7 +9,7 @@
    "chemins": [],
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18492,
+   "brotli": 18484,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -58,7 +59,7 @@
    "chemins": [],
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17520,
+   "brotli": 17539,
    "fichiers": [
     {
      "fichier": "home-news.js",
