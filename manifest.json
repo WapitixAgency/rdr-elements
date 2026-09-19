@@ -1,5 +1,5 @@
 {
- "source": "WapitixAgency/route-du-rhum 74f26ba",
+ "source": "WapitixAgency/route-du-rhum 3c7237b",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -8,7 +8,7 @@
    "chemins": [],
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18522,
+   "brotli": 18480,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -56,9 +56,9 @@
    "quoi": "les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit)",
    "partout": false,
    "chemins": [],
-   "octets": 91162,
-   "gzip": 23997,
-   "brotli": 20056,
+   "octets": 77955,
+   "gzip": 20571,
+   "brotli": 17501,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -82,14 +82,6 @@
      "sha": "1e8398029616",
      "balises": [
       "rdr-espace-promo"
-     ]
-    },
-    {
-     "fichier": "partners-grid.js",
-     "octets": 13456,
-     "sha": "5c1305851da3",
-     "balises": [
-      "partners-grid"
      ]
     }
    ]
