@@ -1,14 +1,14 @@
 {
- "source": "WapitixAgency/route-du-rhum 889de41",
+ "source": "WapitixAgency/route-du-rhum 74f26ba",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
-   "quoi": "les six méga menus et les deux horloges de l'en-tête, sur toutes les pages",
+   "quoi": "les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages",
    "partout": true,
    "chemins": [],
-   "octets": 58784,
-   "gzip": 14139,
-   "brotli": 12351,
+   "octets": 88889,
+   "gzip": 21728,
+   "brotli": 18522,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -41,6 +41,14 @@
      "balises": [
       "alpina-clock"
      ]
+    },
+    {
+     "fichier": "rdr-pied-haut.js",
+     "octets": 30148,
+     "sha": "9460ac2bf46c",
+     "balises": [
+      "rdr-pied-haut"
+     ]
     }
    ]
   },
@@ -49,8 +57,8 @@
    "partout": false,
    "chemins": [],
    "octets": 91162,
-   "gzip": 23996,
-   "brotli": 20052,
+   "gzip": 23997,
+   "brotli": 20056,
    "fichiers": [
     {
      "fichier": "home-news.js",

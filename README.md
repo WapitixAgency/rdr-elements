@@ -10,8 +10,8 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 
 | Paquet | Contenu | Poids |
 | --- | --- | --- |
-| `socle.js` | les six méga menus et les deux horloges de l'en-tête, sur toutes les pages : rdr-menu-actus, rdr-menu-cartes, timer-clock-simple, alpina-clock | 57.4 Ko, 12.1 Ko brotli |
+| `socle.js` | les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages : rdr-menu-actus, rdr-menu-cartes, timer-clock-simple, alpina-clock, rdr-pied-haut | 86.8 Ko, 18.1 Ko brotli |
 | `accueil.js` | les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit) : home-news, skippers-showcase, rdr-espace-promo, partners-grid | 89.0 Ko, 19.6 Ko brotli |
 | `test-rdr.js` | banc du chargement précoce sur TEST RDR26 (menus, figé au 20/09) | |
 
-Source : `WapitixAgency/route-du-rhum 889de41`.
+Source : `WapitixAgency/route-du-rhum 74f26ba`.
