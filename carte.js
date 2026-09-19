@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 7c35b62 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="7c35b62";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum a27123d | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a27123d";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -1151,7 +1151,12 @@ if (!customElements.get('village-map')) {
 
 
 
-  const vignette = (u, px, haut) => {
+  
+
+
+
+
+  const vignette = (u, px, haut, al) => {
     const v = urlSure(u);
     if (!v) return '';
     const m = v.match(/^https:\/\/static\.wixstatic\.com\/media\/([^/]+)$/);
@@ -1159,7 +1164,55 @@ if (!customElements.get('village-map')) {
     const d = px * 2;    
     const h = (haut || px) * 2;
     return 'https://static.wixstatic.com/media/' + m[1] +
-           '/v1/fill/w_' + d + ',h_' + h + ',al_c,q_80,enc_auto/' + m[1];
+           '/v1/fill/w_' + d + ',h_' + h + ',al_' + (al === 't' ? 't' : 'c') + ',q_80,enc_auto/' + m[1];
+  };
+  const portrait = (u, px) => vignette(u, px, 0, 't');
+
+  
+
+
+
+
+
+
+  const PAYS = {
+    fr: ['France', 'France'], be: ['Belgique', 'Belgium'], it: ['Italie', 'Italy'], es: ['Espagne', 'Spain'],
+    ie: ['Irlande', 'Ireland'], cz: ['Tchéquie', 'Czechia'], de: ['Allemagne', 'Germany'], ca: ['Canada', 'Canada'],
+    jp: ['Japon', 'Japan'], au: ['Australie', 'Australia'], gb: ['Royaume-Uni', 'United Kingdom'],
+    us: ['États-Unis', 'United States'], ch: ['Suisse', 'Switzerland'], mc: ['Monaco', 'Monaco'],
+    nl: ['Pays-Bas', 'Netherlands'], pl: ['Pologne', 'Poland'], pt: ['Portugal', 'Portugal'], cn: ['Chine', 'China'],
+    nz: ['Nouvelle-Zélande', 'New Zealand'], fi: ['Finlande', 'Finland'], at: ['Autriche', 'Austria'],
+    tr: ['Turquie', 'Türkiye'], dk: ['Danemark', 'Denmark'], se: ['Suède', 'Sweden'], no: ['Norvège', 'Norway'],
+    hu: ['Hongrie', 'Hungary'], gr: ['Grèce', 'Greece'], br: ['Brésil', 'Brazil'], ar: ['Argentine', 'Argentina'],
+    cl: ['Chili', 'Chile'], za: ['Afrique du Sud', 'South Africa'], ru: ['Russie', 'Russia'], ua: ['Ukraine', 'Ukraine'],
+    lu: ['Luxembourg', 'Luxembourg'], ma: ['Maroc', 'Morocco'], sn: ['Sénégal', 'Senegal'], mu: ['Maurice', 'Mauritius']
+  };
+   
+  const PAYS_CLE = [
+    ['sud-afric', 'za'], ['south afric', 'za'], ['neo-zeland', 'nz'], ['zeland', 'nz'], ['etats-unis', 'us'],
+    ['franc', 'fr'], ['belg', 'be'], ['ital', 'it'], ['espagn', 'es'], ['spani', 'es'], ['irland', 'ie'], ['irish', 'ie'],
+    ['tchequ', 'cz'], ['czech', 'cz'], ['allemand', 'de'], ['german', 'de'], ['canad', 'ca'], ['japon', 'jp'], ['japan', 'jp'],
+    ['austral', 'au'], ['britann', 'gb'], ['british', 'gb'], ['anglais', 'gb'], ['americ', 'us'], ['suiss', 'ch'], ['swiss', 'ch'],
+    ['monegasq', 'mc'], ['monaco', 'mc'], ['neerland', 'nl'], ['hollan', 'nl'], ['dutch', 'nl'], ['polon', 'pl'], ['polish', 'pl'],
+    ['portug', 'pt'], ['chin', 'cn'], ['finland', 'fi'], ['finn', 'fi'], ['autrich', 'at'], ['austria', 'at'], ['turq', 'tr'], ['turk', 'tr'],
+    ['danois', 'dk'], ['danish', 'dk'], ['danemark', 'dk'], ['sued', 'se'], ['swed', 'se'], ['norveg', 'no'], ['norweg', 'no'],
+    ['hongr', 'hu'], ['hungar', 'hu'], ['grec', 'gr'], ['greek', 'gr'], ['bresil', 'br'], ['brazil', 'br'], ['argentin', 'ar'],
+    ['chili', 'cl'], ['chile', 'cl'], ['russ', 'ru'], ['ukrain', 'ua'], ['luxemb', 'lu'], ['maroc', 'ma'], ['morocc', 'ma'],
+    ['senegal', 'sn'], ['mauric', 'mu']
+  ];
+  const paysDe = (nat, lang) => {
+    const brut = String(nat || '').trim();
+    if (!brut) return '';
+    const s = brut.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const trouver = (t) => { const k = PAYS_CLE.find(([r]) => t.indexOf(r) >= 0); return k ? k[1] : null; };
+    
+
+    const parts = s.split(/[/,&+]|\s+et\s+|-(?=[a-z])/).map(x => x.trim()).filter(Boolean);
+    let cles = parts.length > 1 ? parts.map(trouver).filter(Boolean) : [];
+    if (!cles.length) { const k = trouver(s); if (k) cles = [k]; }
+    cles = cles.filter((k, i) => cles.indexOf(k) === i);
+    if (!cles.length) return brut.charAt(0).toUpperCase() + brut.slice(1).toLowerCase();
+    return cles.map(k => PAYS[k][lang === 'en' ? 1 : 0]).join(' / ');
   };
 
   
@@ -3566,7 +3619,12 @@ if (!customElements.get('village-map')) {
 
 
 
-        const dessus = ['flotte-f', 'flotte-b', 'poi-tap', 'poi-pt'].filter(l => this._map.getLayer(l));
+        
+
+
+
+        const pres = this._map.getZoom() >= (this._seuilCoque || 16.6);
+        const dessus = (pres ? ['flotte-f', 'flotte-b'] : []).concat(['poi-tap', 'poi-pt']).filter(l => this._map.getLayer(l));
         const T = 6, boite = [[e.point.x - T, e.point.y - T], [e.point.x + T, e.point.y + T]];
         const sous = dessus.length ? this._map.queryRenderedFeatures(boite, { layers: dessus }) : [];
         if (sous.length) {
@@ -3610,7 +3668,7 @@ if (!customElements.get('village-map')) {
           (nommes.length ? '<ul class="vm__opts vm__fflotte">' + nommes.map(b => {
             const v = urlSure(b.portrait) || urlSure(b.photo);
             return '<li><button class="vm__opt vm__fbat" data-id="' + this._esc(b.id) + '">' +
-              (v ? '<img class="vm__fbatv" src="' + this._esc(vignette(v, 44)) + '" alt="" loading="lazy"' + this._repli('') + '>'
+              (v ? '<img class="vm__fbatv" src="' + this._esc(v === urlSure(b.portrait) ? portrait(v, 44) : vignette(v, 44)) + '" alt="" loading="lazy"' + this._repli('') + '>'
                  : '<span class="vm__opti est-fam" style="--c:' + couleur + '">' + svg(PICTO.boat, '') + '</span>') +
               '<span class="vm__optt"><b>' + this._esc(b.skipper || b.nom) + '</b>' +
                 '<em>' + this._esc([b.skipper ? b.nom : '', b.voile].filter(Boolean).join(' · ')) + '</em></span>' +
@@ -4127,7 +4185,11 @@ if (!customElements.get('village-map')) {
     _allerPonton(id) {
       const p = (this._p.pontons || []).find(x => x.id === id);
       if (!p || !this._ligneValide(p.trace, 2)) return;
-      const lng = p.trace.map(c => c[0]), lat = p.trace.map(c => c[1]);
+      
+
+      let pts = p.trace;
+      try { const zc = this._geojsonZonesClasse().features.find(f => f.properties.ponton === id); if (zc) pts = zc.geometry.coordinates[0]; } catch (e) {   }
+      const lng = pts.map(c => c[0]), lat = pts.map(c => c[1]);
       this._map.setMaxBounds(null);
       this._map.fitBounds([[Math.min(...lng), Math.min(...lat)], [Math.max(...lng), Math.max(...lat)]],
         { padding: this._paddingVolets(), duration: 700, maxZoom: 17.6 });
@@ -4268,7 +4330,7 @@ if (!customElements.get('village-map')) {
            
           const img = urlSure(b.photo) || urlSure(b.portrait);
           return img
-            ? '<img class="vm__svimg" src="' + this._esc(vignette(img, 128)) + '" alt="" loading="lazy"' + this._repli(ini2) + '>'
+            ? '<img class="vm__svimg" src="' + this._esc(img === urlSure(b.photo) ? vignette(img, 128) : portrait(img, 128)) + '" alt="" loading="lazy"' + this._repli(ini2) + '>'
             : ini2;
         }).call(this, '<span class="vm__svimg vm__svini" style="background:' + cl + '">' + this._esc(ini) + '</span>') +
         '<span class="vm__svt">' +
@@ -4301,6 +4363,7 @@ if (!customElements.get('village-map')) {
       if (!flotte.length) return;
       this._flotteVive = true;
       const SEUIL_COQUE = 16.6;    
+      this._seuilCoque = SEUIL_COQUE;
       if (!this._map.hasImage('coque-sdf')) this._map.addImage('coque-sdf', this._coque2D('#fff', true), { pixelRatio: 2, sdf: true });
       this._map.addSource('flotte', { type: 'geojson', data: this._geojsonFlotte() });
       
@@ -4416,6 +4479,11 @@ if (!customElements.get('village-map')) {
         if (!f) return;
         
 
+
+        if (this._map.getZoom() < SEUIL_COQUE && this._map.getLayer('zone-classe-f') &&
+            this._map.queryRenderedFeatures(e.point, { layers: ['zone-classe-f'] }).length) return;
+        
+
         const ev = e.originalEvent;
         if (ev && this._clicCoqueT === ev.timeStamp) return;
         if (ev) this._clicCoqueT = ev.timeStamp;
@@ -4513,12 +4581,12 @@ if (!customElements.get('village-map')) {
         '<div class="vm__fbody vm__fbody--chevauche">' +
           '<div class="vm__fskip vm__fskip--grand">' +
             '<span class="vm__fportw">' +
-              (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(vignette(urlSure(b.portrait), 112)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
+              (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(portrait(urlSure(b.portrait), 112)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
               (drapeauClasse ? '<img class="vm__fpin" src="' + this._esc(drapeauClasse) + '" alt="' + this._esc(this._libClasse(b.classe)) + '">' : '') +
             '</span>' +
             '<span class="vm__fskipt">' +
               (b.skipper ? '<b>' + this._esc(b.skipper) + '</b>' : '') +
-              (b.nationalite || urlSure(b.drapeau) ? '<em>' + (urlSure(b.drapeau) ? '<img src="' + this._esc(urlSure(b.drapeau)) + '" alt="">' : '') + this._esc(b.nationalite || '') + '</em>' : '') +
+              (b.nationalite || urlSure(b.drapeau) ? '<em>' + (urlSure(b.drapeau) ? '<img src="' + this._esc(urlSure(b.drapeau)) + '" alt="">' : '') + this._esc(paysDe(b.nationalite, this._lang)) + '</em>' : '') +
             '</span>' +
           '</div>' +
           '<span class="vm__fcat" style="--c:' + couleur + '">' +
@@ -6131,7 +6199,9 @@ if (!customElements.get('village-map')) {
       const deplie = !!(vm && vm.classList.contains('a-prog'));
       const coins = parseFloat(getComputedStyle(vm || this).getPropertyValue('--vm-coins')) || 0;
       return etroit ? { top: 70, right: 20, bottom: (deplie ? Math.round(this.clientHeight * .7) : 74) + coins, left: 20 }
-                    : { top: 70, right: 350, bottom: 40 + coins, left: 210 };
+                    
+
+                    : { top: 70, right: Math.round(Math.min(440, Math.max(360, this.clientWidth * .28))) + 36, bottom: 40 + coins, left: 300 };    
     }
 
     
@@ -7738,7 +7808,11 @@ if (!customElements.get('village-map')) {
         const cible = e.originalEvent && e.originalEvent.target;
         if (cible && cible.closest && cible.closest('.maplibregl-marker')) return;
         const cs = ['poi-tap', 'poi-pt', 'surf-f', 'trace-l', 'trace-h', 'barre-a', 'zones-f', 'zones-x',
-                    'flotte-b', 'flotte-f', 'flotte-c', 'flotte-h', 'ponton-quai', 'ponton-l', 'secteur-f']
+                    'flotte-b', 'flotte-f', 'flotte-c', 'flotte-h', 'ponton-quai', 'ponton-l', 'secteur-f',
+                    
+
+
+                    'zone-classe-f']
           .filter(l => this._map.getLayer(l));
         if (cs.length && this._map.queryRenderedFeatures(e.point, { layers: cs }).length) return;
         
