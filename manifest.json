@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 80bf2cb",
- "livreLe": "2026-09-19T20:29:17.324Z",
+ "source": "WapitixAgency/route-du-rhum 5d38046",
+ "livreLe": "2026-09-19T20:50:04.950Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -9,9 +9,10 @@
    "chemins": [],
    "prefixes": [],
    "precharger": [],
+   "priorite": "high",
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18493,
+   "brotli": 18476,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -61,9 +62,10 @@
    "chemins": [],
    "prefixes": [],
    "precharger": [],
+   "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17514,
+   "brotli": 17509,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -103,9 +105,10 @@
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js",
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
    ],
+   "priorite": "high",
    "octets": 509651,
    "gzip": 120822,
-   "brotli": 96963,
+   "brotli": 97033,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -118,7 +121,7 @@
    ]
   },
   "espace": {
-   "quoi": "l'Espace Rhum ; le module arrive en parallèle du runtime, le dernier état connu du membre s'affiche à l'instant",
+   "quoi": "l'Espace Rhum ; le module arrive en parallèle du runtime, en priorité réseau basse (il ne peut rien dessiner avant la vérification du membre), et le dernier état connu du membre s'affiche à l'instant",
    "partout": false,
    "chemins": [
     "/mon-espace-rhum",
@@ -126,9 +129,10 @@
    ],
    "prefixes": [],
    "precharger": [],
+   "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139182,
+   "brotli": 139234,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -149,9 +153,10 @@
     "/en/skippers/"
    ],
    "precharger": [],
+   "priorite": "high",
    "octets": 367950,
    "gzip": 87507,
-   "brotli": 70959,
+   "brotli": 71020,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
