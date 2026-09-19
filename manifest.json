@@ -1,15 +1,14 @@
 {
- "source": "WapitixAgency/route-du-rhum 702f8fb",
- "date": "2026-09-19T13:40:13.353Z",
+ "source": "WapitixAgency/route-du-rhum 889de41",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
    "quoi": "les six méga menus et les deux horloges de l'en-tête, sur toutes les pages",
    "partout": true,
    "chemins": [],
-   "octets": 58804,
-   "gzip": 14157,
-   "brotli": 12366,
+   "octets": 58784,
+   "gzip": 14139,
+   "brotli": 12351,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -49,9 +48,9 @@
    "quoi": "les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit)",
    "partout": false,
    "chemins": [],
-   "octets": 91182,
-   "gzip": 24014,
-   "brotli": 20084,
+   "octets": 91162,
+   "gzip": 23996,
+   "brotli": 20052,
    "fichiers": [
     {
      "fichier": "home-news.js",

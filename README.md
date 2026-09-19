@@ -14,4 +14,4 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `accueil.js` | les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit) : home-news, skippers-showcase, rdr-espace-promo, partners-grid | 89.0 Ko, 19.6 Ko brotli |
 | `test-rdr.js` | banc du chargement précoce sur TEST RDR26 (menus, figé au 20/09) | |
 
-Source : `WapitixAgency/route-du-rhum 702f8fb`, assemblé le 2026-09-19T13:40Z.
+Source : `WapitixAgency/route-du-rhum 889de41`.

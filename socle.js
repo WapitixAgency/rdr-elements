@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 702f8fb | 2026-09-19T13:40Z | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="702f8fb";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 889de41 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="889de41";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
