@@ -1,0 +1,91 @@
+{
+ "source": "WapitixAgency/route-du-rhum 702f8fb",
+ "date": "2026-09-19T13:40:13.353Z",
+ "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
+ "paquets": {
+  "socle": {
+   "quoi": "les six méga menus et les deux horloges de l'en-tête, sur toutes les pages",
+   "partout": true,
+   "chemins": [],
+   "octets": 58804,
+   "gzip": 14157,
+   "brotli": 12366,
+   "fichiers": [
+    {
+     "fichier": "rdr-menu-actus.js",
+     "octets": 24247,
+     "sha": "4f324709219b",
+     "balises": [
+      "rdr-menu-actus"
+     ]
+    },
+    {
+     "fichier": "rdr-menu-cartes.js",
+     "octets": 26722,
+     "sha": "e015dafcf388",
+     "balises": [
+      "rdr-menu-cartes"
+     ]
+    },
+    {
+     "fichier": "timer-clock-simple.js",
+     "octets": 4284,
+     "sha": "2b93faed862d",
+     "balises": [
+      "timer-clock-simple"
+     ]
+    },
+    {
+     "fichier": "AlpinaClock.js",
+     "octets": 4231,
+     "sha": "b234b9644ca9",
+     "balises": [
+      "alpina-clock"
+     ]
+    }
+   ]
+  },
+  "accueil": {
+   "quoi": "les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit)",
+   "partout": false,
+   "chemins": [],
+   "octets": 91182,
+   "gzip": 24014,
+   "brotli": 20084,
+   "fichiers": [
+    {
+     "fichier": "home-news.js",
+     "octets": 37499,
+     "sha": "73c7560546d5",
+     "balises": [
+      "home-news"
+     ]
+    },
+    {
+     "fichier": "skippers-showcase.js",
+     "octets": 18126,
+     "sha": "5af5fa7554d0",
+     "balises": [
+      "skippers-showcase"
+     ]
+    },
+    {
+     "fichier": "rdr-espace-promo.js",
+     "octets": 23496,
+     "sha": "1e8398029616",
+     "balises": [
+      "rdr-espace-promo"
+     ]
+    },
+    {
+     "fichier": "partners-grid.js",
+     "octets": 13456,
+     "sha": "5c1305851da3",
+     "balises": [
+      "partners-grid"
+     ]
+    }
+   ]
+  }
+ }
+}
