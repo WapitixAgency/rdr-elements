@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum a27123d | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a27123d";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 2f016c0 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="2f016c0";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -3553,7 +3553,12 @@ if (!customElements.get('village-map')) {
             }
           }
           features.push({ type: 'Feature', id: features.length + 1,
-            properties: { id: 'zc-' + p.id, ponton: p.id, nom: p.nom || '', classe: p.classe || 'defaut',
+            
+
+
+
+
+            properties: { id: 'zc-' + m0.id, ponton: p.id, membre: m0.id, nom: p.nom || '', classe: p.classe || 'defaut',
                           couleur: this._couleurClasse(p.classe), bande: suitLeQuai ? 1 : 0 },
             geometry: { type: 'Polygon', coordinates: [ring] } });
         });
@@ -3632,7 +3637,7 @@ if (!customElements.get('village-map')) {
           if (fb && this._clicCoque) this._clicCoque({ features: [fb], point: e.point, originalEvent: e.originalEvent });
           return;
         }
-        this._allerPonton(f.properties.ponton);
+        this._allerPonton(f.properties.membre || f.properties.ponton);
         const pz = (this._p.pontons || []).find(x => x.id === f.properties.ponton);
         if (pz) this._ficheClasse(pz);
       });
@@ -4188,7 +4193,11 @@ if (!customElements.get('village-map')) {
       
 
       let pts = p.trace;
-      try { const zc = this._geojsonZonesClasse().features.find(f => f.properties.ponton === id); if (zc) pts = zc.geometry.coordinates[0]; } catch (e) {   }
+      try {
+        const zs = this._geojsonZonesClasse().features;
+        const zc = zs.find(f => f.properties.membre === id) || zs.find(f => f.properties.ponton === id);
+        if (zc) pts = zc.geometry.coordinates[0];
+      } catch (e) {   }
       const lng = pts.map(c => c[0]), lat = pts.map(c => c[1]);
       this._map.setMaxBounds(null);
       this._map.fitBounds([[Math.min(...lng), Math.min(...lat)], [Math.max(...lng), Math.max(...lat)]],
