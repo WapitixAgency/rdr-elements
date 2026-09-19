@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 52f081a",
- "livreLe": "2026-09-19T21:17:34.408Z",
+ "source": "WapitixAgency/route-du-rhum d5d09f4",
+ "livreLe": "2026-09-19T21:26:18.707Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -12,7 +12,7 @@
    "priorite": "high",
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18538,
+   "brotli": 18511,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -65,7 +65,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17529,
+   "brotli": 17513,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,7 +108,7 @@
    "priorite": "high",
    "octets": 509651,
    "gzip": 120822,
-   "brotli": 97002,
+   "brotli": 97019,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139199,
+   "brotli": 139121,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -159,7 +159,7 @@
    "priorite": "high",
    "octets": 457653,
    "gzip": 107622,
-   "brotli": 85352,
+   "brotli": 85296,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -179,6 +179,49 @@
      "sha": "31d8589e5159",
      "balises": [
       "skippers-list"
+     ]
+    }
+   ]
+  },
+  "actus": {
+   "quoi": "le hub des actualités et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
+   "partout": false,
+   "chemins": [
+    "/medias-actualites",
+    "/en/medias-actualites"
+   ],
+   "prefixes": [
+    "/post/",
+    "/en/post/"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 287767,
+   "gzip": 70480,
+   "brotli": 53829,
+   "fichiers": [
+    {
+     "fichier": "rdr-news.js",
+     "octets": 167484,
+     "sha": "a21c44f54e3f",
+     "balises": [
+      "rdr-news"
+     ]
+    },
+    {
+     "fichier": "rdr-post-head.js",
+     "octets": 77371,
+     "sha": "30273f80fbac",
+     "balises": [
+      "rdr-post-head"
+     ]
+    },
+    {
+     "fichier": "rdr-post-more.js",
+     "octets": 42668,
+     "sha": "7ab7ec5d6d58",
+     "balises": [
+      "rdr-post-more"
      ]
     }
    ]
