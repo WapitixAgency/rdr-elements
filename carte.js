@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 89e74d4 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="89e74d4";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 80bf2cb | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="80bf2cb";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -1578,7 +1578,10 @@ if (!customElements.get('village-map')) {
     reglages:'<path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/>',    
     calque:'<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>',    
     horloge:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',    
-    lieu:'<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>'     
+    lieu:'<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',     
+    skipper:'<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',    
+    regle:'<path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/>',    
+    ancre:'<path d="M12 6v16"/><path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"/><path d="M9 11h6"/><circle cx="12" cy="4" r="2"/>'    
   };
   
 
@@ -3190,16 +3193,19 @@ if (!customElements.get('village-map')) {
        
       const SEUIL = 14.8;
       this._map.addLayer({ id: 'ponton-quai', type: 'line', source: 'pontons', minzoom: SEUIL,
+        filter: ['!=', ['get', 'discret'], 1],
         layout: { 'line-cap': 'round' },
         paint: { 'line-color': C.surface,
                  'line-width': ['interpolate', ['linear'], ['zoom'], 15, 5, 18, 13],
                  'line-opacity': ['interpolate', ['linear'], ['zoom'], SEUIL, 0, 15.4, 1] } });
       this._map.addLayer({ id: 'ponton-l', type: 'line', source: 'pontons', minzoom: SEUIL,
+        filter: ['!=', ['get', 'discret'], 1],
         layout: { 'line-cap': 'round' },
         paint: { 'line-color': ['get', 'couleur'],
                  'line-width': ['interpolate', ['linear'], ['zoom'], 15, 2, 18, 4.5],
                  'line-opacity': ['interpolate', ['linear'], ['zoom'], SEUIL, 0, 15.4, 1] } });
       this._map.addLayer({ id: 'ponton-b', type: 'symbol', source: 'pontons', minzoom: SEUIL,
+        filter: ['!=', ['get', 'discret'], 1],
         layout: {
           'symbol-placement': 'line',
           'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 15, 14, 18, 34],
@@ -3266,7 +3272,9 @@ if (!customElements.get('village-map')) {
         const g = this._gabarit(p.classe);
         const d = { babord: 0, tribord: 0 };
         bateaux.filter(b => b.pontonId === p.id).forEach(b => {
-          const e = (+b.ecart || Math.round(g[0] / 2 + 2)) + g[0] / 2 + 3;
+           
+          const demi = b.capLibre ? (+b.largeur || g[1]) / 2 : g[0] / 2;
+          const e = (+b.ecart || Math.round(g[0] / 2 + 2)) + demi + (b.capLibre ? 1.5 : 3);
           const c = b.cote === 'babord' ? 'babord' : 'tribord';
           if (e > d[c]) d[c] = e;
         });
@@ -3360,7 +3368,7 @@ if (!customElements.get('village-map')) {
               this._ancresBadge[p.id] = { lngLat: pt(um, v), tige: (capDe(m0.trace) + (versEau > 0 ? -90 : 90) + 360) % 360 };
             }
           }
-          features.push({ type: 'Feature',
+          features.push({ type: 'Feature', id: features.length + 1,
             properties: { id: 'zc-' + p.id, ponton: p.id, nom: p.nom || '', classe: p.classe || 'defaut',
                           couleur: this._couleurClasse(p.classe) },
             geometry: { type: 'Polygon', coordinates: [ring] } });
@@ -3376,11 +3384,41 @@ if (!customElements.get('village-map')) {
 
 
       this._map.addLayer({ id: 'zone-classe-f', type: 'fill', source: 'zones-classe', minzoom: 13.5,
+        
+
+
         paint: { 'fill-color': ['get', 'couleur'],
-                 'fill-opacity': ['interpolate', ['linear'], ['zoom'], 14, .72, 16, .6, 18.5, .4] } });
+                 'fill-opacity': ['interpolate', ['linear'], ['zoom'],
+                   14, ['case', ['boolean', ['feature-state', 'survol'], false], .9, .72],
+                   16, ['case', ['boolean', ['feature-state', 'survol'], false], .85, .6],
+                   18.5, ['case', ['boolean', ['feature-state', 'survol'], false], .7, .4]] } });
       this._map.addLayer({ id: 'zone-classe-l', type: 'line', source: 'zones-classe', minzoom: 13.5,
-        paint: { 'line-color': ['get', 'couleur'], 'line-width': 1.5,
+        paint: { 'line-color': ['get', 'couleur'],
+                 'line-width': ['case', ['boolean', ['feature-state', 'survol'], false], 3, 1.5],
                  'line-opacity': ['interpolate', ['linear'], ['zoom'], 14, .9, 18.5, .5] } });
+      
+
+
+
+      this._survolZone = null;
+      const relever = (id, on) => { if (id == null) return; try { this._map.setFeatureState({ source: 'zones-classe', id }, { survol: on }); } catch (e) {   } };
+      this._map.on('mousemove', 'zone-classe-f', (e) => {
+        if (this._atelier) return;
+        const f = e.features && e.features[0];
+        if (!f) return;
+        if (this._survolZone !== f.id) { relever(this._survolZone, false); this._survolZone = f.id; relever(f.id, true); }
+        this._map.getCanvas().style.cursor = 'pointer';
+      });
+      this._map.on('mouseleave', 'zone-classe-f', () => { relever(this._survolZone, false); this._survolZone = null; this._map.getCanvas().style.cursor = ''; });
+      this._map.on('click', 'zone-classe-f', (e) => {
+        if (this._atelier) return;
+        const f = e.features && e.features[0];
+        if (!f) return;
+         
+        const dessus = ['flotte-f', 'flotte-b', 'poi-tap', 'poi-pt'].filter(l => this._map.getLayer(l));
+        if (dessus.length && this._map.queryRenderedFeatures(e.point, { layers: dessus }).length) return;
+        this._allerPonton(f.properties.ponton);
+      });
     }
 
     
@@ -3393,6 +3431,9 @@ if (!customElements.get('village-map')) {
         .filter(p => this._ligneValide(p.trace, 2))
         .map(p => ({ type: 'Feature',
           properties: { id: p.id, nom: p.nom, branche: p.parent ? 1 : 0, classe: p.classe || 'defaut',
+                         
+                         
+                        discret: p.zone === false ? 1 : 0,
                         couleur: this._couleurClasse(p.classe), icone: 'coque-' + (p.classe || 'defaut') },
           geometry: { type: 'LineString', coordinates: p.trace } })) };
     }
@@ -3786,8 +3827,13 @@ if (!customElements.get('village-map')) {
 
 
 
+      
+
+
+
+
       const pontons = (this._p.pontons || [])
-        .filter(p => this._ligneValide(p.trace, 2) && !p.parent);
+        .filter(p => this._ligneValide(p.trace, 2) && !p.parent && p.zone !== false);
       if (!pontons.length) return;
       this._marqPontons = this._marqPontons || [];
       pontons.forEach(p => {
@@ -3813,14 +3859,17 @@ if (!customElements.get('village-map')) {
 
 
 
+        const drapeau = DRAPEAU[p.classe];
+        el.classList.toggle('est-drapeau', !!drapeau);
         el.innerHTML =
           (ancre && ancre.tige != null ? '<i class="vm__ponts" style="transform:rotate(' + Math.round(ancre.tige) + 'deg)"></i>' : '') +
           '<span class="vm__pontd">' +
-            (DRAPEAU[p.classe] ? '<img src="' + this._esc(DRAPEAU[p.classe]) + '" alt="" loading="lazy">'
-                               : svg(PICTO.boat, 'vm__ponti')) +
+            (drapeau ? '<img src="' + this._esc(drapeau) + '" alt="" loading="lazy">'
+                     : svg(PICTO.boat, 'vm__ponti')) +
             (n ? '<span class="vm__pontn">' + pris + '</span>' : '') +
           '</span>' +
-          '<span class="vm__pontl">' + this._esc(p.nom || '') + '</span>';
+           
+          (drapeau ? '' : '<span class="vm__pontl">' + this._esc(p.nom || '') + '</span>');
         
 
         el.appendChild(Object.assign(document.createElement('span'), {
@@ -3829,7 +3878,7 @@ if (!customElements.get('village-map')) {
         
 
         const decal = Array.isArray(p.badge) && p.badge.length === 2 && p.badge.every(Number.isFinite) ? p.badge : [0, 0];
-        this._marqPontons.push(new maplibregl.Marker({ element: el, anchor: 'top', offset: [decal[0], decal[1] - 25] })
+        this._marqPontons.push(new maplibregl.Marker({ element: el, anchor: 'top', offset: [decal[0], decal[1] - (drapeau ? 30 : 25)] })
           .setLngLat(c).addTo(this._map));
       });
     }
@@ -4174,24 +4223,50 @@ if (!customElements.get('village-map')) {
 
 
       const alerte = b.statut && b.statut !== 'amarre';
+      
+
+
+
+
+
+
+      const en = this._lang === 'en';
+      const couleur = couleurSure(this._couleurClasse(b.classe), C.teal);
+      const hero = urlSure(b.photo) || urlSure(b.portrait);
+      const drapeauClasse = DRAPEAU[b.classe] ? urlSure(DRAPEAU[b.classe]) : '';
+      const pastille = (lib, val) => (val ? '<li><b>' + this._esc(lib) + '</b>' + this._esc(String(val)) + '</li>' : '');
+      const dims = b.longueur ? (b.longueur + ' m' + (b.largeur ? ' × ' + b.largeur + ' m' : '')) : '';
+      const specs =
+        pastille(en ? 'Sail no.' : 'Voile', b.voile) +
+        pastille(en ? 'Size' : 'Dimensions', dims) +
+        pastille(en ? 'Designer' : 'Architecte', b.architecte) +
+        pastille(en ? 'Yard' : 'Chantier', b.chantier) +
+        pastille(en ? 'Built' : 'Année', b.annee) +
+        pastille(en ? 'Route du Rhum' : 'Participations', b.participation && (b.participation + (/\d/.test(b.participation) ? (en ? ' entries' : ' Route du Rhum') : '')));
       this.querySelector('#vmFiche').innerHTML =
         '<button class="vm__fx" aria-label="' + this._esc(this._t('fermer')) + '">' + svg(IC.fermer) + '</button>' +
-        (urlSure(b.photo) ? '<img class="vm__fimg" src="' + this._esc(urlSure(b.photo)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '>' : '') +
+        (hero
+          ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(hero, 480, 230)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '>' +
+              (drapeauClasse ? '<img class="vm__fflag" src="' + this._esc(drapeauClasse) + '" alt="' + this._esc(this._libClasse(b.classe)) + '">' : '') + '</div>'
+          : (drapeauClasse ? '<div class="vm__fhero vm__fhero--vide" style="--c:' + couleur + '"><img class="vm__fflag" src="' + this._esc(drapeauClasse) + '" alt=""></div>' : '')) +
         '<div class="vm__fbody">' +
-          '<span class="vm__fcat" style="--c:' + couleurSure(this._couleurClasse(b.classe), C.teal) + '">' +
+          '<span class="vm__fcat" style="--c:' + couleur + '">' +
             svg(PICTO.boat, 'vm__fic') + this._esc(this._libClasse(b.classe)) + '</span>' +
           '<h3>' + this._esc(b.nom || this._t('posteLibre')) + '</h3>' +
-          (b.skipper ? '<p class="vm__fsous">' + this._esc(b.skipper) + '</p>' : '') +
-          (b.voile ? '<p class="vm__fh">' + svg(PICTO.boat, 'vm__fico') +
-            this._esc(this._t('voileNum')) + ' ' + this._esc(b.voile) + '</p>' : '') +
-          (pont ? '<p class="vm__fh">' + svg(IC.lieu, 'vm__fico') + this._esc(pont.nom) +
+          (b.skipper ? '<div class="vm__fskip">' +
+              (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(vignette(urlSure(b.portrait), 64)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
+              '<span class="vm__fskipt"><b>' + this._esc(b.skipper) + '</b>' +
+                (b.nationalite || urlSure(b.drapeau) ? '<em>' + (urlSure(b.drapeau) ? '<img src="' + this._esc(urlSure(b.drapeau)) + '" alt="">' : '') + this._esc(b.nationalite || '') + '</em>' : '') +
+              '</span></div>' : '') +
+          (specs ? '<ul class="vm__fspecs">' + specs + '</ul>' : '') +
+          (b.citation ? '<blockquote class="vm__fcit" style="--c:' + couleur + '">' + this._esc(b.citation.replace(/^["«\s]+|["»\s]+$/g, '')) + '</blockquote>' : '') +
+          (b.bio ? '<p>' + this._esc(b.bio) + '</p>' : '') +
+          (b.desc ? '<p>' + this._esc(b.desc) + '</p>' : '') +
+          (pont ? '<p class="vm__fh">' + svg(IC.ancre, 'vm__fico') + this._esc(pont.nom) +
             (b.place ? ' · ' + this._esc(this._t('place')) + ' ' + this._esc(String(b.place)) : '') + '</p>' : '') +
           (etat ? (alerte
             ? '<p class="vm__falerte">' + this._esc(this._t(etat)) + '</p>'
             : '<p class="vm__fh">' + svg(IC.horloge, 'vm__fico') + this._esc(this._t(etat)) + '</p>') : '') +
-          (b.desc ? '<p>' + this._esc(b.desc) + '</p>' : '') +
-          (urlSure(b.lien) ? '<p><a class="vm__flien" href="' + this._esc(urlSure(b.lien)) + '" target="_blank" rel="noopener noreferrer">' +
-            this._esc(this._t('enSavoir')) + '</a></p>' : '') +
         '</div>' +
         
 
@@ -4200,10 +4275,18 @@ if (!customElements.get('village-map')) {
 
 
         '<ul class="vm__opts">' +
+           
+          (urlSure(b.lien)
+            ? '<li><a class="vm__opt vm__fskipl" href="' + this._esc(urlSure(b.lien)) + '" target="_blank" rel="noopener noreferrer">' +
+                '<span class="vm__opti est-fort">' + svg(IC.skipper, '') + '</span>' +
+                '<span class="vm__optt"><b>' + this._esc(en ? 'Skipper page' : 'Voir la fiche skipper') + '</b>' +
+                '<em>' + this._esc(b.skipper || '') + '</em></span>' +
+                svg(IC.chevronD, 'vm__optc') + '</a></li>'
+            : '') +
           (this._estPoint([b.lng, b.lat])
             ? '<li><a class="vm__opt vm__fgo" href="https://www.google.com/maps/dir/?api=1&destination=' +
                 encodeURIComponent(b.lat + ',' + b.lng) + '" target="_blank" rel="noopener noreferrer">' +
-                '<span class="vm__opti est-fort">' + svg(IC.chemin, '') + '</span>' +
+                '<span class="vm__opti' + (urlSure(b.lien) ? '' : ' est-fort') + '">' + svg(IC.chemin, '') + '</span>' +
                 '<span class="vm__optt"><b>' + this._esc(this._t('yaller')) + '</b>' +
                 '<em>' + this._esc(this._t('volDOiseau') || 'Itinéraire') + '</em></span>' +
                 svg(IC.chevronD, 'vm__optc') + '</a></li>'
@@ -11256,7 +11339,13 @@ if (!customElements.get('village-map')) {
       if (an && (this._p.animations || []).some(a => a.id === an)) setTimeout(() => this._ouvrirAnimation(an), 700);
       else if (poi && (this._p.poi || []).some(o => o.id === poi)) setTimeout(() => this._ouvrirPoi(poi), 700);
        
-      else if (bat && (this._p.bateaux || []).some(b => b.id === bat)) setTimeout(() => this._allerBateau(bat), 700);
+      else if (bat) {
+        
+
+
+        const trouve = (this._p.bateaux || []).find(x => x.id === bat || x.refId === bat);
+        if (trouve) setTimeout(() => this._allerBateau(trouve.id), 700);
+      }
     }
     
 
@@ -13360,6 +13449,23 @@ if (!customElements.get('village-map')) {
       '.vm__fx{position:absolute;top:12px;right:12px;z-index:2;width:32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:var(--vm-sur-clair);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--vm-ombre);}' +
       '.vm__fx svg{width:16px;height:16px;}' +
       '.vm__fimg{width:100%;height:230px;object-fit:cover;object-position:50% 30%;display:block;}' +
+       
+      '.vm__fhero{position:relative;flex:none;}' +
+      '.vm__fhero--vide{height:96px;background:linear-gradient(135deg,var(--c,#5DBFC0),rgba(255,255,255,.2));}' +
+      '.vm__fflag{position:absolute;left:16px;bottom:-14px;width:46px;height:58px;object-fit:contain;filter:drop-shadow(0 3px 5px rgba(10,26,53,.35));}' +
+      '.vm__fhero + .vm__fbody .vm__fcat{margin-left:68px;}' +
+      '.vm__fskip{display:flex;align-items:center;gap:12px;margin:2px 0 12px;}' +
+      '.vm__fport{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--vm-bg);box-shadow:0 0 0 2px var(--vm-surface),0 2px 8px rgba(10,26,53,.22);}' +
+      '.vm__fport--vide{display:flex;align-items:center;justify-content:center;color:var(--vm-ink-3);}' +
+      '.vm__fport--vide svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}' +
+      '.vm__fskipt{display:flex;flex-direction:column;gap:2px;min-width:0;}' +
+      '.vm__fskipt b{font:800 14px Montserrat,sans-serif;color:var(--vm-ink);}' +
+      '.vm__fskipt em{display:inline-flex;align-items:center;gap:6px;font:600 11px Montserrat,sans-serif;font-style:normal;color:var(--vm-ink-t3);}' +
+      '.vm__fskipt em img{width:18px;height:12px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px var(--vm-line);}' +
+      '.vm__fspecs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0;list-style:none;}' +
+      '.vm__fspecs li{padding:6px 10px;border-radius:7px;background:var(--vm-bg);font:600 11.5px Montserrat,sans-serif;color:var(--vm-ink);}' +
+      '.vm__fspecs b{display:block;margin-bottom:1px;font:800 8.5px Montserrat,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:var(--vm-ink-t3);}' +
+      '.vm__fcit{margin:0 0 12px;padding:8px 12px;border-left:3px solid var(--c,var(--vm-teal));font:italic 500 13px/1.5 Montserrat,sans-serif;color:var(--vm-ink-2);}' +
       '.vm__fbody{padding:20px 24px 24px;}' +
       
 
@@ -14108,8 +14214,8 @@ if (!customElements.get('village-map')) {
       
 
 
-      '.vm__ponts{position:absolute;left:50%;top:25px;width:2px;height:46px;margin-left:-1px;' +
-        'transform-origin:50% 0;background:var(--c,var(--vm-teal));opacity:.9;pointer-events:none;}' +
+      '.vm__ponts{position:absolute;left:50%;top:30px;width:2px;height:44px;margin-left:-1px;' +
+        'transform-origin:50% 0;background:var(--c,var(--vm-teal));opacity:.85;pointer-events:none;}' +
       
 
 
@@ -14119,6 +14225,12 @@ if (!customElements.get('village-map')) {
         'width:50px;height:50px;border-radius:50%;background:var(--vm-surface);' +
         'box-shadow:0 0 0 2.5px var(--c,var(--vm-teal)),0 5px 14px rgba(10,26,53,.24);' +
         'transition:transform .16s cubic-bezier(.22,.61,.36,1);}' +
+      
+
+      '.vm__pont.est-drapeau .vm__pontd{width:48px;height:60px;border-radius:0;background:none;box-shadow:none;' +
+        'filter:drop-shadow(0 3px 5px rgba(10,26,53,.32));}' +
+      '.vm__pont.est-drapeau .vm__pontd img{width:48px;height:60px;object-fit:contain;}' +
+      '.vm__pont.est-drapeau .vm__pontn{top:-6px;right:-10px;}' +
       '.vm__pont:hover .vm__pontd{transform:scale(1.22);}' +
       '.vm__pont:focus-visible .vm__pontd{transform:scale(1.1);outline:3px solid var(--vm-ink);outline-offset:2px;}' +
       '.vm__pontd img{width:34px;height:34px;object-fit:contain;display:block;}' +
