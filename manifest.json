@@ -1,5 +1,5 @@
 {
- "source": "WapitixAgency/route-du-rhum 3c7237b",
+ "source": "WapitixAgency/route-du-rhum 7b951f7",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -8,20 +8,20 @@
    "chemins": [],
    "octets": 88889,
    "gzip": 21728,
-   "brotli": 18480,
+   "brotli": 18492,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
-     "octets": 24247,
-     "sha": "4f324709219b",
+     "octets": 23906,
+     "sha": "64387f835166",
      "balises": [
       "rdr-menu-actus"
      ]
     },
     {
      "fichier": "rdr-menu-cartes.js",
-     "octets": 26722,
-     "sha": "e015dafcf388",
+     "octets": 26385,
+     "sha": "265cdc9ed22f",
      "balises": [
       "rdr-menu-cartes"
      ]
@@ -36,8 +36,8 @@
     },
     {
      "fichier": "AlpinaClock.js",
-     "octets": 4231,
-     "sha": "b234b9644ca9",
+     "octets": 4106,
+     "sha": "99c3b22b9338",
      "balises": [
       "alpina-clock"
      ]
@@ -58,28 +58,28 @@
    "chemins": [],
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17501,
+   "brotli": 17520,
    "fichiers": [
     {
      "fichier": "home-news.js",
-     "octets": 37499,
-     "sha": "73c7560546d5",
+     "octets": 36793,
+     "sha": "38b9cf929d32",
      "balises": [
       "home-news"
      ]
     },
     {
      "fichier": "skippers-showcase.js",
-     "octets": 18126,
-     "sha": "5af5fa7554d0",
+     "octets": 17831,
+     "sha": "12191cb6c623",
      "balises": [
       "skippers-showcase"
      ]
     },
     {
      "fichier": "rdr-espace-promo.js",
-     "octets": 23496,
-     "sha": "1e8398029616",
+     "octets": 23122,
+     "sha": "0f585b2d6bd0",
      "balises": [
       "rdr-espace-promo"
      ]
