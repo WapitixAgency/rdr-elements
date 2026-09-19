@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum d5d09f4 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="d5d09f4";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 2f41491 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="2f41491";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -1220,7 +1220,7 @@ if (!customElements.get('village-map')) {
   const T = {
     fr: { tout:'Tout afficher', famillesN:'{n} familles', grRacc:'Raccourcis', grLieux:'Lieux', resultatsN:'{a} résultats sur {n}', reset:'Réinitialiser', prog:'Programme', progComplet:'Voir le programme complet',
           progTitre:'Programme du jour', progReduire:'Replier le programme', nbEnCours:'en cours',
-          jour:'Jour', fermer:'Fermer', melocaliser:'Me localiser', recherche:'Rechercher un lieu…', rechercheCourt:'Rechercher', rechercheLong:'Rechercher un lieu, une animation, une classe',
+          jour:'Jour', fermer:'Fermer', secteur:'Secteur du village', melocaliser:'Me localiser', recherche:'Rechercher un lieu…', rechercheCourt:'Rechercher', rechercheLong:'Rechercher un lieu, une animation, une classe',
           aucun:'Aucun résultat', ouvert:'Ouvert', ferme:'Fermé', accredite:'Accès accrédité',
           gratuit:'Gratuit', reservation:'Sur réservation', yaller:'M\'y emmener', plan:'Télécharger le plan',
           maj:'Position mise à jour', prochain:'Prochaine apparition', precision:'Précision',
@@ -1333,7 +1333,7 @@ if (!customElements.get('village-map')) {
           voirTout:'Afficher cette catégorie', geoArret:'Suivi arrêté' },
     en: { tout:'Show all', famillesN:'{n} categories', grRacc:'Shortcuts', grLieux:'Places', resultatsN:'{a} of {n} results', reset:'Reset', prog:'Programme', progComplet:'See full programme',
           progTitre:"Today's programme", progReduire:'Collapse programme', nbEnCours:'live',
-          jour:'Day', fermer:'Close', melocaliser:'Locate me', recherche:'Search a place…', rechercheCourt:'Search', rechercheLong:'Search a place, an event, a boat class',
+          jour:'Day', fermer:'Close', secteur:'Village area', melocaliser:'Locate me', recherche:'Search a place…', rechercheCourt:'Search', rechercheLong:'Search a place, an event, a boat class',
           aucun:'No result', ouvert:'Open', ferme:'Closed', accredite:'Accredited access',
           gratuit:'Free', reservation:'Booking required', yaller:'Take me there', plan:'Download map',
           maj:'Position updated', prochain:'Next appearance', precision:'Accuracy',
@@ -3259,6 +3259,60 @@ if (!customElements.get('village-map')) {
     _metres(a, b) {
       return Math.hypot((b[0] - a[0]) * 111320 * Math.cos(a[1] * Math.PI / 180), (b[1] - a[1]) * 110540);
     }
+    
+
+
+
+
+    _bandeRail(trace, dB, dT, ext) {
+      const a0 = trace[0];
+      const kx = 111320 * Math.cos(a0[1] * Math.PI / 180) || 1, ky = 110540;
+      const P = trace.map(c => [(c[0] - a0[0]) * kx, (c[1] - a0[1]) * ky]);    
+      const versLngLat = (q) => [a0[0] + q[0] / kx, a0[1] + q[1] / ky];
+      const dir = (i) => { const d = [P[i + 1][0] - P[i][0], P[i + 1][1] - P[i][1]]; const l = Math.hypot(d[0], d[1]) || 1; return [d[0] / l, d[1] / l]; };
+      const n = P.length;
+       
+      const d0 = dir(0), dN = dir(n - 2);
+      P[0] = [P[0][0] - d0[0] * ext, P[0][1] - d0[1] * ext];
+      P[n - 1] = [P[n - 1][0] + dN[0] * ext, P[n - 1][1] + dN[1] * ext];
+      const droite = [], gauche = [];    
+      for (let i = 0; i < n; i++) {
+        const dA = i > 0 ? dir(i - 1) : dir(0), dB2 = i < n - 1 ? dir(i) : dir(n - 2);
+        let bx = dA[0] + dB2[0], by = dA[1] + dB2[1];
+        const lb = Math.hypot(bx, by) || 1; bx /= lb; by /= lb;
+        const cosDemi = Math.max(.5, bx * dB2[0] + by * dB2[1]);    
+        const nx = by / cosDemi, ny = -bx / cosDemi;                
+        droite.push([P[i][0] + nx * dT, P[i][1] + ny * dT]);
+        gauche.push([P[i][0] - nx * dB, P[i][1] - ny * dB]);
+      }
+      const arc = (c, r, a1, a2) => { const out = []; for (let k = 1; k < 8; k++) { const t = a1 + (a2 - a1) * k / 8; out.push([c[0] + r * Math.cos(t), c[1] + r * Math.sin(t)]); } return out; };
+      
+
+      const rBout = (dT + dB) / 2, dec = (dT - dB) / 2;
+      const cFin = [P[n - 1][0] + dec * dN[1], P[n - 1][1] - dec * dN[0]];
+      const cDeb = [P[0][0] + dec * d0[1], P[0][1] - dec * d0[0]];
+      const aAvant = Math.atan2(dN[1], dN[0]), aArriere = Math.atan2(-d0[1], -d0[0]);
+      const ring = [].concat(droite, arc(cFin, rBout, aAvant - Math.PI / 2, aAvant + Math.PI / 2),
+                             gauche.slice().reverse(), arc(cDeb, rBout, aArriere - Math.PI / 2, aArriere + Math.PI / 2), [droite[0]]);
+      return ring.map(versLngLat);
+    }
+     
+    _milieuEtCap(trace) {
+      let total = 0;
+      for (let i = 1; i < trace.length; i++) total += this._metres(trace[i - 1], trace[i]);
+      let reste = total / 2;
+      for (let i = 1; i < trace.length; i++) {
+        const d = this._metres(trace[i - 1], trace[i]);
+        if (reste <= d || i === trace.length - 1) {
+          const k = d ? reste / d : 0;
+          const a = trace[i - 1], b = trace[i];
+          const cap = ((Math.atan2((b[0] - a[0]) * Math.cos(a[1] * Math.PI / 180), b[1] - a[1]) * 180 / Math.PI) + 360) % 360;
+          return { p: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], cap };
+        }
+        reste -= d;
+      }
+      return { p: trace[0], cap: 0 };
+    }
     _geojsonZonesClasse() {
       const pontons = (this._p.pontons || []).filter(p => this._ligneValide(p.trace, 2));
       const bateaux = this._p.bateaux || [];
@@ -3278,7 +3332,12 @@ if (!customElements.get('village-map')) {
           const c = b.cote === 'babord' ? 'babord' : 'tribord';
           if (e > d[c]) d[c] = e;
         });
-        let dB = Math.max(2, d.babord), dT = Math.max(2, d.tribord);
+        
+
+
+        const aCouple = bateaux.some(b => b.pontonId === p.id && b.capLibre);
+        const vide = aCouple ? .6 : 2;
+        let dB = Math.max(vide, d.babord), dT = Math.max(vide, d.tribord);
         
 
 
@@ -3298,9 +3357,9 @@ if (!customElements.get('village-map')) {
           const u = ((c[0] - a0[0]) * kx) * ux + ((c[1] - a0[1]) * ky) * uy;
           const L0 = this._metres(p.trace[0], p.trace[p.trace.length - 1]), Ln = this._metres(n.trace[0], n.trace[n.trace.length - 1]);
           if (Math.abs(v) > 80 || Math.abs(v) < 4 || Math.abs(u - L0 / 2) > (L0 + Ln) / 2) return;
-          if (v > 0) dT = Math.min(dT, Math.max(2, v / 2 - 1)); else dB = Math.min(dB, Math.max(2, -v / 2 - 1));
+          if (v > 0) dT = Math.min(dT, Math.max(vide, v / 2 - 1)); else dB = Math.min(dB, Math.max(vide, -v / 2 - 1));
         });
-        return { dB, dT, ext: g[1] / 2 + 4 };
+        return { dB, dT, ext: aCouple ? 3 : g[1] / 2 + 4 };
       };
       this._ancresBadge = {};
       pontons.filter(p => !p.parent).forEach(p => {
@@ -3313,7 +3372,7 @@ if (!customElements.get('village-map')) {
           const c = this._milieuPonton(p), capP = capDe(p.trace);
           const kx = 111320 * Math.cos(c[1] * Math.PI / 180) || 1, ky = 110540, r = (capP + 90) * Math.PI / 180;
           const d = cote > 0 ? bp.dT : bp.dB;
-          this._ancresBadge[p.id] = { lngLat: [c[0] + cote * (d + 16) * Math.sin(r) / kx, c[1] + cote * (d + 16) * Math.cos(r) / ky], tige: (capP + (cote > 0 ? -90 : 90) + 360) % 360 };
+          this._ancresBadge[p.id] = { lngLat: [c[0] + cote * (d + 16) * Math.sin(r) / kx, c[1] + cote * (d + 16) * Math.cos(r) / ky], tige: null };
           return;
         }
          
@@ -3349,9 +3408,14 @@ if (!customElements.get('village-map')) {
               v0 = Math.min(v0, v - bm.dB); v1 = Math.max(v1, v + bm.dT);
             });
           });
-           
+          
+
+
           const pt = (u, v) => [a[0] + (u * ux + v * vx) / kx, a[1] + (u * uy + v * vy) / ky];
-          const ring = this._rectRail([pt(u0, 0), pt(u1, 0)], -v0, v1, 0);
+          const suitLeQuai = g.membres.length === 1 && m0.trace.length > 2;
+          const ring = suitLeQuai
+            ? this._bandeRail(m0.trace, g.bords[0].dB, g.bords[0].dT, g.bords[0].ext)
+            : this._rectRail([pt(u0, 0), pt(u1, 0)], -v0, v1, 0);
           
 
 
@@ -3362,10 +3426,18 @@ if (!customElements.get('village-map')) {
             const large = (v1 - v0) >= 45;
             const um = (u0 + u1) / 2;
             if (large) this._ancresBadge[p.id] = { lngLat: pt(um, (v0 + v1) / 2), tige: null };
-            else {
+            else if (suitLeQuai) {
+              
+
+              const mc = this._milieuEtCap(m0.trace);
+              const versEau = g.bords[0].dT >= g.bords[0].dB ? 1 : -1;
+              const d = (versEau > 0 ? g.bords[0].dT : g.bords[0].dB) + 14;
+              const r2 = (mc.cap + 90) * Math.PI / 180, kx2 = 111320 * Math.cos(mc.p[1] * Math.PI / 180) || 1;
+              this._ancresBadge[p.id] = { lngLat: [mc.p[0] + versEau * d * Math.sin(r2) / kx2, mc.p[1] + versEau * d * Math.cos(r2) / ky], tige: null };
+            } else {
               const versEau = v1 >= -v0 ? 1 : -1;
-              const v = versEau > 0 ? v1 + 16 : v0 - 16;
-              this._ancresBadge[p.id] = { lngLat: pt(um, v), tige: (capDe(m0.trace) + (versEau > 0 ? -90 : 90) + 360) % 360 };
+              const v = versEau > 0 ? v1 + 14 : v0 - 14;
+              this._ancresBadge[p.id] = { lngLat: pt(um, v), tige: null };
             }
           }
           features.push({ type: 'Feature', id: features.length + 1,
@@ -3414,11 +3486,98 @@ if (!customElements.get('village-map')) {
         if (this._atelier) return;
         const f = e.features && e.features[0];
         if (!f) return;
-         
+        
+
+
+
+
+
         const dessus = ['flotte-f', 'flotte-b', 'poi-tap', 'poi-pt'].filter(l => this._map.getLayer(l));
-        if (dessus.length && this._map.queryRenderedFeatures(e.point, { layers: dessus }).length) return;
+        const T = 6, boite = [[e.point.x - T, e.point.y - T], [e.point.x + T, e.point.y + T]];
+        const sous = dessus.length ? this._map.queryRenderedFeatures(boite, { layers: dessus }) : [];
+        if (sous.length) {
+          const fb = sous.find(x => x.layer && (x.layer.id === 'flotte-f' || x.layer.id === 'flotte-b'));
+          if (fb && this._clicCoque) this._clicCoque({ features: [fb], point: e.point, originalEvent: e.originalEvent });
+          return;
+        }
         this._allerPonton(f.properties.ponton);
+        const pz = (this._p.pontons || []).find(x => x.id === f.properties.ponton);
+        if (pz) this._ficheClasse(pz);
       });
+    }
+
+    
+
+
+
+    _ficheClasse(p) {
+      if (!p || this._atelier) return;
+      const famille = [p.id].concat((this._p.pontons || []).filter(x => x.parent === p.id).map(x => x.id));
+      const bateaux = (this._p.bateaux || []).filter(b => famille.indexOf(b.pontonId) >= 0)
+        .sort((x, y) => String(x.nom || '').localeCompare(String(y.nom || ''), 'fr'));
+      const couleur = couleurSure(this._couleurClasse(p.classe), C.teal);
+      const drapeau = DRAPEAU[p.classe] ? urlSure(DRAPEAU[p.classe]) : '';
+      const en = this._lang === 'en';
+      const nommes = bateaux.filter(b => b.nom);
+      this._poiOuvert = null; this._batiOuvert = null;
+      this.querySelector('#vmFiche').innerHTML =
+        '<button class="vm__fx" aria-label="' + this._esc(this._t('fermer')) + '">' + svg(IC.fermer) + '</button>' +
+        '<div class="vm__fclasse" style="--c:' + couleur + '">' +
+          (drapeau ? '<img class="vm__fclassf" src="' + this._esc(drapeau) + '" alt="">' : svg(PICTO.boat, 'vm__fclassi')) +
+          '<span class="vm__fclasst"><b>' + this._esc(this._libClasse(p.classe)) + '</b>' +
+            '<em>' + nommes.length + ' ' + this._esc(en ? (nommes.length > 1 ? 'boats' : 'boat') : (nommes.length > 1 ? 'bateaux' : 'bateau')) +
+            (p.nom && p.nom.toUpperCase() !== this._libClasse(p.classe).toUpperCase() ? ' · ' + this._esc(p.nom) : '') + '</em></span>' +
+        '</div>' +
+        '<div class="vm__fbody">' +
+          (nommes.length ? '<ul class="vm__opts vm__fflotte">' + nommes.map(b => {
+            const v = urlSure(b.portrait) || urlSure(b.photo);
+            return '<li><button class="vm__opt vm__fbat" data-id="' + this._esc(b.id) + '">' +
+              (v ? '<img class="vm__fbatv" src="' + this._esc(vignette(v, 44)) + '" alt="" loading="lazy"' + this._repli('') + '>'
+                 : '<span class="vm__opti est-fam" style="--c:' + couleur + '">' + svg(PICTO.boat, '') + '</span>') +
+              '<span class="vm__optt"><b>' + this._esc(b.nom) + '</b>' +
+                '<em>' + this._esc([b.skipper, b.voile].filter(Boolean).join(' · ')) + '</em></span>' +
+              svg(IC.chevronD, 'vm__optc') + '</button></li>';
+          }).join('') + '</ul>' : '<p>' + this._esc(en ? 'No boat moored here yet.' : 'Aucun bateau amarré ici pour l\'instant.') + '</p>') +
+        '</div>';
+      this._ouvrirPanneau();
+      this.querySelector('.vm__fx').addEventListener('click', () => this._fermerFiche());
+      this.querySelectorAll('.vm__fbat').forEach(bt => bt.addEventListener('click', () => this._allerBateau(bt.dataset.id)));
+      if (this._mesure) this._mesure.noter('classe', p.id);
+    }
+
+    
+
+
+
+    _ficheSecteur(z) {
+      if (!z || this._atelier) return;
+      const dedans = (this._p.poi || []).filter(o => { const c = this._centre(o); return this._estPoint(c) && this._dansPolygone(c, z.polygone); });
+      const parCat = new Map();
+      dedans.forEach(o => parCat.set(o.cat, (parCat.get(o.cat) || 0) + 1));
+      const rangs = [...parCat.entries()].sort((x, y) => y[1] - x[1]);
+      const resume = rangs.map(([cle, n]) => this._libCat(this._cat(cle)) + (n > 1 ? ' ×' + n : '')).join(' · ');
+      const couleur = couleurSure(z.couleur, C.teal);
+      this._poiOuvert = null; this._batiOuvert = null;
+      this.querySelector('#vmFiche').innerHTML =
+        '<button class="vm__fx" aria-label="' + this._esc(this._t('fermer')) + '">' + svg(IC.fermer) + '</button>' +
+        (urlSure(z.photo) ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(urlSure(z.photo), 480, 230)) + '" alt="" loading="eager"' + this._repli('') + '></div>' : '') +
+        '<div class="vm__fbody">' +
+          '<span class="vm__fcat" style="--c:' + couleur + '">' + svg(PICTO.star, 'vm__fic') + this._esc(this._t('secteur')) + '</span>' +
+          '<h3>' + this._esc(z.nom || '') + '</h3>' +
+          (resume ? '<p class="vm__fsub">' + this._esc(dedans.length + ' ' + (this._lang === 'en' ? 'places' : 'lieux') + ' · ' + resume) + '</p>' : '') +
+          (z.desc ? '<p>' + this._esc(z.desc) + '</p>' : '') +
+          (dedans.length ? '<ul class="vm__opts">' + dedans.map(o => {
+            const c = this._cat(o.cat);
+            return '<li><button class="vm__opt vm__batil" data-id="' + this._esc(o.id) + '">' +
+              '<span class="vm__opti est-fam" style="--c:' + couleurSure(c.couleur) + '">' + svg(PICTO[c.picto] || PICTO.star, '') + '</span>' +
+              '<span class="vm__optt"><b>' + this._esc(o.nom || o.id) + '</b><em>' + this._esc(o.sousCat || this._libCat(c)) + '</em></span>' +
+              svg(IC.chevronD, 'vm__optc') + '</button></li>';
+          }).join('') + '</ul>' : '') +
+        '</div>';
+      this._ouvrirPanneau();
+      this.querySelector('.vm__fx').addEventListener('click', () => this._fermerFiche());
+      this.querySelectorAll('.vm__batil').forEach(bt => bt.addEventListener('click', () => { this._apercuTouche = bt.dataset.id; this._apercuT0 = 0; this._ouvrirPoi(bt.dataset.id); }));
+      if (this._mesure) this._mesure.noter('secteur-fiche', z.id);
     }
 
     
@@ -3512,6 +3671,7 @@ if (!customElements.get('village-map')) {
         this._map.setMaxBounds(null);
         this._map.fitBounds([[Math.min(...lng), Math.min(...lat)], [Math.max(...lng), Math.max(...lat)]],
           { padding: this._paddingVolets(), duration: 800, maxZoom: 17 });
+        this._ficheSecteur(z);
         if (this._mesure) this._mesure.noter('secteur', z.id);
       });
       this._map.on('mouseenter', 'secteur-f', () => {
@@ -3861,8 +4021,9 @@ if (!customElements.get('village-map')) {
 
         const drapeau = DRAPEAU[p.classe];
         el.classList.toggle('est-drapeau', !!drapeau);
+        
+
         el.innerHTML =
-          (ancre && ancre.tige != null ? '<i class="vm__ponts" style="transform:rotate(' + Math.round(ancre.tige) + 'deg)"></i>' : '') +
           '<span class="vm__pontd">' +
             (drapeau ? '<img src="' + this._esc(drapeau) + '" alt="" loading="lazy">'
                      : svg(PICTO.boat, 'vm__ponti')) +
@@ -3874,7 +4035,10 @@ if (!customElements.get('village-map')) {
 
         el.appendChild(Object.assign(document.createElement('span'), {
           className: 'vm__slo', textContent: (p.nom || '') + (n ? ', ' + pris + ' bateaux sur ' + n + ' places' : '') }));
-        el.addEventListener('click', () => this._allerPonton(p.id));
+        
+
+
+        el.addEventListener('click', () => { this._allerPonton(p.id); this._ficheClasse(p); });
         
 
         const decal = Array.isArray(p.badge) && p.badge.length === 2 && p.badge.every(Number.isFinite) ? p.badge : [0, 0];
@@ -4164,6 +4328,11 @@ if (!customElements.get('village-map')) {
         if (this._appuiLong) return;           
         const f = e.features && e.features[0];
         if (!f) return;
+        
+
+        const ev = e.originalEvent;
+        if (ev && this._clicCoqueT === ev.timeStamp) return;
+        if (ev) this._clicCoqueT = ev.timeStamp;
         const b = (this._p.bateaux || []).find(x => x.id === f.properties.id);
         if (!b) return;
         
@@ -4185,6 +4354,7 @@ if (!customElements.get('village-map')) {
        
        
        
+      this._clicCoque = ouvrir;
       ['flotte-b', 'flotte-f'].forEach(l => {
         this._map.on('click', l, ouvrir);
         this._map.on('mouseenter', l, () => this._map.getCanvas().style.cursor = 'pointer');
@@ -4245,19 +4415,24 @@ if (!customElements.get('village-map')) {
         pastille(en ? 'Route du Rhum' : 'Participations', b.participation && (b.participation + (/\d/.test(b.participation) ? (en ? ' entries' : ' Route du Rhum') : '')));
       this.querySelector('#vmFiche').innerHTML =
         '<button class="vm__fx" aria-label="' + this._esc(this._t('fermer')) + '">' + svg(IC.fermer) + '</button>' +
-        (hero
-          ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(hero, 480, 230)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '>' +
-              (drapeauClasse ? '<img class="vm__fflag" src="' + this._esc(drapeauClasse) + '" alt="' + this._esc(this._libClasse(b.classe)) + '">' : '') + '</div>'
-          : (drapeauClasse ? '<div class="vm__fhero vm__fhero--vide" style="--c:' + couleur + '"><img class="vm__fflag" src="' + this._esc(drapeauClasse) + '" alt=""></div>' : '')) +
-        '<div class="vm__fbody">' +
+        
+
+
+        (hero ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(hero, 480, 230)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '></div>' : '') +
+        '<div class="vm__fbody' + (hero ? ' vm__fbody--chevauche' : '') + '">' +
+          '<div class="vm__fskip vm__fskip--grand">' +
+            '<span class="vm__fportw">' +
+              (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(vignette(urlSure(b.portrait), 112)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
+              (drapeauClasse ? '<img class="vm__fpin" src="' + this._esc(drapeauClasse) + '" alt="' + this._esc(this._libClasse(b.classe)) + '">' : '') +
+            '</span>' +
+            '<span class="vm__fskipt">' +
+              (b.skipper ? '<b>' + this._esc(b.skipper) + '</b>' : '') +
+              (b.nationalite || urlSure(b.drapeau) ? '<em>' + (urlSure(b.drapeau) ? '<img src="' + this._esc(urlSure(b.drapeau)) + '" alt="">' : '') + this._esc(b.nationalite || '') + '</em>' : '') +
+            '</span>' +
+          '</div>' +
           '<span class="vm__fcat" style="--c:' + couleur + '">' +
             svg(PICTO.boat, 'vm__fic') + this._esc(this._libClasse(b.classe)) + '</span>' +
           '<h3>' + this._esc(b.nom || this._t('posteLibre')) + '</h3>' +
-          (b.skipper ? '<div class="vm__fskip">' +
-              (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(vignette(urlSure(b.portrait), 64)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
-              '<span class="vm__fskipt"><b>' + this._esc(b.skipper) + '</b>' +
-                (b.nationalite || urlSure(b.drapeau) ? '<em>' + (urlSure(b.drapeau) ? '<img src="' + this._esc(urlSure(b.drapeau)) + '" alt="">' : '') + this._esc(b.nationalite || '') + '</em>' : '') +
-              '</span></div>' : '') +
           (specs ? '<ul class="vm__fspecs">' + specs + '</ul>' : '') +
           (b.citation ? '<blockquote class="vm__fcit" style="--c:' + couleur + '">' + this._esc(b.citation.replace(/^["«\s]+|["»\s]+$/g, '')) + '</blockquote>' : '') +
           (b.bio ? '<p>' + this._esc(b.bio) + '</p>' : '') +
@@ -7523,8 +7698,16 @@ if (!customElements.get('village-map')) {
         if (!f) return;
         const g = this._groupeReplie(f.properties.id);
         if (g) { this._descendreAEtage(g.ouvre, g.centre); return; }
-        this._bandeau(f.properties.nom, '');
+        
+
+
+        if (this._atelier) return;
+        const z = (this._p.zones || []).find(x => x.id === f.properties.id);
+        if (z) { this._poiOuvert = z.id; this._batiOuvert = null; try { this._fiche(z); } catch (err) { this._incident('fiche d\'emprise', err); this._bandeau(f.properties.nom, ''); } }
+        else this._bandeau(f.properties.nom, '');
       });
+      this._map.on('mouseenter', 'zones-f', () => { if (!this._atelier) this._map.getCanvas().style.cursor = 'pointer'; });
+      this._map.on('mouseleave', 'zones-f', () => this._map.getCanvas().style.cursor = '');
        
        
       this._map.on('click', 'zones-x', e => { const f = e.features[0];
@@ -13451,10 +13634,24 @@ if (!customElements.get('village-map')) {
       '.vm__fimg{width:100%;height:230px;object-fit:cover;object-position:50% 30%;display:block;}' +
        
       '.vm__fhero{position:relative;flex:none;}' +
-      '.vm__fhero--vide{height:96px;background:linear-gradient(135deg,var(--c,#5DBFC0),rgba(255,255,255,.2));}' +
-      '.vm__fflag{position:absolute;left:16px;bottom:-14px;width:46px;height:58px;object-fit:contain;filter:drop-shadow(0 3px 5px rgba(10,26,53,.35));}' +
-      '.vm__fhero + .vm__fbody .vm__fcat{margin-left:68px;}' +
       '.vm__fskip{display:flex;align-items:center;gap:12px;margin:2px 0 12px;}' +
+      
+
+      '.vm__fskip--grand{align-items:flex-end;gap:14px;margin:0 0 10px;}' +
+      '.vm__fbody--chevauche .vm__fskip--grand{margin-top:-56px;}' +
+      '.vm__fportw{position:relative;flex:none;}' +
+      '.vm__fskip--grand .vm__fport{width:96px;height:96px;box-shadow:0 0 0 3px var(--vm-surface),0 6px 16px rgba(10,26,53,.28);}' +
+      '.vm__fpin{position:absolute;right:-10px;bottom:-2px;width:30px;height:38px;object-fit:contain;filter:drop-shadow(0 0 1px #fff) drop-shadow(0 2px 4px rgba(10,26,53,.35));}' +
+      '.vm__fskip--grand .vm__fskipt{padding-bottom:6px;}' +
+      '.vm__fskip--grand .vm__fskipt b{font-size:16px;}' +
+       
+      '.vm__fclasse{display:flex;align-items:center;gap:14px;flex:none;padding:22px 24px 18px;background:linear-gradient(135deg,var(--c,#5DBFC0),rgba(255,255,255,.35));}' +
+      '.vm__fclassf{width:52px;height:66px;object-fit:contain;filter:drop-shadow(0 0 1px #fff) drop-shadow(0 4px 8px rgba(10,26,53,.3));}' +
+      '.vm__fclassi{width:40px;height:40px;color:var(--vm-ink);}' +
+      '.vm__fclasst{display:flex;flex-direction:column;gap:2px;}' +
+      '.vm__fclasst b{font-family:\'Varien\',Montserrat,sans-serif;font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;line-height:1.1;color:var(--vm-ink);}' +
+      '.vm__fclasst em{font:700 11px Montserrat,sans-serif;font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--vm-ink-2);}' +
+      '.vm__fbatv{flex:none;width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--vm-bg);box-shadow:0 0 0 2px var(--vm-surface),0 2px 6px rgba(10,26,53,.2);}' +
       '.vm__fport{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--vm-bg);box-shadow:0 0 0 2px var(--vm-surface),0 2px 8px rgba(10,26,53,.22);}' +
       '.vm__fport--vide{display:flex;align-items:center;justify-content:center;color:var(--vm-ink-3);}' +
       '.vm__fport--vide svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}' +
@@ -13482,6 +13679,8 @@ if (!customElements.get('village-map')) {
       '.vm__flogo{float:right;width:56px;height:56px;margin:-4px 0 8px 14px;padding:4px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid var(--vm-line);box-shadow:var(--vm-ombre);}' +
       '.vm__fcat{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px 2px 6px 2px;background:var(--vm-bg);color:var(--vm-ink-2);font:800 9.5px Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;}' +
       '.vm__fcat .vm__fic{width:12px;height:12px;color:var(--c,var(--vm-teal-deep));}' +
+      '.vm__fbody p.vm__fsub{margin:-2px 0 12px;color:var(--vm-ink-2);font:600 12.5px Montserrat,sans-serif;line-height:1.5;}' +
+      '.vm__fbody .vm__fflotte{margin-top:0;padding-top:2px;border-top:0;}' +
       '.vm__fbody h3{margin:10px 0 8px;font-family:\'Varien\',Montserrat,sans-serif;font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;line-height:1.12;}' +
       '.vm__fbody p{margin:0 0 10px;font:400 13.5px Montserrat,sans-serif;color:var(--vm-ink-2);line-height:1.6;}' +
       
@@ -14227,8 +14426,10 @@ if (!customElements.get('village-map')) {
         'transition:transform .16s cubic-bezier(.22,.61,.36,1);}' +
       
 
+      
+
       '.vm__pont.est-drapeau .vm__pontd{width:48px;height:60px;border-radius:0;background:none;box-shadow:none;' +
-        'filter:drop-shadow(0 3px 5px rgba(10,26,53,.32));}' +
+        'filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 4px 6px rgba(10,26,53,.3));}' +
       '.vm__pont.est-drapeau .vm__pontd img{width:48px;height:60px;object-fit:contain;}' +
       '.vm__pont.est-drapeau .vm__pontn{top:-6px;right:-10px;}' +
       '.vm__pont:hover .vm__pontd{transform:scale(1.22);}' +
