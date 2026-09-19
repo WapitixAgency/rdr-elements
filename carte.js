@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 2f41491 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="2f41491";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 7c35b62 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="7c35b62";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -1307,7 +1307,7 @@ if (!customElements.get('village-map')) {
           regimes:'Régimes alimentaires', resultatsPour:'Résultats pour',
           partager:'Partager ce lieu', lienCopie:'Lien copié',
           bateau:'Bateau', skipperDe:'Skipper', voileNum:'Numéro de voile', place:'place',
-          posteLibre:'Poste libre', etAmarre:'À quai', etAttendu:'Attendu',
+          posteLibre:'Poste libre', bateauAConfirmer:'Bateau à confirmer', partagerBateau:'Partager ce bateau', etAmarre:'À quai', etAttendu:'Attendu',
           etParti:'Parti', etAbsent:'Absent', flotte:'Flotte',
           
 
@@ -1405,7 +1405,7 @@ if (!customElements.get('village-map')) {
           regimes:'Dietary options', resultatsPour:'Results for',
           partager:'Share this place', lienCopie:'Link copied',
           bateau:'Boat', skipperDe:'Skipper', voileNum:'Sail number', place:'berth',
-          posteLibre:'Free berth', etAmarre:'Moored', etAttendu:'Expected',
+          posteLibre:'Free berth', bateauAConfirmer:'Boat to be confirmed', partagerBateau:'Share this boat', etAmarre:'Moored', etAttendu:'Expected',
           etParti:'Departed', etAbsent:'Absent', flotte:'Fleet',
           fiche:'Place details',
           listeLieux:'List of places shown', lieuxAffiches:'{n} places shown',
@@ -3285,16 +3285,63 @@ if (!customElements.get('village-map')) {
         droite.push([P[i][0] + nx * dT, P[i][1] + ny * dT]);
         gauche.push([P[i][0] - nx * dB, P[i][1] - ny * dB]);
       }
-      const arc = (c, r, a1, a2) => { const out = []; for (let k = 1; k < 8; k++) { const t = a1 + (a2 - a1) * k / 8; out.push([c[0] + r * Math.cos(t), c[1] + r * Math.sin(t)]); } return out; };
+      const arc = (c, r, a1, a2) => { const out = []; for (let k = 0; k <= 6; k++) { const t = a1 + (a2 - a1) * k / 6; out.push([c[0] + r * Math.cos(t), c[1] + r * Math.sin(t)]); } return out; };
       
 
-      const rBout = (dT + dB) / 2, dec = (dT - dB) / 2;
-      const cFin = [P[n - 1][0] + dec * dN[1], P[n - 1][1] - dec * dN[0]];
-      const cDeb = [P[0][0] + dec * d0[1], P[0][1] - dec * d0[0]];
-      const aAvant = Math.atan2(dN[1], dN[0]), aArriere = Math.atan2(-d0[1], -d0[0]);
-      const ring = [].concat(droite, arc(cFin, rBout, aAvant - Math.PI / 2, aAvant + Math.PI / 2),
-                             gauche.slice().reverse(), arc(cDeb, rBout, aArriere - Math.PI / 2, aArriere + Math.PI / 2), [droite[0]]);
+
+
+
+
+      const ang = (v) => Math.atan2(v[1], v[0]);
+      const nF = [dN[1], -dN[0]], nD = [d0[1], -d0[0]];    
+      const rT = Math.min(4, dT), rB = Math.min(4, dB);
+      const PF = P[n - 1], PD = P[0];
+      const cFD = [PF[0] + nF[0] * (dT - rT) - dN[0] * rT, PF[1] + nF[1] * (dT - rT) - dN[1] * rT];
+      const cFG = [PF[0] - nF[0] * (dB - rB) - dN[0] * rB, PF[1] - nF[1] * (dB - rB) - dN[1] * rB];
+      const cDG = [PD[0] - nD[0] * (dB - rB) + d0[0] * rB, PD[1] - nD[1] * (dB - rB) + d0[1] * rB];
+      const cDD = [PD[0] + nD[0] * (dT - rT) + d0[0] * rT, PD[1] + nD[1] * (dT - rT) + d0[1] * rT];
+      const ring = [].concat(
+        droite.slice(1, n - 1),
+        arc(cFD, rT, ang(nF), ang(nF) + Math.PI / 2),
+        arc(cFG, rB, ang(nF) + Math.PI / 2, ang(nF) + Math.PI),
+        gauche.slice(1, n - 1).reverse(),
+        arc(cDG, rB, ang(nD) + Math.PI, ang(nD) + 1.5 * Math.PI),
+        arc(cDD, rT, ang(nD) + 1.5 * Math.PI, ang(nD) + 2 * Math.PI));
+      ring.push(ring[0]);
       return ring.map(versLngLat);
+    }
+    
+
+
+
+
+
+
+    _unionConvexes(A, B) {
+      const seg = (p, q, r, s) => {
+        const d = (q[0] - p[0]) * (s[1] - r[1]) - (q[1] - p[1]) * (s[0] - r[0]);
+        if (Math.abs(d) < 1e-18) return null;
+        const t = ((r[0] - p[0]) * (s[1] - r[1]) - (r[1] - p[1]) * (s[0] - r[0])) / d;
+        const u = ((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / d;
+        if (t < 0 || t > 1 || u < 0 || u > 1) return null;
+        return [p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])];
+      };
+      const X = [];
+      for (let i = 0; i < A.length - 1; i++) for (let j = 0; j < B.length - 1; j++) {
+        const x = seg(A[i], A[i + 1], B[j], B[j + 1]);
+        if (x) X.push(x);
+      }
+      if (X.length < 2) return null;
+      const c = X.reduce((s, x) => [s[0] + x[0] / X.length, s[1] + x[1] / X.length], [0, 0]);
+      const kx = Math.cos(c[1] * Math.PI / 180) || 1;
+      const pts = A.slice(0, -1).filter(p => !this._dansPolygone(p, B))
+        .concat(B.slice(0, -1).filter(p => !this._dansPolygone(p, A)), X)
+        .map(p => ({ p, a: Math.atan2(p[1] - c[1], (p[0] - c[0]) * kx) }))
+        .sort((u, v) => u.a - v.a)
+        .map(o => o.p);
+      if (pts.length < 4) return null;
+      pts.push(pts[0]);
+      return pts;
     }
      
     _milieuEtCap(trace) {
@@ -3380,15 +3427,27 @@ if (!customElements.get('village-map')) {
         const groupes = [];
         famille.forEach(m => {
           if (vus.has(m.id)) return;
-          const bm = bords(m);
-          const g = { membres: [m], bords: [bm] };
-          famille.forEach(n => {
-            if (n === m || vus.has(n.id) || g.membres.indexOf(n) >= 0) return;
-            const dcap = Math.abs(((cap(m.trace) - cap(n.trace)) + 540) % 360 - 180);
-            const d = this._metres(this._milieuPonton(m), this._milieuPonton(n));
-            const bn = bords(n);
-            if (dcap < 12 && d < bm.dB + bm.dT + bn.dB + bn.dT + 8) { g.membres.push(n); g.bords.push(bn); }
-          });
+          const g = { membres: [m], bords: [bords(m)] };
+          
+
+
+
+
+          let ajout = true;
+          while (ajout) {
+            ajout = false;
+            famille.forEach(n => {
+              if (vus.has(n.id) || g.membres.indexOf(n) >= 0) return;
+              const bn = bords(n);
+              const voisin = g.membres.some((m2, k) => {
+                const bm = g.bords[k];
+                const dcap = Math.abs(((cap(m2.trace) - cap(n.trace)) + 540) % 360 - 180);
+                const d = this._metres(this._milieuPonton(m2), this._milieuPonton(n));
+                return dcap < 12 && d < bm.dB + bm.dT + bn.dB + bn.dT + 8;
+              });
+              if (voisin) { g.membres.push(n); g.bords.push(bn); ajout = true; }
+            });
+          }
           g.membres.forEach(x => vus.add(x.id));
           groupes.push(g);
         });
@@ -3442,10 +3501,25 @@ if (!customElements.get('village-map')) {
           }
           features.push({ type: 'Feature', id: features.length + 1,
             properties: { id: 'zc-' + p.id, ponton: p.id, nom: p.nom || '', classe: p.classe || 'defaut',
-                          couleur: this._couleurClasse(p.classe) },
+                          couleur: this._couleurClasse(p.classe), bande: suitLeQuai ? 1 : 0 },
             geometry: { type: 'Polygon', coordinates: [ring] } });
         });
       });
+      
+
+      let fondu = true;
+      while (fondu) {
+        fondu = false;
+        for (let i = 0; i < features.length && !fondu; i++) for (let j = i + 1; j < features.length && !fondu; j++) {
+          const a = features[i], b = features[j];
+          if (a.properties.classe !== b.properties.classe || a.properties.bande || b.properties.bande || a.properties.fondu || b.properties.fondu) continue;
+          const u = this._unionConvexes(a.geometry.coordinates[0], b.geometry.coordinates[0]);
+          if (!u) continue;
+          a.geometry.coordinates = [u]; a.properties.fondu = 1;
+          features.splice(j, 1); fondu = true;
+        }
+      }
+      features.forEach((f, k) => { f.id = k + 1; });
       return { type: 'FeatureCollection', features };
     }
     _ajouterZonesClasse() {
@@ -3512,13 +3586,17 @@ if (!customElements.get('village-map')) {
 
     _ficheClasse(p) {
       if (!p || this._atelier) return;
-      const famille = [p.id].concat((this._p.pontons || []).filter(x => x.parent === p.id).map(x => x.id));
-      const bateaux = (this._p.bateaux || []).filter(b => famille.indexOf(b.pontonId) >= 0)
-        .sort((x, y) => String(x.nom || '').localeCompare(String(y.nom || ''), 'fr'));
+      
+
+
+       
+      const famille = (t) => { const m = String(t || '').trim().match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'-]+\s*)+)$/); return (m ? m[1] : String(t || '')) + ' ' + String(t || ''); };
+      const bateaux = (this._p.bateaux || []).filter(b => b.classe === p.classe && (b.skipper || b.nom))
+        .sort((x, y) => famille(x.skipper || x.nom).localeCompare(famille(y.skipper || y.nom), 'fr'));
       const couleur = couleurSure(this._couleurClasse(p.classe), C.teal);
       const drapeau = DRAPEAU[p.classe] ? urlSure(DRAPEAU[p.classe]) : '';
       const en = this._lang === 'en';
-      const nommes = bateaux.filter(b => b.nom);
+      const nommes = bateaux;
       this._poiOuvert = null; this._batiOuvert = null;
       this.querySelector('#vmFiche').innerHTML =
         '<button class="vm__fx" aria-label="' + this._esc(this._t('fermer')) + '">' + svg(IC.fermer) + '</button>' +
@@ -3534,8 +3612,8 @@ if (!customElements.get('village-map')) {
             return '<li><button class="vm__opt vm__fbat" data-id="' + this._esc(b.id) + '">' +
               (v ? '<img class="vm__fbatv" src="' + this._esc(vignette(v, 44)) + '" alt="" loading="lazy"' + this._repli('') + '>'
                  : '<span class="vm__opti est-fam" style="--c:' + couleur + '">' + svg(PICTO.boat, '') + '</span>') +
-              '<span class="vm__optt"><b>' + this._esc(b.nom) + '</b>' +
-                '<em>' + this._esc([b.skipper, b.voile].filter(Boolean).join(' · ')) + '</em></span>' +
+              '<span class="vm__optt"><b>' + this._esc(b.skipper || b.nom) + '</b>' +
+                '<em>' + this._esc([b.skipper ? b.nom : '', b.voile].filter(Boolean).join(' · ')) + '</em></span>' +
               svg(IC.chevronD, 'vm__optc') + '</button></li>';
           }).join('') + '</ul>' : '<p>' + this._esc(en ? 'No boat moored here yet.' : 'Aucun bateau amarré ici pour l\'instant.') + '</p>') +
         '</div>';
@@ -4186,8 +4264,11 @@ if (!customElements.get('village-map')) {
         (function (ini2) {
            
            
-          return urlSure(b.photo)
-            ? '<img class="vm__svimg" src="' + this._esc(vignette(urlSure(b.photo), 128)) + '" alt="" loading="lazy"' + this._repli(ini2) + '>'
+           
+           
+          const img = urlSure(b.photo) || urlSure(b.portrait);
+          return img
+            ? '<img class="vm__svimg" src="' + this._esc(vignette(img, 128)) + '" alt="" loading="lazy"' + this._repli(ini2) + '>'
             : ini2;
         }).call(this, '<span class="vm__svimg vm__svini" style="background:' + cl + '">' + this._esc(ini) + '</span>') +
         '<span class="vm__svt">' +
@@ -4264,6 +4345,11 @@ if (!customElements.get('village-map')) {
         paint: { 'line-color': C.ink,
                  'line-width': ['interpolate', ['linear'], ['zoom'], 16.5, .8, 19, 2],
                  'line-opacity': ['case', ['==', ['get', 'vide'], 1], .45, .9] } });
+      
+
+
+
+      if (this._map.getLayer('poi-tap')) ['flotte-h', 'flotte-f', 'flotte-c'].forEach(l => { try { this._map.moveLayer(l, 'poi-tap'); } catch (e) {   } });
       
 
 
@@ -4402,7 +4488,10 @@ if (!customElements.get('village-map')) {
 
       const en = this._lang === 'en';
       const couleur = couleurSure(this._couleurClasse(b.classe), C.teal);
-      const hero = urlSure(b.photo) || urlSure(b.portrait);
+      
+
+
+      const hero = urlSure(b.photo);
       const drapeauClasse = DRAPEAU[b.classe] ? urlSure(DRAPEAU[b.classe]) : '';
       const pastille = (lib, val) => (val ? '<li><b>' + this._esc(lib) + '</b>' + this._esc(String(val)) + '</li>' : '');
       const dims = b.longueur ? (b.longueur + ' m' + (b.largeur ? ' × ' + b.largeur + ' m' : '')) : '';
@@ -4418,8 +4507,10 @@ if (!customElements.get('village-map')) {
         
 
 
-        (hero ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(hero, 480, 230)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '></div>' : '') +
-        '<div class="vm__fbody' + (hero ? ' vm__fbody--chevauche' : '') + '">' +
+        (hero ? '<div class="vm__fhero"><img class="vm__fimg" src="' + this._esc(vignette(hero, 480, 230)) + '" alt="" loading="eager" decoding="async"' + this._repli('') + '></div>'
+              : '<div class="vm__fhero vm__fhero--classe" style="--c:' + couleur + '">' +
+                  (drapeauClasse ? '<img class="vm__fherof" src="' + this._esc(drapeauClasse) + '" alt="">' : '') + '</div>') +
+        '<div class="vm__fbody vm__fbody--chevauche">' +
           '<div class="vm__fskip vm__fskip--grand">' +
             '<span class="vm__fportw">' +
               (urlSure(b.portrait) ? '<img class="vm__fport" src="' + this._esc(vignette(urlSure(b.portrait), 112)) + '" alt=""' + this._repli('') + '>' : '<span class="vm__fport vm__fport--vide">' + svg(IC.skipper, '') + '</span>') +
@@ -4432,7 +4523,8 @@ if (!customElements.get('village-map')) {
           '</div>' +
           '<span class="vm__fcat" style="--c:' + couleur + '">' +
             svg(PICTO.boat, 'vm__fic') + this._esc(this._libClasse(b.classe)) + '</span>' +
-          '<h3>' + this._esc(b.nom || this._t('posteLibre')) + '</h3>' +
+           
+          '<h3>' + this._esc(b.nom || this._t(b.skipper ? 'bateauAConfirmer' : 'posteLibre')) + '</h3>' +
           (specs ? '<ul class="vm__fspecs">' + specs + '</ul>' : '') +
           (b.citation ? '<blockquote class="vm__fcit" style="--c:' + couleur + '">' + this._esc(b.citation.replace(/^["«\s]+|["»\s]+$/g, '')) + '</blockquote>' : '') +
           (b.bio ? '<p>' + this._esc(b.bio) + '</p>' : '') +
@@ -4468,7 +4560,7 @@ if (!customElements.get('village-map')) {
             : '') +
           '<li><button class="vm__opt vm__fpart" data-part-cle="bateau" data-part-id="' + this._esc(b.id) + '">' +
             '<span class="vm__opti">' + svg(IC.partage, '') + '</span>' +
-            '<span class="vm__optt"><b>' + this._esc(this._t('partager')) + '</b></span>' +
+            '<span class="vm__optt"><b>' + this._esc(this._t('partagerBateau')) + '</b></span>' +
             svg(IC.chevronD, 'vm__optc') + '</button></li>' +
           this._boutonRetour('') +
         '</ul>';
@@ -13613,7 +13705,10 @@ if (!customElements.get('village-map')) {
       '.vm__voile[hidden]{display:none;}' +
        
       '.vm.a-fiche:not(.est-etroit) .vm__prog{visibility:hidden;opacity:0;transition:opacity .18s,visibility .18s;}' +
-      '.vm__fiche{position:relative;pointer-events:auto;width:min(392px,100%);max-height:calc(100% - 24px);overflow:auto;' +
+      
+
+
+      '.vm__fiche{position:relative;pointer-events:auto;width:min(clamp(360px,28vw,440px),100%);max-height:calc(100% - 24px);overflow:auto;' +
         
 
 
@@ -13624,8 +13719,8 @@ if (!customElements.get('village-map')) {
 
 
 
-        'background:var(--vm-surface);border-radius:18px 0 0 14px;' +
-        'box-shadow:-18px 0 48px rgba(10,26,53,.22);margin:12px 0 12px 0;' +
+        'background:var(--vm-surface);border-radius:var(--vm-r-card);' +
+        'box-shadow:0 8px 34px rgba(10,26,53,.16),0 1px 2px rgba(10,26,53,.06);margin:12px 12px 12px 0;' +
         'animation:vm-panneau .22s cubic-bezier(.22,.61,.36,1);}' +
       '@keyframes vm-panneau{from{transform:translateX(22px);opacity:0}to{transform:none;opacity:1}}' +
       '@media(prefers-reduced-motion:reduce){.vm__fiche{animation:none;}}' +
@@ -13634,6 +13729,8 @@ if (!customElements.get('village-map')) {
       '.vm__fimg{width:100%;height:230px;object-fit:cover;object-position:50% 30%;display:block;}' +
        
       '.vm__fhero{position:relative;flex:none;}' +
+      '.vm__fhero--classe{height:150px;background:linear-gradient(135deg,var(--c,#5DBFC0),rgba(255,255,255,.35));}' +
+      '.vm__fherof{position:absolute;right:26px;top:22px;height:100px;width:auto;filter:drop-shadow(0 0 1px #fff) drop-shadow(0 4px 10px rgba(10,26,53,.25));}' +
       '.vm__fskip{display:flex;align-items:center;gap:12px;margin:2px 0 12px;}' +
       
 
