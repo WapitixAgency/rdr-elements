@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum b8fef24 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="b8fef24";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum c4a0a47 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="c4a0a47";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3752,6 +3752,9 @@ rdr-skipper .sk .sk-retour{position:absolute;z-index:7;top:var(--e5);left:calc(m
   background:rgba(14,17,29,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:rgba(238,242,248,.82);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:color .2s ease,background-color .2s ease;}
 rdr-skipper .sk .sk-retour svg{width:14px;height:14px;transform:scaleX(-1);transition:transform .25s cubic-bezier(.22,1,.36,1);}
 rdr-skipper .sk .sk-retour:hover{color:#fff;background-color:rgba(14,17,29,.7);}
+rdr-skipper .sk .sk-retour--attente{opacity:.6;cursor:progress;}
+rdr-skipper .sk .sk-retour--attente svg{animation:sk-retour-va .7s ease-in-out infinite alternate;}
+@keyframes sk-retour-va{to{transform:scaleX(-1) translateX(6px);}}
 rdr-skipper .sk .sk-retour:hover svg{transform:scaleX(-1) translateX(3px);}
 rdr-skipper .sk .sk-retour:focus-visible{outline:2px solid #fff;outline-offset:3px;}
 rdr-skipper .sk .sk-liste-pied{display:flex;justify-content:center;margin-top:var(--e7);}
@@ -5197,7 +5200,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
     _hero(s, T) {
       const h = this._modeHero === 'photo' ? this._heroPhoto(s, T) : this._heroAffiche(s, T);
       const i = h.indexOf('>') + 1;
-      return h.slice(0, i) + '<a class="sk-retour" href="' + esc(this._urlListe()) + '">' + svg('fleche') + '<span>' + esc(T.tousSkippers) + '</span></a>' + h.slice(i);
+      return h.slice(0, i) + '<a class="sk-retour" href="' + esc(this._urlListe()) + '" onclick="this.classList.add(\'sk-retour--attente\')">' + svg('fleche') + '<span>' + esc(T.tousSkippers) + '</span></a>' + h.slice(i);
     }
 
     _urlListe() { return (this._lang === 'en' ? '/en' : '') + '/skippers'; }
@@ -7228,7 +7231,7 @@ class SkippersList extends HTMLElement {
     }
   }
 
-  static get observedAttributes() { return ['skippers','favoris','lang','nav-prete']; }
+  static get observedAttributes() { return ['skippers','favoris','lang']; }
 
    
   _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
@@ -7271,13 +7274,6 @@ class SkippersList extends HTMLElement {
 
   attributeChangedCallback(name, _, val) {
     if (name === 'lang') { this._applyLang(); return; }
-    
-
-    if (name === 'nav-prete') {
-      this._navPrete = true;
-      if (this._navEnAttente) { const url = this._navEnAttente; this._navEnAttente = null; this.dispatchEvent(new CustomEvent('sl-navigate', { detail: { url }, bubbles: true, composed: true })); }
-      return;
-    }
     if (name === 'skippers') {
       
 
@@ -7300,6 +7296,12 @@ class SkippersList extends HTMLElement {
       this._favoris = parsed;
       this._refreshFavoriButtons();
     }
+  }
+
+  _naviguer(url) {
+    if (!url || this._navEnCours) return;
+    this._navEnCours = true;
+    try { location.assign(url); } catch (e) { this._navEnCours = false; }
   }
 
   _processSkippers(data) {
@@ -8196,8 +8198,11 @@ class SkippersList extends HTMLElement {
         const link = e.target.closest('[data-link]');
         if (link) {
           this._markNavLoading(link.closest('.sl-card') || link);
-          if (!this._navPrete) this._navEnAttente = link.dataset.link;
           this.dispatchEvent(new CustomEvent('sl-navigate', { detail:{ url:link.dataset.link }, bubbles:true, composed:true }));
+          
+
+
+          this._naviguer(link.dataset.link);
         }
       });
       content.addEventListener('keydown', (e) => {

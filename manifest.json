@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum b8fef24",
- "livreLe": "2026-09-20T11:08:51.715Z",
+ "source": "WapitixAgency/route-du-rhum c4a0a47",
+ "livreLe": "2026-09-20T11:24:33.469Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -12,7 +12,7 @@
    "priorite": "high",
    "octets": 94224,
    "gzip": 22987,
-   "brotli": 19179,
+   "brotli": 19190,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -65,7 +65,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17512,
+   "brotli": 17525,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -107,8 +107,8 @@
    ],
    "priorite": "high",
    "octets": 535200,
-   "gzip": 127182,
-   "brotli": 101814,
+   "gzip": 127181,
+   "brotli": 101801,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139195,
+   "brotli": 139268,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -157,14 +157,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 461341,
-   "gzip": 108799,
-   "brotli": 86186,
+   "octets": 461486,
+   "gzip": 108831,
+   "brotli": 86165,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
-     "octets": 369797,
-     "sha": "640b9e7de3ab",
+     "octets": 370082,
+     "sha": "ceaad3cdcb36",
      "balises": [
       "skipper-gallery",
       "skipper-outro",
@@ -175,8 +175,8 @@
     },
     {
      "fichier": "skippers-list.js",
-     "octets": 91373,
-     "sha": "54daf137bf0d",
+     "octets": 91233,
+     "sha": "0c73063ea0ba",
      "balises": [
       "skippers-list"
      ]
@@ -198,7 +198,7 @@
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54103,
+   "brotli": 54119,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
