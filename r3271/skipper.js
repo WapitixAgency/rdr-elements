@@ -1,32 +1,22 @@
-/* rdr-elements skipper | source route-du-rhum 6589fee | rdr-nav-page.js rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum a902eb8 | rdr-nav-page.js rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="a902eb8";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
   if (window.rdrNavPage) return;
 
+   
+  const COUPE = false;
   const MEM_LISTE = 'rdrMemSkippersListeV1';
   const MEM_FICHE = 'rdrMemFicheV1:';
   const ATTENTE_MS = 6000;
   const SUFFIXE_TITRE = ' | Route du Rhum';
+   
+  const ATTRIBUTS_FICHE = ['membre', 'suivi', 'prefere', 'prefere-actuel', 'lang', 'phase', 'hero', 'live-url'];
+  const ATTRIBUTS_LISTE = ['favoris', 'lang'];
 
   const lang = () => (/^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr');
   const prefixe = () => (lang() === 'en' ? '/en' : '');
-  const elFiche = () => document.querySelector('rdr-skipper');
-  const elListe = () => document.querySelector('skippers-list');
-  
-
-
-  const membre = () => ['skippers-list', 'rdr-skipper', 'rdr-pied-haut'].some((t) => { const el = document.querySelector(t); return !!(el && /^membre/.test(el.getAttribute('rendu') || '')); });
-  
-
-
-
-
-
-
-  const COUPE = true;
-  const actif = () => !COUPE && !!(window.history && typeof history.pushState === 'function' && membre() && elFiche() && elListe());
 
    
   function slugDe(url) {
@@ -35,6 +25,68 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
     const m = chemin.match(/^\/(?:en\/)?skippers\/([^/?#]+)\/?$/);
     return m ? m[1] : '';
   }
+  const slugOrigine = slugDe(location.pathname);
+  const vueOrigine = slugOrigine ? 'fiche' : 'liste';
+  const TAG_HOTE = vueOrigine === 'fiche' ? 'rdr-skipper' : 'skippers-list';
+  const TAG_COMPAGNON = vueOrigine === 'fiche' ? 'skippers-list' : 'rdr-skipper';
+
+  
+
+  const hote = () => Array.from(document.querySelectorAll(TAG_HOTE)).find((el) => !el.hasAttribute('en-page') && !el.closest('.rdr-compagnon')) || null;
+  const membre = () => ['skippers-list', 'rdr-skipper', 'rdr-pied-haut'].some((t) => Array.from(document.querySelectorAll(t)).some((el) => /^membre/.test(el.getAttribute('rendu') || '')));
+  const actif = () => !COUPE && !!(window.history && typeof history.pushState === 'function' && membre() && hote() && window.customElements && customElements.get(TAG_COMPAGNON));
+
+  
+
+
+  const attributsEnAttente = {};
+  const cadreDe = (h) => Array.from(h.children).find((c) => c.classList && c.classList.contains('rdr-compagnon')) || null;
+  function compagnon() {
+    const h = hote(); if (!h) return null;
+    let cadre = cadreDe(h);
+    if (cadre && cadre.firstElementChild && cadre.firstElementChild.tagName.toLowerCase() === TAG_COMPAGNON) return cadre.firstElementChild;
+    if (cadre) cadre.remove();
+    cadre = document.createElement('div'); cadre.className = 'rdr-compagnon';
+    const el = document.createElement(TAG_COMPAGNON);
+    el.setAttribute('lang', lang());
+    if (TAG_COMPAGNON === 'rdr-skipper') el.setAttribute('phase', 'avant');
+    Object.keys(attributsEnAttente).forEach((k) => el.setAttribute(k, attributsEnAttente[k]));
+    cadre.appendChild(el); h.appendChild(cadre);
+    return el;
+  }
+  const elFiche = () => (vueOrigine === 'fiche' ? hote() : compagnon());
+  const elListe = () => (vueOrigine === 'liste' ? hote() : compagnon());
+
+   
+  const PREFIXE_ATTR = vueOrigine === 'liste' ? 'fiche-' : 'liste-';
+  const ATTRIBUTS = vueOrigine === 'liste' ? ATTRIBUTS_FICHE : ATTRIBUTS_LISTE;
+  function recopier(h, nom) {
+    if (!nom || nom.indexOf(PREFIXE_ATTR) !== 0) return;
+    const cle = nom.slice(PREFIXE_ATTR.length);
+    if (ATTRIBUTS.indexOf(cle) < 0) return;
+    const v = h.getAttribute(nom);
+    if (v == null) delete attributsEnAttente[cle]; else attributsEnAttente[cle] = v;
+    const cadre = cadreDe(h);
+    const el = cadre && cadre.firstElementChild;
+    if (el) { if (v == null) el.removeAttribute(cle); else el.setAttribute(cle, v); }
+  }
+  let observateurHote = null;
+  function observerHote() {
+    const h = hote(); if (!h || observateurHote || typeof MutationObserver !== 'function') return;
+    ATTRIBUTS.forEach((k) => { if (h.hasAttribute(PREFIXE_ATTR + k)) recopier(h, PREFIXE_ATTR + k); });
+    observateurHote = new MutationObserver((ms) => {
+      let enfantsChanges = false;
+      ms.forEach((m) => { if (m.type === 'childList') enfantsChanges = true; else if (m.type !== 'attributes') return; else if (m.attributeName === 'pret') surPret(); else recopier(h, m.attributeName); });
+      
+
+      if (enfantsChanges && !cadreDe(h) && vue !== vueOrigine) {
+        if (vue === 'fiche' && slugCourant) ouvrirFiche(slugCourant, { pousser: false });
+        else if (vue === 'liste') ouvrirListe({ pousser: false, scroll: window.scrollY || 0 });
+      }
+    });
+    observateurHote.observe(h, { attributes: true, attributeFilter: ATTRIBUTS.map((k) => PREFIXE_ATTR + k).concat(['pret']), childList: true });
+  }
+
   const cleMemoireFiche = (slug) => { try { return lang() + ':' + decodeURIComponent(slug).toLowerCase().slice(0, 80); } catch (e) { return lang() + ':' + String(slug).toLowerCase().slice(0, 80); } };
   function memoireFiche(slug) {
     try { const m = JSON.parse(sessionStorage.getItem(MEM_FICHE + cleMemoireFiche(slug)) || 'null'); return m && typeof m.payload === 'string' && Date.now() - m.le < 18e5 ? m.payload : ''; } catch (e) { return ''; }
@@ -55,37 +107,25 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
 
   
 
-
-  const slugOrigine = slugDe(location.pathname);
-  const vueOrigine = slugOrigine ? 'fiche' : 'liste';
   let vue = vueOrigine;
   let slugCourant = slugOrigine;
   let generation = 0;
   let scrollListe = 0;
-   
   const titreListe = vueOrigine === 'liste' ? document.title : 'Skippers engagés Route du Rhum 2026 : liste complète';
   const titreFiche = (c) => [c.skipper.prenom, String(c.skipper.nom || '').toUpperCase()].filter(Boolean).join(' ') + SUFFIXE_TITRE;
-  const annonces = new Map();    
+  let annonceEnAttente = null;    
 
-  function annoncer(el, type, detail) {
-    if (el.getAttribute('pret') === 'oui') { annonces.delete(el); el.dispatchEvent(new CustomEvent(type, { detail, bubbles: true, composed: true })); }
-    else { annonces.set(el, { type, detail }); observerPret(el); }
+  function annoncer(type, detail) {
+    const h = hote(); if (!h) return;
+    if (h.getAttribute('pret') === 'oui') { annonceEnAttente = null; h.dispatchEvent(new CustomEvent(type, { detail, bubbles: true, composed: true })); }
+    else annonceEnAttente = { type, detail };
   }
-  const observes = new WeakSet();
-  function observerPret(el) {
-    if (observes.has(el) || typeof MutationObserver !== 'function') return;
-    observes.add(el);
-    new MutationObserver(() => {
-      const a = annonces.get(el);
-      if (a && el.getAttribute('pret') === 'oui') { annonces.delete(el); el.dispatchEvent(new CustomEvent(a.type, { detail: a.detail, bubbles: true, composed: true })); }
-    }).observe(el, { attributes: true, attributeFilter: ['pret'] });
+  function surPret() {
+    const h = hote();
+    if (h && annonceEnAttente && h.getAttribute('pret') === 'oui') { const a = annonceEnAttente; annonceEnAttente = null; h.dispatchEvent(new CustomEvent(a.type, { detail: a.detail, bubbles: true, composed: true })); }
   }
 
-  function montrer(voir, cacher) {
-    voir.setAttribute('en-page', 'oui'); cacher.setAttribute('en-page', 'oui');
-    cacher.removeAttribute('ouverte');
-    voir.setAttribute('ouverte', 'oui');
-  }
+  const montrer = (quoi) => { const h = hote(); if (h) h.setAttribute('vue', quoi); };
   const enHaut = () => { try { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, 0); } };
   const temoinDe = (c, slug) => ({ ok: true, slug, lang: c.lang || lang(), id: c.skipper.id, prenom: c.skipper.prenom || '', nom: c.skipper.nom || '', classeId: (c.skipper.classe && c.skipper.classe.id) || '' });
   const chargeValide = (c, slug) => !!(c && !c.introuvable && c.skipper && c.skipper.id && String(c.skipper.slug || '').replace(/^\/?skippers\//, '') === slug);
@@ -94,8 +134,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
   async function ouvrirFiche(slug, options) {
     const o = options || {};
     slug = String(slug || '').replace(/^\/+|\/+$/g, '');
-    const fiche = elFiche(), liste = elListe();
     if (!slug || !actif()) return false;
+    observerHote();
+    const fiche = elFiche(); if (!fiche) return false;
     const url = prefixe() + '/skippers/' + slug;
     if (o.pousser !== false) {
       if (vue === 'liste') scrollListe = window.scrollY || 0;
@@ -115,7 +156,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
     const memoire = memoireFiche(slug);
     if (memoire) fiche.setAttribute('payload-memoire', memoire);
     else if (typeof fiche.setPayload === 'function') fiche.setPayload(null);
-    montrer(fiche, liste);
+    montrer('fiche');
     enHaut();
 
     let c = null;
@@ -128,15 +169,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
     }
     fiche.setAttribute('payload', JSON.stringify(c));
     document.title = titreFiche(c);
-    annoncer(fiche, 'sk-affichee', temoinDe(c, slug));
+    annoncer('sk-affichee', temoinDe(c, slug));
     return true;
   }
 
    
   async function ouvrirListe(options) {
     const o = options || {};
-    const fiche = elFiche(), liste = elListe();
     if (!actif()) return false;
+    observerHote();
+    const liste = elListe(); if (!liste) return false;
     if (o.pousser !== false) {
       try { history.pushState({ rdrNav: 'liste' }, '', prefixe() + '/skippers'); } catch (e) { return false; }
     }
@@ -146,11 +188,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
      
     const dejaLa = !!liste.querySelector('.sl-card');
     if (!dejaLa) { const m = memoireListe(); if (m) liste.setAttribute('skippers', m); }
-    montrer(liste, fiche);
+    montrer('liste');
     document.title = titreListe;
     const y = o.pousser === false ? (o.scroll != null ? o.scroll : scrollListe) : scrollListe;
     requestAnimationFrame(() => { try { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, y); } });
-    annoncer(liste, 'sl-affichee', { lang: lang() });
+    annoncer('sl-affichee', { lang: lang() });
     if (!dejaLa && !liste.querySelector('.sl-card')) {
       let l = null;
       try { l = await lire('/_functions/skippers?lang=' + lang()); } catch (e) { l = null; }
@@ -170,7 +212,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performan
     else if (s.rdrNav === 'liste' && vue !== 'liste') ouvrirListe({ pousser: false });
   });
 
-  window.rdrNavPage = { actif, ouvrirFiche, ouvrirListe, slugDe, vue: () => vue };
+  window.rdrNavPage = { actif, ouvrirFiche, ouvrirListe, slugDe, vue: () => vue, hote, compagnon };
 })();
 })();
 ;(function(){
