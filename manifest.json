@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum b17d9a2",
- "livreLe": "2026-09-20T10:39:42.902Z",
+ "source": "WapitixAgency/route-du-rhum 4972110",
+ "livreLe": "2026-09-20T10:49:30.546Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -12,7 +12,7 @@
    "priorite": "high",
    "octets": 94224,
    "gzip": 22988,
-   "brotli": 19197,
+   "brotli": 19165,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -65,7 +65,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17514,
+   "brotli": 17549,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,7 +108,7 @@
    "priorite": "high",
    "octets": 530354,
    "gzip": 126139,
-   "brotli": 101074,
+   "brotli": 101163,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139169,
+   "brotli": 139134,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -157,14 +157,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 460369,
-   "gzip": 108520,
-   "brotli": 85950,
+   "octets": 460492,
+   "gzip": 108546,
+   "brotli": 86035,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
-     "octets": 369178,
-     "sha": "599d88ee8e4d",
+     "octets": 369315,
+     "sha": "e4c2013f579f",
      "balises": [
       "skipper-gallery",
       "skipper-outro",
@@ -175,8 +175,8 @@
     },
     {
      "fichier": "skippers-list.js",
-     "octets": 91020,
-     "sha": "4bb38197ef08",
+     "octets": 91006,
+     "sha": "57f78a5fdf10",
      "balises": [
       "skippers-list"
      ]
@@ -196,14 +196,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 289124,
-   "gzip": 70857,
-   "brotli": 54129,
+   "octets": 289109,
+   "gzip": 70853,
+   "brotli": 54186,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
-     "octets": 168841,
-     "sha": "b3f87b1e0891",
+     "octets": 168826,
+     "sha": "d729229772f3",
      "balises": [
       "rdr-news"
      ]

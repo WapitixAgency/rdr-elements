@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum b17d9a2 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="b17d9a2";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 4972110 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="4972110";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -4939,7 +4939,13 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       if (!this._init) { this._attente[nom] = apres; return; }
       
 
-      if (nom === 'payload') { this._depuisMemoire = false; if (this._appliquerCharge(apres)) { this._memoriser(this._chargeBrute); this._rendre(); } return; }
+      if (nom === 'payload') {
+        
+
+        if (this._depuisMemoire) { this._depuisMemoire = false; this._memoriser(String(apres == null ? '' : apres).trim()); return; }
+        if (this._appliquerCharge(apres)) { this._memoriser(this._chargeBrute); this._rendre(); }
+        return;
+      }
       this._appliquer(nom, apres);
       if (nom === 'suivi') this._confirmerSuivi();
       else if (nom === 'membre') { this._peindreSuivi(); this._rejouerGeste(); }
@@ -7253,7 +7259,9 @@ class SkippersList extends HTMLElement {
 
       if (this._dataLoaded && !this._depuisMemoire) return;
       if (val && this._shellReady) memEcrire(this._lang(), { skippers: val });
-      if (this._depuisMemoire && val === this._brut) { this._depuisMemoire = false; return; }
+      
+
+      if (this._depuisMemoire) { this._depuisMemoire = false; return; }
       let parsed;
       try { parsed = JSON.parse(val || '[]'); } catch(e) { parsed = []; }
       this._brut = val; this._depuisMemoire = false;

@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum b17d9a2 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="b17d9a2";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 4972110 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="4972110";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1109,7 +1109,9 @@ class RdrNews extends HTMLElement {
         
 
         if (newVal) memEcrire(this._state.lang, { payload: newVal });
-        if (this._depuisMemoire && newVal === this._brut) { this._depuisMemoire = false; return; }
+        
+
+        if (this._depuisMemoire) { this._depuisMemoire = false; return; }
         this._depuisMemoire = false; this._brut = newVal;
         try { this._state.payload = JSON.parse(newVal || 'null'); }
         catch (e) { console.error('[rn] payload parse', e); return; }
