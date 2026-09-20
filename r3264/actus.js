@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 15872eb | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="15872eb";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum e15c082 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="e15c082";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
