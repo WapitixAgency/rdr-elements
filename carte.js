@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 1347664 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="1347664";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 3301e36 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="3301e36";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;

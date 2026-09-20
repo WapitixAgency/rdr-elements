@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 1347664 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="1347664";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 3301e36 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="3301e36";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1105,7 +1105,13 @@ rdr-pied-haut .pd-desc{margin-top:4px;font-size:12px;line-height:1.5;text-transf
 rdr-pied-haut form{margin-top:30px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px 36px;align-items:end;text-align:left}
 rdr-pied-haut .pd-champ{position:relative;display:flex;flex-direction:column;gap:6px}
 rdr-pied-haut .pd-champ.pd-large{grid-column:1 / -1}
-rdr-pied-haut label.pd-etq{position:absolute;left:0;top:-9999px}
+
+
+
+
+
+
+rdr-pied-haut label.pd-etq{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 rdr-pied-haut input.pd-in{width:100%;background:transparent;border:0;border-bottom:1px solid var(--pd-filet);border-radius:0;color:#fff;font:inherit;font-size:15px;line-height:1.3;padding:10px 2px 11px;outline:none;transition:border-color .2s,box-shadow .2s}
 rdr-pied-haut input.pd-in::placeholder{color:rgba(255,255,255,.62)}
 rdr-pied-haut input.pd-in:focus{border-bottom-color:#fff}
