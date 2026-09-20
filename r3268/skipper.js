@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum ef542c2 | rdr-nav-page.js rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="ef542c2";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 6589fee | rdr-nav-page.js rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -18,7 +18,15 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="ef542c2";performan
 
 
   const membre = () => ['skippers-list', 'rdr-skipper', 'rdr-pied-haut'].some((t) => { const el = document.querySelector(t); return !!(el && /^membre/.test(el.getAttribute('rendu') || '')); });
-  const actif = () => !!(window.history && typeof history.pushState === 'function' && membre() && elFiche() && elListe());
+  
+
+
+
+
+
+
+  const COUPE = true;
+  const actif = () => !COUPE && !!(window.history && typeof history.pushState === 'function' && membre() && elFiche() && elListe());
 
    
   function slugDe(url) {
