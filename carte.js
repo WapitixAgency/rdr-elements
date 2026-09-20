@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum a30f292 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a30f292";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 1347664 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="1347664";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -3985,14 +3985,19 @@ if (!customElements.get('village-map')) {
     _geojsonFlotte() {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
         properties: { id: b.id, cap: +b.cap || 0, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut',
-                      vide: b.nom ? 0 : 1,
+                      
+
+
+
+
+                      vide: (b.nom || b.skipper || b.refId) ? 0 : 1,
                       taille: this._dimsCoque(b).L / 20,
-                      lib: b.sansEtiquette ? '' : (b.nom || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || '') },
+                      lib: b.sansEtiquette ? '' : (b.nom || b.skipper || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || b.skipper || '') },
         geometry: { type: 'Point', coordinates: [+b.lng, +b.lat] } })) };
     }
     _geojsonFlotteGeo() {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
-        properties: { id: b.id, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut', vide: b.nom ? 0 : 1 },
+        properties: { id: b.id, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut', vide: (b.nom || b.skipper || b.refId) ? 0 : 1 },
         geometry: this._coqueGeo(b) })) };
     }
 
