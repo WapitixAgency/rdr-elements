@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 397826d | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="397826d";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum b8fef24 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="b8fef24";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -1364,7 +1364,7 @@ if (!customElements.get('village-map')) {
           chargeTresLent:'Beaucoup de monde sur le pont. La carte arrive.',
           chargeSecours:'Afficher la dernière version enregistrée',
           contextePerdu:'L\'affichage a été interrompu par le téléphone. Reconstruction en cours…',
-          regimes:'Régimes alimentaires', resultatsPour:'Résultats pour',
+          regimes:'Régimes alimentaires', classes:'Filtrer par classe', resultatsPour:'Résultats pour',
           partager:'Partager ce lieu', lienCopie:'Lien copié',
           bateau:'Bateau', skipperDe:'Skipper', voileNum:'Numéro de voile', place:'place',
           posteLibre:'Poste libre', bateauAConfirmer:'Bateau à confirmer', partagerBateau:'Partager ce bateau', etAmarre:'À quai', etAttendu:'Attendu',
@@ -1462,7 +1462,7 @@ if (!customElements.get('village-map')) {
           annonceRetiree:'A notice was hidden: it was over {h} h old and no longer reliable.',
           chargement:'Loading the map', chargeLent:'The network is busy, please wait.',
           chargeTresLent:'Lots of people on deck. The map is coming.',
-          regimes:'Dietary options', resultatsPour:'Results for',
+          regimes:'Dietary options', classes:'Filter by class', resultatsPour:'Results for',
           partager:'Share this place', lienCopie:'Link copied',
           bateau:'Boat', skipperDe:'Skipper', voileNum:'Sail number', place:'berth',
           posteLibre:'Free berth', bateauAConfirmer:'Boat to be confirmed', partagerBateau:'Share this boat', etAmarre:'Moored', etAttendu:'Expected',
@@ -1567,6 +1567,8 @@ if (!customElements.get('village-map')) {
   const LOGO_COURSE = "data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%22100%22%20width%3D%22100%22%3E%3Cg%3E%3Cpath%20fill%3D%22url(%23ee63fb4c-1830-4ba8-864e-80778395f02c_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M100%200H0v100h100z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M34.485%2030.557a18.7%2018.7%200%200%200-2.304-2.665l-.227-.222a11%2011%200%200%200-2.279-1.655c-1.257-.788-2.99-1.092-4.886-1.278%202.48%201.335%206.624%204.124%206.856%204.64.103%201.932-1.165%204.004-2.96%206.535-2.185%203.093-13.21%2013.974-15.252%2019.84-2.417%206.964.294%2010.702%202.377%2014.088a13.5%2013.5%200%200%200%203.092%203.418%2014%2014%200%200%200%201.944%201.288c1.546.835%202.17%201.35%203.845%201.34h.124a38%2038%200%200%201-6.593-4.035c-.114-1.269%201.345-2.712%202.062-4.124%202.268-4.48%2011.118-11.856%2014.799-18.346%201.546-2.696%203.062-4.876%203.185-9.226.108-4.547-3.18-8.902-3.783-9.598%22%2F%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M17.325%2049.2a44%2044%200%200%200-2.119%203.047h17.892a30%2030%200%200%200%201.948-3%20.2.2%200%200%201%200-.046zm14.232-20.19c.108%201.959-1.16%204.072-2.954%206.655-.139.19-.309.417-.515.67h9.608a19.2%2019.2%200%200%200-3.289-6.186%2018%2018%200%200%200-2.314-2.685l-.232-.227a10.8%2010.8%200%200%200-2.299-1.65c-1.263-.788-3-1.087-4.907-1.257%202.5%201.33%206.665%204.108%206.902%204.68m-4.856%2030.825H12.459c-.096.977-.077%201.96.056%202.933h11.573c.835-.943%201.7-1.923%202.613-2.933m-3.078-18.299h14.475c.062-.515.103-1.077.118-1.675q.014-.591-.04-1.18H26.107c-.742.86-1.588%201.824-2.485%202.855Zm-9.752%2013.077q-.296.627-.516%201.284a20%2020%200%200%200-.463%201.572h15.927c.83-.943%201.655-1.897%202.439-2.856H13.87Zm6.361%2013.367a17.6%2017.6%200%200%201%201.887-2.846h-9.026a26%2026%200%200%200%202.665%205.026%2013.6%2013.6%200%200%200%203.093%203.448%2014%2014%200%200%200%201.953%201.294%2010%2010%200%200%200%204.902%201.31.5.5%200%200%200%20.124%200%2037.2%2037.2%200%200%201-6.66-4.042%208.2%208.2%200%200%201%201.062-4.19m1.356-24.078c-.81.959-1.63%201.943-2.423%202.933h17.222c.505-.935.916-1.917%201.227-2.933z%22%2F%3E%3Cpath%20fill%3D%22url(%23b76e3fef-ee30-4f04-9bb7-be606762fe7c_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M12.165%2059.35c1.449%201.062%205.098%202.702%206.598%202.8a11.4%2011.4%200%200%201-5.423-1.593%204.2%204.2%200%200%201-1.175-1.206Z%22%2F%3E%3Cpath%20fill%3D%22url(%23fddb3550-482d-4de2-a1e4-ff7251f44c79_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M24.335%206.959a4.46%204.46%200%200%201%201.5%201.546c-.773-.825-4.464-2.7-6.933-3.093%202.113.263%204.041.645%205.433%201.547%22%2F%3E%3Cpath%20fill%3D%22url(%23c3cafdf6-f6b0-4c52-a86c-b43232003b96_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M18.902%2062.155h-.14c-1.5-.098-5.154-1.737-6.597-2.8a3.9%203.9%200%200%201-.578-1.824%2042.3%2042.3%200%200%200%207.315%204.624%22%2F%3E%3Cpath%20fill%3D%22url(%2328b2b744-eab8-4b02-b1fd-bc1d839f2242_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M26.392%2010.093q.066.316.077.639c-.252-.603-4.82-3.768-7.556-5.304%202.469.397%206.16%202.273%206.933%203.093.27.488.456%201.02.546%201.572%22%2F%3E%3Cpath%20fill%3D%22url(%23ef65524b-f297-4c02-acd0-001252a980c0_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M25.835%208.526a4.46%204.46%200%200%200-1.5-1.547%2012%2012%200%200%201%202.505%201.882l.253.258a6.77%206.77%200%200%201%201.984%204.309c.114%202.366-.593%204.49-2.309%207.14-3.866%205.979-15.876%2017.329-18.495%2022.68-2.706%205.551-2.69%207.938-.464%2011.958-2.247-3.794-5.19-8.005-2.33-15.66%202.418-6.453%2015-18.278%2017.526-21.649%202.062-2.763%203.536-5.03%203.464-7.175a4%204%200%200%200-.067-.64%204.9%204.9%200%200%200-.567-1.556%22%2F%3E%3Cpath%20fill%3D%22url(%237273e887-29b7-440b-b1cb-161465f93b4f_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M29.603%2012.098c.66.81%204.237%205.711%203.99%2010.727-.232%204.82-2%207.216-3.773%2010.15-4.263%207.102-14.33%2015.076-16.975%2019.989-.84%201.546-1.355%203.154-1.257%204.562.039.646.237%201.273.577%201.824.306.477.704.887%201.17%201.207a16%2016%200%200%201-2.144-1.475c-2.578-2.458-3.16-5.067-1.547-8.953%202.753-6.516%2014.531-16.995%2017.856-22.114%201.031-1.582%203.902-5.226%204.124-9.675.103-2.386-.882-4.546-2.02-6.242Z%22%2F%3E%3Cpath%20fill%3D%22url(%230932f294-0251-451e-9a6a-6cd24f2ff8dd_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M29.603%2012.098c1.14%201.696%202.124%203.856%202.01%206.242-.211%204.449-3.092%208.098-4.123%209.676-3.34%205.154-15.12%2015.598-17.856%2022.098-1.64%203.886-1.031%206.494%201.546%208.953a15.1%2015.1%200%200%201-3.37-3.86c-2.228-4.021-2.243-6.408.463-11.96%202.619-5.37%2014.629-16.721%2018.495-22.68%201.716-2.65%202.423-4.773%202.31-7.14a6.77%206.77%200%200%200-1.985-4.308c.93.91%201.77%201.908%202.51%202.979%22%2F%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M26.747%2059.789H12.505c-.1.976-.084%201.96.046%202.933h11.583c.82-.944%201.701-1.923%202.613-2.933%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M54.407%2050.2h-.979v3.037h-2.19v-9.124h3.468c2.294%200%203.634%201.201%203.634%203.093a2.58%202.58%200%200%201-1.716%202.577l2.062%203.444h-2.578l-1.7-3.026Zm.444-1.747c.809%200%201.247-.402%201.247-1.17a1.114%201.114%200%200%200-1.263-1.216h-1.407v2.386zm9.02-4.546a4.743%204.743%200%201%201-4.81%204.743%204.59%204.59%200%200%201%204.81-4.743m0%207.413a2.68%202.68%200%201%200-2.608-2.67%202.51%202.51%200%200%200%202.608%202.67m13.789-2.176c0%202.753-1.588%204.248-3.974%204.248s-3.975-1.495-3.975-4.248v-5.056h2.217v4.99c0%201.546.598%202.242%201.783%202.242s1.79-.676%201.79-2.243v-4.99h2.159zm5.933-3.02v7.113h-2.191v-7.113h-2.789v-2.062h7.768v2.062zm3.82-2.036h6.65v2.062h-4.46v1.546h3.284v1.825h-3.284v1.654h4.52v2.062h-6.7l-.01-9.15ZM39.83%2055.943c2.727%200%204.809%201.85%204.809%204.603s-2.098%204.547-4.768%204.547h-3.923v-9.124zm-.114%207.088c1.356%200%202.722-.69%202.722-2.49%200-1.799-1.366-2.577-2.722-2.577H38.14v5.067zM53.623%2061c0%202.753-1.592%204.248-3.974%204.248-2.381%200-3.98-1.495-3.98-4.248v-5.057h2.217v4.995c0%201.547.603%202.237%201.79%202.237%201.185%200%201.783-.675%201.783-2.237v-4.995h2.164zm7.599%201.057h-.975v3.036h-2.19v-9.124h3.464c2.293%200%203.634%201.201%203.634%203.093a2.58%202.58%200%200%201-1.722%202.577l2.088%203.443h-2.578zm.443-1.748c.81%200%201.252-.402%201.252-1.17a1.118%201.118%200%200%200-1.262-1.216h-1.408v2.386zm10.392%201.175h-3.505v3.609H66.36v-9.124h2.19v3.443h3.506V55.97h2.19v9.124h-2.19v-3.609ZM83.474%2061c0%202.753-1.587%204.248-3.974%204.248-2.386%200-3.974-1.495-3.974-4.248v-5.057h2.216v4.995c0%201.547.598%202.237%201.784%202.237s1.783-.675%201.783-2.237v-4.995h2.165zm8.278%201.84v-3.247s-.453.835-.897%201.618l-.886%201.603h-1.227l-.887-1.577c-.453-.81-.886-1.629-.897-1.644h-.04v5.5h-2.191v-9.124h2.32l2.293%204.077h.041l2.304-4.077h2.232v9.124h-2.19z%22%2F%3E%3Cpath%20fill%3D%22%23FBDD00%22%20d%3D%22M31.005%2070.19c2.109%200%203.727%201.439%203.727%203.568s-1.624%203.5-3.716%203.5h-3V70.19h2.99Zm-.087%205.496c1.03%200%202.108-.516%202.108-1.928%200-1.413-1.062-1.964-2.108-1.964h-1.222v3.917zm4.52-5.496h5.155v1.604h-3.454v1.211h2.541v1.366h-2.546v1.294h3.5v1.546h-5.196v-7.02Zm7.372%204.867c.138.515.633.85%201.401.85.645%200%201.031-.221%201.031-.68%200-.675-.845-.634-1.711-.846-.959-.231-2.15-.675-2.15-2.17s1.088-2.16%202.67-2.16c1.444%200%202.475.588%202.866%201.846l-1.613.438a1.186%201.186%200%200%200-1.283-.799c-.645%200-.918.253-.918.624%200%20.598.68.685%201.665.892s2.19.644%202.19%202.164-1.03%202.18-2.741%202.18c-1.233%200-2.624-.37-3.032-1.906zm8.427-3.263v5.464h-1.696v-5.464h-2.16v-1.577h6.016v1.577zm2.897-1.604h1.716v7.068h-1.696l-.02-7.067Zm4.392%202.851h-.031v4.217h-1.696V70.19h1.716l3.005%204.123h.031v-4.139h1.696v7.083H61.52zm7.5%203.047-.428%201.17h-1.783l2.721-7.067h1.928l2.737%207.067h-1.814l-.428-1.17zm1.876-2.949c-.222-.582-.386-1.03-.397-1.03h-.026s-.175.443-.397%201.03l-.515%201.413h1.83zm6.351-1.345v5.464h-1.696v-5.464h-2.16v-1.577h6.015v1.577zm2.897-1.604h1.695v7.068H77.15zm6.123-.138a3.676%203.676%200%201%201-3.721%203.675%203.563%203.563%200%200%201%203.721-3.675m0%205.742a2.062%202.062%200%201%200-2.015-2.062%201.944%201.944%200%200%200%202.015%202.062m6.139-2.753h-.03v4.217h-1.676V70.19h1.717l3.005%204.123h.02v-4.139h1.696v7.083h-1.727zM32.86%2087.567v-.515a3.26%203.26%200%200%201-1.989.634%203.577%203.577%200%200%201-3.608-3.68%203.53%203.53%200%200%201%203.665-3.666%203.43%203.43%200%200%201%203.289%202.062l-1.676.454a1.88%201.88%200%200%200-1.696-.902c-1.139%200-1.876.85-1.876%202.062a1.943%201.943%200%200%200%202.062%202.061%202.24%202.24%200%200%200%201.799-.726v-.335h-1.804v-1.547h3.35v4.098zm8.48-3.149c0%202.128-1.226%203.288-3.092%203.288s-3.093-1.16-3.093-3.288V80.5h1.716v3.866c0%201.211.464%201.737%201.382%201.737s1.381-.515%201.381-1.737V80.5h1.675zm2.232%201.979-.422%201.17h-1.784l2.722-7.067h1.928l2.737%207.067h-1.82l-.422-1.17zm1.882-2.949c-.227-.582-.387-1.03-.397-1.03h-.031s-.17.443-.392%201.03l-.515%201.413h1.83zm6.86-2.948c2.108%200%203.727%201.438%203.727%203.567s-1.624%203.5-3.716%203.5h-3.016V80.5zm-.072%205.495c1.031%200%202.108-.516%202.108-1.928s-1.077-1.964-2.108-1.964h-1.237v3.918zm4.506-5.495h5.154v1.603h-3.474v1.211h2.577v1.366h-2.577v1.294h3.5v1.547h-5.18zm6.046%200h1.696v5.495h3.17v1.546h-4.866zm8.69-.14a3.675%203.675%200%201%201-3.721%203.676%203.556%203.556%200%200%201%203.721-3.675Zm0%205.743a2.062%202.062%200%201%200-2.02-2.062%201.94%201.94%200%200%200%202.02%202.062m10.619-1.685c0%202.128-1.232%203.288-3.093%203.288s-3.093-1.16-3.093-3.288V80.5h1.717v3.866c0%201.211.464%201.737%201.381%201.737.918%200%201.382-.515%201.382-1.737V80.5h1.675zM85.67%2080.5c1.732%200%202.784.923%202.784%202.433s-1.031%202.433-2.784%202.433h-.953v2.201h-1.691V80.5zm.047%203.392c.716%200%201.03-.371%201.03-.928s-.324-.918-1.03-.918h-1v1.846zm3.376-3.392h5.154v1.603h-3.453v1.211h2.546v1.366h-2.546v1.294h3.505v1.547h-5.206z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M5.99%2093.552c.041.32.33.577.845.577.412%200%20.675-.16.675-.516%200-.463-.474-.515-1.082-.623-.438-.098-.959-.273-.959-.954s.516-1.005%201.294-1.005%201.222.289%201.376.85l-.572.15c-.082-.304-.32-.49-.768-.49s-.665.16-.665.464.345.433.897.516c.443.087%201.14.257%201.14%201.03%200%20.774-.558%201.032-1.336%201.032-.572%200-1.289-.17-1.438-.933zm4.232.2-.304.815h-.66l1.35-3.459h.789l1.35%203.459h-.67l-.304-.814h-1.551Zm1.098-1.221c-.222-.598-.31-.871-.315-.882l-.335.918-.232.624h1.145zm2.747-1.423h.65v3.459h-.65zm4.67%203.459-1.763-2.464v2.464h-.634v-3.459h.665l1.763%202.418v-2.418h.65v3.459zm3.923-2.856v2.856h-.65V91.71h-1.175v-.603h2.995v.603h-1.17Zm2.453%201.377v-.573H27.5v.573zm7.057-.16v-.86l-.892%201.674h-.427l-.902-1.711v2.546h-.645V91.12h.773l.64%201.16c.221.401.345.67.35.67%200%200%20.14-.269.366-.676l.624-1.154h.727v3.458h-.614zm2.933.824-.299.815h-.665l1.356-3.459h.768l1.355%203.459h-.66l-.303-.814h-1.552Zm1.103-1.221c-.222-.598-.31-.871-.314-.882l-.335.918-.227.624h1.144zm2.748-1.423h.65v2.85h1.705v.604h-2.355zm5.196-.067a1.8%201.8%200%201%201-1.83%201.8%201.77%201.77%200%200%201%201.83-1.8m0%203a1.206%201.206%200%201%200-1.176-1.2%201.144%201.144%200%200%200%201.176%201.2m10.67.526v-.433a1.54%201.54%200%200%201-1.196.516%201.804%201.804%200%201%201%20.036-3.609%201.71%201.71%200%200%201%201.65%201.031l-.594.165a1.16%201.16%200%200%200-1.03-.593%201.13%201.13%200%200%200-1.196%201.212%201.17%201.17%200%200%200%201.273%201.211%201.46%201.46%200%200%200%201.077-.443v-.356h-1.052v-.577h1.583v1.892zm5.113-1.552c0%201.109-.582%201.624-1.546%201.624s-1.547-.515-1.547-1.624v-1.907h.665v1.97c0%20.654.284.963.877.963.592%200%20.876-.31.876-.964v-1.969h.644zm2.031.737-.304.815h-.655l1.35-3.459h.79l1.35%203.459h-.67l-.304-.814h-1.557Zm1.098-1.221c-.222-.598-.31-.871-.314-.882l-.33.918-.232.624h1.144zm4.015-1.423c1.114%200%201.923.655%201.923%201.742%200%201.088-.81%201.717-1.902%201.717h-1.289v-3.459zm0%202.856c.748%200%201.253-.346%201.253-1.114s-.516-1.139-1.273-1.139h-.614v2.248zm3.335-2.856h2.526v.603h-1.876v.794h1.417v.572h-1.417v.882h1.912v.603h-2.577zm4.047%200h.65v2.85h1.706v.604h-2.356zm5.195-.067a1.8%201.8%200%201%201-1.83%201.8%201.77%201.77%200%200%201%201.83-1.8m0%203a1.206%201.206%200%201%200-1.175-1.2%201.146%201.146%200%200%200%201.175%201.2m6.259-1.026c0%201.109-.583%201.624-1.547%201.624s-1.546-.515-1.546-1.624v-1.907h.66v1.97c0%20.654.288.963.881.963s.876-.31.876-.964v-1.969h.645l.03%201.907Zm2.803-1.907c.882%200%201.392.449%201.392%201.134%200%20.686-.515%201.129-1.392%201.129h-.577v1.196h-.65v-3.459zm0%201.722c.475%200%20.707-.227.707-.572%200-.346-.227-.578-.707-.578h-.597v1.15zm2.732-1.722h2.547v.603h-1.882v.794h1.418v.572h-1.418v.882h1.882v.603h-2.578zM48.17%2094.686l-.567-.052%202.031-3.294.546.041z%22%2F%3E%3Cdefs%20fill%3D%22none%22%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2210.062%22%20x2%3D%22107.041%22%20y1%3D%2289.943%22%20x1%3D%22-7.046%22%20id%3D%22ee63fb4c-1830-4ba8-864e-80778395f02c_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23006E78%22%20offset%3D%22.36%22%2F%3E%3Cstop%20stop-color%3D%22%23006669%22%20offset%3D%22.88%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2260.748%22%20x2%3D%2218.763%22%20y1%3D%2260.748%22%20x1%3D%2212.165%22%20id%3D%22b76e3fef-ee30-4f04-9bb7-be606762fe7c_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23632114%22%2F%3E%3Cstop%20stop-color%3D%22%23A93E1B%22%20offset%3D%22.57%22%2F%3E%3Cstop%20stop-color%3D%22%23B5421D%22%20offset%3D%22.6%22%2F%3E%3Cstop%20stop-color%3D%22%23DA4E24%22%20offset%3D%22.7%22%2F%3E%3Cstop%20stop-color%3D%22%23E85227%22%20offset%3D%22.76%22%2F%3E%3Cstop%20stop-color%3D%22%23F7B03E%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%226.072%22%20x2%3D%2218.995%22%20y1%3D%227.67%22%20x1%3D%2225.685%22%20id%3D%22fddb3550-482d-4de2-a1e4-ff7251f44c79_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23053E1B%22%2F%3E%3Cstop%20stop-color%3D%22%233BA52B%22%20offset%3D%22.39%22%2F%3E%3Cstop%20stop-color%3D%22%2340A62A%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%234EA929%22%20offset%3D%22.61%22%2F%3E%3Cstop%20stop-color%3D%22%2352AB39%22%20offset%3D%22.73%22%2F%3E%3Cstop%20stop-color%3D%22%233BA530%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%233EA633%22%20offset%3D%22.87%22%2F%3E%3Cstop%20stop-color%3D%22%2348A93F%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23078B46%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2259.84%22%20x2%3D%2218.902%22%20y1%3D%2259.84%22%20x1%3D%2211.587%22%20id%3D%22c3cafdf6-f6b0-4c52-a86c-b43232003b96_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%231C2972%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%231D2D76%22%20offset%3D%22.42%22%2F%3E%3Cstop%20stop-color%3D%22%231F3A82%22%20offset%3D%22.51%22%2F%3E%3Cstop%20stop-color%3D%22%23234F95%22%20offset%3D%22.6%22%2F%3E%3Cstop%20stop-color%3D%22%232766AB%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23BECEE0%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23B6C6D9%22%20offset%3D%22.85%22%2F%3E%3Cstop%20stop-color%3D%22%23A1AFC4%22%20offset%3D%22.88%22%2F%3E%3Cstop%20stop-color%3D%22%237E8AA3%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%234F5775%22%20offset%3D%22.96%22%2F%3E%3Cstop%20stop-color%3D%22%231A1E42%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%226.093%22%20x2%3D%2218.206%22%20y1%3D%229.629%22%20x1%3D%2226.866%22%20id%3D%2228b2b744-eab8-4b02-b1fd-bc1d839f2242_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%234EA8D9%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%234AA7D9%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%233DA5D8%22%20offset%3D%22.56%22%2F%3E%3Cstop%20stop-color%3D%22%232AA2D7%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23C2E2D8%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23BBDAD5%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23A6C3CB%22%20offset%3D%22.89%22%2F%3E%3Cstop%20stop-color%3D%22%23859EBC%22%20offset%3D%22.94%22%2F%3E%3Cstop%20stop-color%3D%22%23576BA8%22%20offset%3D%22.99%22%2F%3E%3Cstop%20stop-color%3D%22%234B5DA2%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2217.727%22%20x2%3D%2235.149%22%20y1%3D%2242.794%22%20x1%3D%22-.66%22%20id%3D%22ef65524b-f297-4c02-acd0-001252a980c0_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%2398191B%22%2F%3E%3Cstop%20stop-color%3D%22%23B84A1D%22%20offset%3D%22.07%22%2F%3E%3Cstop%20stop-color%3D%22%23D3751F%22%20offset%3D%22.13%22%2F%3E%3Cstop%20stop-color%3D%22%23E79321%22%20offset%3D%22.19%22%2F%3E%3Cstop%20stop-color%3D%22%23F3A522%22%20offset%3D%22.24%22%2F%3E%3Cstop%20stop-color%3D%22%23F7AC22%22%20offset%3D%22.27%22%2F%3E%3Cstop%20stop-color%3D%22%23FBD725%22%20offset%3D%22.55%22%2F%3E%3Cstop%20stop-color%3D%22%23FBE25C%22%20offset%3D%22.62%22%2F%3E%3Cstop%20stop-color%3D%22%23FBEB88%22%20offset%3D%22.69%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF1A7%22%20offset%3D%22.75%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF5BA%22%20offset%3D%22.8%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF6C1%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23FBEF9C%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23FBD723%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23F8BD22%22%20offset%3D%22.95%22%2F%3E%3Cstop%20stop-color%3D%22%23F6AA22%22%20offset%3D%22.98%22%2F%3E%3Cstop%20stop-color%3D%22%23F5A322%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%224801.36%22%20x2%3D%223376.32%22%20y1%3D%226202.7%22%20x1%3D%22829.373%22%20id%3D%227273e887-29b7-440b-b1cb-161465f93b4f_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%234EA8D9%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%234AA7D9%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%233DA5D8%22%20offset%3D%22.56%22%2F%3E%3Cstop%20stop-color%3D%22%232AA2D7%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23C2E2D8%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23BBDAD5%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23A6C3CB%22%20offset%3D%22.89%22%2F%3E%3Cstop%20stop-color%3D%22%23859EBC%22%20offset%3D%22.94%22%2F%3E%3Cstop%20stop-color%3D%22%23576BA8%22%20offset%3D%22.99%22%2F%3E%3Cstop%20stop-color%3D%22%234B5DA2%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%224867.67%22%20x2%3D%223040.98%22%20y1%3D%225811.13%22%20x1%3D%22669.781%22%20id%3D%220932f294-0251-451e-9a6a-6cd24f2ff8dd_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23053E1B%22%2F%3E%3Cstop%20stop-color%3D%22%233BA52B%22%20offset%3D%22.39%22%2F%3E%3Cstop%20stop-color%3D%22%2340A62A%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%234EA929%22%20offset%3D%22.61%22%2F%3E%3Cstop%20stop-color%3D%22%2352AB39%22%20offset%3D%22.73%22%2F%3E%3Cstop%20stop-color%3D%22%233BA530%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%233EA633%22%20offset%3D%22.87%22%2F%3E%3Cstop%20stop-color%3D%22%2348A93F%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23078B46%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3C%2Fg%3E%3C%2Fsvg%3E";
   const TYMAL_SVG = 'https://static.wixstatic.com/shapes/7bb303_83ec85561f9a491a821ec98cefcf2dac.svg';
 
+   
+  const CLASSES_FILTRE = ['ultim', 'ocean-fifty', 'imoca', 'class40', 'v-mono', 'v-multi'];
   const DRAPEAU = {
     ultim:         'https://static.wixstatic.com/shapes/7bb303_0ed87d76a89f4e6ebd6008778014958e.svg',
     'ocean-fifty': 'https://static.wixstatic.com/shapes/7bb303_0b5383f285c8470089ae854bc67b13b5.svg',
@@ -2438,13 +2440,25 @@ if (!customElements.get('village-map')) {
 
 
           '<div class="vm__ffam">' +
-          cats.map(c => (c.cle === 'restauration' ? '<span class="vm__frang">' : '') +
+          cats.map(c => (c.cle === 'restauration' || (c.cle === 'bateaux' && CLASSES_FILTRE.length) ? '<span class="vm__frang">' : '') +
             '<button class="vm__f is-on" aria-pressed="true" data-cat="' + this._esc(c.cle) + '" style="--c:' + couleurSure(c.couleur) + '">' +
             svg(PICTO[c.picto] || PICTO.star, 'vm__fic') + '<span>' + this._esc(this._libCat(c)) + '</span>' +
             '</button>' +
             (c.cle === 'restauration'
               ? '<button type="button" class="vm__fplus" aria-expanded="false" aria-controls="vmCuis" aria-label="' +
                 this._esc(this._t('regimes')) + '" title="' + this._esc(this._t('regimes')) + '">+</button></span>' : '') +
+            
+
+
+
+            (c.cle === 'bateaux' && CLASSES_FILTRE.length
+              ? '<button type="button" class="vm__fplus" aria-expanded="false" aria-controls="vmClasses" aria-label="' +
+                this._esc(this._t('classes')) + '" title="' + this._esc(this._t('classes')) + '">+</button></span>' : '') +
+            (c.cle === 'bateaux' && CLASSES_FILTRE.length
+              ? '<div class="vm__cuisines vm__classes" id="vmClasses" hidden>' + CLASSES_FILTRE.map(k =>
+                  '<button data-classe="' + k + '" aria-pressed="false" title="' + this._esc(this._libClasse(k)) + '" style="--c:' + couleurSure(this._couleurClasse(k), C.teal) + '">' +
+                  '<img src="' + this._esc(DRAPEAU[k]) + '" alt="" loading="lazy"><span>' + this._esc(this._libClasse(k)) + '</span></button>').join('') + '</div>'
+              : '') +
             (c.cle === 'restauration'
               ? '<div class="vm__cuisines" id="vmCuis" hidden>' + Object.entries(CUISINES).map(([k, v]) =>
                   '<button data-cuis="' + k + '" aria-pressed="false" title="' + this._esc(this._lang === 'en' ? v.libelleEn : v.libelle) + '">' +
@@ -3619,13 +3633,17 @@ if (!customElements.get('village-map')) {
       this._survolZone = null;
       const relever = (id, on) => { if (id == null) return; try { this._map.setFeatureState({ source: 'zones-classe', id }, { survol: on }); } catch (e) {   } };
       this._map.on('mousemove', 'zone-classe-f', (e) => {
-        if (this._atelier) return;
+        if (this._atelier || this._replie) return;
         const f = e.features && e.features[0];
         if (!f) return;
-        if (this._survolZone !== f.id) { relever(this._survolZone, false); this._survolZone = f.id; relever(f.id, true); }
+        if (this._survolZone !== f.id) {
+          relever(this._survolZone, false); this._survolZone = f.id; relever(f.id, true);
+           
+          this._releverFanion(f.properties.ponton);
+        }
         this._map.getCanvas().style.cursor = 'pointer';
       });
-      this._map.on('mouseleave', 'zone-classe-f', () => { relever(this._survolZone, false); this._survolZone = null; this._map.getCanvas().style.cursor = ''; });
+      this._map.on('mouseleave', 'zone-classe-f', () => { relever(this._survolZone, false); this._survolZone = null; this._releverFanion(null); this._map.getCanvas().style.cursor = ''; });
       this._map.on('click', 'zone-classe-f', (e) => {
         if (this._atelier) return;
         const f = e.features && e.features[0];
@@ -3650,6 +3668,8 @@ if (!customElements.get('village-map')) {
           return;
         }
         this._allerPonton(f.properties.membre || f.properties.ponton);
+         
+        if (this._replie) return;
         const pz = (this._p.pontons || []).find(x => x.id === f.properties.ponton);
         if (pz) this._ficheClasse(pz);
       });
@@ -3964,7 +3984,7 @@ if (!customElements.get('village-map')) {
     }
     _geojsonFlotte() {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
-        properties: { id: b.id, cap: +b.cap || 0, couleur: this._couleurClasse(b.classe),
+        properties: { id: b.id, cap: +b.cap || 0, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut',
                       vide: b.nom ? 0 : 1,
                       taille: (+b.longueur || this._gabarit(b.classe)[0]) / 20,
                       lib: b.sansEtiquette ? '' : (b.nom || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || '') },
@@ -3972,7 +3992,7 @@ if (!customElements.get('village-map')) {
     }
     _geojsonFlotteGeo() {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
-        properties: { id: b.id, couleur: this._couleurClasse(b.classe), vide: b.nom ? 0 : 1 },
+        properties: { id: b.id, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut', vide: b.nom ? 0 : 1 },
         geometry: this._coqueGeo(b) })) };
     }
 
@@ -4174,6 +4194,7 @@ if (!customElements.get('village-map')) {
 
         const drapeau = DRAPEAU[p.classe];
         el.classList.toggle('est-drapeau', !!drapeau);
+        el.dataset.ponton = p.id; el.dataset.classe = p.classe || '';
         
 
         el.innerHTML =
@@ -4198,6 +4219,9 @@ if (!customElements.get('village-map')) {
         this._marqPontons.push(new maplibregl.Marker({ element: el, anchor: 'top', offset: [decal[0], decal[1] - (drapeau ? 30 : 25)] })
           .setLngLat(c).addTo(this._map));
       });
+    }
+    _releverFanion(id) {
+      (this._marqPontons || []).forEach(mk => { const el = mk.getElement(); el.classList.toggle('est-releve', !!id && el.dataset.ponton === id); });
     }
     _allerPonton(id) {
       const p = (this._p.pontons || []).find(x => x.id === id);
@@ -4469,9 +4493,15 @@ if (!customElements.get('village-map')) {
                   
 
 
+                  
+
+
+
                   'text-field': ['step', ['zoom'], '',
-                    16.6, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'court']],
-                    17.9, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'lib']]],
+                    16.6, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], ['get', 'court'], '']],
+                    17.4, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'court']],
+                    17.9, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], ['get', 'lib'], ['get', 'court']]],
+                    18.6, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'lib']]],
                   'text-font': POLICE_GRASSE, 'text-size': 10.5,
                   
 
@@ -5904,7 +5934,9 @@ if (!customElements.get('village-map')) {
 
 
       if (!this._estEtroit()) marges.bottom = 40;
-      marges.left = Math.max(marges.left, 44); marges.right = Math.max(marges.right, 44);
+      
+
+      marges.left = Math.max(marges.left, this._estEtroit() ? 60 : 44); marges.right = Math.max(marges.right, 44);
       let cam = null;
       try { cam = this._map.cameraForBounds(bornes, { padding: marges, maxZoom: (+this._p.config.zoomDepart || 15.6) + (this._estEtroit() ? 1 : 0) }); }
       catch (e) { cam = null; }
@@ -5989,6 +6021,7 @@ if (!customElements.get('village-map')) {
       if (this._map.getLayer('poi-pt')) this._map.setLayoutProperty('poi-pt', 'icon-size',
         this._detail ? ['interpolate', ['linear'], ['zoom'], 13, .58, 15.5, .82, 17.5, 1.12]
                      : ['interpolate', ['linear'], ['zoom'], 10, .72, 14, .95]);
+      this._majDecorVillage();
       
 
 
@@ -6153,6 +6186,20 @@ if (!customElements.get('village-map')) {
       const sol = this._estFeuille() ? .84 : .62;
       const k = Math.max(sol, Math.min(1, sol + (z - 10.5) * ((1 - sol) / 3.5)));
       this._marqDepart.getElement().style.setProperty('--k', k.toFixed(3));
+    }
+    
+
+
+
+
+
+
+
+    _majDecorVillage() {
+      if (!this._map) return;
+      const on = !(this._replie && !this._atelier);
+      ['amers-i', 'zones-vol', 'secteur-n', 'secteur-c', 'zones-n'].forEach(l =>
+        this._map.getLayer(l) && this._map.setLayoutProperty(l, 'visibility', on ? 'visible' : 'none'));
     }
     _majCarteDepart(on) {
       if (!this._marqDepart) { try { this._ajouterCarteDepart(); } catch (e) { this._incident('carte de départ', e); } }
@@ -8696,6 +8743,7 @@ if (!customElements.get('village-map')) {
 
       ['secteur-f', 'secteur-l', 'secteur-n', 'secteur-c'].forEach(l => this._map.getLayer(l) &&
         this._map.setLayoutProperty(l, 'visibility', 'visible'));
+      this._majDecorVillage();    
        
        
       const sg = this._map.getSource('groupes');
@@ -8733,9 +8781,28 @@ if (!customElements.get('village-map')) {
         const dispo = resto && this.querySelector('.vm__f[data-cat="restauration"]') &&
           !this.querySelector('.vm__f[data-cat="restauration"]').hidden;
         boiteCuis.hidden = !dispo || !this._regimesOuverts;
-        const plus = this.querySelector('.vm__fplus');
+        const plus = this.querySelector('.vm__fplus[aria-controls="vmCuis"]');
         if (plus) plus.hidden = !dispo;
       }
+      
+
+      const boiteCl = this.querySelector('#vmClasses');
+      if (boiteCl) {
+        const bb = this.querySelector('.vm__f[data-cat="bateaux"]');
+        const dispo = bateauxOn && this._detail !== false && bb && !bb.hidden;
+        boiteCl.hidden = !dispo || !this._classesOuvertes;
+        const plusCl = this.querySelector('.vm__fplus[aria-controls="vmClasses"]');
+        if (plusCl) plusCl.hidden = !dispo;
+      }
+      
+
+
+      const cl = this._classe || null;
+      ['flotte-b', 'flotte-f', 'flotte-c', 'flotte-h', 'zone-classe-f', 'zone-classe-l'].forEach(l => {
+        if (!this._map.getLayer(l)) return;
+        try { this._map.setFilter(l, cl ? ['==', ['get', 'classe'], cl] : null); } catch (e) { this._incident('filtre de classe', e); }
+      });
+      (this._marqPontons || []).forEach(mk => { const el = mk.getElement(); el.classList.toggle('a-classe-off', !!cl && el.dataset.classe !== cl); });
       
 
 
@@ -9294,7 +9361,8 @@ if (!customElements.get('village-map')) {
       this._pmr = false;
       const bp0 = this.querySelector('#vmPmr');
       if (bp0) { bp0.classList.remove('is-on'); bp0.setAttribute('aria-pressed', 'false'); }
-      this.querySelectorAll('.vm__cuisines button').forEach(x => x.classList.remove('is-on'));
+      this.querySelectorAll('.vm__cuisines button').forEach(x => { x.classList.remove('is-on'); x.setAttribute('aria-pressed', 'false'); });
+      this._classe = null;
       this.querySelectorAll('.vm__f').forEach(x => { x.classList.add('is-on'); if (x.dataset.cat) x.setAttribute('aria-pressed','true'); });
       const r = this.querySelector('#vmRech'); if (r) { r.value = ''; this._chercher(''); }
       this._fermerFiche();
@@ -9315,12 +9383,13 @@ if (!customElements.get('village-map')) {
 
       const basculerRegimes = (e) => {
         e.stopPropagation(); e.preventDefault();
-        const boite = this.querySelector('#vmCuis'), plus = this.querySelector('.vm__fplus');
+         
+        const plus = e.currentTarget, boite = plus && this.querySelector('#' + plus.getAttribute('aria-controls'));
         if (!boite || !plus) return;
         const ouvert = boite.classList.toggle('is-ouvert');
         plus.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
         plus.textContent = ouvert ? '\u2212' : '+';
-        this._regimesOuverts = ouvert;
+        if (boite.id === 'vmClasses') this._classesOuvertes = ouvert; else this._regimesOuverts = ouvert;
         this._appliquerFiltres();
       };
       this.querySelectorAll('.vm__fplus').forEach(p => {
@@ -9472,7 +9541,26 @@ if (!customElements.get('village-map')) {
         const x = this.querySelector('#vmProgX');
         if (x) { try { x.focus({ preventScroll: true }); } catch (e) { x.focus(); } }
       });
-      this.querySelectorAll('.vm__cuisines button').forEach(b => b.addEventListener('click', () => {
+      
+
+      this.querySelectorAll('.vm__classes button').forEach(b => b.addEventListener('click', () => {
+        const k = b.dataset.classe;
+        this._classe = this._classe === k ? null : k;
+        this.querySelectorAll('.vm__classes button').forEach(x => {
+          const on = x.dataset.classe === this._classe;
+          x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        this._appliquerFiltres();
+        if (this._classe) {
+          const p = (this._p.pontons || []).find(x => !x.parent && x.classe === this._classe && this._ligneValide(x.trace, 2));
+          if (p) { if (this._estEtroit()) this._feuille(null); this._allerPonton(p.id); this._ficheClasse(p); }
+        }
+        if (this._mesure) this._mesure.noter('filtre-classe', this._classe || 'aucune');
+      }));
+      
+
+
+      this.querySelectorAll('#vmCuis button').forEach(b => b.addEventListener('click', () => {
         this._cuis = this._cuis || new Set();
         const k = b.dataset.cuis;
         if (this._cuis.has(k)) this._cuis.delete(k); else this._cuis.add(k);
@@ -13262,6 +13350,15 @@ if (!customElements.get('village-map')) {
         'letter-spacing:.04em;text-transform:uppercase;cursor:pointer;}' +
       '.vm__cuisines button.is-on{background:var(--vm-teal-deep);border-color:var(--vm-teal-deep);color:#fff;}' +
       '.vm__cico{width:12px;height:12px;flex:none;}' +
+      
+
+      
+
+      '.vm__classes{display:grid;grid-template-columns:1fr 1fr;width:236px;max-width:100%;box-sizing:border-box;}' +
+      '.vm__classes button{justify-content:flex-start;}' +
+      '.vm.est-etroit .vm__classes{width:100%;}' +
+      '.vm__classes button img{width:14px;height:18px;object-fit:contain;flex:none;filter:drop-shadow(0 0 1px #fff);}' +
+      '.vm__classes button.is-on{background:var(--c,var(--vm-teal-deep));border-color:var(--c,var(--vm-teal-deep));color:var(--vm-ink);}' +
       '.vm__cuis{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0 12px !important;}' +
       '.vm__cuis b{font:800 9px Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--vm-ink-2);}' +
       '.vm__cuis span{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:6px 2px 6px 2px;' +
@@ -14657,7 +14754,9 @@ if (!customElements.get('village-map')) {
       '.vm.est-loin .vm__pont.est-drapeau .vm__pontd,.vm.est-loin .vm__pont.est-drapeau .vm__pontd img{width:36px;height:45px;}' +
       '.vm.est-loin .vm__pont.est-drapeau .vm__pontn{top:-5px;right:-8px;min-width:18px;height:18px;font-size:10px;}' +
       '.vm__pont.est-drapeau .vm__pontn{top:-6px;right:-10px;}' +
-      '.vm__pont:hover .vm__pontd{transform:scale(1.22);}' +
+      '.vm__pont:hover .vm__pontd,.vm__pont.est-releve .vm__pontd{transform:scale(1.22);}' +
+       
+      '.vm__pont.a-classe-off{display:none;}' +
       '.vm__pont:focus-visible .vm__pontd{transform:scale(1.1);outline:3px solid var(--vm-ink);outline-offset:2px;}' +
       '.vm__pontd img{width:34px;height:34px;object-fit:contain;display:block;}' +
       '.vm__ponti{width:28px;height:28px;color:var(--c,var(--vm-teal));}' +
