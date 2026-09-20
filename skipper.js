@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 4972110 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="4972110";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 397826d | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="397826d";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5043,8 +5043,26 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
     }
 
      
+    
+
+
+
+
+
+    _prechargerListe() {
+      if (this._listePrechargee) return;
+      this._listePrechargee = true;
+      try {
+        if (!HTMLScriptElement.supports('speculationrules')) return;
+        const sc = document.createElement('script'); sc.type = 'speculationrules';
+        sc.textContent = '{"prefetch":[{"urls":["' + this._urlListe() + '"],"eagerness":"immediate"}]}';
+        document.head.appendChild(sc);
+      } catch (e) {   }
+    }
+
     _rendre() {
       this._nettoyer();
+      this._prechargerListe();
        
       this._heroObserve = false;
       this._fondreNav = null;
@@ -7210,7 +7228,7 @@ class SkippersList extends HTMLElement {
     }
   }
 
-  static get observedAttributes() { return ['skippers','favoris','lang']; }
+  static get observedAttributes() { return ['skippers','favoris','lang','nav-prete']; }
 
    
   _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
@@ -7253,6 +7271,13 @@ class SkippersList extends HTMLElement {
 
   attributeChangedCallback(name, _, val) {
     if (name === 'lang') { this._applyLang(); return; }
+    
+
+    if (name === 'nav-prete') {
+      this._navPrete = true;
+      if (this._navEnAttente) { const url = this._navEnAttente; this._navEnAttente = null; this.dispatchEvent(new CustomEvent('sl-navigate', { detail: { url }, bubbles: true, composed: true })); }
+      return;
+    }
     if (name === 'skippers') {
       
 
@@ -8171,6 +8196,7 @@ class SkippersList extends HTMLElement {
         const link = e.target.closest('[data-link]');
         if (link) {
           this._markNavLoading(link.closest('.sl-card') || link);
+          if (!this._navPrete) this._navEnAttente = link.dataset.link;
           this.dispatchEvent(new CustomEvent('sl-navigate', { detail:{ url:link.dataset.link }, bubbles:true, composed:true }));
         }
       });
