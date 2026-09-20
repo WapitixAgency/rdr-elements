@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum c4a0a47 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="c4a0a47";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum a6804e4 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a6804e4";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -3453,7 +3453,7 @@ if (!customElements.get('village-map')) {
         const d = { babord: 0, tribord: 0 };
         bateaux.filter(b => b.pontonId === p.id).forEach(b => {
            
-          const demi = b.capLibre ? (+b.largeur || g[1]) / 2 : g[0] / 2;
+          const demi = b.capLibre ? this._dimsCoque(b).B / 2 : g[0] / 2;
           const e = (+b.ecart || Math.round(g[0] / 2 + 2)) + demi + (b.capLibre ? 1.5 : 3);
           const c = b.cote === 'babord' ? 'babord' : 'tribord';
           if (e > d[c]) d[c] = e;
@@ -3986,7 +3986,7 @@ if (!customElements.get('village-map')) {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
         properties: { id: b.id, cap: +b.cap || 0, couleur: this._couleurClasse(b.classe), classe: b.classe || 'defaut',
                       vide: b.nom ? 0 : 1,
-                      taille: (+b.longueur || this._gabarit(b.classe)[0]) / 20,
+                      taille: this._dimsCoque(b).L / 20,
                       lib: b.sansEtiquette ? '' : (b.nom || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || '') },
         geometry: { type: 'Point', coordinates: [+b.lng, +b.lat] } })) };
     }
@@ -4219,6 +4219,32 @@ if (!customElements.get('village-map')) {
         this._marqPontons.push(new maplibregl.Marker({ element: el, anchor: 'top', offset: [decal[0], decal[1] - (drapeau ? 30 : 25)] })
           .setLngLat(c).addTo(this._map));
       });
+    }
+    
+
+
+    _selectionnerBateau(id) {
+      if (!this._map) return;
+      this._batSel = id || null;
+      const f = ['==', ['get', 'id'], id || ''];
+      ['flotte-sel-g', 'flotte-sel-h', 'flotte-sel', 'flotte-sel-b'].forEach(l => { try { if (this._map.getLayer(l)) this._map.setFilter(l, f); } catch (e) {   } });
+      if (this._pulseSel) { cancelAnimationFrame(this._pulseSel); this._pulseSel = null; }
+      if (!id || !this._map.getLayer('flotte-sel')) return;
+      let reduit = false;
+      try { reduit = matchMedia('(prefers-reduced-motion:reduce)').matches; } catch (e) { reduit = false; }
+      if (reduit) return;
+      const t0 = performance.now(), duree = 380;
+      const pas = (t) => {
+        const k = Math.min(1, (t - t0) / duree), e = 1 - Math.pow(1 - k, 3);
+        try {
+          this._map.setPaintProperty('flotte-sel', 'line-width', 9 - 5.8 * e);
+          this._map.setPaintProperty('flotte-sel-g', 'line-width', 30 - 14 * e);
+          this._map.setPaintProperty('flotte-sel-h', 'line-width', 16 - 8 * e);
+          this._map.setPaintProperty('flotte-sel-b', 'circle-stroke-width', 7 - 4 * e);
+        } catch (err) { return; }
+        if (k < 1) this._pulseSel = requestAnimationFrame(pas); else this._pulseSel = null;
+      };
+      this._pulseSel = requestAnimationFrame(pas);
     }
     _releverFanion(id) {
       (this._marqPontons || []).forEach(mk => { const el = mk.getElement(); el.classList.toggle('est-releve', !!id && el.dataset.ponton === id); });
@@ -4457,6 +4483,30 @@ if (!customElements.get('village-map')) {
 
 
 
+
+
+
+       
+      this._map.addLayer({ id: 'flotte-sel-g', type: 'line', source: 'flotte-geo', minzoom: SEUIL_COQUE,
+        filter: ['==', ['get', 'id'], ''],
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': C.teal, 'line-width': 16, 'line-opacity': .38, 'line-blur': 6 } });
+      this._map.addLayer({ id: 'flotte-sel-h', type: 'line', source: 'flotte-geo', minzoom: SEUIL_COQUE,
+        filter: ['==', ['get', 'id'], ''],
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': C.surface, 'line-width': 8, 'line-opacity': .95 } });
+      this._map.addLayer({ id: 'flotte-sel', type: 'line', source: 'flotte-geo', minzoom: SEUIL_COQUE,
+        filter: ['==', ['get', 'id'], ''],
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': C.tealDeep, 'line-width': 3.2, 'line-opacity': 1 } });
+      this._map.addLayer({ id: 'flotte-sel-b', type: 'circle', source: 'flotte', maxzoom: SEUIL_COQUE, minzoom: 15,
+        filter: ['==', ['get', 'id'], ''],
+        paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 15, 12, 16.6, 20], 'circle-color': 'rgba(0,0,0,0)',
+                 'circle-stroke-width': 3, 'circle-stroke-color': C.tealDeep, 'circle-stroke-opacity': .95 } });
+      
+
+
+
       if (this._map.getLayer('poi-tap')) ['flotte-h', 'flotte-f', 'flotte-c'].forEach(l => { try { this._map.moveLayer(l, 'poi-tap'); } catch (e) {   } });
       
 
@@ -4613,7 +4663,7 @@ if (!customElements.get('village-map')) {
       const hero = urlSure(b.photo);
       const drapeauClasse = DRAPEAU[b.classe] ? urlSure(DRAPEAU[b.classe]) : '';
       const pastille = (lib, val) => (val ? '<li><b>' + this._esc(lib) + '</b>' + this._esc(String(val)) + '</li>' : '');
-      const dims = b.longueur ? (b.longueur + ' m' + (b.largeur ? ' × ' + b.largeur + ' m' : '')) : '';
+      const dims = (b.longueur && this._dimsCoque(b).plausible) ? (b.longueur + ' m' + (b.largeur ? ' × ' + b.largeur + ' m' : '')) : '';
       const specs =
         pastille(en ? 'Sail no.' : 'Voile', b.voile) +
         pastille(en ? 'Size' : 'Dimensions', dims) +
@@ -4684,6 +4734,7 @@ if (!customElements.get('village-map')) {
           this._boutonRetour('') +
         '</ul>';
       this._ouvrirPanneau();
+      this._selectionnerBateau(b.id);
       this.querySelector('.vm__fx').addEventListener('click', () => this._fermerFiche());
       const bp = this.querySelector('.vm__fpart');
       if (bp) bp.addEventListener('click', () => this._partager(b.nom || this._t('bateau'), 'bateau', b.id));
@@ -4924,9 +4975,29 @@ if (!customElements.get('village-map')) {
         centre[1] + (p[1] * c - p[0] * s) / 110540
       ]);
     }
+    
+
+
+
+
+
+
+
+
+    _dimsCoque(b) {
+      const g = this._gabarit(b.classe), multi = !!g[2];
+      let L = +b.longueur || 0, B = +b.largeur || 0;
+      if (!multi && L && B && B > L) { const t = L; L = B; B = t; }
+      const okL = L >= g[0] * .6 && L <= g[0] * 1.6;
+      if (!okL) L = g[0];
+      const okB = multi ? (B >= L * .4 && B <= L * 1.1) : (B >= L * .18 && B <= L * .5);
+      if (!okB) B = g[1];
+      return { L, B, plausible: okL && okB };
+    }
     _coqueGeo(b) {
       const g = this._gabarit(b.classe);
-      const L = +b.longueur || g[0], B = +b.largeur || g[1], multi = g[2];
+      const d = this._dimsCoque(b);
+      const L = d.L, B = d.B, multi = g[2];
       const centre = [+b.lng, +b.lat], cap = +b.cap || 0;
       const ferme = (pts) => { const a = this._versGeo(centre, cap, pts); a.push(a[0]); return a; };
       if (!multi) return { type: 'Polygon', coordinates: [ferme(this._profilCoque(L, B))] };
@@ -10905,6 +10976,7 @@ if (!customElements.get('village-map')) {
     _ouvrirPanneau() {
       const v = this.querySelector('#vmVoile');
       if (!v) return;
+      this._selectionnerBateau(null);
       
 
 
@@ -10960,6 +11032,7 @@ if (!customElements.get('village-map')) {
         try { r.focus({ preventScroll: true }); } catch (e) { r.focus(); }
       }
       this._retirerAvant();
+      this._selectionnerBateau(null);
     }
 
     
