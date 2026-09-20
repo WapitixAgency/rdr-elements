@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 4790c46 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="4790c46";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 73500c7 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="73500c7";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1237,6 +1237,18 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
 
 
   const MEM_CLE = 'rdrMemPiedHautV1';
+   
+  const ASSISTANT_SCRIPT = '/_functions/sw';
+   
+  function navigateurCourt() {
+    const ua = String(navigator.userAgent || '');
+    const mobile = /iPhone|iPad|Android|Mobile/i.test(ua) ? '-mobile' : '';
+    if (/Firefox\//.test(ua)) return 'firefox' + mobile;
+    if (/Edg\//.test(ua)) return 'edge' + mobile;
+    if (/Chrome\/|CriOS\//.test(ua)) return 'chrome' + mobile;
+    if (/Safari\//.test(ua)) return 'safari' + mobile;
+    return 'autre' + mobile;
+  }
   const MEM_TTL_MS = 30 * 60 * 1000;
   const memTelephone = () => /Mobi|iPhone|Android.+Mobile/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
   const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
@@ -1257,7 +1269,7 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       this._attente = null; this._minuteur = null; this._obs = null; this._filet = null; this._veille = null;
       this._cle = null; this._naissance = Date.now(); this._etatNews = 'repos';
     }
-    static get observedAttributes() { return ['lang', 'reglages', 'partenaires', 'pret', 'newsletter-etat']; }
+    static get observedAttributes() { return ['lang', 'reglages', 'partenaires', 'pret', 'newsletter-etat', 'assistant']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
       if (nom === 'lang') { this._lang = val === 'en' ? 'en' : 'fr'; }
@@ -1265,6 +1277,7 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       if (nom === 'partenaires') { this._brut.partenaires = val; try { const l = JSON.parse(val || '[]'); this._partenaires = Array.isArray(l) ? l : []; } catch (e) { this._partenaires = []; } if (this.isConnected) this._memoriser(); }
       if (nom === 'pret') { this._pret = val === 'oui'; if (this._pret && this._attente) this._emettre(this._attente); return; }
       if (nom === 'newsletter-etat') { this._reponse(String(val || '').replace(/#.*$/, '')); return; }
+      if (nom === 'assistant') { this._assistant(String(val || '')); return; }
       if (this.isConnected) this._render();
     }
     
@@ -1438,6 +1451,41 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       if (val === 'ok') { this._attente = null; this._etat('merci'); return; }
       const code = val.replace(/^erreur:?/, '');
       this._etat('erreur', code === 'deja' ? this._t.erreurDeja : this._t.erreur);
+    }
+    
+
+
+
+
+
+
+
+
+
+
+    async _assistant(val) {
+      const detail = { demande: val === 'non' ? 'non' : 'oui', etat: 'inconnu', servi: 'reseau', octet: 0, transfert: 0, navigateur: navigateurCourt() };
+      try {
+        const nav = (performance.getEntriesByType('navigation') || [])[0];
+        if (nav) { detail.octet = Math.round(nav.responseStart || 0); detail.servi = nav.workerStart > 0 ? 'worker' : 'reseau'; detail.transfert = nav.transferSize || 0; }
+      } catch (e) {   }
+      const sw = navigator.serviceWorker;
+      if (!sw || !window.isSecureContext) { detail.etat = 'non-supporte'; this._emettreAssistant(detail); return; }
+      try {
+        const controle = !!sw.controller;
+        if (detail.demande === 'oui') {
+          const reg = await sw.register(ASSISTANT_SCRIPT, { scope: '/', updateViaCache: 'none' });
+          detail.etat = controle ? 'actif' : (reg && (reg.active || reg.installing || reg.waiting) ? 'enregistre' : 'absent');
+        } else {
+          const regs = await sw.getRegistrations();
+          await Promise.all(regs.map((r) => r.unregister()));
+          detail.etat = (controle || regs.length) ? 'retire' : 'absent';
+        }
+      } catch (e) { detail.etat = 'erreur'; detail.erreur = String((e && e.message) || e).slice(0, 80); }
+      this._emettreAssistant(detail);
+    }
+    _emettreAssistant(detail) {
+      this.dispatchEvent(new CustomEvent('assistant-etat', { detail, bubbles: true, composed: true }));
     }
     _etat(etat, message) {
       this._etatNews = etat;
