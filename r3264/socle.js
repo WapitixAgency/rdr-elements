@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 73500c7 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="73500c7";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum dc93d5c | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="dc93d5c";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1238,8 +1238,6 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
 
   const MEM_CLE = 'rdrMemPiedHautV1';
    
-  const ASSISTANT_SCRIPT = '/_functions/sw';
-   
   function navigateurCourt() {
     const ua = String(navigator.userAgent || '');
     const mobile = /iPhone|iPad|Android|Mobile/i.test(ua) ? '-mobile' : '';
@@ -1269,7 +1267,7 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       this._attente = null; this._minuteur = null; this._obs = null; this._filet = null; this._veille = null;
       this._cle = null; this._naissance = Date.now(); this._etatNews = 'repos';
     }
-    static get observedAttributes() { return ['lang', 'reglages', 'partenaires', 'pret', 'newsletter-etat', 'assistant']; }
+    static get observedAttributes() { return ['lang', 'reglages', 'partenaires', 'pret', 'newsletter-etat', 'temoin']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
       if (nom === 'lang') { this._lang = val === 'en' ? 'en' : 'fr'; }
@@ -1277,7 +1275,7 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       if (nom === 'partenaires') { this._brut.partenaires = val; try { const l = JSON.parse(val || '[]'); this._partenaires = Array.isArray(l) ? l : []; } catch (e) { this._partenaires = []; } if (this.isConnected) this._memoriser(); }
       if (nom === 'pret') { this._pret = val === 'oui'; if (this._pret && this._attente) this._emettre(this._attente); return; }
       if (nom === 'newsletter-etat') { this._reponse(String(val || '').replace(/#.*$/, '')); return; }
-      if (nom === 'assistant') { this._assistant(String(val || '')); return; }
+      if (nom === 'temoin') { this._temoin(); return; }
       if (this.isConnected) this._render();
     }
     
@@ -1460,32 +1458,13 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
 
 
 
-
-
-
-    async _assistant(val) {
-      const detail = { demande: val === 'non' ? 'non' : 'oui', etat: 'inconnu', servi: 'reseau', octet: 0, transfert: 0, navigateur: navigateurCourt() };
+    _temoin() {
+      const detail = { octet: 0, transfert: 0, navigateur: navigateurCourt() };
       try {
         const nav = (performance.getEntriesByType('navigation') || [])[0];
-        if (nav) { detail.octet = Math.round(nav.responseStart || 0); detail.servi = nav.workerStart > 0 ? 'worker' : 'reseau'; detail.transfert = nav.transferSize || 0; }
+        if (nav) { detail.octet = Math.round(nav.responseStart || 0); detail.transfert = nav.transferSize || 0; }
       } catch (e) {   }
-      const sw = navigator.serviceWorker;
-      if (!sw || !window.isSecureContext) { detail.etat = 'non-supporte'; this._emettreAssistant(detail); return; }
-      try {
-        const controle = !!sw.controller;
-        if (detail.demande === 'oui') {
-          const reg = await sw.register(ASSISTANT_SCRIPT, { scope: '/', updateViaCache: 'none' });
-          detail.etat = controle ? 'actif' : (reg && (reg.active || reg.installing || reg.waiting) ? 'enregistre' : 'absent');
-        } else {
-          const regs = await sw.getRegistrations();
-          await Promise.all(regs.map((r) => r.unregister()));
-          detail.etat = (controle || regs.length) ? 'retire' : 'absent';
-        }
-      } catch (e) { detail.etat = 'erreur'; detail.erreur = String((e && e.message) || e).slice(0, 80); }
-      this._emettreAssistant(detail);
-    }
-    _emettreAssistant(detail) {
-      this.dispatchEvent(new CustomEvent('assistant-etat', { detail, bubbles: true, composed: true }));
+      this.dispatchEvent(new CustomEvent('navigation-temoin', { detail, bubbles: true, composed: true }));
     }
     _etat(etat, message) {
       this._etatNews = etat;
