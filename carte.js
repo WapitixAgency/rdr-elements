@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum a6804e4 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a6804e4";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum a30f292 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="a30f292";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -4984,15 +4984,21 @@ if (!customElements.get('village-map')) {
 
 
 
+    
+
+
+
+
+
+
     _dimsCoque(b) {
       const g = this._gabarit(b.classe), multi = !!g[2];
       let L = +b.longueur || 0, B = +b.largeur || 0;
       if (!multi && L && B && B > L) { const t = L; L = B; B = t; }
       const okL = L >= g[0] * .6 && L <= g[0] * 1.6;
-      if (!okL) L = g[0];
-      const okB = multi ? (B >= L * .4 && B <= L * 1.1) : (B >= L * .18 && B <= L * .5);
-      if (!okB) B = g[1];
-      return { L, B, plausible: okL && okB };
+      const okB = okL && (multi ? (B >= L * .4 && B <= L * 1.1) : (B >= L * .18 && B <= L * .5));
+      const propre = b.classe === 'hospitalite' && okL && okB;
+      return { L: propre ? L : g[0], B: propre ? B : g[1], plausible: okL && okB };
     }
     _coqueGeo(b) {
       const g = this._gabarit(b.classe);
