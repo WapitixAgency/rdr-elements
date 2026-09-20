@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 3301e36 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="3301e36";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 19c7bbc | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="19c7bbc";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -3685,7 +3685,7 @@ if (!customElements.get('village-map')) {
 
 
        
-      const famille = (t) => { const m = String(t || '').trim().match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'-]+\s*)+)$/); return (m ? m[1] : String(t || '')) + ' ' + String(t || ''); };
+      const famille = (t) => { const m = String(t || '').trim().match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/); return (m ? m[1] : String(t || '')) + ' ' + String(t || ''); };
       const bateaux = (this._p.bateaux || []).filter(b => b.classe === p.classe && (b.skipper || b.nom))
         .sort((x, y) => famille(x.skipper || x.nom).localeCompare(famille(y.skipper || y.nom), 'fr'));
       const couleur = couleurSure(this._couleurClasse(p.classe), C.teal);
@@ -3992,8 +3992,29 @@ if (!customElements.get('village-map')) {
 
                       vide: (b.nom || b.skipper || b.refId) ? 0 : 1,
                       taille: this._dimsCoque(b).L / 20,
-                      lib: b.sansEtiquette ? '' : (b.nom || b.skipper || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || b.skipper || '') },
+                      
+
+
+
+
+
+
+                      lib: b.sansEtiquette ? '' : (b.nom || b.skipper || ''), court: b.sansEtiquette ? '' : (b.voile || b.nom || b.skipper || ''),
+                      prenom: b.sansEtiquette ? '' : this._nomSkipper(b).prenom, nomFam: b.sansEtiquette ? '' : (this._nomSkipper(b).nom || b.nom || '') },
         geometry: { type: 'Point', coordinates: [+b.lng, +b.lat] } })) };
+    }
+    
+
+
+    _nomSkipper(b) {
+      const t = String(b.skipper || '').trim();
+      if (!t) return { prenom: '', nom: '' };
+      const m = t.match(/^(.*?)\s*((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/);
+      if (m && m[1]) return { prenom: m[1].trim(), nom: m[2].trim() };
+       
+      const mots = t.split(/\s+/);
+      if (mots.length > 1 && !/^[A-ZÀ-Ý]{2,}$/.test(t)) return { prenom: mots.slice(0, -1).join(' '), nom: mots[mots.length - 1] };
+      return { prenom: '', nom: t };
     }
     _geojsonFlotteGeo() {
       return { type: 'FeatureCollection', features: this._flotteValide().map(b => ({ type: 'Feature',
@@ -4523,6 +4544,10 @@ if (!customElements.get('village-map')) {
 
 
 
+      
+
+      const NOM_DEUX_LIGNES = ['case', ['==', ['get', 'prenom'], ''], ['get', 'nomFam'],
+        ['format', ['get', 'prenom'], { 'font-scale': .82, 'text-font': ['literal', POLICE_NORMALE] }, '\n', {}, ['get', 'nomFam'], { 'font-scale': 1.02 }]];
       this._map.addLayer({ id: 'flotte-b', type: 'symbol', source: 'flotte', minzoom: 16,
         layout: { 'icon-image': 'coque-sdf', 'icon-rotate': ['get', 'cap'],
                   'icon-rotation-alignment': 'map', 'icon-allow-overlap': true,
@@ -4552,12 +4577,14 @@ if (!customElements.get('village-map')) {
 
 
 
+                  
+
+
                   'text-field': ['step', ['zoom'], '',
-                    16.6, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], ['get', 'court'], '']],
-                    17.4, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'court']],
-                    17.9, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], ['get', 'lib'], ['get', 'court']]],
-                    18.6, ['case', ['==', ['get', 'vide'], 1], '', ['get', 'lib']]],
-                  'text-font': POLICE_GRASSE, 'text-size': 10.5,
+                    17, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], ['get', 'nomFam'], '']],
+                    18, ['case', ['==', ['get', 'vide'], 1], '', ['match', ['get', 'classe'], ['ultim', 'ocean-fifty', 'imoca'], NOM_DEUX_LIGNES, ['get', 'nomFam']]],
+                    19, ['case', ['==', ['get', 'vide'], 1], '', NOM_DEUX_LIGNES]],
+                  'text-font': POLICE_GRASSE, 'text-size': 10.5, 'text-line-height': 1.15,
                   
 
 
