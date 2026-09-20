@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 2f016c0",
- "livreLe": "2026-09-19T23:24:43.480Z",
+ "source": "WapitixAgency/route-du-rhum 64f549f",
+ "livreLe": "2026-09-20T09:09:44.414Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "paquets": {
   "socle": {
@@ -10,22 +10,22 @@
    "prefixes": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 88889,
-   "gzip": 21727,
-   "brotli": 18462,
+   "octets": 94224,
+   "gzip": 22988,
+   "brotli": 19158,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
-     "octets": 23906,
-     "sha": "64387f835166",
+     "octets": 25246,
+     "sha": "bf07269b742b",
      "balises": [
       "rdr-menu-actus"
      ]
     },
     {
      "fichier": "rdr-menu-cartes.js",
-     "octets": 26385,
-     "sha": "265cdc9ed22f",
+     "octets": 28579,
+     "sha": "1f5a0833f45d",
      "balises": [
       "rdr-menu-cartes"
      ]
@@ -48,8 +48,8 @@
     },
     {
      "fichier": "rdr-pied-haut.js",
-     "octets": 30148,
-     "sha": "9460ac2bf46c",
+     "octets": 31949,
+     "sha": "b84a330ecd77",
      "balises": [
       "rdr-pied-haut"
      ]
@@ -65,7 +65,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17535,
+   "brotli": 17536,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,7 +108,7 @@
    "priorite": "high",
    "octets": 528865,
    "gzip": 125769,
-   "brotli": 100889,
+   "brotli": 100803,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139148,
+   "brotli": 139170,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -158,8 +158,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 457653,
-   "gzip": 107621,
-   "brotli": 85291,
+   "gzip": 107622,
+   "brotli": 85350,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -198,7 +198,7 @@
    "priorite": "high",
    "octets": 287767,
    "gzip": 70480,
-   "brotli": 53822,
+   "brotli": 53797,
    "fichiers": [
     {
      "fichier": "rdr-news.js",

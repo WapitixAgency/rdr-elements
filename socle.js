@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 2f016c0 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="2f016c0";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 64f549f | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="64f549f";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -208,29 +208,68 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     try { return new Date(iso).toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'short' }); } catch (e) { return ''; }
   }
 
+
+  
+
+
+
+
+
+
+
+  const MEM_CLE = 'rdrMemMenuActusV1';
+  const MEM_TTL_MS = 30 * 60 * 1000;
+  const memTelephone = () => /Mobi|iPhone|Android.+Mobile/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
+  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
+  function memLire(suffixe) {
+    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    catch (e) { return null; }
+  }
+  function memEcrire(suffixe, valeurs) {
+    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    catch (e) {   }
+  }
+
   class MenuActus extends HTMLElement {
     constructor() {
       super();
-      this._posts = []; this._lang = 'fr'; this._obs = null; this._brut = null;
+      this._posts = []; this._lang = memLangue(); this._obs = null; this._brut = null; this._depuisMemoire = false;
+    }
+    _appliquerPosts(val) {
+      this._brut = val;
+      let l = [];
+      try { l = JSON.parse(val || '[]'); } catch (e) { l = []; }
+      this._posts = (Array.isArray(l) ? l : []).map(p => ({
+        title: p.title || '', excerpt: p.excerpt || '', coverImage: p.coverImage || '', publishedDate: p.publishedDate || '',
+        postPageUrl: urlSure(p.postPageUrl), timeToRead: Number(p.timeToRead) || 0, pinned: !!p.pinned,
+        label: (p.categorie && p.categorie.label) || '', type: typeDe(p.categorie), tags: sujets(p.tags)
+      })).filter(p => p.title && p.postPageUrl);
+    }
+     
+    _depuisLaMemoire() {
+      if (this._brut != null || this._depuisMemoire || memTelephone()) return;
+      const m = memLire(this._lang);
+      if (!m || typeof m.posts !== 'string') return;
+      this._depuisMemoire = true;
+      this._appliquerPosts(m.posts);
     }
     static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
-      if (nom === 'posts') {
-        this._brut = val;
-        let l = [];
-        try { l = JSON.parse(val || '[]'); } catch (e) { l = []; }
-        this._posts = (Array.isArray(l) ? l : []).map(p => ({
-          title: p.title || '', excerpt: p.excerpt || '', coverImage: p.coverImage || '', publishedDate: p.publishedDate || '',
-          postPageUrl: urlSure(p.postPageUrl), timeToRead: Number(p.timeToRead) || 0, pinned: !!p.pinned,
-          label: (p.categorie && p.categorie.label) || '', type: typeDe(p.categorie), tags: sujets(p.tags)
-        })).filter(p => p.title && p.postPageUrl);
-      }
       if (nom === 'lang') this._lang = val === 'en' ? 'en' : 'fr';
+      if (nom === 'posts') {
+        
+
+        const identique = val === this._brut;
+        this._depuisMemoire = false;
+        if (val) memEcrire(this._lang, { posts: val });
+        if (identique) return;
+        this._appliquerPosts(val);
+      }
       if (nom === 'vague' || nom === 'fond') return;    
       if (this.isConnected) this._render();
     }
-    connectedCallback() { this._render(); }
+    connectedCallback() { this._depuisLaMemoire(); this._render(); }
     disconnectedCallback() {
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._veille) { this._veille.disconnect(); this._veille = null; }
@@ -534,19 +573,70 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
   const focale = (v) => { const m = String(v || '').match(/^\s*(\d{1,3})\s*[,;]\s*(\d{1,3})\s*$/); return m ? ' style="object-position:' + Math.min(100, +m[1]) + '% ' + Math.min(100, +m[2]) + '%"' : ''; };
   const lire = (val, repli) => { try { const v = JSON.parse(val || ''); return v == null ? repli : v; } catch (e) { return repli; } };
 
+
+  
+
+
+
+
+
+
+
+  const MEM_CLE = 'rdrMemMenuCartesV1';
+  const MEM_TTL_MS = 30 * 60 * 1000;
+  const memTelephone = () => /Mobi|iPhone|Android.+Mobile/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
+  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
+  function memLire(suffixe) {
+    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    catch (e) { return null; }
+  }
+  function memEcrire(suffixe, valeurs) {
+    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    catch (e) {   }
+  }
+
   class MenuCartes extends HTMLElement {
-    constructor() { super(); this._reglages = null; this._cartes = []; this._skippers = []; this._lang = 'fr'; this._obs = null; }
+    constructor() { super(); this._reglages = null; this._cartes = []; this._skippers = []; this._lang = memLangue(); this._obs = null; this._brut = { reglages: null, cartes: null, skippers: null }; this._depuisMemoire = false; }
+    
+
+    _rang() { return Array.prototype.indexOf.call(document.querySelectorAll('rdr-menu-cartes'), this); }
+    _memSuffixe() { return this._rang() + ':' + this._lang; }
+    _appliquer(nom, val) {
+      this._brut[nom] = val;
+      if (nom === 'reglages') { const r = lire(val, null); this._reglages = r && typeof r === 'object' ? r : null; }
+      if (nom === 'cartes') { const l = lire(val, []); this._cartes = Array.isArray(l) ? l.filter(c => c && c.titre) : []; }
+      if (nom === 'skippers') { const l = lire(val, []); this._skippers = Array.isArray(l) ? l : []; }
+    }
+    _depuisLaMemoire() {
+      if (this._brut.reglages != null || this._depuisMemoire || memTelephone()) return;
+      const m = memLire(this._memSuffixe());
+      if (!m || typeof m.reglages !== 'string') return;
+      this._depuisMemoire = true;
+      this._appliquer('reglages', m.reglages);
+      if (typeof m.cartes === 'string') this._appliquer('cartes', m.cartes);
+      if (typeof m.skippers === 'string') this._appliquer('skippers', m.skippers);
+    }
+    _memoriser() {
+      if (!this._brut.reglages) return;
+      memEcrire(this._memSuffixe(), { reglages: this._brut.reglages, cartes: this._brut.cartes, skippers: this._brut.skippers });
+    }
     static get observedAttributes() { return ['lang', 'reglages', 'cartes', 'skippers', 'vague', 'fond']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
       if (nom === 'lang') this._lang = val === 'en' ? 'en' : 'fr';
-      if (nom === 'reglages') { const r = lire(val, null); this._reglages = r && typeof r === 'object' ? r : null; }
-      if (nom === 'cartes') { const l = lire(val, []); this._cartes = Array.isArray(l) ? l.filter(c => c && c.titre) : []; }
-      if (nom === 'skippers') { const l = lire(val, []); this._skippers = Array.isArray(l) ? l : []; }
       if (nom === 'vague' || nom === 'fond') return;    
+      if (nom === 'reglages' || nom === 'cartes' || nom === 'skippers') {
+        
+
+        const identique = val === this._brut[nom];
+        if (nom === 'reglages') this._depuisMemoire = false;
+        if (!identique) this._appliquer(nom, val); else this._brut[nom] = val;
+        if (this.isConnected) this._memoriser();
+        if (identique) return;
+      }
       if (this.isConnected) this._render();
     }
-    connectedCallback() { this._render(); }
+    connectedCallback() { this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); }
     disconnectedCallback() {
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._veille) { this._veille.disconnect(); this._veille = null; }
@@ -1131,11 +1221,33 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
   rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:.82;transform:none}
 }`;
 
+
+  
+
+
+
+
+
+
+
+  const MEM_CLE = 'rdrMemPiedHautV1';
+  const MEM_TTL_MS = 30 * 60 * 1000;
+  const memTelephone = () => /Mobi|iPhone|Android.+Mobile/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
+  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
+  function memLire(suffixe) {
+    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    catch (e) { return null; }
+  }
+  function memEcrire(suffixe, valeurs) {
+    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    catch (e) {   }
+  }
+
   class PiedHaut extends HTMLElement {
     constructor() {
       super();
        
-      this._lang = /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr'; this._reglages = null; this._partenaires = []; this._pret = false;
+      this._lang = memLangue(); this._reglages = null; this._partenaires = []; this._pret = false; this._brut = { reglages: null, partenaires: null }; this._depuisMemoire = false;
       this._attente = null; this._minuteur = null; this._obs = null; this._filet = null; this._veille = null;
       this._cle = null; this._naissance = Date.now(); this._etatNews = 'repos';
     }
@@ -1143,13 +1255,30 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
       if (nom === 'lang') { this._lang = val === 'en' ? 'en' : 'fr'; }
-      if (nom === 'reglages') { try { this._reglages = JSON.parse(val || 'null'); } catch (e) { this._reglages = null; } if (val == null) { this._cle = null; this._etatNews = 'repos'; this._attente = null; } }
-      if (nom === 'partenaires') { try { const l = JSON.parse(val || '[]'); this._partenaires = Array.isArray(l) ? l : []; } catch (e) { this._partenaires = []; } }
+      if (nom === 'reglages') { this._brut.reglages = val; this._depuisMemoire = false; try { this._reglages = JSON.parse(val || 'null'); } catch (e) { this._reglages = null; } if (val == null) { this._cle = null; this._etatNews = 'repos'; this._attente = null; } if (val && this.isConnected) this._memoriser(); }
+      if (nom === 'partenaires') { this._brut.partenaires = val; try { const l = JSON.parse(val || '[]'); this._partenaires = Array.isArray(l) ? l : []; } catch (e) { this._partenaires = []; } if (this.isConnected) this._memoriser(); }
       if (nom === 'pret') { this._pret = val === 'oui'; if (this._pret && this._attente) this._emettre(this._attente); return; }
       if (nom === 'newsletter-etat') { this._reponse(String(val || '').replace(/#.*$/, '')); return; }
       if (this.isConnected) this._render();
     }
-    connectedCallback() { this._render(); }
+    
+
+
+
+    _depuisLaMemoire() {
+      if (this._brut.reglages != null || this._depuisMemoire) return;
+      const m = memLire(this._lang);
+      if (!m || typeof m.reglages !== 'string') return;
+      this._depuisMemoire = true;
+      this._brut.reglages = m.reglages; this._brut.partenaires = typeof m.partenaires === 'string' ? m.partenaires : '[]';
+      try { this._reglages = JSON.parse(m.reglages); } catch (e) { this._reglages = null; }
+      try { const l = JSON.parse(this._brut.partenaires); this._partenaires = Array.isArray(l) ? l : []; } catch (e) { this._partenaires = []; }
+    }
+    _memoriser() {
+      if (!this._brut.reglages || !this._brut.partenaires) return;
+      memEcrire(this._lang, { reglages: this._brut.reglages, partenaires: this._brut.partenaires });
+    }
+    connectedCallback() { this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); }
     disconnectedCallback() {
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._filet) { clearTimeout(this._filet); this._filet = null; }
