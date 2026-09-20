@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 56030d1 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="56030d1";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum b17d9a2 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="b17d9a2";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 (function () {
   if (window.illustrationsVillage) return;
@@ -562,10 +562,17 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="56030d1";performance
 
 
   const MEDIA = 'https://static.wixstatic.com/media/';
+  
+
+
+
+
+
+  const TAILLE = '/v1/fit/w_300,h_300,q_82,enc_auto/';
   const MEDIATHEQUE = {
-    'ill-comptoir-client.png': MEDIA + '7bb303_84ba630a19814e759ed761f94633587a~mv2.png',
-    'ill-scene-client.png':    MEDIA + '7bb303_60237c13e53244a98c986ecc44b2c854~mv2.png',
-    'ill-roue-client.png':     MEDIA + '7bb303_b4cd4634a5c1400fb723290770bd764f~mv2.png'
+    'ill-comptoir-client.png': MEDIA + '7bb303_84ba630a19814e759ed761f94633587a~mv2.png' + TAILLE + 'comptoir.png',
+    'ill-scene-client.png':    MEDIA + '7bb303_60237c13e53244a98c986ecc44b2c854~mv2.png' + TAILLE + 'scene.png',
+    'ill-roue-client.png':     MEDIA + '7bb303_b4cd4634a5c1400fb723290770bd764f~mv2.png' + TAILLE + 'roue.png'
   };
   ajouterPhoto('ill-comptoir-photo', 'ill-comptoir-client.png', 75, 71.5);
   ajouterPhoto('ill-scene-photo',    'ill-scene-client.png',    75, 69);
@@ -2938,6 +2945,11 @@ if (!customElements.get('village-map')) {
         this._arreterChargement();    
         await etape('mode d\'affichage', () => this._appliquerMode(this._modeCourant(), true));
         await etape('cadrage de départ', () => this._cadrerDepart());
+        
+
+        const vmZ = this.querySelector('.vm');
+        const majLoin = () => { if (vmZ) vmZ.classList.toggle('est-loin', this._map.getZoom() < 16.2); };
+        this._map.on('zoomend', majLoin); majLoin();
          
          
         if (this._mesure) this._mesure.noter('carte', 'ouverte');
@@ -5846,28 +5858,55 @@ if (!customElements.get('village-map')) {
       const vm = this.querySelector('.vm');
       return !!(vm && vm.classList.contains('est-etroit'));
     }
+    
+
+
+
+
+
+
     _cadrerDepart() {
-      if (!this._map || this._atelier || this.closest('village-atelier') || !this._estEtroit()) return;
+      if (!this._map || this._atelier || this.closest('village-atelier')) return;
       const v = (this._p.config.vues || []).find(x => x.cle === 'village');
       if (!v || this._mode !== 'village') return;
       
 
 
 
-      const pts = (this._p.poi || [])
-        .filter(o => !v.familles || v.familles.indexOf(o.cat) >= 0)
-        .map(o => this._centre(o))
-        .concat((this._p.pontons || []).map(p => this._milieuPonton(p)))
-        .filter(c => this._estPoint(c) && this._dansLeVillage(c));
+      
+
+
+
+
+
+
+      const dedans = (c) => this._estPoint(c) && this._dansLeVillage(c);
+      let pts = [];
+      (this._p.pontons || []).filter(p => p.zone !== false && this._ligneValide(p.trace, 2)).forEach(p => { pts = pts.concat(p.trace); });
+      this._secteurs().forEach(z => { pts = pts.concat(z.polygone); });
+      pts = pts.filter(dedans);
+      if (pts.length < 3) {
+        pts = (this._p.poi || [])
+          .filter(o => !v.familles || v.familles.indexOf(o.cat) >= 0)
+          .map(o => this._centre(o))
+          .concat((this._p.pontons || []).map(p => this._milieuPonton(p)))
+          .filter(dedans);
+      }
       if (pts.length < 3) return;
       const lg = pts.map(c => c[0]), lt = pts.map(c => c[1]);
       const bornes = [[Math.min(...lg), Math.min(...lt)], [Math.max(...lg), Math.max(...lt)]];
       
 
+
       const marges = this._paddingVolets();
+      marges.top += 40;
+      
+
+
+      if (!this._estEtroit()) marges.bottom = 40;
       marges.left = Math.max(marges.left, 44); marges.right = Math.max(marges.right, 44);
       let cam = null;
-      try { cam = this._map.cameraForBounds(bornes, { padding: marges, maxZoom: (+this._p.config.zoomDepart || 15.6) + 1 }); }
+      try { cam = this._map.cameraForBounds(bornes, { padding: marges, maxZoom: (+this._p.config.zoomDepart || 15.6) + (this._estEtroit() ? 1 : 0) }); }
       catch (e) { cam = null; }
       if (!cam) return;
       this._map.jumpTo({ center: cam.center, zoom: Math.max(cam.zoom, this._seuil(v) + 0.05) });
@@ -6210,7 +6249,8 @@ if (!customElements.get('village-map')) {
       return etroit ? { top: 70, right: 20, bottom: (deplie ? Math.round(this.clientHeight * .7) : 74) + coins, left: 20 }
                     
 
-                    : { top: 70, right: Math.round(Math.min(440, Math.max(360, this.clientWidth * .28))) + 36, bottom: 40 + coins, left: 300 };    
+                     
+                    : { top: 70, right: (vm && vm.classList.contains('a-fiche')) ? Math.round(Math.min(440, Math.max(360, this.clientWidth * .28))) + 36 : 354, bottom: 40 + coins, left: 300 };    
     }
 
     
@@ -13254,7 +13294,7 @@ if (!customElements.get('village-map')) {
 
 
 
-      '.vm__res{position:absolute;top:48px;left:0;right:0;z-index:6;background:var(--vm-surface);border:1px solid var(--vm-line);border-radius:var(--vm-r-ui);box-shadow:var(--vm-ombre-h);max-height:calc(var(--vm-hv,100vh) - 84px);overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}' +
+      '.vm__res{position:absolute;top:48px;left:0;right:0;z-index:6;background:var(--vm-surface);border:1px solid var(--vm-line);border-radius:var(--vm-r-ui);box-shadow:var(--vm-ombre-h);max-height:calc(var(--vm-hv,100vh) - 84px - var(--vm-coins,0px));overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}' +
       '.vm__res button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:0;background:none;text-align:left;font:500 13px Montserrat,sans-serif;color:var(--vm-ink);cursor:pointer;}' +
       '.vm__resic{flex:none;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:var(--vm-r-sel);background:var(--c);color:var(--vm-sur-clair);}' +
       '.vm__resic svg{width:15px;height:15px;}' +
@@ -14611,6 +14651,11 @@ if (!customElements.get('village-map')) {
       '.vm__pont.est-drapeau .vm__pontd{width:48px;height:60px;border-radius:0;background:none;box-shadow:none;' +
         'filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 4px 6px rgba(10,26,53,.3));}' +
       '.vm__pont.est-drapeau .vm__pontd img{width:48px;height:60px;object-fit:contain;}' +
+      
+
+
+      '.vm.est-loin .vm__pont.est-drapeau .vm__pontd,.vm.est-loin .vm__pont.est-drapeau .vm__pontd img{width:36px;height:45px;}' +
+      '.vm.est-loin .vm__pont.est-drapeau .vm__pontn{top:-5px;right:-8px;min-width:18px;height:18px;font-size:10px;}' +
       '.vm__pont.est-drapeau .vm__pontn{top:-6px;right:-10px;}' +
       '.vm__pont:hover .vm__pontd{transform:scale(1.22);}' +
       '.vm__pont:focus-visible .vm__pontd{transform:scale(1.1);outline:3px solid var(--vm-ink);outline-offset:2px;}' +
@@ -15067,7 +15112,10 @@ if (!customElements.get('village-map')) {
         '.vm.a-rech .vm__rechx svg{width:17px;height:17px;}' +
         
 
-        '.vm.a-rech .vm__res{position:static;display:block;flex:1;min-height:0;margin-top:10px;' +
+        
+
+
+        '.vm.a-rech .vm__res{position:static;display:block;flex:1;min-height:0;margin-top:10px;align-self:stretch;width:100%;' +
           'max-height:none;height:auto;overflow-y:auto;-webkit-overflow-scrolling:touch;' +
           'border:0;box-shadow:none;background:none;' +
           'padding-bottom:calc(24px + var(--vm-coins,0px) + env(safe-area-inset-bottom,0px));}' +
@@ -15147,6 +15195,13 @@ if (!customElements.get('village-map')) {
 
         '.vm__fiche > .vm__fbody{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}' +
         '.vm__fiche > .vm__fimg{flex:none;}' +
+        
+
+        '.vm__fiche .vm__fimg{height:170px;}' +
+        '.vm__fhero--classe{height:120px;}' +
+        '.vm__fherof{height:80px;top:16px;right:20px;}' +
+        '.vm__fskip--grand .vm__fport{width:80px;height:80px;}' +
+        '.vm__fbody--chevauche .vm__fskip--grand{margin-top:-46px;}' +
         
 
         '.vm__fiche{padding-bottom:calc(var(--vm-coins,0px) + env(safe-area-inset-bottom,0px));}' +
