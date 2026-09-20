@@ -1,220 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum a902eb8 | rdr-nav-page.js rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="a902eb8";performance.mark("rdr-elements:skipper")}catch(e){}
-;(function(){
-(function () {
-  'use strict';
-  if (window.rdrNavPage) return;
-
-   
-  const COUPE = false;
-  const MEM_LISTE = 'rdrMemSkippersListeV1';
-  const MEM_FICHE = 'rdrMemFicheV1:';
-  const ATTENTE_MS = 6000;
-  const SUFFIXE_TITRE = ' | Route du Rhum';
-   
-  const ATTRIBUTS_FICHE = ['membre', 'suivi', 'prefere', 'prefere-actuel', 'lang', 'phase', 'hero', 'live-url'];
-  const ATTRIBUTS_LISTE = ['favoris', 'lang'];
-
-  const lang = () => (/^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr');
-  const prefixe = () => (lang() === 'en' ? '/en' : '');
-
-   
-  function slugDe(url) {
-    let chemin = String(url || '');
-    try { chemin = new URL(chemin, location.origin).pathname; } catch (e) {   }
-    const m = chemin.match(/^\/(?:en\/)?skippers\/([^/?#]+)\/?$/);
-    return m ? m[1] : '';
-  }
-  const slugOrigine = slugDe(location.pathname);
-  const vueOrigine = slugOrigine ? 'fiche' : 'liste';
-  const TAG_HOTE = vueOrigine === 'fiche' ? 'rdr-skipper' : 'skippers-list';
-  const TAG_COMPAGNON = vueOrigine === 'fiche' ? 'skippers-list' : 'rdr-skipper';
-
-  
-
-  const hote = () => Array.from(document.querySelectorAll(TAG_HOTE)).find((el) => !el.hasAttribute('en-page') && !el.closest('.rdr-compagnon')) || null;
-  const membre = () => ['skippers-list', 'rdr-skipper', 'rdr-pied-haut'].some((t) => Array.from(document.querySelectorAll(t)).some((el) => /^membre/.test(el.getAttribute('rendu') || '')));
-  const actif = () => !COUPE && !!(window.history && typeof history.pushState === 'function' && membre() && hote() && window.customElements && customElements.get(TAG_COMPAGNON));
-
-  
-
-
-  const attributsEnAttente = {};
-  const cadreDe = (h) => Array.from(h.children).find((c) => c.classList && c.classList.contains('rdr-compagnon')) || null;
-  function compagnon() {
-    const h = hote(); if (!h) return null;
-    let cadre = cadreDe(h);
-    if (cadre && cadre.firstElementChild && cadre.firstElementChild.tagName.toLowerCase() === TAG_COMPAGNON) return cadre.firstElementChild;
-    if (cadre) cadre.remove();
-    cadre = document.createElement('div'); cadre.className = 'rdr-compagnon';
-    const el = document.createElement(TAG_COMPAGNON);
-    el.setAttribute('lang', lang());
-    if (TAG_COMPAGNON === 'rdr-skipper') el.setAttribute('phase', 'avant');
-    Object.keys(attributsEnAttente).forEach((k) => el.setAttribute(k, attributsEnAttente[k]));
-    cadre.appendChild(el); h.appendChild(cadre);
-    return el;
-  }
-  const elFiche = () => (vueOrigine === 'fiche' ? hote() : compagnon());
-  const elListe = () => (vueOrigine === 'liste' ? hote() : compagnon());
-
-   
-  const PREFIXE_ATTR = vueOrigine === 'liste' ? 'fiche-' : 'liste-';
-  const ATTRIBUTS = vueOrigine === 'liste' ? ATTRIBUTS_FICHE : ATTRIBUTS_LISTE;
-  function recopier(h, nom) {
-    if (!nom || nom.indexOf(PREFIXE_ATTR) !== 0) return;
-    const cle = nom.slice(PREFIXE_ATTR.length);
-    if (ATTRIBUTS.indexOf(cle) < 0) return;
-    const v = h.getAttribute(nom);
-    if (v == null) delete attributsEnAttente[cle]; else attributsEnAttente[cle] = v;
-    const cadre = cadreDe(h);
-    const el = cadre && cadre.firstElementChild;
-    if (el) { if (v == null) el.removeAttribute(cle); else el.setAttribute(cle, v); }
-  }
-  let observateurHote = null;
-  function observerHote() {
-    const h = hote(); if (!h || observateurHote || typeof MutationObserver !== 'function') return;
-    ATTRIBUTS.forEach((k) => { if (h.hasAttribute(PREFIXE_ATTR + k)) recopier(h, PREFIXE_ATTR + k); });
-    observateurHote = new MutationObserver((ms) => {
-      let enfantsChanges = false;
-      ms.forEach((m) => { if (m.type === 'childList') enfantsChanges = true; else if (m.type !== 'attributes') return; else if (m.attributeName === 'pret') surPret(); else recopier(h, m.attributeName); });
-      
-
-      if (enfantsChanges && !cadreDe(h) && vue !== vueOrigine) {
-        if (vue === 'fiche' && slugCourant) ouvrirFiche(slugCourant, { pousser: false });
-        else if (vue === 'liste') ouvrirListe({ pousser: false, scroll: window.scrollY || 0 });
-      }
-    });
-    observateurHote.observe(h, { attributes: true, attributeFilter: ATTRIBUTS.map((k) => PREFIXE_ATTR + k).concat(['pret']), childList: true });
-  }
-
-  const cleMemoireFiche = (slug) => { try { return lang() + ':' + decodeURIComponent(slug).toLowerCase().slice(0, 80); } catch (e) { return lang() + ':' + String(slug).toLowerCase().slice(0, 80); } };
-  function memoireFiche(slug) {
-    try { const m = JSON.parse(sessionStorage.getItem(MEM_FICHE + cleMemoireFiche(slug)) || 'null'); return m && typeof m.payload === 'string' && Date.now() - m.le < 18e5 ? m.payload : ''; } catch (e) { return ''; }
-  }
-  function memoireListe() {
-    try { const m = JSON.parse(sessionStorage.getItem(MEM_LISTE + ':' + lang()) || 'null'); return m && typeof m.skippers === 'string' && Date.now() - m.le < 18e5 ? m.skippers : ''; } catch (e) { return ''; }
-  }
-
-  async function lire(url) {
-    const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
-    const minuteur = ctrl ? setTimeout(() => ctrl.abort(), ATTENTE_MS) : null;
-    try {
-      const r = await fetch(url, { credentials: 'same-origin', headers: { accept: 'application/json' }, signal: ctrl ? ctrl.signal : undefined });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return await r.json();
-    } finally { if (minuteur) clearTimeout(minuteur); }
-  }
-
-  
-
-  let vue = vueOrigine;
-  let slugCourant = slugOrigine;
-  let generation = 0;
-  let scrollListe = 0;
-  const titreListe = vueOrigine === 'liste' ? document.title : 'Skippers engagés Route du Rhum 2026 : liste complète';
-  const titreFiche = (c) => [c.skipper.prenom, String(c.skipper.nom || '').toUpperCase()].filter(Boolean).join(' ') + SUFFIXE_TITRE;
-  let annonceEnAttente = null;    
-
-  function annoncer(type, detail) {
-    const h = hote(); if (!h) return;
-    if (h.getAttribute('pret') === 'oui') { annonceEnAttente = null; h.dispatchEvent(new CustomEvent(type, { detail, bubbles: true, composed: true })); }
-    else annonceEnAttente = { type, detail };
-  }
-  function surPret() {
-    const h = hote();
-    if (h && annonceEnAttente && h.getAttribute('pret') === 'oui') { const a = annonceEnAttente; annonceEnAttente = null; h.dispatchEvent(new CustomEvent(a.type, { detail: a.detail, bubbles: true, composed: true })); }
-  }
-
-  const montrer = (quoi) => { const h = hote(); if (h) h.setAttribute('vue', quoi); };
-  const enHaut = () => { try { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, 0); } };
-  const temoinDe = (c, slug) => ({ ok: true, slug, lang: c.lang || lang(), id: c.skipper.id, prenom: c.skipper.prenom || '', nom: c.skipper.nom || '', classeId: (c.skipper.classe && c.skipper.classe.id) || '' });
-  const chargeValide = (c, slug) => !!(c && !c.introuvable && c.skipper && c.skipper.id && String(c.skipper.slug || '').replace(/^\/?skippers\//, '') === slug);
-
-   
-  async function ouvrirFiche(slug, options) {
-    const o = options || {};
-    slug = String(slug || '').replace(/^\/+|\/+$/g, '');
-    if (!slug || !actif()) return false;
-    observerHote();
-    const fiche = elFiche(); if (!fiche) return false;
-    const url = prefixe() + '/skippers/' + slug;
-    if (o.pousser !== false) {
-      if (vue === 'liste') scrollListe = window.scrollY || 0;
-      try { history.pushState({ rdrNav: 'fiche', slug }, '', url); } catch (e) { return false; }
-    }
-    const mienne = ++generation;
-    vue = 'fiche'; slugCourant = slug;
-    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {   }
-
-     
-    fiche.setAttribute('lang', lang());
-    fiche.setAttribute('membre', 'oui');
-    fiche.setAttribute('suivi', 'false');
-    fiche.setAttribute('prefere', 'false');
-    fiche.setAttribute('prefere-actuel', '');
-    if (o.nom) fiche.setAttribute('nom-attente', String(o.nom).slice(0, 60));
-    const memoire = memoireFiche(slug);
-    if (memoire) fiche.setAttribute('payload-memoire', memoire);
-    else if (typeof fiche.setPayload === 'function') fiche.setPayload(null);
-    montrer('fiche');
-    enHaut();
-
-    let c = null;
-    try { c = await lire('/_functions/fiche?slug=' + encodeURIComponent(slug) + '&lang=' + lang()); } catch (e) { c = null; }
-    if (mienne !== generation) return true;             
-    if (!chargeValide(c, slug)) {
-       
-      try { location.assign(url); } catch (e) {   }
-      return true;
-    }
-    fiche.setAttribute('payload', JSON.stringify(c));
-    document.title = titreFiche(c);
-    annoncer('sk-affichee', temoinDe(c, slug));
-    return true;
-  }
-
-   
-  async function ouvrirListe(options) {
-    const o = options || {};
-    if (!actif()) return false;
-    observerHote();
-    const liste = elListe(); if (!liste) return false;
-    if (o.pousser !== false) {
-      try { history.pushState({ rdrNav: 'liste' }, '', prefixe() + '/skippers'); } catch (e) { return false; }
-    }
-    const mienne = ++generation;
-    vue = 'liste'; slugCourant = '';
-    liste.setAttribute('lang', lang());
-     
-    const dejaLa = !!liste.querySelector('.sl-card');
-    if (!dejaLa) { const m = memoireListe(); if (m) liste.setAttribute('skippers', m); }
-    montrer('liste');
-    document.title = titreListe;
-    const y = o.pousser === false ? (o.scroll != null ? o.scroll : scrollListe) : scrollListe;
-    requestAnimationFrame(() => { try { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, y); } });
-    annoncer('sl-affichee', { lang: lang() });
-    if (!dejaLa && !liste.querySelector('.sl-card')) {
-      let l = null;
-      try { l = await lire('/_functions/skippers?lang=' + lang()); } catch (e) { l = null; }
-      if (mienne !== generation) return true;
-      if (Array.isArray(l) && l.length) liste.setAttribute('skippers', JSON.stringify(l));
-      else { try { location.assign(prefixe() + '/skippers'); } catch (e) {   } }
-    }
-    return true;
-  }
-
-   
-  try { history.replaceState(Object.assign({}, history.state || {}, { rdrNav: vueOrigine, slug: slugOrigine }), '', location.href); } catch (e) {   }
-  window.addEventListener('popstate', (e) => {
-    const s = (e && e.state) || null;
-    if (!s || !s.rdrNav) return;                        
-    if (s.rdrNav === 'fiche' && s.slug && (vue !== 'fiche' || s.slug !== slugCourant)) ouvrirFiche(s.slug, { pousser: false });
-    else if (s.rdrNav === 'liste' && vue !== 'liste') ouvrirListe({ pousser: false });
-  });
-
-  window.rdrNavPage = { actif, ouvrirFiche, ouvrirListe, slugDe, vue: () => vue, hote, compagnon };
-})();
-})();
+/* rdr-elements skipper | source route-du-rhum 36d26c4 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="36d26c4";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5091,7 +4876,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
   } catch (e) {   } };
 
   class RdrSkipper extends HTMLElement {
-    static get observedAttributes() { return ['lang', 'phase', 'suivi', 'payload', 'payload-memoire', 'hero', 'nom-attente', 'membre', 'live-url', 'prefere', 'prefere-actuel', 'verifier-charge']; }
+    static get observedAttributes() { return ['lang', 'phase', 'suivi', 'payload', 'hero', 'nom-attente', 'membre', 'live-url', 'prefere', 'prefere-actuel', 'verifier-charge']; }
 
     constructor() {
       super();
@@ -5127,7 +4912,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       }
       
 
-      Object.keys(this._attente).forEach(k => (k === 'payload' ? this._appliquerCharge(this._attente[k]) : k === 'payload-memoire' ? (this._appliquerCharge(this._attente[k]) && (this._depuisMemoire = true)) : this._appliquer(k, this._attente[k])));
+      Object.keys(this._attente).forEach(k => (k === 'payload' ? this._appliquerCharge(this._attente[k]) : this._appliquer(k, this._attente[k])));
       this._attente = {};
       ['lang', 'phase', 'suivi', 'hero', 'membre', 'prefere', 'prefere-actuel'].forEach(k => { if (this.hasAttribute(k)) this._appliquer(k, this.getAttribute(k)); });
       if (this.hasAttribute('payload')) this._appliquerCharge(this.getAttribute('payload'));
@@ -5157,14 +4942,6 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       if (!this._init) { this._attente[nom] = apres; return; }
       
 
-      
-
-
-
-      if (nom === 'payload-memoire') {
-        if (this._appliquerCharge(apres)) { this._depuisMemoire = true; this._rendre(); }
-        return;
-      }
       if (nom === 'payload') {
         
 
@@ -6218,18 +5995,6 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       
 
 
-      const retour = R.querySelector('.sk-retour');
-      if (retour) this._ecoute(retour, 'click', (e) => {
-        const nav = window.rdrNavPage;
-        if (!nav || !nav.actif()) return;
-        e.preventDefault();
-        retour.classList.remove('sk-retour--attente');
-        nav.ouvrirListe();
-      });
-
-      
-
-
 
 
 
@@ -6454,11 +6219,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         carrousel.setAttribute('skippers', JSON.stringify(liste));
         this._ecoute(carrousel, 'navigate', (ev) => {
           const slug = ev.detail && ev.detail.slug;
-          if (!slug) return;
-           
-          const nav = window.rdrNavPage;
-          if (nav && nav.actif()) { nav.ouvrirFiche(String(slug).replace(/^\/?skippers\//, '')); return; }
-          this.dispatchEvent(new CustomEvent('sk-naviguer', { bubbles: true, detail: { slug } }));
+          if (slug) this.dispatchEvent(new CustomEvent('sk-naviguer', { bubbles: true, detail: { slug } }));
         });
       }
 
@@ -8436,18 +8197,6 @@ class SkippersList extends HTMLElement {
         }
         const link = e.target.closest('[data-link]');
         if (link) {
-          
-
-
-
-          const nav = window.rdrNavPage;
-          if (nav && nav.actif()) {
-            const slug = nav.slugDe(link.dataset.link);
-            const carte = link.closest('.sl-card, .sl-list-item') || link;
-            const texte = (sel) => ((carte.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
-            const nom = [texte('.sl-card-prenom, .sl-list-prenom'), texte('.sl-card-nom, .sl-list-nom')].filter(Boolean).join(' ');
-            if (slug) { nav.ouvrirFiche(slug, { nom }); return; }
-          }
           this._markNavLoading(link.closest('.sl-card') || link);
           this.dispatchEvent(new CustomEvent('sl-navigate', { detail:{ url:link.dataset.link }, bubbles:true, composed:true }));
           

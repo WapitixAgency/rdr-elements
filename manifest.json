@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum a902eb8",
- "livreLe": "2026-09-20T21:18:35.019Z",
+ "source": "WapitixAgency/route-du-rhum 36d26c4",
+ "livreLe": "2026-09-20T21:52:04.037Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3249,
  "revisionsAVenir": 30,
@@ -13,8 +13,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 95269,
-   "gzip": 23335,
-   "brotli": 19485,
+   "gzip": 23336,
+   "brotli": 19489,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -67,7 +67,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17513,
+   "brotli": 17512,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -110,7 +110,7 @@
    "priorite": "high",
    "octets": 423043,
    "gzip": 113721,
-   "brotli": 93036,
+   "brotli": 93073,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139196,
+   "brotli": 139169,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -145,7 +145,7 @@
    ]
   },
   "skipper": {
-   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi ; rdr-nav-page.js d'abord, l'orchestrateur qui dessine l'une dans la page de l'autre pour un membre (docs/spec-navigation-en-page.md)",
+   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
    "chemins": [
     "/skippers",
@@ -157,20 +157,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 473371,
-   "gzip": 112171,
-   "brotli": 88767,
+   "octets": 461486,
+   "gzip": 108832,
+   "brotli": 86157,
    "fichiers": [
     {
-     "fichier": "rdr-nav-page.js",
-     "octets": 10560,
-     "sha": "02e5c18cf7b8",
-     "balises": []
-    },
-    {
      "fichier": "rdr-skipper.js",
-     "octets": 370865,
-     "sha": "37f1bcfa37b0",
+     "octets": 370082,
+     "sha": "ceaad3cdcb36",
      "balises": [
       "skipper-gallery",
       "skipper-outro",
@@ -181,8 +175,8 @@
     },
     {
      "fichier": "skippers-list.js",
-     "octets": 91782,
-     "sha": "501780222c04",
+     "octets": 91233,
+     "sha": "0c73063ea0ba",
      "balises": [
       "skippers-list"
      ]
@@ -204,7 +198,7 @@
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54182,
+   "brotli": 54204,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
