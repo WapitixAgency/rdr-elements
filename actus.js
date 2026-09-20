@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 64f549f | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="64f549f";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 56030d1 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="56030d1";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -970,7 +970,25 @@ dialog[open] .rn__search-panel{animation:rn-dlg-up .3s cubic-bezier(.22,1,.36,1)
   const PAGE_STEP = 9;           
   const QUERY_LIMIT = 18;        
 
-  class RdrNews extends HTMLElement {
+  
+
+
+
+
+
+  const MEM_CLE = 'rdrMemHubActusV1';
+  const MEM_TTL_MS = 30 * 60 * 1000;
+  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
+  function memLire(suffixe) {
+    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    catch (e) { return null; }
+  }
+  function memEcrire(suffixe, valeurs) {
+    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    catch (e) {   }
+  }
+
+class RdrNews extends HTMLElement {
     static get observedAttributes() { return ['payload', 'results', 'lang', 'deeplink', 'membre', 'mes-facettes']; }
 
     constructor() {
@@ -1010,7 +1028,14 @@ dialog[open] .rn__search-panel{animation:rn-dlg-up .3s cubic-bezier(.22,1,.36,1)
       this._content = this.querySelector('.rn__content');
 
       if (this._pendingLang) { this._state.lang = this._pendingLang === 'en' ? 'en' : 'fr'; this._pendingLang = null; }
-      if (this._pendingPayload) { this._state.payload = this._pendingPayload; this._pendingPayload = null; }
+      if (this._pendingPayload) { this._state.payload = this._pendingPayload; this._pendingPayload = null; if (this._brut) memEcrire(this._state.lang, { payload: this._brut }); }
+      else if (!this._state.payload) {
+         
+        const m = memLire(this._pendingLang === 'en' || this._state.lang === 'en' || memLangue() === 'en' ? 'en' : 'fr');
+        if (m && typeof m.payload === 'string') {
+          try { this._state.payload = JSON.parse(m.payload); this._brut = m.payload; this._depuisMemoire = true; } catch (e) { this._state.payload = null; }
+        }
+      }
        
       this._state.membre = !!this._pendingMembre;
       if (this._pendingFacettes) { const v = this._pendingFacettes; this._pendingFacettes = null; setTimeout(() => this._recevoirFacettes(v), 0); }
@@ -1067,7 +1092,7 @@ dialog[open] .rn__search-panel{animation:rn-dlg-up .3s cubic-bezier(.22,1,.36,1)
     attributeChangedCallback(name, oldVal, newVal) {
       if (oldVal === newVal) return;
       if (!this._initialized) {
-        if (name === 'payload') { try { this._pendingPayload = JSON.parse(newVal || 'null'); } catch (e) { console.error('[rn] payload parse', e); } }
+        if (name === 'payload') { try { this._pendingPayload = JSON.parse(newVal || 'null'); this._brut = newVal; } catch (e) { console.error('[rn] payload parse', e); } }
         else if (name === 'lang') this._pendingLang = newVal;
         
 
@@ -1081,6 +1106,11 @@ dialog[open] .rn__search-panel{animation:rn-dlg-up .3s cubic-bezier(.22,1,.36,1)
         return;
       }
       if (name === 'payload') {
+        
+
+        if (newVal) memEcrire(this._state.lang, { payload: newVal });
+        if (this._depuisMemoire && newVal === this._brut) { this._depuisMemoire = false; return; }
+        this._depuisMemoire = false; this._brut = newVal;
         try { this._state.payload = JSON.parse(newVal || 'null'); }
         catch (e) { console.error('[rn] payload parse', e); return; }
         this._state.server = { items: null, hasMore: false, cursor: null, total: 0, loading: false };

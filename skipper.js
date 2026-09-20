@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 64f549f | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="64f549f";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 56030d1 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="56030d1";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -4855,6 +4855,23 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 }
 `;
 
+  
+
+
+
+
+
+  const MEM = 'rdrMemFicheV1:';
+  const memLire = (k) => { try { const m = JSON.parse(sessionStorage.getItem(MEM + k) || 'null'); return m && Date.now() - m.le < 18e5 ? m : null; } catch (e) { return null; } };
+  const memEcrire = (k, v) => { try { sessionStorage.setItem(MEM + k, JSON.stringify(Object.assign({ le: Date.now() }, v))); } catch (e) {   } };
+   
+  const memSlug = () => { try { return decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase().slice(0, 80); } catch (e) { return ''; } };
+  const memElaguer = () => { try {
+    const le = (k) => (memLire(k.slice(MEM.length)) || {}).le || 0;
+    const cles = Object.keys(sessionStorage).filter(k => k.indexOf(MEM) === 0).sort((x, y) => le(x) - le(y));
+    cles.slice(0, Math.max(0, cles.length - 6)).forEach(k => sessionStorage.removeItem(k));
+  } catch (e) {   } };
+
   class RdrSkipper extends HTMLElement {
     static get observedAttributes() { return ['lang', 'phase', 'suivi', 'payload', 'hero', 'nom-attente', 'membre', 'live-url', 'prefere', 'prefere-actuel', 'verifier-charge']; }
 
@@ -4896,6 +4913,11 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       this._attente = {};
       ['lang', 'phase', 'suivi', 'hero', 'membre', 'prefere', 'prefere-actuel'].forEach(k => { if (this.hasAttribute(k)) this._appliquer(k, this.getAttribute(k)); });
       if (this.hasAttribute('payload')) this._appliquerCharge(this.getAttribute('payload'));
+       
+      if (!this._p) {
+        const m = memLire(this._memCle());
+        if (m && typeof m.payload === 'string' && this._appliquerCharge(m.payload)) this._depuisMemoire = true;
+      } else if (this._chargeBrute) this._memoriser(this._chargeBrute);
       this._tenirLeHaut();
       this._rendre();
       if (this._verifierApresInit) {
@@ -4915,7 +4937,9 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         return;
       }
       if (!this._init) { this._attente[nom] = apres; return; }
-      if (nom === 'payload') { if (this._appliquerCharge(apres)) this._rendre(); return; }
+      
+
+      if (nom === 'payload') { this._depuisMemoire = false; if (this._appliquerCharge(apres)) { this._memoriser(this._chargeBrute); this._rendre(); } return; }
       this._appliquer(nom, apres);
       if (nom === 'suivi') this._confirmerSuivi();
       else if (nom === 'membre') { this._peindreSuivi(); this._rejouerGeste(); }
@@ -4949,6 +4973,9 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
 
+
+    _memCle() { return this._lang + ':' + memSlug(); }
+    _memoriser(brut) { if (brut) { memEcrire(this._memCle(), { payload: brut }); memElaguer(); } }
 
     _appliquerCharge(v) {
       const brut = String(v == null ? '' : v).trim();
@@ -7056,6 +7083,24 @@ const SL_DICT = {
   },
 };
 
+
+
+
+
+
+
+  const MEM_CLE = 'rdrMemSkippersListeV1';
+  const MEM_TTL_MS = 30 * 60 * 1000;
+  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
+  function memLire(suffixe) {
+    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    catch (e) { return null; }
+  }
+  function memEcrire(suffixe, valeurs) {
+    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    catch (e) {   }
+  }
+
 class SkippersList extends HTMLElement {
   constructor() {
     super();
@@ -7125,6 +7170,15 @@ class SkippersList extends HTMLElement {
     if (this._pendingSkippers !== null) {
       this._processSkippers(this._pendingSkippers);
       this._pendingSkippers = null;
+      if (this._brut) memEcrire(this._lang(), { skippers: this._brut });
+    } else if (!this._dataLoaded) {
+       
+      const m = memLire(this._lang());
+      if (m && typeof m.skippers === 'string') {
+        let parsed = null;
+        try { parsed = JSON.parse(m.skippers); } catch (e) { parsed = null; }
+        if (Array.isArray(parsed) && parsed.length) { this._brut = m.skippers; this._depuisMemoire = true; this._processSkippers(parsed); }
+      }
     }
     if (this._pendingFavoris !== null) {
       this._favoris = this._pendingFavoris;
@@ -7194,9 +7248,15 @@ class SkippersList extends HTMLElement {
   attributeChangedCallback(name, _, val) {
     if (name === 'lang') { this._applyLang(); return; }
     if (name === 'skippers') {
-      if (this._dataLoaded) return;
+      
+
+
+      if (this._dataLoaded && !this._depuisMemoire) return;
+      if (val && this._shellReady) memEcrire(this._lang(), { skippers: val });
+      if (this._depuisMemoire && val === this._brut) { this._depuisMemoire = false; return; }
       let parsed;
       try { parsed = JSON.parse(val || '[]'); } catch(e) { parsed = []; }
+      this._brut = val; this._depuisMemoire = false;
       if (!this._shellReady) { this._pendingSkippers = parsed; return; }
       this._processSkippers(parsed);
     }
