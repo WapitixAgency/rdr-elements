@@ -1,7 +1,9 @@
 {
- "source": "WapitixAgency/route-du-rhum 19c7bbc",
- "livreLe": "2026-09-20T12:41:27.276Z",
+ "source": "WapitixAgency/route-du-rhum 15872eb",
+ "livreLe": "2026-09-20T12:57:03.685Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
+ "revisionCourante": 3242,
+ "revisionsAVenir": 30,
  "paquets": {
   "socle": {
    "quoi": "les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages",
@@ -12,7 +14,7 @@
    "priorite": "high",
    "octets": 94338,
    "gzip": 23021,
-   "brotli": 19218,
+   "brotli": 19222,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -65,7 +67,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17510,
+   "brotli": 17515,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,7 +110,7 @@
    "priorite": "high",
    "octets": 539470,
    "gzip": 128403,
-   "brotli": 102730,
+   "brotli": 102624,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -132,7 +134,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139254,
+   "brotli": 139190,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -158,8 +160,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 461486,
-   "gzip": 108832,
-   "brotli": 86220,
+   "gzip": 108830,
+   "brotli": 86261,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -198,7 +200,7 @@
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54161,
+   "brotli": 54140,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
