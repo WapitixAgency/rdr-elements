@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum ba4ef0b | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="ba4ef0b";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 3186392 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="3186392";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -274,6 +274,22 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     catch (e) {   }
   }
 
+  
+
+
+  const TEMOIN_PREMIER_MS = 1000;
+  const TEMOIN_PAS_MS = 2000;
+  const TEMOIN_ENVOIS = 5;
+  function navigateurCourt() {
+    const ua = String(navigator.userAgent || '');
+    const mobile = /iPhone|iPad|Android|Mobile/i.test(ua) ? '-mobile' : '';
+    if (/Firefox\//.test(ua)) return 'firefox' + mobile;
+    if (/Edg\//.test(ua)) return 'edge' + mobile;
+    if (/Chrome\/|CriOS\//.test(ua)) return 'chrome' + mobile;
+    if (/Safari\//.test(ua)) return 'safari' + mobile;
+    return 'autre' + mobile;
+  }
+
   class MenuActus extends HTMLElement {
     constructor() {
       super();
@@ -309,9 +325,10 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       this._depuisMemoire = true;
       this._appliquerPosts(m.posts);
     }
-    static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond']; }
+    static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond', 'temoin']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
+      if (nom === 'temoin') { this._temoin(val); return; }
       
 
 
@@ -359,8 +376,38 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       this._guet = new IntersectionObserver((entrees) => { if (!entrees.some(e => e.isIntersecting)) poser(); });
       this._guet.observe(this);
     }
+    
+
+
+
+
+
+
+
+
+
+
+    _temoin(val) {
+      clearTimeout(this._temoinMinuteur); this._temoinMinuteur = null;
+      if (val === 'ecrit') { window.__rdrTemoinEcrit = true; return; }
+      if (val !== 'membre' || window.__rdrTemoinEcrit) return;
+      let envois = 0;
+      const envoyer = () => {
+        this._temoinMinuteur = null;
+        if (!this.isConnected || window.__rdrTemoinEcrit || this.getAttribute('temoin') !== 'membre') return;
+        const detail = { octet: 0, transfert: 0, navigateur: navigateurCourt() };
+        try {
+          const nav = (performance.getEntriesByType('navigation') || [])[0];
+          if (nav) { detail.octet = Math.round(nav.responseStart || 0); detail.transfert = nav.transferSize || 0; }
+        } catch (e) {   }
+        this.dispatchEvent(new CustomEvent('navigation-temoin', { detail, bubbles: true, composed: true }));
+        if (++envois < TEMOIN_ENVOIS) this._temoinMinuteur = setTimeout(envoyer, TEMOIN_PAS_MS);
+      };
+      this._temoinMinuteur = setTimeout(envoyer, TEMOIN_PREMIER_MS);
+    }
     connectedCallback() { this._depuisLaMemoire(); this._render(); this._armerGarde(); }
     disconnectedCallback() {
+      if (this._temoinMinuteur) { clearTimeout(this._temoinMinuteur); this._temoinMinuteur = null; }
       if (this._guet) { this._guet.disconnect(); this._guet = null; }
       if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
