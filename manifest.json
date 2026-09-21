@@ -1,7 +1,9 @@
 {
- "source": "WapitixAgency/route-du-rhum 19c7bbc",
- "livreLe": "2026-09-20T12:41:27.276Z",
+ "source": "WapitixAgency/route-du-rhum 90ec807",
+ "livreLe": "2026-09-20T19:52:03.770Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
+ "revisionCourante": 3245,
+ "revisionsAVenir": 30,
  "paquets": {
   "socle": {
    "quoi": "les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages",
@@ -10,13 +12,13 @@
    "prefixes": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 94338,
-   "gzip": 23021,
-   "brotli": 19218,
+   "octets": 95281,
+   "gzip": 23342,
+   "brotli": 19495,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
-     "octets": 25246,
+     "octets": 25618,
      "sha": "bf07269b742b",
      "balises": [
       "rdr-menu-actus"
@@ -24,7 +26,7 @@
     },
     {
      "fichier": "rdr-menu-cartes.js",
-     "octets": 28579,
+     "octets": 28958,
      "sha": "1f5a0833f45d",
      "balises": [
       "rdr-menu-cartes"
@@ -40,7 +42,7 @@
     },
     {
      "fichier": "AlpinaClock.js",
-     "octets": 4106,
+     "octets": 4231,
      "sha": "99c3b22b9338",
      "balises": [
       "alpina-clock"
@@ -48,8 +50,8 @@
     },
     {
      "fichier": "rdr-pied-haut.js",
-     "octets": 32063,
-     "sha": "26377d96376c",
+     "octets": 32994,
+     "sha": "845816f551b4",
      "balises": [
       "rdr-pied-haut"
      ]
@@ -63,13 +65,13 @@
    "prefixes": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 77955,
-   "gzip": 20571,
-   "brotli": 17510,
+   "octets": 77967,
+   "gzip": 20574,
+   "brotli": 17524,
    "fichiers": [
     {
      "fichier": "home-news.js",
-     "octets": 36793,
+     "octets": 37499,
      "sha": "38b9cf929d32",
      "balises": [
       "home-news"
@@ -77,7 +79,7 @@
     },
     {
      "fichier": "skippers-showcase.js",
-     "octets": 17831,
+     "octets": 18126,
      "sha": "12191cb6c623",
      "balises": [
       "skippers-showcase"
@@ -85,7 +87,7 @@
     },
     {
      "fichier": "rdr-espace-promo.js",
-     "octets": 23122,
+     "octets": 23496,
      "sha": "0f585b2d6bd0",
      "balises": [
       "rdr-espace-promo"
@@ -106,17 +108,15 @@
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
    ],
    "priorite": "high",
-   "octets": 539470,
-   "gzip": 128403,
-   "brotli": 102730,
+   "octets": 412751,
+   "gzip": 110999,
+   "brotli": 90969,
    "fichiers": [
     {
      "fichier": "village-map.js",
-     "octets": 539314,
-     "sha": "c91d63ed5d9f",
-     "balises": [
-      "village-map"
-     ]
+     "octets": 412526,
+     "sha": "df0c93b7d0aa",
+     "balises": []
     }
    ]
   },
@@ -130,9 +130,9 @@
    "prefixes": [],
    "precharger": [],
    "priorite": "low",
-   "octets": 866748,
-   "gzip": 181608,
-   "brotli": 139254,
+   "octets": 866760,
+   "gzip": 181612,
+   "brotli": 139123,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -145,7 +145,7 @@
    ]
   },
   "skipper": {
-   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi",
+   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi ; rdr-nav-page.js d'abord, l'orchestrateur qui dessine l'une dans la page de l'autre pour un membre (docs/spec-navigation-en-page.md)",
    "partout": false,
    "chemins": [
     "/skippers",
@@ -157,14 +157,20 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 461486,
-   "gzip": 108832,
-   "brotli": 86220,
+   "octets": 470631,
+   "gzip": 111501,
+   "brotli": 88167,
    "fichiers": [
     {
+     "fichier": "rdr-nav-page.js",
+     "octets": 7807,
+     "sha": "00a2cc195247",
+     "balises": []
+    },
+    {
      "fichier": "rdr-skipper.js",
-     "octets": 370082,
-     "sha": "ceaad3cdcb36",
+     "octets": 372046,
+     "sha": "37f1bcfa37b0",
      "balises": [
       "skipper-gallery",
       "skipper-outro",
@@ -175,8 +181,8 @@
     },
     {
      "fichier": "skippers-list.js",
-     "octets": 91233,
-     "sha": "0c73063ea0ba",
+     "octets": 93317,
+     "sha": "501780222c04",
      "balises": [
       "skippers-list"
      ]
@@ -196,9 +202,9 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 289109,
-   "gzip": 70853,
-   "brotli": 54161,
+   "octets": 289121,
+   "gzip": 70857,
+   "brotli": 54172,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
