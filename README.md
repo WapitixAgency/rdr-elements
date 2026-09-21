@@ -18,4 +18,4 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `actus.js` | le hub des actualités et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi : rdr-news, rdr-post-head, rdr-post-more | 282.3 Ko, 52.9 Ko brotli |
 | `test-rdr.js` | banc du chargement précoce sur TEST RDR26 (menus, figé au 20/09) | |
 
-Source : `WapitixAgency/route-du-rhum e4cabe7`.
+Source : `WapitixAgency/route-du-rhum e4217b7`.
