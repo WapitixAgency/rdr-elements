@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum eaf3e8f | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="eaf3e8f";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 059aafc | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="059aafc";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -302,7 +302,20 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
-      if (nom === 'lang') this._lang = val === 'en' ? 'en' : 'fr';
+      
+
+
+
+
+
+
+
+
+      if (val === null && (nom === 'posts' || nom === 'lang')) return;
+      
+
+
+      if (nom === 'lang') { const l = val === 'en' ? 'en' : 'fr'; if (l === this._lang) return; this._lang = l; }
       if (nom === 'posts') {
         
 
@@ -737,7 +750,20 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
     static get observedAttributes() { return ['lang', 'reglages', 'cartes', 'skippers', 'vague', 'fond']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
-      if (nom === 'lang') this._lang = val === 'en' ? 'en' : 'fr';
+      
+
+
+
+
+
+
+
+
+      if (val === null && (nom === 'reglages' || nom === 'cartes' || nom === 'skippers' || nom === 'lang')) return;
+      
+
+
+      if (nom === 'lang') { const l = val === 'en' ? 'en' : 'fr'; if (l === this._lang) return; this._lang = l; }
       if (nom === 'vague' || nom === 'fond') return;    
       if (nom === 'reglages' || nom === 'cartes' || nom === 'skippers') {
         
