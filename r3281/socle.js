@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum f4c9a9e | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="f4c9a9e";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum a154f4f | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="a154f4f";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -459,6 +459,21 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     get _t() { return TXT[this._lang]; }
     get _r() { return ROUTES[this._lang]; }
     _emit(url) { if (url) this.dispatchEvent(new CustomEvent('ma-navigate', { detail: { url }, bubbles: true, composed: true })); }
+    
+
+
+
+
+
+
+    _aller(url) {
+      if (!url) return;
+      if (/^\/(?!\/)/.test(url) || url.indexOf(location.origin + '/') === 0) {
+        try { this._naviguer(url); return; } catch (e) {   }
+      }
+      this._emit(url);
+    }
+    _naviguer(url) { window.location.assign(url); }
 
     
 
@@ -550,7 +565,11 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     }
 
     _brancher() {
-      this.querySelectorAll('[data-url]').forEach(a => a.addEventListener('click', (e) => { e.preventDefault(); this._emit(a.dataset.url); }));
+      this.querySelectorAll('[data-url]').forEach(a => a.addEventListener('click', (e) => {
+         
+        if (a.tagName === 'A' && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+        e.preventDefault(); this._aller(a.dataset.url);
+      }));
       
 
       if (this._obs) this._obs.disconnect();
@@ -905,6 +924,28 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
     }
     get _t() { return TXT[this._lang]; }
     _emit(url) { if (url) this.dispatchEvent(new CustomEvent('mc-navigate', { detail: { url }, bubbles: true, composed: true })); }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _aller(url) {
+      if (!url) return;
+      if (/^\/(?!\/)/.test(url) || url.indexOf(location.origin + '/') === 0) {
+        try { this._naviguer(url); return; } catch (e) {   }
+      }
+      this._emit(url);
+    }
+    _naviguer(url) { window.location.assign(url); }
 
     _carte(c, classe) {
       const t = this._t; const bientot = c.etat === 'bientot';
@@ -1010,8 +1051,12 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
 
     _brancher() {
       this.querySelectorAll('[data-url]').forEach(a => {
-        a.addEventListener('click', (e) => { if (a.getAttribute('target') === '_blank') return; e.preventDefault(); this._emit(a.dataset.url); });
-        a.addEventListener('keydown', (e) => { if (a.tagName !== 'A' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); this._emit(a.dataset.url); } });
+        a.addEventListener('click', (e) => {
+          if (a.getAttribute('target') === '_blank') return;
+          if (a.tagName === 'A' && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+          e.preventDefault(); this._aller(a.dataset.url);
+        });
+        a.addEventListener('keydown', (e) => { if (a.tagName !== 'A' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); this._aller(a.dataset.url); } });
       });
       
 
