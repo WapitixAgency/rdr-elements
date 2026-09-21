@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 36d26c4 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="36d26c4";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum b7799c0 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="b7799c0";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -51,6 +51,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="36d26c4";performance
   const FENETRE_MEDIA_J = 14;       
    
   const TAGS_TUS = /^(partenaire|partenaires|interview|actualit[eé]s?|news|d[eé]part|amrae|kit p[eé]dagogique)$/i;
+  
+
+
+
+
+
+  const ATTENTE_MAX_MS = 12000;
 
   const CSS = `
 rdr-menu-actus{display:block;width:100%;height:100%;color:rgba(255,255,255,.94);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;
@@ -89,6 +96,29 @@ rdr-menu-actus .ma-sujets{display:flex;gap:6px;flex-wrap:wrap}
 rdr-menu-actus .ma-sujet{display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.35);font-size:11px;font-weight:700;color:#fff;letter-spacing:.02em;white-space:nowrap}
 rdr-menu-actus .ma-sujet--petit{border:0;padding:0;color:var(--cv);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 rdr-menu-actus .ma-vide{display:flex;align-items:center;justify-content:center;height:100%;color:var(--ma-t3);font-size:14px;border:1px dashed var(--ma-filet);border-radius:14px}
+
+
+
+
+
+rdr-menu-actus .ma-squel{position:relative;display:block;border-radius:16px;overflow:hidden;background:var(--ma-panneau);min-height:0}
+rdr-menu-actus .ma-squel::after{content:'';position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.07) 50%,rgba(255,255,255,0) 100%);animation:ma-scintille 1.6s ease-in-out infinite}
+rdr-menu-actus .ma-squel:nth-child(2)::after{animation-delay:.12s}
+rdr-menu-actus .ma-squel:nth-child(3)::after{animation-delay:.24s}
+rdr-menu-actus .ma-squel:nth-child(4)::after{animation-delay:.36s}
+rdr-menu-actus .ma-squel:nth-child(5)::after{animation-delay:.48s}
+rdr-menu-actus .ma-squel:nth-child(6)::after{animation-delay:.6s}
+rdr-menu-actus .ma-squel i{position:absolute;display:block;border-radius:6px;background:rgba(255,255,255,.08)}
+rdr-menu-actus .ma-squel .ma-s-cat{left:14px;top:14px;width:64px;height:22px}
+rdr-menu-actus .ma-squel .ma-s-l1{left:16px;right:20%;bottom:50px;height:13px}
+rdr-menu-actus .ma-squel .ma-s-l2{left:16px;right:44%;bottom:31px;height:13px}
+rdr-menu-actus .ma-squel .ma-s-meta{left:16px;width:72px;bottom:14px;height:9px;opacity:.7}
+rdr-menu-actus .ma-squel--une .ma-s-cat{left:26px;top:22px;width:96px}
+rdr-menu-actus .ma-squel--une .ma-s-l1{left:26px;right:30%;bottom:96px;height:22px}
+rdr-menu-actus .ma-squel--une .ma-s-l2{left:26px;right:50%;bottom:66px;height:22px}
+rdr-menu-actus .ma-squel--une .ma-s-p{left:26px;right:38%;bottom:44px;height:10px;opacity:.7}
+rdr-menu-actus .ma-squel--une .ma-s-meta{left:26px;width:120px;bottom:22px}
+@keyframes ma-scintille{100%{transform:translateX(100%)}}
 rdr-menu-actus .ma-corps{position:relative;min-height:0}
 rdr-menu-actus .ma-rail{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:12px;height:100%;min-height:0}
 rdr-menu-actus .ma-rail--six{grid-template-columns:2fr repeat(5,1fr)}
@@ -155,6 +185,10 @@ rdr-menu-actus .ma-carte--une p{display:none}
 rdr-menu-actus .ma-cite{font-size:14px;-webkit-line-clamp:2}
 rdr-menu-actus .ma-glyphe--grand{width:52px;height:52px}
 rdr-menu-actus .ma-glyphe--grand svg{width:22px;height:22px}
+rdr-menu-actus .ma-squel--une .ma-s-l1{bottom:72px;height:18px}
+rdr-menu-actus .ma-squel--une .ma-s-l2{bottom:46px;height:18px}
+rdr-menu-actus .ma-squel--une .ma-s-p{display:none}
+rdr-menu-actus .ma-squel--une .ma-s-meta{bottom:16px}
 }
 @keyframes ma-vague{0%{-webkit-mask-position:0 top;mask-position:0 top}100%{-webkit-mask-position:-360px top;mask-position:-360px top}}
 
@@ -234,6 +268,18 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     constructor() {
       super();
       this._posts = []; this._lang = memLangue(); this._obs = null; this._brut = null; this._depuisMemoire = false;
+      this._garde = null; this._abandon = false;
+    }
+     
+    _enAttente() { return this._brut == null && !this._abandon; }
+    _armerGarde() {
+      if (this._garde || !this._enAttente()) return;
+      this._garde = setTimeout(() => {
+        this._garde = null;
+        if (this._brut != null) return;
+        this._abandon = true;
+        if (this.isConnected) this._render();
+      }, ATTENTE_MAX_MS);
     }
     _appliquerPosts(val) {
       this._brut = val;
@@ -269,8 +315,9 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       if (nom === 'vague' || nom === 'fond') return;    
       if (this.isConnected) this._render();
     }
-    connectedCallback() { this._depuisLaMemoire(); this._render(); }
+    connectedCallback() { this._depuisLaMemoire(); this._render(); this._armerGarde(); }
     disconnectedCallback() {
+      if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._veille) { this._veille.disconnect(); this._veille = null; }
     }
@@ -332,13 +379,21 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
         + '<div class="ma-txt">' + (une ? this._uneCorps(p, maintenant) : sujet + '<h4>' + esc(p.title) + '</h4>' + this._quand(p, maintenant)) + '</div></a>';
     }
 
+     
+    _squelette(n) {
+      const une = '<span class="ma-squel ma-squel--une"><i class="ma-s-cat"></i><i class="ma-s-l1"></i><i class="ma-s-l2"></i><i class="ma-s-p"></i><i class="ma-s-meta"></i></span>';
+      const petite = '<span class="ma-squel"><i class="ma-s-cat"></i><i class="ma-s-l1"></i><i class="ma-s-l2"></i><i class="ma-s-meta"></i></span>';
+      return '<div class="ma-corps" aria-busy="true"><div class="ma-rail' + (n === 6 ? ' ma-rail--six' : '') + '" aria-hidden="true">'
+        + une + Array.from({ length: n - 1 }, () => petite).join('') + '</div></div>';
+    }
+
     _render() {
       const t = this._t; const maintenant = Date.now();
       const n = this._combien();
       const l = this._ordre(this._posts, maintenant).slice(0, n);
       const corps = l.length
         ? '<div class="ma-corps"><div class="ma-rail' + (n === 6 ? ' ma-rail--six' : '') + '">' + l.map((p, i) => this._carte(p, i === 0, maintenant)).join('') + '</div></div>'
-        : '<div class="ma-vide">' + t.vide + '</div>';
+        : (this._enAttente() ? this._squelette(n) : '<div class="ma-vide">' + t.vide + '</div>');
       this.innerHTML = '<style>' + CSS + '</style><img class="ma-fond" src="https://static.wixstatic.com/shapes/df962b_ab123c0a04db4300ace44b9c6f6e6e7e.svg" alt="" aria-hidden="true"><div class="ma-vague" aria-hidden="true"></div><div class="ma">'
         + '<div class="ma-tete"><div><h2 class="ma-titre">' + t.titre + '</h2><p class="ma-sous">' + t.sousTitre + '</p></div>' + this._rubriques() + '</div>'
         + corps
@@ -406,6 +461,12 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
   };
   const ROTATIONS = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const STYLES_PASTILLE = { sombre: '', teal: ' mc-pastille--teal', jaune: ' mc-pastille--jaune' };
+  
+
+
+
+  const ATTENTE_MAX_MS = 12000;
+  const CARTES_SQUELETTE = 4;
 
   const CSS = `
 rdr-menu-cartes{display:block;width:100%;height:100%;color:rgba(255,255,255,.94);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;
@@ -499,6 +560,29 @@ rdr-menu-cartes .mc-vide{display:flex;align-items:center;justify-content:center;
 
 
 
+rdr-menu-cartes .mc-squel,rdr-menu-cartes .mc-s{position:relative;display:block;overflow:hidden;background:rgba(255,255,255,.08);border-radius:8px}
+rdr-menu-cartes .mc-squel{border-radius:16px;background:var(--mc-panneau);min-height:0}
+rdr-menu-cartes .mc-squel--sk{border-radius:28px 3px 16px 3px;background:#0f2238}
+rdr-menu-cartes .mc-squel::after,rdr-menu-cartes .mc-s::after{content:'';position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.07) 50%,rgba(255,255,255,0) 100%);animation:mc-scintille 1.6s ease-in-out infinite}
+rdr-menu-cartes .mc-squel:nth-child(2)::after{animation-delay:.12s}
+rdr-menu-cartes .mc-squel:nth-child(3)::after{animation-delay:.24s}
+rdr-menu-cartes .mc-squel:nth-child(4)::after{animation-delay:.36s}
+rdr-menu-cartes .mc-squel:nth-child(5)::after{animation-delay:.48s}
+rdr-menu-cartes .mc-squel:nth-child(6)::after{animation-delay:.6s}
+rdr-menu-cartes .mc-squel i{position:absolute;display:block;border-radius:6px;background:rgba(255,255,255,.08)}
+rdr-menu-cartes .mc-squel .mc-s-l1{left:16px;right:24%;bottom:42px;height:16px}
+rdr-menu-cartes .mc-squel .mc-s-l2{left:16px;right:46%;bottom:22px;height:10px;opacity:.75}
+rdr-menu-cartes .mc-squel--sk .mc-s-l1{left:14px;right:40%;bottom:40px;height:9px}
+rdr-menu-cartes .mc-squel--sk .mc-s-l2{left:14px;right:18%;bottom:18px;height:18px;opacity:1}
+rdr-menu-cartes .mc-s-titre{width:min(320px,40vw);height:36px}
+rdr-menu-cartes .mc-s-sous{width:min(420px,50vw);height:11px;margin-top:10px;opacity:.75}
+rdr-menu-cartes .mc-s-btn{width:210px;height:44px;border-radius:10px 0 10px 0;background:transparent;border:2px solid rgba(255,255,255,.14)}
+@keyframes mc-scintille{100%{transform:translateX(100%)}}
+
+
+
+
+
 
 
 
@@ -541,6 +625,9 @@ rdr-menu-cartes .mc-corps--skippers{padding-top:18px}
 rdr-menu-cartes .sk-ov{padding:36px 12px 12px}
 rdr-menu-cartes .sk-classe{top:-24px}
 rdr-menu-cartes .sk-classe img{height:clamp(64px,5.5vw,84px)}
+rdr-menu-cartes .mc-s-titre{height:28px}
+rdr-menu-cartes .mc-s-sous{margin-top:8px}
+rdr-menu-cartes .mc-s-btn{height:40px}
 }
 @keyframes mc-vague{0%{-webkit-mask-position:0 top;mask-position:0 top}100%{-webkit-mask-position:-360px top;mask-position:-360px top}}
 
@@ -596,7 +683,34 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
   }
 
   class MenuCartes extends HTMLElement {
-    constructor() { super(); this._reglages = null; this._cartes = []; this._skippers = []; this._lang = memLangue(); this._obs = null; this._brut = { reglages: null, cartes: null, skippers: null }; this._depuisMemoire = false; }
+    constructor() { super(); this._reglages = null; this._cartes = []; this._skippers = []; this._lang = memLangue(); this._obs = null; this._brut = { reglages: null, cartes: null, skippers: null }; this._depuisMemoire = false; this._garde = null; this._abandon = false; }
+    
+
+
+    _manque() {
+      const d = this._reglages;
+      if (!d) return this._brut.reglages == null;
+      return d.disposition === 'skippers' ? this._brut.skippers == null : this._brut.cartes == null;
+    }
+    _enAttente() { return !this._abandon && this._manque(); }
+    _armerGarde() {
+      if (this._garde || !this._enAttente()) return;
+      this._garde = setTimeout(() => {
+        this._garde = null;
+        if (!this._manque()) return;
+        this._abandon = true;
+        if (this.isConnected) this._render();
+      }, ATTENTE_MAX_MS);
+    }
+    _squelCartes(n, sk) {
+      const c = sk ? '<span class="mc-squel mc-squel--sk"><i class="mc-s-l1"></i><i class="mc-s-l2"></i></span>' : '<span class="mc-squel"><i class="mc-s-l1"></i><i class="mc-s-l2"></i></span>';
+      return Array.from({ length: n }, () => c).join('');
+    }
+    _corpsSquelette(sk) {
+      return sk
+        ? '<div class="mc-corps mc-corps--skippers" aria-busy="true" aria-hidden="true">' + this._squelCartes(6, true) + '</div>'
+        : '<div class="mc-corps mc-corps--cartes" style="--n:' + CARTES_SQUELETTE + '" aria-busy="true" aria-hidden="true">' + this._squelCartes(CARTES_SQUELETTE) + '</div>';
+    }
     
 
     _rang() { return Array.prototype.indexOf.call(document.querySelectorAll('rdr-menu-cartes'), this); }
@@ -636,8 +750,9 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
       }
       if (this.isConnected) this._render();
     }
-    connectedCallback() { this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); }
+    connectedCallback() { this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); this._armerGarde(); }
     disconnectedCallback() {
+      if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._veille) { this._veille.disconnect(); this._veille = null; }
     }
@@ -677,12 +792,33 @@ rdr-menu-cartes .mc-vague,rdr-menu-cartes .mc{position:relative;z-index:1}
         + (cfg.icone ? '<div class="sk-classe"><img data-src="' + cfg.icone + '" alt=""></div>' : '') + '</div></div>';
     }
 
+     
+    _squeletteComplet() {
+      return '<style>' + CSS + '</style><img class="mc-fond" src="https://static.wixstatic.com/shapes/df962b_ab123c0a04db4300ace44b9c6f6e6e7e.svg" alt="" aria-hidden="true"><div class="mc-vague" aria-hidden="true"></div><div class="mc" aria-busy="true">'
+        + '<div class="mc-tete" aria-hidden="true"><div><span class="mc-s mc-s-titre"></span><span class="mc-s mc-s-sous"></span></div></div>'
+        + this._corpsSquelette(false)
+        + '<div class="mc-pied" aria-hidden="true"><span></span><span class="mc-s mc-s-btn"></span></div></div>';
+    }
+
     _render() {
       const d = this._reglages;
-      if (!d) { this.innerHTML = ''; return; }
+      if (!d) {
+        if (this._enAttente()) { this.innerHTML = this._squeletteComplet(); this._veiller(); }
+        else {
+          
+
+          if (this._veille) { this._veille.disconnect(); this._veille = null; }
+          this.innerHTML = '';
+        }
+        return;
+      }
       const cartes = this._cartes;
       let corps = '';
-      if (d.disposition === 'skippers') {
+      if (d.disposition === 'skippers' && this._enAttente()) {
+        corps = this._corpsSquelette(true);
+      } else if (d.disposition !== 'skippers' && this._enAttente()) {
+        corps = this._corpsSquelette(false);
+      } else if (d.disposition === 'skippers') {
         corps = this._skippers.length
           ? '<div class="mc-corps mc-corps--skippers">' + this._skippers.slice(0, 6).map((s, i) => this._skipper(s, i)).join('') + '</div>'
           : '<div class="mc-vide"></div>';
