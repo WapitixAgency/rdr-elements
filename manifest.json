@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum b7799c0",
- "livreLe": "2026-09-21T09:00:58.659Z",
+ "source": "WapitixAgency/route-du-rhum eaf3e8f",
+ "livreLe": "2026-09-21T09:02:41.883Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3252,
  "revisionsAVenir": 30,
@@ -13,8 +13,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 102651,
-   "gzip": 24902,
-   "brotli": 20435,
+   "gzip": 24901,
+   "brotli": 20464,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -66,8 +66,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 77955,
-   "gzip": 20571,
-   "brotli": 17522,
+   "gzip": 20570,
+   "brotli": 17537,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -108,14 +108,14 @@
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
    ],
    "priorite": "high",
-   "octets": 423043,
-   "gzip": 113721,
-   "brotli": 93040,
+   "octets": 425237,
+   "gzip": 114517,
+   "brotli": 93682,
    "fichiers": [
     {
      "fichier": "village-map.js",
-     "octets": 422830,
-     "sha": "59e48f2b2f64",
+     "octets": 425024,
+     "sha": "92db8ad829a9",
      "balises": []
     }
    ]
@@ -132,7 +132,7 @@
    "priorite": "low",
    "octets": 866748,
    "gzip": 181608,
-   "brotli": 139243,
+   "brotli": 139172,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -158,8 +158,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 461486,
-   "gzip": 108832,
-   "brotli": 86226,
+   "gzip": 108831,
+   "brotli": 86227,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -197,8 +197,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 289109,
-   "gzip": 70854,
-   "brotli": 54163,
+   "gzip": 70853,
+   "brotli": 54189,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
