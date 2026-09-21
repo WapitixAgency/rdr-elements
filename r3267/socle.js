@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 3186392 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="3186392";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum d60c44e | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="d60c44e";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -280,6 +280,9 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
   const TEMOIN_PREMIER_MS = 1000;
   const TEMOIN_PAS_MS = 2000;
   const TEMOIN_ENVOIS = 5;
+   
+  const NOTIFS_GUET_MS = 15000;
+  const NOTIFS_EVENEMENTS = ['notify-seen', 'notify-dismiss', 'notify-refresh', 'notify-aller', 'notify-espace'];
   function navigateurCourt() {
     const ua = String(navigator.userAgent || '');
     const mobile = /iPhone|iPad|Android|Mobile/i.test(ua) ? '-mobile' : '';
@@ -325,10 +328,11 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       this._depuisMemoire = true;
       this._appliquerPosts(m.posts);
     }
-    static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond', 'temoin']; }
+    static get observedAttributes() { return ['posts', 'lang', 'vague', 'fond', 'temoin', 'notifications']; }
     attributeChangedCallback(nom, avant, val) {
       if (avant === val) return;
       if (nom === 'temoin') { this._temoin(val); return; }
+      if (nom === 'notifications') { if (val) this._remettreNotifications(val); return; }
       
 
 
@@ -405,8 +409,46 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       };
       this._temoinMinuteur = setTimeout(envoyer, TEMOIN_PREMIER_MS);
     }
-    connectedCallback() { this._depuisLaMemoire(); this._render(); this._armerGarde(); }
+    
+
+
+
+
+
+
+
+
+
+
+
+    _remettreNotifications(json) {
+      clearTimeout(this._guetNotifs); this._guetNotifs = null;
+      if (json === window.__rdrNotifsRemises) return;
+      const module = document.querySelector('rdr-notify');
+      if (module) {
+        window.__rdrNotifsRemises = json;
+        try { module.setAttribute('payload', json); } catch (e) {   }
+        return;
+      }
+      if (!this._guetNotifsDebut) this._guetNotifsDebut = Date.now();
+      if (Date.now() - this._guetNotifsDebut > NOTIFS_GUET_MS) return;
+      this._guetNotifs = setTimeout(() => this._remettreNotifications(json), 400);
+    }
+    _brancherRelaisNotifications() {
+      if (this._relaisNotifs) return;
+      this._relaisNotifs = (e) => {
+        if (!e || !e.target || e.target.tagName !== 'RDR-NOTIFY') return;
+        this.dispatchEvent(new CustomEvent('rn-' + e.type, { bubbles: true, composed: true, detail: e.detail || {} }));
+      };
+      NOTIFS_EVENEMENTS.forEach(t => document.addEventListener(t, this._relaisNotifs));
+    }
+    _debrancherRelaisNotifications() {
+      if (this._relaisNotifs) { NOTIFS_EVENEMENTS.forEach(t => document.removeEventListener(t, this._relaisNotifs)); this._relaisNotifs = null; }
+      clearTimeout(this._guetNotifs); this._guetNotifs = null;
+    }
+    connectedCallback() { this._brancherRelaisNotifications(); this._depuisLaMemoire(); this._render(); this._armerGarde(); }
     disconnectedCallback() {
+      this._debrancherRelaisNotifications();
       if (this._temoinMinuteur) { clearTimeout(this._temoinMinuteur); this._temoinMinuteur = null; }
       if (this._guet) { this._guet.disconnect(); this._guet = null; }
       if (this._garde) { clearTimeout(this._garde); this._garde = null; }
