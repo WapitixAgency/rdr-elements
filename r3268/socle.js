@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 789f9b2 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="789f9b2";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum e17ff8b | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="e17ff8b";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -251,16 +251,26 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
 
 
 
+
+
+
+
+
+
+
+
+
+
   const MEM_CLE = 'rdrMemMenuActusV1';
-  const MEM_TTL_MS = 30 * 60 * 1000;
+  const MEM_TTL_MS = 12 * 3600 * 1000;
   const memTelephone = () => /Mobi|iPhone|Android.+Mobile/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
   const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
   function memLire(suffixe) {
-    try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
+    try { const m = JSON.parse(localStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
     catch (e) { return null; }
   }
   function memEcrire(suffixe, valeurs) {
-    try { sessionStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
+    try { localStorage.setItem(MEM_CLE + ':' + suffixe, JSON.stringify(Object.assign({ le: Date.now() }, valeurs))); }
     catch (e) {   }
   }
 
@@ -268,7 +278,7 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
     constructor() {
       super();
       this._posts = []; this._lang = memLangue(); this._obs = null; this._brut = null; this._depuisMemoire = false;
-      this._garde = null; this._abandon = false;
+      this._garde = null; this._abandon = false; this._reserve = null; this._guet = null;
     }
      
     _enAttente() { return this._brut == null && !this._abandon; }
@@ -319,17 +329,39 @@ rdr-menu-actus .ma-vague,rdr-menu-actus .ma{position:relative;z-index:1}
       if (nom === 'posts') {
         
 
-        const identique = val === this._brut;
-        this._depuisMemoire = false;
         if (val) memEcrire(this._lang, { posts: val });
-        if (identique) return;
+        if (val === this._brut) { this._depuisMemoire = false; this._reserve = null; return; }
+        
+
+        if (this._depuisMemoire && val && this.getClientRects().length) { this._differer(val); return; }
+        this._depuisMemoire = false; this._reserve = null;
         this._appliquerPosts(val);
       }
       if (nom === 'vague' || nom === 'fond') return;    
       if (this.isConnected) this._render();
     }
+    
+
+
+
+    _differer(val) {
+      this._reserve = val;
+      if (this._guet) return;
+      const poser = () => {
+        if (this._guet) { this._guet.disconnect(); this._guet = null; }
+        const v = this._reserve; this._reserve = null;
+        if (v == null || v === this._brut) return;
+        this._depuisMemoire = false;
+        this._appliquerPosts(v);
+        if (this.isConnected) this._render();
+      };
+      if (typeof IntersectionObserver !== 'function') { poser(); return; }
+      this._guet = new IntersectionObserver((entrees) => { if (!entrees.some(e => e.isIntersecting)) poser(); });
+      this._guet.observe(this);
+    }
     connectedCallback() { this._depuisLaMemoire(); this._render(); this._armerGarde(); }
     disconnectedCallback() {
+      if (this._guet) { this._guet.disconnect(); this._guet = null; }
       if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._veille) { this._veille.disconnect(); this._veille = null; }
