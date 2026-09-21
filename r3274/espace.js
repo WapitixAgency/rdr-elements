@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 0394cf8 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0394cf8";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 789f9b2 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="789f9b2";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -327,8 +327,12 @@ if (!customElements.get('espace-rhum')) {
   const MEMOIRE_CSS = `
     espace-rhum.er-memoire > *:not(.er-memoire-pill) { pointer-events: none; }
     espace-rhum .er-memoire-pill { position: fixed; top: 84px; left: 50%; transform: translateX(-50%); z-index: 60; padding: 7px 14px; border-radius: 999px; background: rgba(29, 34, 67, 0.92); color: #fff; font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); animation: er-sk-pulse 1.2s ease-in-out infinite; pointer-events: none; }
-    espace-rhum.er-rafraichi .er-dashboard > *, espace-rhum.er-rafraichi .er-dash-in { animation: none !important; }
+    espace-rhum.er-rafraichi .er-dashboard > *, espace-rhum.er-rafraichi .er-cockpit, espace-rhum.er-rafraichi .er-mobile-topbar, espace-rhum.er-rafraichi .er-mobile-shell { animation: none !important; }
   `;
+  
+
+
+
   function masquerLusActif() {
     try { return localStorage.getItem(MASQUER_KEY) === '1'; } catch (e) { return false; }
   }
@@ -11200,12 +11204,6 @@ if (!customElements.get('espace-rhum')) {
         pill.textContent = this._lang() === 'en' ? 'Updating…' : 'Mise à jour…';
         this.appendChild(pill);
       }
-      if (this._rafraichi) {
-        this._rafraichi = false;
-        this.classList.add('er-rafraichi');
-        clearTimeout(this._rafraichiTimer);
-        this._rafraichiTimer = setTimeout(() => this.classList.remove('er-rafraichi'), 1500);
-      }
     }
 
     _render() {
@@ -11239,6 +11237,17 @@ if (!customElements.get('espace-rhum')) {
         this._startSkeletonSlowTimer();
         return;
       }
+      
+
+
+
+
+
+
+
+
+      this.classList.toggle('er-rafraichi', !!this._rafraichi);
+      this._rafraichi = false;
       this.innerHTML = this._buildHtml();
       this._i18n(this);
       this._wireNavLinks();
