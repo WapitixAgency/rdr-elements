@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum a0911af | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a0911af";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 950c32b | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="950c32b";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -706,9 +706,22 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       try { const D = JSON.parse(t); return jeuValide(D) ? D : null; } catch (e) { return null; }
     }
 
+    
+
+
+
+
+    _calerEntete() {
+      try {
+        const e = document.querySelector('rdr-entete[hero="dessus"]');
+        if (e && !document.documentElement.dataset.rdrEntete) document.documentElement.dataset.rdrEntete = 'dessus';
+      } catch (err) {   }
+    }
+
     _dessiner(D) {
       if (this._dessine) return;
       this._dessine = true;
+      this._calerEntete();
       this.innerHTML = PAGE;
       this._defaire = monter(this, this, D);
     }
