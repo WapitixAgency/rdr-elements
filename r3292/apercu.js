@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 665d5f3 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="665d5f3";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum c4b4142 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="c4b4142";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -623,7 +623,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <div class="promo-btns"><a class="btn btn--marine" href="#">Créez votre espace <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="#">J'ai déjà un compte</a></div>
     </div>
     <div class="promo-visuel">
-      <div class="photo"><img data-media="espacePhoto" alt="" loading="lazy" decoding="async"></div>
+      <div class="photo"><img data-media="espacePhoto" data-larg="900" alt="" loading="lazy" decoding="async"></div>
       <div class="pv-pile">
         <div class="pv-badge pv-flotte">
           <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-lieu"></span></div>
@@ -779,13 +779,23 @@ function monter(racine, portail, D) {
 
 
 
+  
+
+
+
+
+
+
+
+  const pourLarge = (px) => Math.max(160, Math.round(Math.min(px * Math.min(2, window.devicePixelRatio || 1), 1600) / 80) * 80);
+  const etroit = () => (document.documentElement.clientWidth || innerWidth || 0) < 760;
   const retaille = (u, larg, q) => String(u || '').replace(/\/v1\/fill\/w_(\d+),h_(\d+)([^/]*)\//, (tout2, W, H, reste) => {
     const w = Math.min(Number(W), larg), h = Math.max(1, Math.round(Number(H) * (w / Number(W))));
     return '/v1/fill/w_' + w + ',h_' + h + String(reste).replace(/,q_\d+/, ',q_' + q) + '/';
   });
   tout('[data-media]').forEach(el => {
     if (el.tagName === 'SOURCE' || !M[el.dataset.media]) return;
-    el.src = el.dataset.larg ? retaille(M[el.dataset.media], Number(el.dataset.larg), Number(el.dataset.q) || 60) : M[el.dataset.media];
+    el.src = el.dataset.larg ? retaille(M[el.dataset.media], Math.min(Number(el.dataset.larg), pourLarge(document.documentElement.clientWidth || innerWidth)), Number(el.dataset.q) || 60) : M[el.dataset.media];
   });
   tout('[data-media-affiche]').forEach(el => { if (M[el.dataset.mediaAffiche]) el.poster = M[el.dataset.mediaAffiche]; });
   const chargerVideo = (v) => { const s = v && v.querySelector('source[data-media]'); if (s && !s.getAttribute('src') && M[s.dataset.media]) { s.src = M[s.dataset.media]; try { v.load(); } catch (e) {   } } };
@@ -962,7 +972,7 @@ function monter(racine, portail, D) {
     if (diapos().length > 1) diapoTimer = repeter(() => allerDiapo(diapoIdx + 1), 7000);
   }
   function rendreCtas() {
-    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => '<a class="cta cta--' + k.c + '" href="#"><img loading="lazy" decoding="async" src="' + IMG(k.img, 1200, 620, 78) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
+    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => '<a class="cta cta--' + k.c + '" href="#"><img loading="lazy" decoding="async" src="' + IMG(k.img, pourLarge(etroit() ? 380 : 460), Math.round(pourLarge(etroit() ? 380 : 460) * 0.52), 74) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
       '<div class="cta-txt"><span class="cta-ico">' + ICO[k.ico] + '</span><h3>' + esc(k.titre) + '</h3><p>' + esc(k.txt) + '</p><span class="lire">Découvrir ' + FLECHE + '</span></div></a>').join('');
     rendreAffiche();
   }
@@ -1132,11 +1142,11 @@ function monter(racine, portail, D) {
      
     const type = (i, p) => i === 1 ? 'video' : i === 4 ? 'photo' : i === 5 ? 'audio' : /interview/i.test(p._categoryLabel || '') ? 'interview' : 'actu';
     const une = posts[0], video = posts[1], photo = posts[4];
-    $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, 1200, 900) + '" alt="">' +
+    $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, pourLarge(etroit() ? 350 : 620), Math.round(pourLarge(etroit() ? 350 : 620) * 0.75)) + '" alt="">' +
       '<div class="carte-haut">' + cat(type(0, une)) + '<span class="kicker kicker--jaune">À la une</span></div>' +
       '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h3>' + esc(une.title.trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
     $('medias').innerHTML = [[video, 'video', 'La dernière vidéo'], [photo, 'photo', 'Le dernier reportage']].map(([p, t, lib]) =>
-      '<a class="carte" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, 800, 500) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
+      '<a class="carte" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, pourLarge(etroit() ? 350 : 420), Math.round(pourLarge(etroit() ? 350 : 420) * 0.625)) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
       '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
     $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve" href="#"><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
     const sujets = {}; posts.forEach(p => (p._tags || []).forEach(t => { if (!/^[A-Z]{2}/.test(t.label) || /CLASS|OCEAN/.test(t.label)) sujets[t.label] = (sujets[t.label] || 0) + 1; }));
@@ -1153,12 +1163,12 @@ function monter(racine, portail, D) {
   Promise.resolve(D.skippers).then(s => {
     const liste = (Array.isArray(s) ? s : (s.skippers || Object.values(s)[0])).slice(0, 6);
     $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
-      return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(k.photoVignette) + '" alt="" loading="lazy">' +
+      return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 190 : 215), 74)) + '" alt="" loading="lazy">' +
         '<div class="sk-ov"><div class="sk-prenom"><img loading="lazy" decoding="async" src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
         '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img loading="lazy" decoding="async" src="' + cfg.icone + '" alt=""></div>' : '') + '</div></div>'; }).join('');
      
     $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
-      return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(k.photoVignette) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
+      return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 150 : 200), 74)) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
         '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper favori</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
     let pvI = 0;
     repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
