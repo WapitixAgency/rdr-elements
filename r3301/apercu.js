@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum f0a7a92 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f0a7a92";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum a0f8394 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a0f8394";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -44,7 +44,7 @@ rdr-accueil-apercu{--haut-acces:clamp(200px,26vh,260px);--bas-titre:calc(var(--h
 rdr-accueil-apercu .hero{position:relative;height:clamp(520px,calc(100svh - var(--haut-entete)),960px);background:#0E111D;color:#fff;overflow:hidden}
 rdr-accueil-apercu .hero[data-acces="sous"]{--bas-titre:60px}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:clamp(560px,100svh,1100px)}
-rdr-accueil-apercu .hv-scene{position:absolute;inset:0;overflow:hidden}
+rdr-accueil-apercu .hv-scene{position:absolute;inset:0;overflow:hidden;background:#0E111D}
 rdr-accueil-apercu .hv-rail{position:absolute;inset:0;display:flex;width:calc(var(--n,1) * 100%);transition:transform 1.1s cubic-bezier(.7,0,.2,1)}
 rdr-accueil-apercu .hv-vue{position:relative;flex:1 1 0;min-width:0;height:100%;overflow:hidden}
 rdr-accueil-apercu .hv-fond{position:absolute;inset:0}
@@ -81,6 +81,7 @@ rdr-accueil-apercu .hv-ligne{display:flex;align-items:flex-end;justify-content:s
 rdr-accueil-apercu .hv-titre{max-width:min(980px,76%);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(12px,2.2vh,22px)}
 rdr-accueil-apercu .hero .hv-titre{opacity:.01;transform:translateY(26px);transition:opacity .9s ease .3s,transform 1.1s cubic-bezier(.22,.8,.3,1) .3s}
 rdr-accueil-apercu .hero.est-photo .hv-titre{opacity:1;transform:none}
+rdr-accueil-apercu .hero:not(.est-photo) .hv-contenu{z-index:-1}
 rdr-accueil-apercu .hero.est-photo .hv-titre.sort{opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease}
 rdr-accueil-apercu .hv-signe{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--titre);font-style:italic;text-transform:uppercase;font-size:clamp(13px,1.2vw,17px);line-height:1;padding:7px 12px 6px;border-radius:6px;background:rgba(14,17,29,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px)}
 rdr-accueil-apercu .hv-signe b{color:var(--jaune);font-weight:400}
