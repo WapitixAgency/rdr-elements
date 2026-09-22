@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ff4ba8d | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ff4ba8d";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum f0a7a92 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f0a7a92";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -980,7 +980,19 @@ function monter(racine, portail, D) {
     const gen = ++heroGen; let parti = false;
     h.classList.remove('entree-douce');
     signal('debut');
-    const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); poserRail(); relancer(); compter(); signal('bascule'); };
+    
+
+
+
+
+
+    const arreterVideo = () => {
+      const v2 = h.querySelector('video'); if (!v2) return;
+      try { v2.pause(); } catch (e) {   }
+      const s2 = v2.querySelector('source[data-media]');
+      if (s2 && s2.getAttribute('src')) { s2.removeAttribute('src'); try { v2.load(); } catch (e) {   } }
+    };
+    const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); poserRail(); relancer(); compter(); signal('bascule'); minuteurs.push(setTimeout(() => { if (gen === heroGen) arreterVideo(); }, 1500)); };
     const partir = () => { if (gen !== heroGen || parti) return; parti = true; clearTimeout(heroTimer); heroTimer = setTimeout(bascule, 3200); };
     clearTimeout(heroTimer);
     const v = h.querySelector('video');
