@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum da96aeb | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="da96aeb";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 148a131 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="148a131";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -44,6 +44,7 @@ rdr-accueil-apercu .btn--marine:hover{background:#16355D;border-color:#16355D}
 rdr-accueil-apercu,.raa-portail{--haut-acces:clamp(200px,26vh,260px);--bas-titre:calc(var(--haut-acces) + 60px)}
 rdr-accueil-apercu .hero{position:relative;height:clamp(520px,calc(100svh - var(--haut-entete)),960px);background:#0E111D;color:#fff;overflow:hidden}
 rdr-accueil-apercu .hero[data-acces="sous"]{--bas-titre:60px}
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:clamp(560px,100svh,1100px)}
 rdr-accueil-apercu .hv-scene{position:absolute;inset:0;overflow:hidden}
 rdr-accueil-apercu .hv-rail{position:absolute;inset:0;display:flex;width:calc(var(--n,1) * 100%);transition:transform 1.1s cubic-bezier(.7,0,.2,1)}
 rdr-accueil-apercu .hv-vue{position:relative;flex:1 1 0;min-width:0;height:100%;overflow:hidden}
@@ -523,6 +524,8 @@ rdr-accueil-apercu .video{padding:0;margin-top:56px}
 rdr-accueil-apercu .video-cadre{transform:none;border-width:4px}
 rdr-accueil-apercu .video-tymal{left:auto;right:6px;bottom:auto;top:-60px;width:108px;transform:rotate(6deg)}
 rdr-accueil-apercu .hero[data-acces="sous"] .hv-acces{display:none}
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:auto}
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hv-scene{height:calc(clamp(320px,58svh,480px) + var(--rdr-entete-h,120px))}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous{padding:8px 0 36px}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta,rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta:hover{height:108px}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta p{display:none}
@@ -898,7 +901,13 @@ function monter(racine, portail, D) {
 
 
     const gen = ++heroGen; let parti = false;
-    const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); poserRail(); relancer(); compter(); };
+    
+
+    
+
+    const signal = (etape) => { if (window.__rdrIntro) window.__rdrIntro.etape = etape; try { window.dispatchEvent(new CustomEvent('rdr-intro', { detail: { etape } })); } catch (e) {   } };
+    signal('debut');
+    const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); poserRail(); relancer(); compter(); signal('bascule'); };
     const partir = () => { if (gen !== heroGen || parti) return; parti = true; clearTimeout(heroTimer); heroTimer = setTimeout(bascule, 3200); };
     clearTimeout(heroTimer);
     const v = h.querySelector('video');
