@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum acb298a | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="acb298a";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 187c82e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="187c82e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -663,18 +663,54 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     document.head.appendChild(st);
   }
 
+  
+
+
+
+
+
+
+
+
+
+  const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
+
   class RdrAccueilApercu extends HTMLElement {
+    static get observedAttributes() { return ['jeu']; }
+
     connectedCallback() {
       if (this._monte) return;
       this._monte = true;
       injecterCss();
+      const jeu = this._jeuAttribut();
+      if (jeu) { this._dessiner(jeu); return; }
       this.innerHTML = '<div class="raa-attente"></div>';
       this._charger();
     }
 
+    attributeChangedCallback(nom) {
+      if (nom !== 'jeu' || !this._monte || this._dessine) return;
+      const jeu = this._jeuAttribut();
+      if (jeu) this._dessiner(jeu);
+    }
+
     disconnectedCallback() {
       this._monte = false;
+      this._dessine = false;
       if (this._defaire) { try { this._defaire(); } catch (e) {   } this._defaire = null; }
+    }
+
+    _jeuAttribut() {
+      const t = this.getAttribute('jeu');
+      if (!t || this.getAttribute('source')) return null;
+      try { const D = JSON.parse(t); return jeuValide(D) ? D : null; } catch (e) { return null; }
+    }
+
+    _dessiner(D) {
+      if (this._dessine) return;
+      this._dessine = true;
+      this.innerHTML = PAGE;
+      this._defaire = monter(this, this, D);
     }
 
     async _charger() {
@@ -682,13 +718,12 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
         const r = await fetch(this.getAttribute('source') || SOURCE, { credentials: 'omit' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const D = await r.json();
-        if (!this._monte) return;
-        if (!D || !D.phases || !D.medias || !Array.isArray(D.actus) || !Array.isArray(D.skippers)) throw new Error('jeu incomplet');
-        this.innerHTML = PAGE;
-        this._defaire = monter(this, this, D);
+        if (!this._monte || this._dessine) return;
+        if (!jeuValide(D)) throw new Error('jeu incomplet');
+        this._dessiner(D);
       } catch (e) {
         console.warn('[rdr-accueil-apercu] aperçu indisponible', e && e.message);
-        if (!this._monte) return;
+        if (!this._monte || this._dessine) return;
         this.innerHTML = '<div class="raa-vide"><h3>L\'aperçu revient dans un instant</h3><p>Les données n\'ont pas pu être lues.</p><button type="button">Réessayer</button></div>';
         this.querySelector('button').onclick = () => { this.innerHTML = '<div class="raa-attente"></div>'; this._charger(); };
       }
