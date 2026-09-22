@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d2af806 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d2af806";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum f4490b6 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f4490b6";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -286,6 +286,20 @@ rdr-accueil-apercu .video-cadre button{position:absolute;left:50%;top:50%;transf
 rdr-accueil-apercu .video-cadre button:hover{transform:translate(-50%,-50%) scale(1.08)}
 rdr-accueil-apercu .video-cadre button svg{width:34px;height:34px;margin-left:5px}
 rdr-accueil-apercu .video-cadre .duree{position:absolute;right:18px;bottom:16px;padding:6px 10px;border-radius:6px;background:rgba(14,17,29,.75);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+rdr-accueil-apercu .video-cadre .vc-cookies{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:clamp(12px,3vw,26px);text-align:center;background:linear-gradient(rgba(14,17,29,.84),rgba(14,17,29,.93))}
+rdr-accueil-apercu .video-cadre .vc-cookies .vc-ico{width:26px;height:26px;stroke:var(--jaune);fill:none;stroke-width:1.7;stroke-linecap:round}
+rdr-accueil-apercu .video-cadre .vc-cookies b{color:#fff;font-size:clamp(13px,1.5vw,17px);font-weight:800}
+rdr-accueil-apercu .video-cadre .vc-cookies p{margin:0;max-width:36ch;color:rgba(255,255,255,.84);font-size:clamp(11.5px,1.15vw,13.5px);line-height:1.5}
+rdr-accueil-apercu .video-cadre .vc-cookies button{position:static;left:auto;top:auto;transform:none;width:auto;height:auto;min-height:38px;padding:9px 18px;border-radius:999px;background:var(--jaune);color:#0E111D;font-size:13px;font-weight:800;letter-spacing:.02em}
+rdr-accueil-apercu .video-cadre .vc-cookies button:hover{transform:translateY(-1px)}
+rdr-accueil-apercu .video-cadre .vc-cookies button svg{display:none}
+rdr-accueil-apercu .video-cadre .vc-cookies a{color:rgba(255,255,255,.86);font-size:12px;text-decoration:underline;text-underline-offset:3px}
+rdr-accueil-apercu .video-cadre .vc-cookies a:hover{color:#fff}
+@media (max-width:760px){
+rdr-accueil-apercu .video-cadre .vc-cookies{gap:7px}
+rdr-accueil-apercu .video-cadre .vc-cookies .vc-ico{display:none}
+rdr-accueil-apercu .video-cadre .vc-cookies p{max-width:30ch}
+}
 rdr-accueil-apercu .video-tymal{position:absolute;left:-70px;bottom:-60px;width:230px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.25));transform:rotate(-6deg)}
 rdr-accueil-apercu .sm{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap}
 rdr-accueil-apercu .sm-titre{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;white-space:nowrap}
@@ -1130,9 +1144,66 @@ function monter(racine, portail, D) {
     observateurs.push(io); els.forEach(e => io.observe(e));
   }
 
-   
-  $('video').querySelector('button').addEventListener('click', () => {
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const politiqueMarketing = () => {
+    try {
+      const p = window.consentPolicyManager && window.consentPolicyManager.getCurrentConsentPolicy();
+      const pol = p && p.policy;
+      return pol ? pol.advertising === true : true;
+    } catch (e) { return true; }
+  };
+  function ouvrirCookies() {
+    try {
+      const o = window.__ucCmp || window.UC_UI;
+      if (o && typeof o.showSecondLayer === 'function') { o.showSecondLayer(); return; }
+      if (typeof window.openCookieSettings === 'function') { window.openCookieSettings(); return; }
+    } catch (e) {   }
+  }
+  function lancerVideo() {
     $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(M.youtube) + '?autoplay=1&rel=0&playsinline=1" title="TyMAL, la vidéo" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  }
+  const COOKIE_ICO = '<svg class="vc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M11.5 12.5v.01"/></svg>';
+  function demanderCookies() {
+    const cadre = $('video');
+    if (cadre.querySelector('.vc-cookies')) return;
+    const carte = document.createElement('div');
+    carte.className = 'vc-cookies';
+    carte.innerHTML = COOKIE_ICO +
+      '<b>La vidéo est hébergée par YouTube</b>' +
+      '<p>Elle ne se charge pas tant que les cookies marketing sont refusés, pour que rien ne parte chez un tiers sans votre accord.</p>' +
+      '<button type="button" data-rdr-cookies>Gérer mes cookies</button>' +
+      '<a href="https://www.youtube.com/watch?v=' + encodeURIComponent(M.youtube) + '" target="_blank" rel="noopener">Regarder sur YouTube</a>';
+    cadre.appendChild(carte);
+    carte.querySelector('button').addEventListener('click', ouvrirCookies);
+    carte.querySelector('button').focus();
+    let tours = 0;
+    const guet = setInterval(() => {
+      if (++tours > 150) { clearInterval(guet); return; }
+      if (!politiqueMarketing()) return;
+      clearInterval(guet);
+      lancerVideo();
+    }, 600);
+    minuteurs.push(guet);
+  }
+  $('video').querySelector('button').addEventListener('click', () => {
+    if (politiqueMarketing()) lancerVideo(); else demanderCookies();
   });
 
    
