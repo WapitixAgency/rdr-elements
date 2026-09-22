@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum a0f8394 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a0f8394";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 8c2773a | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="8c2773a";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -591,7 +591,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <div class="af-rail" id="affiche"></div>
 </div></section>
 <section class="actus">
-  <img class="filigrane" data-media="filigrane" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  <img class="filigrane" data-media="filigrane" data-larg="1200" data-q="55" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
     <div class="sec-tete">
       <div><span class="trait"></span><h2 class="titre">Actualités</h2><p class="sous">La une, la dernière vidéo, le dernier reportage, et les sujets du moment</p></div>
@@ -603,7 +603,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   </div>
 </section>
 <section class="skippers">
-  <img class="topo" data-media="topo" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  <img class="topo" data-media="topo" data-larg="1200" data-q="55" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
     <div class="sec-tete"><div><span class="trait"></span><h2 class="titre">Les skippers engagés</h2><p class="sous">1 seule ligne de départ, 118 navigateurs. Six visages au hasard, à chaque visite.</p></div></div>
     <div class="sk-liste" id="skippers"></div>
@@ -757,7 +757,19 @@ function monter(racine, portail, D) {
   const M = D.medias;
   
 
-  tout('[data-media]').forEach(el => { if (el.tagName !== 'SOURCE' && M[el.dataset.media]) el.src = M[el.dataset.media]; });
+  
+
+
+
+
+  const retaille = (u, larg, q) => String(u || '').replace(/\/v1\/fill\/w_(\d+),h_(\d+)([^/]*)\//, (tout2, W, H, reste) => {
+    const w = Math.min(Number(W), larg), h = Math.max(1, Math.round(Number(H) * (w / Number(W))));
+    return '/v1/fill/w_' + w + ',h_' + h + String(reste).replace(/,q_\d+/, ',q_' + q) + '/';
+  });
+  tout('[data-media]').forEach(el => {
+    if (el.tagName === 'SOURCE' || !M[el.dataset.media]) return;
+    el.src = el.dataset.larg ? retaille(M[el.dataset.media], Number(el.dataset.larg), Number(el.dataset.q) || 60) : M[el.dataset.media];
+  });
   tout('[data-media-affiche]').forEach(el => { if (M[el.dataset.mediaAffiche]) el.poster = M[el.dataset.mediaAffiche]; });
   const chargerVideo = (v) => { const s = v && v.querySelector('source[data-media]'); if (s && !s.getAttribute('src') && M[s.dataset.media]) { s.src = M[s.dataset.media]; try { v.load(); } catch (e) {   } } };
 
