@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d86e479 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d86e479";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 998ce81 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="998ce81";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -282,6 +282,59 @@ rdr-accueil-apercu .tymal h2{font-size:clamp(32px,3.2vw,46px);line-height:1}
 rdr-accueil-apercu .tymal p{margin-top:16px;font-size:15px;line-height:1.6;max-width:540px;font-weight:500}
 rdr-accueil-apercu .tymal .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 rdr-accueil-apercu .tymal .kicker{margin-bottom:14px}
+rdr-accueil-apercu .faq-bloc[hidden]{display:none}
+rdr-accueil-apercu .faq-acc{--encre:#0E111D;--encre2:#3A4256;--encre3:#6B7285;--papier:#F4F1E8;position:relative;overflow:clip;background:var(--papier);color:var(--encre);padding:clamp(56px,8vh,96px) 0 clamp(64px,10vh,112px)}
+rdr-accueil-apercu .fa-topo{position:absolute;inset:0;background-repeat:repeat;background-size:1200px auto;background-position:center top;opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+rdr-accueil-apercu .faq-acc .trame{position:relative;z-index:1}
+rdr-accueil-apercu .faq-acc:not(.fa-vu) .fa-q{opacity:0}
+rdr-accueil-apercu .faq-acc.fa-vu .fa-q{animation:raa-fa-monte .6s cubic-bezier(.22,.8,.3,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes raa-fa-monte{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+rdr-accueil-apercu .fa-rub{flex:none;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--papier);color:var(--encre3);font-size:10.5px;font-style:normal;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+rdr-accueil-apercu .fa-rub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--cc)}
+rdr-accueil-apercu .fa-corps{max-width:980px;margin:0 auto}
+rdr-accueil-apercu .fa-tete{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:16px;border-bottom:2px solid var(--encre)}
+rdr-accueil-apercu .fa-fil{display:block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--encre3)}
+rdr-accueil-apercu .fa-fil b{color:var(--encre);font-weight:800}
+rdr-accueil-apercu .fa-tete h2 em{display:block;font-style:inherit}
+rdr-accueil-apercu .fa-tete h2{margin-top:10px;font-size:clamp(28px,3vw,42px);line-height:.95;color:var(--encre)}
+rdr-accueil-apercu .fa-toutes{flex:none;display:inline-flex;align-items:center;justify-content:space-between;gap:14px;height:54px;padding:0 10px 0 22px;border-radius:14px;background:var(--encre);color:var(--jaune);font-size:15px;font-weight:800;box-shadow:0 16px 30px -14px rgba(14,17,29,.55);transition:transform .2s,box-shadow .2s}
+rdr-accueil-apercu .fa-toutes:hover{transform:translateY(-2px);box-shadow:0 20px 36px -14px rgba(14,17,29,.6)}
+rdr-accueil-apercu .fa-toutes i{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--jaune);color:var(--encre)}
+rdr-accueil-apercu .fa-toutes i svg{width:18px;height:18px;transition:transform .2s}
+rdr-accueil-apercu .fa-toutes:hover i svg{transform:translateX(3px)}
+rdr-accueil-apercu .fa-cherche{display:flex;align-items:center;height:56px;margin-top:22px;padding:0 7px 0 18px;border-radius:16px;background:#fff;color:var(--encre);box-shadow:0 1px 0 rgba(14,17,29,.06),0 10px 24px -18px rgba(14,17,29,.35);transition:box-shadow .25s}
+rdr-accueil-apercu .fa-cherche:focus-within{box-shadow:0 0 0 4px rgba(252,241,80,.7),0 14px 30px -18px rgba(14,17,29,.4)}
+rdr-accueil-apercu .fa-cherche > svg{flex:none;width:19px;height:19px;color:var(--encre3)}
+rdr-accueil-apercu .fa-cherche input{flex:1;min-width:0;height:100%;padding:0 12px;border:0;background:none;outline:none;color:var(--encre);font:600 15.5px var(--police)}
+rdr-accueil-apercu .fa-cherche input::placeholder{color:var(--encre3);font-weight:500}
+rdr-accueil-apercu .fa-cherche button{flex:none;display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:11px;background:var(--jaune);color:var(--encre);cursor:pointer}
+rdr-accueil-apercu .fa-cherche button svg{width:18px;height:18px}
+rdr-accueil-apercu .fa-liste{margin-top:14px}
+rdr-accueil-apercu .fa-q{--cc:var(--teal);position:relative;border-radius:14px;background:#fff;box-shadow:0 1px 0 rgba(14,17,29,.06),0 10px 24px -18px rgba(14,17,29,.35);transition:box-shadow .3s}
+rdr-accueil-apercu .fa-q + .fa-q{margin-top:8px}
+rdr-accueil-apercu .fa-q::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:0 3px 3px 0;background:var(--cc);transition:top .3s,bottom .3s}
+rdr-accueil-apercu .fa-q[open]{box-shadow:0 1px 0 rgba(14,17,29,.08),0 22px 40px -24px rgba(14,17,29,.5)}
+rdr-accueil-apercu .fa-q[open]::before{top:0;bottom:0;border-radius:14px 0 0 14px}
+rdr-accueil-apercu .fa-q summary{display:flex;align-items:center;gap:14px;padding:14px 14px 14px 22px;border-radius:14px;cursor:pointer;list-style:none}
+rdr-accueil-apercu .fa-q summary::-webkit-details-marker{display:none}
+rdr-accueil-apercu .fa-q summary:focus-visible{outline:3px solid var(--encre);outline-offset:3px}
+rdr-accueil-apercu .fa-q summary b{flex:1;font-size:15px;font-weight:800;line-height:1.35}
+rdr-accueil-apercu .fa-q summary i{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--papier);transition:transform .35s,background .25s}
+rdr-accueil-apercu .fa-q summary i svg{width:15px;height:15px}
+rdr-accueil-apercu .fa-q[open] summary i{transform:rotate(180deg);background:var(--cc)}
+rdr-accueil-apercu .fa-rep{padding:0 22px 16px;color:var(--encre2);font-size:14.5px;line-height:1.65}
+rdr-accueil-apercu .fa-q[open] .fa-rep{animation:raa-fa-ouvre .3s ease both}
+@keyframes raa-fa-ouvre{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+rdr-accueil-apercu .fa-rep p + p{margin-top:6px}
+rdr-accueil-apercu .fa-rep b{color:var(--encre);font-weight:800}
+rdr-accueil-apercu .fa-rep sup{font-size:.65em;line-height:0}
+rdr-accueil-apercu .fa-rep a{color:var(--encre);font-weight:700;text-decoration:underline;text-decoration-color:var(--cc);text-decoration-thickness:3px;text-underline-offset:4px}
+rdr-accueil-apercu .fa-valider{display:inline-block;margin-right:7px;padding:3px 8px;border-radius:6px;background:rgba(241,159,57,.18);color:#B45A00;font-size:11px;font-weight:800;letter-spacing:.06em;line-height:1.3;text-transform:uppercase}
+rdr-accueil-apercu .hv-haut{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+rdr-accueil-apercu .hv-depart{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 6px;border-radius:6px;background:var(--jaune);color:#0E111D;font-family:var(--titre);font-style:italic;font-size:clamp(13px,1.2vw,17px);line-height:1;text-transform:uppercase}
+rdr-accueil-apercu .hv-depart svg{width:15px;height:15px;flex:none}
+rdr-accueil-apercu .hv-fait--depart{--c:#fff}
+rdr-accueil-apercu .hv-depart sup,rdr-accueil-apercu .hv-fait--depart sup{font-size:.62em;line-height:0;vertical-align:.55em;margin-left:1px}
 rdr-accueil-apercu .video{position:relative;padding:0 40px 0 0}
 rdr-accueil-apercu .video-cadre{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#0E111D;box-shadow:0 40px 80px rgba(0,0,0,.35);transform:rotate(1.5deg);border:6px solid #fff}
 rdr-accueil-apercu .video-cadre img,rdr-accueil-apercu .video-cadre iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
@@ -553,6 +606,16 @@ rdr-accueil-apercu .pv-sk-ov strong{font-size:17px}
 rdr-accueil-apercu .pv-sk > img.pv-sk-classe{height:46px}
 rdr-accueil-apercu .tymal{padding:76px 0 84px}
 rdr-accueil-apercu .tymal .trame{grid-template-columns:1fr;gap:30px}
+rdr-accueil-apercu .fa-tete{flex-direction:column;align-items:stretch;gap:16px}
+rdr-accueil-apercu .fa-toutes{height:52px}
+rdr-accueil-apercu .fa-cherche{height:52px;padding-left:14px}
+rdr-accueil-apercu .fa-cherche input{padding:0 8px;font-size:15px}
+rdr-accueil-apercu .fa-cherche button{width:40px;height:40px}
+rdr-accueil-apercu .fa-q summary{gap:10px;padding:13px 12px 13px 18px}
+rdr-accueil-apercu .fa-q summary b{font-size:14.5px}
+rdr-accueil-apercu .fa-rub{display:none}
+rdr-accueil-apercu .fa-rep{padding:0 16px 14px 18px;font-size:14px}
+rdr-accueil-apercu .hv-fait--depart{grid-column:1/-1}
 rdr-accueil-apercu .tymal .elem{display:none}
 rdr-accueil-apercu .video{padding:0;margin-top:56px}
 rdr-accueil-apercu .video-cadre{transform:none;border-width:4px}
@@ -662,7 +725,22 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <img class="video-tymal" data-media="tymalDrapeau" alt="" loading="lazy" decoding="async">
     </div>
   </div>
-</section>`;
+</section>
+<div class="faq-bloc" id="faq-bloc" hidden>
+<div class="vague-sep" style="--avant:#FCF150;--apres:#F4F1E8"><i></i></div>
+<section class="faq-acc" id="faq-acc" aria-labelledby="fa-titre">
+  <div class="fa-topo" id="fa-topo" aria-hidden="true"></div>
+  <div class="trame"><div class="fa-corps">
+    <div class="fa-tete">
+      <div><span class="fa-fil" id="fa-fil"></span><h2 class="titre" id="fa-titre"></h2></div>
+      <a class="fa-toutes" id="fa-toutes" href="/faq"></a>
+    </div>
+    <form class="fa-cherche" action="/faq" method="get" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input type="search" name="q" id="fa-q" autocomplete="off" aria-label="Chercher dans les questions"><button type="submit" aria-label="Chercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></form>
+    <div class="fa-liste" id="fa-liste"></div>
+  </div></div>
+</section>
+<div class="vague-sep" style="--avant:#F4F1E8;--apres:#0E111D"><i></i></div>
+</div>`;
 
   function injecterCss() {
     if (document.getElementById('rdr-accueil-apercu-css')) return;
@@ -685,7 +763,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu']; }
+    static get observedAttributes() { return ['jeu', 'skippers']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -698,6 +776,10 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     }
 
     attributeChangedCallback(nom) {
+      
+
+
+      if (nom === 'skippers') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-skippers')); return; }
       if (nom !== 'jeu' || !this._monte || this._dessine) return;
       const jeu = this._jeuAttribut();
       if (jeu) this._dessiner(jeu);
@@ -884,6 +966,7 @@ function monter(racine, portail, D) {
   const JOURS = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
   const ROND = '<svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg>';
   const CHEV_G = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>';
+  const DRAPEAU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4.5L17 13H5"/></svg>';
   const CHEV_D = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
   const COEUR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.2 4.6 2.8C12 6.2 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>';
   const VERROU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
@@ -914,18 +997,23 @@ function monter(racine, portail, D) {
 
 
   const DIAPOS = D.diapos;
-  let diapoIdx = 0, diapoTimer = null, avecDiapos = true;
+  let diapoIdx = 0, diapoTimer = null, avecDiapos = true, modeDepart = '';
   const diapos = () => [null].concat(avecDiapos ? DIAPOS : []);
   function contenuDiapo(i) {
     const d = diapos()[i];
     if (!d) {
       const p = PHASES[phase];
-      return '<span class="hv-signe">Route du Rhum <b>Destination Guadeloupe</b></span>' +
+       
+      const dep = modeDepart && p.depart ? p.depart : null;
+      const signe = '<span class="hv-signe">Route du Rhum <b>Destination Guadeloupe</b></span>';
+      const faits = p.faits.concat(dep && modeDepart === 'repere' ? [Object.assign({ cls: 'depart' }, dep)] : []);
+      const ordinal = (t) => esc(t).replace(/\b1er\b/, '1<sup>er</sup>');
+      return (dep && modeDepart === 'bandeau' ? '<span class="hv-haut">' + signe + '<span class="hv-depart">' + DRAPEAU + '<span>' + ordinal(dep.texte) + '</span></span></span>' : signe) +
         '<h2 class="titre">' + titreHtml(p.titre) + '</h2>' +
-        '<div class="hv-faits">' + p.faits.map((f, i) => {
+        '<div class="hv-faits">' + faits.map((f, i) => {
            
           const n = /^[0-9 ]+$/.test(f.v) ? Number(f.v.split(' ').join('')) : null;
-          return '<div class="hv-fait" style="--i:' + i + '"><em class="hv-v"><i' + (f.id ? ' id="' + f.id + '"' : '') + (n !== null ? ' data-n="' + n + '"' : '') + '>' + esc(f.v) + '</i>' + (f.u ? '<small>' + esc(f.u) + '</small>' : '') + '</em>' +
+          return '<div class="hv-fait' + (f.cls ? ' hv-fait--' + f.cls : '') + '" style="--i:' + i + '"><em class="hv-v"><i' + (f.id ? ' id="' + f.id + '"' : '') + (n !== null ? ' data-n="' + n + '"' : '') + '>' + (f.cls === 'depart' ? ordinal(f.v) : esc(f.v)) + '</i>' + (f.u ? '<small>' + esc(f.u) + '</small>' : '') + '</em>' +
             '<span class="hv-l"><b>' + esc(f.b) + '</b><span>' + esc(f.s) + '</span></span></div>';
         }).join('') + '</div>';
     }
@@ -1218,8 +1306,20 @@ function monter(racine, portail, D) {
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const vecteur = (v) => { const m = String(v || '').match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : String(v || ''); };
   $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" href="#" style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
-  Promise.resolve(D.skippers).then(s => {
-    const liste = (Array.isArray(s) ? s : (s.skippers || Object.values(s)[0])).slice(0, 6);
+  
+
+
+
+
+
+
+
+  const vivierAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('skippers')) || 'null'); return Array.isArray(a) && a.length >= 6 ? a : null; } catch (e) { return null; } };
+  const tirer = (arr, n) => { const a = arr.slice(); for (let k = a.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [a[k], a[j]] = [a[j], a[k]]; } return a.slice(0, n); };
+  let pvI = 0;
+  function rendreSkippers(s) {
+    const liste = tirer(Array.isArray(s) ? s : (s.skippers || Object.values(s)[0]), 6);
+    pvI = 0;
     $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 190 : 215), 74)) + '" alt="" loading="lazy">' +
         '<div class="sk-ov"><div class="sk-prenom"><img loading="lazy" decoding="async" src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
@@ -1228,10 +1328,11 @@ function monter(racine, portail, D) {
     $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 150 : 200), 74)) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
         '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper favori</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
-    let pvI = 0;
-    repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
     reveler('#skippers .sk-flip', 150);
-  });
+  }
+  rendreSkippers(vivierAttribut() || D.skippers);
+  ecoute(racine, 'raa-skippers', () => { const v = vivierAttribut(); if (v) rendreSkippers(v); });
+  repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; pvI = pvI % c.length; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
   function reveler(sel, pas) {
     const els = [...tout(sel)];
     const io = new IntersectionObserver((ents) => { ents.forEach(e => { if (e.isIntersecting) { const i = els.indexOf(e.target); setTimeout(() => e.target.classList.add('est-la'), 60 + (i % 6) * pas); io.unobserve(e.target); } }); }, { threshold: .1 });
@@ -1329,6 +1430,44 @@ function monter(racine, portail, D) {
   
 
 
+  function rendreFaq(oui) {
+    const F = D.faq; const bloc = $('faq-bloc');
+    if (!oui || !F) { bloc.hidden = true; return; }
+    bloc.hidden = false;
+    const ic = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
+     
+    const CHEVRON = '<path d="m6 9 6 6 6-6"/>', FLECHE_D = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
+     
+    const COULEUR = { depart: 'var(--teal)', village: 'var(--jaune)', venir: 'var(--orange)', course: '#8B86E0', pratique: 'var(--teal2)' };
+    const RUBRIQUE = { depart: 'Le départ', village: 'Le village', venir: 'Venir', course: 'La course', pratique: 'Pratique' };
+    const couleur = (a) => COULEUR[String(a).split('-')[0]] || 'var(--teal)';
+    $('fa-fil').innerHTML = '<b>Route du Rhum</b> · ' + esc(F.kicker);
+    $('fa-titre').innerHTML = titreHtml(F.titre);
+    $('fa-q').placeholder = F.exemple || '';
+    const toutes = $('fa-toutes'); toutes.href = F.toutes.url; toutes.innerHTML = esc(F.toutes.texte) + '<i>' + ic(FLECHE_D) + '</i>';
+    
+
+    const texte = (t, l) => {
+      let s = esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+      if (l) s = s.replace(esc(l.texte), '<a href="' + esc(l.url) + '">' + esc(l.texte) + '</a>');
+      return s.replace(/\b1er\b/g, '1<sup>er</sup>');
+    };
+    const valider = (t) => (t ? '<p><span class="fa-valider">À valider</span>' + esc(t) + '</p>' : '');
+     
+    $('fa-liste').innerHTML = F.questions.map((x, i) => '<details class="fa-q" id="faq-' + esc(x.ancre) + '" style="--cc:' + couleur(x.ancre) + ';--i:' + i + '"' + (i === 0 ? ' open' : '') + '><summary><b>' + esc(x.q) + '</b>' + (RUBRIQUE[String(x.ancre).split('-')[0]] ? '<em class="fa-rub">' + RUBRIQUE[String(x.ancre).split('-')[0]] + '</em>' : '') + '<i>' + ic(CHEVRON) + '</i></summary><div class="fa-rep">' +
+      (x.p || []).map(t => '<p>' + texte(t, x.lien) + '</p>').join('') + valider(x.aValider) + '</div></details>').join('');
+     
+    if (M.topo) $('fa-topo').style.backgroundImage = 'url("' + retaille(M.topo, 1200, 55) + '")';
+    const section = $('faq-acc');
+    if (typeof IntersectionObserver !== 'function') section.classList.add('fa-vu');
+    else {
+      const io = new IntersectionObserver((e) => { if (e.some(x => x.isIntersecting)) { section.classList.add('fa-vu'); io.disconnect(); } }, { threshold: 0.15 });
+      io.observe(section); observateurs.push(io);
+    }
+  }
+  
+
+
 
   const q = new URLSearchParams(location.search);
   if (PHASES[q.get('phase')]) { phase = q.get('phase'); presse('[data-phase]', un('[data-phase="' + phase + '"]')); }
@@ -1337,6 +1476,10 @@ function monter(racine, portail, D) {
   racine.dataset.liaison = 'sillage';
   poserFlotte(q.get('flotte') !== 'non');
   modeAffiche = q.get('aff') === 'billets' ? 'billets' : 'ligne'; presse('[data-aff]', un('[data-aff="' + modeAffiche + '"]'));
+  
+
+  modeDepart = ['bandeau', 'repere'].includes(q.get('depart')) ? q.get('depart') : '';
+  rendreFaq(q.get('faq') === 'oui');
   placer(); rendreHero(); rendreCtas(); entree(); note();
   return () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
 }
