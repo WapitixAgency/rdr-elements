@@ -1,8 +1,8 @@
 {
- "source": "WapitixAgency/route-du-rhum 45db57e",
- "livreLe": "2026-09-22T11:17:42.801Z",
+ "source": "WapitixAgency/route-du-rhum b121ef1",
+ "livreLe": "2026-09-22T11:26:25.905Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
- "revisionCourante": 3265,
+ "revisionCourante": 3267,
  "revisionsAVenir": 30,
  "paquets": {
   "socle": {
@@ -10,11 +10,12 @@
    "partout": true,
    "chemins": [],
    "prefixes": [],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
    "octets": 108051,
    "gzip": 27652,
-   "brotli": 21263,
+   "brotli": 21321,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -63,11 +64,12 @@
    "partout": false,
    "chemins": [],
    "prefixes": [],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
    "octets": 77955,
-   "gzip": 20571,
-   "brotli": 17535,
+   "gzip": 20570,
+   "brotli": 17538,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -103,14 +105,15 @@
     "/en/carte-village-saint-malo"
    ],
    "prefixes": [],
+   "balises": [],
    "precharger": [
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js",
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
    ],
    "priorite": "high",
    "octets": 462504,
-   "gzip": 125608,
-   "brotli": 101927,
+   "gzip": 125610,
+   "brotli": 101903,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -128,11 +131,12 @@
     "/en/mon-espace-rhum"
    ],
    "prefixes": [],
+   "balises": [],
    "precharger": [],
    "priorite": "low",
    "octets": 867395,
-   "gzip": 181774,
-   "brotli": 139343,
+   "gzip": 181775,
+   "brotli": 139407,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -155,11 +159,12 @@
     "/skippers/",
     "/en/skippers/"
    ],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
    "octets": 462252,
    "gzip": 109087,
-   "brotli": 86349,
+   "brotli": 86382,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -183,6 +188,54 @@
     }
    ]
   },
+  "entete": {
+   "quoi": "l'en-tête « mode village » (rdr-entete, 22/09), chargé sur toute page qui porte la balise : aujourd'hui la page test de Jules, demain toutes",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-entete"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 229600,
+   "gzip": 57221,
+   "brotli": 47986,
+   "fichiers": [
+    {
+     "fichier": "rdr-entete.js",
+     "octets": 229386,
+     "sha": "6da626b9a7dc",
+     "balises": [
+      "rdr-entete"
+     ]
+    }
+   ]
+  },
+  "apercu": {
+   "quoi": "l'aperçu de l'accueil V3 (rdr-accueil-apercu), chargé sur toute page qui porte la balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-accueil-apercu"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 99400,
+   "gzip": 23870,
+   "brotli": 20799,
+   "fichiers": [
+    {
+     "fichier": "rdr-accueil-apercu.js",
+     "octets": 99208,
+     "sha": "f24f025e1318",
+     "balises": [
+      "rdr-accueil-apercu"
+     ]
+    }
+   ]
+  },
   "actus": {
    "quoi": "le hub des actualités et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
@@ -194,11 +247,12 @@
     "/post/",
     "/en/post/"
    ],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54108,
+   "brotli": 54087,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
