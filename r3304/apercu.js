@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 8c2773a | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="8c2773a";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 0707684 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="0707684";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1057,6 +1057,17 @@ function monter(racine, portail, D) {
 
 
 
+  
+
+
+
+
+
+  const plusTard = (f) => {
+    const jouer = () => { try { f(); } catch (e) { console.warn('[accueil] section différée', e && e.message); } };
+    if (typeof requestIdleCallback === 'function') { const id = requestIdleCallback(jouer, { timeout: 1200 }); observateurs.push({ disconnect: () => cancelIdleCallback(id) }); return; }
+    minuteurs.push(setTimeout(jouer, 120));
+  };
   const liaison = un('.sep--liaison');
   liaison.innerHTML = '<div class="sep-damier" aria-hidden="true"></div><div class="sep-pavois" aria-hidden="true"></div>' +
     '<div class="sep-sillage" aria-hidden="true"><svg class="sl-svg"><path class="sl-reste"/><path class="sl-fait" pathLength="1000"/></svg>' +
@@ -1154,7 +1165,7 @@ function monter(racine, portail, D) {
     }
     el.innerHTML = h;
   }
-  dessinerDamier(); dessinerPavois(); dessinerSillage();
+  plusTard(() => { dessinerDamier(); dessinerPavois(); dessinerSillage(); });
   let liaisonTimer = null;
   ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerDamier(); dessinerPavois(); dessinerSillage(); }, 150); });
   $('pv-ico-lieu').innerHTML = ICO.lieu; $('pv-ico-verrou').innerHTML = VERROU;
@@ -1165,7 +1176,7 @@ function monter(racine, portail, D) {
   const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([^/#]+)/); return m ? IMG(m[1], w, h) : String(v || ''); };
   const ilYa = (iso) => { const d = (Date.now() - new Date(iso).getTime()) / 86400000; return d < 1 ? 'aujourd\'hui' : d < 2 ? 'hier' : 'il y a ' + Math.floor(d) + ' j'; };
   const cat = (t) => '<span class="cat" style="--c:' + HUB[t].c + ';--bg:' + HUB[t].bg + '">' + ICO[t] + HUB[t].lib + '</span>';
-  Promise.resolve(D.actus).then(a => {
+  Promise.resolve(D.actus).then(a => plusTard(() => {
     const posts = (Array.isArray(a) ? a : a.posts);
      
     const type = (i, p) => i === 1 ? 'video' : i === 4 ? 'photo' : i === 5 ? 'audio' : /interview/i.test(p._categoryLabel || '') ? 'interview' : 'actu';
@@ -1181,14 +1192,14 @@ function monter(racine, portail, D) {
     const tri = Object.entries(sujets).sort((a, b) => b[1] - a[1]).slice(0, 7);
     $('sujets').innerHTML = '<div class="sm"><span class="sm-titre"><i>' + FLAMME + '</i>Les sujets du moment</span><div class="sm-liste">' + tri.map(([s, n], i) => '<a class="sm-chip' + (i === 0 ? ' sm-chip--chaud' : '') + '" href="#"><u>#</u>' + esc(s) + '<em>' + n + '</em></a>').join('') + '</div></div>';
     reveler('.actus .carte', 120); reveler('.breve', 90);
-  });
+  }));
 
    
   const CLASSES = D.classes;
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const vecteur = (v) => { const m = String(v || '').match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : String(v || ''); };
   $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" href="#" style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
-  Promise.resolve(D.skippers).then(s => {
+  Promise.resolve(D.skippers).then(s => plusTard(() => {
     const liste = (Array.isArray(s) ? s : (s.skippers || Object.values(s)[0])).slice(0, 6);
     $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(k.photoVignette) + '" alt="" loading="lazy">' +
@@ -1201,7 +1212,7 @@ function monter(racine, portail, D) {
     let pvI = 0;
     repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
     reveler('#skippers .sk-flip', 150);
-  });
+  }));
   function reveler(sel, pas) {
     const els = [...tout(sel)];
     const io = new IntersectionObserver((ents) => { ents.forEach(e => { if (e.isIntersecting) { const i = els.indexOf(e.target); setTimeout(() => e.target.classList.add('est-la'), 60 + (i % 6) * pas); io.unobserve(e.target); } }); }, { threshold: .1 });
