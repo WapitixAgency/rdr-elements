@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum 7d3798c",
- "livreLe": "2026-09-22T11:33:47.763Z",
+ "source": "WapitixAgency/route-du-rhum e61b758",
+ "livreLe": "2026-09-22T12:16:20.437Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3267,
  "revisionsAVenir": 30,
@@ -15,7 +15,7 @@
    "priorite": "high",
    "octets": 108051,
    "gzip": 27653,
-   "brotli": 21259,
+   "brotli": 21291,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -69,7 +69,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17517,
+   "brotli": 17520,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -113,7 +113,7 @@
    "priorite": "high",
    "octets": 462504,
    "gzip": 125610,
-   "brotli": 101949,
+   "brotli": 101979,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -136,7 +136,7 @@
    "priorite": "low",
    "octets": 867395,
    "gzip": 181775,
-   "brotli": 139388,
+   "brotli": 139392,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -163,8 +163,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 462252,
-   "gzip": 109088,
-   "brotli": 86453,
+   "gzip": 109087,
+   "brotli": 86463,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -198,14 +198,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 229590,
-   "gzip": 57217,
-   "brotli": 47972,
+   "octets": 234531,
+   "gzip": 58100,
+   "brotli": 48824,
    "fichiers": [
     {
      "fichier": "rdr-entete.js",
-     "octets": 229376,
-     "sha": "bbbe3349c160",
+     "octets": 234317,
+     "sha": "caabbbbd522c",
      "balises": [
       "rdr-entete"
      ]
@@ -224,7 +224,7 @@
    "priorite": "high",
    "octets": 99400,
    "gzip": 23870,
-   "brotli": 20784,
+   "brotli": 20751,
    "fichiers": [
     {
      "fichier": "rdr-accueil-apercu.js",
@@ -251,8 +251,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 289109,
-   "gzip": 70854,
-   "brotli": 54182,
+   "gzip": 70853,
+   "brotli": 54112,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
