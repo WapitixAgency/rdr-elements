@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 1523088 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="1523088";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum e5a1cf5 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e5a1cf5";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -64,6 +64,7 @@ rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::after{background:
 rdr-accueil-apercu .hero:not(.est-photo) .hv-fond::after{opacity:.5}
 rdr-accueil-apercu.sans-entree .hero,rdr-accueil-apercu.sans-entree .hero *,rdr-accueil-apercu.sans-entree .hv-acces-sous,rdr-accueil-apercu.sans-entree .hv-acces-sous *{transition:none !important}
 rdr-accueil-apercu.sans-entree .hv-marque{display:none}
+rdr-accueil-apercu .hero.entree-affiche .hero-photo{opacity:1;transition:opacity .6s ease,transform 18s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hero.entree-douce video,rdr-accueil-apercu .hero.entree-douce .hv-marque{display:none}
 rdr-accueil-apercu .hero.entree-douce .hero-photo{transition:opacity 1s ease,transform 9s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hero.entree-douce .hv-titre{transition-delay:.15s}
@@ -1007,6 +1008,11 @@ function monter(racine, portail, D) {
 
 
     const gen = ++heroGen; let parti = false;
+    
+
+
+    const sansVideoIci = !h.querySelector('video');
+    h.classList.toggle('entree-affiche', sansVideoIci);
     h.classList.remove('entree-douce');
     signal('debut');
     
@@ -1030,7 +1036,7 @@ function monter(racine, portail, D) {
       v.addEventListener('playing', partir, { once: true });
       try { v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(() => {   }); } catch (e) {   }
     }
-    heroTimer = setTimeout(() => { if (!parti) { parti = true; bascule(); } }, 1500);
+    heroTimer = setTimeout(() => { if (!parti) { parti = true; bascule(); } }, sansVideoIci ? 2200 : 1500);
   }
   
 
@@ -1049,7 +1055,7 @@ function monter(racine, portail, D) {
   function entreeDouce() {
     const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
     const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
-    h.classList.remove('est-photo'); h.classList.add('entree-douce'); poserRail();
+    h.classList.remove('est-photo', 'entree-affiche'); h.classList.add('entree-douce'); poserRail();
     signal('douce');
     const gen = heroGen;
     requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); relancer(); compter(); }));
@@ -1058,11 +1064,7 @@ function monter(racine, portail, D) {
 
 
 
-
-  function entree() {
-    if (sansVideo) { introDecision().vu.hero = true; entreeDouce(); return; }
-    if (introPour('hero')) jouerHero(); else entreeDouce();
-  }
+  function entree() { if (introPour('hero')) jouerHero(); else entreeDouce(); }
   
 
 
