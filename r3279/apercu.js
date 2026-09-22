@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum c657cfa | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="c657cfa";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum acb298a | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="acb298a";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -79,7 +79,7 @@ rdr-accueil-apercu .hero.est-photo .hv-marque{opacity:0;transform:translateY(-70
 rdr-accueil-apercu .hv-contenu{position:absolute;left:0;right:0;bottom:var(--bas-titre);z-index:3}
 rdr-accueil-apercu .hv-ligne{display:flex;align-items:flex-end;justify-content:space-between;gap:28px}
 rdr-accueil-apercu .hv-titre{max-width:min(980px,76%);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(12px,2.2vh,22px)}
-rdr-accueil-apercu .hero .hv-titre{opacity:0;transform:translateY(26px);transition:opacity .9s ease .3s,transform 1.1s cubic-bezier(.22,.8,.3,1) .3s}
+rdr-accueil-apercu .hero .hv-titre{opacity:.01;transform:translateY(26px);transition:opacity .9s ease .3s,transform 1.1s cubic-bezier(.22,.8,.3,1) .3s}
 rdr-accueil-apercu .hero.est-photo .hv-titre{opacity:1;transform:none}
 rdr-accueil-apercu .hero.est-photo .hv-titre.sort{opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease}
 rdr-accueil-apercu .hv-signe{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--titre);font-style:italic;text-transform:uppercase;font-size:clamp(13px,1.2vw,17px);line-height:1;padding:7px 12px 6px;border-radius:6px;background:rgba(14,17,29,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px)}
@@ -166,7 +166,7 @@ rdr-accueil-apercu .af-date{display:flex;align-items:center;gap:10px}
 rdr-accueil-apercu .af-date b{font-family:var(--titre);font-style:italic;font-size:42px;line-height:.8;color:var(--c)}
 rdr-accueil-apercu .af-date span{display:flex;flex-direction:column;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
 rdr-accueil-apercu .af-date span em{font-style:normal;color:var(--t3)}
-rdr-accueil-apercu .af h4{font-size:15px;font-weight:800;line-height:1.25;text-wrap:balance}
+rdr-accueil-apercu .af h3{font-size:15px;font-weight:800;line-height:1.25;text-wrap:balance}
 rdr-accueil-apercu .af p{font-size:12.5px;color:var(--t3);display:flex;flex-wrap:wrap;gap:4px 10px}
 rdr-accueil-apercu .af p span{display:inline-flex;align-items:center;gap:5px}
 rdr-accueil-apercu .af p svg{width:13px;height:13px;color:var(--c)}
@@ -207,8 +207,8 @@ rdr-accueil-apercu .glyphe--grand svg{width:28px;height:28px}
 rdr-accueil-apercu .carte:hover .glyphe--grand{background:var(--jaune)}
 rdr-accueil-apercu .carte-txt{position:absolute;left:0;right:0;bottom:0;padding:18px;z-index:2;display:flex;flex-direction:column;gap:7px}
 rdr-accueil-apercu .carte--une .carte-txt{padding:26px 28px;gap:10px;max-width:680px}
-rdr-accueil-apercu .carte h4{font-family:var(--titre);font-style:italic;font-size:16px;line-height:1.15;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-rdr-accueil-apercu .carte--une h4{font-size:clamp(22px,2vw,30px);-webkit-line-clamp:3}
+rdr-accueil-apercu .carte h3{font-family:var(--titre);font-style:italic;font-size:16px;line-height:1.15;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+rdr-accueil-apercu .carte--une h3{font-size:clamp(22px,2vw,30px);-webkit-line-clamp:3}
 rdr-accueil-apercu .carte--une p{font-size:13.5px;line-height:1.5;color:var(--t2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 rdr-accueil-apercu .quand{font-size:11.5px;color:var(--t3)}
 rdr-accueil-apercu .quand b{color:var(--jaune);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:10.5px}
@@ -219,7 +219,7 @@ rdr-accueil-apercu .breve{display:grid;grid-template-columns:96px 1fr;gap:14px;a
 rdr-accueil-apercu .breve.est-la{opacity:1;transform:none}
 rdr-accueil-apercu .breve:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
 rdr-accueil-apercu .breve img{width:96px;height:80px;border-radius:10px;object-fit:cover}
-rdr-accueil-apercu .breve h4{font-size:13px;font-weight:800;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+rdr-accueil-apercu .breve h3{font-size:13px;font-weight:800;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 rdr-accueil-apercu .breve .cat{margin-bottom:6px;font-size:9.5px;padding:4px 7px}
 rdr-accueil-apercu .breve .quand{display:block;margin-top:5px}
 rdr-accueil-apercu .actus-pied{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:26px;flex-wrap:wrap}
@@ -374,7 +374,7 @@ rdr-accueil-apercu .bil-talon em{font-style:normal;font-size:10px;font-weight:70
 rdr-accueil-apercu .bil-corps{position:relative;background:linear-gradient(135deg,#222C48,#171F38);border-radius:0 14px 14px 0;padding:16px 46px 14px 18px;display:flex;flex-direction:column;gap:6px;border-left:2px dashed rgba(255,255,255,.3);overflow:hidden}
 rdr-accueil-apercu .bil-corps::after{content:'';position:absolute;right:14px;top:16px;bottom:16px;width:16px;opacity:.3;background:repeating-linear-gradient(180deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px,#fff 8px 11px,transparent 11px 13px)}
 rdr-accueil-apercu .bil-type{font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
-rdr-accueil-apercu .bil h4{font-size:15.5px;font-weight:800;line-height:1.2;text-wrap:balance}
+rdr-accueil-apercu .bil h3{font-size:15.5px;font-weight:800;line-height:1.2;text-wrap:balance}
 rdr-accueil-apercu .bil p{font-size:12px;color:var(--t3);display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:auto}
 rdr-accueil-apercu .bil p span{display:inline-flex;align-items:center;gap:5px}
 rdr-accueil-apercu .bil p b{color:#fff;font-weight:700}
@@ -499,11 +499,11 @@ rdr-accueil-apercu .actus{padding:48px 0 54px}
 rdr-accueil-apercu .actus-grille{grid-template-columns:1fr;height:auto;gap:12px}
 rdr-accueil-apercu .carte--une{aspect-ratio:4/3}
 rdr-accueil-apercu .carte--une .carte-txt{padding:18px}
-rdr-accueil-apercu .carte--une h4{font-size:22px}
+rdr-accueil-apercu .carte--une h3{font-size:22px}
 rdr-accueil-apercu .carte--une p{display:none}
 rdr-accueil-apercu .actus-droite{grid-template-columns:1fr;gap:12px}
 rdr-accueil-apercu .actus-droite .carte{aspect-ratio:16/9}
-rdr-accueil-apercu .actus-droite .carte h4{font-size:14px}
+rdr-accueil-apercu .actus-droite .carte h3{font-size:14px}
 rdr-accueil-apercu .breves{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--marge) 14px;margin:14px calc(-1 * var(--marge)) 0;scrollbar-width:none}
 rdr-accueil-apercu .breve{flex:0 0 78%;scroll-snap-align:start;opacity:1;transform:none}
 rdr-accueil-apercu .actus-pied{gap:14px}
@@ -887,10 +887,10 @@ function monter(racine, portail, D) {
       const rel = ecart === 0 ? 'Aujourd\'hui' : ecart === 1 ? 'Demain' : (ecart > 1 && ecart <= 7) ? 'Dans ' + ecart + ' jours' : '';
       const infos = '<p><span>' + ICO.lieu + esc(r.ou) + '</span>' + (r.quand ? '<span>' + ICO.horloge + '<b>' + esc(r.quand) + '</b></span>' : '') + '</p>';
       if (modeAffiche === 'billets') return '<a class="bil" href="#"><div class="bil-talon"><b>' + d.getDate() + '</b><span>' + MOIS[d.getMonth()] + '</span><em>' + JOURS[d.getDay()] + '</em></div>' +
-        '<div class="bil-corps"><span class="bil-type">Temps fort · N°' + String(i + 1).padStart(2, '0') + '</span><h4>' + esc(r.titre) + '</h4>' + infos + (rel ? '<span class="bil-tampon">' + rel + '</span>' : '') + '</div></a>';
+        '<div class="bil-corps"><span class="bil-type">Temps fort · N°' + String(i + 1).padStart(2, '0') + '</span><h3>' + esc(r.titre) + '</h3>' + infos + (rel ? '<span class="bil-tampon">' + rel + '</span>' : '') + '</div></a>';
       return '<a class="af" href="#">' + (rel ? '<span class="af-rel">' + rel + '</span>' : '') +
         '<div class="af-date"><b>' + d.getDate() + '</b><span>' + JOURS[d.getDay()] + '<em>' + MOIS[d.getMonth()] + '</em></span></div>' +
-        '<h4>' + esc(r.titre) + '</h4>' + infos + '</a>';
+        '<h3>' + esc(r.titre) + '</h3>' + infos + '</a>';
     }).join('');
   }
 
@@ -1087,11 +1087,11 @@ function monter(racine, portail, D) {
     const une = posts[0], video = posts[1], photo = posts[4];
     $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" src="' + wixImg(une.coverImage, 1200, 900) + '" alt="">' +
       '<div class="carte-haut">' + cat(type(0, une)) + '<span class="kicker kicker--jaune">À la une</span></div>' +
-      '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h4>' + esc(une.title.trim()) + '</h4><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
+      '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h3>' + esc(une.title.trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
     $('medias').innerHTML = [[video, 'video', 'La dernière vidéo'], [photo, 'photo', 'Le dernier reportage']].map(([p, t, lib]) =>
       '<a class="carte" href="#"><img class="cover" src="' + wixImg(p.coverImage, 800, 500) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
-      '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h4>' + esc(p.title.trim()) + '</h4><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
-    $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve" href="#"><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h4>' + esc(p.title.trim()) + '</h4><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
+      '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
+    $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve" href="#"><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
     const sujets = {}; posts.forEach(p => (p._tags || []).forEach(t => { if (!/^[A-Z]{2}/.test(t.label) || /CLASS|OCEAN/.test(t.label)) sujets[t.label] = (sujets[t.label] || 0) + 1; }));
     const tri = Object.entries(sujets).sort((a, b) => b[1] - a[1]).slice(0, 7);
     $('sujets').innerHTML = '<div class="sm"><span class="sm-titre"><i>' + FLAMME + '</i>Les sujets du moment</span><div class="sm-liste">' + tri.map(([s, n], i) => '<a class="sm-chip' + (i === 0 ? ' sm-chip--chaud' : '') + '" href="#"><u>#</u>' + esc(s) + '<em>' + n + '</em></a>').join('') + '</div></div>';

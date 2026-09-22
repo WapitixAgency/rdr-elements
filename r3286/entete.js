@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum c657cfa | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="c657cfa";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum acb298a | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="acb298a";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {

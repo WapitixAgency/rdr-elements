@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum c657cfa | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="c657cfa";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum acb298a | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="acb298a";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
