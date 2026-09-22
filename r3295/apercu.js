@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 950c32b | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="950c32b";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum ff4ba8d | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ff4ba8d";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -575,7 +575,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
           <video autoplay muted loop playsinline data-media-affiche="videoAffiche">
             <source data-media="video" type="video/mp4">
           </video>
-          <img class="hero-photo" id="hero-photo" src="" alt="">
+          <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="async">
         </div>
       </div>
     </div>
@@ -590,7 +590,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <div class="af-rail" id="affiche"></div>
 </div></section>
 <section class="actus">
-  <img class="filigrane" data-media="filigrane" alt="" aria-hidden="true">
+  <img class="filigrane" data-media="filigrane" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
     <div class="sec-tete">
       <div><span class="trait"></span><h2 class="titre">Actualités</h2><p class="sous">La une, la dernière vidéo, le dernier reportage, et les sujets du moment</p></div>
@@ -602,7 +602,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   </div>
 </section>
 <section class="skippers">
-  <img class="topo" data-media="topo" alt="" aria-hidden="true">
+  <img class="topo" data-media="topo" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
     <div class="sec-tete"><div><span class="trait"></span><h2 class="titre">Les skippers engagés</h2><p class="sous">1 seule ligne de départ, 118 navigateurs. Six visages au hasard, à chaque visite.</p></div></div>
     <div class="sk-liste" id="skippers"></div>
@@ -621,7 +621,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <div class="promo-btns"><a class="btn btn--marine" href="#">Créez votre espace <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="#">J'ai déjà un compte</a></div>
     </div>
     <div class="promo-visuel">
-      <div class="photo"><img data-media="espacePhoto" alt=""></div>
+      <div class="photo"><img data-media="espacePhoto" alt="" loading="lazy" decoding="async"></div>
       <div class="pv-pile">
         <div class="pv-badge pv-flotte">
           <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-lieu"></span></div>
@@ -636,7 +636,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 </div></section>
 <div class="vague-sep" style="--avant:#fff;--apres:#FCF150"><i></i></div>
 <section class="tymal">
-  <img class="elem" data-media="tymalFond" alt="" aria-hidden="true">
+  <img class="elem" data-media="tymalFond" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
     <div>
       <span class="kicker kicker--sombre">La mascotte officielle</span>
@@ -646,11 +646,11 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     </div>
     <div class="video">
       <div class="video-cadre" id="video">
-        <img data-media="tymalVideo" alt="">
+        <img data-media="tymalVideo" alt="" loading="lazy" decoding="async">
         <button type="button" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg></button>
         <span class="duree">TyMAL, la vidéo</span>
       </div>
-      <img class="video-tymal" data-media="tymalDrapeau" alt="">
+      <img class="video-tymal" data-media="tymalDrapeau" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 </section>`;
@@ -893,11 +893,23 @@ function monter(racine, portail, D) {
     $('hv-nav').querySelectorAll('.hv-barres i').forEach((b, j) => { b.classList.remove('active'); if (j === diapoIdx) { void b.offsetWidth; b.classList.add('active'); } });
     const num = $('hv-num'); if (num) num.textContent = String(diapoIdx + 1).padStart(2, '0');
   }
+  const largeurPhoto = () => Math.min(2560, Math.ceil((innerWidth * Math.min(2, window.devicePixelRatio || 1)) / 160) * 160);
+  let tDiapos = 0;
   function rendreHero() {
     const p = PHASES[phase]; const rail = $('hv-rail'); const nav = $('hv-nav');
-    $('hero-photo').src = IMG(p.photo, 2560, 1440, 82);
+    
+
+
+
+    $('hero-photo').src = IMG(p.photo, largeurPhoto(), Math.round(largeurPhoto() * 0.5625), 82);
     rail.querySelectorAll('.hv-vue--diapo').forEach(v => v.remove());
-    diapos().slice(1).forEach(d => rail.insertAdjacentHTML('beforeend', '<div class="hv-vue hv-vue--diapo"><div class="hv-fond"><img class="hv-img" src="' + IMG(d.img, 2560, 1440, 82) + '" alt=""></div></div>'));
+        
+
+
+    diapos().slice(1).forEach(d => rail.insertAdjacentHTML('beforeend', '<div class="hv-vue hv-vue--diapo"><div class="hv-fond"><img class="hv-img" loading="lazy" decoding="async" data-diapo src="' + IMG(d.img, largeurPhoto(), Math.round(largeurPhoto() * 0.5625), 82) + '" alt=""></div></div>'));
+    clearTimeout(tDiapos);
+    tDiapos = setTimeout(() => tout('.hv-img[data-diapo]').forEach(i => i.removeAttribute('loading')), 2500);
+    minuteurs.push(tDiapos);
     const n = diapos().length;
     nav.innerHTML = n < 2 ? '' : '<span class="hv-compte"><b id="hv-num">01</b> / ' + String(n).padStart(2, '0') + '</span>' +
       '<span class="hv-barres">' + Array.from({ length: n }, () => '<i></i>').join('') + '</span>' +
@@ -920,7 +932,7 @@ function monter(racine, portail, D) {
     if (diapos().length > 1) diapoTimer = repeter(() => allerDiapo(diapoIdx + 1), 7000);
   }
   function rendreCtas() {
-    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => '<a class="cta cta--' + k.c + '" href="#"><img src="' + IMG(k.img, 1200, 620, 78) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
+    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => '<a class="cta cta--' + k.c + '" href="#"><img loading="lazy" decoding="async" src="' + IMG(k.img, 1200, 620, 78) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
       '<div class="cta-txt"><span class="cta-ico">' + ICO[k.ico] + '</span><h3>' + esc(k.titre) + '</h3><p>' + esc(k.txt) + '</p><span class="lire">Découvrir ' + FLECHE + '</span></div></a>').join('');
     rendreAffiche();
   }
@@ -1133,11 +1145,11 @@ function monter(racine, portail, D) {
      
     const type = (i, p) => i === 1 ? 'video' : i === 4 ? 'photo' : i === 5 ? 'audio' : /interview/i.test(p._categoryLabel || '') ? 'interview' : 'actu';
     const une = posts[0], video = posts[1], photo = posts[4];
-    $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" src="' + wixImg(une.coverImage, 1200, 900) + '" alt="">' +
+    $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, 1200, 900) + '" alt="">' +
       '<div class="carte-haut">' + cat(type(0, une)) + '<span class="kicker kicker--jaune">À la une</span></div>' +
       '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h3>' + esc(une.title.trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
     $('medias').innerHTML = [[video, 'video', 'La dernière vidéo'], [photo, 'photo', 'Le dernier reportage']].map(([p, t, lib]) =>
-      '<a class="carte" href="#"><img class="cover" src="' + wixImg(p.coverImage, 800, 500) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
+      '<a class="carte" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, 800, 500) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
       '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
     $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve" href="#"><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
     const sujets = {}; posts.forEach(p => (p._tags || []).forEach(t => { if (!/^[A-Z]{2}/.test(t.label) || /CLASS|OCEAN/.test(t.label)) sujets[t.label] = (sujets[t.label] || 0) + 1; }));
@@ -1150,16 +1162,16 @@ function monter(racine, portail, D) {
   const CLASSES = D.classes;
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const vecteur = (v) => { const m = String(v || '').match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : String(v || ''); };
-  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" href="#" style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
+  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" href="#" style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
   Promise.resolve(D.skippers).then(s => {
     const liste = (Array.isArray(s) ? s : (s.skippers || Object.values(s)[0])).slice(0, 6);
     $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(k.photoVignette) + '" alt="" loading="lazy">' +
-        '<div class="sk-ov"><div class="sk-prenom"><img src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
-        '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img src="' + cfg.icone + '" alt=""></div>' : '') + '</div></div>'; }).join('');
+        '<div class="sk-ov"><div class="sk-prenom"><img loading="lazy" decoding="async" src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
+        '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img loading="lazy" decoding="async" src="' + cfg.icone + '" alt=""></div>' : '') + '</div></div>'; }).join('');
      
     $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
-      return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img src="' + esc(k.photoVignette) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
+      return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(k.photoVignette) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
         '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper favori</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
     let pvI = 0;
     repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
