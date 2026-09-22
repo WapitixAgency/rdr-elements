@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 8e46037 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="8e46037";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 8571522 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="8571522";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -313,15 +313,15 @@ rdr-accueil-apercu .sep-pavois > svg{position:absolute;left:0;top:0;width:100%;h
 rdr-accueil-apercu .pav-dr{position:absolute;width:var(--fw);margin-left:calc(var(--fw) / -2);transform-origin:50% 0;transform:rotate(var(--a))}
 rdr-accueil-apercu .pav-dr svg{display:block;width:100%;height:auto;transform-origin:50% 0;animation:raa-pavois 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.23s);filter:drop-shadow(0 4px 5px rgba(10,18,40,.18))}
 @keyframes raa-pavois{0%,100%{transform:rotate(calc(var(--b,6deg) * -1)) skewX(3deg)}50%{transform:rotate(var(--b,6deg)) skewX(-3deg)}}
-rdr-accueil-apercu .sep-sillage{position:relative;height:100px;background:var(--avant);overflow:hidden}
+rdr-accueil-apercu .sep-sillage{position:relative;height:150px;background:var(--avant);overflow:hidden}
 rdr-accueil-apercu .sl-svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible}
 rdr-accueil-apercu .sl-reste{fill:none;stroke:rgba(255,255,255,.24);stroke-width:1.5;stroke-dasharray:6 7}
 rdr-accueil-apercu .sl-fait{fill:none;stroke:var(--jaune);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:0;animation:raa-sl-trace 12s linear infinite}
 @keyframes raa-sl-trace{0%{stroke-dashoffset:1000;opacity:1}72%{stroke-dashoffset:0;opacity:1}90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
-rdr-accueil-apercu .sl-bateau{position:absolute;left:0;top:0;width:46px;offset-anchor:50% 86%;offset-rotate:auto;offset-distance:100%;animation:raa-sl-vogue 12s linear infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
-rdr-accueil-apercu .sl-bateau svg{display:block;width:100%;height:auto;transform-origin:50% 86%;animation:raa-sl-tangue 2.6s ease-in-out infinite}
+rdr-accueil-apercu .sl-bateau{position:absolute;left:0;top:0;width:100px;offset-anchor:51% 88%;offset-rotate:auto;offset-distance:100%;animation:raa-sl-vogue 12s linear infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+rdr-accueil-apercu .sl-bateau svg{display:block;width:100%;height:auto;transform-origin:51% 88%;animation:raa-sl-tangue 3.4s ease-in-out infinite}
 @keyframes raa-sl-vogue{0%{offset-distance:0%;opacity:0}3%{opacity:1}72%{offset-distance:100%;opacity:1}90%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:0}}
-@keyframes raa-sl-tangue{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes raa-sl-tangue{0%,100%{transform:rotate(-1.2deg) translateY(0)}50%{transform:rotate(1deg) translateY(-1px)}}
 rdr-accueil-apercu .sl-port{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%}
 rdr-accueil-apercu .sl-port b{position:absolute;top:18px;white-space:nowrap;font:800 10px/1 var(--police);letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
 rdr-accueil-apercu .sl-port--dep{background:var(--teal)}
@@ -490,8 +490,9 @@ rdr-accueil-apercu .classe img{width:100%;height:auto}
 rdr-accueil-apercu .classe b{font-size:17px}
 rdr-accueil-apercu .classe small{display:none}
 rdr-accueil-apercu .sm-liste{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--marge));padding:2px var(--marge) 6px}
-rdr-accueil-apercu .sep-sillage{height:92px}
-rdr-accueil-apercu .sl-bateau{width:38px}
+rdr-accueil-apercu .sep-sillage{height:112px}
+rdr-accueil-apercu .sl-bateau{width:72px}
+rdr-accueil-apercu .sl-port b{top:14px}
 rdr-accueil-apercu .bil-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px var(--marge) 8px;margin:0 calc(-1 * var(--marge));scrollbar-width:none}
 rdr-accueil-apercu .bil{flex:0 0 82%;scroll-snap-align:start;--x:74px}
 rdr-accueil-apercu .bil-talon b{font-size:38px}
@@ -760,7 +761,14 @@ function monter(racine, portail, D) {
   const COEUR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.2 4.6 2.8C12 6.2 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>';
   const VERROU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
   const FLAMME = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.4 1 2.5 2.3 2.5 1.6 0 2.5-1.4 2.2-3.2C17.4 10.6 19 13 19 15.5 19 19.1 15.9 22 12 22s-7-2.9-7-6.5C5 10.2 10.6 7.7 12 2z"/></svg>';
-  const VOILIER = '<svg viewBox="0 0 48 40" aria-hidden="true"><path d="M1 34 Q 8 32.4 16 33" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/><path d="M5 37 Q 11 35.8 17.5 36" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.2" stroke-linecap="round"/><path d="M15 31.5 H43 Q 41 36 36.5 37 H20 Q 16.5 36 15 31.5 Z" fill="#fff"/><rect x="28.2" y="3" width="1.4" height="28.5" fill="#fff"/><path d="M27.6 4.5 C 22 12 18.5 21 17.5 29.5 H27.6 Z" fill="#fff"/><path d="M30.2 7 L40.5 29.5 H30.2 Z" fill="#FCF150"/></svg>';
+  
+
+
+
+
+
+
+  const ULTIM = '<svg viewBox="0 0 124 112" aria-hidden="true"><defs><linearGradient id="raa-ultim-gv" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C3CAD8"/><stop offset=".5" stop-color="#EEF1F6"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><path d="M25 98.8 Q14 100 2 99.2" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2" stroke-linecap="round"/><path d="M33 101 Q22 102.4 9 101.8" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/><path d="M82 101.8 Q74 102.8 62 102.3" fill="none" stroke="rgba(255,255,255,.22)" stroke-width=".9" stroke-linecap="round"/><path d="M122 85.2 L65.6 5" fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".6"/><path class="u-gv" d="M65.5 4.5 L47 6 Q36 40 29.5 79.4 L68.2 80.2 Z" fill="url(#raa-ultim-gv)"/><path d="M65.9 16 Q55 15.4 44.2 16.4 M66.4 29 Q53 28.4 40.6 29.4 M66.9 42 Q52 41.4 37.3 42.4 M67.4 55 Q51 54.4 34.4 55.4 M67.9 68 Q50 67.4 31.9 68.4" fill="none" stroke="rgba(14,17,29,.2)" stroke-width=".5"/><path class="u-foc" d="M66.6 26 L110.5 84 L76.4 82.6 Q71.6 56 66.6 26 Z" fill="#FCF150"/><path d="M68.4 34 Q72.6 58 75.4 82" fill="none" stroke="rgba(14,17,29,.1)" stroke-width=".5"/><path class="u-mat" d="M67.8 86 L64.6 2.6 L66.2 2.4 L69.4 86 Z" fill="#fff"/><path d="M68.2 80.3 L29 79.6" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="M113 86 L122 85.2" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M16.4 88.2 L17 96.5 M15 96.6 L19 96.4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linecap="round"/><path class="u-coque" d="M12 84.6 L104 83.6 Q109.6 83.6 114 86 L108.6 87.8 Q70 89.6 15 88.4 Q12.6 87 12 84.6 Z" fill="#fff"/><path d="M58 85.4 L70 85.2 L69.5 86.4 L58.4 86.5 Z" fill="rgba(14,17,29,.45)"/><path d="M15.5 87.5 Q62 89 108.8 87" fill="none" stroke="#4E9FA3" stroke-width=".9"/><path class="u-bras" d="M38 88 Q45 87.4 48 95.4 M76 87.6 Q83 87 86 95" fill="none" stroke="#E6EAF1" stroke-width="2.2" stroke-linecap="round"/><path class="u-flotteur" d="M24 95.2 L108 94.2 Q113.8 94.2 118 96.4 L112.8 98.2 Q76 99.8 27 98.8 Q24.6 97.4 24 95.2 Z" fill="#F2F4F8"/><path d="M27.4 97.8 Q76 99.2 112.9 97.4" fill="none" stroke="#FCF150" stroke-width=".8"/><path class="u-foil" d="M84 99.2 Q84.6 106.4 91 107.8 L93.4 106.8" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 97 Q121 95.2 123.4 95.9 M116.4 99 Q120.4 99.9 123.2 99.3" fill="none" stroke="rgba(255,255,255,.6)" stroke-width=".85" stroke-linecap="round"/></svg>';
 
    
   const titreHtml = (t) => esc(t).replace(/\[([^\]]+)\]/, (_, m) => '<em>' + m + '</em>');
@@ -915,14 +923,15 @@ function monter(racine, portail, D) {
   const liaison = un('.sep--liaison');
   liaison.innerHTML = '<div class="sep-damier" aria-hidden="true"></div><div class="sep-pavois" aria-hidden="true"></div>' +
     '<div class="sep-sillage" aria-hidden="true"><svg class="sl-svg"><path class="sl-reste"/><path class="sl-fait" pathLength="1000"/></svg>' +
-    '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau">' + VOILIER + '</span></div>';
+    '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau">' + ULTIM + '</span></div>';
   
 
 
 
+
   function dessinerSillage() {
-    const el = liaison.querySelector('.sep-sillage'); const L = largeurPage(); const tel = L < 760; const H = tel ? 92 : 100;
-    const m = Math.round(L * (tel ? 0.08 : 0.06)); const y = Math.round(H * 0.66); const sommet = Math.round(H * 0.4);
+    const el = liaison.querySelector('.sep-sillage'); const L = largeurPage(); const tel = L < 760; const H = el.clientHeight || (tel ? 112 : 150);
+    const m = Math.round(L * (tel ? 0.08 : 0.06)); const y = Math.round(H * 0.78); const sommet = Math.round(H * 0.56);
     const d = 'M' + m + ' ' + y + ' Q ' + (L / 2) + ' ' + (2 * sommet - y) + ' ' + (L - m) + ' ' + y;
     const svg = el.querySelector('.sl-svg'); svg.setAttribute('viewBox', '0 0 ' + L + ' ' + H);
     svg.querySelectorAll('path').forEach(p => p.setAttribute('d', d));
