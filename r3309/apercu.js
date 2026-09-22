@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum b0e1218 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="b0e1218";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum f5019be | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f5019be";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -108,6 +108,8 @@ rdr-accueil-apercu .hero.est-photo .hv-fait{opacity:1;transform:none;transition:
 rdr-accueil-apercu .hv-texte{max-width:600px;font-size:clamp(14px,1.1vw,16px);line-height:1.55;font-weight:500;color:rgba(255,255,255,.88);text-wrap:pretty;text-shadow:0 2px 14px rgba(0,0,0,.35)}
 rdr-accueil-apercu .hv-nav{display:flex;align-items:center;gap:6px;flex:none;padding:4px 4px 4px 9px;border-radius:999px;background:rgba(14,17,29,.55);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);transition:opacity .6s}
 rdr-accueil-apercu .hv-nav:empty{display:none}
+rdr-accueil-apercu .hv-defiler{display:none}
+@keyframes raa-hv-descend{0%,100%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(3px);opacity:1}}
 rdr-accueil-apercu .hero:not(.est-photo) .hv-nav{opacity:0;pointer-events:none}
 rdr-accueil-apercu .hv-compte{font-family:var(--titre);font-style:italic;font-size:10px;line-height:1;color:var(--t2);white-space:nowrap}
 rdr-accueil-apercu .hv-compte b{color:#fff;font-weight:400}
@@ -468,8 +470,8 @@ rdr-accueil-apercu .hero{height:auto;min-height:0;overflow:visible}
 rdr-accueil-apercu .hv-scene{position:relative;height:clamp(320px,58svh,480px)}
 rdr-accueil-apercu .hv-logo{width:118px}
 rdr-accueil-apercu .hv-devise{font-size:21px}
-rdr-accueil-apercu .hv-contenu{position:relative;bottom:auto;margin-top:-118px;padding-bottom:4px}
-rdr-accueil-apercu .hv-ligne{flex-direction:column;align-items:flex-start;gap:16px}
+rdr-accueil-apercu .hv-contenu{position:relative;bottom:auto;margin-top:-118px;padding-bottom:18px}
+rdr-accueil-apercu .hv-ligne{flex-direction:column;align-items:flex-start;gap:22px}
 rdr-accueil-apercu .hv-titre{max-width:none;justify-content:flex-end}
 rdr-accueil-apercu .hv-titre h2{font-size:clamp(23px,6.6vw,29px);line-height:1.05}
 rdr-accueil-apercu .hv-faits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;width:100%;padding:0 4px}
@@ -480,6 +482,10 @@ rdr-accueil-apercu .hv-l b{font-size:9px;letter-spacing:.1em;white-space:normal}
 rdr-accueil-apercu .hv-l span{font-size:9.5px;white-space:normal}
 rdr-accueil-apercu .hv-acces{position:relative;bottom:auto;padding:22px 0 30px}
 rdr-accueil-apercu .hv-nav{align-self:flex-start}
+rdr-accueil-apercu .hv-defiler{display:flex;position:absolute;right:var(--marge);bottom:18px;z-index:4;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.26);background:rgba(14,17,29,.45);color:#fff;pointer-events:none;transition:opacity .45s ease,transform .45s ease}
+rdr-accueil-apercu .hv-defiler i{display:flex;animation:raa-hv-descend 1.9s ease-in-out infinite}
+rdr-accueil-apercu .hv-defiler svg{width:13px;height:13px;transform:rotate(90deg)}
+rdr-accueil-apercu .hero:not(.est-photo) .hv-defiler,rdr-accueil-apercu .hero.a-defile .hv-defiler{opacity:0;transform:translateY(8px)}
 rdr-accueil-apercu .cta-liste{flex-direction:column;height:auto;gap:12px}
 rdr-accueil-apercu .cta,rdr-accueil-apercu .cta:hover{flex:none;height:150px}
 rdr-accueil-apercu .cta img{opacity:.6}
@@ -554,7 +560,7 @@ rdr-accueil-apercu .video-tymal{left:auto;right:6px;bottom:auto;top:-60px;width:
 rdr-accueil-apercu .hero[data-acces="sous"] .hv-acces{display:none}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:auto}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hv-scene{height:calc(clamp(320px,58svh,480px) + var(--rdr-entete-h,120px))}
-rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous{padding:8px 0 36px}
+rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous{padding:16px 0 36px}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta,rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta:hover{height:108px}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta p{display:none}
 rdr-accueil-apercu .onglets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;overflow:visible}
@@ -584,6 +590,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     <div class="hv-marque"><h1 class="hv-masque">Route du Rhum, Destination Guadeloupe</h1><img class="hv-logo" data-media="logoIntro" alt=""><p class="hv-devise titre">Là où les rêves prennent le large</p></div>
   </div>
   <div class="hv-contenu"><div class="trame hv-ligne"><div class="hv-titre" id="hv-titre"></div><div class="hv-nav" id="hv-nav"></div></div></div>
+  <span class="hv-defiler" id="hv-defiler" aria-hidden="true"></span>
   <div class="hv-acces" id="hv-slot-acces"><div class="trame"><div class="cta-liste" id="ctas"></div></div></div>
 </section>
 <section class="hv-acces-sous"><div class="trame" id="hv-slot-acces-sous"></div></section>
@@ -1172,6 +1179,10 @@ function monter(racine, portail, D) {
     ioHero.observe($('hero')); observateurs.push(ioHero);
   }
   ecoute(document, 'visibilitychange', () => relancer());
+  
+
+  $('hv-defiler').innerHTML = '<i>' + CHEV_D + '</i>';
+  ecoute(window, 'scroll', () => { if (scrollY > 40) $('hero').classList.add('a-defile'); });
   
 
   try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => reserverTitre()); } catch (e) {   }
