@@ -1,5 +1,5 @@
-/* rdr-elements course | source route-du-rhum 5e3f9e9 | faits-marquants.js manifeste-cartes.js heritage-timeline.js boat-diagram.js pactes-tabs.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["course"]="5e3f9e9";performance.mark("rdr-elements:course")}catch(e){}
+/* rdr-elements course | source route-du-rhum da96aeb | faits-marquants.js manifeste-cartes.js heritage-timeline.js boat-diagram.js pactes-tabs.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["course"]="da96aeb";performance.mark("rdr-elements:course")}catch(e){}
 ;(function(){
 if (!customElements.get('faits-marquants')) {
    
