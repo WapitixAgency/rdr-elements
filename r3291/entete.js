@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum b121ef1 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b121ef1";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 7d3798c | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="7d3798c";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {
@@ -38,8 +38,8 @@ const ARBORESCENCE = {
       ] },
     { cle: 'engagements', libelle: 'Engagements', panneau: 'engagements',
       liens: [
-        { libelle: "Terres d'engagements", lien: '/terres-engagements', source: { panneau: 'engagements', lien: '/terres-d-engagements' } },
-        { libelle: 'Protéger le littoral', lien: '/proteger-littoral', source: { panneau: 'engagements', lien: '/proteger-le-littoral' } },
+        { libelle: "Terres d'engagements", lien: '/terres-engagements', source: { panneau: 'engagements', lien: '/terres-engagements' } },
+        { libelle: 'Protéger le littoral', lien: '/proteger-littoral', source: { panneau: 'engagements', lien: '/proteger-littoral' } },
         { libelle: 'Kit pédagogique', lien: '/kit-pedagogique', groupe: 'Route du Rhum Junior', source: { panneau: 'engagements', lien: '/kit-pedagogique' } },
         { libelle: 'Cartographie de suivi de course', bientot: true, groupe: 'Route du Rhum Junior', picto: 'globe' }
       ] }
@@ -74,8 +74,8 @@ const ARBORESCENCE = {
       ] },
     { cle: 'engagements', libelle: 'Commitments', panneau: 'engagements',
       liens: [
-        { libelle: 'Terres d\'engagements', lien: '/terres-engagements', source: { panneau: 'engagements', lien: '/terres-d-engagements' } },
-        { libelle: 'Protecting the coastline', lien: '/proteger-littoral', source: { panneau: 'engagements', lien: '/proteger-le-littoral' } },
+        { libelle: 'Terres d\'engagements', lien: '/terres-engagements', source: { panneau: 'engagements', lien: '/terres-engagements' } },
+        { libelle: 'Protecting the coastline', lien: '/proteger-littoral', source: { panneau: 'engagements', lien: '/proteger-littoral' } },
         { libelle: 'Educational kit', lien: '/kit-pedagogique', groupe: 'Route du Rhum Junior', source: { panneau: 'engagements', lien: '/kit-pedagogique' } },
         { libelle: 'Race tracking map', bientot: true, groupe: 'Route du Rhum Junior', picto: 'globe' }
       ] }
