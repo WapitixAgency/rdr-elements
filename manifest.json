@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum aeac6d2",
- "livreLe": "2026-09-22T12:20:51.058Z",
+ "source": "WapitixAgency/route-du-rhum 5e3f9e9",
+ "livreLe": "2026-09-22T12:25:27.737Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3267,
  "revisionsAVenir": 30,
@@ -14,8 +14,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 108051,
-   "gzip": 27652,
-   "brotli": 21296,
+   "gzip": 27653,
+   "brotli": 21309,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -60,16 +60,22 @@
    ]
   },
   "accueil": {
-   "quoi": "les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit)",
+   "quoi": "les modules de l'accueil ; la vitrine des skippers a sa charge dans le HTML servi et la promo Espace Rhum se dessine seule ; home-news attend encore la passe navigateur (Accueil.bhup2.js sort avant loadNewsSection au rendu serveur)",
    "partout": false,
-   "chemins": [],
+   "chemins": [
+    "/",
+    "/en"
+   ],
    "prefixes": [],
-   "balises": [],
+   "balises": [
+    "skippers-showcase",
+    "home-news"
+   ],
    "precharger": [],
    "priorite": "high",
    "octets": 77955,
-   "gzip": 20570,
-   "brotli": 17519,
+   "gzip": 20571,
+   "brotli": 17527,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -112,8 +118,8 @@
    ],
    "priorite": "high",
    "octets": 462504,
-   "gzip": 125609,
-   "brotli": 101934,
+   "gzip": 125610,
+   "brotli": 101892,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -136,7 +142,7 @@
    "priorite": "low",
    "octets": 867395,
    "gzip": 181775,
-   "brotli": 139369,
+   "brotli": 139518,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -164,7 +170,7 @@
    "priorite": "high",
    "octets": 462252,
    "gzip": 109087,
-   "brotli": 86419,
+   "brotli": 86468,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -199,8 +205,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 237080,
-   "gzip": 58667,
-   "brotli": 49279,
+   "gzip": 58668,
+   "brotli": 49213,
    "fichiers": [
     {
      "fichier": "rdr-entete.js",
@@ -224,7 +230,7 @@
    "priorite": "high",
    "octets": 99400,
    "gzip": 23870,
-   "brotli": 20749,
+   "brotli": 20762,
    "fichiers": [
     {
      "fichier": "rdr-accueil-apercu.js",
@@ -237,7 +243,7 @@
    ]
   },
   "actus": {
-   "quoi": "le hub des actualités et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
+   "quoi": "le hub des actualités, ses pages de tag (/medias-actualites/tags/<tag>) et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
    "chemins": [
     "/medias-actualites",
@@ -245,14 +251,16 @@
    ],
    "prefixes": [
     "/post/",
-    "/en/post/"
+    "/en/post/",
+    "/medias-actualites/",
+    "/en/medias-actualites/"
    ],
    "balises": [],
    "precharger": [],
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54136,
+   "brotli": 54132,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
@@ -276,6 +284,237 @@
      "sha": "7ab7ec5d6d58",
      "balises": [
       "rdr-post-more"
+     ]
+    }
+   ]
+  },
+  "programme": {
+   "quoi": "la Programmation ; sa charge utile (133 Ko) est dans le HTML servi, le module est la page",
+   "partout": false,
+   "chemins": [
+    "/programme",
+    "/en/programme"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-programme"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 188786,
+   "gzip": 48287,
+   "brotli": 40404,
+   "fichiers": [
+    {
+     "fichier": "rdr-programme.js",
+     "octets": 188594,
+     "sha": "cba7a89a2206",
+     "balises": [
+      "rdr-programme"
+     ]
+    }
+   ]
+  },
+  "venir": {
+   "quoi": "Se rendre au village (rdr-venir, qui absorbe CO2, D'où venez-vous et le Challenge Mobilité) ; sa charge utile (24 Ko) est dans le HTML servi",
+   "partout": false,
+   "chemins": [
+    "/se-rendre-au-village",
+    "/en/se-rendre-au-village"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-venir"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 144847,
+   "gzip": 37914,
+   "brotli": 32104,
+   "fichiers": [
+    {
+     "fichier": "rdr-venir.js",
+     "octets": 144686,
+     "sha": "01a3dd5fc819",
+     "balises": [
+      "rdr-venir"
+     ]
+    }
+   ]
+  },
+  "course": {
+   "quoi": "les petits modules éditoriaux des pages La course et Engagements (Qu'est-ce que la Route du Rhum, Héritage, Bateaux, Terres d'engagements) ; leurs charges sont des attributs du HTML servi, 16 Ko brotli à eux cinq",
+   "partout": false,
+   "chemins": [
+    "/qu-est-ce-que-la-route-du-rhum",
+    "/en/qu-est-ce-que-la-route-du-rhum",
+    "/heritage",
+    "/en/heritage",
+    "/bateaux",
+    "/en/bateaux",
+    "/terres-engagements",
+    "/en/terres-engagements"
+   ],
+   "prefixes": [],
+   "balises": [
+    "faits-marquants",
+    "manifeste-cartes",
+    "heritage-timeline",
+    "boat-diagram",
+    "pactes-tabs"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 78105,
+   "gzip": 18732,
+   "brotli": 16304,
+   "fichiers": [
+    {
+     "fichier": "faits-marquants.js",
+     "octets": 14997,
+     "sha": "b356c70558f8",
+     "balises": [
+      "faits-marquants"
+     ]
+    },
+    {
+     "fichier": "manifeste-cartes.js",
+     "octets": 14259,
+     "sha": "ff6849f3c4f9",
+     "balises": [
+      "manifeste-cartes"
+     ]
+    },
+    {
+     "fichier": "heritage-timeline.js",
+     "octets": 11711,
+     "sha": "570a485153cd",
+     "balises": [
+      "heritage-timeline"
+     ]
+    },
+    {
+     "fichier": "boat-diagram.js",
+     "octets": 11192,
+     "sha": "d9e20fd9112a",
+     "balises": [
+      "boat-diagram"
+     ]
+    },
+    {
+     "fichier": "pactes-tabs.js",
+     "octets": 25617,
+     "sha": "83479ad63a24",
+     "balises": [
+      "pactes-tabs"
+     ]
+    }
+   ]
+  },
+  "accreditations": {
+   "quoi": "la page Accréditations presse ; sa charge utile est dans le HTML servi",
+   "partout": false,
+   "chemins": [
+    "/accreditations",
+    "/en/accreditations"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-accreditations"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 55452,
+   "gzip": 16252,
+   "brotli": 14252,
+   "fichiers": [
+    {
+     "fichier": "rdr-accreditations.js",
+     "octets": 55245,
+     "sha": "cd975c17646a",
+     "balises": [
+      "rdr-accreditations"
+     ]
+    }
+   ]
+  },
+  "cgu": {
+   "quoi": "les conditions d'utilisation ; le texte est dans le module, il se dessine seul",
+   "partout": false,
+   "chemins": [
+    "/conditions-d-utilisation",
+    "/en/conditions-d-utilisation"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-cgu"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 66215,
+   "gzip": 20423,
+   "brotli": 17724,
+   "fichiers": [
+    {
+     "fichier": "rdr-cgu.js",
+     "octets": 66057,
+     "sha": "f3e5910fe556",
+     "balises": [
+      "rdr-cgu"
+     ]
+    }
+   ]
+  },
+  "concours": {
+   "quoi": "le Challenge photo (démonstration, page masquée et non indexée) ; le module va chercher ses données lui-même, le définir tôt avance d'autant sa lecture",
+   "partout": false,
+   "chemins": [
+    "/concours-photo-2026",
+    "/en/concours-photo-2026"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-concours-photo"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 107786,
+   "gzip": 23947,
+   "brotli": 20978,
+   "fichiers": [
+    {
+     "fichier": "rdr-concours-photo.js",
+     "octets": 107591,
+     "sha": "f20664889815",
+     "balises": [
+      "rdr-concours-photo"
+     ]
+    }
+   ]
+  },
+  "tournee": {
+   "quoi": "la carte des tournées (page plein écran) ; le module part tout de suite, MapLibre reste chargé par le module (sa version @5 est une redirection mise en cache 60 s : la précharger la ferait télécharger deux fois) ; les étapes arrivent avec la passe navigateur",
+   "partout": false,
+   "chemins": [
+    "/carte-tournee",
+    "/en/carte-tournee"
+   ],
+   "prefixes": [],
+   "balises": [
+    "tournee-map"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 163169,
+   "gzip": 40913,
+   "brotli": 34704,
+   "fichiers": [
+    {
+     "fichier": "tournee-map.js",
+     "octets": 162979,
+     "sha": "573eb8079894",
+     "balises": [
+      "tournee-map"
      ]
     }
    ]
