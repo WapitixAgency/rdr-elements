@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum e40871e | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e40871e";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 69454a8 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="69454a8";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -64,6 +64,9 @@ rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::after{background:
 rdr-accueil-apercu .hero:not(.est-photo) .hv-fond::after{opacity:.5}
 rdr-accueil-apercu.sans-entree .hero,rdr-accueil-apercu.sans-entree .hero *,rdr-accueil-apercu.sans-entree .hv-acces-sous,rdr-accueil-apercu.sans-entree .hv-acces-sous *{transition:none !important}
 rdr-accueil-apercu.sans-entree .hv-marque{display:none}
+rdr-accueil-apercu .hero.entree-douce video,rdr-accueil-apercu .hero.entree-douce .hv-marque{display:none}
+rdr-accueil-apercu .hero.entree-douce .hero-photo{transition:opacity 1s ease,transform 9s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.entree-douce .hv-titre{transition-delay:.15s}
 rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::before{content:'';position:absolute;left:0;right:0;bottom:0;height:36%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,29,0) 0%,rgba(14,17,29,.72) 60%,#0E111D 100%)}
 rdr-accueil-apercu .hv-marque{position:absolute;left:0;right:0;top:50%;transform:translateY(-44%);z-index:3;text-align:center;padding:0 var(--marge);pointer-events:none;transition:opacity .7s ease,transform 1s cubic-bezier(.22,.8,.3,1)}
 rdr-accueil-apercu .hv-masque{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
@@ -898,6 +901,12 @@ function monter(racine, portail, D) {
   }
 
   let heroTimer = null, heroGen = 0;
+  
+
+
+
+
+  const signal = (etape) => { if (window.__rdrIntro) window.__rdrIntro.etape = etape; try { window.dispatchEvent(new CustomEvent('rdr-intro', { detail: { etape } })); } catch (e) {   } };
   function jouerHero() {
     const h = $('hero'); h.classList.remove('est-photo'); clearInterval(diapoTimer);
     if (diapoIdx !== 0) { diapoIdx = 0; poserRail(); $('hv-titre').innerHTML = contenuDiapo(0); barre(); }
@@ -909,11 +918,7 @@ function monter(racine, portail, D) {
 
 
     const gen = ++heroGen; let parti = false;
-    
-
-    
-
-    const signal = (etape) => { if (window.__rdrIntro) window.__rdrIntro.etape = etape; try { window.dispatchEvent(new CustomEvent('rdr-intro', { detail: { etape } })); } catch (e) {   } };
+    h.classList.remove('entree-douce');
     signal('debut');
     const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); poserRail(); relancer(); compter(); signal('bascule'); };
     const partir = () => { if (gen !== heroGen || parti) return; parti = true; clearTimeout(heroTimer); heroTimer = setTimeout(bascule, 3200); };
@@ -931,13 +936,24 @@ function monter(racine, portail, D) {
 
 
   function sansEntree() {
-    const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
+    const h = $('hero'); ++heroGen; clearTimeout(heroTimer); h.classList.remove('entree-douce');
     const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
     racine.classList.add('sans-entree');
     h.classList.add('est-photo'); poserRail(); relancer(); compter(true);
     requestAnimationFrame(() => requestAnimationFrame(() => racine.classList.remove('sans-entree')));
   }
-  function entree() { if (introPour('hero')) jouerHero(); else sansEntree(); }
+  
+
+
+  function entreeDouce() {
+    const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
+    const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
+    h.classList.remove('est-photo'); h.classList.add('entree-douce'); poserRail();
+    signal('douce');
+    const gen = heroGen;
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); relancer(); compter(); }));
+  }
+  function entree() { if (introPour('hero')) jouerHero(); else entreeDouce(); }
   
 
 
