@@ -1,21 +1,21 @@
 {
- "source": "WapitixAgency/route-du-rhum c113b5e",
- "livreLe": "2026-09-22T14:24:49.488Z",
+ "source": "WapitixAgency/route-du-rhum 97f1663",
+ "livreLe": "2026-09-22T14:35:17.272Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3274,
  "revisionsAVenir": 30,
  "paquets": {
   "socle": {
-   "quoi": "les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages",
+   "quoi": "les six méga menus, les deux horloges de l'en-tête, le haut du pied de page et les notifications (rdr-notify, posé sur toutes les pages, depuis le 22/09 : défini tôt, il est prêt quand la page lui passe la liste), sur toutes les pages",
    "partout": true,
    "chemins": [],
    "prefixes": [],
    "balises": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 108051,
-   "gzip": 27652,
-   "brotli": 21291,
+   "octets": 163285,
+   "gzip": 40958,
+   "brotli": 32088,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -56,6 +56,14 @@
      "balises": [
       "rdr-pied-haut"
      ]
+    },
+    {
+     "fichier": "rdr-notify.js",
+     "octets": 55210,
+     "sha": "fec7f7e39958",
+     "balises": [
+      "rdr-notify"
+     ]
     }
    ]
   },
@@ -74,8 +82,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 77955,
-   "gzip": 20570,
-   "brotli": 17537,
+   "gzip": 20571,
+   "brotli": 17529,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -118,13 +126,39 @@
    ],
    "priorite": "high",
    "octets": 462504,
-   "gzip": 125608,
-   "brotli": 101951,
+   "gzip": 125610,
+   "brotli": 101949,
    "fichiers": [
     {
      "fichier": "village-map.js",
      "octets": 462291,
      "sha": "b29bf227116f",
+     "balises": []
+    }
+   ]
+  },
+  "atelier": {
+   "quoi": "l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte",
+   "partout": false,
+   "chemins": [
+    "/carte-village-saint-malo/atelier-rdr",
+    "/en/carte-village-saint-malo/atelier-rdr"
+   ],
+   "prefixes": [],
+   "balises": [],
+   "precharger": [
+    "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js",
+    "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+   ],
+   "priorite": "high",
+   "octets": 759120,
+   "gzip": 218064,
+   "brotli": 172357,
+   "fichiers": [
+    {
+     "fichier": "village-atelier.js",
+     "octets": 758897,
+     "sha": "b51b23d8535f",
      "balises": []
     }
    ]
@@ -141,8 +175,8 @@
    "precharger": [],
    "priorite": "low",
    "octets": 867395,
-   "gzip": 181772,
-   "brotli": 139357,
+   "gzip": 181775,
+   "brotli": 139304,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -169,8 +203,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 462252,
-   "gzip": 109087,
-   "brotli": 86430,
+   "gzip": 109088,
+   "brotli": 86368,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -205,8 +239,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 246037,
-   "gzip": 60428,
-   "brotli": 50707,
+   "gzip": 60429,
+   "brotli": 50689,
    "fichiers": [
     {
      "fichier": "rdr-entete.js",
@@ -230,7 +264,7 @@
    "priorite": "high",
    "octets": 113339,
    "gzip": 26667,
-   "brotli": 22898,
+   "brotli": 22900,
    "fichiers": [
     {
      "fichier": "rdr-accueil-apercu.js",
@@ -259,8 +293,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 289109,
-   "gzip": 70852,
-   "brotli": 54099,
+   "gzip": 70853,
+   "brotli": 54108,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
@@ -302,8 +336,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 188786,
-   "gzip": 48285,
-   "brotli": 40358,
+   "gzip": 48287,
+   "brotli": 40423,
    "fichiers": [
     {
      "fichier": "rdr-programme.js",
@@ -330,7 +364,7 @@
    "priorite": "high",
    "octets": 144847,
    "gzip": 37914,
-   "brotli": 32074,
+   "brotli": 32100,
    "fichiers": [
     {
      "fichier": "rdr-venir.js",
@@ -366,8 +400,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 78105,
-   "gzip": 18730,
-   "brotli": 16356,
+   "gzip": 18733,
+   "brotli": 16315,
    "fichiers": [
     {
      "fichier": "faits-marquants.js",
@@ -425,8 +459,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 55452,
-   "gzip": 16251,
-   "brotli": 14264,
+   "gzip": 16252,
+   "brotli": 14226,
    "fichiers": [
     {
      "fichier": "rdr-accreditations.js",
@@ -453,7 +487,7 @@
    "priorite": "high",
    "octets": 66215,
    "gzip": 20423,
-   "brotli": 17687,
+   "brotli": 17679,
    "fichiers": [
     {
      "fichier": "rdr-cgu.js",
@@ -479,8 +513,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 107786,
-   "gzip": 23946,
-   "brotli": 20974,
+   "gzip": 23947,
+   "brotli": 20973,
    "fichiers": [
     {
      "fichier": "rdr-concours-photo.js",
@@ -506,8 +540,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 163169,
-   "gzip": 40912,
-   "brotli": 34725,
+   "gzip": 40913,
+   "brotli": 34763,
    "fichiers": [
     {
      "fichier": "tournee-map.js",
@@ -515,6 +549,78 @@
      "sha": "573eb8079894",
      "balises": [
       "tournee-map"
+     ]
+    }
+   ]
+  },
+  "console": {
+   "quoi": "la console de l'équipe (rdr-console, page réservée), chargée sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-console"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 131037,
+   "gzip": 34646,
+   "brotli": 30136,
+   "fichiers": [
+    {
+     "fichier": "rdr-console.js",
+     "octets": 130843,
+     "sha": "bef2dfde0311",
+     "balises": [
+      "rdr-console"
+     ]
+    }
+   ]
+  },
+  "tags": {
+   "quoi": "la page de consigne « Publier une actu » (rdr-tags, réservée à l'équipe), chargée sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-tags"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 44095,
+   "gzip": 13814,
+   "brotli": 11954,
+   "fichiers": [
+    {
+     "fichier": "rdr-tags.js",
+     "octets": 43942,
+     "sha": "f9450fa308cb",
+     "balises": [
+      "rdr-tags"
+     ]
+    }
+   ]
+  },
+  "inscription": {
+   "quoi": "l'envoi des médias des skippers (skipper-media-uploader, page Inscription Skipper, ouverte par un lien à jeton), chargé sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "skipper-media-uploader"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 66565,
+   "gzip": 15985,
+   "brotli": 13777,
+   "fichiers": [
+    {
+     "fichier": "skipper-media-uploader.js",
+     "octets": 66325,
+     "sha": "ede06ad5e8e2",
+     "balises": [
+      "skipper-media-uploader"
      ]
     }
    ]
