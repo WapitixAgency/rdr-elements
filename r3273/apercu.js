@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 1209c77 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="1209c77";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum e40871e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e40871e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -332,6 +332,27 @@ rdr-accueil-apercu .sl-port--arr{background:#FCF150;box-shadow:0 0 0 6px rgba(25
 rdr-accueil-apercu .sl-port--arr b{right:-5px}
 @keyframes raa-sl-arrivee{0%,70%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}73%,92%{background:#FCF150;box-shadow:0 0 0 6px rgba(252,241,80,.22),0 0 18px 4px rgba(252,241,80,.4)}100%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}}
 rdr-accueil-apercu .sl-milles{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--titre);font-style:italic;font-size:13px;line-height:1;letter-spacing:.02em;color:rgba(255,255,255,.55);white-space:nowrap}
+rdr-accueil-apercu .sep-sillage.avec-flotte .sl-fait{animation:raa-sl-trace-f 16s linear infinite}
+@keyframes raa-sl-trace-f{0%{stroke-dashoffset:1000;opacity:1}50%{stroke-dashoffset:0;opacity:1}84%{stroke-dashoffset:0;opacity:1}94%,100%{stroke-dashoffset:0;opacity:0}}
+rdr-accueil-apercu .sep-sillage.avec-flotte .sl-port--arr{animation:raa-sl-arrivee-f 16s linear infinite}
+@keyframes raa-sl-arrivee-f{0%,48%,55%,56%,63%,64%,71%,72%,79%,100%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}50%,53%,58%,61%,66%,69%,74%,77%{background:#FCF150;box-shadow:0 0 0 6px rgba(252,241,80,.22),0 0 18px 4px rgba(252,241,80,.4)}}
+rdr-accueil-apercu .sep-sillage.avec-flotte .sl-bateau--ultim{width:clamp(72px,7vw,100px);animation:raa-sl-f-ultim 16s linear infinite}
+@keyframes raa-sl-f-ultim{0%{offset-distance:0%;opacity:0}2%{opacity:1}50%{offset-distance:100%;opacity:1}51.5%{opacity:1}54%,100%{offset-distance:100%;opacity:0}}
+rdr-accueil-apercu .sl-bateau--o50{width:clamp(46px,4.4vw,62px);animation:raa-sl-f-o50 16s linear infinite}
+rdr-accueil-apercu .sl-bateau--o50 svg{animation-duration:3.1s}
+@keyframes raa-sl-f-o50{0%,4%{offset-distance:0%;opacity:0}6%{opacity:1}58%{offset-distance:100%;opacity:1}59.5%{opacity:1}62%,100%{offset-distance:100%;opacity:0}}
+rdr-accueil-apercu .sl-bateau--imoca{width:clamp(46px,4.5vw,64px);offset-anchor:51% 87%;animation:raa-sl-f-imoca 16s linear infinite}
+rdr-accueil-apercu .sl-bateau--imoca svg{transform-origin:51% 87%;animation-duration:2.8s}
+@keyframes raa-sl-f-imoca{0%,8%{offset-distance:0%;opacity:0}10%{opacity:1}66%{offset-distance:100%;opacity:1}67.5%{opacity:1}70%,100%{offset-distance:100%;opacity:0}}
+@keyframes raa-sl-f-imoca-tel{0%,10%{offset-distance:0%;opacity:0}12%{opacity:1}66%{offset-distance:100%;opacity:1}67.5%{opacity:1}70%,100%{offset-distance:100%;opacity:0}}
+rdr-accueil-apercu .sl-bateau--c40{width:clamp(38px,3.6vw,52px);offset-anchor:51% 80%;animation:raa-sl-f-c40 16s linear infinite}
+rdr-accueil-apercu .sl-bateau--c40 svg{transform-origin:51% 80%;animation-duration:2.4s}
+@keyframes raa-sl-f-c40{0%,12%{offset-distance:0%;opacity:0}14%{opacity:1}74%{offset-distance:100%;opacity:1}75.5%{opacity:1}78%,100%{offset-distance:100%;opacity:0}}
+@keyframes raa-sl-f-c40-tel{0%,18%{offset-distance:0%;opacity:0}20%{opacity:1}76%{offset-distance:100%;opacity:1}77.5%{opacity:1}80%,100%{offset-distance:100%;opacity:0}}
+@keyframes raa-sl-arrivee-f-tel{0%,48%,55%,64%,71%,74%,81%,100%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}50%,53%,66%,69%,76%,79%{background:#FCF150;box-shadow:0 0 0 6px rgba(252,241,80,.22),0 0 18px 4px rgba(252,241,80,.4)}}
+@media (prefers-reduced-motion:reduce){
+rdr-accueil-apercu .sl-suiveur{display:none}
+}
 rdr-accueil-apercu .bil-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-top:14px}
 rdr-accueil-apercu .bil{--x:86px;position:relative;display:grid;grid-template-columns:var(--x) minmax(0,1fr);min-height:132px;color:#fff;filter:drop-shadow(0 18px 26px rgba(0,0,0,.35));transition:transform .3s cubic-bezier(.22,.8,.3,1)}
 rdr-accueil-apercu .bil:nth-child(4n+1){--c:var(--teal)}
@@ -496,6 +517,10 @@ rdr-accueil-apercu .classe small{display:none}
 rdr-accueil-apercu .sm-liste{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--marge));padding:2px var(--marge) 6px}
 rdr-accueil-apercu .sep-sillage{height:112px}
 rdr-accueil-apercu .sl-bateau{width:72px}
+rdr-accueil-apercu .sl-bateau--o50{display:none}
+rdr-accueil-apercu .sl-bateau--imoca{width:46px;animation-name:raa-sl-f-imoca-tel}
+rdr-accueil-apercu .sl-bateau--c40{width:38px;animation-name:raa-sl-f-c40-tel}
+rdr-accueil-apercu .sep-sillage.avec-flotte .sl-port--arr{animation-name:raa-sl-arrivee-f-tel}
 rdr-accueil-apercu .sl-port b{top:14px}
 rdr-accueil-apercu .bil-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px var(--marge) 8px;margin:0 calc(-1 * var(--marge));scrollbar-width:none}
 rdr-accueil-apercu .bil{flex:0 0 82%;scroll-snap-align:start;--x:74px}
@@ -773,6 +798,13 @@ function monter(racine, portail, D) {
 
 
   const ULTIM = '<svg viewBox="0 0 124 112" aria-hidden="true"><defs><linearGradient id="raa-ultim-gv" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C3CAD8"/><stop offset=".5" stop-color="#EEF1F6"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><path d="M25 98.8 Q14 100 2 99.2" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2" stroke-linecap="round"/><path d="M33 101 Q22 102.4 9 101.8" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/><path d="M82 101.8 Q74 102.8 62 102.3" fill="none" stroke="rgba(255,255,255,.22)" stroke-width=".9" stroke-linecap="round"/><path d="M122 85.2 L65.6 5" fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".6"/><path class="u-gv" d="M65.5 4.5 L47 6 Q36 40 29.5 79.4 L68.2 80.2 Z" fill="url(#raa-ultim-gv)"/><path d="M65.9 16 Q55 15.4 44.2 16.4 M66.4 29 Q53 28.4 40.6 29.4 M66.9 42 Q52 41.4 37.3 42.4 M67.4 55 Q51 54.4 34.4 55.4 M67.9 68 Q50 67.4 31.9 68.4" fill="none" stroke="rgba(14,17,29,.2)" stroke-width=".5"/><path class="u-foc" d="M66.6 26 L110.5 84 L76.4 82.6 Q71.6 56 66.6 26 Z" fill="#FCF150"/><path d="M68.4 34 Q72.6 58 75.4 82" fill="none" stroke="rgba(14,17,29,.1)" stroke-width=".5"/><path class="u-mat" d="M67.8 86 L64.6 2.6 L66.2 2.4 L69.4 86 Z" fill="#fff"/><path d="M68.2 80.3 L29 79.6" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="M113 86 L122 85.2" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M16.4 88.2 L17 96.5 M15 96.6 L19 96.4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linecap="round"/><path class="u-coque" d="M12 84.6 L104 83.6 Q109.6 83.6 114 86 L108.6 87.8 Q70 89.6 15 88.4 Q12.6 87 12 84.6 Z" fill="#fff"/><path d="M58 85.4 L70 85.2 L69.5 86.4 L58.4 86.5 Z" fill="rgba(14,17,29,.45)"/><path d="M15.5 87.5 Q62 89 108.8 87" fill="none" stroke="#4E9FA3" stroke-width=".9"/><path class="u-bras" d="M38 88 Q45 87.4 48 95.4 M76 87.6 Q83 87 86 95" fill="none" stroke="#E6EAF1" stroke-width="2.2" stroke-linecap="round"/><path class="u-flotteur" d="M24 95.2 L108 94.2 Q113.8 94.2 118 96.4 L112.8 98.2 Q76 99.8 27 98.8 Q24.6 97.4 24 95.2 Z" fill="#F2F4F8"/><path d="M27.4 97.8 Q76 99.2 112.9 97.4" fill="none" stroke="#FCF150" stroke-width=".8"/><path class="u-foil" d="M84 99.2 Q84.6 106.4 91 107.8 L93.4 106.8" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 97 Q121 95.2 123.4 95.9 M116.4 99 Q120.4 99.9 123.2 99.3" fill="none" stroke="rgba(255,255,255,.6)" stroke-width=".85" stroke-linecap="round"/></svg>';
+  
+
+  const FLOTTE = [
+    ['o50', '<svg viewBox="0 0 124 112" aria-hidden="true"><defs><linearGradient id="raa-gv-o50" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C3CAD8"/><stop offset=".5" stop-color="#EEF1F6"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><path d="M25 98.8 Q14 100 2 99.2" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2" stroke-linecap="round"/><path d="M33 101 Q22 102.4 9 101.8" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/><path d="M82 101.8 Q74 102.8 62 102.3" fill="none" stroke="rgba(255,255,255,.22)" stroke-width=".9" stroke-linecap="round"/><g transform="translate(0 4)"><path d="M122 85.2 L65.6 5" fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".6"/><path class="u-gv" d="M65.5 4.5 L47 6 Q36 40 29.5 79.4 L68.2 80.2 Z" fill="url(#raa-gv-o50)"/><path d="M65.9 16 Q55 15.4 44.2 16.4 M66.4 29 Q53 28.4 40.6 29.4 M66.9 42 Q52 41.4 37.3 42.4 M67.4 55 Q51 54.4 34.4 55.4 M67.9 68 Q50 67.4 31.9 68.4" fill="none" stroke="rgba(14,17,29,.2)" stroke-width=".5"/><path class="u-foc" d="M66.6 26 L110.5 84 L76.4 82.6 Q71.6 56 66.6 26 Z" fill="#5DBFC0"/><path d="M68.4 34 Q72.6 58 75.4 82" fill="none" stroke="rgba(14,17,29,.1)" stroke-width=".5"/><path class="u-mat" d="M67.8 86 L64.6 2.6 L66.2 2.4 L69.4 86 Z" fill="#fff"/><path d="M68.2 80.3 L29 79.6" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="M113 86 L122 85.2" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M16.4 88.2 L17 96.5 M15 96.6 L19 96.4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linecap="round"/><path class="u-coque" d="M12 84.6 L104 83.6 Q109.6 83.6 114 86 L108.6 87.8 Q70 89.6 15 88.4 Q12.6 87 12 84.6 Z" fill="#fff"/><path d="M58 85.4 L70 85.2 L69.5 86.4 L58.4 86.5 Z" fill="rgba(14,17,29,.45)"/><path d="M15.5 87.5 Q62 89 108.8 87" fill="none" stroke="#4E9FA3" stroke-width=".9"/></g><path class="u-bras" d="M38 92 Q45 91.4 48 95.6 M76 91.6 Q83 91 86 95.2" fill="none" stroke="#E6EAF1" stroke-width="2.2" stroke-linecap="round"/><path class="u-flotteur" d="M24 95.2 L108 94.2 Q113.8 94.2 118 96.4 L112.8 98.2 Q76 99.8 27 98.8 Q24.6 97.4 24 95.2 Z" fill="#F2F4F8"/><path d="M27.4 97.8 Q76 99.2 112.9 97.4" fill="none" stroke="#5DBFC0" stroke-width=".8"/><path class="u-foil" d="M84 99.2 Q84.4 103.6 88.4 104.6" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 97 Q121 95.2 123.4 95.9 M116.4 99 Q120.4 99.9 123.2 99.3" fill="none" stroke="rgba(255,255,255,.6)" stroke-width=".85" stroke-linecap="round"/></svg>'],
+    ['imoca', '<svg viewBox="0 0 124 112" aria-hidden="true"><defs><linearGradient id="raa-gv-imoca" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C3CAD8"/><stop offset=".5" stop-color="#EEF1F6"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><path d="M22 96.8 Q12 98 1 97.2" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2" stroke-linecap="round"/><path d="M34 98.8 Q22 100.2 8 99.6" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1" stroke-linecap="round"/><path d="M55.6 90 L54 103.4" stroke="rgba(255,255,255,.45)" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="53.8" cy="104" rx="5.6" ry="1.7" fill="rgba(255,255,255,.45)"/><path d="M121 80.2 L64.4 6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".6"/><path class="u-gv" d="M64.2 5.5 L48 7 Q38 40 31 74.6 L67.4 75.4 Z" fill="url(#raa-gv-imoca)"/><path d="M64.7 17 Q56 16.4 45.6 17.4 M65.2 30 Q54 29.4 42.2 30.4 M65.7 43 Q53 42.4 38.8 43.4 M66.2 56 Q52 55.4 35.6 56.4 M66.7 67 Q51 66.6 33.2 67.4" fill="none" stroke="rgba(14,17,29,.2)" stroke-width=".5"/><path class="u-foc" d="M65 22 L111.5 79.6 L73.5 77.6 Q69.8 50 65 22 Z" fill="#F19F39"/><path class="u-mat" d="M66.4 81 L63.6 3.6 L65 3.4 L67.8 81 Z" fill="#fff"/><path d="M67.4 75.5 L30.6 74.8" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="M112 80.8 L121 80.2" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M18.4 88.4 L19 96.6" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linecap="round"/><path class="u-coque" d="M14 80.5 L100 79.5 Q110 79.6 113 83 Q111 87.4 104 88.4 Q60 90.6 17 88.6 Q14.4 85 14 80.5 Z" fill="#fff"/><path d="M28 80.4 Q29 77 34 76.8 L48 76.6 Q51 77.4 52 80 Z" fill="#E3E7EF"/><path d="M36 78.2 L47 78 L46.6 79 L36.3 79.1 Z" fill="rgba(14,17,29,.5)"/><path d="M17 86.4 Q60 88.4 107 86.2" fill="none" stroke="#F19F39" stroke-width="1.2"/><path class="u-foil" d="M71 88.6 Q71.6 97.8 80.6 100.6 L84.4 99.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M78.4 97.4 Q82.4 95.6 86 96.4 M109.6 91.6 Q114 92.6 117.4 92" fill="none" stroke="rgba(255,255,255,.6)" stroke-width=".85" stroke-linecap="round"/></svg>'],
+    ['c40', '<svg viewBox="0 0 124 112" aria-hidden="true"><defs><linearGradient id="raa-gv-c40" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C3CAD8"/><stop offset=".5" stop-color="#EEF1F6"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="raa-spi-c40" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".42" stop-color="#fff"/><stop offset=".42" stop-color="#F5BE41"/><stop offset=".62" stop-color="#F5BE41"/><stop offset=".62" stop-color="#F2F4F8"/><stop offset="1" stop-color="#E3E7EF"/></linearGradient></defs><path d="M20 90 Q10 91.2 1 90.4" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2" stroke-linecap="round"/><path d="M30 92.4 Q19 93.6 7 93" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1" stroke-linecap="round"/><path d="M60 91.4 L58.8 100.8" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="58.6" cy="101.4" rx="4.8" ry="1.5" fill="rgba(255,255,255,.4)"/><path class="u-gv" d="M60.6 12.5 L47 14 Q38 44 29.5 77.2 L63.6 78 Z" fill="url(#raa-gv-c40)"/><path d="M61.1 24 Q54 23.4 44.6 24.4 M61.7 37 Q52 36.4 41 37.4 M62.3 50 Q50 49.4 37.4 50.4 M62.9 63 Q49 62.4 33.8 63.4" fill="none" stroke="rgba(14,17,29,.2)" stroke-width=".5"/><path class="u-mat" d="M62.6 83 L60 11 L61.4 10.8 L64 83 Z" fill="#fff"/><path d="M63.6 78.1 L29 77.4" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path class="u-spi" d="M61.6 13 Q106 20 120.4 83.2 L80 79.6 Q78 44 61.6 13 Z" fill="url(#raa-spi-c40)"/><path d="M63 16 Q80 44 80.8 79" fill="none" stroke="rgba(14,17,29,.12)" stroke-width=".5"/><path d="M109.4 84.6 L121 83.6" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M20 90 L20.6 96.4" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linecap="round"/><path class="u-coque" d="M16 82.4 L96 81.6 Q108 81.8 110.6 85.4 Q108.4 89.6 98 90.2 Q58 91.6 19 90.4 Q16.4 87 16 82.4 Z" fill="#fff"/><path d="M34 82.3 Q35 79.6 39 79.4 L52 79.2 Q55 79.8 56 82 Z" fill="#E3E7EF"/><path d="M40.4 80.6 L51 80.4 L50.6 81.3 L40.7 81.4 Z" fill="rgba(14,17,29,.5)"/><path d="M19 88.8 Q58 90.2 104 88.4" fill="none" stroke="#F5BE41" stroke-width="1.1"/><path d="M110.4 88 Q114.6 85.4 118 86.4 M108.8 90.8 Q113.6 91.8 117.4 91.2" fill="none" stroke="rgba(255,255,255,.65)" stroke-width=".9" stroke-linecap="round"/></svg>']
+  ];
 
    
   const titreHtml = (t) => esc(t).replace(/\[([^\]]+)\]/, (_, m) => '<em>' + m + '</em>');
@@ -927,7 +959,7 @@ function monter(racine, portail, D) {
   const liaison = un('.sep--liaison');
   liaison.innerHTML = '<div class="sep-damier" aria-hidden="true"></div><div class="sep-pavois" aria-hidden="true"></div>' +
     '<div class="sep-sillage" aria-hidden="true"><svg class="sl-svg"><path class="sl-reste"/><path class="sl-fait" pathLength="1000"/></svg>' +
-    '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau">' + ULTIM + '</span></div>';
+    '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau sl-bateau--ultim">' + ULTIM + '</span></div>';
   
 
 
@@ -939,10 +971,21 @@ function monter(racine, portail, D) {
     const d = 'M' + m + ' ' + y + ' Q ' + (L / 2) + ' ' + (2 * sommet - y) + ' ' + (L - m) + ' ' + y;
     const svg = el.querySelector('.sl-svg'); svg.setAttribute('viewBox', '0 0 ' + L + ' ' + H);
     svg.querySelectorAll('path').forEach(p => p.setAttribute('d', d));
-    el.querySelector('.sl-bateau').style.offsetPath = "path('" + d + "')";
+    el.querySelectorAll('.sl-bateau').forEach(b => { b.style.offsetPath = "path('" + d + "')"; });
     const dep = el.querySelector('.sl-port--dep'), arr = el.querySelector('.sl-port--arr');
     dep.style.left = m + 'px'; dep.style.top = y + 'px'; arr.style.left = (L - m) + 'px'; arr.style.top = y + 'px';
     el.querySelector('.sl-milles').style.top = (sommet + 18) + 'px';
+  }
+  
+
+
+  function poserFlotte(oui) {
+    const el = liaison.querySelector('.sep-sillage');
+    el.querySelectorAll('.sl-suiveur').forEach(b => b.remove());
+    el.classList.toggle('avec-flotte', oui);
+    if (oui) el.insertAdjacentHTML('beforeend', FLOTTE.map(([cle, dessin]) => '<span class="sl-bateau sl-suiveur sl-bateau--' + cle + '">' + dessin + '</span>').join(''));
+    dessinerSillage();
+    try { el.getAnimations({ subtree: true }).forEach(a => { a.currentTime = 0; }); } catch (e) {   }
   }
   
 
@@ -1106,6 +1149,7 @@ function monter(racine, portail, D) {
   disposer(DISPOS[q.get('dispo')] ? q.get('dispo') : 'b');
   avecDiapos = q.get('diapos') !== 'non'; marquerDiapos();
   lier(['damier', 'pavois', 'sillage'].includes(q.get('liaison')) ? q.get('liaison') : 'sillage');
+  poserFlotte(q.get('flotte') !== 'non');
   modeAffiche = q.get('aff') === 'billets' ? 'billets' : 'ligne'; presse('[data-aff]', un('[data-aff="' + modeAffiche + '"]'));
   placer(); rendreHero(); rendreCtas(); entree(); note();
   return () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
