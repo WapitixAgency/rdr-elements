@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ff84b84 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ff84b84";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 8e46037 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="8e46037";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -8,19 +8,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ff84b84";performanc
   const SOURCE = 'https://www.routedurhum.com/_functions/accueilApercu';
 
   const CSS = `rdr-accueil-apercu{display:block;width:var(--customElementWidth,100%);line-height:normal;text-align:left}
-.raa-portail{font-family:var(--police);-webkit-font-smoothing:antialiased;line-height:normal;text-align:left}
-:is(rdr-accueil-apercu,.raa-portail) button{font-family:inherit;margin:0}
+rdr-accueil-apercu button{font-family:inherit;margin:0}
 rdr-accueil-apercu .raa-attente{min-height:clamp(600px,calc(100svh - 125px),960px);background:#0E111D}
 rdr-accueil-apercu .raa-vide{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0E111D;color:#fff;font-family:Montserrat,system-ui,sans-serif;text-align:center;padding:40px 20px}
 rdr-accueil-apercu .raa-vide h3{margin:0;font-size:22px}
 rdr-accueil-apercu .raa-vide p{margin:0;color:rgba(255,255,255,.7)}
 rdr-accueil-apercu .raa-vide button{height:42px;padding:0 20px;border:2px solid #fff;border-radius:10px 0 10px 0;background:transparent;color:#fff;font-weight:700;cursor:pointer}
-rdr-accueil-apercu,.raa-portail{--marine:#0E111D;--nuit:#0A1228;--marine2:#16355D;--panneau:#1B2237;--teal:#5DBFC0;--teal2:#14A79E;--vert:#006F7B;--jaune:#FCF150;--or:#F5BE41;--orange:#F19F39;
+rdr-accueil-apercu{--marine:#0E111D;--nuit:#0A1228;--marine2:#16355D;--panneau:#1B2237;--teal:#5DBFC0;--teal2:#14A79E;--vert:#006F7B;--jaune:#FCF150;--or:#F5BE41;--orange:#F19F39;
     --t2:rgba(255,255,255,.72);--t3:rgba(255,255,255,.5);--filet:rgba(255,255,255,.12);
     --police:'Montserrat',system-ui,sans-serif;--titre:'Varien','Archivo Black',Impact,sans-serif;
     --largeur:1380px;--marge:30px;
     --haut-entete:175px;}
-rdr-accueil-apercu *,.raa-portail *{box-sizing:border-box}
+rdr-accueil-apercu *{box-sizing:border-box}
 rdr-accueil-apercu{margin:0;background:#0E111D;color:#0E111D;overflow-x:clip;font-family:var(--police);-webkit-font-smoothing:antialiased}
 rdr-accueil-apercu img{display:block}
 rdr-accueil-apercu a{color:inherit;text-decoration:none}
@@ -41,7 +40,7 @@ rdr-accueil-apercu .btn--plein{background:var(--jaune);border-color:var(--jaune)
 rdr-accueil-apercu .btn--plein:hover{background:#fff;border-color:#fff}
 rdr-accueil-apercu .btn--marine{background:#0E111D;border-color:#0E111D;color:#fff}
 rdr-accueil-apercu .btn--marine:hover{background:#16355D;border-color:#16355D}
-rdr-accueil-apercu,.raa-portail{--haut-acces:clamp(200px,26vh,260px);--bas-titre:calc(var(--haut-acces) + 60px)}
+rdr-accueil-apercu{--haut-acces:clamp(200px,26vh,260px);--bas-titre:calc(var(--haut-acces) + 60px)}
 rdr-accueil-apercu .hero{position:relative;height:clamp(520px,calc(100svh - var(--haut-entete)),960px);background:#0E111D;color:#fff;overflow:hidden}
 rdr-accueil-apercu .hero[data-acces="sous"]{--bas-titre:60px}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:clamp(560px,100svh,1100px)}
@@ -315,21 +314,24 @@ rdr-accueil-apercu .pav-dr{position:absolute;width:var(--fw);margin-left:calc(va
 rdr-accueil-apercu .pav-dr svg{display:block;width:100%;height:auto;transform-origin:50% 0;animation:raa-pavois 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.23s);filter:drop-shadow(0 4px 5px rgba(10,18,40,.18))}
 @keyframes raa-pavois{0%,100%{transform:rotate(calc(var(--b,6deg) * -1)) skewX(3deg)}50%{transform:rotate(var(--b,6deg)) skewX(-3deg)}}
 rdr-accueil-apercu .sep-sillage{position:relative;height:100px;background:var(--avant);overflow:hidden}
-rdr-accueil-apercu .sep-sillage svg{position:absolute;left:6%;top:18px;width:88%;height:60px;overflow:visible}
-rdr-accueil-apercu .sep-sillage path{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:2 9;stroke-linecap:round;vector-effect:non-scaling-stroke}
-rdr-accueil-apercu .sep-sillage path.sep-trace{stroke:var(--jaune);stroke-width:2.5;stroke-dasharray:1000;stroke-dashoffset:1000;animation:raa-trace 16s linear infinite}
-@keyframes raa-trace{0%{stroke-dashoffset:1000;opacity:1}90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
-rdr-accueil-apercu .sep-port{position:absolute;top:53px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(93,191,192,.2)}
-rdr-accueil-apercu .sep-port--dep{left:calc(6% - 5px)}
-rdr-accueil-apercu .sep-port--arr{right:calc(6% - 5px);background:var(--jaune);box-shadow:0 0 0 4px rgba(252,241,80,.2)}
-rdr-accueil-apercu .sep-port b{position:absolute;top:18px;white-space:nowrap;font:800 10px/1 var(--police);letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
-rdr-accueil-apercu .sep-port--dep b{left:0}
-rdr-accueil-apercu .sep-port--arr b{right:0}
-rdr-accueil-apercu .sep-milles{position:absolute;left:50%;top:46px;transform:translateX(-50%);font-family:var(--titre);font-style:italic;font-size:13px;line-height:1;color:rgba(255,255,255,.5);white-space:nowrap}
-rdr-accueil-apercu .sep-bateau{position:absolute;left:6%;top:32px;width:28px;height:28px;transform:translateX(-50%);animation:raa-voguer 16s linear infinite}
-rdr-accueil-apercu .sep-bateau svg{width:100%;height:100%;animation:raa-tangue 2.4s ease-in-out infinite}
-@keyframes raa-voguer{0%{left:6%;top:32px;opacity:0}3%{opacity:1}22.5%{left:28%;top:18.5px}45%{left:50%;top:14px}67.5%{left:72%;top:18.5px}90%{left:94%;top:32px;opacity:1}95%,100%{left:94%;top:32px;opacity:0}}
-@keyframes raa-tangue{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+rdr-accueil-apercu .sl-svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible}
+rdr-accueil-apercu .sl-reste{fill:none;stroke:rgba(255,255,255,.24);stroke-width:1.5;stroke-dasharray:6 7}
+rdr-accueil-apercu .sl-fait{fill:none;stroke:var(--jaune);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:0;animation:raa-sl-trace 12s linear infinite}
+@keyframes raa-sl-trace{0%{stroke-dashoffset:1000;opacity:1}72%{stroke-dashoffset:0;opacity:1}90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+rdr-accueil-apercu .sl-bateau{position:absolute;left:0;top:0;width:46px;offset-anchor:50% 86%;offset-rotate:auto;offset-distance:100%;animation:raa-sl-vogue 12s linear infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+rdr-accueil-apercu .sl-bateau svg{display:block;width:100%;height:auto;transform-origin:50% 86%;animation:raa-sl-tangue 2.6s ease-in-out infinite}
+@keyframes raa-sl-vogue{0%{offset-distance:0%;opacity:0}3%{opacity:1}72%{offset-distance:100%;opacity:1}90%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:0}}
+@keyframes raa-sl-tangue{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+rdr-accueil-apercu .sl-port{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%}
+rdr-accueil-apercu .sl-port b{position:absolute;top:18px;white-space:nowrap;font:800 10px/1 var(--police);letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
+rdr-accueil-apercu .sl-port--dep{background:var(--teal)}
+rdr-accueil-apercu .sl-port--dep b{left:-5px}
+rdr-accueil-apercu .sl-port--dep::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--teal);opacity:0;animation:raa-sl-pouls 2.2s ease-out infinite}
+@keyframes raa-sl-pouls{from{transform:scale(.6);opacity:.9}to{transform:scale(2.4);opacity:0}}
+rdr-accueil-apercu .sl-port--arr{background:#FCF150;box-shadow:0 0 0 6px rgba(252,241,80,.22),0 0 18px 4px rgba(252,241,80,.4);animation:raa-sl-arrivee 12s linear infinite}
+rdr-accueil-apercu .sl-port--arr b{right:-5px}
+@keyframes raa-sl-arrivee{0%,70%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}73%,92%{background:#FCF150;box-shadow:0 0 0 6px rgba(252,241,80,.22),0 0 18px 4px rgba(252,241,80,.4)}100%{background:rgba(252,241,80,.4);box-shadow:0 0 0 0 rgba(252,241,80,0),0 0 0 0 rgba(252,241,80,0)}}
+rdr-accueil-apercu .sl-milles{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--titre);font-style:italic;font-size:13px;line-height:1;letter-spacing:.02em;color:rgba(255,255,255,.55);white-space:nowrap}
 rdr-accueil-apercu .bil-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-top:14px}
 rdr-accueil-apercu .bil{--x:86px;position:relative;display:grid;grid-template-columns:var(--x) minmax(0,1fr);min-height:132px;color:#fff;filter:drop-shadow(0 18px 26px rgba(0,0,0,.35));transition:transform .3s cubic-bezier(.22,.8,.3,1)}
 rdr-accueil-apercu .bil:nth-child(4n+1){--c:var(--teal)}
@@ -392,15 +394,8 @@ rdr-accueil-apercu .pv-sk-ov .pv-micro svg{width:11px;height:11px}
 rdr-accueil-apercu .pv-sk-ov b{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:7px}
 rdr-accueil-apercu .pv-sk-ov strong{display:block;font-family:var(--titre);font-style:italic;font-weight:400;font-size:22px;line-height:.95;text-transform:uppercase;text-wrap:balance;margin-top:2px}
 rdr-accueil-apercu .pv-sk-ov small{display:block;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cc);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.raa-portail .mq-bandeau{position:fixed;left:12px;bottom:12px;z-index:9000;display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:calc(100vw - 24px);padding:6px 10px;background:rgba(10,18,40,.94);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#e2e8f0;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.raa-portail .mq-bandeau b{color:#F5BE41;font-weight:700;margin-right:6px}
-.raa-portail .mq-bandeau i{font-style:normal;color:#8fa3c0;margin:0 2px 0 8px}
-.raa-portail .mq-bandeau button{font:700 11px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:transparent;color:#e2e8f0;padding:4px 9px;cursor:pointer}
-.raa-portail .mq-bandeau button[aria-pressed="true"]{background:#5DBFC0;border-color:#5DBFC0;color:#0A1228}
-.raa-portail .mq-bandeau b{cursor:pointer}
-.raa-portail .mq-bandeau.replie > :not(b){display:none}
 @media (min-width:761px) and (max-width:1500px){
-rdr-accueil-apercu,.raa-portail{--marge:clamp(40px,3.4vw,52px)}
+rdr-accueil-apercu{--marge:clamp(40px,3.4vw,52px)}
 rdr-accueil-apercu .cta-liste{gap:22px}
 rdr-accueil-apercu .actus{padding:72px 0 84px}
 rdr-accueil-apercu .actus-grille{gap:18px}
@@ -412,7 +407,7 @@ rdr-accueil-apercu .affiche{padding:32px 0 76px}
 rdr-accueil-apercu .promo-txt{padding:52px 58px}
 }
 @media (max-height:820px){
-rdr-accueil-apercu,.raa-portail{--haut-acces:clamp(172px,24vh,200px);--bas-titre:calc(var(--haut-acces) + 48px)}
+rdr-accueil-apercu{--haut-acces:clamp(172px,24vh,200px);--bas-titre:calc(var(--haut-acces) + 48px)}
 rdr-accueil-apercu .hv-titre{gap:12px}
 rdr-accueil-apercu .hv-titre h2{font-size:clamp(30px,min(4.6vw,7.2vh),60px)}
 rdr-accueil-apercu .hv-fait{padding:5px 15px 5px 12px}
@@ -438,7 +433,7 @@ rdr-accueil-apercu .pv-top{display:none}
 rdr-accueil-apercu .bil-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
-rdr-accueil-apercu,.raa-portail{--marge:16px;--haut-entete:120px}
+rdr-accueil-apercu{--marge:16px;--haut-entete:120px}
 rdr-accueil-apercu .hero{height:auto;min-height:0;overflow:visible}
 rdr-accueil-apercu .hv-scene{position:relative;height:clamp(320px,58svh,480px)}
 rdr-accueil-apercu .hv-logo{width:118px}
@@ -496,9 +491,7 @@ rdr-accueil-apercu .classe b{font-size:17px}
 rdr-accueil-apercu .classe small{display:none}
 rdr-accueil-apercu .sm-liste{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--marge));padding:2px var(--marge) 6px}
 rdr-accueil-apercu .sep-sillage{height:92px}
-rdr-accueil-apercu .sep-sillage svg{left:8%;width:84%}
-rdr-accueil-apercu .sep-port--dep{left:calc(8% - 5px)}
-rdr-accueil-apercu .sep-port--arr{right:calc(8% - 5px)}
+rdr-accueil-apercu .sl-bateau{width:38px}
 rdr-accueil-apercu .bil-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px var(--marge) 8px;margin:0 calc(-1 * var(--marge));scrollbar-width:none}
 rdr-accueil-apercu .bil{flex:0 0 82%;scroll-snap-align:start;--x:74px}
 rdr-accueil-apercu .bil-talon b{font-size:38px}
@@ -537,7 +530,7 @@ rdr-accueil-apercu .promo-btns .btn{width:100%}
 rdr-accueil-apercu .pv-sk-ov .pv-micro{letter-spacing:.05em;font-size:8.5px}
 }
 @media (prefers-reduced-motion:reduce){
-rdr-accueil-apercu *,.raa-portail *{animation:none !important;transition:none !important}
+rdr-accueil-apercu *{animation:none !important;transition:none !important}
 rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{opacity:1;transform:none}
 }`;
 
@@ -629,29 +622,6 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   </div>
 </section>`;
 
-  const PORTAIL = `<div class="mq-bandeau" id="mq">
-  <b>APERÇU ACCUEIL V3</b>
-  <i>phase</i>
-  <button data-phase="avant" aria-pressed="true">Avant le village</button>
-  <button data-phase="village" aria-pressed="false">Village</button>
-  <button data-phase="course" aria-pressed="false">Course</button>
-  <i>accès</i>
-  <button data-dispo="a" aria-pressed="false">Sur la photo</button>
-  <button data-dispo="b" aria-pressed="true">Dessous</button>
-  <i>diapos</i>
-  <button id="mq-diapos" aria-pressed="true">Oui</button>
-  <i>skippers › espace</i>
-  <button data-liaison="sillage" aria-pressed="true">Sillage</button>
-  <button data-liaison="pavois" aria-pressed="false">Grand pavois</button>
-  <button data-liaison="damier" aria-pressed="false">Ligne d'arrivée</button>
-  <i>à l'affiche</i>
-  <button data-aff="ligne" aria-pressed="true">Ligne du temps</button>
-  <button data-aff="billets" aria-pressed="false">Billets</button>
-  <i>hero</i>
-  <button id="mq-rejouer">Rejouer</button>
-  <i id="mq-note" style="opacity:.7"></i>
-</div>`;
-
   function injecterCss() {
     if (document.getElementById('rdr-accueil-apercu-css')) return;
     const st = document.createElement('style');
@@ -672,7 +642,6 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     disconnectedCallback() {
       this._monte = false;
       if (this._defaire) { try { this._defaire(); } catch (e) {   } this._defaire = null; }
-      if (this._portail) { this._portail.remove(); this._portail = null; }
     }
 
     async _charger() {
@@ -683,12 +652,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
         if (!this._monte) return;
         if (!D || !D.phases || !D.medias || !Array.isArray(D.actus) || !Array.isArray(D.skippers)) throw new Error('jeu incomplet');
         this.innerHTML = PAGE;
-        const portail = document.createElement('div');
-        portail.className = 'raa-portail';
-        portail.innerHTML = PORTAIL;
-        document.body.appendChild(portail);
-        this._portail = portail;
-        this._defaire = monter(this, portail, D);
+        this._defaire = monter(this, this, D);
       } catch (e) {
         console.warn('[rdr-accueil-apercu] aperçu indisponible', e && e.message);
         if (!this._monte) return;
@@ -796,7 +760,7 @@ function monter(racine, portail, D) {
   const COEUR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.2 4.6 2.8C12 6.2 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>';
   const VERROU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
   const FLAMME = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.4 1 2.5 2.3 2.5 1.6 0 2.5-1.4 2.2-3.2C17.4 10.6 19 13 19 15.5 19 19.1 15.9 22 12 22s-7-2.9-7-6.5C5 10.2 10.6 7.7 12 2z"/></svg>';
-  const VOILE = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15 3 L15 22 L5 22 Z" fill="#fff"/><path d="M17 7 L17 22 L26 22 Z" fill="#FCF150"/><path d="M3 24 H29 L25 28 H7 Z" fill="#fff"/></svg>';
+  const VOILIER = '<svg viewBox="0 0 48 40" aria-hidden="true"><path d="M1 34 Q 8 32.4 16 33" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/><path d="M5 37 Q 11 35.8 17.5 36" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.2" stroke-linecap="round"/><path d="M15 31.5 H43 Q 41 36 36.5 37 H20 Q 16.5 36 15 31.5 Z" fill="#fff"/><rect x="28.2" y="3" width="1.4" height="28.5" fill="#fff"/><path d="M27.6 4.5 C 22 12 18.5 21 17.5 29.5 H27.6 Z" fill="#fff"/><path d="M30.2 7 L40.5 29.5 H30.2 Z" fill="#FCF150"/></svg>';
 
    
   const titreHtml = (t) => esc(t).replace(/\[([^\]]+)\]/, (_, m) => '<em>' + m + '</em>');
@@ -950,8 +914,23 @@ function monter(racine, portail, D) {
 
   const liaison = un('.sep--liaison');
   liaison.innerHTML = '<div class="sep-damier" aria-hidden="true"></div><div class="sep-pavois" aria-hidden="true"></div>' +
-    '<div class="sep-sillage" aria-hidden="true"><svg viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="M0 40 Q 500 4 1000 40"/><path class="sep-trace" pathLength="1000" d="M0 40 Q 500 4 1000 40"/></svg>' +
-    '<span class="sep-port sep-port--dep"><b>Saint-Malo</b></span><span class="sep-port sep-port--arr"><b>Pointe-à-Pitre</b></span><span class="sep-milles">3 542 milles</span><span class="sep-bateau">' + VOILE + '</span></div>';
+    '<div class="sep-sillage" aria-hidden="true"><svg class="sl-svg"><path class="sl-reste"/><path class="sl-fait" pathLength="1000"/></svg>' +
+    '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau">' + VOILIER + '</span></div>';
+  
+
+
+
+  function dessinerSillage() {
+    const el = liaison.querySelector('.sep-sillage'); const L = largeurPage(); const tel = L < 760; const H = tel ? 92 : 100;
+    const m = Math.round(L * (tel ? 0.08 : 0.06)); const y = Math.round(H * 0.66); const sommet = Math.round(H * 0.4);
+    const d = 'M' + m + ' ' + y + ' Q ' + (L / 2) + ' ' + (2 * sommet - y) + ' ' + (L - m) + ' ' + y;
+    const svg = el.querySelector('.sl-svg'); svg.setAttribute('viewBox', '0 0 ' + L + ' ' + H);
+    svg.querySelectorAll('path').forEach(p => p.setAttribute('d', d));
+    el.querySelector('.sl-bateau').style.offsetPath = "path('" + d + "')";
+    const dep = el.querySelector('.sl-port--dep'), arr = el.querySelector('.sl-port--arr');
+    dep.style.left = m + 'px'; dep.style.top = y + 'px'; arr.style.left = (L - m) + 'px'; arr.style.top = y + 'px';
+    el.querySelector('.sl-milles').style.top = (sommet + 18) + 'px';
+  }
   
 
   const alea = (n) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
@@ -1018,9 +997,9 @@ function monter(racine, portail, D) {
     }
     el.innerHTML = h;
   }
-  dessinerDamier(); dessinerPavois();
+  dessinerDamier(); dessinerPavois(); dessinerSillage();
   let liaisonTimer = null;
-  ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerDamier(); dessinerPavois(); }, 150); });
+  ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerDamier(); dessinerPavois(); dessinerSillage(); }, 150); });
   $('pv-ico-lieu').innerHTML = ICO.lieu; $('pv-ico-verrou').innerHTML = VERROU;
 
    
@@ -1084,7 +1063,7 @@ function monter(racine, portail, D) {
     $('hero').dataset.acces = DISPOS[cle];
     presse('[data-dispo]', un('[data-dispo="' + cle + '"]')); placer(); note();
   }
-  function marquerDiapos() { $('mq-diapos').setAttribute('aria-pressed', String(avecDiapos)); $('mq-diapos').textContent = avecDiapos ? 'Oui' : 'Non'; }
+  function marquerDiapos() { const b = $('mq-diapos'); if (!b) return; b.setAttribute('aria-pressed', String(avecDiapos)); b.textContent = avecDiapos ? 'Oui' : 'Non'; }
   function lier(cle) { racine.dataset.liaison = cle; presse('[data-liaison]', un('[data-liaison="' + cle + '"]')); }
   function afficher(cle) { modeAffiche = cle; presse('[data-aff]', un('[data-aff="' + cle + '"]')); rendreAffiche(); }
   tout('[data-phase]').forEach(b => b.addEventListener('click', () => {
@@ -1094,12 +1073,16 @@ function monter(racine, portail, D) {
   tout('[data-dispo]').forEach(b => b.addEventListener('click', () => disposer(b.dataset.dispo)));
   tout('[data-liaison]').forEach(b => b.addEventListener('click', () => lier(b.dataset.liaison)));
   tout('[data-aff]').forEach(b => b.addEventListener('click', () => afficher(b.dataset.aff)));
-  $('mq-diapos').addEventListener('click', () => { avecDiapos = !avecDiapos; marquerDiapos(); rendreHero(); if ($('hero').classList.contains('est-photo')) { poserRail(); relancer(); } });
-  $('mq-rejouer').addEventListener('click', jouerHero);
-  un('#mq b').addEventListener('click', () => $('mq').classList.toggle('replie'));
-   
-  if (innerWidth < 760) $('mq').classList.add('replie');
-  function note() { $('mq-note').textContent = innerWidth + ' × ' + innerHeight + ' · hero ' + $('hero').offsetHeight + ' px · ' + PHASES[phase].nom; }
+  
+
+  if ($('mq')) {
+    $('mq-diapos').addEventListener('click', () => { avecDiapos = !avecDiapos; marquerDiapos(); rendreHero(); if ($('hero').classList.contains('est-photo')) { poserRail(); relancer(); } });
+    $('mq-rejouer').addEventListener('click', jouerHero);
+    un('#mq b').addEventListener('click', () => $('mq').classList.toggle('replie'));
+     
+    if (innerWidth < 760) $('mq').classList.add('replie');
+  }
+  function note() { const n = $('mq-note'); if (n) n.textContent = innerWidth + ' × ' + innerHeight + ' · hero ' + $('hero').offsetHeight + ' px · ' + PHASES[phase].nom; }
   ecoute(window, 'resize', note);
   
 
