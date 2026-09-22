@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum ecea7d5",
- "livreLe": "2026-09-22T20:27:37.062Z",
+ "source": "WapitixAgency/route-du-rhum 1523088",
+ "livreLe": "2026-09-22T20:38:11.262Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3284,
  "revisionsAVenir": 30,
@@ -15,7 +15,7 @@
    "priorite": "high",
    "octets": 163285,
    "gzip": 40957,
-   "brotli": 32102,
+   "brotli": 32115,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -82,8 +82,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 77955,
-   "gzip": 20570,
-   "brotli": 17537,
+   "gzip": 20571,
+   "brotli": 17538,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -126,8 +126,8 @@
    ],
    "priorite": "high",
    "octets": 462504,
-   "gzip": 125609,
-   "brotli": 101906,
+   "gzip": 125610,
+   "brotli": 101963,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -153,7 +153,7 @@
    "priorite": "high",
    "octets": 759120,
    "gzip": 218064,
-   "brotli": 172510,
+   "brotli": 172526,
    "fichiers": [
     {
      "fichier": "village-atelier.js",
@@ -176,7 +176,7 @@
    "priorite": "low",
    "octets": 867395,
    "gzip": 181775,
-   "brotli": 139281,
+   "brotli": 139337,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -203,8 +203,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 462252,
-   "gzip": 109087,
-   "brotli": 86373,
+   "gzip": 109086,
+   "brotli": 86410,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -240,7 +240,7 @@
    "priorite": "high",
    "octets": 247334,
    "gzip": 60863,
-   "brotli": 50960,
+   "brotli": 50993,
    "fichiers": [
     {
      "fichier": "rdr-entete.js",
@@ -262,14 +262,14 @@
    ],
    "precharger": [],
    "priorite": "high",
-   "octets": 112555,
-   "gzip": 26394,
-   "brotli": 22646,
+   "octets": 113002,
+   "gzip": 26523,
+   "brotli": 22717,
    "fichiers": [
     {
      "fichier": "rdr-accueil-apercu.js",
-     "octets": 112359,
-     "sha": "6ee92251ca50",
+     "octets": 112806,
+     "sha": "bfc7aa29b154",
      "balises": [
       "rdr-accueil-apercu"
      ]
@@ -294,7 +294,7 @@
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54121,
+   "brotli": 54124,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
@@ -336,8 +336,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 188786,
-   "gzip": 48287,
-   "brotli": 40442,
+   "gzip": 48286,
+   "brotli": 40392,
    "fichiers": [
     {
      "fichier": "rdr-programme.js",
@@ -363,8 +363,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 144847,
-   "gzip": 37913,
-   "brotli": 32083,
+   "gzip": 37914,
+   "brotli": 32103,
    "fichiers": [
     {
      "fichier": "rdr-venir.js",
@@ -400,8 +400,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 78105,
-   "gzip": 18731,
-   "brotli": 16304,
+   "gzip": 18732,
+   "brotli": 16298,
    "fichiers": [
     {
      "fichier": "faits-marquants.js",
@@ -460,7 +460,7 @@
    "priorite": "high",
    "octets": 55452,
    "gzip": 16251,
-   "brotli": 14263,
+   "brotli": 14251,
    "fichiers": [
     {
      "fichier": "rdr-accreditations.js",
@@ -486,8 +486,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 66215,
-   "gzip": 20423,
-   "brotli": 17694,
+   "gzip": 20421,
+   "brotli": 17695,
    "fichiers": [
     {
      "fichier": "rdr-cgu.js",
@@ -513,8 +513,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 107786,
-   "gzip": 23946,
-   "brotli": 20976,
+   "gzip": 23947,
+   "brotli": 20971,
    "fichiers": [
     {
      "fichier": "rdr-concours-photo.js",
@@ -541,7 +541,7 @@
    "priorite": "high",
    "octets": 163169,
    "gzip": 40913,
-   "brotli": 34724,
+   "brotli": 34738,
    "fichiers": [
     {
      "fichier": "tournee-map.js",
@@ -565,7 +565,7 @@
    "priorite": "high",
    "octets": 131037,
    "gzip": 34646,
-   "brotli": 30251,
+   "brotli": 30193,
    "fichiers": [
     {
      "fichier": "rdr-console.js",
@@ -588,8 +588,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 44095,
-   "gzip": 13813,
-   "brotli": 11958,
+   "gzip": 13814,
+   "brotli": 11965,
    "fichiers": [
     {
      "fichier": "rdr-tags.js",
@@ -613,7 +613,7 @@
    "priorite": "high",
    "octets": 66565,
    "gzip": 15984,
-   "brotli": 13788,
+   "brotli": 13774,
    "fichiers": [
     {
      "fichier": "skipper-media-uploader.js",

@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ecea7d5 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ecea7d5";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 1523088 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="1523088";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -762,6 +762,22 @@ function monter(racine, portail, D) {
 
 
 
+
+
+
+
+
+
+  const AU_TELEPHONE = (document.documentElement.clientWidth || window.innerWidth || 0) < 760;
+  let forceIntro = null;
+  try { forceIntro = new URLSearchParams(location.search).get('intro'); } catch (e) {   }
+  const sansVideo = AU_TELEPHONE && forceIntro !== 'oui';
+  if (sansVideo) { const v0 = un('.hv-fond video'); if (v0) v0.remove(); }
+  
+
+
+
+
   const retaille = (u, larg, q) => String(u || '').replace(/\/v1\/fill\/w_(\d+),h_(\d+)([^/]*)\//, (tout2, W, H, reste) => {
     const w = Math.min(Number(W), larg), h = Math.max(1, Math.round(Number(H) * (w / Number(W))));
     return '/v1/fill/w_' + w + ',h_' + h + String(reste).replace(/,q_\d+/, ',q_' + q) + '/';
@@ -1038,7 +1054,15 @@ function monter(racine, portail, D) {
     const gen = heroGen;
     requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); relancer(); compter(); }));
   }
-  function entree() { if (introPour('hero')) jouerHero(); else entreeDouce(); }
+  
+
+
+
+
+  function entree() {
+    if (sansVideo) { introDecision().vu.hero = true; entreeDouce(); return; }
+    if (introPour('hero')) jouerHero(); else entreeDouce();
+  }
   
 
 
