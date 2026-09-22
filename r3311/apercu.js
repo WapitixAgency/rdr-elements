@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 6a488ed | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="6a488ed";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum d2af806 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d2af806";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -302,21 +302,7 @@ rdr-accueil-apercu .sm-chip--chaud u,rdr-accueil-apercu .sm-chip--chaud em{color
 rdr-accueil-apercu .sm-chip--chaud em{background:rgba(252,241,80,.16)}
 rdr-accueil-apercu .sep{position:relative;z-index:4;line-height:0}
 rdr-accueil-apercu .sep > div{display:none}
-rdr-accueil-apercu[data-liaison="damier"] .sep-damier,rdr-accueil-apercu[data-liaison="pavois"] .sep-pavois,rdr-accueil-apercu[data-liaison="sillage"] .sep--liaison .sep-sillage{display:block}
-rdr-accueil-apercu .sep-damier{--c:20px;position:relative;height:calc(var(--c) * 2 + 78px);background:var(--apres);overflow:hidden}
-rdr-accueil-apercu .sep-damier::before{content:'';position:absolute;left:0;right:0;top:0;height:10px;background:var(--avant);z-index:2}
-rdr-accueil-apercu .dm-ligne{position:absolute;left:0;top:4px;display:flex}
-rdr-accueil-apercu .dm-ligne i{flex:none;width:var(--c);height:calc(var(--c) * 2 + 6px);animation:raa-ondule 2.8s ease-in-out infinite;animation-delay:calc(var(--k) * -.09s)}
-rdr-accueil-apercu .dm-a{background:linear-gradient(var(--avant) calc(50% + 3px),transparent 0)}
-rdr-accueil-apercu .dm-b{background:linear-gradient(var(--avant) 6px,transparent 0 calc(50% + 3px),var(--avant) 0)}
-@keyframes raa-ondule{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-rdr-accueil-apercu .dm-conf{position:absolute;left:var(--x);top:calc(var(--c) * 2 + 12px);width:var(--w);height:var(--h);background:var(--cc);border-radius:1px;opacity:0;animation:raa-confetti var(--t) linear var(--d) infinite}
-@keyframes raa-confetti{0%{opacity:0;transform:translate(0,-8px) rotate(0)}12%{opacity:1}78%{opacity:.85}100%{opacity:0;transform:translate(var(--dx),60px) rotate(var(--r))}}
-rdr-accueil-apercu .sep-pavois{--fw:28px;position:relative;height:104px;background:var(--apres);overflow:hidden}
-rdr-accueil-apercu .sep-pavois > svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
-rdr-accueil-apercu .pav-dr{position:absolute;width:var(--fw);margin-left:calc(var(--fw) / -2);transform-origin:50% 0;transform:rotate(var(--a))}
-rdr-accueil-apercu .pav-dr svg{display:block;width:100%;height:auto;transform-origin:50% 0;animation:raa-pavois 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.23s);filter:drop-shadow(0 4px 5px rgba(10,18,40,.18))}
-@keyframes raa-pavois{0%,100%{transform:rotate(calc(var(--b,6deg) * -1)) skewX(3deg)}50%{transform:rotate(var(--b,6deg)) skewX(-3deg)}}
+rdr-accueil-apercu[data-liaison="sillage"] .sep--liaison .sep-sillage{display:block}
 rdr-accueil-apercu .sep-sillage{position:relative;height:150px;background:var(--avant);overflow:hidden}
 rdr-accueil-apercu .sl-svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible}
 rdr-accueil-apercu .sl-reste{fill:none;stroke:rgba(255,255,255,.24);stroke-width:1.5;stroke-dasharray:6 7}
@@ -1057,8 +1043,9 @@ function monter(racine, portail, D) {
 
 
 
+
   const liaison = un('.sep--liaison');
-  liaison.innerHTML = '<div class="sep-damier" aria-hidden="true"></div><div class="sep-pavois" aria-hidden="true"></div>' +
+  liaison.innerHTML =
     '<div class="sep-sillage" aria-hidden="true"><svg class="sl-svg"><path class="sl-reste"/><path class="sl-fait" pathLength="1000"/></svg>' +
     '<span class="sl-port sl-port--dep"><b>Saint-Malo</b></span><span class="sl-port sl-port--arr"><b>Pointe-à-Pitre</b></span><span class="sl-milles">3 542 milles</span><span class="sl-bateau sl-bateau--ultim">' + ULTIM + '</span></div>';
   
@@ -1088,75 +1075,10 @@ function monter(racine, portail, D) {
     dessinerSillage();
     try { el.getAnimations({ subtree: true }).forEach(a => { a.currentTime = 0; }); } catch (e) {   }
   }
-  
-
-  const alea = (n) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
   const largeurPage = () => document.documentElement.clientWidth || innerWidth;
-  function dessinerDamier() {
-    const el = liaison.querySelector('.sep-damier'); const L = largeurPage();
-    const c = L < 760 ? 14 : Math.round(Math.min(24, Math.max(16, L * 0.015)));
-    el.style.setProperty('--c', c + 'px');
-    let h = '<div class="dm-ligne">';
-    for (let k = 0; k < Math.ceil(L / c) + 1; k++) h += '<i class="' + (k % 2 ? 'dm-b' : 'dm-a') + '" style="--k:' + k + '"></i>';
-    h += '</div>';
-    const COUL = ['var(--teal)', 'var(--jaune)', 'var(--orange)', '#8B86E0', '#0A1228'];
-    const nb = L < 760 ? 12 : 26;
-    for (let k = 0; k < nb; k++) {
-      const r = (j) => alea(k * 7 + j + 1);
-      h += '<b class="dm-conf" style="--x:' + (2 + r(1) * 96).toFixed(1) + '%;--w:' + Math.round(5 + r(2) * 5) + 'px;--h:' + Math.round(6 + r(3) * 7) + 'px;--dx:' + Math.round((r(4) - 0.5) * 60) + 'px;--r:' + Math.round((r(5) - 0.5) * 540) + 'deg;--t:' + (3.4 + r(6) * 2.6).toFixed(2) + 's;--d:-' + (r(7) * 6).toFixed(2) + 's;--cc:' + COUL[k % COUL.length] + '"></b>';
-    }
-    el.innerHTML = h;
-  }
-  
-
-
-
-
-  const BLEU = '#1F4E9C', ROUGE = '#D93A3A', JAUNE = '#FCF150', NOIR = '#0E111D';
-  const PAVILLONS = {
-    A: '<path d="M0 0H15V22H0z" fill="#fff"/><path d="M15 0H30L23 11L30 22H15z" fill="' + BLEU + '"/>',
-    E: '<rect width="30" height="11" fill="' + BLEU + '"/><rect y="11" width="30" height="11" fill="' + ROUGE + '"/>',
-    H: '<rect width="15" height="22" fill="#fff"/><rect x="15" width="15" height="22" fill="' + ROUGE + '"/>',
-    I: '<rect width="30" height="22" fill="' + JAUNE + '"/><circle cx="15" cy="11" r="6" fill="' + NOIR + '"/>',
-    K: '<rect width="15" height="22" fill="' + JAUNE + '"/><rect x="15" width="15" height="22" fill="' + BLEU + '"/>',
-    L: '<rect width="30" height="22" fill="' + NOIR + '"/><rect width="15" height="11" fill="' + JAUNE + '"/><rect x="15" y="11" width="15" height="11" fill="' + JAUNE + '"/>',
-    M: '<rect width="30" height="22" fill="' + BLEU + '"/><path d="M0 0L30 22M30 0L0 22" stroke="#fff" stroke-width="4.5"/>',
-    P: '<rect width="30" height="22" fill="' + BLEU + '"/><rect x="10" y="6" width="10" height="10" fill="#fff"/>',
-    R: '<rect width="30" height="22" fill="' + ROUGE + '"/><path d="M13 0h4v22h-4zM0 9h30v4H0z" fill="' + JAUNE + '"/>',
-    S: '<rect width="30" height="22" fill="#fff"/><rect x="10" y="6" width="10" height="10" fill="' + BLEU + '"/>',
-    U: '<rect width="30" height="22" fill="#fff"/><rect width="15" height="11" fill="' + ROUGE + '"/><rect x="15" y="11" width="15" height="11" fill="' + ROUGE + '"/>',
-    V: '<rect width="30" height="22" fill="#fff"/><path d="M0 0L30 22M30 0L0 22" stroke="' + ROUGE + '" stroke-width="4.5"/>',
-    Z: '<path d="M0 0H30L15 11z" fill="' + JAUNE + '"/><path d="M30 0V22L15 11z" fill="' + BLEU + '"/><path d="M0 22H30L15 11z" fill="' + ROUGE + '"/><path d="M0 0V22L15 11z" fill="' + NOIR + '"/>'
-  };
-  const cadre = (l) => '<path d="' + (l === 'A' ? 'M0 0H30L23 11L30 22H0Z' : 'M0 0H30V22H0Z') + '" fill="none" stroke="rgba(10,18,40,.2)" stroke-width="1.2"/>';
-  const PHRASES = ['ALLEZ LES SKIPPERS', 'VIVE LE RHUM', 'RHUM'];
-  function dessinerPavois() {
-    const el = liaison.querySelector('.sep-pavois'); const L = largeurPage(); const tel = L < 760;
-    
-
-
-
-    const fw = tel ? 22 : Math.round(Math.min(46, Math.max(36, L * 0.03))); const pas = Math.round(fw * 1.34);
-    const a = tel ? 10 : 14; const S = tel ? 14 : Math.min(44, L * 0.03);
-    const H = Math.ceil(a + S + fw * 0.74 + 34);
-    el.style.height = H + 'px'; el.style.setProperty('--fw', fw + 'px');
-    const corde = 'Q' + (L / 2) + ' ' + (a + 2 * S);
-    let h = '<svg viewBox="0 0 ' + L + ' ' + H + '" preserveAspectRatio="none"><path d="M0 0H' + L + 'V' + a + corde + ' 0 ' + a + 'Z" style="fill:var(--avant)"/>' +
-      '<path d="M0 ' + a + corde + ' ' + L + ' ' + a + '" fill="none" stroke="#5DBFC0" stroke-width="2"/></svg>';
-    const places = Math.floor((L - pas) / pas);
-    const phrase = PHRASES.find(p => p.length <= places) || 'RHUM';
-    const x0 = (L - phrase.length * pas) / 2 + pas / 2;
-    for (let i = 0; i < phrase.length; i++) {
-      const lettre = phrase[i]; if (!PAVILLONS[lettre]) continue;
-      const x = x0 + i * pas; const t = x / L; const y = a + 4 * S * t * (1 - t);
-      const angle = Math.atan(4 * S * (1 - 2 * t) / L) * 180 / Math.PI;
-      h += '<span class="pav-dr" title="' + lettre + '" style="left:' + x.toFixed(1) + 'px;top:' + y.toFixed(1) + 'px;--a:' + angle.toFixed(2) + 'deg;--i:' + i + ';--b:' + (4 + alea(i + 40) * 4).toFixed(1) + 'deg"><svg viewBox="0 0 30 22">' + PAVILLONS[lettre] + cadre(lettre) + '</svg></span>';
-    }
-    el.innerHTML = h;
-  }
-  dessinerDamier(); dessinerPavois(); dessinerSillage();
+  dessinerSillage();
   let liaisonTimer = null;
-  ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerDamier(); dessinerPavois(); dessinerSillage(); }, 150); });
+  ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerSillage(); }, 150); });
   $('pv-ico-lieu').innerHTML = ICO.lieu; $('pv-ico-verrou').innerHTML = VERROU;
 
    
@@ -1221,14 +1143,12 @@ function monter(racine, portail, D) {
     presse('[data-dispo]', un('[data-dispo="' + cle + '"]')); placer(); note();
   }
   function marquerDiapos() { const b = $('mq-diapos'); if (!b) return; b.setAttribute('aria-pressed', String(avecDiapos)); b.textContent = avecDiapos ? 'Oui' : 'Non'; }
-  function lier(cle) { racine.dataset.liaison = cle; presse('[data-liaison]', un('[data-liaison="' + cle + '"]')); }
   function afficher(cle) { modeAffiche = cle; presse('[data-aff]', un('[data-aff="' + cle + '"]')); rendreAffiche(); }
   tout('[data-phase]').forEach(b => b.addEventListener('click', () => {
     phase = b.dataset.phase; presse('[data-phase]', b);
     rendreHero(); rendreCtas(); sansEntree(); note();
   }));
   tout('[data-dispo]').forEach(b => b.addEventListener('click', () => disposer(b.dataset.dispo)));
-  tout('[data-liaison]').forEach(b => b.addEventListener('click', () => lier(b.dataset.liaison)));
   tout('[data-aff]').forEach(b => b.addEventListener('click', () => afficher(b.dataset.aff)));
   
 
@@ -1249,7 +1169,7 @@ function monter(racine, portail, D) {
   if (PHASES[q.get('phase')]) { phase = q.get('phase'); presse('[data-phase]', un('[data-phase="' + phase + '"]')); }
   disposer(DISPOS[q.get('dispo')] ? q.get('dispo') : 'b');
   avecDiapos = q.get('diapos') !== 'non'; marquerDiapos();
-  lier(['damier', 'pavois', 'sillage'].includes(q.get('liaison')) ? q.get('liaison') : 'sillage');
+  racine.dataset.liaison = 'sillage';
   poserFlotte(q.get('flotte') !== 'non');
   modeAffiche = q.get('aff') === 'billets' ? 'billets' : 'ligne'; presse('[data-aff]', un('[data-aff="' + modeAffiche + '"]'));
   placer(); rendreHero(); rendreCtas(); entree(); note();
