@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum b753a6b | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="b753a6b";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 4e4b53a | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4e4b53a";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -284,7 +284,7 @@ rdr-accueil-apercu .tymal .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:
 rdr-accueil-apercu .tymal .kicker{margin-bottom:14px}
 rdr-accueil-apercu .faq-bloc[hidden]{display:none}
 rdr-accueil-apercu .faq-acc{--encre:#0E111D;--encre2:#3A4256;--encre3:#6B7285;--papier:#F4F1E8;position:relative;overflow:clip;background:var(--papier);color:var(--encre);padding:clamp(56px,8vh,96px) 0 clamp(64px,10vh,112px)}
-rdr-accueil-apercu .fa-topo{position:absolute;inset:0;background-repeat:repeat;background-size:1200px auto;background-position:center top;opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+rdr-accueil-apercu .fa-topo{position:absolute;inset:0;background:#16355D;opacity:.34;pointer-events:none;-webkit-mask:var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto;mask:var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto;-webkit-mask-composite:source-over;mask-composite:add}
 rdr-accueil-apercu .faq-acc .trame{position:relative;z-index:1}
 rdr-accueil-apercu .faq-acc:not(.fa-vu) .fa-q{opacity:0}
 rdr-accueil-apercu .faq-acc.fa-vu .fa-q{animation:raa-fa-monte .6s cubic-bezier(.22,.8,.3,1) both;animation-delay:calc(var(--i,0) * 70ms)}
@@ -329,6 +329,10 @@ rdr-accueil-apercu .fa-rep p + p{margin-top:6px}
 rdr-accueil-apercu .fa-rep b{color:var(--encre);font-weight:800}
 rdr-accueil-apercu .fa-rep sup{font-size:.65em;line-height:0}
 rdr-accueil-apercu .fa-rep a{color:var(--encre);font-weight:700;text-decoration:underline;text-decoration-color:var(--cc);text-decoration-thickness:3px;text-underline-offset:4px}
+rdr-accueil-apercu .fa-rep .fa-source{display:flex;width:fit-content;align-items:center;gap:8px;margin-top:12px;padding:7px 13px 7px 15px;border-radius:999px;background:var(--encre);color:#fff;font-size:12px;font-weight:800;text-decoration:none;transition:background .2s}
+rdr-accueil-apercu .fa-rep .fa-source svg{width:14px;height:14px;color:var(--jaune);transition:transform .2s}
+rdr-accueil-apercu .fa-rep .fa-source:hover{background:#1f2640}
+rdr-accueil-apercu .fa-rep .fa-source:hover svg{transform:translate(2px,-2px)}
 rdr-accueil-apercu .fa-valider{display:inline-block;margin-right:7px;padding:3px 8px;border-radius:6px;background:rgba(241,159,57,.18);color:#B45A00;font-size:11px;font-weight:800;letter-spacing:.06em;line-height:1.3;text-transform:uppercase}
 rdr-accueil-apercu .hv-haut{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
 rdr-accueil-apercu .hv-depart{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 6px;border-radius:6px;background:var(--jaune);color:#0E111D;font-family:var(--titre);font-style:italic;font-size:clamp(13px,1.2vw,17px);line-height:1;text-transform:uppercase}
@@ -1436,7 +1440,7 @@ function monter(racine, portail, D) {
     bloc.hidden = false;
     const ic = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
      
-    const CHEVRON = '<path d="m6 9 6 6 6-6"/>', FLECHE_D = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
+    const CHEVRON = '<path d="m6 9 6 6 6-6"/>', FLECHE_D = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>', FLECHE_HD = '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>';
      
     const COULEUR = { depart: 'var(--teal)', village: 'var(--jaune)', venir: 'var(--orange)', course: '#8B86E0', pratique: 'var(--teal2)' };
     const RUBRIQUE = { depart: 'Le départ', village: 'Le village', venir: 'Venir', course: 'La course', pratique: 'Pratique' };
@@ -1455,9 +1459,11 @@ function monter(racine, portail, D) {
     const valider = (t) => (t ? '<p><span class="fa-valider">À valider</span>' + esc(t) + '</p>' : '');
      
     $('fa-liste').innerHTML = F.questions.map((x, i) => '<details class="fa-q" id="faq-' + esc(x.ancre) + '" style="--cc:' + couleur(x.ancre) + ';--i:' + i + '"' + (i === 0 ? ' open' : '') + '><summary><b>' + esc(x.q) + '</b>' + (RUBRIQUE[String(x.ancre).split('-')[0]] ? '<em class="fa-rub">' + RUBRIQUE[String(x.ancre).split('-')[0]] + '</em>' : '') + '<i>' + ic(CHEVRON) + '</i></summary><div class="fa-rep">' +
-      (x.p || []).map(t => '<p>' + texte(t, x.lien) + '</p>').join('') + valider(x.aValider) + '</div></details>').join('');
-     
-    if (M.topo) $('fa-topo').style.backgroundImage = 'url("' + retaille(M.topo, 1200, 55) + '")';
+      (x.p || []).map(t => '<p>' + texte(t, x.lien) + '</p>').join('') + valider(x.aValider) +
+      (x.src ? '<a class="fa-source" href="' + esc(x.src.url) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
+    
+
+    if (M.topo) $('fa-topo').style.setProperty('--topo', 'url("' + retaille(M.topo, 1200, 55).replace(/\/x\.jpg$/, '/x.png') + '")');
     const section = $('faq-acc');
     if (typeof IntersectionObserver !== 'function') section.classList.add('fa-vu');
     else {
@@ -1478,8 +1484,10 @@ function monter(racine, portail, D) {
   modeAffiche = q.get('aff') === 'billets' ? 'billets' : 'ligne'; presse('[data-aff]', un('[data-aff="' + modeAffiche + '"]'));
   
 
-  modeDepart = ['bandeau', 'repere'].includes(q.get('depart')) ? q.get('depart') : '';
-  rendreFaq(q.get('faq') === 'oui');
+
+
+  modeDepart = q.get('depart') === 'repere' ? 'repere' : (q.get('depart') === 'non' ? '' : 'bandeau');
+  rendreFaq(q.get('faq') !== 'non');
   placer(); rendreHero(); rendreCtas(); entree(); note();
   return () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
 }
