@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 18517f5 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="18517f5";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 817b627 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="817b627";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -462,13 +462,12 @@ rdr-accueil-apercu .pv-micro{display:inline-flex;align-items:center;gap:6px;font
 rdr-accueil-apercu .pv-badge{position:absolute;left:28px;top:30px;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:18px;background:rgba(14,17,29,.84);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 40px rgba(14,17,29,.35);color:#fff;animation-delay:-1.4s}
 rdr-accueil-apercu .pv-medaille{position:relative;width:58px;height:58px;flex:none}
 rdr-accueil-apercu .pv-anneau{position:absolute;inset:0;width:100%;height:100%}
-rdr-accueil-apercu .pv-arc{animation:raa-arc 3.2s cubic-bezier(.4,0,.2,1) infinite}
+rdr-accueil-apercu .pv-arc{animation:raa-arc 6s cubic-bezier(.4,0,.2,1) infinite}
 @keyframes raa-arc{0%{stroke-dashoffset:100}78%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:100}}
-rdr-accueil-apercu .pv-bdg-txt{min-width:196px}
 rdr-accueil-apercu .pv-medaille span.avec-art{inset:6px;background:#0E111D}
 rdr-accueil-apercu .pv-medaille span img{display:block;width:100%;height:100%;object-fit:contain}
-rdr-accueil-apercu .pv-medaille span,rdr-accueil-apercu .pv-bdg-txt{transition:opacity .28s ease,transform .28s ease}
-rdr-accueil-apercu .pv-badge.est-change .pv-medaille span,rdr-accueil-apercu .pv-badge.est-change .pv-bdg-txt{opacity:0;transform:translateY(4px)}
+rdr-accueil-apercu .pv-medaille span{transition:opacity .28s ease,transform .28s ease}
+rdr-accueil-apercu .pv-badge.est-change .pv-medaille span{opacity:0;transform:translateY(4px)}
 rdr-accueil-apercu .pv-medaille span{position:absolute;inset:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2B3D6B,#0E111D);display:flex;align-items:center;justify-content:center;color:var(--jaune);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 rdr-accueil-apercu .pv-medaille span svg{width:18px;height:18px}
 rdr-accueil-apercu .pv-badge .pv-micro{color:var(--teal)}
@@ -723,7 +722,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <div class="pv-pile">
         <div class="pv-badge pv-flotte">
           <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-badge"></span></div>
-          <div class="pv-bdg-txt" id="pv-bdg-txt"><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
+          <div><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
           <i id="pv-ico-verrou"></i>
         </div>
         <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-podium" aria-hidden="true"><i style="--h:72%"><b>2</b></i><i style="--h:100%"><b>1</b></i><i style="--h:54%"><b>3</b></i></div><small>Entrez dans le classement</small></div>
@@ -741,7 +740,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <span class="kicker kicker--sombre">La mascotte officielle</span>
       <h2 class="titre">TyMAL, en tournée avant le village</h2>
       <p>Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.</p>
-      <div class="btns"><a class="btn btn--marine" href="/carte-tournee">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre">En savoir plus</a></div>
+      <div class="btns"><a class="btn btn--marine" href="/carte-tournee">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="/post/tymal-la-mascotte-de-l-édition-2026" data-en="/en/post/tymal-the-mascot-of-the-2026-edition">En savoir plus</a></div>
     </div>
     <div class="video">
       <div class="video-cadre" id="video">
@@ -989,7 +988,7 @@ function monter(racine, portail, D) {
   const EN = /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '');
   const lien = (u) => { u = String(u || ''); return (!EN || !/^\/(?!\/)/.test(u) || /^\/(en|post)(\/|$)/.test(u)) ? u : '/en' + u; };
   const href = (u) => (u ? ' href="' + esc(lien(u)) + '"' : '');
-  if (EN) [racine, portail].forEach((z) => z && z.querySelectorAll && z.querySelectorAll('a[href^="/"], form[action^="/"]').forEach((a) => { const k = a.tagName === 'FORM' ? 'action' : 'href'; a.setAttribute(k, lien(a.getAttribute(k))); }));
+  if (EN) [racine, portail].forEach((z) => z && z.querySelectorAll && z.querySelectorAll('a[href^="/"], form[action^="/"]').forEach((a) => { const k = a.tagName === 'FORM' ? 'action' : 'href'; a.setAttribute(k, a.dataset && a.dataset.en ? a.dataset.en : lien(a.getAttribute(k))); }));
   let phase = 'avant';
 
    
@@ -1395,14 +1394,12 @@ function monter(racine, portail, D) {
 
 
 
+
   const BADGES = (Array.isArray(D.badges) ? D.badges : []).filter((b) => b && b.image && b.fr);
-  const MICRO_BADGE = LANGUE_PUB === 'en' ? 'Badge to unlock' : 'Badge à débloquer';
-  const icoBadge = $('pv-ico-badge'), txtBadge = $('pv-bdg-txt'), pastilleBadge = un('.pv-badge');
+  const icoBadge = $('pv-ico-badge'), pastilleBadge = un('.pv-badge');
   const poserBadge = (b) => {
-    const t = b[LANGUE_PUB] || b.fr;
     icoBadge.classList.add('avec-art');
     icoBadge.innerHTML = '<img src="' + esc(b.image) + '" alt="" width="96" height="96" decoding="async">';
-    txtBadge.innerHTML = '<span class="pv-micro">' + esc(MICRO_BADGE) + '</span><b>' + esc(t.nom) + '</b><small>' + esc(t.accroche) + '</small>';
   };
   if (!BADGES.length) icoBadge.innerHTML = MEDAILLE;
   else {
