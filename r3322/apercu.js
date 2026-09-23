@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 5649ec6 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="5649ec6";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum c33f60e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="c33f60e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -714,7 +714,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     <div>
       <span class="kicker kicker--sombre">La mascotte officielle</span>
       <h2 class="titre">TyMAL, en tournée avant le village</h2>
-      <p>Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée, retrouvez-le sur le plan interactif, et repartez avec lui dans votre Espace Rhum.</p>
+      <p>Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.</p>
       <div class="btns"><a class="btn btn--marine" href="#">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="#">En savoir plus</a></div>
     </div>
     <div class="video">
