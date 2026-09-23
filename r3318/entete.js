@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum ca2b7f7 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ca2b7f7";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 985d468 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="985d468";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {
@@ -17,7 +17,7 @@ const ARBORESCENCE = {
         { libelle: 'Photos', lien: '/medias-actualites?cat=image' },
         { libelle: 'Vidéos', lien: '/medias-actualites?cat=video' }
       ] },
-    { cle: 'programme', libelle: 'Programmation', lien: '/programme', panneau: 'programme', liens: [] },    
+    { cle: 'programme', libelle: 'Programmation', lien: '/programmation', panneau: 'programme', liens: [] },    
     { cle: 'skippers', libelle: 'Skippers', lien: '/skippers', panneau: 'skippers',
       liens: [{ libelle: 'Skippers', lien: '/skippers' }] },
     { cle: 'village', libelle: 'Village de Saint-Malo', lien: '/saint-malo', panneau: 'villages', dates: SM, sansTout: true,
@@ -26,7 +26,7 @@ const ARBORESCENCE = {
         { libelle: 'Préparer sa venue', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Covoiturage', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
         { libelle: 'Carte interactive', bientot: true, picto: 'carte', image: 'wix:image://v1/df962b_51b3d859da05413c98677a2bfe4b7947~mv2.png/menu-villages-carte-interactive.png' },
-        { libelle: 'Programmation', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
+        { libelle: 'Programmation', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'À propos', panneau: 'a-propos',
       liens: [
@@ -53,7 +53,7 @@ const ARBORESCENCE = {
         { libelle: 'Photos', lien: '/medias-actualites?cat=image' },
         { libelle: 'Videos', lien: '/medias-actualites?cat=video' }
       ] },
-    { cle: 'programme', libelle: 'Programme', lien: '/programme', panneau: 'programme', liens: [] },
+    { cle: 'programme', libelle: 'Programme', lien: '/programmation', panneau: 'programme', liens: [] },
     { cle: 'skippers', libelle: 'Skippers', lien: '/skippers', panneau: 'skippers',
       liens: [{ libelle: 'Skippers', lien: '/skippers' }] },
     { cle: 'village', libelle: 'Saint-Malo race village', lien: '/saint-malo', panneau: 'villages', dates: SM, sansTout: true,
@@ -62,7 +62,7 @@ const ARBORESCENCE = {
         { libelle: 'Plan your visit', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Carpooling', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
         { libelle: 'Interactive map', bientot: true, picto: 'carte', image: 'wix:image://v1/df962b_51b3d859da05413c98677a2bfe4b7947~mv2.png/menu-villages-carte-interactive.png' },
-        { libelle: 'Village programme', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
+        { libelle: 'Village programme', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'About', panneau: 'a-propos',
       liens: [
@@ -461,7 +461,7 @@ function monterRecherche(ctx) {
   function tirerEssais() {
     const hasard = (l) => l[Math.floor(Math.random() * l.length)];
     const sk = idx.filter((e) => e.type === 'skipper');
-    const themes = idx.filter((e) => e.type === 'page' && /^\/programme\?cat=/.test(e.lien || '') && !/cat=animation/.test(e.lien));
+    const themes = idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || '') && !/cat=animation/.test(e.lien));
     const pages = idx.filter((e) => e.type === 'page' && e.lien && !e.bientot && /^\/(heritage|carte-village-saint-malo|kit-pedagogique|bateaux|se-rendre-au-village)$/.test(e.lien));
     const classes = [...new Set(sk.map((e) => (e.meta || '').split(' · ')[0]).filter((c) => CLASSES[c]))];
     const l = [];
@@ -482,7 +482,7 @@ function monterRecherche(ctx) {
     let n = 0;
     const id = () => pre + '-r' + (n++);
     const racc = (ctx.raccourcis ? ctx.raccourcis() : []).map((e) => preparer(Object.assign({ type: 'page' }, e)));
-    const themes = idx.filter((e) => e.type === 'page' && /^\/programme\?cat=/.test(e.lien || ''));
+    const themes = idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || ''));
     return (racc.length ? '<div class="gl-sg-groupe" role="group" aria-labelledby="' + pre + '-gm">' + label('calendrier', X.moment, null, pre + '-gm') + '<div class="gl-sg-grille">' + racc.map((e) => option(e, [], id())).join('') + '</div></div>' : '') +
       htmlEssais(pre) +
       (themes.length ? '<div class="gl-sg-groupe" role="group" aria-labelledby="' + pre + '-gt">' + label('programme', X.themes, null, pre + '-gt') + '<div class="gl-sg-themes">' + themes.map((e) =>
@@ -911,7 +911,7 @@ const MONTRE = ['df962b_6f374b182ba647af8ba5b808bcd0fc67~mv2.avif', 'df962b_23e0
 const CATS = { actualites: '#5DBFC0', interview: '#FCF150', image: '#FFFFFF', video: '#FFB338', audio: '#5DBFC0' };
 
 const CARTE_OUVERTE = MENU.some((r) => (r.liens || []).some((l) => l.lien === '/carte-village-saint-malo' && !l.bientot));
-const ACCES = [{ cle: 'carte', lien: '/carte-village-saint-malo' }, { cle: 'programme', lien: '/programme' }].filter((a) => a.cle !== 'carte' || CARTE_OUVERTE);
+const ACCES = [{ cle: 'carte', lien: '/carte-village-saint-malo' }, { cle: 'programme', lien: '/programmation' }].filter((a) => a.cle !== 'carte' || CARTE_OUVERTE);
 
 const TXT = {
   fr: { depart: 'Départ dans', toutVoir: 'Tout voir', images: 'Voir les images', bientot: 'Bientôt', nouvel: '(nouvel onglet)', enCours: 'rubrique en cours',
@@ -1915,7 +1915,7 @@ const jourLong = (j) => premierDuMois(dateUTC(j).toLocaleDateString(TXT.locale, 
 const jourCourt = (j) => dateUTC(j).toLocaleDateString(TXT.locale, { day: 'numeric', month: 'short', timeZone: 'UTC' });
 const jourMois = (j) => ({ jour: dateUTC(j).getUTCDate(), mois: dateUTC(j).toLocaleDateString(TXT.locale, { month: 'short', timeZone: 'UTC' }).replace('.', '') });
 const heureLib = (h) => (h ? h.replace(':', ' h ').replace(/ h 00$/, ' h') : '');
-const lienJour = (j) => '/programme?jour=' + j;
+const lienJour = (j) => '/programmation?jour=' + j;
 const libTheme = (t) => (TXT.themes && TXT.themes[t.slug]) || t.lib;
  
 const themesTries = (th) => th.slice().sort((a, b) => (a.slug === 'animation') - (b.slug === 'animation') || b.n - a.n);
@@ -1934,7 +1934,7 @@ const imgProg = (u, w, h) => {
 };
 function themesHTML(p, cls) {
   return '<ul class="gl-themes ' + (cls || '') + '" aria-label="' + esc(TXT.parTheme) + '">' + themesTries(p.themes).map((t) =>
-    '<li data-slug="' + esc(t.slug) + '"><a href="' + esc(lien('/programme?cat=' + t.slug)) + '"><span class="gl-theme-ico">' + (ICO['th_' + t.slug] || ICO.programme) + '</span><span>' + esc(libTheme(t)) + '</span><b>' + t.n + '</b></a></li>').join('') + '</ul>';
+    '<li data-slug="' + esc(t.slug) + '"><a href="' + esc(lien('/programmation?cat=' + t.slug)) + '"><span class="gl-theme-ico">' + (ICO['th_' + t.slug] || ICO.programme) + '</span><span>' + esc(libTheme(t)) + '</span><b>' + t.n + '</b></a></li>').join('') + '</ul>';
 }
 function itemJourHTML(a) {
   return '<li><a class="gl-pj-item' + (a.vedette ? ' gl-pj-item--vedette' : '') + '" href="' + esc(lien(lienJour(a.date))) + '"><span class="gl-pj-heure">' + esc(heureLib(a.debut) || '·') + '</span>' +
@@ -2017,7 +2017,7 @@ function remplirProgramme() {
 function pagesProgramme() {
   const p = resumeProg;
   if (!p) return [];
-  return themesTries(p.themes).map((t) => ({ type: 'page', titre: libTheme(t), lien: '/programme?cat=' + t.slug, meta: TXT.progTitre + ' · ' + TXT.rdv(t.n), ico: 'th_' + t.slug, mots: 'programme ' + t.lib }))
+  return themesTries(p.themes).map((t) => ({ type: 'page', titre: libTheme(t), lien: '/programmation?cat=' + t.slug, meta: TXT.progTitre + ' · ' + TXT.rdv(t.n), ico: 'th_' + t.slug, mots: 'programme ' + t.lib }))
     .concat(p.journees.map((j) => ({ type: 'page', titre: j.titre, lien: lienJour(j.date), meta: TXT.progTitre + ' · ' + jourLong(j.date) + (j.partenaire ? ' · ' + j.partenaire : ''), ico: 'calendrier', mots: 'journee programme ' + (j.partenaire || '') })));
 }
 
@@ -2066,7 +2066,7 @@ function chargerRecherche() {
 function raccourcisMoment() {
   const l = [];
   const p = resumeProg;
-  if (p && p.etat === 'avant') l.push({ titre: TXT.ouvreDansCourt(p.joursAvant), lien: '/programme', meta: TXT.progTitre + ' · ' + jourLong(p.ouverture), ico: 'calendrier' });
+  if (p && p.etat === 'avant') l.push({ titre: TXT.ouvreDansCourt(p.joursAvant), lien: '/programmation', meta: TXT.progTitre + ' · ' + jourLong(p.ouverture), ico: 'calendrier' });
   else if (p && p.etat === 'pendant') {
     const n = p.temps.mode === 'vedettes' ? p.temps.items.filter((a) => a.vedette).length : 0;
     l.push({ titre: n ? TXT.aujourdhuiVillage(n) : TXT.aujourdhuiProgramme, lien: lienJour(p.jour), meta: TXT.progDuJour, ico: 'calendrier' });

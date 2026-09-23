@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum ca2b7f7 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="ca2b7f7";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 985d468 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="985d468";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2261,7 +2261,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
             '<li>' + ico('cadeau') + '<span><b>Chaque jour</b> : ' + esc(res.lotsQuotidiens || this._cms('lotsQuotidiens')) + '</span></li>' +
             '<li>' + ico('vague') + '<span><b>Grand tirage final</b> : ' + esc(res.grandLot || this._cms('grandLot')) + '</span></li>' +
           '</ul>' +
-          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programme' : '/programme') + '">Découvrir la programmation du village' + ico('fleche') + '</a>' +
+          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programmation' : '/programmation') + '">Découvrir la programmation du village' + ico('fleche') + '</a>' +
         '</div>';
       this._i18n(corps);
       corps.scrollTop = 0;
