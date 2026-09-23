@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 065d2fc | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="065d2fc";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 0ee490c | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="0ee490c";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -149,7 +149,7 @@ const ER_EN = {
     'Précisez votre mode de transport': 'Tell us more about your transport',
     'Votre justificatif de transport': 'Your proof of transport',
     'Déposez ici votre justificatif de mobilité.': 'Upload your proof of mobility here.',
-    'Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, photo de votre vélo, justificatif de covoiturage.': 'Accepted proofs include: train or bus ticket, travel pass, a photo of your bike, car-sharing confirmation.',
+    'Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, confirmation de covoiturage, photo de votre vélo ou de vous à pied.': 'Accepted proofs include: train or bus ticket, travel pass, car-sharing confirmation, a photo of your bike or of you on foot.',
     'PDF, JPG ou PNG, 10 Mo au plus.': 'PDF, JPG or PNG, up to 10 MB.',
     'Choisir un fichier': 'Choose a file',
     'ou glissez-le ici': 'or drag it here',
@@ -1891,7 +1891,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const r = this._etat.reglages || {};
       const modes = Array.isArray(r.modes) && r.modes.length ? r.modes : [
         { cle: 'train', libelle: 'Train' }, { cle: 'bus', libelle: 'Bus' }, { cle: 'covoiturage', libelle: 'Covoiturage' },
-        { cle: 'velo', libelle: 'Vélo' }, { cle: 'pied', libelle: 'À pied' }, { cle: 'autre', libelle: 'Autre' }];
+        { cle: 'velo', libelle: 'Vélo' }, { cle: 'pied', libelle: 'À pied' }];
       const en = this._en();
       
 
@@ -1964,7 +1964,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
                   '<input type="file" name="justificatif" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" aria-label="Choisir un fichier">' +
                   ico('fichier') + '<b>Déposez ici votre justificatif de mobilité.</b>' +
                   '<span class="rv-depot__btn">' + ico('fleche') + 'Choisir un fichier</span><span>ou glissez-le ici</span>' +
-                  '<p class="rv-depot__aide">Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, photo de votre vélo, justificatif de covoiturage.</p>' +
+                  '<p class="rv-depot__aide">Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, confirmation de covoiturage, photo de votre vélo ou de vous à pied.</p>' +
                   '<p class="rv-depot__aide">' + esc(this._t('PDF, JPG ou PNG, 10 Mo au plus.').replace('10', String(max))) + '</p>' +
                 '</div>' +
                 '<div class="rv-fichier" hidden data-fichier></div>' +
