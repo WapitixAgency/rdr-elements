@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 8007fa5 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="8007fa5";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 2abb59b | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="2abb59b";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -29,6 +29,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="8007fa5";perfor
     gavel: '<path d="m14 13-8.381 8.38a1 1 0 0 1-3.001-3l8.384-8.381"/><path d="m16 16 6-6"/><path d="m21.5 10.5-8-8"/><path d="m8 8 6-6"/><path d="m8.5 7.5 8 8"/>',
     clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
     arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+    arrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
     download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'
   };
 
@@ -187,6 +188,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="8007fa5";perfor
       pdf: 'Télécharger le règlement (PDF)',
       avisLangue: '',
       vide: 'Aucun règlement n’est publié pour le moment.',
+      nbJeux: (n) => n + ' jeux et concours',
+      choixAria: 'Choisir un règlement',
+      lire: 'Lire le règlement',
+      tous: 'Tous les règlements',
+      titreJeu: (nom) => 'Règlements · ' + nom,
       lies: {
         titre: 'Documents liés',
         texte: 'Les jeux proposés dans « Mon Espace Rhum » relèvent aussi de ses conditions d’utilisation ; en cas de contradiction, le règlement du jeu prévaut pour ce jeu. Les données personnelles sont traitées selon la politique de confidentialité du site.',
@@ -213,6 +219,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="8007fa5";perfor
       pdf: 'Download the rules (PDF)',
       avisLangue: 'These rules are published in French. The French text below is the only version that applies.',
       vide: 'No rules are published yet.',
+      nbJeux: (n) => n + ' games and contests',
+      choixAria: 'Choose a set of rules',
+      lire: 'Read the rules',
+      tous: 'All rules',
+      titreJeu: (nom) => 'Official rules · ' + nom,
       lies: {
         titre: 'Related documents',
         texte: 'Games offered in “My Espace Rhum” are also governed by its terms of use; in the event of a conflict, the rules of the game prevail for that game. Personal data is processed under the site’s privacy policy.',
@@ -349,6 +360,39 @@ rdr-reglements .rgl .rgl-lecture{min-width:0;display:grid;gap:var(--rgl-e8);}
 rdr-reglements .rgl .rgl-vide{padding:var(--rgl-e6);border:1px dashed var(--rgl-filet-sombre);border-radius:var(--rgl-r-carte);color:var(--rgl-encre-douce);}
 
  
+rdr-reglements .rgl .rgl-index{padding-bottom:var(--rgl-e7);}
+rdr-reglements .rgl .rgl-index-pied{padding-bottom:var(--rgl-e8);}
+rdr-reglements .rgl .rgl-index-titre{margin:0 0 var(--rgl-e4);font-size:var(--rgl-t1);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rgl-encre-sourde);}
+rdr-reglements .rgl .rgl-choix{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--rgl-e5);}
+rdr-reglements .rgl .rgl-choix li{min-width:0;display:flex;}
+rdr-reglements .rgl .rgl-choix-carte{flex:1 1 auto;display:flex;flex-direction:column;gap:var(--rgl-e2);min-width:0;padding:var(--rgl-e6);border:2px solid transparent;border-radius:var(--rgl-r-carte);background:var(--rgl-carte);color:var(--rgl-carte-texte);transition:transform .15s,border-color .15s,box-shadow .15s;}
+rdr-reglements .rgl .rgl-choix-carte:hover{transform:translateY(-3px);border-color:var(--rgl-or);box-shadow:0 12px 30px rgba(0,0,0,.35);}
+rdr-reglements .rgl .rgl-choix-carte:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;}
+rdr-reglements .rgl .rgl-choix-carte.est-termine .rgl-choix-badge{background:var(--rgl-carte-filet);color:var(--rgl-carte-sourd);}
+rdr-reglements .rgl .rgl-choix-carte.est-termine .rgl-choix-nom{color:var(--rgl-carte-texte);}
+rdr-reglements .rgl .rgl-choix-haut{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--rgl-e3);margin:0 0 var(--rgl-e3);}
+rdr-reglements .rgl .rgl-choix-badge{flex:0 0 auto;display:grid;place-items:center;width:52px;height:52px;border-radius:var(--rgl-r-badge);background:var(--rgl-or);color:var(--rgl-fond);}
+rdr-reglements .rgl .rgl-choix-badge svg{width:26px;height:26px;}
+rdr-reglements .rgl .rgl-choix .rgl-statut{margin-left:0;border-color:var(--rgl-carte-filet);color:var(--rgl-carte-sourd);}
+rdr-reglements .rgl .rgl-choix .rgl-statut.est-encours{border-color:rgba(0,111,123,.35);background:rgba(0,111,123,.08);color:var(--rgl-vert);}
+rdr-reglements .rgl .rgl-choix .rgl-statut.est-termine{background:var(--rgl-panneau);color:var(--rgl-carte-sourd);}
+rdr-reglements .rgl .rgl-choix-nature{font-size:var(--rgl-t1);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rgl-vert);}
+rdr-reglements .rgl .rgl-choix-nom{margin:0;font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:var(--rgl-t5);line-height:1.1;letter-spacing:.01em;text-transform:uppercase;color:var(--rgl-carte-encre);text-wrap:balance;}
+rdr-reglements .rgl .rgl-choix-dates{font-size:var(--rgl-t2);color:var(--rgl-carte-sourd);}
+rdr-reglements .rgl .rgl-choix-lire{display:inline-flex;align-items:center;gap:var(--rgl-e2);margin-top:auto;padding-top:var(--rgl-e4);font-weight:700;color:var(--rgl-vert);}
+rdr-reglements .rgl .rgl-choix-lire svg{width:18px;height:18px;transition:transform .15s;}
+rdr-reglements .rgl .rgl-choix-carte:hover .rgl-choix-lire svg{transform:translateX(3px);}
+
+ 
+rdr-reglements .rgl .rgl-fil{display:flex;align-items:center;padding:var(--rgl-e7) 0 var(--rgl-e6);}
+rdr-reglements .rgl .rgl-retour{display:inline-flex;align-items:center;gap:var(--rgl-e2);padding:var(--rgl-e2) var(--rgl-e4);border:1px solid var(--rgl-or-filet);border-radius:999px;font-size:var(--rgl-t2);font-weight:700;color:var(--rgl-or);transition:background .15s;}
+rdr-reglements .rgl .rgl-retour svg{width:16px;height:16px;transition:transform .15s;}
+rdr-reglements .rgl .rgl-retour:hover{background:var(--rgl-or-voile);}
+rdr-reglements .rgl .rgl-retour:hover svg{transform:translateX(-3px);}
+rdr-reglements .rgl .rgl-retour:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;}
+rdr-reglements .rgl .rgl-cache{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}
+
+ 
 rdr-reglements .rgl .rgl-jeu{min-width:0;display:grid;gap:var(--rgl-e7);}
 rdr-reglements .rgl .rgl-jeu-intro{min-width:0;scroll-margin-top:calc(var(--rgl-chrome) + var(--rgl-e5));}
 rdr-reglements .rgl .rgl-jeu-tete{display:flex;align-items:center;gap:var(--rgl-e4);margin:0 0 var(--rgl-e5);}
@@ -435,8 +479,17 @@ rdr-reglements .rgl.sous-600 .rgl-sec-tete{gap:var(--rgl-e3);}
 rdr-reglements .rgl.sous-600 .rgl-badge{width:40px;height:40px;border-radius:12px;}
 rdr-reglements .rgl.sous-600 .rgl-badge svg{width:20px;height:20px;}
 rdr-reglements .rgl.sous-420 .rgl-som-liste{grid-template-columns:minmax(0,1fr);}
+rdr-reglements .rgl.sous-900 .rgl-choix{grid-template-columns:repeat(2,minmax(0,1fr));}
+rdr-reglements .rgl.sous-600 .rgl-choix{grid-template-columns:minmax(0,1fr);gap:var(--rgl-e4);}
+rdr-reglements .rgl.sous-600 .rgl-choix-carte{padding:var(--rgl-e5);}
+rdr-reglements .rgl.sous-600 .rgl-choix-haut{margin-bottom:var(--rgl-e2);}
+rdr-reglements .rgl.sous-600 .rgl-choix-badge{width:44px;height:44px;}
+rdr-reglements .rgl.sous-600 .rgl-choix-badge svg{width:22px;height:22px;}
+rdr-reglements .rgl.sous-600 .rgl-choix-lire{padding-top:var(--rgl-e3);}
+rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
 @media(prefers-reduced-motion:reduce){
-  rdr-reglements .rgl .rgl-som-lien,rdr-reglements .rgl .rgl-som-tete,rdr-reglements .rgl .rgl-lies-liens a svg,rdr-reglements .rgl .rgl-fiche-val a svg{transition:none;}
+  rdr-reglements .rgl .rgl-som-lien,rdr-reglements .rgl .rgl-som-tete,rdr-reglements .rgl .rgl-lies-liens a svg,rdr-reglements .rgl .rgl-fiche-val a svg,rdr-reglements .rgl .rgl-choix-carte,rdr-reglements .rgl .rgl-choix-lire svg,rdr-reglements .rgl .rgl-retour,rdr-reglements .rgl .rgl-retour svg{transition:none;}
+  rdr-reglements .rgl .rgl-choix-carte:hover{transform:none;}
 }
 `;
 
@@ -478,7 +531,13 @@ rdr-reglements .rgl.sous-420 .rgl-som-liste{grid-template-columns:minmax(0,1fr);
       this._observateurs = [];
       this._ecouteurs = [];
       this._rafId = 0;
-      this._ancreSuivie = false;
+      
+
+      this._vue = null;
+      this._adresseLue = false;
+      this._cibleAVenir = '';
+      this._depuisChoix = false;
+      this._retourSur = '';
     }
 
     connectedCallback() {
@@ -545,27 +604,142 @@ rdr-reglements .rgl.sous-420 .rgl-som-liste{grid-template-columns:minmax(0,1fr);
       const T = I18N[this._lang] || I18N.fr;
       const lang = this._lang;
       const jour = aujourdhuiParis();
-      const liste = REGLEMENTS.filter(r => r.actif !== false && Array.isArray(r.articles) && r.articles.length);
+      const liste = this._reglements(jour);
+      const plusieurs = liste.length > 1;
       this._racine.style.setProperty('--rgl-chrome', this._chrome + 'px');
       this._racine.setAttribute('lang', lang);
 
       
 
-      const maj = this._maj || liste.map(r => r.version || '').sort().pop() || '';
 
-      this._racine.innerHTML =
-        '<div class="rgl-cadre">' +
-          this._hero(T, maj) +
+      if (!this._adresseLue) {
+        this._adresseLue = true;
+        const a = this._lireAdresse(liste);
+        this._vue = plusieurs ? a.jeu : null;
+        this._cibleAVenir = a.cible || (plusieurs ? '' : a.jeu || '');
+      }
+
+      
+
+      const maj = this._maj || liste.map(r => r.version || '').sort().pop() || '';
+      const ouvert = plusieurs ? liste.find(r => r.id === this._vue) : liste[0];
+      if (plusieurs && !ouvert) this._vue = null;
+
+      let corps;
+      if (plusieurs && !ouvert) {
+         
+        corps = this._hero(T, maj) + this._choix(T, liste, lang, jour) + '<div class="rgl-index-pied">' + this._lies(T, lang) + '</div>';
+      } else {
+        
+
+
+        const montres = ouvert ? [ouvert] : [];
+        corps = (plusieurs
+          ? '<nav class="rgl-fil"><a class="rgl-retour" href="' + esc(this._adresseDuChoix()) + '" data-retour>' + svg('arrowLeft') + esc(T.tous) + '</a></nav>' +
+            '<h1 class="rgl-cache">' + esc(T.titreJeu(ouvert.nom)) + '</h1>'
+          : this._hero(T, maj)) +
           '<div class="rgl-corps">' +
-            this._sommaire(T, liste) +
+            this._sommaire(T, montres) +
             '<div class="rgl-lecture">' +
-              (liste.length ? liste.map(r => this._reglement(r, T, lang, jour)).join('') : '<p class="rgl-vide">' + esc(T.vide) + '</p>') +
+              (montres.length ? montres.map(r => this._reglement(r, T, lang, jour)).join('') : '<p class="rgl-vide">' + esc(T.vide) + '</p>') +
               this._lies(T, lang) +
             '</div>' +
-          '</div>' +
-        '</div>';
+          '</div>';
+      }
+      this._racine.innerHTML = '<div class="rgl-cadre">' + corps + '</div>';
 
-      this._brancher();
+      this._brancher(liste);
+    }
+
+    
+
+
+    _reglements(jour) {
+      const rang = { encours: 0, avenir: 1, termine: 2 };
+      const liste = REGLEMENTS.filter(r => r.actif !== false && Array.isArray(r.articles) && r.articles.length);
+      return liste.map((r, i) => ({ r, i, st: statutDe(r, jour) })).sort((a, b) =>
+        (rang[a.st] - rang[b.st]) ||
+        (a.st === 'termine' ? String(b.r.fin).localeCompare(String(a.r.fin)) : String(a.r.debut).localeCompare(String(b.r.debut))) ||
+        (a.i - b.i)).map(x => x.r);
+    }
+
+    
+
+
+    _lireAdresse(liste) {
+      let h = '';
+      try {
+        h = decodeURIComponent(String(window.location.hash || '').replace(/^#/, ''));
+        if (!h) h = new URLSearchParams(window.location.search).get('jeu') || '';
+      } catch (e) { h = ''; }
+      for (const r of liste) {
+        if (h === r.id) return { jeu: r.id, cible: '' };
+        if (r.articles.some(a => idArticle(r, a) === h)) return { jeu: r.id, cible: h };
+      }
+      return { jeu: null, cible: '' };
+    }
+
+     
+    _adresseDuChoix() {
+      try {
+        const p = new URLSearchParams(window.location.search);
+        p.delete('jeu');
+        const q = p.toString();
+        return window.location.pathname + (q ? '?' + q : '');
+      } catch (e) { return window.location.pathname; }
+    }
+
+    _choix(T, liste, lang, jour) {
+      return '<section class="rgl-index" aria-label="' + esc(T.choixAria) + '">' +
+        '<div>' +
+          '<p class="rgl-index-titre">' + esc(T.nbJeux(liste.length)) + '</p>' +
+          '<ul class="rgl-choix">' + liste.map(r => {
+            const st = statutDe(r, jour);
+            const periode = T.periode(dateLisible(r.debut, lang, r.debut.slice(0, 4) === r.fin.slice(0, 4)), dateLisible(r.fin, lang));
+            return '<li><a class="rgl-choix-carte est-' + st + '" href="#' + esc(r.id) + '" data-jeu="' + esc(r.id) + '">' +
+              '<span class="rgl-choix-haut"><span class="rgl-choix-badge">' + svg(r.icone) + '</span>' +
+                '<span class="rgl-statut est-' + st + '">' + esc(T.statut[st]) + '</span></span>' +
+              '<span class="rgl-choix-nature">' + esc((r.nature && (r.nature[lang] || r.nature.fr)) || '') + '</span>' +
+              '<h2 class="rgl-choix-nom">' + esc(r.nom) + '</h2>' +
+              '<span class="rgl-choix-dates">' + esc(periode) + '</span>' +
+              '<span class="rgl-choix-lire">' + esc(T.lire) + svg('arrowRight') + '</span>' +
+            '</a></li>';
+          }).join('') + '</ul>' +
+        '</div>' +
+      '</section>';
+    }
+
+    
+
+    _allerEnHaut() {
+      const y = this._racine.getBoundingClientRect().top + window.scrollY - this._chrome;
+      window.scrollTo(0, Math.max(0, Math.round(y)));
+    }
+
+    
+
+    _changerVue(id, cible) {
+      const avant = this._vue;
+      this._vue = id;
+      this._cibleAVenir = cible || '';
+      this._retourSur = id ? '' : (avant || '');
+      this._rendre();
+      if (cible) return;
+      const carte = this._retourSur && this._racine.querySelector('.rgl-choix-carte[data-jeu="' + this._retourSur + '"]');
+      const placer = () => {
+        if (!this.isConnected) return;
+        if (carte && carte.isConnected) carte.scrollIntoView({ block: 'center' });
+        else this._allerEnHaut();
+      };
+      placer();
+      if (carte) { try { carte.focus({ preventScroll: true }); } catch (e) {   } }
+      
+
+
+
+
+      requestAnimationFrame(placer);
+      setTimeout(placer, 120);
     }
 
     _hero(T, maj) {
@@ -672,8 +846,56 @@ rdr-reglements .rgl.sous-420 .rgl-som-liste{grid-template-columns:minmax(0,1fr);
     }
 
      
-    _brancher() {
+    _brancher(liste) {
       const racine = this._racine;
+      const plusieurs = (liste || []).length > 1;
+
+      
+
+
+
+
+      const surNav = (ev) => {
+        const carte = ev.target.closest('.rgl-choix-carte');
+        const retour = !carte && ev.target.closest('[data-retour]');
+        if (!carte && !retour) return;
+        if (ev.button > 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;    
+        ev.preventDefault();
+        if (carte) {
+          const id = carte.getAttribute('data-jeu');
+          try { history.pushState(null, '', '#' + id); } catch (e) {   }
+          this._depuisChoix = true;
+          this._changerVue(id, '');
+          const t = racine.querySelector('.rgl-retour');
+          if (t) { try { t.focus({ preventScroll: true }); } catch (e) {   } }
+          return;
+        }
+        if (this._depuisChoix) { this._depuisChoix = false; history.back(); return; }
+        try { history.pushState(null, '', this._adresseDuChoix()); } catch (e) {   }
+        this._changerVue(null, '');
+      };
+      if (plusieurs) {
+        racine.addEventListener('click', surNav);
+        this._ecouteurs.push([racine, 'click', surNav]);
+      }
+
+       
+      const surAdresse = () => {
+        const a = this._lireAdresse(liste || []);
+        if (plusieurs && a.jeu !== this._vue) {
+          this._depuisChoix = a.jeu !== null && this._vue === null;
+          this._changerVue(a.jeu, a.cible);
+          return;
+        }
+        if (a.cible) {
+          const c = racine.querySelector('#' + (window.CSS && window.CSS.escape ? window.CSS.escape(a.cible) : a.cible));
+          if (c) c.scrollIntoView({ block: 'start' });
+        }
+      };
+      window.addEventListener('popstate', surAdresse);
+      this._ecouteurs.push([window, 'popstate', surAdresse]);
+      window.addEventListener('hashchange', surAdresse);
+      this._ecouteurs.push([window, 'hashchange', surAdresse]);
       const som = racine.querySelector('.rgl-som');
       const liens = Array.from(racine.querySelectorAll('.rgl-som-lien, .rgl-som-tete'));
       const groupes = Array.from(racine.querySelectorAll('.rgl-som-jeu'));
@@ -803,13 +1025,9 @@ rdr-reglements .rgl.sous-420 .rgl-som-liste{grid-template-columns:minmax(0,1fr);
 
 
 
-      if (!this._ancreSuivie) {
-        this._ancreSuivie = true;
-        let cible = '';
-        try {
-          cible = decodeURIComponent(String(window.location.hash || '').replace(/^#/, ''));
-          if (!cible) cible = new URLSearchParams(window.location.search).get('jeu') || '';
-        } catch (e) { cible = ''; }
+      const cible = this._cibleAVenir;
+      this._cibleAVenir = '';
+      {
         if (cible && parId.has(cible)) {
           
 
