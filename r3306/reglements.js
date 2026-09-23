@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 2abb59b | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="2abb59b";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 26564c0 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="26564c0";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -70,6 +70,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="2abb59b";perfor
       nature: { fr: 'Jeu-concours', en: 'Prize competition' },
       debut: '2026-10-20',
       fin: '2026-11-01',
+      
+
+      publieLe: '2026-09-23',
       version: '2026-09-23',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/se-rendre-au-village#mobilite', fr: 'Page « Se rendre au village »', en: '“Getting to the village” page' },
@@ -656,7 +659,8 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
 
     _reglements(jour) {
       const rang = { encours: 0, avenir: 1, termine: 2 };
-      const liste = REGLEMENTS.filter(r => r.actif !== false && Array.isArray(r.articles) && r.articles.length);
+      const liste = REGLEMENTS.filter(r => r.actif !== false && Array.isArray(r.articles) && r.articles.length &&
+        /^\d{4}-\d{2}-\d{2}$/.test(String(r.publieLe || '')) && jour >= r.publieLe);
       return liste.map((r, i) => ({ r, i, st: statutDe(r, jour) })).sort((a, b) =>
         (rang[a.st] - rang[b.st]) ||
         (a.st === 'termine' ? String(b.r.fin).localeCompare(String(a.r.fin)) : String(a.r.debut).localeCompare(String(b.r.debut))) ||
