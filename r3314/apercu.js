@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 4f2b2c1 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4f2b2c1";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 1521e64 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="1521e64";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -308,6 +308,7 @@ rdr-accueil-apercu .fa-toutes:hover{transform:translateY(-2px);box-shadow:0 20px
 rdr-accueil-apercu .fa-toutes i{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--jaune);color:var(--encre)}
 rdr-accueil-apercu .fa-toutes i svg{width:18px;height:18px;transition:transform .2s}
 rdr-accueil-apercu .fa-toutes:hover i svg{transform:translateX(3px)}
+rdr-accueil-apercu .fa-toutes--bas{display:none}
 rdr-accueil-apercu .fa-cherche{display:flex;align-items:center;height:56px;margin-top:22px;padding:0 7px 0 18px;border-radius:16px;background:#fff;color:var(--encre);box-shadow:0 1px 0 rgba(14,17,29,.06),0 10px 24px -18px rgba(14,17,29,.35);transition:box-shadow .25s}
 rdr-accueil-apercu .fa-cherche:focus-within{box-shadow:0 0 0 4px rgba(252,241,80,.7),0 14px 30px -18px rgba(14,17,29,.4)}
 rdr-accueil-apercu .fa-cherche > svg{flex:none;width:19px;height:19px;color:var(--encre3)}
@@ -586,6 +587,7 @@ rdr-accueil-apercu .sl-bateau--imoca{width:46px;animation-name:raa-sl-f-imoca-te
 rdr-accueil-apercu .sl-bateau--c40{width:38px;animation-name:raa-sl-f-c40-tel}
 rdr-accueil-apercu .sep-sillage.avec-flotte .sl-port--arr{animation-name:raa-sl-arrivee-f-tel}
 rdr-accueil-apercu .sl-port b{top:14px}
+rdr-accueil-apercu .sl-milles{font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.42)}
 rdr-accueil-apercu .bil-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px var(--marge) 8px;margin:0 calc(-1 * var(--marge));scrollbar-width:none}
 rdr-accueil-apercu .bil{flex:0 0 82%;scroll-snap-align:start;--x:74px}
 rdr-accueil-apercu .bil-talon b{font-size:38px}
@@ -608,6 +610,8 @@ rdr-accueil-apercu .tymal{padding:76px 0 84px}
 rdr-accueil-apercu .tymal .trame{grid-template-columns:1fr;gap:30px}
 rdr-accueil-apercu .fa-tete{flex-direction:column;align-items:stretch;gap:16px}
 rdr-accueil-apercu .fa-toutes{height:52px}
+rdr-accueil-apercu .fa-tete .fa-toutes{display:none}
+rdr-accueil-apercu .fa-toutes--bas{display:flex;margin-top:18px}
 rdr-accueil-apercu .fa-cherche{height:52px;padding-left:14px}
 rdr-accueil-apercu .fa-cherche input{padding:0 8px;font-size:15px}
 rdr-accueil-apercu .fa-cherche button{width:40px;height:40px}
@@ -624,7 +628,7 @@ rdr-accueil-apercu .hero[data-acces="sous"] .hv-acces{display:none}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero{height:auto}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hv-scene{height:calc(clamp(320px,58svh,480px) + var(--rdr-entete-h,120px))}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous{padding:16px 0 36px}
-rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta,rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta:hover{height:108px}
+rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta,rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta:hover{height:auto;min-height:146px}
 rdr-accueil-apercu .hero[data-acces="sous"] + .hv-acces-sous .cta p{display:none}
 rdr-accueil-apercu .onglets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;overflow:visible}
 rdr-accueil-apercu .onglet{justify-content:center;gap:5px;padding:5px 6px;font-size:10px;letter-spacing:.04em}
@@ -658,7 +662,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 </section>
 <section class="hv-acces-sous"><div class="trame" id="hv-slot-acces-sous"></div></section>
 <section class="affiche"><div class="trame">
-  <div class="affiche-tete"><h2 class="titre">À l'affiche<small>Les prochains temps forts, jour par jour</small></h2><a class="affiche-lien" href="#">Toute la programmation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="affiche-tete"><h2 class="titre">À l'affiche<small>Les prochains temps forts, jour par jour</small></h2><a class="affiche-lien" href="/programmation">Toute la programmation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   <div class="af-rail" id="affiche"></div>
 </div></section>
 <section class="actus">
@@ -670,7 +674,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     </div>
     <div class="actus-grille"><div id="une-actu"></div><div class="actus-droite" id="medias"></div></div>
     <div class="breves" id="breves"></div>
-    <div class="actus-pied"><a class="btn" href="#">Toutes les actualités <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a></div>
+    <div class="actus-pied"><a class="btn" href="/medias-actualites">Toutes les actualités <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a></div>
   </div>
 </section>
 <section class="skippers">
@@ -679,7 +683,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     <div class="sec-tete"><div><span class="trait"></span><h2 class="titre">Les skippers engagés</h2><p class="sous">1 seule ligne de départ, 118 navigateurs. Six visages au hasard, à chaque visite.</p></div></div>
     <div class="sk-liste" id="skippers"></div>
     <div class="classes" id="classes"></div>
-    <div class="sec-pied"><a class="btn" href="#">Explorez tous les skippers <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a></div>
+    <div class="sec-pied"><a class="btn" href="/skippers">Explorez tous les skippers <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a></div>
   </div>
 </section>
 <div class="sep sep--liaison" style="--avant:#0A1228;--apres:#fff"></div>
@@ -690,7 +694,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <span class="kicker">Mon Espace Rhum</span>
       <h2 class="titre">Vivez votre Rhum</h2>
       <p>Rejoignez les passionnés du Rhum et partagez toute l'intensité de la course. Suivez vos skippers préférés, découvrez des contenus et données personnalisés, relevez des défis, participez à des jeux-concours exclusifs et collectionnez des badges au fil de l'aventure.</p>
-      <div class="promo-btns"><a class="btn btn--marine" href="#">Créez votre espace <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="#">J'ai déjà un compte</a></div>
+      <div class="promo-btns"><a class="btn btn--marine" href="/mon-espace-rhum">Créez votre espace <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="/mon-espace-rhum">J'ai déjà un compte</a></div>
     </div>
     <div class="promo-visuel">
       <div class="photo"><img data-media="espacePhoto" data-larg="900" alt="" loading="lazy" decoding="async"></div>
@@ -714,7 +718,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <span class="kicker kicker--sombre">La mascotte officielle</span>
       <h2 class="titre">TyMAL, en tournée avant le village</h2>
       <p>Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.</p>
-      <div class="btns"><a class="btn btn--marine" href="#">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="#">En savoir plus</a></div>
+      <div class="btns"><a class="btn btn--marine" href="/carte-tournee">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre">En savoir plus</a></div>
     </div>
     <div class="video">
       <div class="video-cadre" id="video">
@@ -737,6 +741,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     </div>
     <form class="fa-cherche" action="/faq" method="get" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input type="search" name="q" id="fa-q" autocomplete="off" aria-label="Chercher dans les questions"><button type="submit" aria-label="Chercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></form>
     <div class="fa-liste" id="fa-liste"></div>
+    <a class="fa-toutes fa-toutes--bas" id="fa-toutes-bas" href="/faq"></a>
   </div></div>
 </section>
 <div class="vague-sep" style="--avant:#F4F1E8;--apres:#0E111D"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
@@ -950,6 +955,14 @@ function monter(racine, portail, D) {
 
   const $ = (id) => racine.querySelector('#' + id) || portail.querySelector('#' + id);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  
+
+
+
+  const EN = /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '');
+  const lien = (u) => { u = String(u || ''); return (!EN || !/^\/(?!\/)/.test(u) || /^\/(en|post)(\/|$)/.test(u)) ? u : '/en' + u; };
+  const href = (u) => (u ? ' href="' + esc(lien(u)) + '"' : '');
+  if (EN) [racine, portail].forEach((z) => z && z.querySelectorAll && z.querySelectorAll('a[href^="/"], form[action^="/"]').forEach((a) => { const k = a.tagName === 'FORM' ? 'action' : 'href'; a.setAttribute(k, lien(a.getAttribute(k))); }));
   let phase = 'avant';
 
    
@@ -1017,7 +1030,7 @@ function monter(racine, portail, D) {
         }).join('') + '</div>';
     }
     return '<span class="kicker kicker--jaune">' + esc(d.kicker) + '</span><h2 class="titre">' + titreHtml(d.titre) + '</h2>' +
-      '<p class="hv-texte">' + esc(d.texte) + '</p><a class="btn btn--plein" href="#">' + esc(d.bouton) + ' ' + ROND + '</a>';
+      '<p class="hv-texte">' + esc(d.texte) + '</p><a class="btn btn--plein"' + href(d.lien) + '>' + esc(d.bouton) + ' ' + ROND + '</a>';
   }
   function poserRail() {
     const n = diapos().length; const rail = $('hv-rail');
@@ -1105,7 +1118,7 @@ function monter(racine, portail, D) {
   function rendreCtas() {
     
 
-    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => (k.bientot ? '<div class="cta cta--' + k.c + ' cta--bientot" aria-disabled="true">' : '<a class="cta cta--' + k.c + '" href="#">') + '<img loading="lazy" decoding="async" src="' + IMG(k.img, pourLarge(etroit() ? 380 : 460), Math.round(pourLarge(etroit() ? 380 : 460) * 0.52), 74) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
+    $('ctas').innerHTML = PHASES[phase].ctas.map((k, i) => (k.bientot ? '<div class="cta cta--' + k.c + ' cta--bientot" aria-disabled="true">' : '<a class="cta cta--' + k.c + '"' + href(k.lien) + '>') + '<img loading="lazy" decoding="async" src="' + IMG(k.img, pourLarge(etroit() ? 380 : 460), Math.round(pourLarge(etroit() ? 380 : 460) * 0.52), 74) + '" alt="" loading="lazy"><span class="cta-num">0' + (i + 1) + '</span>' +
       '<div class="cta-txt"><span class="cta-ico">' + ICO[k.ico] + '</span><h3>' + esc(k.titre) + '</h3><p>' + esc(k.txt) + '</p>' + (k.bientot ? '<span class="lire cta-prochainement">' + esc(k.bientot) + '</span></div></div>' : '<span class="lire">Découvrir ' + FLECHE + '</span></div></a>')).join('');
     rendreAffiche();
   }
@@ -1114,14 +1127,16 @@ function monter(racine, portail, D) {
   let modeAffiche = 'ligne';
   function rendreAffiche() {
     const p = PHASES[phase]; const auj = new Date(p.jour + 'T12:00:00'); const el = $('affiche');
+    const prog = (jour) => '/programmation' + (phase === 'course' ? '?type=guadeloupe' + (jour ? '&jour=' + jour : '') : (jour ? '?jour=' + jour : ''));
+    const toutProg = un('.affiche-lien'); if (toutProg) toutProg.setAttribute('href', lien(prog('')));
     el.className = modeAffiche === 'billets' ? 'bil-rail' : 'af-rail';
     el.innerHTML = p.affiche.map((r, i) => {
       const d = new Date(r.d + 'T12:00:00'); const ecart = Math.round((d - auj) / 86400000);
       const rel = ecart === 0 ? 'Aujourd\'hui' : ecart === 1 ? 'Demain' : (ecart > 1 && ecart <= 7) ? 'Dans ' + ecart + ' jours' : '';
       const infos = '<p><span>' + ICO.lieu + esc(r.ou) + '</span>' + (r.quand ? '<span>' + ICO.horloge + '<b>' + esc(r.quand) + '</b></span>' : '') + '</p>';
-      if (modeAffiche === 'billets') return '<a class="bil" href="#"><div class="bil-talon"><b>' + d.getDate() + '</b><span>' + MOIS[d.getMonth()] + '</span><em>' + JOURS[d.getDay()] + '</em></div>' +
+      if (modeAffiche === 'billets') return '<a class="bil"' + href(prog(r.d)) + '><div class="bil-talon"><b>' + d.getDate() + '</b><span>' + MOIS[d.getMonth()] + '</span><em>' + JOURS[d.getDay()] + '</em></div>' +
         '<div class="bil-corps"><span class="bil-type">Temps fort · N°' + String(i + 1).padStart(2, '0') + '</span><h3>' + esc(r.titre) + '</h3>' + infos + (rel ? '<span class="bil-tampon">' + rel + '</span>' : '') + '</div></a>';
-      return '<a class="af" href="#">' + (rel ? '<span class="af-rel">' + rel + '</span>' : '') +
+      return '<a class="af"' + href(prog(r.d)) + '>' + (rel ? '<span class="af-rel">' + rel + '</span>' : '') +
         '<div class="af-date"><b>' + d.getDate() + '</b><span>' + JOURS[d.getDay()] + '<em>' + MOIS[d.getMonth()] + '</em></span></div>' +
         '<h3>' + esc(r.titre) + '</h3>' + infos + '</a>';
     }).join('');
@@ -1245,7 +1260,7 @@ function monter(racine, portail, D) {
     el.querySelectorAll('.sl-bateau').forEach(b => { b.style.offsetPath = "path('" + d + "')"; });
     const dep = el.querySelector('.sl-port--dep'), arr = el.querySelector('.sl-port--arr');
     dep.style.left = m + 'px'; dep.style.top = y + 'px'; arr.style.left = (L - m) + 'px'; arr.style.top = y + 'px';
-    el.querySelector('.sl-milles').style.top = (sommet + 18) + 'px';
+    el.querySelector('.sl-milles').style.top = (sommet + (tel ? 9 : 18)) + 'px';
   }
   
 
@@ -1281,7 +1296,8 @@ function monter(racine, portail, D) {
 
    
   const HUB = { actu: { c: '#0B6E6B', bg: '#DCF2EF', lib: 'Actualités' }, photo: { c: '#5747C9', bg: '#E9E6FB', lib: 'Photo' }, video: { c: '#A14D00', bg: '#FBEAD6', lib: 'Vidéo' }, audio: { c: '#0E5B84', bg: '#DCEBF7', lib: 'Audio' }, interview: { c: '#8A6C00', bg: '#FBF3CD', lib: 'Interview' } };
-  $('onglets').innerHTML = ['actu', 'photo', 'video', 'audio'].map(k => '<a class="onglet" href="#" style="--c:' + HUB[k].c + ';--bg:' + HUB[k].bg + '"><i>' + ICO[k] + '</i>' + (k === 'actu' ? 'Actu' : HUB[k].lib) + '</a>').join('');
+  const CAT_HUB = { actu: 'actualites', photo: 'image', video: 'video', audio: 'audio' };
+  $('onglets').innerHTML = ['actu', 'photo', 'video', 'audio'].map(k => '<a class="onglet"' + href('/medias-actualites?cat=' + CAT_HUB[k]) + ' style="--c:' + HUB[k].c + ';--bg:' + HUB[k].bg + '"><i>' + ICO[k] + '</i>' + (k === 'actu' ? 'Actu' : HUB[k].lib) + '</a>').join('');
   const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([^/#]+)/); return m ? IMG(m[1], w, h) : String(v || ''); };
   const ilYa = (iso) => { const d = (Date.now() - new Date(iso).getTime()) / 86400000; return d < 1 ? 'aujourd\'hui' : d < 2 ? 'hier' : 'il y a ' + Math.floor(d) + ' j'; };
   const cat = (t) => '<span class="cat" style="--c:' + HUB[t].c + ';--bg:' + HUB[t].bg + '">' + ICO[t] + HUB[t].lib + '</span>';
@@ -1290,13 +1306,14 @@ function monter(racine, portail, D) {
      
     const type = (i, p) => i === 1 ? 'video' : i === 4 ? 'photo' : i === 5 ? 'audio' : /interview/i.test(p._categoryLabel || '') ? 'interview' : 'actu';
     const une = posts[0], video = posts[1], photo = posts[4];
-    $('une-actu').innerHTML = '<a class="carte carte--une" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, pourLarge(etroit() ? 350 : 620), Math.round(pourLarge(etroit() ? 350 : 620) * 0.75)) + '" alt="">' +
+    const lienPost = (p) => p.lien || (p.slug ? '/post/' + p.slug : '/medias-actualites');
+    $('une-actu').innerHTML = '<a class="carte carte--une"' + href(lienPost(une)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, pourLarge(etroit() ? 350 : 620), Math.round(pourLarge(etroit() ? 350 : 620) * 0.75)) + '" alt="">' +
       '<div class="carte-haut">' + cat(type(0, une)) + '<span class="kicker kicker--jaune">À la une</span></div>' +
       '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h3>' + esc(une.title.trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
     $('medias').innerHTML = [[video, 'video', 'La dernière vidéo'], [photo, 'photo', 'Le dernier reportage']].map(([p, t, lib]) =>
-      '<a class="carte" href="#"><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, pourLarge(etroit() ? 350 : 420), Math.round(pourLarge(etroit() ? 350 : 420) * 0.625)) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
+      '<a class="carte"' + href(lienPost(p)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, pourLarge(etroit() ? 350 : 420), Math.round(pourLarge(etroit() ? 350 : 420) * 0.625)) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
       '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
-    $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve" href="#"><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
+    $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve"' + href(lienPost(p)) + '><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
     reveler('.actus .carte', 120); reveler('.breve', 90);
   });
 
@@ -1304,7 +1321,7 @@ function monter(racine, portail, D) {
   const CLASSES = D.classes;
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const vecteur = (v) => { const m = String(v || '').match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : String(v || ''); };
-  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" href="#" style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
+  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe"' + href('/skippers') + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
   
 
 
@@ -1447,19 +1464,19 @@ function monter(racine, portail, D) {
     $('fa-fil').innerHTML = '<b>Route du Rhum</b> · ' + esc(F.kicker);
     $('fa-titre').innerHTML = titreHtml(F.titre);
     $('fa-q').placeholder = F.exemple || '';
-    const toutes = $('fa-toutes'); toutes.href = F.toutes.url; toutes.innerHTML = esc(F.toutes.texte) + '<i>' + ic(FLECHE_D) + '</i>';
+    ['fa-toutes', 'fa-toutes-bas'].forEach((id) => { const a = $(id); if (!a) return; a.href = lien(F.toutes.url); a.innerHTML = esc(F.toutes.texte) + '<i>' + ic(FLECHE_D) + '</i>'; });
     
 
     const texte = (t, l) => {
       let s = esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
-      if (l) s = s.replace(esc(l.texte), '<a href="' + esc(l.url) + '">' + esc(l.texte) + '</a>');
+      if (l) s = s.replace(esc(l.texte), '<a href="' + esc(lien(l.url)) + '">' + esc(l.texte) + '</a>');
       return s.replace(/\b1er\b/g, '1<sup>er</sup>');
     };
     const valider = (t) => (t ? '<p><span class="fa-valider">À valider</span>' + esc(t) + '</p>' : '');
      
     $('fa-liste').innerHTML = F.questions.map((x, i) => '<details class="fa-q" id="faq-' + esc(x.ancre) + '" style="--cc:' + couleur(x.ancre) + ';--i:' + i + '"' + (i === 0 ? ' open' : '') + '><summary><b>' + esc(x.q) + '</b>' + (RUBRIQUE[String(x.ancre).split('-')[0]] ? '<em class="fa-rub">' + RUBRIQUE[String(x.ancre).split('-')[0]] + '</em>' : '') + '<i>' + ic(CHEVRON) + '</i></summary><div class="fa-rep">' +
       (x.p || []).map(t => '<p>' + texte(t, x.lien) + '</p>').join('') + valider(x.aValider) +
-      (x.src ? '<a class="fa-source" href="' + esc(x.src.url) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
+      (x.src ? '<a class="fa-source" href="' + esc(lien(x.src.url)) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
     
 
     if (M.topoFaq) $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")');
