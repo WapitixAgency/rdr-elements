@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 26564c0 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="26564c0";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum bd0e5ed | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="bd0e5ed";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -173,7 +173,7 @@ const ER_EN = {
     'Vous participez automatiquement au tirage au sort quotidien correspondant à votre venue, et vous êtes aussi enregistré pour le grand tirage au sort final, à l’issue des 13 jours du village.': 'You are automatically entered into the daily prize draw for your visit day, and also registered for the grand final draw at the end of the village’s 13 days.',
     'Chaque jour': 'Every day',
     'Grand tirage final': 'Grand final draw',
-    'Découvrir le programme du village': 'Discover the village programme',
+    'Découvrir la programmation du village': 'Discover the village programme',
     'Ce champ est requis.': 'This field is required.',
     'Adresse e-mail invalide.': 'Invalid email address.',
     'Numéro de téléphone invalide.': 'Invalid phone number.',
@@ -2261,7 +2261,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
             '<li>' + ico('cadeau') + '<span><b>Chaque jour</b> : ' + esc(res.lotsQuotidiens || this._cms('lotsQuotidiens')) + '</span></li>' +
             '<li>' + ico('vague') + '<span><b>Grand tirage final</b> : ' + esc(res.grandLot || this._cms('grandLot')) + '</span></li>' +
           '</ul>' +
-          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programme' : '/programme') + '">Découvrir le programme du village' + ico('fleche') + '</a>' +
+          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programme' : '/programme') + '">Découvrir la programmation du village' + ico('fleche') + '</a>' +
         '</div>';
       this._i18n(corps);
       corps.scrollTop = 0;

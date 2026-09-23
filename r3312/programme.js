@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 26564c0 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="26564c0";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum bd0e5ed | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="bd0e5ed";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -202,7 +202,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="26564c0";perform
     'Programmation': 'Programme',
     'Officielle': 'Official',
     'Type de programmation': 'Programme type',
-    'Revoir le programme du village de Saint-Malo': 'Back to the Saint-Malo village programme',
+    'Revoir la programmation du village de Saint-Malo': 'Back to the Saint-Malo village programme',
      
     'Choix du jour': 'Choose a day',
     'Jours précédents': 'Previous days',
@@ -216,7 +216,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="26564c0";perform
     'Les catégories': 'Categories',
     'Thématique': 'Theme',
     'Tout afficher': 'Show all',
-    'Partager cette sélection du programme': 'Share this selection of the programme',
+    'Partager cette sélection de la programmation': 'Share this selection of the programme',
     'Lien copié': 'Link copied',
      
     'Matin': 'Morning',
@@ -233,7 +233,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="26564c0";perform
     'En savoir plus': 'Find out more',
     'Sur la carte': 'On the map',
     'Voir la carte complète': 'See the full map',
-    'Revenir au programme': 'Back to the programme',
+    'Revenir à la programmation': 'Back to the programme',
     'Écouter sur Spotify': 'Listen on Spotify',
     'Le détail de cette animation n’est pas encore publié.': 'The details of this event are not published yet.',
     'Il le sera au fil des semaines.': 'They will be, over the coming weeks.',
@@ -256,16 +256,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="26564c0";perform
 
 
 
-    'Ce jour n’a pas encore de programme publié. Il se remplit au fil des semaines.': 'This day has no published programme yet. It fills up over the coming weeks.',
+    'Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.': 'This day has no published programme yet. It fills up over the coming weeks.',
      
-    'Programme indisponible': 'Programme unavailable',
-    'Le programme n’a pas pu être chargé.': 'The programme could not be loaded.',
+    'Programmation indisponible': 'Programme unavailable',
+    'La programmation n’a pas pu être chargée.': 'The programme could not be loaded.',
     'Rafraîchir la page suffit le plus souvent.': 'Refreshing the page usually does it.',
-    'Le programme n’a pas pu être chargé': 'The programme could not be loaded',
-    'La connexion a été trop longue. Le programme est bien là,': 'The connection took too long. The programme is there,',
-    'il n’est pas encore arrivé jusqu’ici.': 'it just has not reached this page yet.',
+    'La programmation n’a pas pu être chargée': 'The programme could not be loaded',
+    'La connexion a été trop longue. La programmation est bien là,': 'The connection took too long. The programme is there,',
+    'elle n’est pas encore arrivée jusqu’ici.': 'it just has not reached this page yet.',
     'Réessayer': 'Try again',
-    'Chargement du programme…': 'Loading the programme…',
+    'Chargement de la programmation…': 'Loading the programme…',
      
     'Chargement de la carte': 'Loading the map',
     'La carte n’a pas pu s’afficher ici.': 'The map could not be displayed here.',
@@ -5503,7 +5503,7 @@ rdr-programme{display:block;width:100%;}
       if (this._type !== 'guadeloupe') return '';
       return '<p class="rp-retour">' +
         '<a href="?type=officielle" id="rpRetourSM">' +
-          'Revoir le programme du village de Saint-Malo' +
+          'Revoir la programmation du village de Saint-Malo' +
         '</a></p>';
     }
 
@@ -5569,7 +5569,7 @@ rdr-programme{display:block;width:100%;}
             '<div class="rp-sk-outils">' + champ.repeat(4) + '</div>' +
             '<div class="rp-sk-liste">' + rangee.repeat(5) + '</div>' +
           '</div>' +
-          '<p class="rp-sr-seul" role="status">Chargement du programme…</p>' +
+          '<p class="rp-sr-seul" role="status">Chargement de la programmation…</p>' +
         '</div>';
     }
 
@@ -5577,7 +5577,7 @@ rdr-programme{display:block;width:100%;}
       if (!this._p) {
         this.innerHTML = this._attente ? this._squelette()
           : '<div class="rp-root"><div class="rp-vide">' +
-            '<h3>Programme indisponible</h3><p>Le programme n’a pas pu être chargé. ' +
+            '<h3>Programmation indisponible</h3><p>La programmation n’a pas pu être chargée. ' +
             'Rafraîchir la page suffit le plus souvent.</p></div></div>';
         this._i18n(this);
         return;
@@ -6029,7 +6029,7 @@ rdr-programme{display:block;width:100%;}
           sel('cat', IC.liste, 'Les catégories', f.cat, cats) +
           (this._pilote && (pose || this._type !== this._registreParDefaut() || this._jourChoisi)
             ? '<button type="button" class="rp-partage" id="rpPartage"' +
-                ' aria-label="Partager cette sélection du programme">' +
+                ' aria-label="Partager cette sélection de la programmation">' +
                 svg(IC.partage, 'rp-ic') + '<span>Partager</span></button>'
             : '') +
         '</div>' +
@@ -6743,9 +6743,9 @@ rdr-programme{display:block;width:100%;}
       if (this._p && this._p.complet === false && !this._anims().length) {
         return '<div class="rp-vide">' +
           '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
-          '<h3>Le programme n’a pas pu être chargé</h3>' +
-          '<p>La connexion a été trop longue. Le programme est bien là, ' +
-            'il n’est pas encore arrivé jusqu’ici.</p>' +
+          '<h3>La programmation n’a pas pu être chargée</h3>' +
+          '<p>La connexion a été trop longue. La programmation est bien là, ' +
+            'elle n’est pas encore arrivée jusqu’ici.</p>' +
           '<div class="rp-vide-actions">' +
             '<button type="button" class="rp-cta rp-cta--fort" id="rpRecharger">Réessayer</button>' +
           '</div>' +
@@ -6778,7 +6778,7 @@ rdr-programme{display:block;width:100%;}
         '<h3>' + (filtre ? 'Aucun rendez-vous avec ces filtres' : 'Rien à cette date') + '</h3>' +
         '<p>' + (filtre
           ? 'Ce jour-là, rien ne correspond à ce que vous avez choisi. En retirer un suffit souvent.'
-          : 'Ce jour n’a pas encore de programme publié. Il se remplit au fil des semaines.') + '</p>' +
+          : 'Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.') + '</p>' +
         '<div class="rp-vide-actions">' +
           (filtre ? '<button type="button" class="rp-cta rp-cta--fort" id="rpRaz2">Tout afficher</button>' : '') +
           (proche
@@ -6851,7 +6851,7 @@ rdr-programme{display:block;width:100%;}
       if (bp) bp.addEventListener('click', async () => {
         const url = this._adresse();
         if (!url) return;
-        const titre = document.title || 'Programme, Route du Rhum';
+        const titre = document.title || (this._lang() === 'en' ? 'Programme' : 'Programmation') + ', Route du Rhum';
         try {
           if (navigator.share) { await navigator.share({ title: titre, url }); return; }
           await navigator.clipboard.writeText(url);
@@ -7015,7 +7015,7 @@ rdr-programme{display:block;width:100%;}
             '<div class="rp-mod-pied">' +
               '<a class="rp-cta rp-cta--fort" href="' + esc(lien) + '">' +
                 'Voir la carte complète' + svg(IC.fleche) + '</a>' +
-              '<button type="button" class="rp-cta" data-fermer>Revenir au programme</button>' +
+              '<button type="button" class="rp-cta" data-fermer>Revenir à la programmation</button>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -7339,7 +7339,7 @@ rdr-programme{display:block;width:100%;}
         }
         if (this._type !== this._registreParDefaut()) bouts.push(REGISTRE_NOMS[this._type].titre);
         document.title = bouts.length
-          ? 'Programme, ' + bouts.join(', ') + ' | Route du Rhum'
+          ? (this._lang() === 'en' ? 'Programme, ' : 'Programmation, ') + bouts.join(', ') + ' | Route du Rhum'
           : this._titreOrigine;
       } catch (e) {   }
     }
