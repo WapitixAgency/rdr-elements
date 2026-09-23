@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum a1d35ad | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="a1d35ad";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum d90f933 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d90f933";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -6696,9 +6696,19 @@ rdr-programme{display:block;width:100%;}
       
 
        
+      
+
+
+
+
+
+
+
+
+      const AFFICHER_DUREE = false;
       const d = minutes(a.debut), f = /^\d{1,2}:\d{2}/.test(a.fin || '') ? finMinutes(a) : 0;
       let duree = '';
-      if (f > d) {
+      if (AFFICHER_DUREE && f > d) {
         const m = f - d, h = Math.floor(m / 60), r = m % 60;
         duree = h ? (h + ' h' + (r ? ' ' + String(r).padStart(2, '0') : '')) : (m + ' min');
       }
