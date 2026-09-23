@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum e6d329b | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e6d329b";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 48c9ad3 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="48c9ad3";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -457,15 +457,13 @@ rdr-accueil-apercu .pv-badge > i{color:var(--t3);margin-left:4px}
 rdr-accueil-apercu .pv-badge > i svg{width:16px;height:16px}
 rdr-accueil-apercu .pv-top{position:absolute;right:26px;top:24px;width:174px;padding:12px 14px;border-radius:16px;background:#fff;color:#0E111D;box-shadow:0 24px 50px rgba(14,17,29,.3);animation-delay:-3s}
 rdr-accueil-apercu .pv-top .pv-micro{color:#5b6477}
-rdr-accueil-apercu .pv-rang{display:flex;align-items:baseline;justify-content:space-between;margin-top:6px}
-rdr-accueil-apercu .pv-rang b{font-family:var(--titre);font-style:italic;font-size:36px;line-height:1}
-rdr-accueil-apercu .pv-rang sup{font-size:.45em;vertical-align:super}
-rdr-accueil-apercu .pv-rang em{font-style:normal;font-size:11px;font-weight:800;color:#0B7A55;background:#DDF5EA;border-radius:6px;padding:3px 6px}
-rdr-accueil-apercu .pv-histo{display:flex;align-items:flex-end;gap:4px;height:30px;margin-top:8px}
-rdr-accueil-apercu .pv-histo i{flex:1;height:var(--h);border-radius:3px 3px 1px 1px;background:linear-gradient(180deg,#F5A23C,#FF7A3D);transform-origin:bottom;animation:raa-pousse 4s ease-in-out infinite}
-rdr-accueil-apercu .pv-histo i:nth-child(2n){animation-delay:-1s}
-rdr-accueil-apercu .pv-histo i:last-child{background:#0E111D}
-@keyframes raa-pousse{0%,100%{transform:scaleY(.82)}50%{transform:scaleY(1)}}
+rdr-accueil-apercu .pv-podium{display:flex;align-items:flex-end;gap:5px;height:56px;margin-top:10px}
+rdr-accueil-apercu .pv-podium i{position:relative;flex:1;height:var(--h);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-style:normal}
+rdr-accueil-apercu .pv-podium i::before{content:'';position:absolute;inset:0;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#F5A23C,#FF7A3D);transform-origin:bottom;animation:raa-pousse 4s ease-in-out infinite}
+rdr-accueil-apercu .pv-podium i:nth-child(2)::before{background:#0E111D;animation-delay:-1s}
+rdr-accueil-apercu .pv-podium i:nth-child(3)::before{animation-delay:-2s}
+rdr-accueil-apercu .pv-podium b{position:relative;font-family:var(--titre);font-style:italic;font-size:16px;line-height:1;color:#fff}
+@keyframes raa-pousse{0%,100%{transform:scaleY(.86)}50%{transform:scaleY(1)}}
 rdr-accueil-apercu .pv-top small{display:block;font-size:10px;color:#5b6477;margin-top:6px;font-weight:600}
 rdr-accueil-apercu .pv-skipper{position:absolute;right:clamp(150px,30%,230px);bottom:-38px;width:178px;aspect-ratio:4/5;transform:rotate(-4deg);filter:drop-shadow(0 30px 40px rgba(14,17,29,.4))}
 rdr-accueil-apercu .pv-sk{position:absolute;inset:0;border-radius:28px 3px 16px 3px;overflow:hidden;background:#0f2238;border:2px solid rgba(255,255,255,.75);opacity:0;transform:scale(.94) rotate(3deg);transition:opacity .7s ease,transform .8s cubic-bezier(.22,.8,.3,1)}
@@ -702,7 +700,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
           <div><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
           <i id="pv-ico-verrou"></i>
         </div>
-        <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-rang"><b>137<sup>e</sup></b><em>▲ 12 places</em></div><div class="pv-histo"><i style="--h:32%"></i><i style="--h:46%"></i><i style="--h:40%"></i><i style="--h:58%"></i><i style="--h:54%"></i><i style="--h:74%"></i><i style="--h:92%"></i></div><small>Cette semaine</small></div>
+        <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-podium" aria-hidden="true"><i style="--h:72%"><b>2</b></i><i style="--h:100%"><b>1</b></i><i style="--h:54%"><b>3</b></i></div><small>Entrez dans le classement</small></div>
         <div class="pv-skipper" id="pv-skipper"></div>
       </div>
     </div>
