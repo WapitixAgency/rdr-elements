@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 88d571e | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="88d571e";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum ed20bba | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ed20bba";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -1132,6 +1132,8 @@ rdr-programme{display:block;width:100%;}
 .rp-hero{
   position:relative;isolation:isolate;
   display:grid;place-items:center;
+   
+  grid-template-columns:minmax(0,1fr);
   width:100%;margin:0;border-radius:0;
   aspect-ratio:2 / 1;
   
@@ -1233,6 +1235,19 @@ rdr-programme{display:block;width:100%;}
 
   padding:0 20px max(calc(var(--rp-chevauche) + 14px),min(clamp(52px,11%,132px),15vh));
   display:grid;justify-items:center;align-content:center;
+  
+
+
+
+
+
+
+
+
+
+
+
+  grid-template-columns:minmax(0,1fr);min-width:0;
 }
 .rp-logo{
   
@@ -1252,11 +1267,17 @@ rdr-programme{display:block;width:100%;}
 
 
 
-  height:min(clamp(58px,calc(var(--rp-l,1180) * .072 * 1px),104px),12vh);
+  --rp-logo-h:min(clamp(58px,calc(var(--rp-l,1180) * .072 * 1px),104px),12vh);
+  height:var(--rp-logo-h);
   margin:0 auto clamp(12px,2vw,26px);object-fit:contain;color:#fff;
   filter:drop-shadow(0 4px 22px rgba(6,10,30,.9));
 }
 .rp-logo svg{display:block;height:100%;width:auto;}
+
+
+
+.rp-logo--svg{width:var(--rp-logo-h);}
+.rp-logo--svg svg{width:100%;}
 
 
 
@@ -5776,7 +5797,7 @@ rdr-programme{display:block;width:100%;}
                 ' src="' + esc(wixContenu(logo, 240)) + '"' +
                 (wixContenuDensite(logo, 240) ? ' srcset="' + esc(wixContenuDensite(logo, 240)) + '"' : '') +
                 ' alt="' + esc(this._t(off ? 'Off du Rhum' : 'Route du Rhum')) + '" loading="eager" decoding="async">'
-            : '<div class="rp-logo" role="img" aria-label="Route du Rhum, destination Guadeloupe">' +
+            : '<div class="rp-logo rp-logo--svg" role="img" aria-label="Route du Rhum, destination Guadeloupe">' +
                 LOGO_RDR + '</div>') +
           (logoVille
             ? '<img class="rp-logo-tiers"' +
