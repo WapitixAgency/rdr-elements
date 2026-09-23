@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum e6001e6 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e6001e6";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 18b6ad6 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18b6ad6";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
