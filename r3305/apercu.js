@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 31f8573 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="31f8573";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 538f3f8 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="538f3f8";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1562,8 +1562,14 @@ function monter(racine, portail, D) {
     const pris = new Set();
     const prendre = (ok) => { const p = posts.find((x) => !pris.has(x) && ok(x)); if (p) pris.add(p); return p || null; };
     const une = prendre((p) => typeDe(p) === 'actu' || typeDe(p) === 'interview') || prendre(() => true);
-    const video = prendre((p) => typeDe(p) === 'video') || prendre(() => true);
-    const photo = prendre((p) => typeDe(p) === 'photo') || prendre(() => true);
+    
+
+
+
+
+    const recentMedia = (p) => Date.now() - new Date(p.publishedDate).getTime() < 14 * 86400000;
+    const video = prendre((p) => typeDe(p) === 'video' && recentMedia(p)) || prendre((p) => recentMedia(p) || typeDe(p) === 'actu' || typeDe(p) === 'interview');
+    const photo = prendre((p) => typeDe(p) === 'photo' && recentMedia(p)) || prendre((p) => recentMedia(p) || typeDe(p) === 'actu' || typeDe(p) === 'interview');
     const breves = [0, 1, 2, 3].map(() => prendre(() => true)).filter(Boolean);
     const tu = typeDe(une);
     $('une-actu').innerHTML = '<a class="carte carte--une"' + href(lienPost(une)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, pourLarge(etroit() ? 350 : 620), Math.round(pourLarge(etroit() ? 350 : 620) * 0.75)) + '" alt="">' +
