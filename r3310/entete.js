@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum ed20bba | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ed20bba";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 57fdbd7 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="57fdbd7";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {
@@ -25,8 +25,8 @@ const ARBORESCENCE = {
         { libelle: 'Présentation', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Préparer sa venue', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Covoiturage', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
-        { libelle: 'Carte interactive', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/7bb303_b2ec154a8c854c98919c6b61dc6fd05c~mv2.avif/carte-illustree-village.avif' },
-        { libelle: 'Programmation', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/7bb303_653698a0635b49fa88d6346686b4b0d2~mv2.jpg/village-de-nuit.jpg' }
+        { libelle: 'Carte interactive', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/df962b_51b3d859da05413c98677a2bfe4b7947~mv2.png/menu-villages-carte-interactive.png' },
+        { libelle: 'Programmation', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'À propos', panneau: 'a-propos',
       liens: [
@@ -61,8 +61,8 @@ const ARBORESCENCE = {
         { libelle: 'Overview', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Plan your visit', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Carpooling', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
-        { libelle: 'Interactive map', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/7bb303_b2ec154a8c854c98919c6b61dc6fd05c~mv2.avif/carte-illustree-village.avif' },
-        { libelle: 'Village programme', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/7bb303_653698a0635b49fa88d6346686b4b0d2~mv2.jpg/village-de-nuit.jpg' }
+        { libelle: 'Interactive map', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/df962b_51b3d859da05413c98677a2bfe4b7947~mv2.png/menu-villages-carte-interactive.png' },
+        { libelle: 'Village programme', lien: '/programme', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'About', panneau: 'a-propos',
       liens: [
