@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 204ab5c | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="204ab5c";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 88d571e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="88d571e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -176,9 +176,11 @@ rdr-accueil-apercu .af p span{display:inline-flex;align-items:center;gap:5px}
 rdr-accueil-apercu .af p svg{width:13px;height:13px;color:var(--c)}
 rdr-accueil-apercu .af p b{color:#fff;font-weight:700}
 rdr-accueil-apercu .af-rel{position:absolute;right:14px;top:14px;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:rgba(252,241,80,.14);color:var(--jaune)}
-rdr-accueil-apercu .vague-sep{height:24px;width:100%;background:var(--avant);position:relative;z-index:2;line-height:0;font-size:0;margin:-1px 0}
-rdr-accueil-apercu .vague-sep i{display:block;height:26px;width:100%;position:relative;background:var(--apres);-webkit-mask:url("data:image/svg+xml;utf8,<svg width='360' height='12' viewBox='0 0 360 12' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'><path d='M0,1.092C37.3557,1.092,52.6443,12,90,12C127.356,12,142.633,1.092,180,1.092C217.356,1.092,232.644,12,270,12C307.356,12,322.644,1.092,360,1.092V12H0V1.092Z' fill='black'/></svg>") 0 0/600px 24px repeat-x,linear-gradient(#000,#000) 0 100%/100% 3px no-repeat;mask:url("data:image/svg+xml;utf8,<svg width='360' height='12' viewBox='0 0 360 12' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'><path d='M0,1.092C37.3557,1.092,52.6443,12,90,12C127.356,12,142.633,1.092,180,1.092C217.356,1.092,232.644,12,270,12C307.356,12,322.644,1.092,360,1.092V12H0V1.092Z' fill='black'/></svg>") 0 0/600px 24px repeat-x,linear-gradient(#000,#000) 0 100%/100% 3px no-repeat;animation:raa-vague 18s linear infinite}
-@keyframes raa-vague{0%{-webkit-mask-position:0 0,0 100%;mask-position:0 0,0 100%}100%{-webkit-mask-position:-600px 0,0 100%;mask-position:-600px 0,0 100%}}
+rdr-accueil-apercu .vague-sep{position:relative;z-index:2;overflow:hidden;line-height:0;font-size:0;background:var(--avant);margin:-1px 0}
+rdr-accueil-apercu .vague-sep svg{display:block;width:calc(100% + 120px);margin-left:-60px;height:clamp(34px,5vw,64px);animation:raa-houle 11s ease-in-out infinite alternate}
+rdr-accueil-apercu .vague-sep path{fill:var(--apres)}
+rdr-accueil-apercu .vague-sep path:first-child{fill-opacity:.34}
+@keyframes raa-houle{from{translate:-40px 0}to{translate:40px 0}}
 rdr-accueil-apercu .actus{position:relative;background:#0E111D;color:#fff;padding:60px 0 70px;overflow:hidden}
 rdr-accueil-apercu .actus .filigrane{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.45;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 96%);mask-image:linear-gradient(to bottom,#000 62%,transparent 96%)}
 rdr-accueil-apercu .actus .trame{position:relative}
@@ -448,7 +450,7 @@ rdr-accueil-apercu .pv-badge{position:absolute;left:28px;top:30px;display:flex;a
 rdr-accueil-apercu .pv-medaille{position:relative;width:58px;height:58px;flex:none}
 rdr-accueil-apercu .pv-anneau{position:absolute;inset:0;width:100%;height:100%}
 rdr-accueil-apercu .pv-arc{animation:raa-arc 6s cubic-bezier(.4,0,.2,1) infinite}
-@keyframes raa-arc{0%{stroke-dashoffset:100}45%,82%{stroke-dashoffset:34}100%{stroke-dashoffset:100}}
+@keyframes raa-arc{0%{stroke-dashoffset:100}45%,82%{stroke-dashoffset:30}100%{stroke-dashoffset:100}}
 rdr-accueil-apercu .pv-medaille span{position:absolute;inset:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2B3D6B,#0E111D);display:flex;align-items:center;justify-content:center;color:var(--jaune);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 rdr-accueil-apercu .pv-medaille span svg{width:18px;height:18px}
 rdr-accueil-apercu .pv-badge .pv-micro{color:var(--teal)}
@@ -700,8 +702,8 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       <div class="photo"><img data-media="espacePhoto" data-larg="900" alt="" loading="lazy" decoding="async"></div>
       <div class="pv-pile">
         <div class="pv-badge pv-flotte">
-          <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-lieu"></span></div>
-          <div><span class="pv-micro">Badge « Village »</span><b>À débloquer au bassin Vauban</b><small>2 visites sur 3</small></div>
+          <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-badge"></span></div>
+          <div><span class="pv-micro">Badge « Explorateur »</span><b>Découvrez 20 skippers</b><small>14 skippers sur 20</small></div>
           <i id="pv-ico-verrou"></i>
         </div>
         <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-rang"><b>137<sup>e</sup></b><em>▲ 12 places</em></div><div class="pv-histo"><i style="--h:32%"></i><i style="--h:46%"></i><i style="--h:40%"></i><i style="--h:58%"></i><i style="--h:54%"></i><i style="--h:74%"></i><i style="--h:92%"></i></div><small>Cette semaine</small></div>
@@ -710,7 +712,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     </div>
   </div>
 </div></section>
-<div class="vague-sep" style="--avant:#fff;--apres:#FCF150"><i></i></div>
+<div class="vague-sep" style="--avant:#fff;--apres:#FCF150"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
 <section class="tymal">
   <img class="elem" data-media="tymalFond" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="trame">
@@ -731,7 +733,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   </div>
 </section>
 <div class="faq-bloc" id="faq-bloc" hidden>
-<div class="vague-sep" style="--avant:#FCF150;--apres:#F4F1E8"><i></i></div>
+<div class="vague-sep" style="--avant:#FCF150;--apres:#F4F1E8"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
 <section class="faq-acc" id="faq-acc" aria-labelledby="fa-titre">
   <div class="fa-topo" id="fa-topo" aria-hidden="true"></div>
   <div class="trame"><div class="fa-corps">
@@ -743,7 +745,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     <div class="fa-liste" id="fa-liste"></div>
   </div></div>
 </section>
-<div class="vague-sep" style="--avant:#F4F1E8;--apres:#0E111D"><i></i></div>
+<div class="vague-sep" style="--avant:#F4F1E8;--apres:#0E111D"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
 </div>`;
 
   function injecterCss() {
@@ -1279,7 +1281,9 @@ function monter(racine, portail, D) {
 
   try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => reserverTitre()); } catch (e) {   }
   minuteurs.push(setTimeout(() => reserverTitre(), 1200));
-  $('pv-ico-lieu').innerHTML = ICO.lieu; $('pv-ico-verrou').innerHTML = VERROU;
+  
+
+  $('pv-ico-badge').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></svg>'; $('pv-ico-verrou').innerHTML = VERROU;
 
    
   const HUB = { actu: { c: '#0B6E6B', bg: '#DCF2EF', lib: 'Actualités' }, photo: { c: '#5747C9', bg: '#E9E6FB', lib: 'Photo' }, video: { c: '#A14D00', bg: '#FBEAD6', lib: 'Vidéo' }, audio: { c: '#0E5B84', bg: '#DCEBF7', lib: 'Audio' }, interview: { c: '#8A6C00', bg: '#FBF3CD', lib: 'Interview' } };
@@ -1334,8 +1338,12 @@ function monter(racine, portail, D) {
         '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper favori</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
     reveler('#skippers .sk-flip', 150);
   }
+  
+
+
+  let vivierDessine = vivierAttribut() ? racine.getAttribute('skippers') : null;
   rendreSkippers(vivierAttribut() || D.skippers);
-  ecoute(racine, 'raa-skippers', () => { const v = vivierAttribut(); if (v) rendreSkippers(v); });
+  ecoute(racine, 'raa-skippers', () => { const brut = racine.getAttribute('skippers'); if (brut === vivierDessine) return; const v = vivierAttribut(); if (v) { vivierDessine = brut; rendreSkippers(v); } });
   repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; pvI = pvI % c.length; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
   function reveler(sel, pas) {
     const els = [...tout(sel)];
