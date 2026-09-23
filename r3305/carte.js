@@ -1,5 +1,5 @@
-/* rdr-elements carte | source route-du-rhum 1521e64 | village-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="1521e64";performance.mark("rdr-elements:carte")}catch(e){}
+/* rdr-elements carte | source route-du-rhum 18517f5 | village-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["carte"]="18517f5";performance.mark("rdr-elements:carte")}catch(e){}
 ;(function(){
 /* ==========================================================================
    <village-map> — Carte publique du village.

@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 1521e64 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="1521e64";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 18517f5 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="18517f5";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -269,17 +269,32 @@ rdr-accueil-apercu .espace .trame{position:relative;z-index:1}
 rdr-accueil-apercu .espace{--promo-h:clamp(370px,46vh,420px)}
 rdr-accueil-apercu[data-liaison="sillage"] .espace{--air-haut:clamp(84px,12vh,128px);--nuit-haut:calc(var(--air-haut) + var(--promo-h) / 2);padding-top:var(--air-haut)}
 rdr-accueil-apercu[data-liaison="sillage"] .espace::before{content:'';position:absolute;left:0;right:0;top:0;height:var(--nuit-haut);background:#0A1228;z-index:0}
-rdr-accueil-apercu[data-liaison="sillage"] .promo{box-shadow:0 30px 70px rgba(10,18,40,.35),0 34px 80px rgba(245,158,60,.22)}
-rdr-accueil-apercu .promo{position:relative;border-radius:26px;background:linear-gradient(115deg,#FF7A3D 0%,#F5A23C 55%,#F5BE41 100%);color:#0E111D;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:var(--promo-h);box-shadow:0 34px 80px rgba(245,158,60,.3)}
+rdr-accueil-apercu[data-liaison="sillage"] .promo{box-shadow:0 30px 70px rgba(10,18,40,.35),0 34px 80px rgba(232,108,32,.22)}
+rdr-accueil-apercu .promo{position:relative;border-radius:26px;background:radial-gradient(90% 120% at 0% 0%,#F4A23A 0%,rgba(244,162,58,0) 58%),linear-gradient(118deg,#EF8A2B 0%,#E86C20 46%,#DB5710 100%);color:#fff;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:var(--promo-h);box-shadow:0 34px 80px rgba(232,108,32,.3)}
+rdr-accueil-apercu .promo::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.5;pointer-events:none;background:repeating-linear-gradient(128deg,rgba(255,255,255,.07) 0 150px,rgba(255,255,255,0) 150px 330px)}
 rdr-accueil-apercu .promo-txt{padding:58px 62px;display:flex;flex-direction:column;gap:14px;justify-content:center;position:relative;z-index:2}
-rdr-accueil-apercu .promo .kicker{background:#0E111D;color:#fff}
-rdr-accueil-apercu .promo h2{font-size:clamp(36px,3.8vw,56px);line-height:.95;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.15)}
-rdr-accueil-apercu .promo p{font-size:14px;line-height:1.55;max-width:520px;color:rgba(14,17,29,.85);font-weight:500}
-rdr-accueil-apercu .promo-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+rdr-accueil-apercu .promo .kicker{background:none;padding:0;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em}
+rdr-accueil-apercu .promo h2{font-size:clamp(40px,4.4vw,66px);line-height:.9;color:#fff;text-shadow:0 4px 20px rgba(80,24,0,.18)}
+rdr-accueil-apercu .promo h2 em{font-style:inherit;color:var(--jaune)}
+rdr-accueil-apercu .promo p{font-size:15px;line-height:1.55;max-width:540px;color:#fff;font-weight:600}
+rdr-accueil-apercu .promo-btns{display:flex;gap:14px 22px;flex-wrap:wrap;align-items:center;margin-top:10px}
+rdr-accueil-apercu .cta-rhum{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:12px 3px 12px 3px;background:var(--jaune);color:#13204A;font:italic 400 19px/1 var(--titre);text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(80,24,0,.7);transition:transform .2s ease,box-shadow .2s ease}
+rdr-accueil-apercu .cta-rhum svg{width:18px;height:18px;flex:none;transition:transform .2s ease}
+rdr-accueil-apercu .cta-rhum:hover{transform:translateY(-2px);box-shadow:0 16px 28px -12px rgba(80,24,0,.8)}
+rdr-accueil-apercu .cta-rhum:hover svg{transform:translateX(3px)}
+rdr-accueil-apercu .lien-rhum{color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.5)}
+rdr-accueil-apercu .lien-rhum:hover{text-decoration-color:#fff}
+rdr-accueil-apercu .cta-rhum:focus-visible,rdr-accueil-apercu .lien-rhum:focus-visible{outline:3px solid #13204A;outline-offset:3px}
 rdr-accueil-apercu .promo-visuel{position:relative;border-radius:0 26px 26px 0;overflow:visible}
 rdr-accueil-apercu .promo-visuel .photo{position:absolute;inset:0;border-radius:0 26px 26px 0;overflow:hidden}
 rdr-accueil-apercu .promo-visuel .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
-rdr-accueil-apercu .promo-visuel .photo::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#F5A23C 0%,rgba(245,162,60,0) 45%);z-index:1}
+rdr-accueil-apercu .promo-visuel .photo::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#E4661C 0%,rgba(228,102,28,0) 45%);z-index:1}
+rdr-accueil-apercu .pub-encart{--pub-hmax:clamp(200px,40vh,400px);position:relative;z-index:1;display:block;width:min(100%,calc(var(--pub-hmax) * var(--pub-ratio,3)));aspect-ratio:var(--pub-ratio,3);margin:clamp(76px,10vh,110px) auto 0;border-radius:22px;overflow:hidden;background:#0A1228;box-shadow:0 26px 60px rgba(10,18,40,.18)}
+rdr-accueil-apercu .pub-encart[hidden]{display:none}
+rdr-accueil-apercu .pub-encart a,rdr-accueil-apercu .pub-encart picture{display:block;width:100%;height:100%}
+rdr-accueil-apercu .pub-encart img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,.8,.3,1)}
+rdr-accueil-apercu .pub-encart a:hover img{transform:scale(1.02)}
+rdr-accueil-apercu .pub-encart a:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
 @keyframes raa-flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 rdr-accueil-apercu .tymal{position:relative;background:var(--jaune);color:#0E111D;padding:clamp(100px,12vh,130px) 0 clamp(104px,13vh,136px);overflow:hidden;clip-path:inset(0)}
 rdr-accueil-apercu .tymal .elem{position:absolute;left:-160px;bottom:-140px;width:640px;height:440px;object-fit:contain;opacity:.55;pointer-events:none;transform:rotate(12deg)}
@@ -447,8 +462,13 @@ rdr-accueil-apercu .pv-micro{display:inline-flex;align-items:center;gap:6px;font
 rdr-accueil-apercu .pv-badge{position:absolute;left:28px;top:30px;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:18px;background:rgba(14,17,29,.84);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 40px rgba(14,17,29,.35);color:#fff;animation-delay:-1.4s}
 rdr-accueil-apercu .pv-medaille{position:relative;width:58px;height:58px;flex:none}
 rdr-accueil-apercu .pv-anneau{position:absolute;inset:0;width:100%;height:100%}
-rdr-accueil-apercu .pv-arc{animation:raa-arc 6s cubic-bezier(.4,0,.2,1) infinite}
-@keyframes raa-arc{0%{stroke-dashoffset:100}45%,82%{stroke-dashoffset:30}100%{stroke-dashoffset:100}}
+rdr-accueil-apercu .pv-arc{animation:raa-arc 3.2s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes raa-arc{0%{stroke-dashoffset:100}78%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:100}}
+rdr-accueil-apercu .pv-bdg-txt{min-width:196px}
+rdr-accueil-apercu .pv-medaille span.avec-art{inset:6px;background:#0E111D}
+rdr-accueil-apercu .pv-medaille span img{display:block;width:100%;height:100%;object-fit:contain}
+rdr-accueil-apercu .pv-medaille span,rdr-accueil-apercu .pv-bdg-txt{transition:opacity .28s ease,transform .28s ease}
+rdr-accueil-apercu .pv-badge.est-change .pv-medaille span,rdr-accueil-apercu .pv-badge.est-change .pv-bdg-txt{opacity:0;transform:translateY(4px)}
 rdr-accueil-apercu .pv-medaille span{position:absolute;inset:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2B3D6B,#0E111D);display:flex;align-items:center;justify-content:center;color:var(--jaune);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 rdr-accueil-apercu .pv-medaille span svg{width:18px;height:18px}
 rdr-accueil-apercu .pv-badge .pv-micro{color:var(--teal)}
@@ -472,8 +492,8 @@ rdr-accueil-apercu .pv-sk.est-active{opacity:1;transform:none}
 rdr-accueil-apercu .pv-sk > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
 rdr-accueil-apercu .pv-sk > img.pv-sk-classe{inset:auto;right:6px;top:-2px;width:auto;height:64px;object-fit:contain;z-index:2}
 rdr-accueil-apercu .pv-sk-ov{position:absolute;left:0;right:0;bottom:0;padding:36px 12px 12px;background:linear-gradient(to top,rgba(6,14,26,1),rgba(6,14,26,.86) 45%,transparent);color:#fff}
-rdr-accueil-apercu .pv-sk-ov .pv-micro{color:var(--jaune);letter-spacing:.12em;white-space:nowrap}
-rdr-accueil-apercu .pv-sk-ov .pv-micro svg{width:11px;height:11px}
+rdr-accueil-apercu .pv-sk-ov .pv-micro{color:#fff;letter-spacing:.12em;white-space:nowrap}
+rdr-accueil-apercu .pv-sk-ov .pv-micro svg{width:11px;height:11px;color:#E63946}
 rdr-accueil-apercu .pv-sk-ov b{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:7px}
 rdr-accueil-apercu .pv-sk-ov strong{display:block;font-family:var(--titre);font-style:italic;font-weight:400;font-size:22px;line-height:.95;text-transform:uppercase;text-wrap:balance;margin-top:2px}
 rdr-accueil-apercu .pv-sk-ov small{display:block;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cc);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -488,6 +508,7 @@ rdr-accueil-apercu .af-rail{gap:20px}
 rdr-accueil-apercu .bil-rail{gap:22px}
 rdr-accueil-apercu .affiche{padding:32px 0 76px}
 rdr-accueil-apercu .promo-txt{padding:56px 58px}
+rdr-accueil-apercu .promo p{font-size:14px}
 }
 @media (min-width:761px) and (max-width:1660px){
 rdr-accueil-apercu .hero[data-acces="sous"]{--bas-titre:112px}
@@ -596,9 +617,10 @@ rdr-accueil-apercu[data-liaison="sillage"] .espace{--nuit-haut:170px;padding-top
 rdr-accueil-apercu .promo{grid-template-columns:1fr;min-height:0}
 rdr-accueil-apercu .promo-txt{padding:30px 22px 26px}
 rdr-accueil-apercu .promo h2{font-size:38px}
+rdr-accueil-apercu .pub-encart{--pub-hmax:80vh;width:min(100%,calc(var(--pub-hmax) * var(--pub-ratio-tel,var(--pub-ratio,3))));aspect-ratio:var(--pub-ratio-tel,var(--pub-ratio,3));margin-top:64px;border-radius:18px}
 rdr-accueil-apercu .promo-visuel{min-height:300px;border-radius:0 0 26px 26px}
 rdr-accueil-apercu .promo-visuel .photo{border-radius:0 0 26px 26px}
-rdr-accueil-apercu .promo-visuel .photo::before{background:linear-gradient(180deg,#F5A23C 0%,rgba(245,162,60,0) 40%)}
+rdr-accueil-apercu .promo-visuel .photo::before{background:linear-gradient(180deg,#E4661C 0%,rgba(228,102,28,0) 40%)}
 rdr-accueil-apercu .pv-badge{left:14px;top:14px;padding:10px 14px 10px 10px;gap:10px}
 rdr-accueil-apercu .pv-medaille{width:46px;height:46px}
 rdr-accueil-apercu .pv-medaille span{inset:8px}
@@ -692,16 +714,16 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <div class="promo">
     <div class="promo-txt">
       <span class="kicker">Mon Espace Rhum</span>
-      <h2 class="titre">Vivez votre Rhum</h2>
+      <h2 class="titre">Vivez <em>votre</em> Rhum</h2>
       <p>Rejoignez les passionnés du Rhum et partagez toute l'intensité de la course. Suivez vos skippers préférés, découvrez des contenus et données personnalisés, relevez des défis, participez à des jeux-concours exclusifs et collectionnez des badges au fil de l'aventure.</p>
-      <div class="promo-btns"><a class="btn btn--marine" href="/mon-espace-rhum">Créez votre espace <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="/mon-espace-rhum">J'ai déjà un compte</a></div>
+      <div class="promo-btns"><a class="cta-rhum" href="/mon-espace-rhum">Créez votre espace <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><a class="lien-rhum" href="/mon-espace-rhum">J'ai déjà un compte</a></div>
     </div>
     <div class="promo-visuel">
       <div class="photo"><img data-media="espacePhoto" data-larg="900" alt="" loading="lazy" decoding="async"></div>
       <div class="pv-pile">
         <div class="pv-badge pv-flotte">
           <div class="pv-medaille"><svg class="pv-anneau" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBFC0"/><stop offset="1" stop-color="#FCF150"/></linearGradient></defs><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="5"/><circle class="pv-arc" cx="32" cy="32" r="27" fill="none" stroke="url(#pvg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 32 32)"/></svg><span id="pv-ico-badge"></span></div>
-          <div><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
+          <div class="pv-bdg-txt" id="pv-bdg-txt"><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
           <i id="pv-ico-verrou"></i>
         </div>
         <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-podium" aria-hidden="true"><i style="--h:72%"><b>2</b></i><i style="--h:100%"><b>1</b></i><i style="--h:54%"><b>3</b></i></div><small>Entrez dans le classement</small></div>
@@ -709,6 +731,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       </div>
     </div>
   </div>
+  <div class="pub-encart" id="pub-encart" hidden></div>
 </div></section>
 <div class="vague-sep" style="--avant:#fff;--apres:#FCF150"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
 <section class="tymal">
@@ -768,7 +791,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu', 'skippers']; }
+    static get observedAttributes() { return ['jeu', 'skippers', 'promos']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -785,6 +808,10 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (nom === 'skippers') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-skippers')); return; }
+      
+
+
+      if (nom === 'promos') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-promos')); return; }
       if (nom !== 'jeu' || !this._monte || this._dessine) return;
       const jeu = this._jeuAttribut();
       if (jeu) this._dessiner(jeu);
@@ -1292,7 +1319,105 @@ function monter(racine, portail, D) {
   try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => reserverTitre()); } catch (e) {   }
   minuteurs.push(setTimeout(() => reserverTitre(), 1200));
    
-  $('pv-ico-badge').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>'; $('pv-ico-verrou').innerHTML = VERROU;
+  const MEDAILLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>'; $('pv-ico-verrou').innerHTML = VERROU;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  const LANGUE_PUB = /^\/en(\/|$)/.test(location.pathname || '') || /^en/i.test(document.documentElement.lang || '') ? 'en' : 'fr';
+  const MODE_PUB = (() => { try { return new URLSearchParams(location.search).get('promo') || ''; } catch (e) { return ''; } })();
+  let pubRecalage = 0;
+  const promosAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('promos')) || 'null'); return Array.isArray(a) ? a : null; } catch (e) { return null; } };
+  
+
+  const imgPub = (v) => {
+    if (!v || typeof v !== 'object') return null;
+    const s = String(v.src || '').trim();
+    const m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/) || s.match(/^https:\/\/static\.wixstatic\.com\/media\/([^/#?]+)/);
+    if (!m) return null;
+    const l = Math.max(0, Math.round(Number(v.l) || 0)), h = Math.max(0, Math.round(Number(v.h) || 0));
+    return { id: m[1], l: l && h ? l : 0, h: l && h ? h : 0 };
+  };
+  const urlPub = (img, largeur) => {
+    const w = img.l ? Math.min(largeur, img.l) : largeur;
+    const h = img.l ? Math.round(w * img.h / img.l) : largeur;
+    return 'https://static.wixstatic.com/media/' + img.id + '/v1/' + (img.l ? 'fill' : 'fit') + '/w_' + w + ',h_' + h + ',q_85,enc_auto/' + img.id;
+  };
+  const jeuPub = (img, largeurs) => { const vues = new Set(); return largeurs.map(l => img.l ? Math.min(l, img.l) : l).filter(l => !vues.has(l) && vues.add(l)).map(l => urlPub(img, l) + ' ' + l + 'w').join(', '); };
+  const lienPub = (u) => { const s = String(u || '').trim(); return /^https:\/\/[^\s"'<>]+$/i.test(s) || /^\/(?!\/)[^\s"'<>]*$/.test(s) ? s : ''; };
+  let pubDessinee = '';
+  function rendrePub() {
+    const boite = $('pub-encart');
+    if (!boite) return;
+    if (pubRecalage) { clearTimeout(pubRecalage); pubRecalage = 0; }
+    const liste = MODE_PUB === 'non' ? [] : MODE_PUB === 'demo' ? (D.promoDemo ? [D.promoDemo] : []) : (promosAttribut() || []);
+    const maintenant = Date.now();
+    const promos = liste.filter((x) => x && x[LANGUE_PUB]);
+    const p = promos.find((x) => (x.debut === null || x.debut === undefined || x.debut <= maintenant) && (x.fin === null || x.fin === undefined || x.fin > maintenant));
+    const v = p && p[LANGUE_PUB];
+    const o = v && (imgPub(v.ordinateur) || imgPub(v.mobile));
+    if (!o) { boite.hidden = true; boite.innerHTML = ''; pubDessinee = ''; }
+    else {
+      const m = imgPub(v.mobile) || o;
+      const lien = lienPub(v.lien);
+      const cle = (p.id || '') + '|' + o.id + '|' + m.id + '|' + lien;
+      if (cle !== pubDessinee) {
+        pubDessinee = cle;
+        const image = '<picture><source media="(max-width:760px)" srcset="' + jeuPub(m, [480, 760, 1080]) + '" sizes="100vw">' +
+          '<img src="' + urlPub(o, 1400) + '" srcset="' + jeuPub(o, [900, 1400, 2000]) + '" sizes="(max-width:1500px) 92vw, 1240px" alt="' + esc(v.alt || '') + '" loading="lazy" decoding="async"></picture>';
+        boite.innerHTML = lien ? '<a href="' + esc(lien) + '"' + (p.nouvelOnglet ? ' target="_blank" rel="noopener"' : '') + '>' + image + '</a>' : image;
+        boite.style.setProperty('--pub-ratio', o.l ? (o.l / o.h).toFixed(4) : '3');
+        boite.style.setProperty('--pub-ratio-tel', m.l ? (m.l / m.h).toFixed(4) : '3');
+      }
+      boite.hidden = false;
+    }
+    let suivant = Infinity;
+    promos.forEach((x) => [x.debut, x.fin].forEach((t) => { if (typeof t === 'number' && t > maintenant && t < suivant) suivant = t; }));
+    if (suivant - maintenant <= 6 * 60 * 60 * 1000) { pubRecalage = setTimeout(() => { pubRecalage = 0; rendrePub(); }, suivant - maintenant + 500); minuteurs.push(pubRecalage); }
+  }
+  rendrePub();
+  ecoute(racine, 'raa-promos', rendrePub);
+
+  
+
+
+
+
+
+
+
+  const BADGES = (Array.isArray(D.badges) ? D.badges : []).filter((b) => b && b.image && b.fr);
+  const MICRO_BADGE = LANGUE_PUB === 'en' ? 'Badge to unlock' : 'Badge à débloquer';
+  const icoBadge = $('pv-ico-badge'), txtBadge = $('pv-bdg-txt'), pastilleBadge = un('.pv-badge');
+  const poserBadge = (b) => {
+    const t = b[LANGUE_PUB] || b.fr;
+    icoBadge.classList.add('avec-art');
+    icoBadge.innerHTML = '<img src="' + esc(b.image) + '" alt="" width="96" height="96" decoding="async">';
+    txtBadge.innerHTML = '<span class="pv-micro">' + esc(MICRO_BADGE) + '</span><b>' + esc(t.nom) + '</b><small>' + esc(t.accroche) + '</small>';
+  };
+  if (!BADGES.length) icoBadge.innerHTML = MEDAILLE;
+  else {
+    let iBadge = 0;
+    poserBadge(BADGES[0]);
+    const calme = (() => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } })();
+    if (BADGES.length > 1 && !calme) {
+      let prechargés = false;
+      repeter(() => {
+        if (!prechargés) { prechargés = true; BADGES.slice(1).forEach((b) => { const im = new Image(); im.src = b.image; }); }
+        pastilleBadge.classList.add('est-change');
+        minuteurs.push(setTimeout(() => { iBadge = (iBadge + 1) % BADGES.length; poserBadge(BADGES[iBadge]); pastilleBadge.classList.remove('est-change'); }, 280));
+      }, 3200);
+    }
+  }
 
    
   const HUB = { actu: { c: '#0B6E6B', bg: '#DCF2EF', lib: 'Actualités' }, photo: { c: '#5747C9', bg: '#E9E6FB', lib: 'Photo' }, video: { c: '#A14D00', bg: '#FBEAD6', lib: 'Vidéo' }, audio: { c: '#0E5B84', bg: '#DCEBF7', lib: 'Audio' }, interview: { c: '#8A6C00', bg: '#FBF3CD', lib: 'Interview' } };
@@ -1343,7 +1468,7 @@ function monter(racine, portail, D) {
      
     $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 150 : 200), 74)) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
-        '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper favori</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
+        '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper préféré</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
     reveler('#skippers .sk-flip', 150);
   }
   
