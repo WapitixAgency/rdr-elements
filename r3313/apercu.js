@@ -1,11 +1,71 @@
-/* rdr-elements apercu | source route-du-rhum cd1947d | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="cd1947d";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 20994e4 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="20994e4";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
   if (typeof customElements === 'undefined' || customElements.get('rdr-accueil-apercu')) return;
 
   const SOURCE = 'https://www.routedurhum.com/_functions/accueilApercu';
+  
+
+
+
+
+
+
+
+
+
+  const TRAD_EN = {"Là où les rêves prennent le large":"Where dreams set sail","Découvrir":"Discover","À l'affiche":"What's on","Les prochains temps forts, jour par jour":"The upcoming highlights, day by day","Toute la programmation":"The full programme","Aujourd'hui":"Today","Demain":"Tomorrow","lun.":"Mon","mar.":"Tue","mer.":"Wed","jeu.":"Thu","ven.":"Fri","sam.":"Sat","dim.":"Sun","janv.":"Jan","févr.":"Feb","mars":"Mar","avr.":"Apr","mai":"May","juin":"Jun","juil.":"Jul","août":"Aug","sept.":"Sep","oct.":"Oct","nov.":"Nov","déc.":"Dec","Actualités":"News","La une, la dernière vidéo, le dernier reportage":"The top story, the latest video, the latest photo story","Actu":"News","Photo":"Photo","Vidéo":"Video","Audio":"Audio","Interview":"Interview","À la une":"Featured","Nouveau":"New","aujourd'hui":"today","hier":"yesterday","La dernière vidéo":"The latest video","Le dernier reportage":"The latest photo story","Toutes les actualités":"All the news","Les skippers engagés":"The skippers in the race","1 seule ligne de départ, 118 navigateurs. Six visages au hasard, à chaque visite.":"A single start line, 118 sailors. Six faces picked at random on every visit.","bateaux":"boats","Explorez tous les skippers":"Explore all the skippers","3 542 milles · 6 560 km":"3,542 miles · 6,560 km","Mon Espace Rhum":"My Espace Rhum","Vivez":"Experience","votre":"your","Rhum":"Rhum","Rejoignez les passionnés du Rhum et partagez toute l'intensité de la course. Suivez vos skippers préférés, découvrez des contenus et données personnalisés, relevez des défis, participez à des jeux-concours exclusifs et collectionnez des badges au fil de l'aventure.":"Join the Route du Rhum community and experience all the intensity of the race. Follow your favourite skippers, discover personalised content and data, take part in exclusive competitions and collect badges throughout the adventure.","Créez votre espace":"Create my space","J'ai déjà un compte":"I already have an account","Badges et rangs":"Badges and ranks","Débloquez des badges":"Unlock badges","et montez dans les rangs":"and climb the ranks","Top 50 des fans":"Top 50 fans","Entrez dans le classement":"Get on the leaderboard","Skipper préféré":"Favourite skipper","Badge à débloquer":"Badge to unlock","La mascotte officielle":"The official mascot","TyMAL, en tournée avant le village":"TyMAL, on tour before the village","Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.":"An Atlantic puffin from the Breton coast, TyMAL is touring Brittany and Guadeloupe before joining you at the harbour basins. Follow the tour all the way to the village, then take TyMAL home with you in your Espace Rhum.","Où est TyMAL ?":"Where is TyMAL?","En savoir plus":"Find out more","TyMAL, la vidéo":"TyMAL, the video","Lire la vidéo":"Play the video","La vidéo est hébergée par YouTube":"This video is hosted on YouTube","Elle ne se charge pas tant que les cookies marketing sont refusés, pour que rien ne parte chez un tiers sans votre accord.":"It will not load while marketing cookies are declined, so that nothing is sent to a third party without your consent.","Gérer mes cookies":"Manage my cookies","Regarder sur YouTube":"Watch on YouTube","Voir toutes les questions":"See all questions","Le départ":"The start","Le village":"The village","Venir":"Getting there","La course":"The race","Pratique":"Practical info","À valider":"To be confirmed","Chercher dans les questions":"Search the questions","Chercher":"Search","Précédent":"Previous","Suivant":"Next","Temps fort":"Highlight","À lire aussi":"Also worth reading","Le dernier podcast":"The latest podcast"};
+  const MOTIFS_EN = [
+    [/^il y a (\d+) j$/, (m, n) => n + ' d ago'],
+    [/^aujourd'hui$/, () => 'today'],
+    [/^hier$/, () => 'yesterday'],
+    [/^(\d+) min de lecture$/, (m, n) => n + ' min read'],
+    [/^Dans (\d+) jours$/, (m, n) => 'In ' + n + ' days'],
+    [/^N°(\d+)$/, (m, n) => 'No. ' + n]
+  ];
+  const morceauEn = (m) => {
+    if (Object.prototype.hasOwnProperty.call(TRAD_EN, m)) return TRAD_EN[m];
+    for (const [re, fn] of MOTIFS_EN) if (re.test(m)) return m.replace(re, fn);
+    return null;
+  };
+  const aTraduire = (v) => {
+    const brut = String(v || '');
+    const net = brut.replace(/\s+/g, ' ').trim();
+    if (!net) return null;
+    const avant = brut.match(/^\s*/)[0], apres = brut.match(/\s*$/)[0];
+    const entier = morceauEn(net);
+    if (entier != null) return avant + entier + apres;
+    if (net.indexOf(' · ') < 0) return null;
+    let change = false;
+    const t = net.split(' · ').map((m) => { const e = morceauEn(m.trim()); if (e != null) { change = true; return e; } return m; }).join(' · ');
+    return change ? avant + t + apres : null;
+  };
+  function traduireEn(racine) {
+    if (!racine || !racine.querySelectorAll) return;
+    const w = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
+    const noeuds = []; let n; while ((n = w.nextNode())) noeuds.push(n);
+    noeuds.forEach((x) => {
+      const p = x.parentElement;
+      if (p && /^(STYLE|SCRIPT)$/.test(p.tagName)) return;
+      const v = aTraduire(x.nodeValue);
+      if (v != null && v !== x.nodeValue) x.nodeValue = v;
+    });
+    [racine].concat([...racine.querySelectorAll('[alt],[aria-label],[title],[placeholder]')]).forEach((e) => {
+      ['alt', 'aria-label', 'title', 'placeholder'].forEach((a) => {
+        if (!e.hasAttribute || !e.hasAttribute(a)) return;
+        const v = aTraduire(e.getAttribute(a));
+        if (v != null && v !== e.getAttribute(a)) e.setAttribute(a, v);
+      });
+    });
+  }
+  const langueDe = (el) => {
+    const p = location.pathname || '';
+    const l = el.getAttribute('lang') || (p === '/en' || p.indexOf('/en/') === 0 ? 'en' : document.documentElement.getAttribute('lang') || 'fr');
+    return String(l).slice(0, 2).toLowerCase() === 'en' ? 'en' : 'fr';
+  };
+
 
   const CSS = `rdr-accueil-apercu{display:block;width:var(--customElementWidth,100%);line-height:normal;text-align:left}
 rdr-accueil-apercu button{font-family:inherit;margin:0}
@@ -203,6 +263,9 @@ rdr-accueil-apercu .actus-grille .carte{height:100%}
 rdr-accueil-apercu .actus-droite{display:grid;grid-template-rows:1fr 1fr;gap:14px;min-height:0}
 rdr-accueil-apercu .carte{position:relative;display:block;border-radius:18px;overflow:hidden;background:var(--panneau);min-height:0;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s cubic-bezier(.22,.8,.3,1);border:1px solid rgba(255,255,255,.08)}
 rdr-accueil-apercu .carte.est-la{opacity:1;transform:none}
+rdr-accueil-apercu .actu-squel{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:raa-actu-squel 1.4s ease-in-out infinite;pointer-events:none}
+rdr-accueil-apercu .breve.actu-squel{height:102px}
+@keyframes raa-actu-squel{0%{background-position:100% 0}100%{background-position:-100% 0}}
 rdr-accueil-apercu .carte img.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 rdr-accueil-apercu .carte:hover img.cover{transform:scale(1.04)}
 rdr-accueil-apercu .carte::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,29,.55) 0%,rgba(14,17,29,0) 32%);z-index:1}
@@ -799,7 +862,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu', 'skippers', 'promos']; }
+    static get observedAttributes() { return ['jeu', 'skippers', 'promos', 'actus']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -820,6 +883,10 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (nom === 'promos') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-promos')); return; }
+      
+
+
+      if (nom === 'actus') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-actus')); return; }
       if (nom !== 'jeu' || !this._monte || this._dessine) return;
       const jeu = this._jeuAttribut();
       if (jeu) this._dessiner(jeu);
@@ -829,6 +896,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       this._monte = false;
       this._dessine = false;
       if (this._defaire) { try { this._defaire(); } catch (e) {   } this._defaire = null; }
+      if (this._obsEn) { this._obsEn.disconnect(); this._obsEn = null; }
     }
 
     _jeuAttribut() {
@@ -855,11 +923,22 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       this._calerEntete();
       this.innerHTML = PAGE;
       this._defaire = monter(this, this, D);
+       
+      if (langueDe(this) === 'en') {
+        traduireEn(this);
+        try {
+          this._obsEn = new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => {
+            if (n.nodeType === 1) traduireEn(n);
+            else if (n.nodeType === 3) { const v = aTraduire(n.nodeValue); if (v != null && v !== n.nodeValue) n.nodeValue = v; }
+          })));
+          this._obsEn.observe(this, { childList: true, subtree: true });
+        } catch (e) {   }
+      }
     }
 
     async _charger() {
       try {
-        const r = await fetch(this.getAttribute('source') || SOURCE, { credentials: 'omit' });
+        const r = await fetch(this.getAttribute('source') || SOURCE + '?lang=' + langueDe(this), { credentials: 'omit' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const D = await r.json();
         if (!this._monte || this._dessine) return;
@@ -1264,7 +1343,8 @@ function monter(racine, portail, D) {
   function compter(direct) {
     tout('#hv-titre [data-n]').forEach((el, k) => {
       const fin = Number(el.dataset.n); const depart = performance.now() + 500 + k * 90; const duree = 1100;
-      const ecrire = (x) => { el.textContent = Math.round(x).toLocaleString('fr-FR'); };
+       
+      const ecrire = (x) => { el.textContent = Math.round(x).toLocaleString(EN || /^en/i.test((racine.getAttribute && racine.getAttribute('lang')) || '') ? 'en-GB' : 'fr-FR'); };
       if (direct) { ecrire(fin); return; }
       ecrire(0);
       const pas = (t) => { const p = Math.min(1, Math.max(0, (t - depart) / duree)); ecrire(fin * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(pas); };
@@ -1431,24 +1511,74 @@ function monter(racine, portail, D) {
   const HUB = { actu: { c: '#0B6E6B', bg: '#DCF2EF', lib: 'Actualités' }, photo: { c: '#5747C9', bg: '#E9E6FB', lib: 'Photo' }, video: { c: '#A14D00', bg: '#FBEAD6', lib: 'Vidéo' }, audio: { c: '#0E5B84', bg: '#DCEBF7', lib: 'Audio' }, interview: { c: '#8A6C00', bg: '#FBF3CD', lib: 'Interview' } };
   const CAT_HUB = { actu: 'actualites', photo: 'image', video: 'video', audio: 'audio' };
   $('onglets').innerHTML = ['actu', 'photo', 'video', 'audio'].map(k => '<a class="onglet"' + href('/medias-actualites?cat=' + CAT_HUB[k]) + ' style="--c:' + HUB[k].c + ';--bg:' + HUB[k].bg + '"><i>' + ICO[k] + '</i>' + (k === 'actu' ? 'Actu' : HUB[k].lib) + '</a>').join('');
-  const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([^/#]+)/); return m ? IMG(m[1], w, h) : String(v || ''); };
+  const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([^/#]+)/); return m ? IMG(m[1], w, h) : esc(String(v || '')); };
   const ilYa = (iso) => { const d = (Date.now() - new Date(iso).getTime()) / 86400000; return d < 1 ? 'aujourd\'hui' : d < 2 ? 'hier' : 'il y a ' + Math.floor(d) + ' j'; };
   const cat = (t) => '<span class="cat" style="--c:' + HUB[t].c + ';--bg:' + HUB[t].bg + '">' + ICO[t] + HUB[t].lib + '</span>';
-  Promise.resolve(D.actus).then(a => {
-    const posts = (Array.isArray(a) ? a : a.posts);
-     
-    const type = (i, p) => i === 1 ? 'video' : i === 4 ? 'photo' : i === 5 ? 'audio' : /interview/i.test(p._categoryLabel || '') ? 'interview' : 'actu';
-    const une = posts[0], video = posts[1], photo = posts[4];
-    const lienPost = (p) => p.lien || (p.slug ? '/post/' + p.slug : '/medias-actualites');
+  
+
+
+
+
+
+
+
+
+
+
+  const TAGS_TUS_ACC = /^(partenaire|partenaires|interview|actualit[eé]s?|news|d[eé]part|amrae|kit p[eé]dagogique)$/i;
+  const typeDe = (p) => {
+    const sl = String((p.categorie && p.categorie.slug) || '').toLowerCase();
+    const lb = String(p._categoryLabel || (p.categorie && p.categorie.label) || '');
+    if (sl === 'video' || /vid[ée]o/i.test(lb)) return 'video';
+    if (sl === 'image' || sl === 'photo' || /photo|image/i.test(lb)) return 'photo';
+    if (sl === 'audio' || /audio|podcast/i.test(lb)) return 'audio';
+    if (sl === 'interview' || /interview/i.test(lb)) return 'interview';
+    return 'actu';
+  };
+  const sujetsDe = (p) => (p._tags || p.tags || []).map((t) => String((t && typeof t === 'object' ? t.label : t) || '').trim()).filter((t) => t && !TAGS_TUS_ACC.test(t));
+  const lienPost = (p) => p.lien || p.postPageUrl || (p.slug ? '/post/' + p.slug : '/medias-actualites');
+  const recent = (p) => Date.now() - new Date(p.publishedDate).getTime() < 48 * 3600000;
+  const lecture = (p) => (Number(p.timeToRead) > 0 ? ' · ' + Number(p.timeToRead) + ' min' : '');
+  const DIRECT = String(racine.tagName || '').toLowerCase() === 'rdr-accueil-apercu';
+  const actusAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('actus')) || 'null'); return Array.isArray(a) && a.length ? a : null; } catch (e) { return null; } };
+  function squelettesActus() {
+    $('une-actu').innerHTML = '<div class="carte carte--une actu-squel est-la"></div>';
+    $('medias').innerHTML = '<div class="carte actu-squel est-la"></div><div class="carte actu-squel est-la"></div>';
+    $('breves').innerHTML = '<div class="breve actu-squel est-la"></div>'.repeat(4);
+  }
+  let actusDessines = '';
+  function rendreActus(liste) {
+    const posts = (Array.isArray(liste) ? liste : []).filter((p) => p && p.title && p.publishedDate)
+      .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+    if (!posts.length) return;
+    const cle = posts.map((p) => p._id || p.title).join('|');
+    if (cle === actusDessines) return;
+    actusDessines = cle;
+    const pris = new Set();
+    const prendre = (ok) => { const p = posts.find((x) => !pris.has(x) && ok(x)); if (p) pris.add(p); return p || null; };
+    const une = prendre((p) => typeDe(p) === 'actu' || typeDe(p) === 'interview') || prendre(() => true);
+    const video = prendre((p) => typeDe(p) === 'video') || prendre(() => true);
+    const photo = prendre((p) => typeDe(p) === 'photo') || prendre(() => true);
+    const breves = [0, 1, 2, 3].map(() => prendre(() => true)).filter(Boolean);
+    const tu = typeDe(une);
     $('une-actu').innerHTML = '<a class="carte carte--une"' + href(lienPost(une)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(une.coverImage, pourLarge(etroit() ? 350 : 620), Math.round(pourLarge(etroit() ? 350 : 620) * 0.75)) + '" alt="">' +
-      '<div class="carte-haut">' + cat(type(0, une)) + '<span class="kicker kicker--jaune">À la une</span></div>' +
-      '<div class="carte-txt"><div class="sujets">' + (une._tags || []).slice(0, 2).map(t => '<span class="sujet">' + esc(t.label) + '</span>').join('') + '</div><h3>' + esc(une.title.trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand"><b>Nouveau</b> · ' + ilYa(une.publishedDate) + ' · ' + une.timeToRead + ' min de lecture</span></div></a>';
-    $('medias').innerHTML = [[video, 'video', 'La dernière vidéo'], [photo, 'photo', 'Le dernier reportage']].map(([p, t, lib]) =>
-      '<a class="carte"' + href(lienPost(p)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, pourLarge(etroit() ? 350 : 420), Math.round(pourLarge(etroit() ? 350 : 420) * 0.625)) + '" alt=""><div class="carte-haut">' + cat(t) + '<span class="glyphe">' + ICO[t] + '</span></div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
-      '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + (t === 'video' ? ' · 2 min 40' : ' · 24 photos') + '</span></div></a>').join('');
-    $('breves').innerHTML = [2, 3, 6, 7].map(i => { const p = posts[i]; return '<a class="breve"' + href(lienPost(p)) + '><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(type(i, p)) + '<h3>' + esc(p.title.trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + ' · ' + p.timeToRead + ' min</span></div></a>'; }).join('');
+      '<div class="carte-haut">' + cat(tu) + '<span class="kicker kicker--jaune">À la une</span></div>' +
+      '<div class="carte-txt"><div class="sujets">' + sujetsDe(une).slice(0, 2).map((t) => '<span class="sujet">' + esc(t) + '</span>').join('') + '</div><h3>' + esc(String(une.title).trim()) + '</h3><p>' + esc(une.excerpt || '') + '</p><span class="quand">' + (recent(une) ? '<b>Nouveau</b> · ' : '') + ilYa(une.publishedDate) + (Number(une.timeToRead) > 0 ? ' · ' + Number(une.timeToRead) + ' min de lecture' : '') + '</span></div></a>';
+    const libMedia = { video: 'La dernière vidéo', photo: 'Le dernier reportage', audio: 'Le dernier podcast' };
+    $('medias').innerHTML = [video, photo].filter(Boolean).map((p) => {
+      const t = typeDe(p);
+      const lib = libMedia[t] || 'À lire aussi';
+      return '<a class="carte"' + href(lienPost(p)) + '><img class="cover" loading="lazy" decoding="async" src="' + wixImg(p.coverImage, pourLarge(etroit() ? 350 : 420), Math.round(pourLarge(etroit() ? 350 : 420) * 0.625)) + '" alt=""><div class="carte-haut">' + cat(t) + (t === 'actu' ? '' : '<span class="glyphe">' + ICO[t] + '</span>') + '</div>' + (t === 'video' ? '<span class="glyphe glyphe--grand">' + ICO.video + '</span>' : '') +
+        '<div class="carte-txt"><span class="quand" style="color:var(--teal);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px">' + lib + '</span><h3>' + esc(String(p.title).trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + lecture(p) + '</span></div></a>';
+    }).join('');
+    $('breves').innerHTML = breves.map((p) => '<a class="breve"' + href(lienPost(p)) + '><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(typeDe(p)) + '<h3>' + esc(String(p.title).trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + lecture(p) + '</span></div></a>').join('');
     reveler('.actus .carte', 120); reveler('.breve', 90);
-  });
+  }
+  if (DIRECT) {
+    const a = actusAttribut();
+    if (a) rendreActus(a); else squelettesActus();
+    ecoute(racine, 'raa-actus', () => { const a2 = actusAttribut(); if (a2) rendreActus(a2); });
+  } else Promise.resolve(D.actus).then((a) => rendreActus(Array.isArray(a) ? a : a.posts));
 
    
   const CLASSES = D.classes;
