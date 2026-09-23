@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 5172b2b | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="5172b2b";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 8007fa5 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="8007fa5";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1892,11 +1892,15 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const modes = Array.isArray(r.modes) && r.modes.length ? r.modes : [
         { cle: 'train', libelle: 'Train' }, { cle: 'bus', libelle: 'Bus' }, { cle: 'covoiturage', libelle: 'Covoiturage' },
         { cle: 'velo', libelle: 'Vélo' }, { cle: 'pied', libelle: 'À pied' }, { cle: 'autre', libelle: 'Autre' }];
-      const lienR = r.lienReglement ? esc(r.lienReglement) : '';
-      const lienC = r.lienConfidentialite ? esc(r.lienConfidentialite) : '';
+      const en = this._en();
+      
+
+
+      const interne = (h) => (en && h && h.charAt(0) === '/' && h !== '/en' && h.indexOf('/en/') !== 0) ? '/en' + h : h;
+      const lienR = r.lienReglement ? esc(interne(r.lienReglement)) : '';
+      const lienC = r.lienConfidentialite ? esc(interne(r.lienConfidentialite)) : '';
       const lien = (href, texte) => href ? '<a href="' + href + '" target="_blank" rel="noopener">' + texte + '</a>' : '<a href="#" data-lien-absent>' + texte + '</a>';
       const max = Number(r.tailleMaxMo) > 0 ? Math.min(10, Number(r.tailleMaxMo)) : 10;
-      const en = this._en();
       
 
       const tuileJour = (j) => {
