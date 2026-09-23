@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum bd0e5ed | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="bd0e5ed";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 065d2fc | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="065d2fc";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -203,6 +203,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="bd0e5ed";perform
     'Officielle': 'Official',
     'Type de programmation': 'Programme type',
     'Revoir la programmation du village de Saint-Malo': 'Back to the Saint-Malo village programme',
+    
+
+
+
+    'Pour plus d’informations sur les animations organisées par la ville de Saint-Malo, rendez-vous sur l’application Le Lien Malouin.':
+      'For more information on the events organised by the City of Saint-Malo, see the Le Lien Malouin app.',
+    '(nouvel onglet)': '(new tab)',
      
     'Choix du jour': 'Choose a day',
     'Jours précédents': 'Previous days',
@@ -3976,6 +3983,21 @@ rdr-programme{display:block;width:100%;}
 .rp-root.est-off .rp-signature{margin-top:0;}
 
 
+.rp-mention-off{
+  max-width:640px;margin:clamp(40px,5.5%,72px) auto 0;padding:0 20px;text-align:center;
+  font:500 var(--t-2) Montserrat,sans-serif;line-height:1.6;color:var(--rp-encre-2);
+}
+.rp-mention-off p{margin:0;text-wrap:balance;}
+.rp-mention-off .rp-mention-liens{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px;}
+.rp-mention-liens a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 20px;
+  border:1.5px solid var(--rp-encre-3);border-radius:999px;
+  font:700 var(--t-2) Montserrat,sans-serif;letter-spacing:.04em;color:var(--rp-encre);
+  text-decoration:none;transition:border-color .2s,background-color .2s;
+}
+.rp-mention-liens a:hover,.rp-mention-liens a:focus-visible{border-color:#FFFFFF;background-color:rgba(255,255,255,.08);}
+
+
 
 
 
@@ -5507,6 +5529,28 @@ rdr-programme{display:block;width:100%;}
         '</a></p>';
     }
 
+    
+
+
+
+
+
+
+    _mentionOff() {
+      const p = this._p || {};
+      if (this._type !== 'off' || !p.mentionOff) return '';
+      const sur = (u) => (/^https:\/\//i.test(String(u || '').trim()) ? urlSure(u) : '');
+      const liens = [['App Store', sur(p.mentionOffAppStore)], ['Google Play', sur(p.mentionOffGooglePlay)]].filter(l => l[1]);
+      return '<div class="rp-mention-off">' +
+        '<p>' + esc(p.mentionOff) + '</p>' +
+        (liens.length
+          ? '<p class="rp-mention-liens">' + liens.map(l =>
+              '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + l[0] +
+                '<span class="rp-sr-seul"> (nouvel onglet)</span></a>').join('') + '</p>'
+          : '') +
+      '</div>';
+    }
+
     _anims() { return (this._p && this._p.animations) || []; }
 
     
@@ -5618,6 +5662,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
+          this._mentionOff() +
           (this._type === 'off'
             ? '<div class="rp-sig-off" aria-hidden="true">' +
                 '<img src="' + esc(wixContenu(urlSure(p.logoOffPied) || LOGO_OFF_COULEUR, 180)) + '"' +
