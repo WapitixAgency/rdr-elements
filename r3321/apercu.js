@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 0ee490c | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="0ee490c";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum dac25c4 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="dac25c4";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -289,7 +289,7 @@ rdr-accueil-apercu .tymal .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:
 rdr-accueil-apercu .tymal .kicker{margin-bottom:14px}
 rdr-accueil-apercu .faq-bloc[hidden]{display:none}
 rdr-accueil-apercu .faq-acc{--encre:#0E111D;--encre2:#3A4256;--encre3:#6B7285;--papier:#F4F1E8;position:relative;overflow:clip;background:var(--papier);color:var(--encre);padding:clamp(56px,8vh,96px) 0 clamp(64px,10vh,112px)}
-rdr-accueil-apercu .fa-topo{position:absolute;inset:0;background:#16355D;opacity:.34;pointer-events:none;-webkit-mask:var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto;mask:var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto,var(--topo) repeat center top/1200px auto;-webkit-mask-composite:source-over;mask-composite:add}
+rdr-accueil-apercu .fa-topo{position:absolute;inset:0;background:#16355D;opacity:.06;pointer-events:none;-webkit-mask:var(--topo) repeat center top/1200px auto;mask:var(--topo) repeat center top/1200px auto}
 rdr-accueil-apercu .faq-acc .trame{position:relative;z-index:1}
 rdr-accueil-apercu .faq-acc:not(.fa-vu) .fa-q{opacity:0}
 rdr-accueil-apercu .faq-acc.fa-vu .fa-q{animation:raa-fa-monte .6s cubic-bezier(.22,.8,.3,1) both;animation-delay:calc(var(--i,0) * 70ms)}
@@ -1464,7 +1464,7 @@ function monter(racine, portail, D) {
       (x.src ? '<a class="fa-source" href="' + esc(x.src.url) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
     
 
-    if (M.topo) $('fa-topo').style.setProperty('--topo', 'url("' + retaille(M.topo, 1200, 55).replace(/\/x\.jpg$/, '/x.png') + '")');
+    if (M.topoFaq) $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")');
     const section = $('faq-acc');
     if (typeof IntersectionObserver !== 'function') section.classList.add('fa-vu');
     else {
