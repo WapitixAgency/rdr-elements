@@ -1,5 +1,5 @@
-/* rdr-elements atelier | source route-du-rhum db0b578 | village-atelier.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["atelier"]="db0b578";performance.mark("rdr-elements:atelier")}catch(e){}
+/* rdr-elements atelier | source route-du-rhum b954580 | village-atelier.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["atelier"]="b954580";performance.mark("rdr-elements:atelier")}catch(e){}
 ;(function(){
 /* ==========================================================================
    <village-atelier> — Atelier de positionnement, page interne.

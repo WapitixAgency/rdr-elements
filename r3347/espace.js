@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 789f9b2 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="789f9b2";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum b954580 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="b954580";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -11097,7 +11097,11 @@ if (!customElements.get('espace-rhum')) {
         if (_oldVal === newVal) return;
         try { this._payload = newVal ? JSON.parse(newVal) : null; }
         catch { this._payload = null; }
-        if (this._payload && this._enMemoire) { this._enMemoire = false; this._rafraichi = true; }
+        
+
+
+        if (this._payload && this._enMemoire) { this._enMemoire = false; this._rafraichi = !!this._memoireVue; }
+        this._memoireVue = false;
         if (this.isConnected) this._render();
         if (this._payload) ecrireMemoire(this._membre || (this._payload.member && this._payload.member.id) || '', this._lang(), this._payload);
       }
@@ -11194,6 +11198,26 @@ if (!customElements.get('espace-rhum')) {
       if (!m) return;
       this._payload = m.payload; this._enMemoire = true; this._memoireLe = m.le;
       if (this.isConnected) this._render();
+      
+
+      this._memoireVue = false;
+      const vue = () => { if (this._enMemoire) this._memoireVue = true; };
+      try { requestAnimationFrame(() => requestAnimationFrame(vue)); } catch (e) {   }
+    }
+
+    
+
+
+
+
+    _finirEntrees() {
+      if (typeof this.getAnimations !== 'function') return;
+      try {
+        this.getAnimations({ subtree: true }).forEach(a => {
+          const t = a.effect && a.effect.getComputedTiming ? a.effect.getComputedTiming() : null;
+          if (t && isFinite(t.endTime)) a.finish();
+        });
+      } catch (e) {   }
     }
 
     _poserEtatMemoire() {
@@ -11246,7 +11270,8 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-      this.classList.toggle('er-rafraichi', !!this._rafraichi);
+      const rafraichi = !!this._rafraichi;
+      this.classList.toggle('er-rafraichi', rafraichi);
       this._rafraichi = false;
       this.innerHTML = this._buildHtml();
       this._i18n(this);
@@ -11281,6 +11306,7 @@ if (!customElements.get('espace-rhum')) {
       this._wireSkippersExpand();
       this._wireBadges();
       this._poserEtatMemoire();
+      if (rafraichi) this._finirEntrees();
        
       if (this._remonter && !this._remonteAuRendu) { this._remonteAuRendu = true; this._remonter(); }
       this._honorerAller();
