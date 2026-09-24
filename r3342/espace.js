@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 36d26c4 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="36d26c4";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 3bf0e8e | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3bf0e8e";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -327,8 +327,12 @@ if (!customElements.get('espace-rhum')) {
   const MEMOIRE_CSS = `
     espace-rhum.er-memoire > *:not(.er-memoire-pill) { pointer-events: none; }
     espace-rhum .er-memoire-pill { position: fixed; top: 84px; left: 50%; transform: translateX(-50%); z-index: 60; padding: 7px 14px; border-radius: 999px; background: rgba(29, 34, 67, 0.92); color: #fff; font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); animation: er-sk-pulse 1.2s ease-in-out infinite; pointer-events: none; }
-    espace-rhum.er-rafraichi .er-dashboard > *, espace-rhum.er-rafraichi .er-dash-in { animation: none !important; }
+    espace-rhum.er-rafraichi .er-dashboard > *, espace-rhum.er-rafraichi .er-cockpit, espace-rhum.er-rafraichi .er-mobile-topbar, espace-rhum.er-rafraichi .er-mobile-shell { animation: none !important; }
   `;
+  
+
+
+
   function masquerLusActif() {
     try { return localStorage.getItem(MASQUER_KEY) === '1'; } catch (e) { return false; }
   }
@@ -11093,7 +11097,11 @@ if (!customElements.get('espace-rhum')) {
         if (_oldVal === newVal) return;
         try { this._payload = newVal ? JSON.parse(newVal) : null; }
         catch { this._payload = null; }
-        if (this._payload && this._enMemoire) { this._enMemoire = false; this._rafraichi = true; }
+        
+
+
+        if (this._payload && this._enMemoire) { this._enMemoire = false; this._rafraichi = !!this._memoireVue; }
+        this._memoireVue = false;
         if (this.isConnected) this._render();
         if (this._payload) ecrireMemoire(this._membre || (this._payload.member && this._payload.member.id) || '', this._lang(), this._payload);
       }
@@ -11190,6 +11198,26 @@ if (!customElements.get('espace-rhum')) {
       if (!m) return;
       this._payload = m.payload; this._enMemoire = true; this._memoireLe = m.le;
       if (this.isConnected) this._render();
+      
+
+      this._memoireVue = false;
+      const vue = () => { if (this._enMemoire) this._memoireVue = true; };
+      try { requestAnimationFrame(() => requestAnimationFrame(vue)); } catch (e) {   }
+    }
+
+    
+
+
+
+
+    _finirEntrees() {
+      if (typeof this.getAnimations !== 'function') return;
+      try {
+        this.getAnimations({ subtree: true }).forEach(a => {
+          const t = a.effect && a.effect.getComputedTiming ? a.effect.getComputedTiming() : null;
+          if (t && isFinite(t.endTime)) a.finish();
+        });
+      } catch (e) {   }
     }
 
     _poserEtatMemoire() {
@@ -11199,12 +11227,6 @@ if (!customElements.get('espace-rhum')) {
         pill.className = 'er-memoire-pill'; pill.setAttribute('role', 'status'); pill.setAttribute('aria-live', 'polite');
         pill.textContent = this._lang() === 'en' ? 'Updating…' : 'Mise à jour…';
         this.appendChild(pill);
-      }
-      if (this._rafraichi) {
-        this._rafraichi = false;
-        this.classList.add('er-rafraichi');
-        clearTimeout(this._rafraichiTimer);
-        this._rafraichiTimer = setTimeout(() => this.classList.remove('er-rafraichi'), 1500);
       }
     }
 
@@ -11239,6 +11261,18 @@ if (!customElements.get('espace-rhum')) {
         this._startSkeletonSlowTimer();
         return;
       }
+      
+
+
+
+
+
+
+
+
+      const rafraichi = !!this._rafraichi;
+      this.classList.toggle('er-rafraichi', rafraichi);
+      this._rafraichi = false;
       this.innerHTML = this._buildHtml();
       this._i18n(this);
       this._wireNavLinks();
@@ -11272,6 +11306,7 @@ if (!customElements.get('espace-rhum')) {
       this._wireSkippersExpand();
       this._wireBadges();
       this._poserEtatMemoire();
+      if (rafraichi) this._finirEntrees();
        
       if (this._remonter && !this._remonteAuRendu) { this._remonteAuRendu = true; this._remonter(); }
       this._honorerAller();

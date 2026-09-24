@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum fdaf435 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="fdaf435";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 3bf0e8e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="3bf0e8e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1652,9 +1652,26 @@ function monter(racine, portail, D) {
   
 
 
+
+
+
+
+
+
+
+
+
+
   let vivierDessine = vivierAttribut() ? racine.getAttribute('skippers') : null;
-  rendreSkippers(vivierAttribut() || D.skippers);
-  ecoute(racine, 'raa-skippers', () => { const brut = racine.getAttribute('skippers'); if (brut === vivierDessine) return; const v = vivierAttribut(); if (v) { vivierDessine = brut; rendreSkippers(v); } });
+  const tirageAnnonce = !!(racine.getAttribute && racine.getAttribute('tirage') === 'page');
+  let skippersFiges = false;
+  if (vivierDessine || !tirageAnnonce) rendreSkippers(vivierAttribut() || D.skippers);
+  else {
+    $('skippers').innerHTML = ROT.map((r) => '<div class="sk" aria-hidden="true" style="--rot:' + r + 'deg"><div class="sk-flip"><div class="sk-face sk-back"></div></div></div>').join('');
+    minuteurs.push(setTimeout(() => { if (!skippersFiges && !vivierDessine) { skippersFiges = true; rendreSkippers(D.skippers); } }, 6000));
+  }
+  if (vivierDessine && tirageAnnonce) skippersFiges = true;
+  ecoute(racine, 'raa-skippers', () => { if (skippersFiges) return; const brut = racine.getAttribute('skippers'); if (brut === vivierDessine) return; const v = vivierAttribut(); if (v) { vivierDessine = brut; if (tirageAnnonce) skippersFiges = true; rendreSkippers(v); } });
   repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; pvI = pvI % c.length; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
   function reveler(sel, pas) {
     const els = [...tout(sel)];
