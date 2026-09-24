@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum fdaf435 | rdr-concours-photo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="fdaf435";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 96c7ec8 | rdr-concours-photo.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="96c7ec8";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
