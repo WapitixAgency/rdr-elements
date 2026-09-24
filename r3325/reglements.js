@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 88f871b | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="88f871b";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 7b8a979 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="7b8a979";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -534,7 +534,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       this._initialise = false;
       this._lang = 'fr';
       this._maj = '';
-      this._chrome = 0;
+      this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
@@ -584,10 +584,21 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       const v = String(valeur == null ? '' : valeur).trim();
       if (nom === 'lang') this._lang = v.toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
       else if (nom === 'maj') this._maj = v;
-      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : 0; }
+      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : null; }
     }
 
     
+
+    
+
+
+
+
+    _haut() {
+      if (this._chrome != null) return this._chrome;
+      if (!document.querySelector('rdr-entete')) return 0;
+      return window.matchMedia('(max-width: 750px)').matches ? 60 : 56;
+    }
 
     disconnectedCallback() {
       if (this._rafId) cancelAnimationFrame(this._rafId);
@@ -614,7 +625,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       const jour = aujourdhuiParis();
       const liste = this._reglements(jour);
       const plusieurs = liste.length > 1;
-      this._racine.style.setProperty('--rgl-chrome', this._chrome + 'px');
+      this._racine.style.setProperty('--rgl-chrome', this._haut() + 'px');
       this._racine.setAttribute('lang', lang);
 
       
@@ -721,7 +732,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
     
 
     _allerEnHaut() {
-      const y = this._racine.getBoundingClientRect().top + window.scrollY - this._chrome;
+      const y = this._racine.getBoundingClientRect().top + window.scrollY - this._haut();
       window.scrollTo(0, Math.max(0, Math.round(y)));
     }
 
@@ -995,7 +1006,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
         const vue = window.innerHeight;
         const docH = document.documentElement.scrollHeight;
         const scrollMax = Math.max(0, docH - vue);
-        const h = this._chrome;
+        const h = this._haut();
         let ligne = y + h + 24;
         const reste = scrollMax - y;
         if (reste < vue) {
@@ -1025,7 +1036,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       marquerDebord();
       window.addEventListener('scroll', demander, { passive: true });
       this._ecouteurs.push([window, 'scroll', demander]);
-      const surRedim = () => { demander(); marquerDebord(); };
+      const surRedim = () => { this._racine.style.setProperty('--rgl-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
 

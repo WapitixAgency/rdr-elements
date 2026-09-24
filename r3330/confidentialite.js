@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum 88f871b | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="88f871b";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 7b8a979 | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="7b8a979";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -706,7 +706,7 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
 
 
       this._maj = '2026-09-24';
-      this._chrome = 0;
+      this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
@@ -749,10 +749,21 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       const v = String(valeur == null ? '' : valeur).trim();
       if (nom === 'lang') this._lang = v.toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
       else if (nom === 'maj') { if (v) this._maj = v; }
-      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : 0; }
+      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : null; }
     }
 
     
+
+    
+
+
+
+
+    _haut() {
+      if (this._chrome != null) return this._chrome;
+      if (!document.querySelector('rdr-entete')) return 0;
+      return window.matchMedia('(max-width: 750px)').matches ? 60 : 56;
+    }
 
     disconnectedCallback() {
       if (this._rafId) cancelAnimationFrame(this._rafId);
@@ -776,7 +787,7 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
 
       const T = I18N[this._lang] || I18N.fr;
       const lang = this._lang;
-      this._racine.style.setProperty('--cfd-chrome', this._chrome + 'px');
+      this._racine.style.setProperty('--cfd-chrome', this._haut() + 'px');
       this._racine.setAttribute('lang', lang);
 
       this._racine.innerHTML =
@@ -988,7 +999,7 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
         const vue = window.innerHeight;
         const docH = document.documentElement.scrollHeight;
         const scrollMax = Math.max(0, docH - vue);
-        const h = this._chrome;
+        const h = this._haut();
         let ligne = y + h + 24;
         const reste = scrollMax - y;
         if (reste < vue) {
@@ -1018,7 +1029,7 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       marquerDebord();
       window.addEventListener('scroll', demander, { passive: true });
       this._ecouteurs.push([window, 'scroll', demander]);
-      const surRedim = () => { demander(); marquerDebord(); };
+      const surRedim = () => { this._racine.style.setProperty('--cfd-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
     }
