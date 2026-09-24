@@ -1,6 +1,6 @@
 {
- "source": "WapitixAgency/route-du-rhum ff2629c",
- "livreLe": "2026-09-24T21:36:08.007Z",
+ "source": "WapitixAgency/route-du-rhum 3d4612b",
+ "livreLe": "2026-09-24T22:32:02.472Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
  "revisionCourante": 3320,
  "revisionsAVenir": 30,
@@ -15,7 +15,7 @@
    "priorite": "high",
    "octets": 163340,
    "gzip": 40979,
-   "brotli": 32067,
+   "brotli": 32108,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
@@ -80,7 +80,7 @@
    "priorite": "high",
    "octets": 77955,
    "gzip": 20571,
-   "brotli": 17536,
+   "brotli": 17553,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -124,7 +124,7 @@
    "priorite": "high",
    "octets": 467500,
    "gzip": 127256,
-   "brotli": 103220,
+   "brotli": 103256,
    "fichiers": [
     {
      "fichier": "village-map.js",
@@ -149,8 +149,8 @@
    ],
    "priorite": "high",
    "octets": 779699,
-   "gzip": 224940,
-   "brotli": 177605,
+   "gzip": 224939,
+   "brotli": 177593,
    "fichiers": [
     {
      "fichier": "village-atelier.js",
@@ -173,7 +173,7 @@
    "priorite": "low",
    "octets": 867395,
    "gzip": 181775,
-   "brotli": 139316,
+   "brotli": 139344,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
@@ -201,7 +201,7 @@
    "priorite": "high",
    "octets": 464831,
    "gzip": 109771,
-   "brotli": 87043,
+   "brotli": 86891,
    "fichiers": [
     {
      "fichier": "rdr-skipper.js",
@@ -236,8 +236,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 275524,
-   "gzip": 67544,
-   "brotli": 56562,
+   "gzip": 67543,
+   "brotli": 56526,
    "fichiers": [
     {
      "fichier": "rdr-entete.js",
@@ -264,7 +264,7 @@
    "priorite": "high",
    "octets": 151220,
    "gzip": 37668,
-   "brotli": 31329,
+   "brotli": 31287,
    "fichiers": [
     {
      "fichier": "rdr-accueil-apercu.js",
@@ -294,7 +294,7 @@
    "priorite": "high",
    "octets": 289109,
    "gzip": 70853,
-   "brotli": 54074,
+   "brotli": 54088,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
@@ -339,7 +339,7 @@
    "priorite": "high",
    "octets": 197366,
    "gzip": 50123,
-   "brotli": 41927,
+   "brotli": 41918,
    "fichiers": [
     {
      "fichier": "rdr-programme.js",
@@ -366,7 +366,7 @@
    "priorite": "high",
    "octets": 150740,
    "gzip": 39393,
-   "brotli": 33263,
+   "brotli": 33261,
    "fichiers": [
     {
      "fichier": "rdr-venir.js",
@@ -403,7 +403,7 @@
    "priorite": "high",
    "octets": 78105,
    "gzip": 18732,
-   "brotli": 16294,
+   "brotli": 16300,
    "fichiers": [
     {
      "fichier": "faits-marquants.js",
@@ -462,7 +462,7 @@
    "priorite": "high",
    "octets": 55452,
    "gzip": 16252,
-   "brotli": 14244,
+   "brotli": 14224,
    "fichiers": [
     {
      "fichier": "rdr-accreditations.js",
@@ -488,8 +488,8 @@
    "precharger": [],
    "priorite": "high",
    "octets": 66504,
-   "gzip": 20492,
-   "brotli": 17763,
+   "gzip": 20491,
+   "brotli": 17756,
    "fichiers": [
     {
      "fichier": "rdr-cgu.js",
@@ -516,7 +516,7 @@
    "priorite": "high",
    "octets": 58991,
    "gzip": 15581,
-   "brotli": 13691,
+   "brotli": 13704,
    "fichiers": [
     {
      "fichier": "rdr-reglements.js",
@@ -542,7 +542,7 @@
    "precharger": [],
    "priorite": "high",
    "octets": 65536,
-   "gzip": 17706,
+   "gzip": 17705,
    "brotli": 15224,
    "fichiers": [
     {
@@ -570,7 +570,7 @@
    "priorite": "high",
    "octets": 36589,
    "gzip": 10683,
-   "brotli": 9228,
+   "brotli": 9207,
    "fichiers": [
     {
      "fichier": "rdr-mentions.js",
@@ -597,12 +597,237 @@
    "priorite": "high",
    "octets": 52798,
    "gzip": 15280,
-   "brotli": 13440,
+   "brotli": 13441,
    "fichiers": [
     {
      "fichier": "rdr-faq.js",
      "octets": 52609,
      "sha": "7592e1fcc5b1",
+     "balises": []
+    }
+   ]
+  },
+  "saint-malo": {
+   "quoi": "la page Saint-Malo (rdr-saint-malo, 24/09) : textes, photos et programme arrivent en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/saint-malo",
+    "/en/saint-malo"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-saint-malo"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 62861,
+   "gzip": 17210,
+   "brotli": 15020,
+   "fichiers": [
+    {
+     "fichier": "rdr-saint-malo.js",
+     "octets": 62648,
+     "sha": "15ae200bc582",
+     "balises": []
+    }
+   ]
+  },
+  "guadeloupe": {
+   "quoi": "la page Guadeloupe (rdr-guadeloupe, 24/09) : même maquette que Saint-Malo, sa ville fixée ; jeu en attribut posé par la page maître",
+   "partout": false,
+   "chemins": [
+    "/guadeloupe",
+    "/en/guadeloupe"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-guadeloupe"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 63463,
+   "gzip": 17340,
+   "brotli": 15183,
+   "fichiers": [
+    {
+     "fichier": "rdr-guadeloupe.js",
+     "octets": 63250,
+     "sha": "42ef70e87a24",
+     "balises": []
+    }
+   ]
+  },
+  "bateaux": {
+   "quoi": "la page Bateaux (24/09) : son jeu (textes fixes et six classes lues au CMS) arrive en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/bateaux",
+    "/en/bateaux"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-bateaux"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 58647,
+   "gzip": 16980,
+   "brotli": 15088,
+   "fichiers": [
+    {
+     "fichier": "rdr-bateaux.js",
+     "octets": 58445,
+     "sha": "fc8cf74f1546",
+     "balises": []
+    }
+   ]
+  },
+  "la-course": {
+   "quoi": "la page La course (Qu'est-ce que la Route du Rhum, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/qu-est-ce-que-la-route-du-rhum",
+    "/en/qu-est-ce-que-la-route-du-rhum"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-course"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 94276,
+   "gzip": 27033,
+   "brotli": 22653,
+   "fichiers": [
+    {
+     "fichier": "rdr-course.js",
+     "octets": 94067,
+     "sha": "4c78499846d0",
+     "balises": []
+    }
+   ]
+  },
+  "heritage": {
+   "quoi": "la page Héritage (rdr-heritage, 24/09) : son jeu, les douze éditions lues au CMS, arrive en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/heritage",
+    "/en/heritage"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-heritage"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 45232,
+   "gzip": 13465,
+   "brotli": 11869,
+   "fichiers": [
+    {
+     "fichier": "rdr-heritage.js",
+     "octets": 45023,
+     "sha": "a23b4c370f09",
+     "balises": []
+    }
+   ]
+  },
+  "edition2022": {
+   "quoi": "la page Édition 2022 (rdr-edition-2022, 24/09), page d'archive : son jeu figé arrive en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/edition-2022",
+    "/en/edition-2022"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-edition-2022"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 64573,
+   "gzip": 17360,
+   "brotli": 15269,
+   "fichiers": [
+    {
+     "fichier": "rdr-edition-2022.js",
+     "octets": 64351,
+     "sha": "f8270a3e94f6",
+     "balises": []
+    }
+   ]
+  },
+  "terres": {
+   "quoi": "la page Terres d'engagements (25/09) : ses données arrivent en attribut jeu, posé par la page maître au rendu serveur ; les pactes sont lus au CMS",
+   "partout": false,
+   "chemins": [
+    "/terres-engagements",
+    "/en/terres-engagements"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-terres-engagements"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 50879,
+   "gzip": 14330,
+   "brotli": 12717,
+   "fichiers": [
+    {
+     "fichier": "rdr-terres-engagements.js",
+     "octets": 50674,
+     "sha": "6e3b62b0d65f",
+     "balises": []
+    }
+   ]
+  },
+  "littoral": {
+   "quoi": "la page Protéger le littoral (rdr-littoral, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; ?go=benevolat tenu par le module",
+   "partout": false,
+   "chemins": [
+    "/proteger-littoral",
+    "/en/proteger-littoral"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-littoral"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 44469,
+   "gzip": 13611,
+   "brotli": 11564,
+   "fichiers": [
+    {
+     "fichier": "rdr-littoral.js",
+     "octets": 44260,
+     "sha": "e30ca533f37e",
+     "balises": []
+    }
+   ]
+  },
+  "kit": {
+   "quoi": "la page Kit pédagogique (rdr-kit-pedagogique, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur",
+   "partout": false,
+   "chemins": [
+    "/kit-pedagogique",
+    "/en/kit-pedagogique"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-kit-pedagogique"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 38864,
+   "gzip": 11126,
+   "brotli": 9826,
+   "fichiers": [
+    {
+     "fichier": "rdr-kit-pedagogique.js",
+     "octets": 38663,
+     "sha": "4a169b06a84b",
      "balises": []
     }
    ]
@@ -622,7 +847,7 @@
    "priorite": "high",
    "octets": 107786,
    "gzip": 23947,
-   "brotli": 20991,
+   "brotli": 20986,
    "fichiers": [
     {
      "fichier": "rdr-concours-photo.js",
@@ -649,7 +874,7 @@
    "priorite": "high",
    "octets": 163169,
    "gzip": 40913,
-   "brotli": 34790,
+   "brotli": 34776,
    "fichiers": [
     {
      "fichier": "tournee-map.js",
@@ -673,7 +898,7 @@
    "priorite": "high",
    "octets": 131037,
    "gzip": 34646,
-   "brotli": 30194,
+   "brotli": 30196,
    "fichiers": [
     {
      "fichier": "rdr-console.js",
@@ -697,7 +922,7 @@
    "priorite": "high",
    "octets": 44095,
    "gzip": 13813,
-   "brotli": 11964,
+   "brotli": 11990,
    "fichiers": [
     {
      "fichier": "rdr-tags.js",
@@ -721,7 +946,7 @@
    "priorite": "high",
    "octets": 66565,
    "gzip": 15984,
-   "brotli": 13775,
+   "brotli": 13777,
    "fichiers": [
     {
      "fichier": "skipper-media-uploader.js",

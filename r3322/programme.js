@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum ff2629c | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ff2629c";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 3d4612b | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="3d4612b";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';

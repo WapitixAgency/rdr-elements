@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ff2629c | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ff2629c";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 3d4612b | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3d4612b";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
