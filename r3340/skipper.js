@@ -1,178 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 6589fee | rdr-nav-page.js rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6589fee";performance.mark("rdr-elements:skipper")}catch(e){}
-;(function(){
-(function () {
-  'use strict';
-  if (window.rdrNavPage) return;
-
-  const MEM_LISTE = 'rdrMemSkippersListeV1';
-  const MEM_FICHE = 'rdrMemFicheV1:';
-  const ATTENTE_MS = 6000;
-  const SUFFIXE_TITRE = ' | Route du Rhum';
-
-  const lang = () => (/^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr');
-  const prefixe = () => (lang() === 'en' ? '/en' : '');
-  const elFiche = () => document.querySelector('rdr-skipper');
-  const elListe = () => document.querySelector('skippers-list');
-  
-
-
-  const membre = () => ['skippers-list', 'rdr-skipper', 'rdr-pied-haut'].some((t) => { const el = document.querySelector(t); return !!(el && /^membre/.test(el.getAttribute('rendu') || '')); });
-  
-
-
-
-
-
-
-  const COUPE = true;
-  const actif = () => !COUPE && !!(window.history && typeof history.pushState === 'function' && membre() && elFiche() && elListe());
-
-   
-  function slugDe(url) {
-    let chemin = String(url || '');
-    try { chemin = new URL(chemin, location.origin).pathname; } catch (e) {   }
-    const m = chemin.match(/^\/(?:en\/)?skippers\/([^/?#]+)\/?$/);
-    return m ? m[1] : '';
-  }
-  const cleMemoireFiche = (slug) => { try { return lang() + ':' + decodeURIComponent(slug).toLowerCase().slice(0, 80); } catch (e) { return lang() + ':' + String(slug).toLowerCase().slice(0, 80); } };
-  function memoireFiche(slug) {
-    try { const m = JSON.parse(sessionStorage.getItem(MEM_FICHE + cleMemoireFiche(slug)) || 'null'); return m && typeof m.payload === 'string' && Date.now() - m.le < 18e5 ? m.payload : ''; } catch (e) { return ''; }
-  }
-  function memoireListe() {
-    try { const m = JSON.parse(sessionStorage.getItem(MEM_LISTE + ':' + lang()) || 'null'); return m && typeof m.skippers === 'string' && Date.now() - m.le < 18e5 ? m.skippers : ''; } catch (e) { return ''; }
-  }
-
-  async function lire(url) {
-    const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
-    const minuteur = ctrl ? setTimeout(() => ctrl.abort(), ATTENTE_MS) : null;
-    try {
-      const r = await fetch(url, { credentials: 'same-origin', headers: { accept: 'application/json' }, signal: ctrl ? ctrl.signal : undefined });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return await r.json();
-    } finally { if (minuteur) clearTimeout(minuteur); }
-  }
-
-  
-
-
-  const slugOrigine = slugDe(location.pathname);
-  const vueOrigine = slugOrigine ? 'fiche' : 'liste';
-  let vue = vueOrigine;
-  let slugCourant = slugOrigine;
-  let generation = 0;
-  let scrollListe = 0;
-   
-  const titreListe = vueOrigine === 'liste' ? document.title : 'Skippers engagés Route du Rhum 2026 : liste complète';
-  const titreFiche = (c) => [c.skipper.prenom, String(c.skipper.nom || '').toUpperCase()].filter(Boolean).join(' ') + SUFFIXE_TITRE;
-  const annonces = new Map();    
-
-  function annoncer(el, type, detail) {
-    if (el.getAttribute('pret') === 'oui') { annonces.delete(el); el.dispatchEvent(new CustomEvent(type, { detail, bubbles: true, composed: true })); }
-    else { annonces.set(el, { type, detail }); observerPret(el); }
-  }
-  const observes = new WeakSet();
-  function observerPret(el) {
-    if (observes.has(el) || typeof MutationObserver !== 'function') return;
-    observes.add(el);
-    new MutationObserver(() => {
-      const a = annonces.get(el);
-      if (a && el.getAttribute('pret') === 'oui') { annonces.delete(el); el.dispatchEvent(new CustomEvent(a.type, { detail: a.detail, bubbles: true, composed: true })); }
-    }).observe(el, { attributes: true, attributeFilter: ['pret'] });
-  }
-
-  function montrer(voir, cacher) {
-    voir.setAttribute('en-page', 'oui'); cacher.setAttribute('en-page', 'oui');
-    cacher.removeAttribute('ouverte');
-    voir.setAttribute('ouverte', 'oui');
-  }
-  const enHaut = () => { try { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, 0); } };
-  const temoinDe = (c, slug) => ({ ok: true, slug, lang: c.lang || lang(), id: c.skipper.id, prenom: c.skipper.prenom || '', nom: c.skipper.nom || '', classeId: (c.skipper.classe && c.skipper.classe.id) || '' });
-  const chargeValide = (c, slug) => !!(c && !c.introuvable && c.skipper && c.skipper.id && String(c.skipper.slug || '').replace(/^\/?skippers\//, '') === slug);
-
-   
-  async function ouvrirFiche(slug, options) {
-    const o = options || {};
-    slug = String(slug || '').replace(/^\/+|\/+$/g, '');
-    const fiche = elFiche(), liste = elListe();
-    if (!slug || !actif()) return false;
-    const url = prefixe() + '/skippers/' + slug;
-    if (o.pousser !== false) {
-      if (vue === 'liste') scrollListe = window.scrollY || 0;
-      try { history.pushState({ rdrNav: 'fiche', slug }, '', url); } catch (e) { return false; }
-    }
-    const mienne = ++generation;
-    vue = 'fiche'; slugCourant = slug;
-    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {   }
-
-     
-    fiche.setAttribute('lang', lang());
-    fiche.setAttribute('membre', 'oui');
-    fiche.setAttribute('suivi', 'false');
-    fiche.setAttribute('prefere', 'false');
-    fiche.setAttribute('prefere-actuel', '');
-    if (o.nom) fiche.setAttribute('nom-attente', String(o.nom).slice(0, 60));
-    const memoire = memoireFiche(slug);
-    if (memoire) fiche.setAttribute('payload-memoire', memoire);
-    else if (typeof fiche.setPayload === 'function') fiche.setPayload(null);
-    montrer(fiche, liste);
-    enHaut();
-
-    let c = null;
-    try { c = await lire('/_functions/fiche?slug=' + encodeURIComponent(slug) + '&lang=' + lang()); } catch (e) { c = null; }
-    if (mienne !== generation) return true;             
-    if (!chargeValide(c, slug)) {
-       
-      try { location.assign(url); } catch (e) {   }
-      return true;
-    }
-    fiche.setAttribute('payload', JSON.stringify(c));
-    document.title = titreFiche(c);
-    annoncer(fiche, 'sk-affichee', temoinDe(c, slug));
-    return true;
-  }
-
-   
-  async function ouvrirListe(options) {
-    const o = options || {};
-    const fiche = elFiche(), liste = elListe();
-    if (!actif()) return false;
-    if (o.pousser !== false) {
-      try { history.pushState({ rdrNav: 'liste' }, '', prefixe() + '/skippers'); } catch (e) { return false; }
-    }
-    const mienne = ++generation;
-    vue = 'liste'; slugCourant = '';
-    liste.setAttribute('lang', lang());
-     
-    const dejaLa = !!liste.querySelector('.sl-card');
-    if (!dejaLa) { const m = memoireListe(); if (m) liste.setAttribute('skippers', m); }
-    montrer(liste, fiche);
-    document.title = titreListe;
-    const y = o.pousser === false ? (o.scroll != null ? o.scroll : scrollListe) : scrollListe;
-    requestAnimationFrame(() => { try { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, y); } });
-    annoncer(liste, 'sl-affichee', { lang: lang() });
-    if (!dejaLa && !liste.querySelector('.sl-card')) {
-      let l = null;
-      try { l = await lire('/_functions/skippers?lang=' + lang()); } catch (e) { l = null; }
-      if (mienne !== generation) return true;
-      if (Array.isArray(l) && l.length) liste.setAttribute('skippers', JSON.stringify(l));
-      else { try { location.assign(prefixe() + '/skippers'); } catch (e) {   } }
-    }
-    return true;
-  }
-
-   
-  try { history.replaceState(Object.assign({}, history.state || {}, { rdrNav: vueOrigine, slug: slugOrigine }), '', location.href); } catch (e) {   }
-  window.addEventListener('popstate', (e) => {
-    const s = (e && e.state) || null;
-    if (!s || !s.rdrNav) return;                        
-    if (s.rdrNav === 'fiche' && s.slug && (vue !== 'fiche' || s.slug !== slugCourant)) ouvrirFiche(s.slug, { pousser: false });
-    else if (s.rdrNav === 'liste' && vue !== 'liste') ouvrirListe({ pousser: false });
-  });
-
-  window.rdrNavPage = { actif, ouvrirFiche, ouvrirListe, slugDe, vue: () => vue };
-})();
-})();
+/* rdr-elements skipper | source route-du-rhum 50f7bc8 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="50f7bc8";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -209,7 +36,10 @@ const CONFIG = {
   PRELOAD_TIMEOUT_MS: 4000,
   ROW_GAP_PX: 16,
   ROW_MAX_HEIGHT: 560,
-  ROW_DEFAULT_HEIGHT: 460,
+  
+
+  ROW_VIEWPORT_MARGIN_PX: 110,
+  ROW_MIN_CAP_PX: 240,
   RESIZE_DEBOUNCE_MS: 220,
   RESIZE_TOLERANCE_PX: 30,
   SWIPE_THRESHOLD_PX: 60,
@@ -250,7 +80,6 @@ class SkipperGallery extends HTMLElement {
   constructor() {
     super();
     this._photos = [];
-    this._skipperName = '';
     this._lang = 'fr';
     this._accent = CONFIG.ACCENT_DEFAULT;
     this._activeIndex = 0;
@@ -263,7 +92,6 @@ class SkipperGallery extends HTMLElement {
     this._intersectionObserver = null;
     this._renderToken = 0;
     this._rendered = false;
-    this._touchState = null;
   }
 
   static get observedAttributes() {
@@ -291,6 +119,8 @@ class SkipperGallery extends HTMLElement {
       clearTimeout(this._resizeDebounce);
       this._resizeDebounce = null;
     }
+    removeEventListener('resize', this._onResizeFenetre);
+    clearTimeout(this._resizeFenetreT);
     this._closeLightbox(true);
     this._retirerVisionneuse();
     document.removeEventListener('keydown', this._onKeyDown);
@@ -322,7 +152,6 @@ class SkipperGallery extends HTMLElement {
       .filter(Boolean)
       .slice(0, CONFIG.MAX_PHOTOS);
 
-    this._skipperName = this.getAttribute('skipper-name') || '';
     const lang = (this.getAttribute('lang') || 'fr').toLowerCase();
     this._lang = I18N[lang] ? lang : 'fr';
 
@@ -354,7 +183,15 @@ class SkipperGallery extends HTMLElement {
     return /^[0-9a-fA-F]{3,8}$/.test(hex) ? '#' + hex : fallback;
   }
 
-  _wixUrl(url, width) {
+  
+
+
+
+
+
+
+
+  _wixUrl(url, width, hauteur, mode) {
     if (!url) return '';
     let fileId = null;
 
@@ -376,17 +213,8 @@ class SkipperGallery extends HTMLElement {
     if (!width) width = 1200;
 
     const ext = (fileId.split('.').pop() || 'jpg').toLowerCase();
-    const h = Math.round(width * 0.75);
-    const params = [
-      `w_${width}`,
-      `h_${h}`,
-      'al_c',
-      `q_${CONFIG.CDN_QUALITY}`,
-      'enc_avif',
-      'quality_auto'
-    ].join(',');
-
-    return `https://static.wixstatic.com/media/${fileId}/v1/fill/${params}/img.${ext}`;
+    const f = mode || 'fill';
+    return `https://static.wixstatic.com/media/${fileId}/v1/${f}/w_${Math.round(width)},h_${Math.round(hauteur || width * 0.75) || 1}${f === 'fill' ? ',al_c' : ''},q_${CONFIG.CDN_QUALITY},enc_avif,quality_auto/img.${ext}`;
   }
 
   
@@ -448,7 +276,8 @@ class SkipperGallery extends HTMLElement {
         p.ratio = fromUrl;
         return;
       }
-      const measured = await this._measureImage(this._wixUrl(p.src, 400));
+       
+      const measured = await this._measureImage(this._wixUrl(p.src, 400, 400, 'fit'));
       p.ratio = measured;
     });
     await Promise.all(promises);
@@ -489,6 +318,18 @@ class SkipperGallery extends HTMLElement {
       }
     });
     this._resizeObserver.observe(this);
+
+    
+
+    this._onResizeFenetre = () => {
+      clearTimeout(this._resizeFenetreT);
+      this._resizeFenetreT = setTimeout(() => {
+        if (this._isMobile || this._plafondRendu == null || Math.abs(this._plafondRangee() - this._plafondRendu) <= CONFIG.RESIZE_TOLERANCE_PX) return;
+        if (this._lightboxOpen) this._renduForce = true;
+        else this._render();
+      }, CONFIG.RESIZE_DEBOUNCE_MS);
+    };
+    addEventListener('resize', this._onResizeFenetre);
   }
 
   async _init() {
@@ -643,6 +484,8 @@ class SkipperGallery extends HTMLElement {
       || this.getBoundingClientRect().width
       || 1200;
     const gap = CONFIG.ROW_GAP_PX;
+    const plafond = this._plafondRangee();
+    this._plafondRendu = plafond;
 
     if (this._photos.length === 1) {
       const p = this._photos[0];
@@ -652,7 +495,7 @@ class SkipperGallery extends HTMLElement {
       
 
 
-      const rowHeight = Math.min(CONFIG.ROW_MAX_HEIGHT, naturalHeight);
+      const rowHeight = Math.min(plafond, naturalHeight);
       const rowWidth = rowHeight * p.ratio;
       row.appendChild(this._buildPhotoCard(p, 0, `${rowWidth}px`, `${rowHeight}px`));
       grid.appendChild(row);
@@ -675,7 +518,7 @@ class SkipperGallery extends HTMLElement {
       
 
 
-      const rowHeight = Math.min(CONFIG.ROW_MAX_HEIGHT, naturalRowHeight);
+      const rowHeight = Math.min(plafond, naturalRowHeight);
 
       rowPhotos.forEach((photo) => {
         const cardWidth = rowHeight * photo.ratio;
@@ -689,6 +532,23 @@ class SkipperGallery extends HTMLElement {
     this._setupReveal(grid);
   }
 
+  
+
+
+
+
+
+
+
+  _plafondRangee() {
+    const s = document.createElement('div');
+    s.style.cssText = 'position:fixed;height:100vh;height:100svh;visibility:hidden';
+    document.body.appendChild(s);
+    const h = s.offsetHeight || innerHeight;
+    s.remove();
+    return Math.max(CONFIG.ROW_MIN_CAP_PX, Math.min(CONFIG.ROW_MAX_HEIGHT, h - CONFIG.ROW_VIEWPORT_MARGIN_PX));
+  }
+
   _buildPhotoCard(photo, idx, width, height) {
     const total = this._photos.length;
     const btn = document.createElement('button');
@@ -699,11 +559,11 @@ class SkipperGallery extends HTMLElement {
     btn.style.height = height;
     btn.setAttribute('aria-label', `${this._t('photoOf')} ${idx + 1}`);
 
-    const heightPx = parseInt(height, 10) || CONFIG.ROW_DEFAULT_HEIGHT;
-    const widthPx = parseInt(width, 10) || (heightPx * photo.ratio);
+    const widthPx = parseInt(width, 10) || 800;
     const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) ? Math.min(window.devicePixelRatio, 2) : 1;
     const targetCdnWidth = Math.max(800, Math.round(widthPx * dpr));
-    const optimizedUrl = this._wixUrl(photo.src, targetCdnWidth);
+     
+    const optimizedUrl = this._wixUrl(photo.src, targetCdnWidth, targetCdnWidth / (photo.ratio || 1.5));
 
     btn.innerHTML = `
       <img src="${this._safeUrl(optimizedUrl)}" alt="${this._t('photoOf')} ${idx + 1}" loading="lazy" draggable="false">
@@ -1082,16 +942,21 @@ class SkipperGallery extends HTMLElement {
 
 
 
-  _largeurVisionneuse() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const utile = Math.max(320, window.innerWidth || 1200) * dpr;
+  
+
+
+  _largeurVisionneuse(photo) {
+    const r = photo.ratio || 1.5;
+    const l = Math.min(Math.max(320, innerWidth), Math.max(320, innerHeight) * r);
+    const utile = Math.max(l, l / r) * Math.min(devicePixelRatio || 1, 2);
     return [800, 1200, 1600, 2000].find(p => p >= utile) || 2000;
   }
 
   _precharger(index) {
     const photo = this._photos[index];
     if (!photo) return null;
-    const url = this._wixUrl(photo.src, this._largeurVisionneuse());
+    const cote = this._largeurVisionneuse(photo);
+    const url = this._wixUrl(photo.src, cote, cote, 'fit');
     if (!this._prets) this._prets = new Map();
     let e = this._prets.get(url);
     if (!e) {
@@ -3887,7 +3752,6 @@ rdr-skipper .sk [hidden]{display:none!important;}
 rdr-skipper .sk :focus-visible{outline:2px solid var(--sk-teal);outline-offset:3px;}
 
 rdr-skipper .sk .sk-cadre{width:100%;max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,72px);}
-rdr-skipper .sk .sk-varien{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;text-transform:uppercase;}
 rdr-skipper .sk .sk-kicker{display:flex;align-items:center;gap:var(--e3);font-size:var(--t2);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--sk-encre-3);}
 rdr-skipper .sk .sk-kicker::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--sk-accent);flex:none;}
 
@@ -4300,7 +4164,6 @@ rdr-skipper .sk .sk-ligne--attente dd{font-weight:600;font-style:italic;letter-s
 rdr-skipper .sk .sk-ligne dt{white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--sk-carte-label);}
 rdr-skipper .sk .sk-ligne dd{display:flex;align-items:center;gap:var(--e2);font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--sk-carte-encre);text-align:right;}
 rdr-skipper .sk .sk-ligne dd img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
-rdr-skipper .sk .sk-ligne dd .sk-icone-classe{width:auto;height:30px;border-radius:0;}
 
 
 
@@ -5049,7 +4912,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
   } catch (e) {   } };
 
   class RdrSkipper extends HTMLElement {
-    static get observedAttributes() { return ['lang', 'phase', 'suivi', 'payload', 'payload-memoire', 'hero', 'nom-attente', 'membre', 'live-url', 'prefere', 'prefere-actuel', 'verifier-charge']; }
+    static get observedAttributes() { return ['lang', 'phase', 'suivi', 'payload', 'hero', 'nom-attente', 'membre', 'live-url', 'prefere', 'prefere-actuel', 'verifier-charge']; }
 
     constructor() {
       super();
@@ -5085,7 +4948,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       }
       
 
-      Object.keys(this._attente).forEach(k => (k === 'payload' ? this._appliquerCharge(this._attente[k]) : k === 'payload-memoire' ? (this._appliquerCharge(this._attente[k]) && (this._depuisMemoire = true)) : this._appliquer(k, this._attente[k])));
+      Object.keys(this._attente).forEach(k => (k === 'payload' ? this._appliquerCharge(this._attente[k]) : this._appliquer(k, this._attente[k])));
       this._attente = {};
       ['lang', 'phase', 'suivi', 'hero', 'membre', 'prefere', 'prefere-actuel'].forEach(k => { if (this.hasAttribute(k)) this._appliquer(k, this.getAttribute(k)); });
       if (this.hasAttribute('payload')) this._appliquerCharge(this.getAttribute('payload'));
@@ -5115,14 +4978,6 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       if (!this._init) { this._attente[nom] = apres; return; }
       
 
-      
-
-
-
-      if (nom === 'payload-memoire') {
-        if (this._appliquerCharge(apres)) { this._depuisMemoire = true; this._rendre(); }
-        return;
-      }
       if (nom === 'payload') {
         
 
@@ -6176,18 +6031,6 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       
 
 
-      const retour = R.querySelector('.sk-retour');
-      if (retour) this._ecoute(retour, 'click', (e) => {
-        const nav = window.rdrNavPage;
-        if (!nav || !nav.actif()) return;
-        e.preventDefault();
-        retour.classList.remove('sk-retour--attente');
-        nav.ouvrirListe();
-      });
-
-      
-
-
 
 
 
@@ -6412,11 +6255,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         carrousel.setAttribute('skippers', JSON.stringify(liste));
         this._ecoute(carrousel, 'navigate', (ev) => {
           const slug = ev.detail && ev.detail.slug;
-          if (!slug) return;
-           
-          const nav = window.rdrNavPage;
-          if (nav && nav.actif()) { nav.ouvrirFiche(String(slug).replace(/^\/?skippers\//, '')); return; }
-          this.dispatchEvent(new CustomEvent('sk-naviguer', { bubbles: true, detail: { slug } }));
+          if (slug) this.dispatchEvent(new CustomEvent('sk-naviguer', { bubbles: true, detail: { slug } }));
         });
       }
 
@@ -7217,6 +7056,12 @@ const PROFIL_CONFIG = {
   'INTERNATIONAUX':    { label: 'Internationaux',     sub: 'Hors France',                               couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' },
 };
 
+
+
+
+const URL_CLASSES = { 'ultim': 'Ultim', 'ocean-fifty': 'Ocean Fifty', 'class40': 'Class40', 'imoca': 'IMOCA', 'vintage-mono': 'Vintage Mono', 'vintage-multi': 'Vintage Multi' };
+const URL_PROFILS = { 'rookies': 'ROOKIES', 'femmes': 'FEMMES', 'hommes': 'HOMMES', 'vainqueurs': 'ANCIENS VAINQUEURS', 'locaux': 'LOCAUX', 'internationaux': 'INTERNATIONAUX' };
+
  
 const HOMMES_CFG = { label: 'Hommes', couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="19" y1="5" x2="14.15" y2="9.85"/><polyline points="15 5 19 5 19 9"/></svg>' };
 
@@ -7374,9 +7219,47 @@ class SkippersList extends HTMLElement {
     setTimeout(() => { try { card.classList.remove('sl-navloading'); spin.remove(); } catch (e) {   } }, 6000);
   }
 
+  _lireAdresse() {
+    let p;
+    try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
+    const classe = URL_CLASSES[String(p.get('classe') || '').toLowerCase()];
+    if (classe) this._activeClasse = classe;
+    String(p.get('profil') || '').toLowerCase().split(',').map((x) => x.trim()).forEach((k) => {
+      const f = URL_PROFILS[k];
+      if (!f) return;
+      if (f === 'HOMMES') { this._activeGenre = 'HOMMES'; this._activeFilters['FEMMES'] = false; return; }
+      this._activeFilters[f] = true;
+      if (f === 'FEMMES') this._activeGenre = null;
+    });
+    if (this._activeFilters['ROOKIES'] && this._activeFilters['ANCIENS VAINQUEURS']) this._activeFilters['ANCIENS VAINQUEURS'] = false;
+    const q = String(p.get('q') || '').trim().slice(0, 60);
+    if (q) this._search = q;
+    if (p.get('tri') === 'az') this._sort = 'az';
+  }
+
+  _ecrireAdresse() {
+    let u;
+    try { u = new URL(window.location.href); } catch (e) { return; }
+    const p = u.searchParams;
+    const classe = Object.keys(URL_CLASSES).find((k) => URL_CLASSES[k] === this._activeClasse);
+    if (classe) p.set('classe', classe); else p.delete('classe');
+    const profils = Object.keys(URL_PROFILS).filter((k) => {
+      const f = URL_PROFILS[k];
+      return f === 'HOMMES' ? this._activeGenre === 'HOMMES' : !!this._activeFilters[f];
+    });
+    if (profils.length) p.set('profil', profils.join(',')); else p.delete('profil');
+    if (this._search.trim()) p.set('q', this._search.trim()); else p.delete('q');
+    if (this._sort === 'az') p.set('tri', 'az'); else p.delete('tri');
+    const requete = p.toString().split('%2C').join(',');
+    const cible = u.pathname + (requete ? '?' + requete : '') + u.hash;
+    if (cible === location.pathname + location.search + location.hash) return;
+    try { history.replaceState(history.state, '', cible); } catch (e) {   }
+  }
+
   connectedCallback() {
     this.style.display = 'block';
     this.style.width = '100%';
+    if (!this._adresseLue) { this._adresseLue = true; this._lireAdresse(); }
      
      
     if (!this._onPageShow) {
@@ -7391,6 +7274,10 @@ class SkippersList extends HTMLElement {
     this._renderShell();
     this._shellReady = true;
     this._appliedLang = this._lang();
+    if (this._activeFilterCount() || this._sort !== 'random') {
+      ['#sl-search', '#sl-search-mobile'].forEach((sel) => { const i = this.querySelector(sel); if (i) i.value = this._search; });
+      this._updateFilterStyles();
+    }
     if (this._pendingSkippers !== null) {
       this._processSkippers(this._pendingSkippers);
       this._pendingSkippers = null;
@@ -8291,6 +8178,7 @@ class SkippersList extends HTMLElement {
     this._updateFilterStyles();
     this._renderGrid();
     this._renderPagination();
+    this._ecrireAdresse();
   }
 
   _reshuffle() {
@@ -8394,18 +8282,6 @@ class SkippersList extends HTMLElement {
         }
         const link = e.target.closest('[data-link]');
         if (link) {
-          
-
-
-
-          const nav = window.rdrNavPage;
-          if (nav && nav.actif()) {
-            const slug = nav.slugDe(link.dataset.link);
-            const carte = link.closest('.sl-card, .sl-list-item') || link;
-            const texte = (sel) => ((carte.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
-            const nom = [texte('.sl-card-prenom, .sl-list-prenom'), texte('.sl-card-nom, .sl-list-nom')].filter(Boolean).join(' ');
-            if (slug) { nav.ouvrirFiche(slug, { nom }); return; }
-          }
           this._markNavLoading(link.closest('.sl-card') || link);
           this.dispatchEvent(new CustomEvent('sl-navigate', { detail:{ url:link.dataset.link }, bubbles:true, composed:true }));
           

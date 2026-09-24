@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ed1e646 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ed1e646";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 50f7bc8 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="50f7bc8";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -303,6 +303,7 @@ rdr-accueil-apercu .skippers::before{content:'';position:absolute;left:0;right:0
 rdr-accueil-apercu .skippers .trame{position:relative}
 rdr-accueil-apercu .skippers .sec-tete{align-items:center;text-align:center;flex-direction:column;margin-bottom:26px}
 rdr-accueil-apercu .sk-liste{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;padding-top:26px}
+rdr-accueil-apercu [data-hors],rdr-accueil-apercu [data-hors] *{animation-play-state:paused !important}
 rdr-accueil-apercu .sk{display:block;position:relative;perspective:1000px;min-width:0;aspect-ratio:4/5;color:inherit;text-decoration:none}
 rdr-accueil-apercu .sk-flip{position:relative;height:100%;transform-style:preserve-3d;transform:rotateY(180deg);transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
 rdr-accueil-apercu .sk-flip.est-la{transform:rotateY(0) rotate(var(--rot,0deg))}
@@ -962,6 +963,15 @@ function monter(racine, portail, D) {
   const repeter = (f, ms) => { const t = setInterval(f, ms); minuteurs.push(t); return t; };
   const tout = (s) => [...racine.querySelectorAll(s)].concat(portail === racine ? [] : [...portail.querySelectorAll(s)]);
   const un = (s) => racine.querySelector(s) || portail.querySelector(s);
+  
+
+
+
+  if ('IntersectionObserver' in window) {
+    const horsEcran = new IntersectionObserver((es) => es.forEach((e) => e.target.toggleAttribute('data-hors', !e.isIntersecting)), { rootMargin: '120px 0px' });
+    tout('section, .sep').forEach((x) => horsEcran.observe(x));
+    ecouteurs.push(() => horsEcran.disconnect());
+  }
    
   const M = D.medias;
   
@@ -1166,7 +1176,11 @@ function monter(racine, portail, D) {
 
 
 
-    $('hero-photo').src = IMG(p.photo, largeurPhoto(), Math.round(largeurPhoto() * 0.5625), 82);
+    
+
+
+    const annoncee = document.querySelector('link[data-rdr-photo]');
+    $('hero-photo').src = annoncee && annoncee.getAttribute('data-rdr-photo') === p.photo ? annoncee.href : IMG(p.photo, largeurPhoto(), Math.round(largeurPhoto() * 0.5625), 82);
     rail.querySelectorAll('.hv-vue--diapo').forEach(v => v.remove());
         
 
