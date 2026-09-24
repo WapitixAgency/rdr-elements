@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 96c7ec8 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="96c7ec8";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum db0b578 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="db0b578";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -257,7 +257,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="96c7ec8";perform
      
     'Rien à cette date': 'Nothing on this date',
     'Aucun rendez-vous avec ces filtres': 'No events match these filters',
-    'Ce jour-là, rien ne correspond à ce que vous avez choisi. En retirer un suffit souvent.': 'Nothing that day matches what you picked. Removing one filter is usually enough.',
+    'Rien ce jour-là avec ces filtres': 'Nothing that day with these filters',
+    'Plus de rendez-vous à venir avec ces filtres': 'No more upcoming events with these filters',
+    'Rien ne correspond dans cette programmation.': 'Nothing matches in this programme.',
+    'Le prochain arrive un peu plus tard.': 'The next one is a little later.',
+    'Ceux de cette programmation sont passés.': 'The ones in this programme are over.',
+    'Retirer ce filtre': 'Remove this filter',
     
 
 
@@ -1792,6 +1797,22 @@ rdr-programme{display:block;width:100%;}
 }
 .rp-jour-pastille[hidden]{display:none;}
 
+
+.rp-socle.a-filtre .rp-jour.est-sans{opacity:.34;}
+.rp-socle.a-filtre .rp-jour.est-sans[aria-pressed="true"]{opacity:1;}
+.rp-socle.a-filtre .rp-jour.est-trouve{
+  border-color:color-mix(in srgb, var(--rp-teinte) 70%, transparent);
+  background:color-mix(in srgb, var(--rp-teinte) 12%, transparent);
+}
+.rp-socle.a-filtre .rp-jour.est-trouve[aria-pressed="true"]{
+  background:linear-gradient(165deg,#7894F7 0%,#4F5BA5 100%);border-color:var(--rp-teinte);
+}
+.rp-jour-n{
+  justify-self:center;min-width:18px;margin-top:4px;padding:1px 5px;
+  border-radius:2px 7px 2px 7px;background:var(--rp-teinte);color:#0A1630;
+  font-size:10px;font-weight:800;line-height:14px;font-style:normal;
+}
+
  
 
 
@@ -1884,13 +1905,16 @@ rdr-programme{display:block;width:100%;}
   border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03);
   transition:border-color .2s,background .2s;
 }
- 
+
+
+
+
 .rp-champ.est-pose{
-  border-style:solid;border-color:var(--rp-actif);
-  background:var(--rp-verre-fort);box-shadow:var(--o-arete);
+  border-style:solid;border-color:#FFFFFF;
+  background:#FFFFFF;box-shadow:0 8px 22px rgba(0,0,0,.28);
 }
 .rp-champ > .rp-ic{flex:none;width:15px;height:15px;color:var(--rp-encre-3);}
-.rp-champ.est-pose > .rp-ic{color:var(--rp-actif);}
+.rp-champ.est-pose > .rp-ic{color:#0A1630;}
 
 
 
@@ -1908,6 +1932,17 @@ rdr-programme{display:block;width:100%;}
 .rp-champ .rp-chev{position:absolute;right:11px;width:14px;height:14px;
   color:var(--rp-encre-3);pointer-events:none;transition:transform .2s;}
 .rp-champ.est-ouvert .rp-chev{transform:rotate(180deg);}
+.rp-champ.est-pose .rp-champ-btn{color:#0A1630;font-weight:700;padding-right:58px;}
+.rp-champ.est-pose .rp-chev{right:40px;color:#0A1630;}
+.rp-champ-teinte{flex:none;width:10px;height:10px;border-radius:2px 5px 2px 5px;
+  box-shadow:0 0 0 1px rgba(10,22,48,.35);}
+.rp-champ-x{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;display:grid;place-items:center;padding:0;
+  border:0;border-radius:3px 9px 3px 9px;background:rgba(10,22,48,.08);color:#0A1630;cursor:pointer;
+}
+.rp-champ-x .rp-ic{width:13px;height:13px;}
+@media (hover:hover) and (pointer:fine){ .rp-champ-x:hover{background:rgba(10,22,48,.18);} }
 
 
 
@@ -5313,6 +5348,8 @@ rdr-programme{display:block;width:100%;}
         const t = (this._p.categories || []).find(c => pli(c) === pli(d.cat));
         if (t) this._f.cat = pli(t);
       }
+       
+      if (!this._jourChoisi) this._calerSurFiltre();
       this._demande = null;
     }
 
@@ -5574,6 +5611,47 @@ rdr-programme{display:block;width:100%;}
         }
         return true;
       }).sort((a, b) => minutes(a.debut) - minutes(b.debut));
+    }
+
+    _filtrePose() {
+      const f = this._f;
+      return !!(f.heure || f.theme || f.lieu || f.cat);
+    }
+
+    
+
+
+
+
+
+
+
+
+
+    _prochainFiltre(type) {
+      const garde = this._type;
+      if (type) this._type = type;
+      try {
+        const now = this._maintenant();
+        for (const d of this._jours()) {
+          if (d < now.jour) continue;
+          const l = this._filtrees(d);
+          if (!l.length) continue;
+          if (d > now.jour) return d;
+          if (l.some(a => !/^\d{1,2}:\d{2}/.test(a.debut || '') || finMinutes(a) > now.minute)) return d;
+        }
+        return '';
+      } finally { this._type = garde; }
+    }
+
+    
+
+
+
+    _calerSurFiltre() {
+      if (!this._filtrePose() || this._filtrees(this._jour).length) return;
+      const d = this._prochainFiltre();
+      if (d && d !== this._jour) { this._jour = d; this._jourChoisi = false; }
     }
 
     
@@ -5901,6 +5979,16 @@ rdr-programme{display:block;width:100%;}
         parJour.set(a.date, (parJour.get(a.date) || 0) + 1);
       });
       const journees = new Set((this._p.journees || []).filter(j => j.actif !== false).map(j => j.date));
+      
+
+
+
+
+
+
+      const filtre = this._filtrePose();
+      const parFiltre = filtre ? new Map(jours.map(iso => [iso, this._filtrees(iso).length])) : null;
+      const teinte = this._f.cat ? catDe(this._f.cat).c : '#FFFFFF';
 
       
 
@@ -5930,7 +6018,8 @@ rdr-programme{display:block;width:100%;}
 
 
 
-      return '<nav class="rp-socle" aria-label="Choix du jour">' +
+      return '<nav class="rp-socle' + (filtre ? ' a-filtre' : '') + '" aria-label="Choix du jour"' +
+          (filtre ? ' style="--rp-teinte:' + teinte + '"' : '') + '>' +
         '<div class="rp-jours-cadre">' +
         '<button type="button" class="rp-fl rp-fl--g" id="rpFlG" aria-label="Jours précédents" hidden>' +
           svg(IC.chevron) + '</button>' +
@@ -5952,21 +6041,25 @@ rdr-programme{display:block;width:100%;}
           const finDeSemaine = jd.getDay() === 0 || jd.getDay() === 6;
           const cEstAuj = iso === auj;
           const revolu = iso < auj;
+           
+          const nf = filtre && !revolu ? parFiltre.get(iso) || 0 : 0;
           const marques = (cEstAuj ? ' est-auj' : '') +
                           (finDeSemaine ? ' est-we' : '') +
-                          (revolu ? ' est-revolu' : '');
+                          (revolu ? ' est-revolu' : '') +
+                          (filtre ? (nf ? ' est-trouve' : ' est-sans') : '');
           return '<button type="button" class="rp-jour' + marques + '" data-jour="' + esc(iso) + '"' +
             ' aria-pressed="' + (actif ? 'true' : 'false') + '"' +
             
 
 
             ' aria-label="' + esc(this._jc(d) + ' ' + d.getDate() + ' ' +
-              this._mc(d) + ', ' + this._compte(n) +
+              this._mc(d) + ', ' + this._compte(filtre ? nf : n) +
               (iso === auj ? (this._lang() === 'en' ? ', today' : ", aujourd'hui") : '')) + '">' +
             '<i>' + esc(this._jc(d)) + '</i>' +
             '<b>' + String(d.getDate()).padStart(2, '0') + '</b>' +
             '<i>' + esc(this._mc(d)) + '</i>' +
-            '<span class="rp-jour-pastille"' + (journees.has(iso) ? '' : ' hidden') + '></span>' +
+            '<span class="rp-jour-pastille"' + (journees.has(iso) && !filtre ? '' : ' hidden') + '></span>' +
+            (nf ? '<span class="rp-jour-n" aria-hidden="true">' + nf + '</span>' : '') +
           '</button>';
         }).join('') +
         '</div>' +
@@ -5996,13 +6089,23 @@ rdr-programme{display:block;width:100%;}
 
       const sel = (cle, icone, libelle, valeur, options) => {
         const choisi = options.find(o => o[0] === valeur);
+        
+
+
         return '<div class="rp-champ' + (valeur ? ' est-pose' : '') + '" data-champ="' + esc(cle) + '">' +
           svg(icone) +
+          (valeur && cle === 'cat'
+            ? '<span class="rp-champ-teinte" style="background:' + catDe(valeur).c + '" aria-hidden="true"></span>'
+            : '') +
           '<button type="button" class="rp-champ-btn" data-vide="' + (valeur ? 'false' : 'true') + '"' +
             ' aria-haspopup="listbox" aria-expanded="false">' +
             esc(choisi ? choisi[1] : libelle) +
           '</button>' +
           svg(IC.chevron, 'rp-ic rp-chev') +
+          (valeur
+            ? '<button type="button" class="rp-champ-x" data-effacer="' + esc(cle) + '"' +
+                ' aria-label="Retirer ce filtre">' + svg(IC.croix, 'rp-ic') + '</button>'
+            : '') +
           '<div class="rp-pop" role="listbox" aria-label="' + esc(libelle) + '" hidden>' +
             '<button type="button" class="rp-opt" role="option" data-val=""' +
               ' aria-selected="' + (valeur ? 'false' : 'true') + '">' + esc(libelle) + '</button>' +
@@ -6809,6 +6912,57 @@ rdr-programme{display:block;width:100%;}
 
       const filtre = this._f.heure || this._f.theme || this._f.lieu || this._f.cat;
 
+      const nomDe = (iso) => {
+        const d = dateDe(iso);
+        return this._jc(d) + '. ' + d.getDate() + ' ' + this._mc(d) + '.';
+      };
+      const en = this._lang() === 'en';
+
+      
+
+
+
+
+
+
+      if (filtre) {
+        const total = this._filtrees('').length;
+        const prochain = this._prochainFiltre();
+        let ailleurs = null;
+        if (!prochain) {
+          for (const t of this._registresVisibles()) {
+            if (t === this._type) continue;
+            const d = this._prochainFiltre(t);
+            if (d) { ailleurs = { type: t, date: d }; break; }
+          }
+        }
+        const titre = !total ? 'Aucun rendez-vous avec ces filtres'
+          : prochain ? 'Rien ce jour-là avec ces filtres'
+          : 'Plus de rendez-vous à venir avec ces filtres';
+        const texte = !total ? 'Rien ne correspond dans cette programmation.'
+          : prochain ? 'Le prochain arrive un peu plus tard.'
+          : 'Ceux de cette programmation sont passés.';
+        return '<div class="rp-vide">' +
+          '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
+          '<h3>' + titre + '</h3>' +
+          '<p>' + texte + '</p>' +
+          '<div class="rp-vide-actions">' +
+            (prochain
+              ? '<button type="button" class="rp-cta rp-cta--fort" data-aller-jour="' + esc(prochain) + '">' +
+                  (en ? 'Go to ' : 'Aller au ') + esc(nomDe(prochain)) +
+                  ' <em>' + this._filtrees(prochain).length + '</em>' + svg(IC.fleche) + '</button>'
+              : '') +
+            (ailleurs
+              ? '<button type="button" class="rp-cta rp-cta--fort" data-aller-registre="' + esc(ailleurs.type) + '"' +
+                  ' data-registre-jour="' + esc(ailleurs.date) + '">' +
+                  (en ? 'See ' : 'Voir ') + esc(this._t(REGISTRE_NOMS[ailleurs.type].onglet)) +
+                  ', ' + esc(nomDe(ailleurs.date)) + svg(IC.fleche) + '</button>'
+              : '') +
+            '<button type="button" class="rp-cta" id="rpRaz2">Tout afficher</button>' +
+          '</div>' +
+        '</div>';
+      }
+
       
 
       const jours = this._jours();
@@ -6823,22 +6977,14 @@ rdr-programme{display:block;width:100%;}
         if (e < ecart) { ecart = e; proche = { date: d, combien }; }
       });
 
-      const nomDe = (iso) => {
-        const d = dateDe(iso);
-        return this._jc(d) + '. ' + d.getDate() + ' ' + this._mc(d) + '.';
-      };
-
       return '<div class="rp-vide">' +
         '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
-        '<h3>' + (filtre ? 'Aucun rendez-vous avec ces filtres' : 'Rien à cette date') + '</h3>' +
-        '<p>' + (filtre
-          ? 'Ce jour-là, rien ne correspond à ce que vous avez choisi. En retirer un suffit souvent.'
-          : 'Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.') + '</p>' +
+        '<h3>Rien à cette date</h3>' +
+        '<p>Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.</p>' +
         '<div class="rp-vide-actions">' +
-          (filtre ? '<button type="button" class="rp-cta rp-cta--fort" id="rpRaz2">Tout afficher</button>' : '') +
           (proche
             ? '<button type="button" class="rp-cta" data-aller-jour="' + esc(proche.date) + '">' +
-                'Aller au ' + esc(nomDe(proche.date)) +
+                (en ? 'Go to ' : 'Aller au ') + esc(nomDe(proche.date)) +
                 ' <em>' + proche.combien + '</em>' + svg(IC.fleche) + '</button>'
             : '') +
         '</div>' +
@@ -6892,6 +7038,32 @@ rdr-programme{display:block;width:100%;}
       const raz = () => { this._f = { heure: '', theme: '', lieu: '', cat: '' }; this._rendre(); };
       const r1 = q('#rpRaz'); if (r1) r1.addEventListener('click', raz);
       const r2 = q('#rpRaz2'); if (r2) r2.addEventListener('click', raz);
+       
+      this.querySelectorAll('[data-effacer]').forEach(b =>
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this._fermerChamps(null);
+          this._f[b.dataset.effacer] = '';
+          this._rendre();
+        }));
+      
+
+
+      this.querySelectorAll('[data-aller-registre]').forEach(b =>
+        b.addEventListener('click', () => {
+          const t = b.dataset.allerRegistre;
+          if (!estRegistre(t)) return;
+          const garde = { heure: this._f.heure, theme: '', lieu: '', cat: this._f.cat };
+          this._type = t;
+          this._typeChoisi = true;
+          this._f = garde;
+          this._jour = b.dataset.registreJour || this._jour;
+          this._jourChoisi = false;
+          this._rendre();
+          this._emit('programme-type', { type: this._type });
+          const so = this.querySelector('.rp-socle');
+          if (so) so.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }));
 
       
 
@@ -7256,6 +7428,7 @@ rdr-programme{display:block;width:100%;}
           const opt = e.target.closest('.rp-opt');
           if (!opt) return;
           this._f[cle] = opt.dataset.val || '';
+          this._calerSurFiltre();
           this._rendre();
         });
       });
