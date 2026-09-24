@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 538f3f8 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="538f3f8";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum ed1e646 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ed1e646";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -303,7 +303,7 @@ rdr-accueil-apercu .skippers::before{content:'';position:absolute;left:0;right:0
 rdr-accueil-apercu .skippers .trame{position:relative}
 rdr-accueil-apercu .skippers .sec-tete{align-items:center;text-align:center;flex-direction:column;margin-bottom:26px}
 rdr-accueil-apercu .sk-liste{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;padding-top:26px}
-rdr-accueil-apercu .sk{position:relative;perspective:1000px;min-width:0;aspect-ratio:4/5}
+rdr-accueil-apercu .sk{display:block;position:relative;perspective:1000px;min-width:0;aspect-ratio:4/5;color:inherit;text-decoration:none}
 rdr-accueil-apercu .sk-flip{position:relative;height:100%;transform-style:preserve-3d;transform:rotateY(180deg);transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
 rdr-accueil-apercu .sk-flip.est-la{transform:rotateY(0) rotate(var(--rot,0deg))}
 rdr-accueil-apercu .sk:hover .sk-flip.est-la{transform:rotateY(0) rotate(0) translateY(-6px) scale(1.02);transition:transform .35s cubic-bezier(.34,1.2,.64,1)}
@@ -1591,11 +1591,17 @@ function monter(racine, portail, D) {
     ecoute(racine, 'raa-actus', () => { const a2 = actusAttribut(); if (a2) rendreActus(a2); });
   } else Promise.resolve(D.actus).then((a) => rendreActus(Array.isArray(a) ? a : a.posts));
 
+  tout('.lien-rhum').forEach((a) => ecoute(a, 'click', (ev) => {
+    if (!racine.getAttribute || racine.getAttribute('connexion') !== 'velo') return;
+    ev.preventDefault();
+    racine.dispatchEvent(new CustomEvent('raa-connexion', { bubbles: true, composed: true }));
+  }));
+
    
   const CLASSES = D.classes;
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
   const vecteur = (v) => { const m = String(v || '').match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : String(v || ''); };
-  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe"' + href('/skippers') + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
+  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe"' + href('/skippers?classe=' + k.toLowerCase().split(' ').join('-')) + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
   
 
 
@@ -1611,9 +1617,11 @@ function monter(racine, portail, D) {
     const liste = tirer(Array.isArray(s) ? s : (s.skippers || Object.values(s)[0]), 6);
     pvI = 0;
     $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
-      return '<div class="sk" style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 190 : 215), 74)) + '" alt="" loading="lazy">' +
+      const fiche = /^\/skippers\/[^\s"'<>]+$/.test(String(k['link-skippers-prenomNom'] || '')) && k.ficheActive !== false ? k['link-skippers-prenomNom'] : '';
+      const balise = fiche ? 'a' : 'div';
+      return '<' + balise + ' class="sk"' + (fiche ? href(fiche) + ' aria-label="' + esc([k.prenom, k.nom].filter(Boolean).join(' ')) + '"' : '') + ' style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 190 : 215), 74)) + '" alt="" loading="lazy">' +
         '<div class="sk-ov"><div class="sk-prenom"><img loading="lazy" decoding="async" src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
-        '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img loading="lazy" decoding="async" src="' + cfg.icone + '" alt=""></div>' : '') + '</div></div>'; }).join('');
+        '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img loading="lazy" decoding="async" src="' + cfg.icone + '" alt=""></div>' : '') + '</div></' + balise + '>'; }).join('');
      
     $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 150 : 200), 74)) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +

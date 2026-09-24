@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 538f3f8 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="538f3f8";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum ed1e646 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="ed1e646";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -144,7 +144,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="538f3f8";perfor
             'Les données personnelles collectées (nom, prénom, date de naissance, e-mail, téléphone, justificatif de mobilité) sont traitées par l’Organisateur aux seules fins de la gestion du jeu (vérification de l’éligibilité, réalisation des tirages, contact des gagnants) et de l’établissement du bilan RSE de l’événement, sous forme agrégée et anonymisée s’agissant des données de mobilité.',
             'La participation au jeu n’est conditionnée ni à une inscription à la newsletter de la Route du Rhum – Destination Guadeloupe, ni à l’utilisation des données à des fins commerciales. Toute inscription à la newsletter fait l’objet d’une case à cocher distincte et facultative.',
             'Conformément au RGPD et à la loi Informatique et Libertés, les participants disposent d’un droit d’accès, de rectification, d’effacement et d’opposition, qu’ils peuvent exercer auprès de {a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a}.',
-            'Les données sont conservées pendant une durée de 3 ans, à l’issue de laquelle elles sont supprimées ou anonymisées.'
+            'Les données sont conservées pendant une durée de 3 ans, à l’issue de laquelle elles sont supprimées ou anonymisées.',
+            
+
+
+
+            'Pour en savoir plus sur la manière dont OC Sport traite les données personnelles, consultez la {a:/politique-de-condidentialité}politique de confidentialité{/a} du site.'
           ]
         },
         {

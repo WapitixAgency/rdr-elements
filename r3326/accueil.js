@@ -1,5 +1,5 @@
-/* rdr-elements accueil | source route-du-rhum 538f3f8 | home-news.js skippers-showcase.js rdr-espace-promo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accueil"]="538f3f8";performance.mark("rdr-elements:accueil")}catch(e){}
+/* rdr-elements accueil | source route-du-rhum ed1e646 | home-news.js skippers-showcase.js rdr-espace-promo.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accueil"]="ed1e646";performance.mark("rdr-elements:accueil")}catch(e){}
 ;(function(){
 if (!customElements.get('home-news')) {
 
