@@ -1,33 +1,34 @@
 {
- "source": "WapitixAgency/route-du-rhum 90ec807",
- "livreLe": "2026-09-20T19:52:03.770Z",
+ "source": "WapitixAgency/route-du-rhum 4e4b53a",
+ "livreLe": "2026-09-23T08:16:09.086Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
- "revisionCourante": 3245,
+ "revisionCourante": 3292,
  "revisionsAVenir": 30,
  "paquets": {
   "socle": {
-   "quoi": "les six méga menus, les deux horloges de l'en-tête et le haut du pied de page, sur toutes les pages",
+   "quoi": "les six méga menus, les deux horloges de l'en-tête, le haut du pied de page et les notifications (rdr-notify, posé sur toutes les pages, depuis le 22/09 : défini tôt, il est prêt quand la page lui passe la liste), sur toutes les pages",
    "partout": true,
    "chemins": [],
    "prefixes": [],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 95281,
-   "gzip": 23342,
-   "brotli": 19495,
+   "octets": 163340,
+   "gzip": 40978,
+   "brotli": 32112,
    "fichiers": [
     {
      "fichier": "rdr-menu-actus.js",
-     "octets": 25618,
-     "sha": "bf07269b742b",
+     "octets": 33612,
+     "sha": "8b59356e4a63",
      "balises": [
       "rdr-menu-actus"
      ]
     },
     {
      "fichier": "rdr-menu-cartes.js",
-     "octets": 28958,
-     "sha": "1f5a0833f45d",
+     "octets": 33991,
+     "sha": "d4051acd3443",
      "balises": [
       "rdr-menu-cartes"
      ]
@@ -50,24 +51,39 @@
     },
     {
      "fichier": "rdr-pied-haut.js",
-     "octets": 32994,
-     "sha": "845816f551b4",
+     "octets": 33049,
+     "sha": "282508790170",
      "balises": [
       "rdr-pied-haut"
+     ]
+    },
+    {
+     "fichier": "rdr-notify.js",
+     "octets": 55210,
+     "sha": "fec7f7e39958",
+     "balises": [
+      "rdr-notify"
      ]
     }
    ]
   },
   "accueil": {
-   "quoi": "les modules de l'accueil ; assemblé, pas encore chargé par le snippet (lot 5 de l'audit)",
+   "quoi": "les modules de l'accueil ; la vitrine des skippers a sa charge dans le HTML servi et la promo Espace Rhum se dessine seule ; home-news attend encore la passe navigateur (Accueil.bhup2.js sort avant loadNewsSection au rendu serveur)",
    "partout": false,
-   "chemins": [],
+   "chemins": [
+    "/",
+    "/en"
+   ],
    "prefixes": [],
+   "balises": [
+    "skippers-showcase",
+    "home-news"
+   ],
    "precharger": [],
    "priorite": "high",
-   "octets": 77967,
-   "gzip": 20574,
-   "brotli": 17524,
+   "octets": 77955,
+   "gzip": 20571,
+   "brotli": 17545,
    "fichiers": [
     {
      "fichier": "home-news.js",
@@ -103,19 +119,46 @@
     "/en/carte-village-saint-malo"
    ],
    "prefixes": [],
+   "balises": [],
    "precharger": [
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js",
     "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
    ],
    "priorite": "high",
-   "octets": 412751,
-   "gzip": 110999,
-   "brotli": 90969,
+   "octets": 463498,
+   "gzip": 125813,
+   "brotli": 102084,
    "fichiers": [
     {
      "fichier": "village-map.js",
-     "octets": 412526,
-     "sha": "df0c93b7d0aa",
+     "octets": 463285,
+     "sha": "fe09a4e8cbe7",
+     "balises": []
+    }
+   ]
+  },
+  "atelier": {
+   "quoi": "l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte",
+   "partout": false,
+   "chemins": [
+    "/carte-village-saint-malo/atelier-rdr",
+    "/en/carte-village-saint-malo/atelier-rdr"
+   ],
+   "prefixes": [],
+   "balises": [],
+   "precharger": [
+    "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js",
+    "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+   ],
+   "priorite": "high",
+   "octets": 775695,
+   "gzip": 223389,
+   "brotli": 176477,
+   "fichiers": [
+    {
+     "fichier": "village-atelier.js",
+     "octets": 775472,
+     "sha": "a140d4ddd24f",
      "balises": []
     }
    ]
@@ -128,16 +171,17 @@
     "/en/mon-espace-rhum"
    ],
    "prefixes": [],
+   "balises": [],
    "precharger": [],
    "priorite": "low",
-   "octets": 866760,
-   "gzip": 181612,
-   "brotli": 139123,
+   "octets": 867395,
+   "gzip": 181775,
+   "brotli": 139366,
    "fichiers": [
     {
      "fichier": "espace-rhum.js",
-     "octets": 866540,
-     "sha": "2dc1373d0bbf",
+     "octets": 867187,
+     "sha": "7bf8446182de",
      "balises": [
       "espace-rhum"
      ]
@@ -145,7 +189,7 @@
    ]
   },
   "skipper": {
-   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi ; rdr-nav-page.js d'abord, l'orchestrateur qui dessine l'une dans la page de l'autre pour un membre (docs/spec-navigation-en-page.md)",
+   "quoi": "la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
    "chemins": [
     "/skippers",
@@ -155,22 +199,17 @@
     "/skippers/",
     "/en/skippers/"
    ],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 470631,
-   "gzip": 111501,
-   "brotli": 88167,
+   "octets": 462252,
+   "gzip": 109087,
+   "brotli": 86435,
    "fichiers": [
     {
-     "fichier": "rdr-nav-page.js",
-     "octets": 7807,
-     "sha": "00a2cc195247",
-     "balises": []
-    },
-    {
      "fichier": "rdr-skipper.js",
-     "octets": 372046,
-     "sha": "37f1bcfa37b0",
+     "octets": 372029,
+     "sha": "689ad4ec915b",
      "balises": [
       "skipper-gallery",
       "skipper-outro",
@@ -181,16 +220,64 @@
     },
     {
      "fichier": "skippers-list.js",
-     "octets": 93317,
-     "sha": "501780222c04",
+     "octets": 92792,
+     "sha": "0c73063ea0ba",
      "balises": [
       "skippers-list"
      ]
     }
    ]
   },
+  "entete": {
+   "quoi": "l'en-tête « mode village » (rdr-entete, 22/09), chargé sur toute page qui porte la balise : aujourd'hui la page test de Jules, demain toutes",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-entete"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 247334,
+   "gzip": 60863,
+   "brotli": 50996,
+   "fichiers": [
+    {
+     "fichier": "rdr-entete.js",
+     "octets": 247120,
+     "sha": "413440c46fb9",
+     "balises": [
+      "rdr-entete"
+     ]
+    }
+   ]
+  },
+  "apercu": {
+   "quoi": "l'aperçu de l'accueil V3 (rdr-accueil-apercu), chargé sur toute page qui porte la balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-accueil-apercu"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 130012,
+   "gzip": 30581,
+   "brotli": 26068,
+   "fichiers": [
+    {
+     "fichier": "rdr-accueil-apercu.js",
+     "octets": 130436,
+     "sha": "a74f8a7bb4a7",
+     "balises": [
+      "rdr-accueil-apercu"
+     ]
+    }
+   ]
+  },
   "actus": {
-   "quoi": "le hub des actualités et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
+   "quoi": "le hub des actualités, ses pages de tag (/medias-actualites/tags/<tag>) et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi",
    "partout": false,
    "chemins": [
     "/medias-actualites",
@@ -198,13 +285,16 @@
    ],
    "prefixes": [
     "/post/",
-    "/en/post/"
+    "/en/post/",
+    "/medias-actualites/",
+    "/en/medias-actualites/"
    ],
+   "balises": [],
    "precharger": [],
    "priorite": "high",
-   "octets": 289121,
-   "gzip": 70857,
-   "brotli": 54172,
+   "octets": 289109,
+   "gzip": 70853,
+   "brotli": 54140,
    "fichiers": [
     {
      "fichier": "rdr-news.js",
@@ -228,6 +318,309 @@
      "sha": "7ab7ec5d6d58",
      "balises": [
       "rdr-post-more"
+     ]
+    }
+   ]
+  },
+  "programme": {
+   "quoi": "la Programmation ; sa charge utile (133 Ko) est dans le HTML servi, le module est la page",
+   "partout": false,
+   "chemins": [
+    "/programme",
+    "/en/programme"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-programme"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 188786,
+   "gzip": 48287,
+   "brotli": 40427,
+   "fichiers": [
+    {
+     "fichier": "rdr-programme.js",
+     "octets": 188594,
+     "sha": "cba7a89a2206",
+     "balises": [
+      "rdr-programme"
+     ]
+    }
+   ]
+  },
+  "venir": {
+   "quoi": "Se rendre au village (rdr-venir, qui absorbe CO2, D'où venez-vous et le Challenge Mobilité) ; sa charge utile (24 Ko) est dans le HTML servi",
+   "partout": false,
+   "chemins": [
+    "/se-rendre-au-village",
+    "/en/se-rendre-au-village"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-venir"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 144847,
+   "gzip": 37914,
+   "brotli": 32123,
+   "fichiers": [
+    {
+     "fichier": "rdr-venir.js",
+     "octets": 144686,
+     "sha": "01a3dd5fc819",
+     "balises": [
+      "rdr-venir"
+     ]
+    }
+   ]
+  },
+  "course": {
+   "quoi": "les petits modules éditoriaux des pages La course et Engagements (Qu'est-ce que la Route du Rhum, Héritage, Bateaux, Terres d'engagements) ; leurs charges sont des attributs du HTML servi, 16 Ko brotli à eux cinq",
+   "partout": false,
+   "chemins": [
+    "/qu-est-ce-que-la-route-du-rhum",
+    "/en/qu-est-ce-que-la-route-du-rhum",
+    "/heritage",
+    "/en/heritage",
+    "/bateaux",
+    "/en/bateaux",
+    "/terres-engagements",
+    "/en/terres-engagements"
+   ],
+   "prefixes": [],
+   "balises": [
+    "faits-marquants",
+    "manifeste-cartes",
+    "heritage-timeline",
+    "boat-diagram",
+    "pactes-tabs"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 78105,
+   "gzip": 18732,
+   "brotli": 16301,
+   "fichiers": [
+    {
+     "fichier": "faits-marquants.js",
+     "octets": 15265,
+     "sha": "b356c70558f8",
+     "balises": [
+      "faits-marquants"
+     ]
+    },
+    {
+     "fichier": "manifeste-cartes.js",
+     "octets": 14259,
+     "sha": "ff6849f3c4f9",
+     "balises": [
+      "manifeste-cartes"
+     ]
+    },
+    {
+     "fichier": "heritage-timeline.js",
+     "octets": 11961,
+     "sha": "570a485153cd",
+     "balises": [
+      "heritage-timeline"
+     ]
+    },
+    {
+     "fichier": "boat-diagram.js",
+     "octets": 11383,
+     "sha": "d9e20fd9112a",
+     "balises": [
+      "boat-diagram"
+     ]
+    },
+    {
+     "fichier": "pactes-tabs.js",
+     "octets": 25617,
+     "sha": "83479ad63a24",
+     "balises": [
+      "pactes-tabs"
+     ]
+    }
+   ]
+  },
+  "accreditations": {
+   "quoi": "la page Accréditations presse ; sa charge utile est dans le HTML servi",
+   "partout": false,
+   "chemins": [
+    "/accreditations",
+    "/en/accreditations"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-accreditations"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 55452,
+   "gzip": 16252,
+   "brotli": 14258,
+   "fichiers": [
+    {
+     "fichier": "rdr-accreditations.js",
+     "octets": 55245,
+     "sha": "cd975c17646a",
+     "balises": [
+      "rdr-accreditations"
+     ]
+    }
+   ]
+  },
+  "cgu": {
+   "quoi": "les conditions d'utilisation ; le texte est dans le module, il se dessine seul",
+   "partout": false,
+   "chemins": [
+    "/conditions-d-utilisation",
+    "/en/conditions-d-utilisation"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-cgu"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 66215,
+   "gzip": 20422,
+   "brotli": 17689,
+   "fichiers": [
+    {
+     "fichier": "rdr-cgu.js",
+     "octets": 66057,
+     "sha": "f3e5910fe556",
+     "balises": [
+      "rdr-cgu"
+     ]
+    }
+   ]
+  },
+  "concours": {
+   "quoi": "le Challenge photo (démonstration, page masquée et non indexée) ; le module va chercher ses données lui-même, le définir tôt avance d'autant sa lecture",
+   "partout": false,
+   "chemins": [
+    "/concours-photo-2026",
+    "/en/concours-photo-2026"
+   ],
+   "prefixes": [],
+   "balises": [
+    "rdr-concours-photo"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 107786,
+   "gzip": 23947,
+   "brotli": 20969,
+   "fichiers": [
+    {
+     "fichier": "rdr-concours-photo.js",
+     "octets": 107591,
+     "sha": "f20664889815",
+     "balises": [
+      "rdr-concours-photo"
+     ]
+    }
+   ]
+  },
+  "tournee": {
+   "quoi": "la carte des tournées (page plein écran) ; le module part tout de suite, MapLibre reste chargé par le module (sa version @5 est une redirection mise en cache 60 s : la précharger la ferait télécharger deux fois) ; les étapes arrivent avec la passe navigateur",
+   "partout": false,
+   "chemins": [
+    "/carte-tournee",
+    "/en/carte-tournee"
+   ],
+   "prefixes": [],
+   "balises": [
+    "tournee-map"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 163169,
+   "gzip": 40913,
+   "brotli": 34722,
+   "fichiers": [
+    {
+     "fichier": "tournee-map.js",
+     "octets": 162979,
+     "sha": "573eb8079894",
+     "balises": [
+      "tournee-map"
+     ]
+    }
+   ]
+  },
+  "console": {
+   "quoi": "la console de l'équipe (rdr-console, page réservée), chargée sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-console"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 131037,
+   "gzip": 34646,
+   "brotli": 30187,
+   "fichiers": [
+    {
+     "fichier": "rdr-console.js",
+     "octets": 132885,
+     "sha": "bef2dfde0311",
+     "balises": [
+      "rdr-console"
+     ]
+    }
+   ]
+  },
+  "tags": {
+   "quoi": "la page de consigne « Publier une actu » (rdr-tags, réservée à l'équipe), chargée sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "rdr-tags"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 44095,
+   "gzip": 13813,
+   "brotli": 11957,
+   "fichiers": [
+    {
+     "fichier": "rdr-tags.js",
+     "octets": 43942,
+     "sha": "f9450fa308cb",
+     "balises": [
+      "rdr-tags"
+     ]
+    }
+   ]
+  },
+  "inscription": {
+   "quoi": "l'envoi des médias des skippers (skipper-media-uploader, page Inscription Skipper, ouverte par un lien à jeton), chargé sur la présence de sa balise",
+   "partout": false,
+   "chemins": [],
+   "prefixes": [],
+   "balises": [
+    "skipper-media-uploader"
+   ],
+   "precharger": [],
+   "priorite": "high",
+   "octets": 66565,
+   "gzip": 15984,
+   "brotli": 13784,
+   "fichiers": [
+    {
+     "fichier": "skipper-media-uploader.js",
+     "octets": 68072,
+     "sha": "ede06ad5e8e2",
+     "balises": [
+      "skipper-media-uploader"
      ]
     }
    ]
