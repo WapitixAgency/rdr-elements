@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum b954580 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b954580";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 3cc6a0c | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="3cc6a0c";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {
@@ -2516,6 +2516,7 @@ function surFiltreIci(e) {
   const ici = (p) => (p.replace(/\/+$/, '') || '/').replace(/^\/en(?=\/|$)/, '') || '/';
   if (ici(u.pathname) !== ici(location.pathname)) return;
   e.preventDefault();
+  e.stopPropagation();
   CLES_PROGRAMME.forEach((k) => {
     const v = u.searchParams.get(k);
     prog.removeAttribute(k);
@@ -2524,6 +2525,7 @@ function surFiltreIci(e) {
   try { history.replaceState(history.state, '', u.pathname + u.search); } catch (err) {   }
   if (etat.large) fermerLarge();
   if (etat.plein) fermerPlein(false);
+  if (moduleRecherche && moduleRecherche.paletteOuverte()) moduleRecherche.fermerPalette(false);
   const barre = format() === 'tel' ? 64 : 76;
   const y = prog.getBoundingClientRect().top + window.scrollY - barre;
   window.scrollTo({ top: Math.max(0, y), behavior: reduit() ? 'auto' : 'smooth' });
