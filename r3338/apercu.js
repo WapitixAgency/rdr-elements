@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum aca535b | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="aca535b";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum fdaf435 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="fdaf435";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -127,6 +127,8 @@ rdr-accueil-apercu.sans-entree .hv-marque{display:none}
 rdr-accueil-apercu .hero.entree-affiche .hero-photo{opacity:1;transition:opacity .6s ease,transform 18s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hero.entree-douce video,rdr-accueil-apercu .hero.entree-douce .hv-marque{display:none}
 rdr-accueil-apercu .hero.entree-douce .hero-photo{transition:opacity 1s ease,transform 9s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.sans-video .hero-photo{opacity:1;transition:transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.sans-video.entree-douce .hero-photo{transition:transform 9s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hero.entree-douce .hv-titre{transition-delay:.15s}
 rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::before{content:'';position:absolute;left:0;right:0;bottom:0;height:36%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,29,0) 0%,rgba(14,17,29,.72) 60%,#0E111D 100%)}
 rdr-accueil-apercu .hv-marque{position:absolute;left:0;right:0;top:50%;transform:translateY(-44%);z-index:3;text-align:center;padding:0 var(--marge);pointer-events:none;transition:opacity .7s ease,transform 1s cubic-bezier(.22,.8,.3,1)}
@@ -744,7 +746,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
           <video autoplay muted loop playsinline data-media-affiche="videoAffiche">
             <source data-media="video" type="video/mp4">
           </video>
-          <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="async">
+          <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="sync">
         </div>
       </div>
     </div>
@@ -991,7 +993,12 @@ function monter(racine, portail, D) {
   let forceIntro = null;
   try { forceIntro = new URLSearchParams(location.search).get('intro'); } catch (e) {   }
   const sansVideo = AU_TELEPHONE && forceIntro !== 'oui';
-  if (sansVideo) { const v0 = un('.hv-fond video'); if (v0) v0.remove(); }
+  if (sansVideo) { const v0 = un('.hv-fond video'); if (v0) v0.remove(); const h0 = un('#hero'); if (h0) h0.classList.add('sans-video'); }
+  
+
+
+
+  if (document.querySelector('rdr-entete[hero="dessus"]') && !document.documentElement.hasAttribute('data-rdr-entete')) document.documentElement.setAttribute('data-rdr-entete', 'dessus');
   
 
 
