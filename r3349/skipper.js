@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum d60c44e | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="d60c44e";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum bed6f46 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="bed6f46";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -36,7 +36,10 @@ const CONFIG = {
   PRELOAD_TIMEOUT_MS: 4000,
   ROW_GAP_PX: 16,
   ROW_MAX_HEIGHT: 560,
-  ROW_DEFAULT_HEIGHT: 460,
+  
+
+  ROW_VIEWPORT_MARGIN_PX: 110,
+  ROW_MIN_CAP_PX: 240,
   RESIZE_DEBOUNCE_MS: 220,
   RESIZE_TOLERANCE_PX: 30,
   SWIPE_THRESHOLD_PX: 60,
@@ -77,7 +80,6 @@ class SkipperGallery extends HTMLElement {
   constructor() {
     super();
     this._photos = [];
-    this._skipperName = '';
     this._lang = 'fr';
     this._accent = CONFIG.ACCENT_DEFAULT;
     this._activeIndex = 0;
@@ -90,7 +92,6 @@ class SkipperGallery extends HTMLElement {
     this._intersectionObserver = null;
     this._renderToken = 0;
     this._rendered = false;
-    this._touchState = null;
   }
 
   static get observedAttributes() {
@@ -118,6 +119,8 @@ class SkipperGallery extends HTMLElement {
       clearTimeout(this._resizeDebounce);
       this._resizeDebounce = null;
     }
+    removeEventListener('resize', this._onResizeFenetre);
+    clearTimeout(this._resizeFenetreT);
     this._closeLightbox(true);
     this._retirerVisionneuse();
     document.removeEventListener('keydown', this._onKeyDown);
@@ -149,7 +152,6 @@ class SkipperGallery extends HTMLElement {
       .filter(Boolean)
       .slice(0, CONFIG.MAX_PHOTOS);
 
-    this._skipperName = this.getAttribute('skipper-name') || '';
     const lang = (this.getAttribute('lang') || 'fr').toLowerCase();
     this._lang = I18N[lang] ? lang : 'fr';
 
@@ -181,7 +183,15 @@ class SkipperGallery extends HTMLElement {
     return /^[0-9a-fA-F]{3,8}$/.test(hex) ? '#' + hex : fallback;
   }
 
-  _wixUrl(url, width) {
+  
+
+
+
+
+
+
+
+  _wixUrl(url, width, hauteur, mode) {
     if (!url) return '';
     let fileId = null;
 
@@ -203,17 +213,8 @@ class SkipperGallery extends HTMLElement {
     if (!width) width = 1200;
 
     const ext = (fileId.split('.').pop() || 'jpg').toLowerCase();
-    const h = Math.round(width * 0.75);
-    const params = [
-      `w_${width}`,
-      `h_${h}`,
-      'al_c',
-      `q_${CONFIG.CDN_QUALITY}`,
-      'enc_avif',
-      'quality_auto'
-    ].join(',');
-
-    return `https://static.wixstatic.com/media/${fileId}/v1/fill/${params}/img.${ext}`;
+    const f = mode || 'fill';
+    return `https://static.wixstatic.com/media/${fileId}/v1/${f}/w_${Math.round(width)},h_${Math.round(hauteur || width * 0.75) || 1}${f === 'fill' ? ',al_c' : ''},q_${CONFIG.CDN_QUALITY},enc_avif,quality_auto/img.${ext}`;
   }
 
   
@@ -275,7 +276,8 @@ class SkipperGallery extends HTMLElement {
         p.ratio = fromUrl;
         return;
       }
-      const measured = await this._measureImage(this._wixUrl(p.src, 400));
+       
+      const measured = await this._measureImage(this._wixUrl(p.src, 400, 400, 'fit'));
       p.ratio = measured;
     });
     await Promise.all(promises);
@@ -316,6 +318,18 @@ class SkipperGallery extends HTMLElement {
       }
     });
     this._resizeObserver.observe(this);
+
+    
+
+    this._onResizeFenetre = () => {
+      clearTimeout(this._resizeFenetreT);
+      this._resizeFenetreT = setTimeout(() => {
+        if (this._isMobile || this._plafondRendu == null || Math.abs(this._plafondRangee() - this._plafondRendu) <= CONFIG.RESIZE_TOLERANCE_PX) return;
+        if (this._lightboxOpen) this._renduForce = true;
+        else this._render();
+      }, CONFIG.RESIZE_DEBOUNCE_MS);
+    };
+    addEventListener('resize', this._onResizeFenetre);
   }
 
   async _init() {
@@ -470,6 +484,8 @@ class SkipperGallery extends HTMLElement {
       || this.getBoundingClientRect().width
       || 1200;
     const gap = CONFIG.ROW_GAP_PX;
+    const plafond = this._plafondRangee();
+    this._plafondRendu = plafond;
 
     if (this._photos.length === 1) {
       const p = this._photos[0];
@@ -479,7 +495,7 @@ class SkipperGallery extends HTMLElement {
       
 
 
-      const rowHeight = Math.min(CONFIG.ROW_MAX_HEIGHT, naturalHeight);
+      const rowHeight = Math.min(plafond, naturalHeight);
       const rowWidth = rowHeight * p.ratio;
       row.appendChild(this._buildPhotoCard(p, 0, `${rowWidth}px`, `${rowHeight}px`));
       grid.appendChild(row);
@@ -502,7 +518,7 @@ class SkipperGallery extends HTMLElement {
       
 
 
-      const rowHeight = Math.min(CONFIG.ROW_MAX_HEIGHT, naturalRowHeight);
+      const rowHeight = Math.min(plafond, naturalRowHeight);
 
       rowPhotos.forEach((photo) => {
         const cardWidth = rowHeight * photo.ratio;
@@ -516,6 +532,23 @@ class SkipperGallery extends HTMLElement {
     this._setupReveal(grid);
   }
 
+  
+
+
+
+
+
+
+
+  _plafondRangee() {
+    const s = document.createElement('div');
+    s.style.cssText = 'position:fixed;height:100vh;height:100svh;visibility:hidden';
+    document.body.appendChild(s);
+    const h = s.offsetHeight || innerHeight;
+    s.remove();
+    return Math.max(CONFIG.ROW_MIN_CAP_PX, Math.min(CONFIG.ROW_MAX_HEIGHT, h - CONFIG.ROW_VIEWPORT_MARGIN_PX));
+  }
+
   _buildPhotoCard(photo, idx, width, height) {
     const total = this._photos.length;
     const btn = document.createElement('button');
@@ -526,11 +559,11 @@ class SkipperGallery extends HTMLElement {
     btn.style.height = height;
     btn.setAttribute('aria-label', `${this._t('photoOf')} ${idx + 1}`);
 
-    const heightPx = parseInt(height, 10) || CONFIG.ROW_DEFAULT_HEIGHT;
-    const widthPx = parseInt(width, 10) || (heightPx * photo.ratio);
+    const widthPx = parseInt(width, 10) || 800;
     const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) ? Math.min(window.devicePixelRatio, 2) : 1;
     const targetCdnWidth = Math.max(800, Math.round(widthPx * dpr));
-    const optimizedUrl = this._wixUrl(photo.src, targetCdnWidth);
+     
+    const optimizedUrl = this._wixUrl(photo.src, targetCdnWidth, targetCdnWidth / (photo.ratio || 1.5));
 
     btn.innerHTML = `
       <img src="${this._safeUrl(optimizedUrl)}" alt="${this._t('photoOf')} ${idx + 1}" loading="lazy" draggable="false">
@@ -909,16 +942,21 @@ class SkipperGallery extends HTMLElement {
 
 
 
-  _largeurVisionneuse() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const utile = Math.max(320, window.innerWidth || 1200) * dpr;
+  
+
+
+  _largeurVisionneuse(photo) {
+    const r = photo.ratio || 1.5;
+    const l = Math.min(Math.max(320, innerWidth), Math.max(320, innerHeight) * r);
+    const utile = Math.max(l, l / r) * Math.min(devicePixelRatio || 1, 2);
     return [800, 1200, 1600, 2000].find(p => p >= utile) || 2000;
   }
 
   _precharger(index) {
     const photo = this._photos[index];
     if (!photo) return null;
-    const url = this._wixUrl(photo.src, this._largeurVisionneuse());
+    const cote = this._largeurVisionneuse(photo);
+    const url = this._wixUrl(photo.src, cote, cote, 'fit');
     if (!this._prets) this._prets = new Map();
     let e = this._prets.get(url);
     if (!e) {
@@ -3714,7 +3752,6 @@ rdr-skipper .sk [hidden]{display:none!important;}
 rdr-skipper .sk :focus-visible{outline:2px solid var(--sk-teal);outline-offset:3px;}
 
 rdr-skipper .sk .sk-cadre{width:100%;max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,72px);}
-rdr-skipper .sk .sk-varien{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;text-transform:uppercase;}
 rdr-skipper .sk .sk-kicker{display:flex;align-items:center;gap:var(--e3);font-size:var(--t2);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--sk-encre-3);}
 rdr-skipper .sk .sk-kicker::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--sk-accent);flex:none;}
 
@@ -4127,7 +4164,6 @@ rdr-skipper .sk .sk-ligne--attente dd{font-weight:600;font-style:italic;letter-s
 rdr-skipper .sk .sk-ligne dt{white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--sk-carte-label);}
 rdr-skipper .sk .sk-ligne dd{display:flex;align-items:center;gap:var(--e2);font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--sk-carte-encre);text-align:right;}
 rdr-skipper .sk .sk-ligne dd img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
-rdr-skipper .sk .sk-ligne dd .sk-icone-classe{width:auto;height:30px;border-radius:0;}
 
 
 
@@ -7020,6 +7056,12 @@ const PROFIL_CONFIG = {
   'INTERNATIONAUX':    { label: 'Internationaux',     sub: 'Hors France',                               couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' },
 };
 
+
+
+
+const URL_CLASSES = { 'ultim': 'Ultim', 'ocean-fifty': 'Ocean Fifty', 'class40': 'Class40', 'imoca': 'IMOCA', 'vintage-mono': 'Vintage Mono', 'vintage-multi': 'Vintage Multi' };
+const URL_PROFILS = { 'rookies': 'ROOKIES', 'femmes': 'FEMMES', 'hommes': 'HOMMES', 'vainqueurs': 'ANCIENS VAINQUEURS', 'locaux': 'LOCAUX', 'internationaux': 'INTERNATIONAUX' };
+
  
 const HOMMES_CFG = { label: 'Hommes', couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="19" y1="5" x2="14.15" y2="9.85"/><polyline points="15 5 19 5 19 9"/></svg>' };
 
@@ -7177,9 +7219,47 @@ class SkippersList extends HTMLElement {
     setTimeout(() => { try { card.classList.remove('sl-navloading'); spin.remove(); } catch (e) {   } }, 6000);
   }
 
+  _lireAdresse() {
+    let p;
+    try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
+    const classe = URL_CLASSES[String(p.get('classe') || '').toLowerCase()];
+    if (classe) this._activeClasse = classe;
+    String(p.get('profil') || '').toLowerCase().split(',').map((x) => x.trim()).forEach((k) => {
+      const f = URL_PROFILS[k];
+      if (!f) return;
+      if (f === 'HOMMES') { this._activeGenre = 'HOMMES'; this._activeFilters['FEMMES'] = false; return; }
+      this._activeFilters[f] = true;
+      if (f === 'FEMMES') this._activeGenre = null;
+    });
+    if (this._activeFilters['ROOKIES'] && this._activeFilters['ANCIENS VAINQUEURS']) this._activeFilters['ANCIENS VAINQUEURS'] = false;
+    const q = String(p.get('q') || '').trim().slice(0, 60);
+    if (q) this._search = q;
+    if (p.get('tri') === 'az') this._sort = 'az';
+  }
+
+  _ecrireAdresse() {
+    let u;
+    try { u = new URL(window.location.href); } catch (e) { return; }
+    const p = u.searchParams;
+    const classe = Object.keys(URL_CLASSES).find((k) => URL_CLASSES[k] === this._activeClasse);
+    if (classe) p.set('classe', classe); else p.delete('classe');
+    const profils = Object.keys(URL_PROFILS).filter((k) => {
+      const f = URL_PROFILS[k];
+      return f === 'HOMMES' ? this._activeGenre === 'HOMMES' : !!this._activeFilters[f];
+    });
+    if (profils.length) p.set('profil', profils.join(',')); else p.delete('profil');
+    if (this._search.trim()) p.set('q', this._search.trim()); else p.delete('q');
+    if (this._sort === 'az') p.set('tri', 'az'); else p.delete('tri');
+    const requete = p.toString().split('%2C').join(',');
+    const cible = u.pathname + (requete ? '?' + requete : '') + u.hash;
+    if (cible === location.pathname + location.search + location.hash) return;
+    try { history.replaceState(history.state, '', cible); } catch (e) {   }
+  }
+
   connectedCallback() {
     this.style.display = 'block';
     this.style.width = '100%';
+    if (!this._adresseLue) { this._adresseLue = true; this._lireAdresse(); }
      
      
     if (!this._onPageShow) {
@@ -7194,6 +7274,10 @@ class SkippersList extends HTMLElement {
     this._renderShell();
     this._shellReady = true;
     this._appliedLang = this._lang();
+    if (this._activeFilterCount() || this._sort !== 'random') {
+      ['#sl-search', '#sl-search-mobile'].forEach((sel) => { const i = this.querySelector(sel); if (i) i.value = this._search; });
+      this._updateFilterStyles();
+    }
     if (this._pendingSkippers !== null) {
       this._processSkippers(this._pendingSkippers);
       this._pendingSkippers = null;
@@ -8094,6 +8178,7 @@ class SkippersList extends HTMLElement {
     this._updateFilterStyles();
     this._renderGrid();
     this._renderPagination();
+    this._ecrireAdresse();
   }
 
   _reshuffle() {
