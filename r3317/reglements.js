@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 50f7bc8 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="50f7bc8";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 88f871b | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="88f871b";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -149,7 +149,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="50f7bc8";perfor
 
 
 
-            'Pour en savoir plus sur la manière dont OC Sport traite les données personnelles, consultez la {a:/politique-de-condidentialité}politique de confidentialité{/a} du site.'
+            'Pour en savoir plus sur la manière dont OC Sport traite les données personnelles, consultez la {a:/politique-de-confidentialite}politique de confidentialité{/a} du site.'
           ]
         },
         {
@@ -176,7 +176,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="50f7bc8";perfor
 
    
   const CGU = '/conditions-d-utilisation';
-  const CONF = '/politique-de-condidentialité';
+  const CONF = '/politique-de-confidentialite';
   const MENTIONS = '/mentions-legales';
 
   const I18N = {

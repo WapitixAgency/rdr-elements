@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 50f7bc8 | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="50f7bc8";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 88f871b | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="88f871b";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -66,7 +66,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="50f7bc8";performance.m
 
 
 
-  const CONF = '/politique-de-condidentialité';
+  const CONF = '/politique-de-confidentialite';
   const MENTIONS = '/mentions-legales';
   const ESPACE = '/mon-espace-rhum';
 

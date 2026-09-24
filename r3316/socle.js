@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 50f7bc8 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="50f7bc8";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 88f871b | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="88f871b";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1655,7 +1655,7 @@ rdr-pied-haut .pd-pg.pd-anime .pd-img:not(.pd-vu){opacity:0;transform:translateY
       this._veiller();
     }
     _newsletter(r, t, idp) {
-      const politique = urlSure(r.politiqueUrl, '/politique-de-condidentialité');
+      const politique = urlSure(r.politiqueUrl, '/politique-de-confidentialite');
       const consent = r.consentement ? esc(r.consentement).replace(/\[([^\]]+)\]/, '<a href="' + esc(lienInterne(politique, this._lang)) + '" target="_blank" rel="noopener">$1</a>') : '';
       return '<section class="pd-news" aria-labelledby="' + idp + '-titre">'
         + '<h2 class="pd-titre" id="' + idp + '-titre">' + esc(r.titre || '') + '</h2>'
