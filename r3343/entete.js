@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum e84c973 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="e84c973";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 8cde964 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="8cde964";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 /* rdr-entete : fichier ASSEMBLÉ par outils/assembler-entete.mjs depuis entete/d/, ne pas le modifier ici. */
 ;(function () {
@@ -36,7 +36,7 @@ const ARBORESCENCE = {
         { libelle: 'Héritage', lien: '/heritage', source: { panneau: 'a-propos', lien: '/heritage' } },
         { libelle: 'Édition 2022', lien: '/edition-2022', source: { panneau: 'a-propos', lien: '/edition-2022' } },
         { libelle: 'Bateaux', lien: '/bateaux', source: { panneau: 'a-propos', lien: '/bateaux' } },
-        { libelle: 'Parcours', bientot: true, picto: 'parcours', image: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif' },
+        { libelle: 'Parcours', lien: '/parcours', picto: 'parcours', image: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif' },
         { libelle: "Qu'est-ce que la Route du Rhum", lien: '/qu-est-ce-que-la-route-du-rhum', source: { panneau: 'a-propos', lien: '/qu-est-ce-que-la-route-du-rhum' } }
       ] },
     { cle: 'engagements', libelle: 'Engagements', panneau: 'engagements',
@@ -73,7 +73,7 @@ const ARBORESCENCE = {
         { libelle: 'Heritage', lien: '/heritage', source: { panneau: 'a-propos', lien: '/heritage' } },
         { libelle: '2022 edition', lien: '/edition-2022', source: { panneau: 'a-propos', lien: '/edition-2022' } },
         { libelle: 'Boats', lien: '/bateaux', source: { panneau: 'a-propos', lien: '/bateaux' } },
-        { libelle: 'Race course', bientot: true, picto: 'parcours', image: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif' },
+        { libelle: 'Race course', lien: '/parcours', picto: 'parcours', image: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif' },
         { libelle: 'What is the Route du Rhum', lien: '/qu-est-ce-que-la-route-du-rhum', source: { panneau: 'a-propos', lien: '/qu-est-ce-que-la-route-du-rhum' } }
       ] },
     { cle: 'engagements', libelle: 'Commitments', panneau: 'engagements',
