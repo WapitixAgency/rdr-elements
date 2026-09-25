@@ -1,8 +1,8 @@
 {
  "source": "WapitixAgency/route-du-rhum 83bbcc0",
- "livreLe": "2026-09-25T21:46:58.148Z",
+ "livreLe": "2026-09-25T21:55:17.344Z",
  "cdn": "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/",
- "revisionCourante": 2,
+ "revisionCourante": 3334,
  "revisionsAVenir": 30,
  "paquets": {
   "socle": {
