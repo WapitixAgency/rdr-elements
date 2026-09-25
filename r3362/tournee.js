@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum 8abbdb1 | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="8abbdb1";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum 9ca83c5 | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="9ca83c5";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';
@@ -1315,6 +1315,10 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 .tm-retour svg{width:17px;height:17px;flex:0 0 auto;}
 .tm-switch-flottant{display:inline-flex;position:static;z-index:auto;width:auto;max-width:100%;margin:0;padding:4px;gap:4px;background:rgba(9,26,52,.82);border-color:rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 28px rgba(7,17,31,.45);}
 .tm-switch-flottant .tm-switch-btn{flex:0 0 auto;min-height:42px;padding:11px 20px;font-size:12.5px;color:rgba(255,255,255,.8);white-space:nowrap;overflow:visible;text-overflow:clip;}
+
+
+
+.tm-switch[hidden]{display:none;}
 .tm-switch-flottant .tm-switch-btn:not(.tm-on):hover{background:rgba(255,255,255,.11);color:#fff;}
 
 
