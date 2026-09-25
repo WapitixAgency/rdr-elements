@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 1b03390 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="1b03390";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 3d1fd49 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="3d1fd49";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1316,7 +1316,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       
 
 
-      const signature = [this._lang(), src, alt, 'heroKick', 'heroTitre', 'heroTexte', 'heroBouton', 'titreCo2'].map(k => /^(hero|titre)/.test(k) ? this._page(k) : k).join('');
+      const signature = [this._lang(), src, alt, 'heroKick', 'heroTitre', 'heroTexte', 'heroBouton', 'titreCo2'].map(k => /^(hero|titre)/.test(k) ? this._page(k) : k).join('\u0001');
       if (s.firstChild && this._signatureHero === signature) return;
       this._signatureHero = signature;
       s.innerHTML =
