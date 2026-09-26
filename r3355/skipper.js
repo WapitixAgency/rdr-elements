@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 6e80657 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="6e80657";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum fb29194 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="fb29194";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -166,7 +166,7 @@ class SkipperGallery extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -2025,7 +2025,7 @@ class SkippersCarousel extends HTMLElement {
     }[c]));
   }
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -7267,6 +7267,8 @@ class SkippersList extends HTMLElement {
         try {
           this.querySelectorAll('.sl-navloading').forEach(n => n.classList.remove('sl-navloading'));
           this.querySelectorAll('.sl-navspin').forEach(n => n.remove());
+           
+          this._navEnCours = false;
         } catch (e) {   }
       };
       window.addEventListener('pageshow', this._onPageShow);
@@ -7384,7 +7386,11 @@ class SkippersList extends HTMLElement {
 
   _naviguer(url) {
     if (!url || this._navEnCours) return;
+     
+    if (this._lang() === 'en' && /^\/(?!en\/)/.test(url)) url = '/en' + url;
     this._navEnCours = true;
+     
+    setTimeout(() => { this._navEnCours = false; }, 6000);
     try { location.assign(url); } catch (e) { this._navEnCours = false; }
   }
 
@@ -7450,7 +7456,7 @@ class SkippersList extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -8038,7 +8044,7 @@ class SkippersList extends HTMLElement {
     const wrapA11y = link ? 'role="button" tabindex="0"' : (isSoon ? 'role="button" tabindex="0"' : '');
     return `<div class="sl-card-wrap${wrapClass ? ' '+wrapClass : ''}${estMystere ? ' mystery' : ''}" ${link ? `data-link="${link}"` : ''} ${isSoon ? 'data-soon="1"' : ''} ${wrapA11y} style="--rot:${rot}deg;animation-delay:${delay}ms">
       <div class="sl-card${estMystere ? ' mystery-card' : ''}" style="--cc:${cc};--cc-rgb:${ccRGB}">
-        <img class="sl-card-img" src="${photo}" alt="" loading="lazy" />
+        <img class="sl-card-img" src="${photo}" alt="" ${i < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} />
         ${!estMystere ? `<div class="sl-card-overlay">
           <div class="sl-card-flag-prenom">
             ${drapeau ? `<img class="sl-card-flag" src="${drapeau}" alt="" />` : ''}

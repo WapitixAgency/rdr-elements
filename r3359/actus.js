@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 6e80657 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="6e80657";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum fb29194 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="fb29194";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -16,7 +16,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="6e80657";performance
   function isSafeUrl(u, fallback) {
     fallback = arguments.length > 1 ? fallback : '';
     if (u == null) return fallback;
-    let s = String(u).trim();
+    let s = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return fallback;
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -251,7 +251,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="6e80657";performance
     cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M9 7l1.2-2.4h3.6L15 7"/></svg>',
     mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
-    eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>',
      
      
     eyelu: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 11.5S5.5 5.5 12 5.5 22 11.5 22 11.5s-3.5 6-10 6-10-6-10-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11.5" r="2.6" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="17.6" r="5.2" fill="#FCF150" stroke="#0A1A35" stroke-width="1.1"/><path d="m15.9 17.6 1.5 1.5 2.7-2.8" stroke="#0A1A35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',

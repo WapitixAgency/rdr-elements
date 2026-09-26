@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum 6e80657 | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="6e80657";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum fb29194 | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="fb29194";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';
@@ -7,8 +7,9 @@ if (typeof window === 'undefined' || !window.customElements) return;
 if (customElements.get('tournee-map')) return;
 
  
-const MAPLIBRE_JS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js';
-const MAPLIBRE_CSS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css';
+ 
+const MAPLIBRE_JS = 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js';
+const MAPLIBRE_CSS = 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css';
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 const GEOCODE_URL = 'https://data.geopf.fr/geocodage/search';
 const FRANCE_CENTER = [2.4, 46.6];
@@ -941,7 +942,7 @@ class TourneeMap extends HTMLElement {
     _url(u, repli) {
         const fallback = arguments.length > 1 ? repli : '';
         if (u == null) return fallback;
-        let s = String(u).trim();
+        let s = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
         if (!s) return fallback;
         let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
         if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -2298,6 +2299,8 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (window.maplibregl) return resolve();
             const s = document.createElement('script');
             s.src = MAPLIBRE_JS; s.onload = () => resolve();
+             
+            s.onerror = () => resolve();
             document.head.appendChild(s);
         });
     }
@@ -2345,6 +2348,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _initMap() {
         const container = this._q('.tm-root');
         if (!container || !window.maplibregl) return;
+        if (!this.isConnected || this._map) return;
         const mobile = window.innerWidth <= 768;
         this._map = new window.maplibregl.Map({
             container, style: STYLE_URL,
@@ -2414,6 +2418,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             };
             document.addEventListener('visibilitychange', this._onVisible);
         }
+        if (this._ro) this._ro.disconnect();
         this._ro = new ResizeObserver(() => {
              
              
@@ -2739,6 +2744,10 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     }
 
     _startPulse() {
+         
+        if (this._pulseRAF) cancelAnimationFrame(this._pulseRAF);
+        this._pulseRAF = null;
+        try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {   }
         const start = performance.now();
         const step = (t) => {
             if (!this._map || !this._map.getLayer('points-pulse')) return;

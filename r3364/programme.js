@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 6e80657 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="6e80657";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum fb29194 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="fb29194";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -18,7 +18,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="6e80657";perform
 
   const urlSure = (u, repli = '') => {
     if (u == null) return repli;
-    let v = String(u).trim();
+    let v = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!v) return repli;
     const m = v.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) v = 'https://static.wixstatic.com/media/' + m[1];
@@ -6078,11 +6078,6 @@ rdr-programme{display:block;width:100%;}
       const p = this._p;
       const f = this._f;
       const pose = f.heure || f.theme || f.lieu || f.cat;
-      const n = this._filtrees(this._jour).length;
-      const dj = this._jour ? dateDe(this._jour) : null;
-      const jourLong = dj
-        ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '.'
-        : '';
 
       
 
@@ -6143,7 +6138,6 @@ rdr-programme{display:block;width:100%;}
         .filter(l => nomsDuType.has(l.nom) || nomsDuType.has(l.id) || (l.id || l.nom) === f.lieu)
         .map(l => [l.id || l.nom, l.nom]);
       const cats = (p.categories || []).map(c => [pli(c), c]);
-      const themes = (p.thematiques || []).map(t => [pli(t), t]);
 
       return '<div class="rp-outils">' +
         
@@ -6709,7 +6703,6 @@ rdr-programme{display:block;width:100%;}
           '</div>' +
           meta;
 
-      const balise = 'div';
       
 
 
@@ -6794,7 +6787,6 @@ rdr-programme{display:block;width:100%;}
     }
 
     _detail(a, photo, lien) {
-      const cat = catDe(a.cat || a.catLib);
 
       
 
