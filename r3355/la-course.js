@@ -1,5 +1,5 @@
-/* rdr-elements la-course | source route-du-rhum 4192a03 | rdr-course.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="4192a03";performance.mark("rdr-elements:la-course")}catch(e){}
+/* rdr-elements la-course | source route-du-rhum 6e80657 | rdr-course.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="6e80657";performance.mark("rdr-elements:la-course")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-course")) return;
@@ -480,7 +480,7 @@ async function terre() { await chargerGeo(); d3 = window.d3; topojson = window.t
 const f1 = (v) => v.toFixed(1);
 const texte = (p, txt, cls, dx, dy, ancre) => '<text class="' + cls + '" x="' + f1(p[0] + (dx || 0)) + '" y="' + f1(p[1] + (dy || 0)) + '" text-anchor="' + (ancre || 'start') + '">' + txt + '</text>';
 const hoteCarte = document.getElementById('carte-parcours');
-let carte = null, etape = 0, fCourant = 0, anim = 0, carteVue = false;
+let carte = null, etape = 0, fCourant = 0, anim = 0, carteVue = false, carteEchec = false;
 async function dessinerCarte() {
   const T0 = await terre();
   hoteCarte.querySelectorAll('.c-svg,.chargement').forEach((x) => x.remove());
@@ -553,7 +553,8 @@ new IntersectionObserver((es, obs) => es.forEach((e) => {
   if (!e.isIntersecting) return;
   obs.disconnect(); carteVue = true;
   if (tel()) { etape = 2; }
-  const go = () => { if (!carte) return setTimeout(go, 200); allumer(etape); };
+   
+  const go = () => { if (!carte) return carteEchec ? undefined : setTimeout(go, 200); allumer(etape); };
   go();
 }), { threshold: 0.35 }).observe(hoteCarte);
 
@@ -563,7 +564,7 @@ const q = new URLSearchParams(location.search);
 if (q.get('entete') === 'non') document.body.classList.add('sans-entete');
  
 if (!tel()) fil.classList.add('fil--route');
-document.fonts.ready.then(() => { tracerFil(); armerFil(); quandProche(hoteCarte, () => dessinerCarte().catch((e) => console.error('carte', e))); });
+document.fonts.ready.then(() => { tracerFil(); armerFil(); quandProche(hoteCarte, () => dessinerCarte().catch((e) => { carteEchec = true; console.error('carte', e); })); });
 let largeur = innerWidth, attente = 0;
 addEventListener('resize', () => { clearTimeout(attente); attente = setTimeout(() => { tracerFil(); if (Math.abs(innerWidth - largeur) >= 40) { largeur = innerWidth; dessinerCarte(); } }, 250); });
 new ResizeObserver(() => { clearTimeout(attente); attente = setTimeout(tracerFil, 120); }).observe(fil);

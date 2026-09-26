@@ -1,5 +1,5 @@
-/* rdr-elements faq | source route-du-rhum 4192a03 | rdr-faq.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["faq"]="4192a03";performance.mark("rdr-elements:faq")}catch(e){}
+/* rdr-elements faq | source route-du-rhum 6e80657 | rdr-faq.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["faq"]="6e80657";performance.mark("rdr-elements:faq")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-faq")) return;
@@ -193,7 +193,9 @@ document.addEventListener('click', (e) => {
 champ.addEventListener('input', dessiner);
 $('vider').addEventListener('click', () => { champ.value = ''; champ.focus(); dessiner(); });
 addEventListener('keydown', (e) => {
-  if (e.key === '/' && document.activeElement !== champ) { e.preventDefault(); champ.focus(); champ.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+   
+  const saisie = (el) => !!el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
+  if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !saisie(document.activeElement)) { e.preventDefault(); champ.focus(); champ.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   if (e.key === 'Escape' && document.activeElement === champ && champ.value) { champ.value = ''; dessiner(); }
 });
 
@@ -312,7 +314,7 @@ if (location.hash) {
       if (this._monte) return;
       const u = (this.getAttribute('source') || SOURCE) + '?lang=' + this._lang();
       fetch(u).then((r) => (r.ok ? r.json() : null)).then((j) => {
-        if (j && j.questions) return this._tenter(j);
+        if (j && Array.isArray(j.questions) && j.questions.length) return this._tenter(j);
         this._panne();
       }).catch(() => this._panne());
     }

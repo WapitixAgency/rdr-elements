@@ -1,5 +1,5 @@
-/* rdr-elements bateaux | source route-du-rhum 4192a03 | rdr-bateaux.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="4192a03";performance.mark("rdr-elements:bateaux")}catch(e){}
+/* rdr-elements bateaux | source route-du-rhum 6e80657 | rdr-bateaux.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="6e80657";performance.mark("rdr-elements:bateaux")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-bateaux")) return;
@@ -341,7 +341,7 @@ function rendre(k) {
   $('bd-blason').src = forme(c.picto); $('bd-blason').alt = '';
   $('t-classe').textContent = c.nom;
   const ps = paragraphes(c.intro);
-  $('bd-intro').innerHTML = '<p>' + typo(ps[0]) + '</p>' + (ps.length > 1
+  $('bd-intro').innerHTML = (ps.length ? '<p>' + typo(ps[0]) + '</p>' : '') + (ps.length > 1
     ? '<div class="suite" id="bd-suite">' + ps.slice(1).map((p) => '<p>' + typo(p) + '</p>').join('') + '</div><button type="button" class="lire-suite" aria-expanded="false" aria-controls="bd-suite"><span>Lire la suite</span>' + pic('chevronDown') + '</button>'
     : '');
   const ls = $('bd-intro').querySelector('.lire-suite');
@@ -376,8 +376,8 @@ function rendre(k) {
    
   const t = c.v2022 && c.v2022.temps;
   const etapes = [
-    { val: odo(nombre(c.longueur)) + '<small>m</small>', lu: nombre(c.longueur) + ' m', lib: 'Longueur' },
-    { val: odo(nombre(c.mat)) + '<small>m</small>', lu: nombre(c.mat) + ' m', lib: 'Hauteur de mât' },
+    c.longueur != null && c.longueur !== '' && { val: odo(nombre(c.longueur)) + '<small>m</small>', lu: nombre(c.longueur) + ' m', lib: 'Longueur' },
+    c.mat != null && c.mat !== '' && { val: odo(nombre(c.mat)) + '<small>m</small>', lu: nombre(c.mat) + ' m', lib: 'Hauteur de mât' },
     c.vitesse != null && { val: odo(c.vitesse) + '<small>nœuds</small>', lu: c.vitesse + ' nœuds', lib: 'Vitesse max' },
     t && { val: odo(t[0]) + '<small>j</small>' + odo(String(t[1]).padStart(2, '0')) + '<small>h</small>' + odo(String(t[2]).padStart(2, '0')) + '<small>min</small>',
       lu: t[0] + ' jours ' + t[1] + ' heures ' + t[2] + ' minutes', lib: 'Vainqueur 2022', plus: esc(c.v2022.skipper) + ', ' + esc(c.v2022.bateau) },

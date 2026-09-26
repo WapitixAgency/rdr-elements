@@ -1,5 +1,5 @@
-/* rdr-elements heritage | source route-du-rhum 4192a03 | rdr-heritage.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="4192a03";performance.mark("rdr-elements:heritage")}catch(e){}
+/* rdr-elements heritage | source route-du-rhum 6e80657 | rdr-heritage.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="6e80657";performance.mark("rdr-elements:heritage")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-heritage")) return;
@@ -193,7 +193,9 @@ function dessinerEdition(anime) {
   if (anime && !reduit) { fiche.classList.add('change'); setTimeout(() => fiche.classList.remove('change'), 180); }
    
   const img = $('fiche-img');
-  if (e.image) { const L = Math.min(e.image.l, palier(img.clientWidth || 600)); img.src = wix(e.image.id, L, Math.round(L * 2 / 3), 80); }
+   
+  if (e.image) { const L = Math.min(e.image.l, palier(img.clientWidth || 600)); img.src = wix(e.image.id, L, Math.round(L * 2 / 3), 80); img.style.visibility = ''; }
+  else { img.removeAttribute('src'); img.style.visibility = 'hidden'; }
   img.alt = 'Route du Rhum ' + e.annee;
   $('fiche-an').textContent = e.annee;
   $('fiche-credit').textContent = e.creditPhoto && e.creditPhoto !== '©' ? e.creditPhoto : '';
