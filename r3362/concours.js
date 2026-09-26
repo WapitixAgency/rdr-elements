@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum a72ca9d | rdr-concours-photo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="a72ca9d";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum ede21c7 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="ede21c7";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1265,5 +1265,112 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
   }
 
   customElements.define('rdr-concours-photo', RdrConcoursPhoto);
+})();
+})();
+;(function(){
+(function () {
+  'use strict';
+  
+
+  if (typeof window === 'undefined' || !window.customElements) return;
+  if (window.customElements.get('alpina-clock')) return;
+
+  
+
+
+
+  const MEDIA = 'https://static.wixstatic.com/media/';
+  const MODELE = {
+    cadran: MEDIA + 'df962b_6f374b182ba647af8ba5b808bcd0fc67~mv2.avif',
+    heure: MEDIA + 'df962b_23e0b40b8b8749a3af6a736bd3ad18fe~mv2.webp',
+    minute: MEDIA + 'df962b_bfb9d81ed5494964851d188bc89ab132~mv2.webp',
+    seconde: MEDIA + 'df962b_e5d91ebdb4fb431bb0a875a1bb72c7ab~mv2.webp',
+    centreX: 46.243,
+    centreY: 49.991
+  };
+  const FUSEAU = 'Europe/Paris';
+
+  const CSS = 'alpina-clock{display:block;position:relative;width:100%;height:100%;aspect-ratio:1/1;overflow:hidden;contain:layout paint style;}' +
+     
+    'alpina-clock img.ac-couche{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;min-width:0;margin:0;padding:0;border:0;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none;}' +
+    'alpina-clock img.ac-aiguille{transform-origin:' + MODELE.centreX + '% ' + MODELE.centreY + '%;}' +
+    'alpina-clock .ac-h{z-index:3}alpina-clock .ac-m{z-index:4}alpina-clock .ac-s{z-index:5}';
+
+  let formateur = null;
+  function heureDeParis(d) {
+    try {
+      if (!formateur) formateur = new Intl.DateTimeFormat('en-US', { timeZone: FUSEAU, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const parts = formateur.formatToParts(d);
+      const get = (k) => Number((parts.find(p => p.type === k) || {}).value || 0);
+      return { h: get('hour') % 12, m: get('minute'), s: get('second') };
+    } catch (e) {
+       
+      return { h: d.getHours() % 12, m: d.getMinutes(), s: d.getSeconds() };
+    }
+  }
+
+  class AlpinaClock extends HTMLElement {
+    constructor() {
+      super();
+      this._minuteur = null;
+      this._visible = true;
+      this._io = null;
+       
+      this._surVisibilite = () => { if (!document.hidden && this.el) this._afficher(); this._planifier(); };
+    }
+
+    connectedCallback() {
+      if (!this.el) {
+         
+        this.innerHTML = '<style>' + CSS + '</style>';
+        const couche = (cls, src) => {
+          const i = document.createElement('img');
+          i.className = 'ac-couche ' + cls; i.alt = ''; i.decoding = 'async'; i.draggable = false;
+          i.setAttribute('aria-hidden', 'true');
+          i.src = src;
+          this.appendChild(i);
+          return i;
+        };
+        this.el = {
+          cadran: couche('ac-cadran', MODELE.cadran),
+          h: couche('ac-aiguille ac-h', MODELE.heure),
+          m: couche('ac-aiguille ac-m', MODELE.minute),
+          s: couche('ac-aiguille ac-s', MODELE.seconde)
+        };
+      }
+      if (typeof IntersectionObserver === 'function') {
+        this._io = new IntersectionObserver((e) => { this._visible = e.some(x => x.isIntersecting); if (this._visible) this._afficher(); this._planifier(); });
+        this._io.observe(this);
+      }
+      document.addEventListener('visibilitychange', this._surVisibilite);
+      this._afficher();
+      this._planifier();
+    }
+
+    disconnectedCallback() {
+      this._arreter();
+      if (this._io) { this._io.disconnect(); this._io = null; }
+      document.removeEventListener('visibilitychange', this._surVisibilite);
+    }
+
+    
+
+    _planifier() {
+      this._arreter();
+      if (!this._visible || document.hidden || !this.isConnected) return;
+      const suivant = 1000 - (Date.now() % 1000) + 5;
+      this._minuteur = setTimeout(() => { this._minuteur = null; this._afficher(); this._planifier(); }, suivant);
+    }
+    _arreter() { if (this._minuteur) { clearTimeout(this._minuteur); this._minuteur = null; } }
+
+    _afficher() {
+      const { h, m, s } = heureDeParis(new Date());
+      this.el.h.style.transform = 'rotate(' + (h + m / 60) * 30 + 'deg)';
+      this.el.m.style.transform = 'rotate(' + (m + s / 60) * 6 + 'deg)';
+      this.el.s.style.transform = 'rotate(' + s * 6 + 'deg)';
+    }
+  }
+
+  window.customElements.define('alpina-clock', AlpinaClock);
 })();
 })();
