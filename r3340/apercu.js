@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 6c1cdb8 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="6c1cdb8";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 2e92473 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="2e92473";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -163,8 +163,12 @@ rdr-accueil-apercu .hv-rail{position:absolute;inset:0;display:flex;width:calc(va
 rdr-accueil-apercu .hv-vue{position:relative;flex:1 1 0;min-width:0;height:100%;overflow:hidden}
 rdr-accueil-apercu .hv-fond{position:absolute;inset:0}
 rdr-accueil-apercu .hero video,rdr-accueil-apercu .hero .hero-photo,rdr-accueil-apercu .hv-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-rdr-accueil-apercu .hero .hero-photo{opacity:0;object-position:62% 45%;transform:scale(1.08);transition:opacity 1.4s ease,transform 18s cubic-bezier(.2,.6,.3,1)}
-rdr-accueil-apercu .hero.est-photo .hero-photo{opacity:1;transform:scale(1)}
+rdr-accueil-apercu .hero .hero-photo{object-position:62% 45%;transform:scale(1.08);transition:transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.est-photo .hero-photo{transform:scale(1)}
+rdr-accueil-apercu .hv-nuit{position:absolute;inset:0;background:#0E111D;pointer-events:none}
+rdr-accueil-apercu .hero.est-photo .hv-nuit{opacity:0}
+rdr-accueil-apercu .hero video{background:#0E111D;transition:opacity 1.4s ease}
+rdr-accueil-apercu .hero.est-photo video{opacity:0}
 rdr-accueil-apercu .hv-img{transform:scale(1.07);transition:transform 9s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hv-vue.est-active .hv-img{transform:scale(1)}
 rdr-accueil-apercu .hv-fond::after{content:'';position:absolute;inset:0;pointer-events:none;transition:opacity 1s;background:
@@ -178,10 +182,13 @@ rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::after{background:
 rdr-accueil-apercu .hero:not(.est-photo) .hv-fond::after{opacity:.5}
 rdr-accueil-apercu.sans-entree .hero,rdr-accueil-apercu.sans-entree .hero *,rdr-accueil-apercu.sans-entree .hv-acces-sous,rdr-accueil-apercu.sans-entree .hv-acces-sous *{transition:none !important}
 rdr-accueil-apercu.sans-entree .hv-marque{display:none}
-rdr-accueil-apercu .hero.entree-affiche .hero-photo{opacity:1;transition:opacity .6s ease,transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.entree-affiche .hero-photo{transition:transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.entree-affiche .hv-nuit{opacity:0;transition:opacity .6s ease}
 rdr-accueil-apercu .hero.entree-douce video,rdr-accueil-apercu .hero.entree-douce .hv-marque{display:none}
-rdr-accueil-apercu .hero.entree-douce .hero-photo{transition:opacity 1s ease,transform 9s cubic-bezier(.2,.6,.3,1)}
-rdr-accueil-apercu .hero.sans-video .hero-photo{opacity:1;transition:transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.entree-douce .hero-photo{transition:transform 9s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.entree-douce .hv-nuit{transition:opacity 1s ease}
+rdr-accueil-apercu .hero.sans-video .hero-photo{transition:transform 18s cubic-bezier(.2,.6,.3,1)}
+rdr-accueil-apercu .hero.sans-video .hv-nuit{display:none}
 rdr-accueil-apercu .hero.sans-video.entree-douce .hero-photo{transition:transform 9s cubic-bezier(.2,.6,.3,1)}
 rdr-accueil-apercu .hero.entree-douce .hv-titre{transition-delay:.15s}
 rdr-accueil-apercu .hero[data-acces="sous"] .hv-fond::before{content:'';position:absolute;left:0;right:0;bottom:0;height:36%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,29,0) 0%,rgba(14,17,29,.72) 60%,#0E111D 100%)}
@@ -797,10 +804,11 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     <div class="hv-rail" id="hv-rail">
       <div class="hv-vue est-active">
         <div class="hv-fond">
+          <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="sync">
+          <div class="hv-nuit"></div>
           <video autoplay muted loop playsinline data-media-affiche="videoAffiche">
             <source data-media="video" type="video/mp4">
           </video>
-          <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="sync">
         </div>
       </div>
     </div>
@@ -1590,6 +1598,8 @@ function monter(racine, portail, D) {
 
 
 
+
+
   const BADGES = (Array.isArray(D.badges) ? D.badges : []).filter((b) => b && b.image && b.fr);
   const icoBadge = $('pv-ico-badge'), pastilleBadge = un('.pv-badge');
   const poserBadge = (b) => {
@@ -1604,6 +1614,7 @@ function monter(racine, portail, D) {
     if (BADGES.length > 1 && !calme) {
       let prechargés = false;
       repeter(() => {
+        if (document.hidden || pastilleBadge.closest('[data-hors]')) return;
         if (!prechargés) { prechargés = true; BADGES.slice(1).forEach((b) => { const im = new Image(); im.src = b.image; }); }
         pastilleBadge.classList.add('est-change');
         minuteurs.push(setTimeout(() => { iBadge = (iBadge + 1) % BADGES.length; poserBadge(BADGES[iBadge]); pastilleBadge.classList.remove('est-change'); }, 280));
