@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum a60995b | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="a60995b";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum caa45f2 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="caa45f2";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1370,8 +1370,8 @@ if (!customElements.get('espace-rhum')) {
     'Récupère dans un fichier tout ce que ton espace sait de toi.':
       'Download everything your space knows about you in a single file.',
     'Télécharger': 'Download',
-    'Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro. Irréversible.':
-      'Erases everything your space has remembered: your stats, badges, favourites, preferences and entries. Your account starts from scratch. Irreversible.',
+    'Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Irréversible.':
+      'Erases everything your space has remembered: your stats, badges, favourites, preferences and entries. Your account starts from scratch, except in the games: a wheel spin played and a code received stay with the account. Irreversible.',
     'Ton compte, tes infos et tout ton espace disparaissent définitivement. Tu seras déconnecté immédiatement. Cette action ne peut pas être annulée.':
       'Your account, your details and your whole space disappear for good. You will be logged out immediately. This action cannot be undone.',
     "Ces réglages s'appliquent immédiatement.": 'These settings apply immediately.',
@@ -20248,7 +20248,7 @@ if (!customElements.get('espace-rhum')) {
                 <div class="er-prefs-danger">
                   <div class="er-prefs-danger-txt">
                     <span class="er-prefs-danger-title">Supprimer mes données</span>
-                    <span class="er-prefs-danger-hint">Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro. Irréversible.</span>
+                    <span class="er-prefs-danger-hint">Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Irréversible.</span>
                   </div>
                   <button class="er-prefs-btn er-prefs-btn--danger" type="button" data-action="delete-data">Tout effacer</button>
                 </div>
@@ -20899,8 +20899,8 @@ if (!customElements.get('espace-rhum')) {
       const ok = await this._confirmerGrave({
         titre: en ? 'Delete all your data?' : 'Supprimer toutes tes données ?',
         texte: en
-          ? 'Everything your space has learned about you is erased: your stats, your badges, your favourites, your preferences and your entries. Your account remains but starts from zero. This cannot be undone.'
-          : 'Tout ce que ton espace a retenu de toi est effacé : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte reste mais repart de zéro. Cette action est irréversible.',
+          ? 'Everything your space has learned about you is erased: your stats, your badges, your favourites, your preferences and your entries. Your account remains but starts from zero. One exception, the games: a wheel spin already played and codes already received stay with the account, without your name or contact details, so they cannot be played again. This cannot be undone.'
+          : 'Tout ce que ton espace a retenu de toi est effacé : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte reste mais repart de zéro. Seule exception, les jeux : le tour de roue déjà joué et les codes déjà reçus restent acquis au compte, sans ton nom ni tes coordonnées, pour qu’ils ne se rejouent pas. Cette action est irréversible.',
         bouton: en ? 'Delete my data' : 'Supprimer mes données',
         delai: 5
       });
