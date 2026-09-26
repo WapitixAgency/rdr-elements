@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum 950c32b | skipper-media-uploader.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="950c32b";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum 6c1cdb8 | skipper-media-uploader.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="6c1cdb8";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 const CONFIG = {
   MAX_GALERIE: 10,
@@ -1075,8 +1075,6 @@ class SkipperMediaUploader extends HTMLElement {
       if (!result?.blob) throw new Error('Compression impossible');
 
       const sizeMB = (result.blob.size / 1024 / 1024).toFixed(2);
-      const sizeKB = Math.round(result.blob.size / 1024);
-      console.log(`[skipper-media-uploader] compressed: ${sizeKB} KB (${sizeMB} MB), type=${result.blob.type}, attempts=${attempts}, isSafari=${IS_SAFARI}`);
 
       if (result.blob.size > hardLimit) {
         throw new Error(`Image trop lourde après optimisation (${sizeMB} Mo). Réduisez sa taille avant envoi.`);
@@ -1129,8 +1127,6 @@ class SkipperMediaUploader extends HTMLElement {
       contentBase64
     });
 
-    const payloadKB = Math.round(body.length / 1024);
-    console.log(`[skipper-media-uploader] uploading: ${payloadKB} KB payload, kind=${kind}, mime=${mimeType}, filename=${filename}`);
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();

@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 950c32b | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 6c1cdb8 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="6c1cdb8";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -18,7 +18,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";perform
 
   const urlSure = (u, repli = '') => {
     if (u == null) return repli;
-    let v = String(u).trim();
+    let v = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!v) return repli;
     const m = v.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) v = 'https://static.wixstatic.com/media/' + m[1];
@@ -202,7 +202,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";perform
     'Programmation': 'Programme',
     'Officielle': 'Official',
     'Type de programmation': 'Programme type',
-    'Revoir le programme du village de Saint-Malo': 'Back to the Saint-Malo village programme',
+    'Revoir la programmation du village de Saint-Malo': 'Back to the Saint-Malo village programme',
+    
+
+
+
+    'Pour plus d’informations sur les animations organisées par la ville de Saint-Malo, rendez-vous sur l’application Le Lien Malouin.':
+      'For more information on the events organised by the City of Saint-Malo, see the Le Lien Malouin app.',
+    '(nouvel onglet)': '(new tab)',
      
     'Choix du jour': 'Choose a day',
     'Jours précédents': 'Previous days',
@@ -216,7 +223,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";perform
     'Les catégories': 'Categories',
     'Thématique': 'Theme',
     'Tout afficher': 'Show all',
-    'Partager cette sélection du programme': 'Share this selection of the programme',
+    'Partager cette sélection de la programmation': 'Share this selection of the programme',
     'Lien copié': 'Link copied',
      
     'Matin': 'Morning',
@@ -233,7 +240,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";perform
     'En savoir plus': 'Find out more',
     'Sur la carte': 'On the map',
     'Voir la carte complète': 'See the full map',
-    'Revenir au programme': 'Back to the programme',
+    'Revenir à la programmation': 'Back to the programme',
     'Écouter sur Spotify': 'Listen on Spotify',
     'Le détail de cette animation n’est pas encore publié.': 'The details of this event are not published yet.',
     'Il le sera au fil des semaines.': 'They will be, over the coming weeks.',
@@ -250,22 +257,27 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="950c32b";perform
      
     'Rien à cette date': 'Nothing on this date',
     'Aucun rendez-vous avec ces filtres': 'No events match these filters',
-    'Ce jour-là, rien ne correspond à ce que vous avez choisi. En retirer un suffit souvent.': 'Nothing that day matches what you picked. Removing one filter is usually enough.',
+    'Rien ce jour-là avec ces filtres': 'Nothing that day with these filters',
+    'Plus de rendez-vous à venir avec ces filtres': 'No more upcoming events with these filters',
+    'Rien ne correspond dans cette programmation.': 'Nothing matches in this programme.',
+    'Le prochain arrive un peu plus tard.': 'The next one is a little later.',
+    'Ceux de cette programmation sont passés.': 'The ones in this programme are over.',
+    'Retirer ce filtre': 'Remove this filter',
     
 
 
 
 
-    'Ce jour n’a pas encore de programme publié. Il se remplit au fil des semaines.': 'This day has no published programme yet. It fills up over the coming weeks.',
+    'Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.': 'This day has no published programme yet. It fills up over the coming weeks.',
      
-    'Programme indisponible': 'Programme unavailable',
-    'Le programme n’a pas pu être chargé.': 'The programme could not be loaded.',
+    'Programmation indisponible': 'Programme unavailable',
+    'La programmation n’a pas pu être chargée.': 'The programme could not be loaded.',
     'Rafraîchir la page suffit le plus souvent.': 'Refreshing the page usually does it.',
-    'Le programme n’a pas pu être chargé': 'The programme could not be loaded',
-    'La connexion a été trop longue. Le programme est bien là,': 'The connection took too long. The programme is there,',
-    'il n’est pas encore arrivé jusqu’ici.': 'it just has not reached this page yet.',
+    'La programmation n’a pas pu être chargée': 'The programme could not be loaded',
+    'La connexion a été trop longue. La programmation est bien là,': 'The connection took too long. The programme is there,',
+    'elle n’est pas encore arrivée jusqu’ici.': 'it just has not reached this page yet.',
     'Réessayer': 'Try again',
-    'Chargement du programme…': 'Loading the programme…',
+    'Chargement de la programmation…': 'Loading the programme…',
      
     'Chargement de la carte': 'Loading the map',
     'La carte n’a pas pu s’afficher ici.': 'The map could not be displayed here.',
@@ -1132,6 +1144,8 @@ rdr-programme{display:block;width:100%;}
 .rp-hero{
   position:relative;isolation:isolate;
   display:grid;place-items:center;
+   
+  grid-template-columns:minmax(0,1fr);
   width:100%;margin:0;border-radius:0;
   aspect-ratio:2 / 1;
   
@@ -1233,6 +1247,19 @@ rdr-programme{display:block;width:100%;}
 
   padding:0 20px max(calc(var(--rp-chevauche) + 14px),min(clamp(52px,11%,132px),15vh));
   display:grid;justify-items:center;align-content:center;
+  
+
+
+
+
+
+
+
+
+
+
+
+  grid-template-columns:minmax(0,1fr);min-width:0;
 }
 .rp-logo{
   
@@ -1252,11 +1279,17 @@ rdr-programme{display:block;width:100%;}
 
 
 
-  height:min(clamp(58px,calc(var(--rp-l,1180) * .072 * 1px),104px),12vh);
+  --rp-logo-h:min(clamp(58px,calc(var(--rp-l,1180) * .072 * 1px),104px),12vh);
+  height:var(--rp-logo-h);
   margin:0 auto clamp(12px,2vw,26px);object-fit:contain;color:#fff;
   filter:drop-shadow(0 4px 22px rgba(6,10,30,.9));
 }
 .rp-logo svg{display:block;height:100%;width:auto;}
+
+
+
+.rp-logo--svg{width:var(--rp-logo-h);}
+.rp-logo--svg svg{width:100%;}
 
 
 
@@ -1764,6 +1797,22 @@ rdr-programme{display:block;width:100%;}
 }
 .rp-jour-pastille[hidden]{display:none;}
 
+
+.rp-socle.a-filtre .rp-jour.est-sans{opacity:.34;}
+.rp-socle.a-filtre .rp-jour.est-sans[aria-pressed="true"]{opacity:1;}
+.rp-socle.a-filtre .rp-jour.est-trouve{
+  border-color:color-mix(in srgb, var(--rp-teinte) 70%, transparent);
+  background:color-mix(in srgb, var(--rp-teinte) 12%, transparent);
+}
+.rp-socle.a-filtre .rp-jour.est-trouve[aria-pressed="true"]{
+  background:linear-gradient(165deg,#7894F7 0%,#4F5BA5 100%);border-color:var(--rp-teinte);
+}
+.rp-jour-n{
+  justify-self:center;min-width:18px;margin-top:4px;padding:1px 5px;
+  border-radius:2px 7px 2px 7px;background:var(--rp-teinte);color:#0A1630;
+  font-size:10px;font-weight:800;line-height:14px;font-style:normal;
+}
+
  
 
 
@@ -1856,13 +1905,16 @@ rdr-programme{display:block;width:100%;}
   border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03);
   transition:border-color .2s,background .2s;
 }
- 
+
+
+
+
 .rp-champ.est-pose{
-  border-style:solid;border-color:var(--rp-actif);
-  background:var(--rp-verre-fort);box-shadow:var(--o-arete);
+  border-style:solid;border-color:#FFFFFF;
+  background:#FFFFFF;box-shadow:0 8px 22px rgba(0,0,0,.28);
 }
 .rp-champ > .rp-ic{flex:none;width:15px;height:15px;color:var(--rp-encre-3);}
-.rp-champ.est-pose > .rp-ic{color:var(--rp-actif);}
+.rp-champ.est-pose > .rp-ic{color:#0A1630;}
 
 
 
@@ -1880,6 +1932,17 @@ rdr-programme{display:block;width:100%;}
 .rp-champ .rp-chev{position:absolute;right:11px;width:14px;height:14px;
   color:var(--rp-encre-3);pointer-events:none;transition:transform .2s;}
 .rp-champ.est-ouvert .rp-chev{transform:rotate(180deg);}
+.rp-champ.est-pose .rp-champ-btn{color:#0A1630;font-weight:700;padding-right:58px;}
+.rp-champ.est-pose .rp-chev{right:40px;color:#0A1630;}
+.rp-champ-teinte{flex:none;width:10px;height:10px;border-radius:2px 5px 2px 5px;
+  box-shadow:0 0 0 1px rgba(10,22,48,.35);}
+.rp-champ-x{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;display:grid;place-items:center;padding:0;
+  border:0;border-radius:3px 9px 3px 9px;background:rgba(10,22,48,.08);color:#0A1630;cursor:pointer;
+}
+.rp-champ-x .rp-ic{width:13px;height:13px;}
+@media (hover:hover) and (pointer:fine){ .rp-champ-x:hover{background:rgba(10,22,48,.18);} }
 
 
 
@@ -3955,6 +4018,21 @@ rdr-programme{display:block;width:100%;}
 .rp-root.est-off .rp-signature{margin-top:0;}
 
 
+.rp-mention-off{
+  max-width:640px;margin:clamp(40px,5.5%,72px) auto 0;padding:0 20px;text-align:center;
+  font:500 var(--t-2) Montserrat,sans-serif;line-height:1.6;color:var(--rp-encre-2);
+}
+.rp-mention-off p{margin:0;text-wrap:balance;}
+.rp-mention-off .rp-mention-liens{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px;}
+.rp-mention-liens a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 20px;
+  border:1.5px solid var(--rp-encre-3);border-radius:999px;
+  font:700 var(--t-2) Montserrat,sans-serif;letter-spacing:.04em;color:var(--rp-encre);
+  text-decoration:none;transition:border-color .2s,background-color .2s;
+}
+.rp-mention-liens a:hover,.rp-mention-liens a:focus-visible{border-color:#FFFFFF;background-color:rgba(255,255,255,.08);}
+
+
 
 
 
@@ -5270,6 +5348,8 @@ rdr-programme{display:block;width:100%;}
         const t = (this._p.categories || []).find(c => pli(c) === pli(d.cat));
         if (t) this._f.cat = pli(t);
       }
+       
+      if (!this._jourChoisi) this._calerSurFiltre();
       this._demande = null;
     }
 
@@ -5482,8 +5562,30 @@ rdr-programme{display:block;width:100%;}
       if (this._type !== 'guadeloupe') return '';
       return '<p class="rp-retour">' +
         '<a href="?type=officielle" id="rpRetourSM">' +
-          'Revoir le programme du village de Saint-Malo' +
+          'Revoir la programmation du village de Saint-Malo' +
         '</a></p>';
+    }
+
+    
+
+
+
+
+
+
+    _mentionOff() {
+      const p = this._p || {};
+      if (this._type !== 'off' || !p.mentionOff) return '';
+      const sur = (u) => (/^https:\/\//i.test(String(u || '').trim()) ? urlSure(u) : '');
+      const liens = [['App Store', sur(p.mentionOffAppStore)], ['Google Play', sur(p.mentionOffGooglePlay)]].filter(l => l[1]);
+      return '<div class="rp-mention-off">' +
+        '<p>' + esc(p.mentionOff) + '</p>' +
+        (liens.length
+          ? '<p class="rp-mention-liens">' + liens.map(l =>
+              '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + l[0] +
+                '<span class="rp-sr-seul"> (nouvel onglet)</span></a>').join('') + '</p>'
+          : '') +
+      '</div>';
     }
 
     _anims() { return (this._p && this._p.animations) || []; }
@@ -5509,6 +5611,47 @@ rdr-programme{display:block;width:100%;}
         }
         return true;
       }).sort((a, b) => minutes(a.debut) - minutes(b.debut));
+    }
+
+    _filtrePose() {
+      const f = this._f;
+      return !!(f.heure || f.theme || f.lieu || f.cat);
+    }
+
+    
+
+
+
+
+
+
+
+
+
+    _prochainFiltre(type) {
+      const garde = this._type;
+      if (type) this._type = type;
+      try {
+        const now = this._maintenant();
+        for (const d of this._jours()) {
+          if (d < now.jour) continue;
+          const l = this._filtrees(d);
+          if (!l.length) continue;
+          if (d > now.jour) return d;
+          if (l.some(a => !/^\d{1,2}:\d{2}/.test(a.debut || '') || finMinutes(a) > now.minute)) return d;
+        }
+        return '';
+      } finally { this._type = garde; }
+    }
+
+    
+
+
+
+    _calerSurFiltre() {
+      if (!this._filtrePose() || this._filtrees(this._jour).length) return;
+      const d = this._prochainFiltre();
+      if (d && d !== this._jour) { this._jour = d; this._jourChoisi = false; }
     }
 
     
@@ -5548,7 +5691,7 @@ rdr-programme{display:block;width:100%;}
             '<div class="rp-sk-outils">' + champ.repeat(4) + '</div>' +
             '<div class="rp-sk-liste">' + rangee.repeat(5) + '</div>' +
           '</div>' +
-          '<p class="rp-sr-seul" role="status">Chargement du programme…</p>' +
+          '<p class="rp-sr-seul" role="status">Chargement de la programmation…</p>' +
         '</div>';
     }
 
@@ -5556,7 +5699,7 @@ rdr-programme{display:block;width:100%;}
       if (!this._p) {
         this.innerHTML = this._attente ? this._squelette()
           : '<div class="rp-root"><div class="rp-vide">' +
-            '<h3>Programme indisponible</h3><p>Le programme n’a pas pu être chargé. ' +
+            '<h3>Programmation indisponible</h3><p>La programmation n’a pas pu être chargée. ' +
             'Rafraîchir la page suffit le plus souvent.</p></div></div>';
         this._i18n(this);
         return;
@@ -5597,6 +5740,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
+          this._mentionOff() +
           (this._type === 'off'
             ? '<div class="rp-sig-off" aria-hidden="true">' +
                 '<img src="' + esc(wixContenu(urlSure(p.logoOffPied) || LOGO_OFF_COULEUR, 180)) + '"' +
@@ -5776,7 +5920,7 @@ rdr-programme{display:block;width:100%;}
                 ' src="' + esc(wixContenu(logo, 240)) + '"' +
                 (wixContenuDensite(logo, 240) ? ' srcset="' + esc(wixContenuDensite(logo, 240)) + '"' : '') +
                 ' alt="' + esc(this._t(off ? 'Off du Rhum' : 'Route du Rhum')) + '" loading="eager" decoding="async">'
-            : '<div class="rp-logo" role="img" aria-label="Route du Rhum, destination Guadeloupe">' +
+            : '<div class="rp-logo rp-logo--svg" role="img" aria-label="Route du Rhum, destination Guadeloupe">' +
                 LOGO_RDR + '</div>') +
           (logoVille
             ? '<img class="rp-logo-tiers"' +
@@ -5835,6 +5979,16 @@ rdr-programme{display:block;width:100%;}
         parJour.set(a.date, (parJour.get(a.date) || 0) + 1);
       });
       const journees = new Set((this._p.journees || []).filter(j => j.actif !== false).map(j => j.date));
+      
+
+
+
+
+
+
+      const filtre = this._filtrePose();
+      const parFiltre = filtre ? new Map(jours.map(iso => [iso, this._filtrees(iso).length])) : null;
+      const teinte = this._f.cat ? catDe(this._f.cat).c : '#FFFFFF';
 
       
 
@@ -5864,7 +6018,8 @@ rdr-programme{display:block;width:100%;}
 
 
 
-      return '<nav class="rp-socle" aria-label="Choix du jour">' +
+      return '<nav class="rp-socle' + (filtre ? ' a-filtre' : '') + '" aria-label="Choix du jour"' +
+          (filtre ? ' style="--rp-teinte:' + teinte + '"' : '') + '>' +
         '<div class="rp-jours-cadre">' +
         '<button type="button" class="rp-fl rp-fl--g" id="rpFlG" aria-label="Jours précédents" hidden>' +
           svg(IC.chevron) + '</button>' +
@@ -5886,21 +6041,25 @@ rdr-programme{display:block;width:100%;}
           const finDeSemaine = jd.getDay() === 0 || jd.getDay() === 6;
           const cEstAuj = iso === auj;
           const revolu = iso < auj;
+           
+          const nf = filtre && !revolu ? parFiltre.get(iso) || 0 : 0;
           const marques = (cEstAuj ? ' est-auj' : '') +
                           (finDeSemaine ? ' est-we' : '') +
-                          (revolu ? ' est-revolu' : '');
+                          (revolu ? ' est-revolu' : '') +
+                          (filtre ? (nf ? ' est-trouve' : ' est-sans') : '');
           return '<button type="button" class="rp-jour' + marques + '" data-jour="' + esc(iso) + '"' +
             ' aria-pressed="' + (actif ? 'true' : 'false') + '"' +
             
 
 
             ' aria-label="' + esc(this._jc(d) + ' ' + d.getDate() + ' ' +
-              this._mc(d) + ', ' + this._compte(n) +
+              this._mc(d) + ', ' + this._compte(filtre ? nf : n) +
               (iso === auj ? (this._lang() === 'en' ? ', today' : ", aujourd'hui") : '')) + '">' +
             '<i>' + esc(this._jc(d)) + '</i>' +
             '<b>' + String(d.getDate()).padStart(2, '0') + '</b>' +
             '<i>' + esc(this._mc(d)) + '</i>' +
-            '<span class="rp-jour-pastille"' + (journees.has(iso) ? '' : ' hidden') + '></span>' +
+            '<span class="rp-jour-pastille"' + (journees.has(iso) && !filtre ? '' : ' hidden') + '></span>' +
+            (nf ? '<span class="rp-jour-n" aria-hidden="true">' + nf + '</span>' : '') +
           '</button>';
         }).join('') +
         '</div>' +
@@ -5919,24 +6078,29 @@ rdr-programme{display:block;width:100%;}
       const p = this._p;
       const f = this._f;
       const pose = f.heure || f.theme || f.lieu || f.cat;
-      const n = this._filtrees(this._jour).length;
-      const dj = this._jour ? dateDe(this._jour) : null;
-      const jourLong = dj
-        ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '.'
-        : '';
 
       
 
 
       const sel = (cle, icone, libelle, valeur, options) => {
         const choisi = options.find(o => o[0] === valeur);
+        
+
+
         return '<div class="rp-champ' + (valeur ? ' est-pose' : '') + '" data-champ="' + esc(cle) + '">' +
           svg(icone) +
+          (valeur && cle === 'cat'
+            ? '<span class="rp-champ-teinte" style="background:' + catDe(valeur).c + '" aria-hidden="true"></span>'
+            : '') +
           '<button type="button" class="rp-champ-btn" data-vide="' + (valeur ? 'false' : 'true') + '"' +
             ' aria-haspopup="listbox" aria-expanded="false">' +
             esc(choisi ? choisi[1] : libelle) +
           '</button>' +
           svg(IC.chevron, 'rp-ic rp-chev') +
+          (valeur
+            ? '<button type="button" class="rp-champ-x" data-effacer="' + esc(cle) + '"' +
+                ' aria-label="Retirer ce filtre">' + svg(IC.croix, 'rp-ic') + '</button>'
+            : '') +
           '<div class="rp-pop" role="listbox" aria-label="' + esc(libelle) + '" hidden>' +
             '<button type="button" class="rp-opt" role="option" data-val=""' +
               ' aria-selected="' + (valeur ? 'false' : 'true') + '">' + esc(libelle) + '</button>' +
@@ -5974,7 +6138,6 @@ rdr-programme{display:block;width:100%;}
         .filter(l => nomsDuType.has(l.nom) || nomsDuType.has(l.id) || (l.id || l.nom) === f.lieu)
         .map(l => [l.id || l.nom, l.nom]);
       const cats = (p.categories || []).map(c => [pli(c), c]);
-      const themes = (p.thematiques || []).map(t => [pli(t), t]);
 
       return '<div class="rp-outils">' +
         
@@ -6008,7 +6171,7 @@ rdr-programme{display:block;width:100%;}
           sel('cat', IC.liste, 'Les catégories', f.cat, cats) +
           (this._pilote && (pose || this._type !== this._registreParDefaut() || this._jourChoisi)
             ? '<button type="button" class="rp-partage" id="rpPartage"' +
-                ' aria-label="Partager cette sélection du programme">' +
+                ' aria-label="Partager cette sélection de la programmation">' +
                 svg(IC.partage, 'rp-ic') + '<span>Partager</span></button>'
             : '') +
         '</div>' +
@@ -6540,7 +6703,6 @@ rdr-programme{display:block;width:100%;}
           '</div>' +
           meta;
 
-      const balise = 'div';
       
 
 
@@ -6625,14 +6787,23 @@ rdr-programme{display:block;width:100%;}
     }
 
     _detail(a, photo, lien) {
-      const cat = catDe(a.cat || a.catLib);
 
       
 
        
+      
+
+
+
+
+
+
+
+
+      const AFFICHER_DUREE = false;
       const d = minutes(a.debut), f = /^\d{1,2}:\d{2}/.test(a.fin || '') ? finMinutes(a) : 0;
       let duree = '';
-      if (f > d) {
+      if (AFFICHER_DUREE && f > d) {
         const m = f - d, h = Math.floor(m / 60), r = m % 60;
         duree = h ? (h + ' h' + (r ? ' ' + String(r).padStart(2, '0') : '')) : (m + ' min');
       }
@@ -6722,9 +6893,9 @@ rdr-programme{display:block;width:100%;}
       if (this._p && this._p.complet === false && !this._anims().length) {
         return '<div class="rp-vide">' +
           '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
-          '<h3>Le programme n’a pas pu être chargé</h3>' +
-          '<p>La connexion a été trop longue. Le programme est bien là, ' +
-            'il n’est pas encore arrivé jusqu’ici.</p>' +
+          '<h3>La programmation n’a pas pu être chargée</h3>' +
+          '<p>La connexion a été trop longue. La programmation est bien là, ' +
+            'elle n’est pas encore arrivée jusqu’ici.</p>' +
           '<div class="rp-vide-actions">' +
             '<button type="button" class="rp-cta rp-cta--fort" id="rpRecharger">Réessayer</button>' +
           '</div>' +
@@ -6732,6 +6903,57 @@ rdr-programme{display:block;width:100%;}
       }
 
       const filtre = this._f.heure || this._f.theme || this._f.lieu || this._f.cat;
+
+      const nomDe = (iso) => {
+        const d = dateDe(iso);
+        return this._jc(d) + '. ' + d.getDate() + ' ' + this._mc(d) + '.';
+      };
+      const en = this._lang() === 'en';
+
+      
+
+
+
+
+
+
+      if (filtre) {
+        const total = this._filtrees('').length;
+        const prochain = this._prochainFiltre();
+        let ailleurs = null;
+        if (!prochain) {
+          for (const t of this._registresVisibles()) {
+            if (t === this._type) continue;
+            const d = this._prochainFiltre(t);
+            if (d) { ailleurs = { type: t, date: d }; break; }
+          }
+        }
+        const titre = !total ? 'Aucun rendez-vous avec ces filtres'
+          : prochain ? 'Rien ce jour-là avec ces filtres'
+          : 'Plus de rendez-vous à venir avec ces filtres';
+        const texte = !total ? 'Rien ne correspond dans cette programmation.'
+          : prochain ? 'Le prochain arrive un peu plus tard.'
+          : 'Ceux de cette programmation sont passés.';
+        return '<div class="rp-vide">' +
+          '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
+          '<h3>' + titre + '</h3>' +
+          '<p>' + texte + '</p>' +
+          '<div class="rp-vide-actions">' +
+            (prochain
+              ? '<button type="button" class="rp-cta rp-cta--fort" data-aller-jour="' + esc(prochain) + '">' +
+                  (en ? 'Go to ' : 'Aller au ') + esc(nomDe(prochain)) +
+                  ' <em>' + this._filtrees(prochain).length + '</em>' + svg(IC.fleche) + '</button>'
+              : '') +
+            (ailleurs
+              ? '<button type="button" class="rp-cta rp-cta--fort" data-aller-registre="' + esc(ailleurs.type) + '"' +
+                  ' data-registre-jour="' + esc(ailleurs.date) + '">' +
+                  (en ? 'See ' : 'Voir ') + esc(this._t(REGISTRE_NOMS[ailleurs.type].onglet)) +
+                  ', ' + esc(nomDe(ailleurs.date)) + svg(IC.fleche) + '</button>'
+              : '') +
+            '<button type="button" class="rp-cta" id="rpRaz2">Tout afficher</button>' +
+          '</div>' +
+        '</div>';
+      }
 
       
 
@@ -6747,22 +6969,14 @@ rdr-programme{display:block;width:100%;}
         if (e < ecart) { ecart = e; proche = { date: d, combien }; }
       });
 
-      const nomDe = (iso) => {
-        const d = dateDe(iso);
-        return this._jc(d) + '. ' + d.getDate() + ' ' + this._mc(d) + '.';
-      };
-
       return '<div class="rp-vide">' +
         '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
-        '<h3>' + (filtre ? 'Aucun rendez-vous avec ces filtres' : 'Rien à cette date') + '</h3>' +
-        '<p>' + (filtre
-          ? 'Ce jour-là, rien ne correspond à ce que vous avez choisi. En retirer un suffit souvent.'
-          : 'Ce jour n’a pas encore de programme publié. Il se remplit au fil des semaines.') + '</p>' +
+        '<h3>Rien à cette date</h3>' +
+        '<p>Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.</p>' +
         '<div class="rp-vide-actions">' +
-          (filtre ? '<button type="button" class="rp-cta rp-cta--fort" id="rpRaz2">Tout afficher</button>' : '') +
           (proche
             ? '<button type="button" class="rp-cta" data-aller-jour="' + esc(proche.date) + '">' +
-                'Aller au ' + esc(nomDe(proche.date)) +
+                (en ? 'Go to ' : 'Aller au ') + esc(nomDe(proche.date)) +
                 ' <em>' + proche.combien + '</em>' + svg(IC.fleche) + '</button>'
             : '') +
         '</div>' +
@@ -6816,6 +7030,32 @@ rdr-programme{display:block;width:100%;}
       const raz = () => { this._f = { heure: '', theme: '', lieu: '', cat: '' }; this._rendre(); };
       const r1 = q('#rpRaz'); if (r1) r1.addEventListener('click', raz);
       const r2 = q('#rpRaz2'); if (r2) r2.addEventListener('click', raz);
+       
+      this.querySelectorAll('[data-effacer]').forEach(b =>
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this._fermerChamps(null);
+          this._f[b.dataset.effacer] = '';
+          this._rendre();
+        }));
+      
+
+
+      this.querySelectorAll('[data-aller-registre]').forEach(b =>
+        b.addEventListener('click', () => {
+          const t = b.dataset.allerRegistre;
+          if (!estRegistre(t)) return;
+          const garde = { heure: this._f.heure, theme: '', lieu: '', cat: this._f.cat };
+          this._type = t;
+          this._typeChoisi = true;
+          this._f = garde;
+          this._jour = b.dataset.registreJour || this._jour;
+          this._jourChoisi = false;
+          this._rendre();
+          this._emit('programme-type', { type: this._type });
+          const so = this.querySelector('.rp-socle');
+          if (so) so.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }));
 
       
 
@@ -6830,7 +7070,7 @@ rdr-programme{display:block;width:100%;}
       if (bp) bp.addEventListener('click', async () => {
         const url = this._adresse();
         if (!url) return;
-        const titre = document.title || 'Programme, Route du Rhum';
+        const titre = document.title || (this._lang() === 'en' ? 'Programme' : 'Programmation') + ', Route du Rhum';
         try {
           if (navigator.share) { await navigator.share({ title: titre, url }); return; }
           await navigator.clipboard.writeText(url);
@@ -6994,7 +7234,7 @@ rdr-programme{display:block;width:100%;}
             '<div class="rp-mod-pied">' +
               '<a class="rp-cta rp-cta--fort" href="' + esc(lien) + '">' +
                 'Voir la carte complète' + svg(IC.fleche) + '</a>' +
-              '<button type="button" class="rp-cta" data-fermer>Revenir au programme</button>' +
+              '<button type="button" class="rp-cta" data-fermer>Revenir à la programmation</button>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -7180,6 +7420,7 @@ rdr-programme{display:block;width:100%;}
           const opt = e.target.closest('.rp-opt');
           if (!opt) return;
           this._f[cle] = opt.dataset.val || '';
+          this._calerSurFiltre();
           this._rendre();
         });
       });
@@ -7318,7 +7559,7 @@ rdr-programme{display:block;width:100%;}
         }
         if (this._type !== this._registreParDefaut()) bouts.push(REGISTRE_NOMS[this._type].titre);
         document.title = bouts.length
-          ? 'Programme, ' + bouts.join(', ') + ' | Route du Rhum'
+          ? (this._lang() === 'en' ? 'Programme, ' : 'Programmation, ') + bouts.join(', ') + ' | Route du Rhum'
           : this._titreOrigine;
       } catch (e) {   }
     }
