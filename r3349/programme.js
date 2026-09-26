@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 74dac62 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="74dac62";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 5d44dd5 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="5d44dd5";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -2372,7 +2372,7 @@ rdr-programme{display:block;width:100%;}
   .rp-root.est-arrivee .rp-motif,
   .rp-root.est-arrivee .rp-trait-cadre{animation:none;}
   .rp-vfond img{transition:none;}
-  .rp-tuile--vedette:hover .rp-vfond img{transform:none;}
+  @media (hover:hover) and (pointer:fine){.rp-tuile--vedette:hover .rp-vfond img{transform:none;}}
 }
 
  
@@ -4034,7 +4034,7 @@ rdr-programme{display:block;width:100%;}
   font:700 var(--t-2) Montserrat,sans-serif;letter-spacing:.04em;color:var(--rp-encre);
   text-decoration:none;transition:border-color .2s,background-color .2s;
 }
-.rp-mention-liens a:hover,.rp-mention-liens a:focus-visible{border-color:#FFFFFF;background-color:rgba(255,255,255,.08);}
+.rp-mention-liens a:focus-visible{border-color:#FFFFFF;background-color:rgba(255,255,255,.08);}@media (hover:hover) and (pointer:fine){.rp-mention-liens a:hover{border-color:#FFFFFF;background-color:rgba(255,255,255,.08);}}
 
 
 
@@ -4049,7 +4049,7 @@ rdr-programme{display:block;width:100%;}
   color:var(--rp-encre-3);text-decoration:underline;text-underline-offset:4px;
   transition:color .2s;
 }
-.rp-retour a:hover,.rp-retour a:focus-visible{color:#FFFFFF;}
+.rp-retour a:focus-visible{color:#FFFFFF;}@media (hover:hover) and (pointer:fine){.rp-retour a:hover{color:#FFFFFF;}}
 .rp-signature{
   display:flex;align-items:center;justify-content:center;gap:var(--e-4);
   margin:clamp(52px,7%,104px) auto clamp(34px,4.5%,64px);padding:0 20px;
@@ -4591,7 +4591,7 @@ rdr-programme{display:block;width:100%;}
 .rp-spotify:active{transform:scale(.99);}
 .rp-spotify:focus-visible{outline:2px solid #fff;outline-offset:3px;}
 @media (prefers-reduced-motion:reduce){
-  .rp-spotify,.rp-spotify:hover{transform:none;transition:none;}
+  .rp-spotify{transform:none;transition:none;}@media (hover:hover) and (pointer:fine){.rp-spotify:hover{transform:none;transition:none;}}
 }
 
 

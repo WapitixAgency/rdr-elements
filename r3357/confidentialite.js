@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum 74dac62 | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="74dac62";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 5d44dd5 | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="5d44dd5";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -541,7 +541,7 @@ rdr-confidentialite .cfd .cfd-som-lien{display:flex;align-items:center;gap:var(-
 rdr-confidentialite .cfd .cfd-som-num{flex:0 0 auto;min-width:1.6em;font-variant-numeric:tabular-nums;font-size:var(--cfd-t1);font-weight:700;letter-spacing:.04em;color:var(--cfd-encre-sourde);transition:color .15s;}
 rdr-confidentialite .cfd .cfd-som-lien svg{flex:0 0 auto;width:16px;height:16px;color:var(--cfd-or);}
 rdr-confidentialite .cfd .cfd-som-lib{min-width:0;}
-rdr-confidentialite .cfd .cfd-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}}
 rdr-confidentialite .cfd .cfd-som-lien:focus-visible{outline:2px solid var(--cfd-or);outline-offset:2px;}
 rdr-confidentialite .cfd .cfd-som-lien.est-actif{background:var(--cfd-or-voile);border-left-color:var(--cfd-or);color:#FFFFFF;font-weight:600;}
 rdr-confidentialite .cfd .cfd-som-lien.est-actif .cfd-som-num{color:var(--cfd-or);}
@@ -558,7 +558,7 @@ rdr-confidentialite .cfd .cfd-sec-titre{margin:0;font-family:Varien,Impact,sans-
 rdr-confidentialite .cfd .cfd-carte{display:grid;gap:var(--cfd-e4);padding:var(--cfd-e6);border-radius:var(--cfd-r-carte);background:var(--cfd-carte);color:var(--cfd-carte-texte);min-width:0;}
 rdr-confidentialite .cfd .cfd-carte p{color:var(--cfd-carte-texte);}
 rdr-confidentialite .cfd .cfd-carte a{color:var(--cfd-vert);font-weight:600;text-decoration:underline;text-decoration-color:rgba(0,111,123,.35);text-underline-offset:3px;overflow-wrap:anywhere;}
-rdr-confidentialite .cfd .cfd-carte a:hover{text-decoration-color:var(--cfd-vert);}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-carte a:hover{text-decoration-color:var(--cfd-vert);}}
 rdr-confidentialite .cfd .cfd-carte a:focus-visible{outline:2px solid var(--cfd-vert);outline-offset:2px;border-radius:2px;}
 rdr-confidentialite .cfd .cfd-carte strong{color:var(--cfd-carte-encre);font-weight:700;}
 rdr-confidentialite .cfd .cfd-h3{margin:var(--cfd-e3) 0 0;font-size:var(--cfd-t4);font-weight:700;color:var(--cfd-carte-encre);}
@@ -610,7 +610,7 @@ rdr-confidentialite .cfd .cfd-ajout-titre{display:block;margin:0 0 var(--cfd-e1)
 rdr-confidentialite .cfd .cfd-cookies{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cfd-e3) var(--cfd-e4);margin-top:var(--cfd-e2);}
 rdr-confidentialite .cfd .cfd-bouton{display:inline-flex;align-items:center;gap:var(--cfd-e2);min-height:44px;padding:0 var(--cfd-e5);border:0;border-radius:999px;background:var(--cfd-carte-encre);color:#FFFFFF;font-weight:700;font-size:var(--cfd-t2);letter-spacing:.04em;cursor:pointer;transition:background .15s;}
 rdr-confidentialite .cfd .cfd-bouton svg{width:18px;height:18px;color:var(--cfd-or);}
-rdr-confidentialite .cfd .cfd-bouton:hover{background:#1E2640;}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-bouton:hover{background:#1E2640;}}
 rdr-confidentialite .cfd .cfd-bouton:focus-visible{outline:2px solid var(--cfd-vert);outline-offset:3px;}
 rdr-confidentialite .cfd .cfd-cookies-repli{font-size:var(--cfd-t2);color:var(--cfd-carte-sourd);}
 rdr-confidentialite .cfd .cfd-cookies-repli[hidden]{display:none;}
@@ -625,7 +625,7 @@ rdr-confidentialite .cfd .cfd-lies p{margin:0 0 var(--cfd-e4);color:var(--cfd-en
 rdr-confidentialite .cfd .cfd-lies-liens{display:flex;flex-wrap:wrap;gap:var(--cfd-e2) var(--cfd-e5);}
 rdr-confidentialite .cfd .cfd-lies-liens a{display:inline-flex;align-items:center;gap:var(--cfd-e2);font-weight:600;color:var(--cfd-or);}
 rdr-confidentialite .cfd .cfd-lies-liens a svg{width:18px;height:18px;transition:transform .15s;}
-rdr-confidentialite .cfd .cfd-lies-liens a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-lies-liens a:hover svg{transform:translateX(3px);}}
 rdr-confidentialite .cfd .cfd-lies-liens a:focus-visible{outline:2px solid var(--cfd-or);outline-offset:3px;border-radius:2px;}
 
  

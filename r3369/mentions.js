@@ -1,5 +1,5 @@
-/* rdr-elements mentions | source route-du-rhum 74dac62 | rdr-mentions.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="74dac62";performance.mark("rdr-elements:mentions")}catch(e){}
+/* rdr-elements mentions | source route-du-rhum 5d44dd5 | rdr-mentions.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="5d44dd5";performance.mark("rdr-elements:mentions")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -308,7 +308,7 @@ rdr-mentions .mtl .mtl-som-lien{display:flex;align-items:center;gap:var(--mtl-e3
 rdr-mentions .mtl .mtl-som-num{flex:0 0 auto;min-width:1.6em;font-variant-numeric:tabular-nums;font-size:var(--mtl-t1);font-weight:700;letter-spacing:.04em;color:var(--mtl-encre-sourde);transition:color .15s;}
 rdr-mentions .mtl .mtl-som-lien svg{flex:0 0 auto;width:16px;height:16px;color:var(--mtl-or);}
 rdr-mentions .mtl .mtl-som-lib{min-width:0;}
-rdr-mentions .mtl .mtl-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}
+@media (hover:hover) and (pointer:fine){rdr-mentions .mtl .mtl-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}}
 rdr-mentions .mtl .mtl-som-lien:focus-visible{outline:2px solid var(--mtl-or);outline-offset:2px;}
 rdr-mentions .mtl .mtl-som-lien.est-actif{background:var(--mtl-or-voile);border-left-color:var(--mtl-or);color:#FFFFFF;font-weight:600;}
 rdr-mentions .mtl .mtl-som-lien.est-actif .mtl-som-num{color:var(--mtl-or);}
@@ -325,7 +325,7 @@ rdr-mentions .mtl .mtl-sec-titre{margin:0;font-family:Varien,Impact,sans-serif;f
 rdr-mentions .mtl .mtl-carte{display:grid;gap:var(--mtl-e4);padding:var(--mtl-e6);border-radius:var(--mtl-r-carte);background:var(--mtl-carte);color:var(--mtl-carte-texte);min-width:0;}
 rdr-mentions .mtl .mtl-carte p{color:var(--mtl-carte-texte);}
 rdr-mentions .mtl .mtl-carte a{color:var(--mtl-vert);font-weight:600;text-decoration:underline;text-decoration-color:rgba(0,111,123,.35);text-underline-offset:3px;overflow-wrap:anywhere;}
-rdr-mentions .mtl .mtl-carte a:hover{text-decoration-color:var(--mtl-vert);}
+@media (hover:hover) and (pointer:fine){rdr-mentions .mtl .mtl-carte a:hover{text-decoration-color:var(--mtl-vert);}}
 rdr-mentions .mtl .mtl-carte a:focus-visible{outline:2px solid var(--mtl-vert);outline-offset:2px;border-radius:2px;}
 rdr-mentions .mtl .mtl-carte strong{color:var(--mtl-carte-encre);font-weight:700;}
 rdr-mentions .mtl .mtl-h3{margin:var(--mtl-e3) 0 0;font-size:var(--mtl-t4);font-weight:700;color:var(--mtl-carte-encre);}
@@ -339,8 +339,8 @@ rdr-mentions .mtl .mtl-champ-val span{display:block;}
  
 rdr-mentions .mtl .mtl-carte a.mtl-bouton{justify-self:start;display:inline-flex;align-items:center;gap:var(--mtl-e2);min-height:44px;margin-top:var(--mtl-e2);padding:0 var(--mtl-e5);border-radius:999px;background:var(--mtl-carte-encre);color:#FFFFFF;font-weight:700;font-size:var(--mtl-t2);letter-spacing:.04em;text-decoration:none;transition:background .15s;}
 rdr-mentions .mtl .mtl-carte a.mtl-bouton svg{width:18px;height:18px;color:var(--mtl-or);transition:transform .15s;}
-rdr-mentions .mtl .mtl-carte a.mtl-bouton:hover{background:#1E2640;}
-rdr-mentions .mtl .mtl-carte a.mtl-bouton:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-mentions .mtl .mtl-carte a.mtl-bouton:hover{background:#1E2640;}}
+@media (hover:hover) and (pointer:fine){rdr-mentions .mtl .mtl-carte a.mtl-bouton:hover svg{transform:translateX(3px);}}
 rdr-mentions .mtl .mtl-carte a.mtl-bouton:focus-visible{outline:2px solid var(--mtl-vert);outline-offset:3px;}
 
  
@@ -353,7 +353,7 @@ rdr-mentions .mtl .mtl-lies p{margin:0 0 var(--mtl-e4);color:var(--mtl-encre-dou
 rdr-mentions .mtl .mtl-lies-liens{display:flex;flex-wrap:wrap;gap:var(--mtl-e2) var(--mtl-e5);}
 rdr-mentions .mtl .mtl-lies-liens a{display:inline-flex;align-items:center;gap:var(--mtl-e2);font-weight:600;color:var(--mtl-or);}
 rdr-mentions .mtl .mtl-lies-liens a svg{width:18px;height:18px;transition:transform .15s;}
-rdr-mentions .mtl .mtl-lies-liens a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-mentions .mtl .mtl-lies-liens a:hover svg{transform:translateX(3px);}}
 rdr-mentions .mtl .mtl-lies-liens a:focus-visible{outline:2px solid var(--mtl-or);outline-offset:3px;border-radius:2px;}
 
  

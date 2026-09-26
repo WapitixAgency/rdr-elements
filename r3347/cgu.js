@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 74dac62 | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="74dac62";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 5d44dd5 | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="5d44dd5";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -450,7 +450,7 @@ rdr-cgu .cgu .cgu-som-lien{display:flex;align-items:center;gap:var(--cgu-e3);pad
 rdr-cgu .cgu .cgu-som-num{flex:0 0 auto;min-width:1.6em;font-variant-numeric:tabular-nums;font-size:var(--cgu-t1);font-weight:700;letter-spacing:.04em;color:var(--cgu-encre-sourde);transition:color .15s;}
 rdr-cgu .cgu .cgu-som-lien svg{flex:0 0 auto;width:16px;height:16px;color:var(--cgu-or);}
 rdr-cgu .cgu .cgu-som-lib{min-width:0;}
-rdr-cgu .cgu .cgu-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}
+@media (hover:hover) and (pointer:fine){rdr-cgu .cgu .cgu-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}}
 rdr-cgu .cgu .cgu-som-lien:focus-visible{outline:2px solid var(--cgu-or);outline-offset:2px;}
 rdr-cgu .cgu .cgu-som-lien.est-actif{background:var(--cgu-or-voile);border-left-color:var(--cgu-or);color:#FFFFFF;font-weight:600;}
 rdr-cgu .cgu .cgu-som-lien.est-actif .cgu-som-num{color:var(--cgu-or);}
@@ -468,7 +468,7 @@ rdr-cgu .cgu .cgu-sec-titre.cgu-sec-titre--sobre{text-transform:none;font-family
 rdr-cgu .cgu .cgu-carte{display:grid;gap:var(--cgu-e4);padding:var(--cgu-e6) var(--cgu-e6);border-radius:var(--cgu-r-carte);background:var(--cgu-carte);color:var(--cgu-carte-texte);}
 rdr-cgu .cgu .cgu-carte p{color:var(--cgu-carte-texte);}
 rdr-cgu .cgu .cgu-carte a{color:var(--cgu-vert);font-weight:600;text-decoration:underline;text-decoration-color:rgba(0,111,123,.35);text-underline-offset:3px;}
-rdr-cgu .cgu .cgu-carte a:hover{text-decoration-color:var(--cgu-vert);}
+@media (hover:hover) and (pointer:fine){rdr-cgu .cgu .cgu-carte a:hover{text-decoration-color:var(--cgu-vert);}}
 rdr-cgu .cgu .cgu-carte a:focus-visible{outline:2px solid var(--cgu-vert);outline-offset:2px;border-radius:2px;}
 rdr-cgu .cgu .cgu-carte strong{color:var(--cgu-carte-encre);font-weight:700;}
 rdr-cgu .cgu .cgu-cl{color:var(--cgu-carte-encre);font-weight:700;}
@@ -505,7 +505,7 @@ rdr-cgu .cgu .cgu-lies p{margin:0 0 var(--cgu-e4);color:var(--cgu-encre-douce);}
 rdr-cgu .cgu .cgu-lies-liens{display:flex;flex-wrap:wrap;gap:var(--cgu-e2) var(--cgu-e5);}
 rdr-cgu .cgu .cgu-lies-liens a{display:inline-flex;align-items:center;gap:var(--cgu-e2);font-weight:600;color:var(--cgu-or);}
 rdr-cgu .cgu .cgu-lies-liens a svg{width:18px;height:18px;transition:transform .15s;}
-rdr-cgu .cgu .cgu-lies-liens a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-cgu .cgu .cgu-lies-liens a:hover svg{transform:translateX(3px);}}
 rdr-cgu .cgu .cgu-lies-liens a:focus-visible{outline:2px solid var(--cgu-or);outline-offset:3px;border-radius:2px;}
 
  
