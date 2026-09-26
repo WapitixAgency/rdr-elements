@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 2e92473 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="2e92473";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 1b5dde8 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1b5dde8";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -225,6 +225,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="2e92473";perform
     'Tout afficher': 'Show all',
     'Partager cette sélection de la programmation': 'Share this selection of the programme',
     'Lien copié': 'Link copied',
+    'Copie impossible': 'Copy failed',
+    'Partager': 'Share',
+    'Fermer': 'Close',
+    'Le point sera posé dès que l’implantation sera arrêtée.': 'The pin will be placed once the layout is final.',
      
     'Matin': 'Morning',
     'Horaire à préciser': 'Time to be confirmed',
@@ -5272,6 +5276,11 @@ rdr-programme{display:block;width:100%;}
       m = clef.match(/^(\d+)\srendez-vous ici aujourd’hui$/);
       if (m) return m[1] + (m[1] === '1' ? ' event' : ' events') + ' here today';
        
+      m = clef.match(/^(\d+)\sautres?\srendez-vous ici aujourd’hui$/);
+      if (m) return m[1] + ' other ' + (m[1] === '1' ? 'event' : 'events') + ' here today';
+      m = clef.match(/^(.+) n’est pas sur le plan du village\.$/);
+      if (m) return (m[1] === 'Ce lieu' ? 'This venue' : m[1]) + ' is not on the village map yet.';
+       
       m = clef.match(/^(\d+)\sh(?:\s(\d{2}))?$/);
       if (m) return m[1] + ' hr' + (m[2] ? ' ' + m[2] : '');
       return undefined;
@@ -7074,10 +7083,10 @@ rdr-programme{display:block;width:100%;}
         try {
           if (navigator.share) { await navigator.share({ title: titre, url }); return; }
           await navigator.clipboard.writeText(url);
-          this._direPartage('Lien copié');
+          this._direPartage(this._t('Lien copié'));
         } catch (e) {
           if (e && e.name === 'AbortError') return;
-          this._direPartage('Copie impossible');
+          this._direPartage(this._t('Copie impossible'));
         }
       });
       
@@ -7250,7 +7259,7 @@ rdr-programme{display:block;width:100%;}
       if (a.poiId) {
         const vue = hote.querySelector('.rp-mod-vue');
         const cadre = document.createElement('iframe');
-        cadre.title = 'Carte du village, ' + (a.lieu || '');
+        cadre.title = (this._lang() === 'en' ? 'Village map, ' : 'Carte du village, ') + (a.lieu || '');
         cadre.loading = 'eager';
         cadre.src = joindre(lienCadre, 'encadre=1');
         

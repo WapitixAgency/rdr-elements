@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 950c32b | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="950c32b";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 1b5dde8 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1b5dde8";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -16,7 +16,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="950c32b";performance
   function isSafeUrl(u, fallback) {
     fallback = arguments.length > 1 ? fallback : '';
     if (u == null) return fallback;
-    let s = String(u).trim();
+    let s = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return fallback;
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -251,7 +251,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="950c32b";performance
     cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M9 7l1.2-2.4h3.6L15 7"/></svg>',
     mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
-    eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>',
      
      
     eyelu: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 11.5S5.5 5.5 12 5.5 22 11.5 22 11.5s-3.5 6-10 6-10-6-10-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11.5" r="2.6" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="17.6" r="5.2" fill="#FCF150" stroke="#0A1A35" stroke-width="1.1"/><path d="m15.9 17.6 1.5 1.5 2.7-2.8" stroke="#0A1A35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -3094,6 +3093,7 @@ class RdrNews extends HTMLElement {
 
   var ER_EN = {
     'Retour': 'Back',
+    'Lien copié ✓': 'Link copied ✓',
     'Retour aux actualités': 'Back to the news',
     'Explorer': 'Explore',
     'Explorer toutes les actualités': 'Explore all the news',
@@ -3699,7 +3699,7 @@ class RdrNews extends HTMLElement {
        
        
       var crumbDouble = /^(actualit|news$)/i.test(String(crumbCat).normalize('NFD').replace(/[̀-ͯ]/g, '').trim());
-      var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : coverPlaceholder();
+      var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="" fetchpriority="high" decoding="async">' : coverPlaceholder();
 
       this.innerHTML =
         '<div class="rph-root">' +
@@ -3716,7 +3716,7 @@ class RdrNews extends HTMLElement {
             '<button type="button" class="rph-rshare" data-rph-share="native" aria-label="Partager l\'article">' + IC.share + '</button>' +
           '</div></div>' +
           '<div class="rph-hw"><section class="rph-hero">' +
-            '<div class="rph-blur">' + (d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : '<div class="ph"></div>') + '</div>' +
+            '<div class="rph-blur" aria-hidden="true">' + (d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : '<div class="ph"></div>') + '</div>' +
             '<div class="rph-main">' +
               '<div class="rph-kick">' +
                 '<span class="rph-b fmt">' + esc(d.formatLabel || d.format) + '</span>' +
@@ -3814,7 +3814,7 @@ class RdrNews extends HTMLElement {
       if (copy) copy.onclick = function () {
         var tip = copy.querySelector('.tip'), prev = tip ? tip.textContent : '';
         if (navigator.clipboard) { try { navigator.clipboard.writeText(location.href); } catch (e) {} }
-        if (tip) { tip.textContent = 'Lien copié ✓'; setTimeout(function () { tip.textContent = prev; }, 1400); }
+        if (tip) { tip.textContent = self._t('Lien copié ✓'); setTimeout(function () { tip.textContent = prev; }, 1400); }
       };
     }
 
@@ -4497,6 +4497,30 @@ class RdrNews extends HTMLElement {
 
     '.rpm-rev{opacity:0;transform:translateY(14px);transition:.5s ease}.rpm-rev.in{opacity:1;transform:none}',
 
+    
+
+
+
+
+    '.rpm-sq-l,.rpm-sq-c{position:relative;display:block;overflow:hidden}',
+    '.rpm-sq-l{height:12px;border-radius:4px;background:rgba(10,26,53,.08)}',
+    '.rpm-sq-c{background:rgba(10,26,53,.06)}',
+    '.rpm-sq-segic{flex:0 0 auto;width:32px;height:32px;border-radius:9px 3px 9px 3px;background:rgba(10,26,53,.12)}',
+    '.rpm-sq-segt{width:min(240px,50%);height:20px;border-radius:5px;background:rgba(10,26,53,.11)}',
+    '.rpm-sq-pilule{width:104px;height:36px;border-radius:999px;background:rgba(10,26,53,.06)}',
+    '.rpm-sq-pilule:nth-child(3n){width:88px}.rpm-sq-pilule:nth-child(3n+2){width:126px}',
+    '.rpm-sq-carte{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0}',
+    '.rpm-sq-vign{aspect-ratio:16/9}',
+    '.rpm-sq-corps{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;min-height:151px}',
+    '.rpm-sq-rang1 .rpm-sq-corps{min-height:211px}',
+    '.rpm-sq-badge{width:92px;height:20px;border-radius:6px 2px 6px 2px}',
+    '.rpm-sq-t{width:92%;height:15px}.rpm-sq-t2{width:64%}',
+    '.rpm-sq-p{width:96%;height:10px;margin-top:4px}.rpm-sq-p2{width:72%;margin-top:0}',
+    '.rpm-sq-l::after,.rpm-sq-c::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:rpm-sq-luire 1.6s ease-in-out infinite}',
+    '@keyframes rpm-sq-luire{to{transform:translateX(100%)}}',
+    '@media(max-width:620px){.rpm-sq-rang1 .rpm-sq-corps{min-height:192px}}',
+    '@media (prefers-reduced-motion:reduce){.rpm-sq-l::after,.rpm-sq-c::after{animation:none;display:none}}',
+
     '@media(max-width:1060px){.rpm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rpm-tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}',
     '@media(max-width:620px){.rpm-in{padding-left:14px;padding-right:14px}.rpm-grid{grid-template-columns:1fr;gap:14px}.rpm-tgrid{grid-template-columns:1fr}}',
     '@media(prefers-reduced-motion:reduce){.rpm-root *{transition:none!important}}'
@@ -4638,6 +4662,7 @@ class RdrNews extends HTMLElement {
 
 
   const ER_EN = {
+    'Nouveau': 'New',
     'Partager cet article': 'Share this article',
     'Partager sur X': 'Share on X',
     'Partager sur Facebook': 'Share on Facebook',
@@ -4690,9 +4715,11 @@ class RdrNews extends HTMLElement {
     }
     disconnectedCallback() {
       if (this._io) { this._io.disconnect(); this._io = null; }
+      if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       this._wired = false;
     }
     static get observedAttributes() { return ['data-payload', 'lang']; }
+    static get ATTENTE_MAX_MS() { return 12000; }
     _lang() {
       LANGUE = this.getAttribute('lang') === 'en' ? 'en' : 'fr';
       return LANGUE;
@@ -4900,16 +4927,59 @@ class RdrNews extends HTMLElement {
         }).join('') + '</div></div>';
     }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    _enAttente() {
+      return !this.getAttribute('data-payload') && !DEMO_AUTORISEE && !this._abandon;
+    }
+    _garder(attente) {
+      var self = this;
+      if (!attente) { if (this._garde) { clearTimeout(this._garde); this._garde = null; } return; }
+      if (this._garde) return;
+      this._garde = setTimeout(function () {
+        self._garde = null;
+        if (self.getAttribute('data-payload')) return;
+        self._abandon = true;
+        if (self._wired) { self._render(); self._reveal(); }
+      }, this.constructor.ATTENTE_MAX_MS);
+    }
+    _squelette() {
+      var i = function (c) { return '<i class="' + c + '"></i>'; };
+      var seg = function (icone) { return '<div class="rpm-seg">' + (icone ? i('rpm-sq-c rpm-sq-segic') : '') + i('rpm-sq-l rpm-sq-segt') + '<span class="rule"></span></div>'; };
+      var carte = '<div class="rpm-sq-carte">' + i('rpm-sq-c rpm-sq-vign') + '<div class="rpm-sq-corps">' +
+        i('rpm-sq-l rpm-sq-badge') + i('rpm-sq-l rpm-sq-t') + i('rpm-sq-l rpm-sq-t rpm-sq-t2') + i('rpm-sq-l rpm-sq-p') + i('rpm-sq-l rpm-sq-p rpm-sq-p2') + '</div></div>';
+      var rang = function (n) { return '<div class="rpm-sq-rang' + (n === 1 ? ' rpm-sq-rang1' : '') + '">' + seg(true) + '<div class="rpm-grid">' + carte + carte + carte + '</div></div>'; };
+      return '<div class="rpm-sq" aria-hidden="true"><div class="rpm-tags">' + seg(false) + '<div class="rpm-tagrow">' +
+        i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') +
+        '</div></div>' + rang(1) + rang(2) + rang(3) + '</div>';
+    }
+
     _render() {
       this._lang();
       var d = this._data();
       var r = this._rows(d);
+      var attente = this._enAttente();
+      this._garder(attente);
       var html = '<div class="rpm-in">' + this._shareRow();
-       
-      html += this._tagsBlock(d);
-      if (r.same.length) html += '<div class="rpm-rev">' + this._seg(IC.compass, 'Sur le même bord', 'MÊME SKIPPER · BATEAU · CLASSE') + this._row(r.same) + '</div>';
-      if (r.vein.length) html += '<div class="rpm-rev">' + this._seg(IC.search, 'Dans la même veine', 'CATÉGORIE ET THÈMES PROCHES') + this._row(r.vein) + '</div>';
-      if (r.pick.length) html += '<div class="rpm-rev">' + this._seg(IC.flame, 'À ne pas manquer', 'SÉLECTION DE LA RÉDACTION') + this._row(r.pick) + '</div>';
+      if (attente) html += this._squelette();
+      else {
+         
+        html += this._tagsBlock(d);
+        if (r.same.length) html += '<div class="rpm-rev">' + this._seg(IC.compass, 'Sur le même bord', 'MÊME SKIPPER · BATEAU · CLASSE') + this._row(r.same) + '</div>';
+        if (r.vein.length) html += '<div class="rpm-rev">' + this._seg(IC.search, 'Dans la même veine', 'CATÉGORIE ET THÈMES PROCHES') + this._row(r.vein) + '</div>';
+        if (r.pick.length) html += '<div class="rpm-rev">' + this._seg(IC.flame, 'À ne pas manquer', 'SÉLECTION DE LA RÉDACTION') + this._row(r.pick) + '</div>';
+      }
       html += this._tools(d);
       html += '<div class="rpm-endnav rpm-rev">' +
         '<button class="primary" data-rpm-back>' + IC.back + 'Retour à toutes les actualités</button>' +

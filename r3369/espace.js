@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 950c32b | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="950c32b";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 1b5dde8 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="1b5dde8";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -41,7 +41,6 @@ if (!customElements.get('espace-rhum')) {
   const ICON_DASHBOARD    = '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>';
   const ICON_SKIPPER_JOUR = '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
   const ICON_SKIPPERS     = '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
-  const ICON_POUR_TOI     = '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
   const ICON_ACTUS        = '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="13" y2="18"/></svg>';
   const ICON_BADGES       = '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>';
   const ICON_STATS        = '<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>';
@@ -50,7 +49,6 @@ if (!customElements.get('espace-rhum')) {
   const ICON_ARROW_RIGHT  = '<svg class="er-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
   const ICON_PLUS         = '<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
   const ICON_LOCK         = '<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
-  const ICON_MEDAL        = '<svg viewBox="0 0 24 24"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg>';
 
   const HEART_SVG = '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
   
@@ -209,7 +207,6 @@ if (!customElements.get('espace-rhum')) {
    
   const ICON_COPIER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
    
-  const ICON_SKIP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>';
   
 
 
@@ -316,18 +313,33 @@ if (!customElements.get('espace-rhum')) {
       return m;
     } catch (e) { return null; }
   }
+  
+
+
+  function sansCodes(codes) {
+    if (!codes || typeof codes !== 'object') return codes;
+    const o = {};
+    Object.keys(codes).forEach((k) => { const c = codes[k]; o[k] = c && typeof c === 'object' ? Object.assign({}, c, { code: c.code ? true : c.code }) : c; });
+    return o;
+  }
   function ecrireMemoire(membre, lang, payload) {
     if (!membre || !payload) return;
     try {
-      const copie = Object.assign({}, payload, { newlyUnlockedBadges: [], packFanCode: null, profilePrompt: null });
+      const packFan = payload.packFan ? Object.assign({}, payload.packFan, { codes: sansCodes(payload.packFan.codes) }) : payload.packFan;
+      const copie = Object.assign({}, payload, { newlyUnlockedBadges: [], packFanCode: null, profilePrompt: null, packFan });
       localStorage.setItem(MEMOIRE_KEY, JSON.stringify({ membre, lang, le: Date.now(), payload: copie }));
-    } catch (e) {   }
+    } catch (e) {
+      
+
+      try { localStorage.removeItem(MEMOIRE_KEY); } catch (e2) {   }
+    }
   }
   function oublierMemoire() { try { localStorage.removeItem(MEMOIRE_KEY); } catch (e) {   } }
   const MEMOIRE_CSS = `
     espace-rhum.er-memoire > *:not(.er-memoire-pill) { pointer-events: none; }
     espace-rhum .er-memoire-pill { position: fixed; top: 84px; left: 50%; transform: translateX(-50%); z-index: 60; padding: 7px 14px; border-radius: 999px; background: rgba(29, 34, 67, 0.92); color: #fff; font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); animation: er-sk-pulse 1.2s ease-in-out infinite; pointer-events: none; }
     espace-rhum.er-rafraichi .er-dashboard > *, espace-rhum.er-rafraichi .er-cockpit, espace-rhum.er-rafraichi .er-mobile-topbar, espace-rhum.er-rafraichi .er-mobile-shell { animation: none !important; }
+    @media (prefers-reduced-motion: reduce) { espace-rhum .er-memoire-pill { animation: none; } }
   `;
   
 
@@ -1288,7 +1300,6 @@ if (!customElements.get('espace-rhum')) {
     'Un instant…': 'One moment…',
     'Fermer': 'Close', 'Fermer la liste': 'Close the list',
     'Lire plus tard': 'Read later',
-    'Mes sujets': 'My topics',
     "Les angles d'actu que « Mes actus » fait remonter en priorité.":
       'The angles that My news brings to the top for you.',
     'fans dans son sillage': 'fans in their wake', 'fan dans son sillage': 'fan in their wake',
@@ -8789,6 +8800,14 @@ if (!customElements.get('espace-rhum')) {
       background: radial-gradient(closest-side, rgba(93, 191, 192, 0.45), transparent 70%);
       animation: er-halo-pulse 2.4s ease-in-out infinite;
     }
+    
+
+
+    @media (prefers-reduced-motion: reduce) {
+      espace-rhum .er-badge-tile[data-state="unlocked"] .er-badge-tile-halo,
+      espace-rhum .er-badge-modal-halo,
+      espace-rhum .er-pastille[data-tier="critical"] { animation: none; }
+    }
     espace-rhum .er-badge-modal-title {
       font-family: var(--er-font-display);
       font-style: italic;
@@ -10813,12 +10832,6 @@ if (!customElements.get('espace-rhum')) {
     const d = Math.round(h / 24);
     if (d < 7) return `il y a ${d} j`;
     return `il y a ${Math.round(d / 7)} sem`;
-  }
-
-  function extractMainReason(matchReason) {
-    if (!matchReason || typeof matchReason !== 'string') return '';
-    const first = matchReason.split('·')[0];
-    return first ? first.trim() : '';
   }
 
   function computeStatFact(key, value, rangLabel) {
@@ -13513,7 +13526,11 @@ if (!customElements.get('espace-rhum')) {
         hidden: Math.max(0, nEcart - ecartes.length)
       };
 
-      const flashId = pickFlashNews(this._payload)?._id;    
+      
+
+
+      const flash = pickFlashNews(this._payload);
+      const flashId = flash && flash.article ? (flash.article._id || flash.article.id) : undefined;    
       const eligibles = recos.filter(a => (a._id || a.id) && (a._id || a.id) !== flashId);
 
       
@@ -14906,36 +14923,6 @@ if (!customElements.get('espace-rhum')) {
       this._majVolet();
     }
 
-    _buildNewsCard(article, isBig) {
-      const id         = article?._id || article?.id || '';
-       
-      const cover      = isBig ? (article?.coverImage || '') : (article?.coverThumb || article?.coverImage || '');
-      const title      = article?.title || '';
-      const pastille   = Array.isArray(article?.pastilles) && article.pastilles.length ? article.pastilles[0] : null;
-      const tier       = pastille?.tier || 'core';
-      const pastilleLabel = pastille?.label || 'News';
-      const timeAgo    = formatTimeAgoLang(article?.publishedDate, this._lang());
-      const readTime   = Number.isFinite(article?.minutesToRead) ? `${article.minutesToRead} min` : '';
-
-      const modifier = isBig ? ' er-news-card--big er-news-card--full-image' : ' er-news-card-split';
-
-      return `
-        <div class="er-news-card${modifier}"
-             role="button" tabindex="0"
-             data-action="go-article" data-article-id="${escapeHtml(id)}">
-          <div class="er-news-card-img" style="background-image: url('${escapeHtml(cover)}');"></div>
-          <div class="er-news-card-content">
-            <span class="er-pastille" data-tier="${escapeHtml(tier)}">${escapeHtml(pastilleLabel)}</span>
-            <h3 class="er-news-title">${escapeHtml(title)}</h3>
-            <div class="er-news-meta">
-              ${timeAgo ? `<span class="er-news-meta-clock"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>${escapeHtml(timeAgo)}</span>` : ''}
-              ${readTime ? `<span>${escapeHtml(readTime)} ${this._lang() === 'en' ? 'read' : 'de lecture'}</span>` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
     _buildSuggestionsWidget() {
       const recos = Array.isArray(this._payload?.recoSkippers) ? this._payload.recoSkippers : [];
 
@@ -15829,7 +15816,6 @@ if (!customElements.get('espace-rhum')) {
             bubbles: true, composed: true,
             detail: { skipperId, action }
           }));
-          console.log('[ER] er-fav-toggle dispatched', { skipperId, action });
 
           const next = !currently;
           follow.dataset.following = String(next);
@@ -15868,7 +15854,6 @@ if (!customElements.get('espace-rhum')) {
             bubbles: true, composed: true,
             detail: { skipperId, action: 'remove' }
           }));
-          console.log('[ER] er-fav-toggle dispatched', { skipperId, action: 'remove' });
           const card = btn.closest('.er-skipper-card');
           if (card) {
             card.classList.add('is-removing');
@@ -18702,60 +18687,6 @@ if (!customElements.get('espace-rhum')) {
        
        
       return (dedans.length ? dedans : cat).slice(0, 200);
-    }
-
-     
-     
-     
-     
-     
-     
-     
-    _pronosFenetre() {
-      const e = this._pronosEtat();
-      if (!e) return null;
-       
-       
-       
-      let depart = e.fermetureLe ? new Date(e.fermetureLe) : null;
-      if (!depart || isNaN(depart.getTime())) depart = new Date();
-      let debut = e.arriveeDebut ? new Date(e.arriveeDebut) : null;
-      let fin   = e.arriveeFin   ? new Date(e.arriveeFin)   : null;
-      if (!debut || isNaN(debut.getTime())) debut = new Date(depart.getTime() + 7 * 86400000);
-      if (!fin   || isNaN(fin.getTime()))   fin   = new Date(depart.getTime() + 35 * 86400000);
-      if (fin <= debut) fin = new Date(debut.getTime() + 28 * 86400000);
-      return { debut, fin };
-    }
-
-    _pronosJours() {
-      const f = this._pronosFenetre();
-      if (!f) return [];
-      const en = this._lang() === 'en';
-      const out = [];
-      const p2 = (n) => String(n).padStart(2, '0');
-       
-       
-      const d = new Date(f.debut.getFullYear(), f.debut.getMonth(), f.debut.getDate(), 12);
-      const stop = new Date(f.fin.getFullYear(), f.fin.getMonth(), f.fin.getDate(), 12).getTime();
-      while (d.getTime() <= stop && out.length < 90) {
-        out.push({
-          v: d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()),
-          l: d.toLocaleDateString(en ? 'en-GB' : 'fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
-        });
-        d.setDate(d.getDate() + 1);
-      }
-      return out;
-    }
-
-     
-     
-    _pronosHeures() {
-      const out = [];
-      for (let h = 0; h < 24; h += 2) {
-        const hh = String(h).padStart(2, '0');
-        out.push({ v: hh + ':00', l: hh + ' h' });
-      }
-      return out;
     }
 
     _pronosDuree(ms) {

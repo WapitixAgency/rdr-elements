@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 950c32b | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="950c32b";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 1b5dde8 | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="1b5dde8";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -66,7 +66,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="950c32b";performance.m
 
 
 
-  const CONF = '/politique-de-condidentialité';
+  const CONF = '/politique-de-confidentialite';
   const MENTIONS = '/mentions-legales';
   const ESPACE = '/mon-espace-rhum';
 
@@ -566,7 +566,7 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
       
 
       this._maj = '2026-09-14';
-      this._chrome = 0;
+      this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
@@ -613,11 +613,22 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
       const v = String(valeur == null ? '' : valeur).trim();
       if (nom === 'lang') this._lang = v.toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
       else if (nom === 'maj') { if (v) this._maj = v; }
-      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : 0; }
+      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : null; }
     }
 
     
 
+
+    
+
+
+
+
+    _haut() {
+      if (this._chrome != null) return this._chrome;
+      if (!document.querySelector('rdr-entete')) return 0;
+      return window.matchMedia('(max-width: 750px)').matches ? 60 : 56;
+    }
 
     disconnectedCallback() {
       if (this._rafId) cancelAnimationFrame(this._rafId);
@@ -641,7 +652,7 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
 
       const T = I18N[this._lang] || I18N.fr;
       const lang = this._lang;
-      this._racine.style.setProperty('--cgu-chrome', this._chrome + 'px');
+      this._racine.style.setProperty('--cgu-chrome', this._haut() + 'px');
       this._racine.setAttribute('lang', lang);
 
       this._racine.innerHTML =
@@ -834,7 +845,7 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
         const vue = window.innerHeight;
         const docH = document.documentElement.scrollHeight;
         const scrollMax = Math.max(0, docH - vue);
-        const h = this._chrome;
+        const h = this._haut();
         let ligne = y + h + 24;
         const reste = scrollMax - y;
         if (reste < vue) {
@@ -864,7 +875,7 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
       marquerDebord();
       window.addEventListener('scroll', demander, { passive: true });
       this._ecouteurs.push([window, 'scroll', demander]);
-      const surRedim = () => { demander(); marquerDebord(); };
+      const surRedim = () => { this._racine.style.setProperty('--cgu-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
     }

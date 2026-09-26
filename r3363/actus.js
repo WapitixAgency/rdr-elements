@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 2e92473 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="2e92473";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 1b5dde8 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1b5dde8";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3093,6 +3093,7 @@ class RdrNews extends HTMLElement {
 
   var ER_EN = {
     'Retour': 'Back',
+    'Lien copié ✓': 'Link copied ✓',
     'Retour aux actualités': 'Back to the news',
     'Explorer': 'Explore',
     'Explorer toutes les actualités': 'Explore all the news',
@@ -3698,7 +3699,7 @@ class RdrNews extends HTMLElement {
        
        
       var crumbDouble = /^(actualit|news$)/i.test(String(crumbCat).normalize('NFD').replace(/[̀-ͯ]/g, '').trim());
-      var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : coverPlaceholder();
+      var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="" fetchpriority="high" decoding="async">' : coverPlaceholder();
 
       this.innerHTML =
         '<div class="rph-root">' +
@@ -3715,7 +3716,7 @@ class RdrNews extends HTMLElement {
             '<button type="button" class="rph-rshare" data-rph-share="native" aria-label="Partager l\'article">' + IC.share + '</button>' +
           '</div></div>' +
           '<div class="rph-hw"><section class="rph-hero">' +
-            '<div class="rph-blur">' + (d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : '<div class="ph"></div>') + '</div>' +
+            '<div class="rph-blur" aria-hidden="true">' + (d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : '<div class="ph"></div>') + '</div>' +
             '<div class="rph-main">' +
               '<div class="rph-kick">' +
                 '<span class="rph-b fmt">' + esc(d.formatLabel || d.format) + '</span>' +
@@ -3813,7 +3814,7 @@ class RdrNews extends HTMLElement {
       if (copy) copy.onclick = function () {
         var tip = copy.querySelector('.tip'), prev = tip ? tip.textContent : '';
         if (navigator.clipboard) { try { navigator.clipboard.writeText(location.href); } catch (e) {} }
-        if (tip) { tip.textContent = 'Lien copié ✓'; setTimeout(function () { tip.textContent = prev; }, 1400); }
+        if (tip) { tip.textContent = self._t('Lien copié ✓'); setTimeout(function () { tip.textContent = prev; }, 1400); }
       };
     }
 
@@ -4661,6 +4662,7 @@ class RdrNews extends HTMLElement {
 
 
   const ER_EN = {
+    'Nouveau': 'New',
     'Partager cet article': 'Share this article',
     'Partager sur X': 'Share on X',
     'Partager sur Facebook': 'Share on Facebook',
