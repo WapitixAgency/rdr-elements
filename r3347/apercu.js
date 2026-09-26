@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum caa45f2 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="caa45f2";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 6d43c09 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="6d43c09";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -410,7 +410,7 @@ rdr-accueil-apercu .cta-rhum{display:inline-flex;align-items:center;gap:10px;min
 rdr-accueil-apercu .cta-rhum svg{width:18px;height:18px;flex:none;transition:transform .2s ease}
 rdr-accueil-apercu .cta-rhum:hover{transform:translateY(-2px);box-shadow:0 16px 28px -12px rgba(80,24,0,.8)}
 rdr-accueil-apercu .cta-rhum:hover svg{transform:translateX(3px)}
-rdr-accueil-apercu .lien-rhum{color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.5)}
+rdr-accueil-apercu .lien-rhum{color:#fff;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.5)}
 rdr-accueil-apercu .lien-rhum:hover{text-decoration-color:#fff}
 rdr-accueil-apercu .cta-rhum:focus-visible,rdr-accueil-apercu .lien-rhum:focus-visible{outline:3px solid #13204A;outline-offset:3px}
 rdr-accueil-apercu .promo-visuel{position:relative;border-radius:0 26px 26px 0;overflow:visible}
@@ -929,7 +929,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu', 'skippers', 'promos', 'actus']; }
+    static get observedAttributes() { return ['jeu', 'skippers', 'promos', 'actus', 'connexion']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -977,6 +977,10 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (nom === 'actus') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-actus')); return; }
+      
+
+
+      if (nom === 'connexion') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-connexion-prete')); return; }
       if (nom !== 'jeu' || !this._monte || this._dessine) return;
       const jeu = this._jeuAttribut();
       if (jeu) this._dessiner(jeu);
@@ -1747,11 +1751,37 @@ function monter(racine, portail, D) {
     ecoute(racine, 'raa-actus', () => { const a2 = actusAttribut(); if (a2) rendreActus(a2); });
   } else Promise.resolve(D.actus).then((a) => rendreActus(Array.isArray(a) ? a : a.posts));
 
-  tout('.lien-rhum').forEach((a) => ecoute(a, 'click', (ev) => {
-    if (!racine.getAttribute || racine.getAttribute('connexion') !== 'velo') return;
-    ev.preventDefault();
-    racine.dispatchEvent(new CustomEvent('raa-connexion', { bubbles: true, composed: true }));
-  }));
+  
+
+
+
+
+
+
+  const connexionVelo = () => !!(racine.getAttribute && racine.getAttribute('connexion') === 'velo');
+  const brancherConnexion = () => {
+    if (!connexionVelo()) return;
+    tout('.lien-rhum').forEach((a) => {
+      if (!a.hasAttribute('href')) return;
+      a.removeAttribute('href');
+      a.setAttribute('role', 'button');
+      a.setAttribute('tabindex', '0');
+    });
+  };
+  tout('.lien-rhum').forEach((a) => {
+    ecoute(a, 'click', (ev) => {
+      if (!connexionVelo()) return;
+      ev.preventDefault();
+      racine.dispatchEvent(new CustomEvent('raa-connexion', { bubbles: true, composed: true }));
+    });
+    ecoute(a, 'keydown', (ev) => {
+      if (a.hasAttribute('href') || (ev.key !== 'Enter' && ev.key !== ' ')) return;
+      ev.preventDefault();
+      a.click();
+    });
+  });
+  brancherConnexion();
+  ecoute(racine, 'raa-connexion-prete', brancherConnexion);
 
    
   const CLASSES = D.classes;
