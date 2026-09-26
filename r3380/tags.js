@@ -1,5 +1,5 @@
-/* rdr-elements tags | source route-du-rhum 4e4b53a | rdr-tags.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.mark("rdr-elements:tags")}catch(e){}
+/* rdr-elements tags | source route-du-rhum eab1d5d | rdr-tags.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="eab1d5d";performance.mark("rdr-elements:tags")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -248,8 +248,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.
       transition: background .14s ease, border-color .14s ease, color .14s ease;
     }
     rdr-tags .rt-jeton .rt-etat { width: 0; overflow: hidden; transition: width .14s ease; }
-    rdr-tags .rt-jeton:hover { background: #5DBFC0; border-color: #5DBFC0; color: #06222B; }
-    rdr-tags .rt-jeton:hover .rt-etat { width: 13px; }
+    @media (hover:hover) and (pointer:fine){rdr-tags .rt-jeton:hover{ background: #5DBFC0; border-color: #5DBFC0; color: #06222B; }}
+    @media (hover:hover) and (pointer:fine){rdr-tags .rt-jeton:hover .rt-etat{ width: 13px; }}
     rdr-tags .rt-jeton:focus-visible { outline: 2px solid #7FD4D2; outline-offset: 2px; }
     rdr-tags .rt-jeton[data-fait="oui"] {
       background: #5DBFC0; border-color: #5DBFC0; color: #06222B;
@@ -335,9 +335,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.
     rdr-tags .rt-champ input::placeholder, rdr-tags .rt-champ textarea::placeholder {
       color: var(--rt-gris);
     }
-    rdr-tags .rt-champ input:hover, rdr-tags .rt-champ textarea:hover {
+    @media (hover:hover) and (pointer:fine){rdr-tags .rt-champ input:hover,rdr-tags .rt-champ textarea:hover{
       border-color: var(--rt-teal);
-    }
+    }}
     rdr-tags .rt-champ input:focus, rdr-tags .rt-champ textarea:focus {
       border-color: var(--rt-teal); box-shadow: 0 0 0 3px rgba(93, 191, 192, .16);
     }
@@ -374,7 +374,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.
     }
     rdr-tags .rt-copie.rt-fr { background: var(--rt-teal-doux); }
     rdr-tags .rt-copie.rt-en { border-left: 1px solid var(--rt-trait-fort); color: var(--rt-gris); }
-    rdr-tags .rt-copie:hover { background: var(--rt-teal); color: #fff; }
+    @media (hover:hover) and (pointer:fine){rdr-tags .rt-copie:hover{ background: var(--rt-teal); color: #fff; }}
     rdr-tags .rt-copie:focus-visible { outline: 2px solid var(--rt-teal); outline-offset: -2px; }
     rdr-tags .rt-drap {
       width: 17px; height: 11.5px; flex: 0 0 auto; border-radius: 1.5px;
@@ -386,7 +386,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.
     rdr-tags .rt-etat { display: grid; width: 13px; height: 13px; flex: 0 0 auto; }
     rdr-tags .rt-etat svg { grid-area: 1 / 1; width: 13px; height: 13px; opacity: .45; }
     rdr-tags .rt-etat svg + svg { opacity: 0; }
-    rdr-tags .rt-copie:hover .rt-etat svg { opacity: .95; }
+    @media (hover:hover) and (pointer:fine){rdr-tags .rt-copie:hover .rt-etat svg{ opacity: .95; }}
     rdr-tags .rt-copie[data-fait="oui"] { background: var(--rt-teal); color: #fff; }
     rdr-tags .rt-copie[data-fait="oui"] .rt-etat svg { opacity: 0; }
     rdr-tags .rt-copie[data-fait="oui"] .rt-etat svg + svg { opacity: 1; }
@@ -450,7 +450,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="4e4b53a";performance.
       border: 1px solid var(--rt-trait-fort); border-radius: 2px; background: transparent; color: var(--rt-encre);
       font: 600 12.5px/1 Montserrat, sans-serif; white-space: nowrap;
     }
-    rdr-tags .rt-bouton:hover, rdr-tags .rt-bouton[data-fait="oui"] { background: var(--rt-teal); border-color: var(--rt-teal); color: #06222B; }
+    rdr-tags .rt-bouton[data-fait="oui"]{ background: var(--rt-teal); border-color: var(--rt-teal); color: #06222B; }@media (hover:hover) and (pointer:fine){rdr-tags .rt-bouton:hover{ background: var(--rt-teal); border-color: var(--rt-teal); color: #06222B; }}
     rdr-tags .rt-bouton:focus-visible { outline: 2px solid var(--rt-teal); outline-offset: 2px; }
     rdr-tags .rt-bouton .rt-etat svg { opacity: .8; }
     rdr-tags .rt-bouton[data-fait="oui"] .rt-etat svg { opacity: 0; }
