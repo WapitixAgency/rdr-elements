@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 2aa13f3 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="2aa13f3";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum a60995b | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a60995b";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1061,6 +1061,44 @@ function monter(racine, portail, D) {
 
 
 
+
+  let libere = false;
+  const retenues = [], apres = [];
+  const retenir = (img) => {
+    if (libere || img.closest('#hero, .hv-acces-sous')) return;
+    const src = img.getAttribute('src'), srcset = img.getAttribute('srcset');
+    if (!src && !srcset) return;
+    retenues.push([img, src, srcset]);
+    img.removeAttribute('srcset'); img.removeAttribute('src');
+  };
+  const guetImages = new MutationObserver((ms) => {
+    if (libere) return;
+    ms.forEach((m) => m.addedNodes.forEach((n) => {
+      if (n.nodeType !== 1) return;
+      if (n.matches('img[loading="lazy"]')) retenir(n);
+      n.querySelectorAll('img[loading="lazy"]').forEach(retenir);
+    }));
+  });
+  guetImages.observe(racine, { childList: true, subtree: true });
+  if (portail !== racine) guetImages.observe(portail, { childList: true, subtree: true });
+  observateurs.push(guetImages);
+  const apresPhoto = (f) => { if (libere) f(); else apres.push(f); };
+  const liberer = () => {
+    if (libere) return;
+    libere = true;
+    guetImages.disconnect();
+    retenues.splice(0).forEach(([img, src, srcset]) => { if (srcset) img.setAttribute('srcset', srcset); if (src) img.setAttribute('src', src); });
+    apres.splice(0).forEach((f) => { try { f(); } catch (e) {   } });
+  };
+  
+
+
+
+
+
+
+
+
   if ('IntersectionObserver' in window) {
     const horsEcran = new IntersectionObserver((es) => es.forEach((e) => e.target.toggleAttribute('data-hors', !e.isIntersecting)), { rootMargin: '120px 0px' });
     tout('section, .sep, .vague-sep').forEach((x) => horsEcran.observe(x));
@@ -1114,8 +1152,10 @@ function monter(racine, portail, D) {
     if (el.tagName === 'SOURCE' || !M[el.dataset.media]) return;
     el.src = el.dataset.larg ? retaille(M[el.dataset.media], Math.min(Number(el.dataset.larg), pourLarge(document.documentElement.clientWidth || innerWidth)), Number(el.dataset.q) || 60) : M[el.dataset.media];
   });
-  tout('[data-media-affiche]').forEach(el => { if (M[el.dataset.mediaAffiche]) el.poster = M[el.dataset.mediaAffiche]; });
-  const chargerVideo = (v) => { const s = v && v.querySelector('source[data-media]'); if (s && !s.getAttribute('src') && M[s.dataset.media]) { s.src = M[s.dataset.media]; try { v.load(); } catch (e) {   } } };
+  tout('img[loading="lazy"]').forEach(retenir);
+  
+
+  const chargerVideo = (v) => { if (v && !v.getAttribute('poster') && M[v.dataset.mediaAffiche]) v.poster = M[v.dataset.mediaAffiche]; const s = v && v.querySelector('source[data-media]'); if (s && !s.getAttribute('src') && M[s.dataset.media]) { s.src = M[s.dataset.media]; try { v.load(); } catch (e) {   } } };
 
   
 
@@ -1592,7 +1632,7 @@ function monter(racine, portail, D) {
   rendrePub();
   ecoute(racine, 'raa-promos', rendrePub);
    
-  { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")'); }
+  { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) apresPhoto(() => sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")')); }
 
   
 
@@ -1895,7 +1935,7 @@ function monter(racine, portail, D) {
       (x.src ? '<a class="fa-source" href="' + esc(lien(x.src.url)) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
     
 
-    if (M.topoFaq) $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")');
+    if (M.topoFaq) apresPhoto(() => $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")'));
     const section = $('faq-acc');
     if (typeof IntersectionObserver !== 'function') section.classList.add('fa-vu');
     else {
@@ -1923,6 +1963,13 @@ function monter(racine, portail, D) {
   modeDepart = q.get('depart') === 'repere' ? 'repere' : (q.get('depart') === 'non' ? '' : 'bandeau');
   rendreFaq(q.get('faq') !== 'non');
   placer(); rendreHero(); rendreCtas(); entree(); note();
+  {
+    const ph = $('hero-photo');
+    const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
+    prete.then(() => requestAnimationFrame(() => requestAnimationFrame(liberer)));
+    minuteurs.push(setTimeout(liberer, 3000));
+    ecoute(window, 'scroll', liberer);
+  }
   return () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
 }
  
