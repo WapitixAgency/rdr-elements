@@ -1,5 +1,5 @@
-/* rdr-elements bateaux | source route-du-rhum c9743c6 | rdr-bateaux.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="c9743c6";performance.mark("rdr-elements:bateaux")}catch(e){}
+/* rdr-elements bateaux | source route-du-rhum d89638a | rdr-bateaux.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="d89638a";performance.mark("rdr-elements:bateaux")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-bateaux")) return;
