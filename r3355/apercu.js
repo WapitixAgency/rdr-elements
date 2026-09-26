@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d89638a | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d89638a";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 74dac62 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="74dac62";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1056,9 +1056,14 @@ function monter(racine, portail, D) {
 
 
 
+
+
+
+
+
   if ('IntersectionObserver' in window) {
     const horsEcran = new IntersectionObserver((es) => es.forEach((e) => e.target.toggleAttribute('data-hors', !e.isIntersecting)), { rootMargin: '120px 0px' });
-    tout('section, .sep').forEach((x) => horsEcran.observe(x));
+    tout('section, .sep, .vague-sep').forEach((x) => horsEcran.observe(x));
     ecouteurs.push(() => horsEcran.disconnect());
   }
    
