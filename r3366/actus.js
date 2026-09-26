@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum acb298a | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="acb298a";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 490097c | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="490097c";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -4497,6 +4497,30 @@ class RdrNews extends HTMLElement {
 
     '.rpm-rev{opacity:0;transform:translateY(14px);transition:.5s ease}.rpm-rev.in{opacity:1;transform:none}',
 
+    
+
+
+
+
+    '.rpm-sq-l,.rpm-sq-c{position:relative;display:block;overflow:hidden}',
+    '.rpm-sq-l{height:12px;border-radius:4px;background:rgba(10,26,53,.08)}',
+    '.rpm-sq-c{background:rgba(10,26,53,.06)}',
+    '.rpm-sq-segic{flex:0 0 auto;width:32px;height:32px;border-radius:9px 3px 9px 3px;background:rgba(10,26,53,.12)}',
+    '.rpm-sq-segt{width:min(240px,50%);height:20px;border-radius:5px;background:rgba(10,26,53,.11)}',
+    '.rpm-sq-pilule{width:104px;height:36px;border-radius:999px;background:rgba(10,26,53,.06)}',
+    '.rpm-sq-pilule:nth-child(3n){width:88px}.rpm-sq-pilule:nth-child(3n+2){width:126px}',
+    '.rpm-sq-carte{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0}',
+    '.rpm-sq-vign{aspect-ratio:16/9}',
+    '.rpm-sq-corps{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;min-height:151px}',
+    '.rpm-sq-rang1 .rpm-sq-corps{min-height:211px}',
+    '.rpm-sq-badge{width:92px;height:20px;border-radius:6px 2px 6px 2px}',
+    '.rpm-sq-t{width:92%;height:15px}.rpm-sq-t2{width:64%}',
+    '.rpm-sq-p{width:96%;height:10px;margin-top:4px}.rpm-sq-p2{width:72%;margin-top:0}',
+    '.rpm-sq-l::after,.rpm-sq-c::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:rpm-sq-luire 1.6s ease-in-out infinite}',
+    '@keyframes rpm-sq-luire{to{transform:translateX(100%)}}',
+    '@media(max-width:620px){.rpm-sq-rang1 .rpm-sq-corps{min-height:192px}}',
+    '@media (prefers-reduced-motion:reduce){.rpm-sq-l::after,.rpm-sq-c::after{animation:none;display:none}}',
+
     '@media(max-width:1060px){.rpm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rpm-tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}',
     '@media(max-width:620px){.rpm-in{padding-left:14px;padding-right:14px}.rpm-grid{grid-template-columns:1fr;gap:14px}.rpm-tgrid{grid-template-columns:1fr}}',
     '@media(prefers-reduced-motion:reduce){.rpm-root *{transition:none!important}}'
@@ -4690,9 +4714,11 @@ class RdrNews extends HTMLElement {
     }
     disconnectedCallback() {
       if (this._io) { this._io.disconnect(); this._io = null; }
+      if (this._garde) { clearTimeout(this._garde); this._garde = null; }
       this._wired = false;
     }
     static get observedAttributes() { return ['data-payload', 'lang']; }
+    static get ATTENTE_MAX_MS() { return 12000; }
     _lang() {
       LANGUE = this.getAttribute('lang') === 'en' ? 'en' : 'fr';
       return LANGUE;
@@ -4900,16 +4926,59 @@ class RdrNews extends HTMLElement {
         }).join('') + '</div></div>';
     }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    _enAttente() {
+      return !this.getAttribute('data-payload') && !DEMO_AUTORISEE && !this._abandon;
+    }
+    _garder(attente) {
+      var self = this;
+      if (!attente) { if (this._garde) { clearTimeout(this._garde); this._garde = null; } return; }
+      if (this._garde) return;
+      this._garde = setTimeout(function () {
+        self._garde = null;
+        if (self.getAttribute('data-payload')) return;
+        self._abandon = true;
+        if (self._wired) { self._render(); self._reveal(); }
+      }, this.constructor.ATTENTE_MAX_MS);
+    }
+    _squelette() {
+      var i = function (c) { return '<i class="' + c + '"></i>'; };
+      var seg = function (icone) { return '<div class="rpm-seg">' + (icone ? i('rpm-sq-c rpm-sq-segic') : '') + i('rpm-sq-l rpm-sq-segt') + '<span class="rule"></span></div>'; };
+      var carte = '<div class="rpm-sq-carte">' + i('rpm-sq-c rpm-sq-vign') + '<div class="rpm-sq-corps">' +
+        i('rpm-sq-l rpm-sq-badge') + i('rpm-sq-l rpm-sq-t') + i('rpm-sq-l rpm-sq-t rpm-sq-t2') + i('rpm-sq-l rpm-sq-p') + i('rpm-sq-l rpm-sq-p rpm-sq-p2') + '</div></div>';
+      var rang = function (n) { return '<div class="rpm-sq-rang' + (n === 1 ? ' rpm-sq-rang1' : '') + '">' + seg(true) + '<div class="rpm-grid">' + carte + carte + carte + '</div></div>'; };
+      return '<div class="rpm-sq" aria-hidden="true"><div class="rpm-tags">' + seg(false) + '<div class="rpm-tagrow">' +
+        i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') + i('rpm-sq-l rpm-sq-pilule') +
+        '</div></div>' + rang(1) + rang(2) + rang(3) + '</div>';
+    }
+
     _render() {
       this._lang();
       var d = this._data();
       var r = this._rows(d);
+      var attente = this._enAttente();
+      this._garder(attente);
       var html = '<div class="rpm-in">' + this._shareRow();
-       
-      html += this._tagsBlock(d);
-      if (r.same.length) html += '<div class="rpm-rev">' + this._seg(IC.compass, 'Sur le même bord', 'MÊME SKIPPER · BATEAU · CLASSE') + this._row(r.same) + '</div>';
-      if (r.vein.length) html += '<div class="rpm-rev">' + this._seg(IC.search, 'Dans la même veine', 'CATÉGORIE ET THÈMES PROCHES') + this._row(r.vein) + '</div>';
-      if (r.pick.length) html += '<div class="rpm-rev">' + this._seg(IC.flame, 'À ne pas manquer', 'SÉLECTION DE LA RÉDACTION') + this._row(r.pick) + '</div>';
+      if (attente) html += this._squelette();
+      else {
+         
+        html += this._tagsBlock(d);
+        if (r.same.length) html += '<div class="rpm-rev">' + this._seg(IC.compass, 'Sur le même bord', 'MÊME SKIPPER · BATEAU · CLASSE') + this._row(r.same) + '</div>';
+        if (r.vein.length) html += '<div class="rpm-rev">' + this._seg(IC.search, 'Dans la même veine', 'CATÉGORIE ET THÈMES PROCHES') + this._row(r.vein) + '</div>';
+        if (r.pick.length) html += '<div class="rpm-rev">' + this._seg(IC.flame, 'À ne pas manquer', 'SÉLECTION DE LA RÉDACTION') + this._row(r.pick) + '</div>';
+      }
       html += this._tools(d);
       html += '<div class="rpm-endnav rpm-rev">' +
         '<button class="primary" data-rpm-back>' + IC.back + 'Retour à toutes les actualités</button>' +
