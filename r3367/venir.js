@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum acb298a | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="acb298a";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 056e552 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="056e552";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -58,6 +58,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="acb298a";performance
     velo: '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
     pied: '<path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>',
     autre: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+    jourPlus: '<path d="M16 18h6"/><path d="M16 2v3"/><path d="M19 15v6"/><path d="M21 11.5V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h8.3"/><path d="M3 9h18"/><path d="M8 2v3"/>',
     cadeau: '<path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/>',
     vague: '<path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"/>',
     fichier: '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
@@ -149,7 +150,7 @@ const ER_EN = {
     'Précisez votre mode de transport': 'Tell us more about your transport',
     'Votre justificatif de transport': 'Your proof of transport',
     'Déposez ici votre justificatif de mobilité.': 'Upload your proof of mobility here.',
-    'Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, photo de votre vélo, justificatif de covoiturage.': 'Accepted proofs include: train or bus ticket, travel pass, a photo of your bike, car-sharing confirmation.',
+    'Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, confirmation de covoiturage, photo de votre vélo ou de vous à pied.': 'Accepted proofs include: train or bus ticket, travel pass, car-sharing confirmation, a photo of your bike or of you on foot.',
     'PDF, JPG ou PNG, 10 Mo au plus.': 'PDF, JPG or PNG, up to 10 MB.',
     'Choisir un fichier': 'Choose a file',
     'ou glissez-le ici': 'or drag it here',
@@ -173,7 +174,7 @@ const ER_EN = {
     'Vous participez automatiquement au tirage au sort quotidien correspondant à votre venue, et vous êtes aussi enregistré pour le grand tirage au sort final, à l’issue des 13 jours du village.': 'You are automatically entered into the daily prize draw for your visit day, and also registered for the grand final draw at the end of the village’s 13 days.',
     'Chaque jour': 'Every day',
     'Grand tirage final': 'Grand final draw',
-    'Découvrir le programme du village': 'Discover the village programme',
+    'Découvrir la programmation du village': 'Discover the village programme',
     'Ce champ est requis.': 'This field is required.',
     'Adresse e-mail invalide.': 'Invalid email address.',
     'Numéro de téléphone invalide.': 'Invalid phone number.',
@@ -199,6 +200,11 @@ const ER_EN = {
     'Parkings, navettes et bornes de recharge : tout est regroupé plus bas sur cette page.':
       'Car parks, shuttles and charging points are all further down this page.',
     'Voir les infos pratiques voiture': 'See practical information for drivers',
+    'Avec carte de réduction': 'With a railcard',
+    'Je viens aussi un autre jour': 'I am coming on another day too',
+    'Vous venez plusieurs jours ? Chaque jour de venue vous donne une chance de plus, au tirage du jour comme au grand tirage final.':
+      'Coming on several days? Each day you visit gives you one more chance, in that day’s draw and in the final draw.',
+    'Déjà enregistré': 'Already registered',
     'Trajet': 'Route',
     'Plein tarif': 'Full fare',
     'Carte Avantage moins de 26 ans': 'Avantage card, under 26',
@@ -377,7 +383,8 @@ function traduireDynamique(clef) {
     voitureBouton: 'Voir les infos pratiques voiture',
     tarifsTrajet: 'Trajet',
     tarifsPlein: 'Plein tarif',
-    tarifsReduit: 'Carte Avantage moins de 26 ans'
+    tarifsReduit: 'Carte Avantage moins de 26 ans',
+    tarifsCarte: 'Avec carte de réduction'
   };
 
   
@@ -469,6 +476,10 @@ function traduireDynamique(clef) {
   
 
 
+
+
+
+
   function couperLien(ligne) {
     const parts = String(ligne == null ? '' : ligne).split(' → ');
     if (parts.length === 1) return { texte: parts[0].trim(), libelle: '', lien: '' };
@@ -476,10 +487,29 @@ function traduireDynamique(clef) {
     const m = queue.match(/^\[([^\]]*)\]\s*(.*)$/);
     return { texte: parts.slice(0, -1).join(' → ').trim(), libelle: m ? m[1].trim() : '', lien: m ? m[2].trim() : queue };
   }
+  
+
+  function avecLiens(txt) {
+    const s = String(txt == null ? '' : txt);
+    const re = /\[([^\]\n]+)\]\(([^)\s]+)\)/g;
+    let out = '', i = 0, m;
+    while ((m = re.exec(s))) {
+      out += esc(s.slice(i, m.index));
+      const href = adresseSure(m[2]);
+      out += href ? '<a class="rv-a" href="' + esc(href) + '"' + (/^https?:/i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + esc(m[1]) + '</a>' : esc(m[1]);
+      i = re.lastIndex;
+    }
+    return out + esc(s.slice(i));
+  }
   function lireLignes(texte) {
     if (!texte) return [];
     return String(texte).split('\n').map(l => l.trim()).filter(Boolean).map(ligne => {
       if (ligne.indexOf('## ') === 0) return { type: 'titre', texte: ligne.slice(3).trim() };
+      if (ligne.indexOf('→ ') === 0) {
+        const q = ligne.slice(2).trim();
+        const m = q.match(/^\[([^\]]*)\]\s*(.*)$/);
+        return { type: 'bouton', texte: '', libelle: m ? m[1].trim() : '', lien: m ? m[2].trim() : q };
+      }
       const c = couperLien(ligne);
       c.type = 'item';
       return c;
@@ -712,6 +742,10 @@ rdr-venir .rv-prix .rv-num{text-align:right;font-variant-numeric:tabular-nums;wh
 rdr-venir .rv-fiche--indiv{background:${T.creme};border-color:transparent;box-shadow:none;}
 rdr-venir .rv-fiche--indiv .rv-pico{background:rgba(22,53,93,.08);color:${T.marine};}
 rdr-venir .rv-fiche__actions{margin-top:6px;}
+ 
+rdr-venir .rv-boutons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 10px;}
+rdr-venir .rv-btn--petit{min-height:44px;padding:0 18px;font-size:11.5px;gap:9px;}
+rdr-venir .rv-btn--petit svg{width:15px;height:15px;}
 
  
 rdr-venir .rv-pastilles{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:0 0 clamp(24px,3vw,36px);}
@@ -990,6 +1024,13 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 .rv-fen .rv-ok__cta{display:inline-flex;align-items:center;gap:8px;justify-self:center;margin-top:4px;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.22);color:${T.tealClair};
   font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;}
 .rv-fen .rv-ok__cta svg{width:14px;height:14px;}
+.rv-fen .rv-ok__autre{display:grid;gap:10px;justify-items:center;margin-top:4px;padding:14px 16px;border-radius:12px;border:1px dashed rgba(245,190,65,.45);}
+.rv-fen .rv-ok__autre-btn{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border:0;border-radius:3px 14px 3px 14px;background:linear-gradient(135deg,${T.ambreVif} 0%,${T.ambre} 100%);color:${T.marine};font-family:inherit;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
+.rv-fen .rv-ok__autre-btn svg{width:16px;height:16px;}
+.rv-fen .rv-ok__autre-btn:focus-visible{outline:2px solid ${T.tealClair};outline-offset:3px;}
+ 
+.rv-fen .rv-jour[data-pris="1"]{opacity:.32;cursor:not-allowed;transform:none;}
+.rv-fen .rv-jour[data-pris="1"] input{cursor:not-allowed;}
 @media (prefers-reduced-motion:reduce){.rv-fen .rv-ok__tymal{animation:none;}}
 `;
 
@@ -1275,7 +1316,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       
 
 
-      const signature = [this._lang(), src, alt, 'heroKick', 'heroTitre', 'heroTexte', 'heroBouton', 'titreCo2'].map(k => /^(hero|titre)/.test(k) ? this._page(k) : k).join('');
+      const signature = [this._lang(), src, alt, 'heroKick', 'heroTitre', 'heroTexte', 'heroBouton', 'titreCo2'].map(k => /^(hero|titre)/.test(k) ? this._page(k) : k).join('\u0001');
       if (s.firstChild && this._signatureHero === signature) return;
       this._signatureHero = signature;
       s.innerHTML =
@@ -1637,18 +1678,44 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
     _rendreLignes(texte, classeListe) {
       let corps = '';
-      let liste = false;
+      let liste = false, boutons = false;
+      const fermer = () => { if (liste) { corps += '</ul>'; liste = false; } if (boutons) { corps += '</div>'; boutons = false; } };
       lireLignes(texte).forEach(it => {
-        if (it.type === 'titre') {
+        if (it.type === 'bouton') {
+          const b = this._rendreBouton(it);
+          if (!b) return;
           if (liste) { corps += '</ul>'; liste = false; }
-          corps += '<p class="rv-st">' + esc(it.texte) + '</p>';
+          if (!boutons) { corps += '<div class="rv-boutons">'; boutons = true; }
+          corps += b;
           return;
         }
+        if (it.type === 'titre') {
+          fermer();
+          corps += '<p class="rv-st">' + this._riche(it.texte) + '</p>';
+          return;
+        }
+        if (boutons) { corps += '</div>'; boutons = false; }
         if (!liste) { corps += '<ul class="' + (classeListe || 'rv-liste') + '">'; liste = true; }
-        corps += '<li>' + esc(it.texte) + this._rendreLien(it) + '</li>';
+        corps += '<li>' + this._riche(it.texte) + this._rendreLien(it) + '</li>';
       });
-      if (liste) corps += '</ul>';
+      fermer();
       return corps;
+    }
+
+    
+
+
+    _riche(txt) {
+      let s = String(txt == null ? '' : txt);
+      if (this._en() && /\]\(/.test(s)) { const en = this._i18nLookup(s); if (en !== undefined) s = en; }
+      return avecLiens(s);
+    }
+
+    _rendreBouton(it) {
+      const href = adresseSure(it.lien);
+      if (!href) return '';
+      const externe = /^https?:/i.test(href);
+      return '<a class="rv-btn rv-btn--ligne rv-btn--petit" href="' + esc(href) + '"' + (externe ? ' target="_blank" rel="noopener noreferrer"' : '') + '><span>' + esc(it.libelle || 'En savoir plus') + '</span>' + ico(externe ? 'externe' : 'fleche') + '</a>';
     }
 
     _rendreFiche(fiche) {
@@ -1657,7 +1724,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
       const tag = couperLien(fiche.tagline);
       const a = lireLignes(fiche.tipTexte)[0];
-      const tip = (a && a.texte) ? '<p class="rv-astuce">' + ico('astuce') + '<span>' + esc(a.texte) + this._rendreLien(a) + '</span></p>' : '';
+      const tip = (a && a.texte) ? '<p class="rv-astuce">' + ico('astuce') + '<span>' + this._riche(a.texte) + this._rendreLien(a) + '</span></p>' : '';
       const prix = fiche.afficheTableauPrix === true ? this._rendreTarifs() : '';
       let photo = '';
       if (fiche.afficheCarte === true) {
@@ -1669,7 +1736,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       return '<section class="rv-fiche' + (photo ? ' rv-fiche--photo' : '') + '">' +
         '<div class="rv-fiche__corps">' +
           '<h3 class="rv-fiche__t"><span class="rv-pico">' + ico(fiche.modeKey) + '</span><span>' + esc(fiche.titre) + '</span></h3>' +
-          (tag.texte ? '<p class="rv-fiche__tag">' + esc(tag.texte) + this._rendreLien(tag) + '</p>' : '') +
+          (tag.texte ? '<p class="rv-fiche__tag">' + this._riche(tag.texte) + this._rendreLien(tag) + '</p>' : '') +
           corps + prix + tip +
         '</div>' + photo +
       '</section>';
@@ -1691,9 +1758,12 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const tarifs = Array.isArray(this._p.tarifs) ? this._p.tarifs : [];
       if (!tarifs.length) return '';
       const prix = (v) => (v == null || v === '') ? '' : String(v).replace('.', ',') + ' €';
+      
+
+      const avecCarte = tarifs.some(t => t && t.prixCarte != null && t.prixCarte !== '');
       return '<div class="rv-cadre"><table class="rv-prix"><thead><tr>' +
-        '<th scope="col">' + esc(this._page('tarifsTrajet')) + '</th><th scope="col" class="rv-num">' + esc(this._page('tarifsPlein')) + '</th><th scope="col" class="rv-num">' + esc(this._page('tarifsReduit')) + '</th></tr></thead><tbody>' +
-        tarifs.map(t => '<tr><td>' + esc(t && t.ville) + '</td><td class="rv-num">' + esc(prix(t && t.prixPlein)) + '</td><td class="rv-num">' + esc(prix(t && t.prixReduit)) + '</td></tr>').join('') +
+        '<th scope="col">' + esc(this._page('tarifsTrajet')) + '</th><th scope="col" class="rv-num">' + esc(this._page('tarifsPlein')) + '</th><th scope="col" class="rv-num">' + esc(this._page('tarifsReduit')) + '</th>' + (avecCarte ? '<th scope="col" class="rv-num">' + esc(this._page('tarifsCarte')) + '</th>' : '') + '</tr></thead><tbody>' +
+        tarifs.map(t => '<tr><td>' + esc(t && t.ville) + '</td><td class="rv-num">' + esc(prix(t && t.prixPlein)) + '</td><td class="rv-num">' + esc(prix(t && t.prixReduit)) + '</td>' + (avecCarte ? '<td class="rv-num">' + esc(prix(t && t.prixCarte)) + '</td>' : '') + '</tr>').join('') +
         '</tbody></table></div>';
     }
 
@@ -1742,9 +1812,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
           return '<article class="rv-carte">' +
             '<h3 class="rv-carte__t"><span class="rv-pico">' + ico(TRACES[l.picto] ? l.picto : 'info') + '</span><span>' + esc(texteDe(l, 'titre')) + '</span></h3>' +
             (src ? '<figure class="rv-carte__photo"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async" width="1200" height="675"></figure>' : '') +
-            (texteDe(l, 'texte') ? '<p class="rv-carte__p">' + esc(texteDe(l, 'texte')) + '</p>' : '') +
+            (texteDe(l, 'texte') ? '<p class="rv-carte__p">' + this._riche(texteDe(l, 'texte')) + '</p>' : '') +
             this._rendreLignes(texteDe(l, 'lignes')) +
-            (note.texte ? '<p class="rv-carte__note">' + ico('astuce') + '<span>' + esc(note.texte) + this._rendreLien(note) + '</span></p>' : '') +
+            (note.texte ? '<p class="rv-carte__note">' + ico('astuce') + '<span>' + this._riche(note.texte) + this._rendreLien(note) + '</span></p>' : '') +
           '</article>';
         }).join('') + '</div>';
       }
@@ -1891,12 +1961,16 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const r = this._etat.reglages || {};
       const modes = Array.isArray(r.modes) && r.modes.length ? r.modes : [
         { cle: 'train', libelle: 'Train' }, { cle: 'bus', libelle: 'Bus' }, { cle: 'covoiturage', libelle: 'Covoiturage' },
-        { cle: 'velo', libelle: 'Vélo' }, { cle: 'pied', libelle: 'À pied' }, { cle: 'autre', libelle: 'Autre' }];
-      const lienR = r.lienReglement ? esc(r.lienReglement) : '';
-      const lienC = r.lienConfidentialite ? esc(r.lienConfidentialite) : '';
+        { cle: 'velo', libelle: 'Vélo' }, { cle: 'pied', libelle: 'À pied' }];
+      const en = this._en();
+      
+
+
+      const interne = (h) => (en && h && h.charAt(0) === '/' && h !== '/en' && h.indexOf('/en/') !== 0) ? '/en' + h : h;
+      const lienR = r.lienReglement ? esc(interne(r.lienReglement)) : '';
+      const lienC = r.lienConfidentialite ? esc(interne(r.lienConfidentialite)) : '';
       const lien = (href, texte) => href ? '<a href="' + href + '" target="_blank" rel="noopener">' + texte + '</a>' : '<a href="#" data-lien-absent>' + texte + '</a>';
       const max = Number(r.tailleMaxMo) > 0 ? Math.min(10, Number(r.tailleMaxMo)) : 10;
-      const en = this._en();
       
 
       const tuileJour = (j) => {
@@ -1960,7 +2034,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
                   '<input type="file" name="justificatif" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" aria-label="Choisir un fichier">' +
                   ico('fichier') + '<b>Déposez ici votre justificatif de mobilité.</b>' +
                   '<span class="rv-depot__btn">' + ico('fleche') + 'Choisir un fichier</span><span>ou glissez-le ici</span>' +
-                  '<p class="rv-depot__aide">Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, photo de votre vélo, justificatif de covoiturage.</p>' +
+                  '<p class="rv-depot__aide">Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, confirmation de covoiturage, photo de votre vélo ou de vous à pied.</p>' +
                   '<p class="rv-depot__aide">' + esc(this._t('PDF, JPG ou PNG, 10 Mo au plus.').replace('10', String(max))) + '</p>' +
                 '</div>' +
                 '<div class="rv-fichier" hidden data-fichier></div>' +
@@ -2230,6 +2304,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
           return;
         }
         this._etat.resultat = res;
+         
+        this._etat.identite = { prenom: d.prenom, nom: d.nom, dateNaissance: d.dateNaissance, email: d.email, telephone: d.telephone };
+        this._etat.joursPris = (this._etat.joursPris || []).concat(d.jour ? [d.jour] : []);
         try { localStorage.setItem(CLE_PARTICIPE, res.identifiant || '1'); } catch (e) {   }
         this._retirerFlottant();
         this._rendreConfirmation(res);
@@ -2257,9 +2334,43 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
             '<li>' + ico('cadeau') + '<span><b>Chaque jour</b> : ' + esc(res.lotsQuotidiens || this._cms('lotsQuotidiens')) + '</span></li>' +
             '<li>' + ico('vague') + '<span><b>Grand tirage final</b> : ' + esc(res.grandLot || this._cms('grandLot')) + '</span></li>' +
           '</ul>' +
-          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programme' : '/programme') + '">Découvrir le programme du village' + ico('fleche') + '</a>' +
+          (this._jours().some(j => (this._etat.joursPris || []).indexOf(j) === -1)
+            ? '<div class="rv-ok__autre"><p>Vous venez plusieurs jours ? Chaque jour de venue vous donne une chance de plus, au tirage du jour comme au grand tirage final.</p>' +
+              '<button type="button" class="rv-ok__autre-btn" data-autre-jour>' + ico('jourPlus') + '<span>Je viens aussi un autre jour</span></button></div>'
+            : '') +
+          '<a class="rv-ok__cta" href="' + (this._en() ? '/en/programmation' : '/programmation') + '">Découvrir la programmation du village' + ico('fleche') + '</a>' +
         '</div>';
       this._i18n(corps);
+      const autre = corps.querySelector('[data-autre-jour]');
+      if (autre) autre.addEventListener('click', () => this._autreJour());
+      corps.scrollTop = 0;
+    }
+
+    
+
+
+
+
+
+    _autreJour() {
+      this._etat.fichier = null;
+      this._rendreFormulaire();
+      const corps = this._fenetre.querySelector('.rv-fen__corps');
+      const form = corps.querySelector('form');
+      const id = this._etat.identite || {};
+      const poser = (nom, v) => { const ch = form.querySelector('[name="' + nom + '"]'); if (ch && v) ch.value = v; };
+      ['prenom', 'nom', 'email', 'telephone', 'dateNaissance'].forEach(k => poser(k, id[k]));
+      const n = String(id.dateNaissance || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (n) { poser('naissAn', n[1]); poser('naissMois', n[2]); poser('naissJour', n[3]); }
+      (this._etat.joursPris || []).filter(j => /^\d{4}-\d{2}-\d{2}$/.test(j)).forEach(j => {
+        const rd = form.querySelector('input[name="jourChoix"][value="' + j + '"]');
+        if (!rd) return;
+        rd.disabled = true;
+        const tuile = rd.closest('.rv-jour');
+        tuile.setAttribute('data-pris', '1');
+        tuile.title = this._t('Déjà enregistré');
+      });
+      this._etapes(form);
       corps.scrollTop = 0;
     }
 
