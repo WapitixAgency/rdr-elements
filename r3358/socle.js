@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 8d20609 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="8d20609";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum f7f0ed9 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="f7f0ed9";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1665,7 +1665,9 @@ rdr-pied-haut .pb a:focus-visible,rdr-pied-haut .pb summary:focus-visible,rdr-pi
   rdr-pied-haut .pb-outils{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:26px}
   rdr-pied-haut .pb-outil{height:auto;min-height:44px;padding:7px 12px;justify-content:center;white-space:normal;line-height:1.2;font-size:11px;letter-spacing:.04em}
   rdr-pied-haut .pb-outil .pb-ext{display:none}
-  rdr-pied-haut .pb-outil:last-child:nth-child(odd){grid-column:1 / -1}
+  
+
+  rdr-pied-haut .pb-outil--espace{order:1;grid-column:1 / -1}
   rdr-pied-haut .pb-plan{grid-template-columns:1fr;gap:0;padding:14px 0 0}
   rdr-pied-haut .pb-rub{border-bottom:1px solid var(--pb-filet)}
   rdr-pied-haut .pb-rub summary{margin:0;padding:20px 2px;cursor:pointer;font-size:18px}
@@ -1761,6 +1763,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
   rdr-pied-haut .pd-sq-bas{--pd-sq-bas:1350px;gap:26px}
   rdr-pied-haut .pd-sq-outils{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   rdr-pied-haut .pd-sq-outils .pd-sq-c{width:auto;height:44px}
+  rdr-pied-haut .pd-sq-outils .pd-sq-c:last-child{grid-column:1 / -1}
   rdr-pied-haut .pd-sq-plan{grid-template-columns:1fr;gap:0}
   rdr-pied-haut .pd-sq-col{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.13)}
   rdr-pied-haut .pd-sq-col .pd-sq-l:not(:first-child){display:none}
