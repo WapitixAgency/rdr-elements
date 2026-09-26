@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 056e552 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="056e552";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 4192a03 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="4192a03";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2974,7 +2974,10 @@ rdr-pied-haut .pd-sq-l::after,rdr-pied-haut .pd-sq-c::after{content:'';position:
         
 
 
+
+
         self._marquerVu(ids);
+        self._marquerPresentees(ids);
         self._retirerCarte(carte, true);
       };
       var open = toast.querySelector('[data-rnf-open]');
