@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum ff4ba8d | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="ff4ba8d";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum c9743c6 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="c9743c6";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -166,7 +166,7 @@ class SkipperGallery extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -2025,7 +2025,7 @@ class SkippersCarousel extends HTMLElement {
     }[c]));
   }
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -7056,6 +7056,12 @@ const PROFIL_CONFIG = {
   'INTERNATIONAUX':    { label: 'Internationaux',     sub: 'Hors France',                               couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' },
 };
 
+
+
+
+const URL_CLASSES = { 'ultim': 'Ultim', 'ocean-fifty': 'Ocean Fifty', 'class40': 'Class40', 'imoca': 'IMOCA', 'vintage-mono': 'Vintage Mono', 'vintage-multi': 'Vintage Multi' };
+const URL_PROFILS = { 'rookies': 'ROOKIES', 'femmes': 'FEMMES', 'hommes': 'HOMMES', 'vainqueurs': 'ANCIENS VAINQUEURS', 'locaux': 'LOCAUX', 'internationaux': 'INTERNATIONAUX' };
+
  
 const HOMMES_CFG = { label: 'Hommes', couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="19" y1="5" x2="14.15" y2="9.85"/><polyline points="15 5 19 5 19 9"/></svg>' };
 
@@ -7213,9 +7219,47 @@ class SkippersList extends HTMLElement {
     setTimeout(() => { try { card.classList.remove('sl-navloading'); spin.remove(); } catch (e) {   } }, 6000);
   }
 
+  _lireAdresse() {
+    let p;
+    try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
+    const classe = URL_CLASSES[String(p.get('classe') || '').toLowerCase()];
+    if (classe) this._activeClasse = classe;
+    String(p.get('profil') || '').toLowerCase().split(',').map((x) => x.trim()).forEach((k) => {
+      const f = URL_PROFILS[k];
+      if (!f) return;
+      if (f === 'HOMMES') { this._activeGenre = 'HOMMES'; this._activeFilters['FEMMES'] = false; return; }
+      this._activeFilters[f] = true;
+      if (f === 'FEMMES') this._activeGenre = null;
+    });
+    if (this._activeFilters['ROOKIES'] && this._activeFilters['ANCIENS VAINQUEURS']) this._activeFilters['ANCIENS VAINQUEURS'] = false;
+    const q = String(p.get('q') || '').trim().slice(0, 60);
+    if (q) this._search = q;
+    if (p.get('tri') === 'az') this._sort = 'az';
+  }
+
+  _ecrireAdresse() {
+    let u;
+    try { u = new URL(window.location.href); } catch (e) { return; }
+    const p = u.searchParams;
+    const classe = Object.keys(URL_CLASSES).find((k) => URL_CLASSES[k] === this._activeClasse);
+    if (classe) p.set('classe', classe); else p.delete('classe');
+    const profils = Object.keys(URL_PROFILS).filter((k) => {
+      const f = URL_PROFILS[k];
+      return f === 'HOMMES' ? this._activeGenre === 'HOMMES' : !!this._activeFilters[f];
+    });
+    if (profils.length) p.set('profil', profils.join(',')); else p.delete('profil');
+    if (this._search.trim()) p.set('q', this._search.trim()); else p.delete('q');
+    if (this._sort === 'az') p.set('tri', 'az'); else p.delete('tri');
+    const requete = p.toString().split('%2C').join(',');
+    const cible = u.pathname + (requete ? '?' + requete : '') + u.hash;
+    if (cible === location.pathname + location.search + location.hash) return;
+    try { history.replaceState(history.state, '', cible); } catch (e) {   }
+  }
+
   connectedCallback() {
     this.style.display = 'block';
     this.style.width = '100%';
+    if (!this._adresseLue) { this._adresseLue = true; this._lireAdresse(); }
      
      
     if (!this._onPageShow) {
@@ -7223,6 +7267,8 @@ class SkippersList extends HTMLElement {
         try {
           this.querySelectorAll('.sl-navloading').forEach(n => n.classList.remove('sl-navloading'));
           this.querySelectorAll('.sl-navspin').forEach(n => n.remove());
+           
+          this._navEnCours = false;
         } catch (e) {   }
       };
       window.addEventListener('pageshow', this._onPageShow);
@@ -7230,6 +7276,10 @@ class SkippersList extends HTMLElement {
     this._renderShell();
     this._shellReady = true;
     this._appliedLang = this._lang();
+    if (this._activeFilterCount() || this._sort !== 'random') {
+      ['#sl-search', '#sl-search-mobile'].forEach((sel) => { const i = this.querySelector(sel); if (i) i.value = this._search; });
+      this._updateFilterStyles();
+    }
     if (this._pendingSkippers !== null) {
       this._processSkippers(this._pendingSkippers);
       this._pendingSkippers = null;
@@ -7336,7 +7386,11 @@ class SkippersList extends HTMLElement {
 
   _naviguer(url) {
     if (!url || this._navEnCours) return;
+     
+    if (this._lang() === 'en' && /^\/(?!en\/)/.test(url)) url = '/en' + url;
     this._navEnCours = true;
+     
+    setTimeout(() => { this._navEnCours = false; }, 6000);
     try { location.assign(url); } catch (e) { this._navEnCours = false; }
   }
 
@@ -7402,7 +7456,7 @@ class SkippersList extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -7990,7 +8044,7 @@ class SkippersList extends HTMLElement {
     const wrapA11y = link ? 'role="button" tabindex="0"' : (isSoon ? 'role="button" tabindex="0"' : '');
     return `<div class="sl-card-wrap${wrapClass ? ' '+wrapClass : ''}${estMystere ? ' mystery' : ''}" ${link ? `data-link="${link}"` : ''} ${isSoon ? 'data-soon="1"' : ''} ${wrapA11y} style="--rot:${rot}deg;animation-delay:${delay}ms">
       <div class="sl-card${estMystere ? ' mystery-card' : ''}" style="--cc:${cc};--cc-rgb:${ccRGB}">
-        <img class="sl-card-img" src="${photo}" alt="" loading="lazy" />
+        <img class="sl-card-img" src="${photo}" alt="" ${i < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} />
         ${!estMystere ? `<div class="sl-card-overlay">
           <div class="sl-card-flag-prenom">
             ${drapeau ? `<img class="sl-card-flag" src="${drapeau}" alt="" />` : ''}
@@ -8130,6 +8184,7 @@ class SkippersList extends HTMLElement {
     this._updateFilterStyles();
     this._renderGrid();
     this._renderPagination();
+    this._ecrireAdresse();
   }
 
   _reshuffle() {
