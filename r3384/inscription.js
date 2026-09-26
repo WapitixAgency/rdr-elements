@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum 57fdbd7 | skipper-media-uploader.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="57fdbd7";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum a72ca9d | skipper-media-uploader.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="a72ca9d";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 const CONFIG = {
   MAX_GALERIE: 10,
@@ -1075,8 +1075,6 @@ class SkipperMediaUploader extends HTMLElement {
       if (!result?.blob) throw new Error('Compression impossible');
 
       const sizeMB = (result.blob.size / 1024 / 1024).toFixed(2);
-      const sizeKB = Math.round(result.blob.size / 1024);
-      console.log(`[skipper-media-uploader] compressed: ${sizeKB} KB (${sizeMB} MB), type=${result.blob.type}, attempts=${attempts}, isSafari=${IS_SAFARI}`);
 
       if (result.blob.size > hardLimit) {
         throw new Error(`Image trop lourde après optimisation (${sizeMB} Mo). Réduisez sa taille avant envoi.`);
@@ -1129,8 +1127,6 @@ class SkipperMediaUploader extends HTMLElement {
       contentBase64
     });
 
-    const payloadKB = Math.round(body.length / 1024);
-    console.log(`[skipper-media-uploader] uploading: ${payloadKB} KB payload, kind=${kind}, mime=${mimeType}, filename=${filename}`);
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -1527,7 +1523,7 @@ class SkipperMediaUploader extends HTMLElement {
         transition: border-color 0.18s ease, background-color 0.18s ease;
         outline: none;
       }
-      .tile-drop:hover, .tile-drop.is-dragover { border-color: var(--tile-border-hover); }
+      .tile-drop.is-dragover{ border-color: var(--tile-border-hover); }@media (hover:hover) and (pointer:fine){.tile-drop:hover{ border-color: var(--tile-border-hover); }}
       .tile-drop:focus-visible {
         border-color: var(--tile-border-hover);
         background: var(--accent-soft);
@@ -1559,7 +1555,7 @@ class SkipperMediaUploader extends HTMLElement {
         display: flex; align-items: flex-end; justify-content: flex-end;
         gap: 8px; padding: 12px;
       }
-      .tile-drop:hover .tile-overlay, .tile-drop:focus-within .tile-overlay { opacity: 1; }
+      .tile-drop:focus-within .tile-overlay{ opacity: 1; }@media (hover:hover) and (pointer:fine){.tile-drop:hover .tile-overlay{ opacity: 1; }}
       .tile-drop.is-busy .tile-overlay { opacity: 0; }
 
       .btn-icon {
@@ -1568,8 +1564,8 @@ class SkipperMediaUploader extends HTMLElement {
         display: flex; align-items: center; justify-content: center;
         cursor: pointer; transition: background-color 0.15s ease, transform 0.15s ease;
       }
-      .btn-icon:hover { background: var(--accent); color: #0a1a2f; transform: translateY(-1px); }
-      .btn-icon.btn-danger:hover { background: var(--danger); color: #fff; }
+      @media (hover:hover) and (pointer:fine){.btn-icon:hover{ background: var(--accent); color: #0a1a2f; transform: translateY(-1px); }}
+      @media (hover:hover) and (pointer:fine){.btn-icon.btn-danger:hover{ background: var(--danger); color: #fff; }}
       .btn-icon svg { width: 16px; height: 16px; }
 
       .tile-loading-full {
@@ -1588,7 +1584,7 @@ class SkipperMediaUploader extends HTMLElement {
         display: flex; align-items: center; justify-content: center;
         cursor: pointer; transition: background-color 0.15s ease;
       }
-      .btn-cancel:hover { background: var(--danger); }
+      @media (hover:hover) and (pointer:fine){.btn-cancel:hover{ background: var(--danger); }}
       .btn-cancel svg { width: 14px; height: 14px; }
       .loading-text { font-size: 12.5px; font-weight: 500; color: #fff; text-align: center; }
       .spinner {
@@ -1632,12 +1628,13 @@ class SkipperMediaUploader extends HTMLElement {
         transition: border-color 0.18s ease, background-color 0.18s ease;
         outline: none;
       }
-      .galerie-drop:hover:not(.is-disabled),
-      .galerie-drop:focus-visible:not(.is-disabled),
-      .galerie-drop.is-dragover:not(.is-disabled) {
+      .galerie-drop:focus-visible:not(.is-disabled),.galerie-drop.is-dragover:not(.is-disabled){
         border-color: var(--accent);
         background: var(--accent-soft);
-      }
+      }@media (hover:hover) and (pointer:fine){.galerie-drop:hover:not(.is-disabled){
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }}
       .galerie-drop.is-disabled { opacity: 0.45; cursor: not-allowed; }
 
       .galerie-grid {
@@ -1661,8 +1658,8 @@ class SkipperMediaUploader extends HTMLElement {
         cursor: pointer; display: flex; align-items: center; justify-content: center;
         opacity: 0; transition: opacity 0.15s ease, background-color 0.15s ease;
       }
-      .thumb:hover .thumb-remove { opacity: 1; }
-      .thumb-remove:hover { background: var(--danger); }
+      @media (hover:hover) and (pointer:fine){.thumb:hover .thumb-remove{ opacity: 1; }}
+      @media (hover:hover) and (pointer:fine){.thumb-remove:hover{ background: var(--danger); }}
       .thumb-remove svg { width: 14px; height: 14px; }
       .thumb-pending .thumb-remove { display: none; }
       .thumb-loading {
@@ -1685,7 +1682,7 @@ class SkipperMediaUploader extends HTMLElement {
         z-index: 2;
         transition: background-color 0.15s ease;
       }
-      .thumb-cancel:hover { background: var(--danger); }
+      @media (hover:hover) and (pointer:fine){.thumb-cancel:hover{ background: var(--danger); }}
       .thumb-cancel svg { width: 12px; height: 12px; }
       .thumb-progress {
         position: absolute; left: 0; bottom: 0;
@@ -1728,7 +1725,7 @@ class SkipperMediaUploader extends HTMLElement {
         font-size: 14px; font-weight: 600; color: #fff; text-decoration: none;
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
-      a.dossier-nom:hover { color: var(--accent); text-decoration: underline; }
+      @media (hover:hover) and (pointer:fine){a.dossier-nom:hover{ color: var(--accent); text-decoration: underline; }}
       .dossier-meta { font-size: 12px; color: var(--text-muted); }
       .dossier-barre { height: 4px; margin-top: 6px; border-radius: 2px; overflow: hidden; background: rgba(255, 255, 255, 0.15); }
       .dossier-annuler { top: 50%; right: 14px; transform: translateY(-50%); }
@@ -1739,7 +1736,7 @@ class SkipperMediaUploader extends HTMLElement {
         font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
         cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease;
       }
-      .btn-ligne:hover { border-color: var(--accent); color: var(--accent); }
+      @media (hover:hover) and (pointer:fine){.btn-ligne:hover{ border-color: var(--accent); color: var(--accent); }}
       .dossier-retirer { background: rgba(255, 255, 255, 0.08); }
       @media (max-width: 520px) {
         .dossier-fichier { flex-wrap: wrap; }
