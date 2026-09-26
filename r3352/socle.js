@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum a47f449 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="a47f449";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 8d20609 | rdr-menu-actus.js rdr-menu-cartes.js timer-clock-simple.js AlpinaClock.js rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="8d20609";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1620,6 +1620,7 @@ rdr-pied-haut .pb-rub ul{display:grid;gap:11px}
 rdr-pied-haut .pb-rub a{color:var(--pb-texte);font-size:14px;font-weight:500;line-height:1.35;text-decoration:none;background:linear-gradient(var(--c),var(--c)) 0 100%/0 1.5px no-repeat;padding-bottom:2px;transition:color .2s ease,background-size .3s ease}
 rdr-pied-haut .pb-rub a svg{width:12px;height:12px;margin-left:5px;vertical-align:-1px;opacity:.55}
 rdr-pied-haut .pb-rub a[aria-current="page"]{color:#fff;background-size:100% 1.5px}
+rdr-pied-haut .pb-insec{white-space:nowrap}
 rdr-pied-haut .pb-bientot{font-size:14px;font-weight:500;line-height:1.35;color:rgba(255,255,255,.4)}
 rdr-pied-haut .pb-bientot em{display:inline-block;white-space:nowrap;margin-left:7px;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.06);font-style:normal;font-size:7.5px;font-weight:700;line-height:1.5;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);vertical-align:2px}
 rdr-pied-haut .pb-orga{grid-area:orga;display:flex;align-items:center;gap:clamp(18px,2vw,28px);padding:clamp(28px,3.2vw,38px) 0;border-top:1px solid var(--pb-filet)}
@@ -1973,7 +1974,11 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
         if (l.bientot) return '<span class="pb-bientot">' + esc(l.libelle) + '<em>' + esc(b.bientot || '') + '</em></span>';
         if (l.action === 'cookies') return '<button type="button" data-pb-cookies>' + esc(l.libelle) + '</button>';
         const u = lienInterne(l.lien, lang);
-        return '<a href="' + esc(u) + '"' + cible(l) + (l.externe ? ' aria-label="' + esc(l.libelle + ' (' + (b.externe || '') + ')') + '"' : ' data-pb-ici') + '>' + esc(l.libelle) + (l.externe ? PB.externe : '') + '</a>';
+        
+
+        const mots = String(l.libelle || '').split(' '); const dernier = mots.pop();
+        const texte = l.externe ? esc(mots.join(' ')) + (mots.length ? ' ' : '') + '<span class="pb-insec">' + esc(dernier) + PB.externe + '</span>' : esc(l.libelle);
+        return '<a href="' + esc(u) + '"' + cible(l) + (l.externe ? ' aria-label="' + esc(l.libelle + ' (' + (b.externe || '') + ')') + '"' : ' data-pb-ici') + '>' + texte + '</a>';
       };
       const ouvert = !etroit();
       const motif = urlSure(b.motif);
