@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum deaa497 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="deaa497";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 369a235 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="369a235";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -860,8 +860,8 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     connectedCallback() {
       if (this._monte) return;
       this._monte = true;
-      injecterCss();
       const jeu = this._jeuAttribut();
+      if (jeu && this._photoDabord(jeu)) return;
       if (jeu) { this._dessiner(jeu); return; }
       this._attendre();
       this._charger();
@@ -873,7 +873,94 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _photoDabord(D) {
+      const lien = document.querySelector('link[data-rdr-photo]');
+      if (!lien || !lien.href) return false;
+      
+
+
+
+
+      if (!((document.documentElement.clientWidth || window.innerWidth || 0) < 760 && !/[?&]intro=oui/.test(location.search))) return false;
+      let rv = this.firstElementChild;
+      if (!rv || !rv.classList.contains('raa-rv')) {
+        if (this.firstChild) return false;
+        this.innerHTML = '<i class="raa-rv v"><img alt="" decoding="sync" elementtiming="raa"></i>';
+        rv = this.firstElementChild;
+        rv.firstChild.src = lien.href;
+      }
+      const img = rv.querySelector('img');
+      if (!img) return false;
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      const jeton = this._jeton = {};
+      const suite = () => { if (this._jeton === jeton && this._monte && !this._dessine) this._dessiner(D); };
+      let lente = 0;
+      const apresPeinture = () => {
+        clearTimeout(lente);
+        let po = null, fini = false;
+        const go = () => { if (fini) return; fini = true; if (po) po.disconnect(); setTimeout(suite, 0); };
+        try {
+          const types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+          const type = types.indexOf('element') >= 0 ? 'element' : types.indexOf('largest-contentful-paint') >= 0 ? 'largest-contentful-paint' : '';
+          if (type) {
+            po = new PerformanceObserver((l) => { if (l.getEntries().some((e) => e.element === img)) go(); });
+            po.observe({ type, buffered: true });
+            setTimeout(go, 600);
+            return;
+          }
+        } catch (e) {   }
+        requestAnimationFrame(() => setTimeout(go, 0));
+      };
+      if (img.complete && img.naturalWidth) apresPeinture();
+      else {
+        img.addEventListener('load', apresPeinture, { once: true });
+        img.addEventListener('error', suite, { once: true });
+        lente = setTimeout(suite, 300);
+      }
+      setTimeout(suite, 3000);
+      return true;
+    }
+
+    
+
+
+
+
+
     _attendre() {
+      injecterCss();
       this._calerEntete();
       this.innerHTML = SQUELETTE;
       try {
@@ -937,9 +1024,13 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       } catch (err) {   }
     }
 
+    
+
+
     _dessiner(D) {
       if (this._dessine) return;
       this._dessine = true;
+      injecterCss();
       this._calerEntete();
       this.innerHTML = PAGE;
       
@@ -984,6 +1075,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
     _panne() {
+      injecterCss();
       const en = langueDe(this) === 'en';
       this.innerHTML = '<div class="raa-vide"><h3>' + (en ? 'The home page will be back in a moment' : "La page d'accueil revient dans un instant") + '</h3><button type="button">' + (en ? 'Try again' : 'Réessayer') + '</button></div>';
       this.querySelector('button').onclick = () => { this._attendre(); this._charger(); };
@@ -1040,6 +1132,19 @@ function monter(racine, portail, D) {
   if (portail !== racine) guetImages.observe(portail, { childList: true, subtree: true });
   observateurs.push(guetImages);
   const apresPhoto = (f) => { if (libere) f(); else apres.push(f); };
+  
+
+
+
+
+
+
+  const aLApproche = (el, f) => apresPhoto(() => {
+    if (!el) return;
+    if (typeof IntersectionObserver !== 'function') { f(); return; }
+    const io = new IntersectionObserver((es) => { if (!es.some((e) => e.isIntersecting)) return; io.disconnect(); f(); }, { rootMargin: '100% 0px' });
+    io.observe(el); observateurs.push(io);
+  });
   const liberer = () => {
     if (libere) return;
     libere = true;
@@ -1504,7 +1609,7 @@ function monter(racine, portail, D) {
   rendrePub();
   ecoute(racine, 'raa-promos', rendrePub);
    
-  { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) apresPhoto(() => sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")')); }
+  { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) aLApproche(sectionEspace, () => sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")')); }
 
   
 
@@ -1815,7 +1920,7 @@ function monter(racine, portail, D) {
       (x.src ? '<a class="fa-source" href="' + esc(lien(x.src.url)) + '">' + esc(x.src.texte) + ic(FLECHE_HD) + '</a>' : '') + '</div></details>').join('');
     
 
-    if (M.topoFaq) apresPhoto(() => $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")'));
+    if (M.topoFaq) aLApproche($('faq-acc'), () => $('fa-topo').style.setProperty('--topo', 'url("' + M.topoFaq + '")'));
     const section = $('faq-acc');
     if (typeof IntersectionObserver !== 'function') section.classList.add('fa-vu');
     else {

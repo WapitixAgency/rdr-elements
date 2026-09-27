@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum d90f933 | rdr-concours-photo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="d90f933";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 369a235 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="369a235";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -76,9 +76,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 20px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:transform .15s ease,background .2s}
 :is(rdr-concours-photo,.cp-portail) .cp-btn svg{width:18px;height:18px;flex:none}
 :is(rdr-concours-photo,.cp-portail) .cp-btn--or{background:var(--jaune);color:var(--marine)}
-:is(rdr-concours-photo,.cp-portail) .cp-btn--or:hover{background:#fff;transform:translateY(-1px)}
+@media (hover:hover) and (pointer:fine){:is(rdr-concours-photo,.cp-portail) .cp-btn--or:hover{background:#fff;transform:translateY(-1px)}}
 :is(rdr-concours-photo,.cp-portail) .cp-btn--ligne{background:transparent;color:var(--t1);border:1.5px solid var(--filet)}
-:is(rdr-concours-photo,.cp-portail) .cp-btn--ligne:hover{border-color:rgba(255,255,255,.45)}
+@media (hover:hover) and (pointer:fine){:is(rdr-concours-photo,.cp-portail) .cp-btn--ligne:hover{border-color:rgba(255,255,255,.45)}}
 :is(rdr-concours-photo,.cp-portail) .cp-btn--ligne .cp-pastille{min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--rouge);color:#fff;font-size:11.5px;display:inline-flex;align-items:center;justify-content:center}
 :is(rdr-concours-photo,.cp-portail) .cp-etat{font-size:12.5px;color:var(--t2);line-height:1.45;text-align:center}
 :is(rdr-concours-photo,.cp-portail) .cp-etat b{color:var(--jaune)}
@@ -129,7 +129,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-onglets-curseur[data-ordre="aimees"]{--c:#FF6B77;--c-ombre:rgba(255,107,119,.34)}
 :is(rdr-concours-photo,.cp-portail) .cp-onglets-curseur:not([style]) ~ .cp-onglet[aria-selected="true"]{background:var(--teal)}
 :is(rdr-concours-photo,.cp-portail) .cp-onglet{position:relative;z-index:1;display:flex;align-items:center;gap:11px;border:0;background:transparent;color:var(--t1);padding:8px 18px 8px 8px;border-radius:15px;text-align:left;white-space:nowrap;transition:color .25s,background .2s}
-:is(rdr-concours-photo,.cp-portail) .cp-onglet:hover:not([aria-selected="true"]){background:rgba(255,255,255,.05)}
+@media (hover:hover) and (pointer:fine){:is(rdr-concours-photo,.cp-portail) .cp-onglet:hover:not([aria-selected="true"]){background:rgba(255,255,255,.05)}}
 :is(rdr-concours-photo,.cp-portail) .cp-onglet:focus-visible{outline:2px solid var(--jaune);outline-offset:2px}
 :is(rdr-concours-photo,.cp-portail) .cp-onglet i{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex:none;background:rgba(93,191,192,.15);color:var(--teal);transition:background .25s,color .25s}
 :is(rdr-concours-photo,.cp-portail) .cp-onglet[data-ordre="dernieres"] i{background:rgba(252,241,80,.12);color:var(--jaune)}
@@ -678,6 +678,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 
     disconnectedCallback() {
       this._monte = false;
+       
+      this._gen = (this._gen || 0) + 1;
       (this._nettoyages || []).forEach(f => { try { f(); } catch (e) {   } });
       this._nettoyages = [];
       if (this._portail) { this._portail.remove(); this._portail = null; }
@@ -686,16 +688,20 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 
     async _charger() {
       const grille = this.querySelector('#cp-grille');
+      
+
+
+      const gen = this._gen = (this._gen || 0) + 1;
       try {
         const r = await fetch(this.getAttribute('source') || SOURCE, { credentials: 'omit' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const donnees = await r.json();
-        if (!this._monte) return;
+        if (!this._monte || gen !== this._gen) return;
         if (!donnees || !Array.isArray(donnees.photos) || !donnees.photos.length) throw new Error('jeu vide');
         this._nettoyages.push(monter(this, this._portail, donnees, this._options));
       } catch (e) {
         console.warn('[rdr-concours-photo] aperçu indisponible', e && e.message);
-        if (grille && this._monte) {
+        if (grille && this._monte && gen === this._gen) {
            
           this.querySelectorAll('.cp-att').forEach(n => n.remove());
           const jour = this.querySelector('#cp-jour');
@@ -1214,20 +1220,25 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     function ouvrirDepot() {
       if (!exigerCompte()) return;
       $('cp-depot').dataset.ouverte = 1; $('cp-depot-etape1').style.display = ''; $('cp-depot-ok').dataset.on = 0; $('cp-apercu').dataset.on = 0; $('cp-progress').dataset.on = 0; $('cp-progress').firstElementChild.style.width = '0';
-      $('cp-c1').checked = false; $('cp-c2').checked = false; $('cp-legende').value = ''; $('cp-envoyer').disabled = true; depot.fichier = null;
+      $('cp-c1').checked = false; $('cp-c2').checked = false; $('cp-legende').value = ''; $('cp-envoyer').disabled = true; depot.fichier = null; libererApercu();
     }
-    const depot = { fichier: null };
+    const depot = { fichier: null, url: '' };
+     
+    const libererApercu = () => { if (depot.url) { URL.revokeObjectURL(depot.url); depot.url = ''; } };
+    nettoyages.push(libererApercu);
     const verifierDepot = () => { $('cp-envoyer').disabled = !(depot.fichier && $('cp-c1').checked && $('cp-c2').checked); };
     $('cp-c1').onchange = verifierDepot; $('cp-c2').onchange = verifierDepot;
     $('cp-fichier').onchange = (e) => {
       const f = e.target.files && e.target.files[0]; if (!f) return;
       depot.fichier = f;
-      const url = URL.createObjectURL(f);
+      libererApercu();
+      const url = depot.url = URL.createObjectURL(f);
       const img = new Image();
       img.onload = () => {
+        if (depot.url !== url) return;
         $('cp-apercu-img').src = url; $('cp-apercu').dataset.on = 1;
         const grand = Math.max(img.naturalWidth, img.naturalHeight); const facteur = Math.min(1, 2400 / grand);
-        $('cp-apercu-i').innerHTML = `<b>${f.name}</b><br>${img.naturalWidth} × ${img.naturalHeight} px, ${(f.size / 1048576).toFixed(1)} Mo<br>Sera envoyée en ${Math.round(img.naturalWidth * facteur)} × ${Math.round(img.naturalHeight * facteur)} px, sans données de localisation.`;
+        $('cp-apercu-i').innerHTML = `<b>${esc(f.name)}</b><br>${img.naturalWidth} × ${img.naturalHeight} px, ${(f.size / 1048576).toFixed(1)} Mo<br>Sera envoyée en ${Math.round(img.naturalWidth * facteur)} × ${Math.round(img.naturalHeight * facteur)} px, sans données de localisation.`;
         verifierDepot();
       };
       img.src = url;
@@ -1265,5 +1276,112 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
   }
 
   customElements.define('rdr-concours-photo', RdrConcoursPhoto);
+})();
+})();
+;(function(){
+(function () {
+  'use strict';
+  
+
+  if (typeof window === 'undefined' || !window.customElements) return;
+  if (window.customElements.get('alpina-clock')) return;
+
+  
+
+
+
+  const MEDIA = 'https://static.wixstatic.com/media/';
+  const MODELE = {
+    cadran: MEDIA + 'df962b_6f374b182ba647af8ba5b808bcd0fc67~mv2.avif',
+    heure: MEDIA + 'df962b_23e0b40b8b8749a3af6a736bd3ad18fe~mv2.webp',
+    minute: MEDIA + 'df962b_bfb9d81ed5494964851d188bc89ab132~mv2.webp',
+    seconde: MEDIA + 'df962b_e5d91ebdb4fb431bb0a875a1bb72c7ab~mv2.webp',
+    centreX: 46.243,
+    centreY: 49.991
+  };
+  const FUSEAU = 'Europe/Paris';
+
+  const CSS = 'alpina-clock{display:block;position:relative;width:100%;height:100%;aspect-ratio:1/1;overflow:hidden;contain:layout paint style;}' +
+     
+    'alpina-clock img.ac-couche{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;min-width:0;margin:0;padding:0;border:0;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none;}' +
+    'alpina-clock img.ac-aiguille{transform-origin:' + MODELE.centreX + '% ' + MODELE.centreY + '%;}' +
+    'alpina-clock .ac-h{z-index:3}alpina-clock .ac-m{z-index:4}alpina-clock .ac-s{z-index:5}';
+
+  let formateur = null;
+  function heureDeParis(d) {
+    try {
+      if (!formateur) formateur = new Intl.DateTimeFormat('en-US', { timeZone: FUSEAU, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const parts = formateur.formatToParts(d);
+      const get = (k) => Number((parts.find(p => p.type === k) || {}).value || 0);
+      return { h: get('hour') % 12, m: get('minute'), s: get('second') };
+    } catch (e) {
+       
+      return { h: d.getHours() % 12, m: d.getMinutes(), s: d.getSeconds() };
+    }
+  }
+
+  class AlpinaClock extends HTMLElement {
+    constructor() {
+      super();
+      this._minuteur = null;
+      this._visible = true;
+      this._io = null;
+       
+      this._surVisibilite = () => { if (!document.hidden && this.el) this._afficher(); this._planifier(); };
+    }
+
+    connectedCallback() {
+      if (!this.el) {
+         
+        this.innerHTML = '<style>' + CSS + '</style>';
+        const couche = (cls, src) => {
+          const i = document.createElement('img');
+          i.className = 'ac-couche ' + cls; i.alt = ''; i.decoding = 'async'; i.draggable = false;
+          i.setAttribute('aria-hidden', 'true');
+          i.src = src;
+          this.appendChild(i);
+          return i;
+        };
+        this.el = {
+          cadran: couche('ac-cadran', MODELE.cadran),
+          h: couche('ac-aiguille ac-h', MODELE.heure),
+          m: couche('ac-aiguille ac-m', MODELE.minute),
+          s: couche('ac-aiguille ac-s', MODELE.seconde)
+        };
+      }
+      if (typeof IntersectionObserver === 'function') {
+        this._io = new IntersectionObserver((e) => { this._visible = e.some(x => x.isIntersecting); if (this._visible) this._afficher(); this._planifier(); });
+        this._io.observe(this);
+      }
+      document.addEventListener('visibilitychange', this._surVisibilite);
+      this._afficher();
+      this._planifier();
+    }
+
+    disconnectedCallback() {
+      this._arreter();
+      if (this._io) { this._io.disconnect(); this._io = null; }
+      document.removeEventListener('visibilitychange', this._surVisibilite);
+    }
+
+    
+
+    _planifier() {
+      this._arreter();
+      if (!this._visible || document.hidden || !this.isConnected) return;
+      const suivant = 1000 - (Date.now() % 1000) + 5;
+      this._minuteur = setTimeout(() => { this._minuteur = null; this._afficher(); this._planifier(); }, suivant);
+    }
+    _arreter() { if (this._minuteur) { clearTimeout(this._minuteur); this._minuteur = null; } }
+
+    _afficher() {
+      const { h, m, s } = heureDeParis(new Date());
+      this.el.h.style.transform = 'rotate(' + (h + m / 60) * 30 + 'deg)';
+      this.el.m.style.transform = 'rotate(' + (m + s / 60) * 6 + 'deg)';
+      this.el.s.style.transform = 'rotate(' + s * 6 + 'deg)';
+    }
+  }
+
+  window.customElements.define('alpina-clock', AlpinaClock);
 })();
 })();

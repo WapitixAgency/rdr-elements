@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum d90f933 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d90f933";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 369a235 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="369a235";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -144,7 +144,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d90f933";perfor
             'Les données personnelles collectées (nom, prénom, date de naissance, e-mail, téléphone, justificatif de mobilité) sont traitées par l’Organisateur aux seules fins de la gestion du jeu (vérification de l’éligibilité, réalisation des tirages, contact des gagnants) et de l’établissement du bilan RSE de l’événement, sous forme agrégée et anonymisée s’agissant des données de mobilité.',
             'La participation au jeu n’est conditionnée ni à une inscription à la newsletter de la Route du Rhum – Destination Guadeloupe, ni à l’utilisation des données à des fins commerciales. Toute inscription à la newsletter fait l’objet d’une case à cocher distincte et facultative.',
             'Conformément au RGPD et à la loi Informatique et Libertés, les participants disposent d’un droit d’accès, de rectification, d’effacement et d’opposition, qu’ils peuvent exercer auprès de {a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a}.',
-            'Les données sont conservées pendant une durée de 3 ans, à l’issue de laquelle elles sont supprimées ou anonymisées.'
+            'Les données sont conservées pendant une durée de 3 ans, à l’issue de laquelle elles sont supprimées ou anonymisées.',
+            
+
+
+
+            'Pour en savoir plus sur la manière dont OC Sport traite les données personnelles, consultez la {a:/politique-de-confidentialite}politique de confidentialité{/a} du site.'
           ]
         },
         {
@@ -171,7 +176,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d90f933";perfor
 
    
   const CGU = '/conditions-d-utilisation';
-  const CONF = '/politique-de-condidentialité';
+  const CONF = '/politique-de-confidentialite';
   const MENTIONS = '/mentions-legales';
 
   const I18N = {
@@ -345,7 +350,7 @@ rdr-reglements .rgl .rgl-som-titre{margin:0 0 var(--rgl-e4);font-size:var(--rgl-
 rdr-reglements .rgl .rgl-som-jeux{display:grid;gap:var(--rgl-e4);}
 rdr-reglements .rgl .rgl-som-tete{display:flex;align-items:center;gap:var(--rgl-e3);padding:var(--rgl-e2) var(--rgl-e3);border-radius:var(--rgl-r-lien);font-size:var(--rgl-t3);font-weight:700;line-height:1.25;color:#FFFFFF;transition:background .15s,color .15s;}
 rdr-reglements .rgl .rgl-som-tete svg{flex:0 0 auto;width:18px;height:18px;color:var(--rgl-or);}
-rdr-reglements .rgl .rgl-som-tete:hover{background:rgba(255,255,255,.06);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-som-tete:hover{background:rgba(255,255,255,.06);}}
 rdr-reglements .rgl .rgl-som-tete:focus-visible{outline:2px solid var(--rgl-or);outline-offset:2px;}
 rdr-reglements .rgl .rgl-som-tete.est-actif{background:var(--rgl-or-voile);color:var(--rgl-or);}
 rdr-reglements .rgl .rgl-som-liste{display:grid;gap:2px;margin:var(--rgl-e1) 0 0 var(--rgl-e3);padding-left:var(--rgl-e2);border-left:1px solid var(--rgl-filet-sombre);}
@@ -355,7 +360,7 @@ rdr-reglements .rgl .rgl-som-lien{display:flex;align-items:center;gap:var(--rgl-
 rdr-reglements .rgl .rgl-som-num{flex:0 0 auto;min-width:1.6em;font-variant-numeric:tabular-nums;font-size:var(--rgl-t1);font-weight:700;letter-spacing:.04em;color:var(--rgl-encre-sourde);transition:color .15s;}
 rdr-reglements .rgl .rgl-som-lien svg{flex:0 0 auto;width:16px;height:16px;color:var(--rgl-or);}
 rdr-reglements .rgl .rgl-som-lib{min-width:0;}
-rdr-reglements .rgl .rgl-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}}
 rdr-reglements .rgl .rgl-som-lien:focus-visible{outline:2px solid var(--rgl-or);outline-offset:2px;}
 rdr-reglements .rgl .rgl-som-lien.est-actif{background:var(--rgl-or-voile);border-left-color:var(--rgl-or);color:#FFFFFF;font-weight:600;}
 rdr-reglements .rgl .rgl-som-lien.est-actif .rgl-som-num{color:var(--rgl-or);}
@@ -369,7 +374,7 @@ rdr-reglements .rgl .rgl-index-titre{margin:0 0 var(--rgl-e4);font-size:var(--rg
 rdr-reglements .rgl .rgl-choix{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--rgl-e5);}
 rdr-reglements .rgl .rgl-choix li{min-width:0;display:flex;}
 rdr-reglements .rgl .rgl-choix-carte{flex:1 1 auto;display:flex;flex-direction:column;gap:var(--rgl-e2);min-width:0;padding:var(--rgl-e6);border:2px solid transparent;border-radius:var(--rgl-r-carte);background:var(--rgl-carte);color:var(--rgl-carte-texte);transition:transform .15s,border-color .15s,box-shadow .15s;}
-rdr-reglements .rgl .rgl-choix-carte:hover{transform:translateY(-3px);border-color:var(--rgl-or);box-shadow:0 12px 30px rgba(0,0,0,.35);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-choix-carte:hover{transform:translateY(-3px);border-color:var(--rgl-or);box-shadow:0 12px 30px rgba(0,0,0,.35);}}
 rdr-reglements .rgl .rgl-choix-carte:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;}
 rdr-reglements .rgl .rgl-choix-carte.est-termine .rgl-choix-badge{background:var(--rgl-carte-filet);color:var(--rgl-carte-sourd);}
 rdr-reglements .rgl .rgl-choix-carte.est-termine .rgl-choix-nom{color:var(--rgl-carte-texte);}
@@ -384,14 +389,14 @@ rdr-reglements .rgl .rgl-choix-nom{margin:0;font-family:Varien,Impact,sans-serif
 rdr-reglements .rgl .rgl-choix-dates{font-size:var(--rgl-t2);color:var(--rgl-carte-sourd);}
 rdr-reglements .rgl .rgl-choix-lire{display:inline-flex;align-items:center;gap:var(--rgl-e2);margin-top:auto;padding-top:var(--rgl-e4);font-weight:700;color:var(--rgl-vert);}
 rdr-reglements .rgl .rgl-choix-lire svg{width:18px;height:18px;transition:transform .15s;}
-rdr-reglements .rgl .rgl-choix-carte:hover .rgl-choix-lire svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-choix-carte:hover .rgl-choix-lire svg{transform:translateX(3px);}}
 
  
 rdr-reglements .rgl .rgl-fil{display:flex;align-items:center;padding:var(--rgl-e7) 0 var(--rgl-e6);}
 rdr-reglements .rgl .rgl-retour{display:inline-flex;align-items:center;gap:var(--rgl-e2);padding:var(--rgl-e2) var(--rgl-e4);border:1px solid var(--rgl-or-filet);border-radius:999px;font-size:var(--rgl-t2);font-weight:700;color:var(--rgl-or);transition:background .15s;}
 rdr-reglements .rgl .rgl-retour svg{width:16px;height:16px;transition:transform .15s;}
-rdr-reglements .rgl .rgl-retour:hover{background:var(--rgl-or-voile);}
-rdr-reglements .rgl .rgl-retour:hover svg{transform:translateX(-3px);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-retour:hover{background:var(--rgl-or-voile);}}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-retour:hover svg{transform:translateX(-3px);}}
 rdr-reglements .rgl .rgl-retour:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;}
 rdr-reglements .rgl .rgl-cache{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}
 
@@ -415,7 +420,7 @@ rdr-reglements .rgl .rgl-fiche-lib{font-size:var(--rgl-t1);font-weight:700;lette
 rdr-reglements .rgl .rgl-fiche-val{font-weight:600;color:#FFFFFF;overflow-wrap:anywhere;}
 rdr-reglements .rgl .rgl-fiche-val a{display:inline-flex;align-items:center;gap:var(--rgl-e2);color:var(--rgl-or);}
 rdr-reglements .rgl .rgl-fiche-val a svg{width:16px;height:16px;transition:transform .15s;}
-rdr-reglements .rgl .rgl-fiche-val a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-fiche-val a:hover svg{transform:translateX(3px);}}
 rdr-reglements .rgl .rgl-fiche-val a:focus-visible,rdr-reglements .rgl .rgl-fiche-pdf:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;border-radius:2px;}
 rdr-reglements .rgl .rgl-fiche-pied{display:flex;flex-wrap:wrap;align-items:center;gap:var(--rgl-e2) var(--rgl-e5);padding-top:var(--rgl-e3);border-top:1px solid var(--rgl-or-filet);}
 rdr-reglements .rgl .rgl-fiche-pied:empty{display:none;}
@@ -438,7 +443,7 @@ rdr-reglements .rgl .rgl-sec-num{display:block;margin:0 0 2px;font-family:Montse
 rdr-reglements .rgl .rgl-carte{display:grid;gap:var(--rgl-e4);padding:var(--rgl-e6);border-radius:var(--rgl-r-carte);background:var(--rgl-carte);color:var(--rgl-carte-texte);}
 rdr-reglements .rgl .rgl-carte p{color:var(--rgl-carte-texte);}
 rdr-reglements .rgl .rgl-carte a{color:var(--rgl-vert);font-weight:600;text-decoration:underline;text-decoration-color:rgba(0,111,123,.35);text-underline-offset:3px;}
-rdr-reglements .rgl .rgl-carte a:hover{text-decoration-color:var(--rgl-vert);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-carte a:hover{text-decoration-color:var(--rgl-vert);}}
 rdr-reglements .rgl .rgl-carte a:focus-visible{outline:2px solid var(--rgl-vert);outline-offset:2px;border-radius:2px;}
 rdr-reglements .rgl .rgl-carte strong{color:var(--rgl-carte-encre);font-weight:700;}
 rdr-reglements .rgl .rgl-h3{margin:var(--rgl-e2) 0 0;font-size:var(--rgl-t4);font-weight:700;color:var(--rgl-carte-encre);}
@@ -457,7 +462,7 @@ rdr-reglements .rgl .rgl-lies p{margin:0 0 var(--rgl-e4);color:var(--rgl-encre-d
 rdr-reglements .rgl .rgl-lies-liens{display:flex;flex-wrap:wrap;gap:var(--rgl-e2) var(--rgl-e5);}
 rdr-reglements .rgl .rgl-lies-liens a{display:inline-flex;align-items:center;gap:var(--rgl-e2);font-weight:600;color:var(--rgl-or);}
 rdr-reglements .rgl .rgl-lies-liens a svg{width:18px;height:18px;transition:transform .15s;}
-rdr-reglements .rgl .rgl-lies-liens a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-lies-liens a:hover svg{transform:translateX(3px);}}
 rdr-reglements .rgl .rgl-lies-liens a:focus-visible{outline:2px solid var(--rgl-or);outline-offset:3px;border-radius:2px;}
 
  
@@ -492,7 +497,7 @@ rdr-reglements .rgl.sous-600 .rgl-choix-lire{padding-top:var(--rgl-e3);}
 rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
 @media(prefers-reduced-motion:reduce){
   rdr-reglements .rgl .rgl-som-lien,rdr-reglements .rgl .rgl-som-tete,rdr-reglements .rgl .rgl-lies-liens a svg,rdr-reglements .rgl .rgl-fiche-val a svg,rdr-reglements .rgl .rgl-choix-carte,rdr-reglements .rgl .rgl-choix-lire svg,rdr-reglements .rgl .rgl-retour,rdr-reglements .rgl .rgl-retour svg{transition:none;}
-  rdr-reglements .rgl .rgl-choix-carte:hover{transform:none;}
+  @media (hover:hover) and (pointer:fine){rdr-reglements .rgl .rgl-choix-carte:hover{transform:none;}}
 }
 `;
 
@@ -529,7 +534,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       this._initialise = false;
       this._lang = 'fr';
       this._maj = '';
-      this._chrome = 0;
+      this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
@@ -579,10 +584,21 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       const v = String(valeur == null ? '' : valeur).trim();
       if (nom === 'lang') this._lang = v.toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
       else if (nom === 'maj') this._maj = v;
-      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : 0; }
+      else if (nom === 'chrome') { const n = parseInt(v, 10); this._chrome = Number.isFinite(n) && n > 0 ? n : null; }
     }
 
     
+
+    
+
+
+
+
+    _haut() {
+      if (this._chrome != null) return this._chrome;
+      if (!document.querySelector('rdr-entete')) return 0;
+      return window.matchMedia('(max-width: 750px)').matches ? 60 : 56;
+    }
 
     disconnectedCallback() {
       if (this._rafId) cancelAnimationFrame(this._rafId);
@@ -609,7 +625,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       const jour = aujourdhuiParis();
       const liste = this._reglements(jour);
       const plusieurs = liste.length > 1;
-      this._racine.style.setProperty('--rgl-chrome', this._chrome + 'px');
+      this._racine.style.setProperty('--rgl-chrome', this._haut() + 'px');
       this._racine.setAttribute('lang', lang);
 
       
@@ -716,7 +732,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
     
 
     _allerEnHaut() {
-      const y = this._racine.getBoundingClientRect().top + window.scrollY - this._chrome;
+      const y = this._racine.getBoundingClientRect().top + window.scrollY - this._haut();
       window.scrollTo(0, Math.max(0, Math.round(y)));
     }
 
@@ -990,7 +1006,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
         const vue = window.innerHeight;
         const docH = document.documentElement.scrollHeight;
         const scrollMax = Math.max(0, docH - vue);
-        const h = this._chrome;
+        const h = this._haut();
         let ligne = y + h + 24;
         const reste = scrollMax - y;
         if (reste < vue) {
@@ -1020,7 +1036,7 @@ rdr-reglements .rgl.sous-600 .rgl-fil{padding-top:var(--rgl-e6);}
       marquerDebord();
       window.addEventListener('scroll', demander, { passive: true });
       this._ecouteurs.push([window, 'scroll', demander]);
-      const surRedim = () => { demander(); marquerDebord(); };
+      const surRedim = () => { this._racine.style.setProperty('--rgl-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
 
