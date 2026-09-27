@@ -1,5 +1,5 @@
-/* rdr-elements tags | source route-du-rhum ede21c7 | rdr-tags.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="ede21c7";performance.mark("rdr-elements:tags")}catch(e){}
+/* rdr-elements tags | source route-du-rhum 35aaade | rdr-tags.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="35aaade";performance.mark("rdr-elements:tags")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -498,6 +498,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="ede21c7";performance.
       this.style.display = 'block';
       this.style.width = '100%';
       this._injecterCss();
+      
+
+      if (this._monte) return;
+      this._monte = true;
       this._flotte = this._lireFlotte();
       this.innerHTML = this._html();
       this._cabler();
@@ -589,7 +593,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="ede21c7";performance.
         try {
           const p = JSON.parse(brut);
           if (Array.isArray(p.flotte) && p.flotte.length) {
-            return p.flotte.map(x => ({ nom: String(x.nom || ''), f: String(x.f || '') }))
+            
+
+            return p.flotte.map(x => ({ prenom: String(x.prenom || ''), nom: String(x.nom || ''), f: String(x.f || '') }))
               .filter(x => x.nom.length >= 4);
           }
         } catch (e) {   }
@@ -802,7 +808,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="ede21c7";performance.
       
 
       const t = pli(titre + ' ' + chapo).replace(/[^a-z0-9]+/g, ' ')
-        .replace(/ocean fifty/g, ' ').replace(/s+/g, ' ').trim();
+        .replace(/ocean fifty/g, ' ').replace(/\s+/g, ' ').trim();
       const trouve = new Map();
       const ajoute = (nom, motif) => { if (!trouve.has(nom)) trouve.set(nom, motif); };
 

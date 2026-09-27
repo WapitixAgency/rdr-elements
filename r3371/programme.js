@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum ede21c7 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 35aaade | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="35aaade";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -12,6 +12,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
 
   const pli = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().replace(/\s+/g, ' ').trim();
+
+  
+
+
+
+
+  const cleCat = (s) => pli(s).replace(/ /g, '-');
 
   
 
@@ -83,8 +90,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
   const ecussons = (liste) => {
     if (!Array.isArray(liste) || !liste.length) return '';
     return liste.slice(0, 4).map(nom => {
-      const cle = String(nom || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
-        .toLowerCase().replace(/\s+/g, ' ').trim();
+      
+
+      const cle = pli(nom);
       const c = CLASSES[cle];
       
 
@@ -136,12 +144,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
 
 
 
+  
+
+  const FORMATS_HEURE = {};
   const maintenantA = (fuseau) => {
     try {
-      const p = new Intl.DateTimeFormat('en-CA', {
+      const fmt = FORMATS_HEURE[fuseau] || (FORMATS_HEURE[fuseau] = new Intl.DateTimeFormat('en-CA', {
         timeZone: fuseau, year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit', hour12: false
-      }).formatToParts(new Date());
+      }));
+      const p = fmt.formatToParts(new Date());
       const g = (t) => (p.find(x => x.type === t) || {}).value;
       return {
         jour: g('year') + '-' + g('month') + '-' + g('day'),
@@ -228,7 +240,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
     'Copie impossible': 'Copy failed',
     'Partager': 'Share',
     'Fermer': 'Close',
-    'Le point sera posé dès que l’implantation sera arrêtée.': 'The pin will be placed once the layout is final.',
      
     'Matin': 'Morning',
     'Horaire à préciser': 'Time to be confirmed',
@@ -239,6 +250,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
     'Lieu': 'Venue',
     'Accès': 'Access',
     'Gratuit, accès libre': 'Free, open access',
+     
+    'Gratuit': 'Free',
     'Sur réservation': 'Booking required',
     'Réserver': 'Book',
     'En savoir plus': 'Find out more',
@@ -258,6 +271,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
     'Présenté par': 'Presented by',
     'Tous les soirs': 'Every evening',
     'Tous les jours': 'Every day',
+    'Heure silencieuse': 'Quiet hour',
      
     'Rien à cette date': 'Nothing on this date',
     'Aucun rendez-vous avec ces filtres': 'No events match these filters',
@@ -314,7 +328,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
 
   const IC = {
     horloge: 'M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
-    etiquette: 'M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11Zm4-4h.01',
     epingle: 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
     liste: 'M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01',
     fleche: 'M5 12h14M13 6l6 6-6 6',
@@ -330,13 +343,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
     famille: 'M16 20v-1a4 4 0 0 0-8 0v1M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM5 20v-.5a3 3 0 0 1 2-2.8M19 20v-.5a3 3 0 0 0-2-2.8',
     lune: 'M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z',
     feu: 'M12 3c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1-.4-2-1-2.8M12 21a6 6 0 0 1-6-6c0-2 1-3.5 2-5',
-    billet: 'M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 8v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-8Z',
     
 
 
 
     partage: 'M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8.6 13.5l6.8 4M15.4 6.5l-6.8 4',
-    coche: 'M20 6 9 17l-5-5',
     carte: 'M9 4 3 6.5v13L9 17l6 2.5 6-2.5v-13L15 7 9 4Zm0 0v13m6-10v12.5',
     
 
@@ -663,7 +674,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="ede21c7";perform
     
 
     tempos: [730, 910, 640, 1090, 830, 1210, 690, 970, 770, 1150, 610, 880],
-    onde: 'M0 12 Q 9 2 18 12 T 36 12 T 54 12 T 72 12 T 90 12 T 108 12',
     rayons: [0, 1, 2, 3, 4, 5, 6, 7],
     
 
@@ -1399,14 +1409,6 @@ rdr-programme{display:block;width:100%;}
   .rp-marques{gap:10px;}
   .rp-logo-tiers{max-width:52%;}
 }
-.rp-logo-vide{
-  justify-self:center;margin:0 auto clamp(12px,2vw,26px);
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:7px 18px;border-radius:var(--rp-r-tag);
-  border:1px solid rgba(255,255,255,.34);background:rgba(9,14,38,.42);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  font:800 var(--t-2)/1 Montserrat,sans-serif;letter-spacing:.26em;color:#fff;
-}
 
 
 .rp-titre{
@@ -1472,77 +1474,6 @@ rdr-programme{display:block;width:100%;}
 
 
 
-
-
-
-
-
-
-
-
-.rp-illus{
-  position:relative;z-index:1;margin:14px auto 0;width:min(100%,1180px);
-  aspect-ratio:22/7;max-height:min(38vh,380px);
-  
-
-
-
-
-
-
-
-
-
-  overflow:visible;
-  -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 11%, #000 66%, transparent 100%),
-    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
-          mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 11%, #000 66%, transparent 100%),
-    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect;
-}
-
-
-
-
-
-.rp-halo{
-  position:absolute;inset:-14% -7% -22%;z-index:0;pointer-events:none;
-  filter:blur(64px) saturate(1.45);opacity:.5;
-  -webkit-mask-image:radial-gradient(72% 72% at 50% 46%, #000 30%, transparent 78%);
-          mask-image:radial-gradient(72% 72% at 50% 46%, #000 30%, transparent 78%);
-}
-.rp-halo img{width:100%;height:100%;object-fit:cover;display:block;}
-
-
-
-
-.rp-illus > img{position:relative;z-index:1;width:100%;height:100%;
-  object-fit:cover;object-position:center 26%;display:block;}
-.rp-illus-vide{
-  position:relative;width:100%;height:100%;display:grid;place-items:center;text-align:center;
-  background:
-    radial-gradient(60% 90% at 50% 100%, rgba(168,85,247,.30), transparent 70%),
-    radial-gradient(40% 70% at 18% 100%, rgba(56,189,248,.26), transparent 70%),
-    radial-gradient(40% 70% at 82% 100%, rgba(236,72,153,.22), transparent 70%);
-  color:var(--rp-encre-3);font-size:var(--t-2);letter-spacing:.16em;text-transform:uppercase;
-}
-
-
-
-.rp-illus-vide::before{
-  content:'';position:absolute;inset:auto 0 0;height:62%;
-  background:
-    linear-gradient(90deg,transparent 6%,rgba(255,255,255,.10) 6%,rgba(255,255,255,.10) 11%,transparent 11%,
-      transparent 16%,rgba(255,255,255,.07) 16%,rgba(255,255,255,.07) 24%,transparent 24%,
-      transparent 30%,rgba(255,255,255,.12) 30%,rgba(255,255,255,.12) 33%,transparent 33%,
-      transparent 44%,rgba(255,255,255,.08) 44%,rgba(255,255,255,.08) 58%,transparent 58%,
-      transparent 66%,rgba(255,255,255,.11) 66%,rgba(255,255,255,.11) 70%,transparent 70%,
-      transparent 78%,rgba(255,255,255,.07) 78%,rgba(255,255,255,.07) 90%,transparent 90%);
-  -webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%);
-}
-.rp-illus-vide span{position:relative;z-index:1;}
 
  
  
@@ -2734,15 +2665,6 @@ rdr-programme{display:block;width:100%;}
 
 
 
-.rp-meta-cat{
-  display:inline-flex;align-items:center;gap:var(--e-2);min-width:0;
-  font:700 var(--t-2) Montserrat,sans-serif;letter-spacing:.03em;color:var(--c);
-}
-.rp-meta-cat span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rp-meta-cat .rp-ic{width:15px;height:15px;flex:none;color:var(--c);}
-
-
-
 
 
 
@@ -2770,7 +2692,7 @@ rdr-programme{display:block;width:100%;}
   position:relative;z-index:1;pointer-events:none;}
 
 
-.rp-tete > .rp-vlieu--carte{position:relative;z-index:1;}
+
 .rp-tete > .rp-ouvre{z-index:1;}
 
 
@@ -2800,42 +2722,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-.rp-meta-i{display:inline-flex;align-items:center;gap:var(--e-2);
-  padding:5px 10px;border-radius:8px 2px 8px 2px;
-  background:rgba(4,12,26,.55);border:1px solid var(--rp-filet);
-  font:700 var(--t-2) Montserrat,sans-serif;letter-spacing:.04em;
-  color:var(--rp-encre-2);white-space:nowrap;}
-.rp-meta-i .rp-ic{width:14px;height:14px;flex:none;color:var(--rp-encre-3);}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.rp-meta-i--carte{
-  pointer-events:auto;cursor:pointer;
-  border-color:rgba(255,255,255,.30);color:var(--rp-encre);
-  transition:border-color .2s,background .2s,color .2s;
-}
-.rp-meta-i--carte .rp-ic{color:var(--rp-actif);}
-.rp-meta-i--carte .rp-ic--carte{width:12px;height:12px;margin-left:1px;opacity:1;}
-@media (hover:hover) and (pointer:fine){
-  .rp-meta-i--carte:hover{background:rgba(255,255,255,.10);color:var(--rp-encre);
-    border-color:var(--rp-encre-3);}
-}
  
 
 
@@ -2967,11 +2854,10 @@ rdr-programme{display:block;width:100%;}
 
 
 @media (hover:none){
-  .rp-meta-i--carte,.rp-champ-btn,.rp-fl,.rp-jour,.rp-bascule button,
+  .rp-champ-btn,.rp-fl,.rp-jour,.rp-bascule button,
   .rp-raz,.rp-cta,.rp-mod-ici button{min-height:44px;}
   .rp-fl{width:44px;}
 }
-.rp-sep{display:none;}
 
 
 
@@ -3010,7 +2896,6 @@ rdr-programme{display:block;width:100%;}
   70%{box-shadow:0 0 0 7px rgba(93,191,192,0);}
   100%{box-shadow:0 0 0 0 rgba(93,191,192,0);}
 }
-.rp-badge--off{--b:#56BCF6;}
 
 .rp-tuile.est-passe{opacity:.45;}
 
@@ -3324,18 +3209,6 @@ rdr-programme{display:block;width:100%;}
 .rp-vecus .rp-fanion:nth-child(even){margin-top:9px;}
 .rp-root.sous-720 .rp-fanion{height:56px;}
 .rp-root.sous-720 .rp-vecus .rp-fanion:nth-child(even){margin-top:7px;}
-.rp-vligne{grid-column:1;grid-row:3;}
- 
-.rp-vligne{
-  display:flex;align-items:center;gap:var(--e-4);flex-wrap:wrap;margin-top:14px;
-}
-.rp-vbadges{margin-top:0;}
-
-
-.rp-vnom{
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-  overflow:hidden;
-}
 
 
 .rp-vtitre{
@@ -3353,10 +3226,6 @@ rdr-programme{display:block;width:100%;}
   font-size:clamp(19px,calc(var(--rp-l,1180) * .030 * 1px),34px);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
   overflow:hidden;
-}
-.rp-vnom{
-  font:700 var(--t-3)/1.35 Montserrat,sans-serif;color:rgba(255,255,255,.9);
-  text-shadow:0 2px 12px rgba(0,0,0,.8);overflow-wrap:anywhere;
 }
  
 
@@ -3395,7 +3264,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-.rp-signe--eq i,.rp-signe--pts i{
+.rp-signe--eq i{
   display:block;flex:none;width:2.5px;border-radius:2px;
   background:linear-gradient(180deg,
     color-mix(in srgb,currentColor 55%,transparent),currentColor 50%,
@@ -3404,7 +3273,6 @@ rdr-programme{display:block;width:100%;}
   animation:rp-eq 1s ease-in-out infinite alternate;
   box-shadow:0 0 14px -3px currentColor,0 1px 5px rgba(4,8,24,.85);
 }
-.rp-signe--pts i{width:3px;border-radius:3px;}
 @keyframes rp-eq{from{transform:scaleY(.3);}to{transform:scaleY(1);}}
 
  
@@ -3657,7 +3525,6 @@ rdr-programme{display:block;width:100%;}
 
 @media (prefers-reduced-motion:reduce){
   .rp-cim-cadres i{animation:none;opacity:.62;}
-  .rp-gui-lampes i{animation:none;opacity:.62;}
 }
 
 
@@ -3679,13 +3546,6 @@ rdr-programme{display:block;width:100%;}
   box-shadow:0 0 0 4px color-mix(in srgb, var(--c) 12%, transparent);
 }
 .rp-vpast .rp-rond .rp-ic{width:22px;height:22px;}
-
-
-.rp-vbadges{margin-top:8px;}
-.rp-vbadges .rp-badge{
-  background:rgba(6,11,32,.62);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  border-color:color-mix(in srgb, var(--b,#fff) 52%, transparent);
-}
 
 
 
@@ -4210,18 +4070,6 @@ rdr-programme{display:block;width:100%;}
 
 .rp-root.sous-1080 .rp-filtres{grid-template-columns:repeat(2,minmax(0,1fr));}
 
-.rp-root.sous-720 .rp-illus{
-  aspect-ratio:16/9;max-height:min(30vh,260px);
-  
-
-
-  -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 9%, #000 70%, transparent 100%),
-    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
-          mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 9%, #000 70%, transparent 100%),
-    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
-}
 
 
 .rp-root.sous-720 .rp-outils,
@@ -4281,7 +4129,6 @@ rdr-programme{display:block;width:100%;}
 
 
 
-.rp-root.sous-720 .rp-h .rp-cat{font-size:9px;letter-spacing:.07em;margin-top:5px;}
 .rp-root.sous-720 .rp-h em{display:none;}
 .rp-root.sous-720 .rp-h{gap:0;line-height:1.3;}
 .rp-root.sous-720 .rp-titre-t{font-size:var(--t-3);}
@@ -4294,21 +4141,9 @@ rdr-programme{display:block;width:100%;}
 
 
 .rp-root.sous-720 .rp-meta{grid-column:2;display:grid;justify-items:start;margin-top:5px;}
-.rp-root.sous-720 .rp-sep{display:none;}
-.rp-root.sous-720 .rp-meta-i{font-size:var(--t-2);align-items:flex-start;}
-.rp-root.sous-720 .rp-meta-i span{white-space:normal;overflow-wrap:anywhere;max-width:none;}
-.rp-root.sous-720 .rp-meta-i .rp-ic{margin-top:1px;}
- 
 
 
 .rp-root.sous-720 .rp-meta{grid-template-columns:minmax(0,1fr);gap:var(--e-2);width:100%;}
-.rp-kicker{display:none;}
-.rp-root.sous-720 .rp-kicker{
-  display:flex;align-items:center;gap:var(--e-2);width:max-content;max-width:100%;margin-bottom:4px;
-  font-size:var(--t-1);font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--c);
-}
-.rp-kicker .rp-ic{width:13px;height:13px;flex:none;}
 
 
 
@@ -4367,39 +4202,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-
-
-
-
-
-.rp-tuile--vedette .rp-vlieu--carte{
-  cursor:pointer;pointer-events:auto;
-  border-color:rgba(255,255,255,.5);background:rgba(6,11,32,.7);
-  transition:border-color .2s,background .2s;
-}
-.rp-tuile--vedette .rp-vlieu--carte .rp-ic{color:#fff;}
-.rp-tuile--vedette .rp-vlieu--carte .rp-ic--carte{width:12px;height:12px;opacity:1;}
-@media (hover:hover) and (pointer:fine){
-  .rp-tuile--vedette .rp-vlieu--carte:hover{background:rgba(0,0,0,.34);border-color:#fff;}
-}
- 
-@media (hover:none){ .rp-tuile--vedette .rp-vlieu--carte{min-height:44px;} }
-
-
-
-
-
-.rp-root.sous-720 .rp-tuile--vedette .rp-vlieu--carte{
-  padding:6px 11px;margin-top:10px;width:max-content;max-width:100%;
-}
-
-
 .rp-root.sous-720 .rp-vscene{grid-column:1 / -1;grid-row:2;min-height:104px;padding:14px;margin-top:10px;}
-
-
-
-.rp-tuile--vedette .rp-meta .rp-meta-cat,
-.rp-tuile--vedette .rp-meta .rp-sep{display:none;}
 
 
 
@@ -4466,7 +4269,6 @@ rdr-programme{display:block;width:100%;}
 .rp-root.sous-720 .rp-vpast .rp-signe{
   display:block;width:clamp(96px,26vw,150px);height:26px;margin:0;
 }
-.rp-root.sous-720 .rp-vligne{margin-top:10px;gap:var(--e-3);}
 .rp-root.sous-720 .rp-vpast{padding-top:2px;}
 .rp-root.sous-720 .rp-vtitre{font-size:clamp(21px,calc(var(--rp-l,390) * .085 * 1px),38px);}
  
@@ -4475,7 +4277,6 @@ rdr-programme{display:block;width:100%;}
 
 
 .rp-root.sous-420 .rp-tete{grid-template-columns:70px minmax(0,1fr);gap:var(--e-3);}
-.rp-root.sous-420 .rp-h .rp-cat{font-size:8.5px;letter-spacing:.05em;}
 .rp-root.sous-420 .rp-titre-t{font-size:var(--t-3);}
 
 
@@ -4507,7 +4308,7 @@ rdr-programme{display:block;width:100%;}
   .rp-tuile{break-inside:avoid;border:1px solid #ccc;background:#fff !important;
     box-shadow:none;margin-bottom:6px;backdrop-filter:none;}
   .rp-tuile .rp-titre-t,.rp-tuile .rp-h{color:#000;}
-  .rp-meta-i,.rp-h span:last-child{color:#444;}
+  .rp-h span:last-child{color:#444;}
   .rp-vscene img,.rp-photo{display:none;}
   .rp-plus{grid-template-rows:1fr;}
 }
@@ -5074,7 +4875,23 @@ rdr-programme{display:block;width:100%;}
 
 
     connectedCallback() {
-      if (this._monte) return;
+      
+
+
+
+
+      if (this._monte) {
+        if (!this._ro) this._observerLargeur();
+        if (!this._p && this._attente && !this._minuteur) {
+          this._minuteur = setTimeout(() => {
+            this._minuteur = null;
+            if (!this._p) { this._attente = false; this._rendre(); }
+          }, DELAI_ATTENTE);
+        }
+        this._armerHorloge();
+        this._rendre();
+        return;
+      }
       this._monte = true;
       this._attente = true;
       this._injecterCss();
@@ -5089,6 +4906,7 @@ rdr-programme{display:block;width:100%;}
       this._rendre();
       this._observerLargeur();
       this._mesurerChiffre();
+      this._armerHorloge();
        
       this._minuteur = setTimeout(() => {
         if (!this._p) { this._attente = false; this._rendre(); }
@@ -5152,8 +4970,16 @@ rdr-programme{display:block;width:100%;}
       appliquer();
       
 
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
+
+
+
+
+
+
+      const pret = document.fonts && document.fonts.ready;
+      if (pret && pret !== this._policesGuettees) {
+        this._policesGuettees = pret;
+        pret.then(() => {
           this._chiffre = null;
           appliquer();
         }).catch(() => {});
@@ -5163,6 +4989,7 @@ rdr-programme{display:block;width:100%;}
     disconnectedCallback() {
       if (this._ro) { this._ro.disconnect(); this._ro = null; }
       if (this._minuteur) { clearTimeout(this._minuteur); this._minuteur = null; }
+      this._couperHorloge();
       
 
 
@@ -5173,6 +5000,77 @@ rdr-programme{display:block;width:100%;}
         removeEventListener('scroll', this._suivre, true);
         removeEventListener('resize', this._suivre);
         this._horsChamp = null;
+      }
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _armerHorloge() {
+      this._couperHorloge();
+      this._surVisible = () => { if (!document.hidden) this._tic(); };
+      this._horloge = setInterval(() => this._tic(), 30000);
+      document.addEventListener('visibilitychange', this._surVisible);
+      addEventListener('pageshow', this._surVisible);
+    }
+
+    _couperHorloge() {
+      if (this._horloge) { clearInterval(this._horloge); this._horloge = null; }
+      if (this._surVisible) {
+        document.removeEventListener('visibilitychange', this._surVisible);
+        removeEventListener('pageshow', this._surVisible);
+        this._surVisible = null;
+      }
+    }
+
+    
+
+
+    _etatHoraire(now) {
+      let s = now.jour + '|' + (this._estNuit() ? 'n' : 'j');
+      if (this._p && this._jour === now.jour) {
+        s += '|' + this._filtrees(this._jour).map(a => {
+          if (!/^\d{1,2}:\d{2}/.test(a.debut || '')) return 'x';
+          return now.minute >= finMinutes(a) ? 'p' : now.minute >= minutes(a.debut) ? 'l' : 'a';
+        }).join('');
+      }
+      return s;
+    }
+
+    _tic() {
+      if (!this._p || !this.isConnected || document.hidden) return;
+      if (this.querySelector('.rp-champ.est-ouvert, .rp-partage.est-dit') ||
+          document.querySelector('.rp-modale')) return;
+      const now = this._maintenant();
+      let jourChange = false;
+      if (this._aujVu && now.jour !== this._aujVu && !this._jourChoisi) {
+        const avant = this._jour;
+        if (this._jours().includes(now.jour)) this._jour = now.jour;
+        this._calerSurFiltre();
+        jourChange = this._jour !== avant;
+      }
+      if (jourChange || this._etatHoraire(now) !== this._horaireVu) {
+        const barre = this.querySelector('#rpJours');
+        this._garderRail = !jourChange && barre ? barre.scrollLeft : null;
+        this._rendre();
+        return;
+      }
+      const t = this.querySelector('.rp-now span');
+      if (t) {
+        t.textContent = String(Math.floor(now.minute / 60)).padStart(2, '0') + ':' +
+          String(now.minute % 60).padStart(2, '0');
       }
     }
 
@@ -5283,6 +5181,13 @@ rdr-programme{display:block;width:100%;}
        
       m = clef.match(/^(\d+)\sh(?:\s(\d{2}))?$/);
       if (m) return m[1] + ' hr' + (m[2] ? ' ' + m[2] : '');
+      
+
+
+      m = clef.match(/^(\d+)\sh(?:\s(\d{2}))?\sde libre$/);
+      if (m) return m[1] + ' hr' + (m[2] ? ' ' + m[2] : '') + ' of free time';
+      m = clef.match(/^(\d+)\smin de libre$/);
+      if (m) return m[1] + ' min of free time';
       return undefined;
     }
 
@@ -5344,7 +5249,20 @@ rdr-programme{display:block;width:100%;}
     _honorerDemande() {
       const d = this._demande;
       if (!d || !this._p) return;
-      if (estRegistre(d.type)) { this._type = d.type; this._typeChoisi = true; }
+      if (estRegistre(d.type)) {
+        this._type = d.type;
+        this._typeChoisi = true;
+        
+
+
+
+
+        const jours = this._jours();
+        if (!jours.includes(this._jour)) {
+          const auj = this._maintenant().jour;
+          this._jour = jours.includes(auj) ? auj : (jours[0] || '');
+        }
+      }
       if (d.heure === 'matin' || d.heure === 'apresmidi' || d.heure === 'soir') {
         this._f.heure = d.heure;
       }
@@ -5354,8 +5272,8 @@ rdr-programme{display:block;width:100%;}
         if (t) this._f.lieu = t.id || t.nom;
       }
       if (d.cat) {
-        const t = (this._p.categories || []).find(c => pli(c) === pli(d.cat));
-        if (t) this._f.cat = pli(t);
+        const t = (this._p.categories || []).find(c => cleCat(c) === cleCat(d.cat));
+        if (t) this._f.cat = cleCat(t);
       }
        
       if (!this._jourChoisi) this._calerSurFiltre();
@@ -5448,18 +5366,14 @@ rdr-programme{display:block;width:100%;}
       }
     }
 
-     
-     
+    
+
+
+
+
     setPayload(p) {
-      this._p = p || null;
-      this._rec = null;
-      this._reglerRegistre();
-      const jours = this._jours();
-      const auj = this._maintenant().jour;
-      if (!this._jour || !jours.includes(this._jour)) {
-        this._jour = jours.includes(auj) ? auj : (jours[0] || '');
-      }
-      if (this._monte) this._rendre();
+      if (p == null) { this.removeAttribute('payload'); return; }
+      this.setAttribute('payload', JSON.stringify(p));
     }
 
     
@@ -5608,7 +5522,7 @@ rdr-programme{display:block;width:100%;}
         if ((a.type || 'officielle') !== t) return false;
         if (jour && a.date !== jour) return false;
         if (f.lieu && (a.lieuId || a.lieu) !== f.lieu && a.lieu !== f.lieu) return false;
-        if (f.cat && pli(a.cat || a.catLib) !== f.cat) return false;
+        if (f.cat && cleCat(a.cat || a.catLib) !== f.cat) return false;
         if (f.theme && pli(a.theme || a.themeLib) !== f.theme) return false;
          
          
@@ -5704,18 +5618,95 @@ rdr-programme{display:block;width:100%;}
         '</div>';
     }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _ecrire(html) {
+      const a = this._annonce;
+      if (a && a.parentNode === this) {
+        [...this.childNodes].forEach(n => { if (n !== a) this.removeChild(n); });
+        a.insertAdjacentHTML('beforebegin', html);
+      } else {
+        this.innerHTML = html;
+      }
+    }
+
+    _annoncer(texte) {
+      let a = this._annonce;
+      if (!a) {
+        a = this._annonce = document.createElement('p');
+        a.className = 'rp-sr-seul';
+        a.setAttribute('aria-live', 'polite');
+        a.setAttribute('aria-atomic', 'true');
+        a.textContent = texte;
+      }
+      if (a.parentNode !== this) this.appendChild(a);
+      if (a.textContent !== texte) a.textContent = texte;
+    }
+
+    
+
+
+    _cibleFocus() {
+      if (this._focusApres) { const c = this._focusApres; this._focusApres = null; return c; }
+      const el = document.activeElement;
+      if (!el || el === this || !this.contains(el)) return null;
+      const q = (v) => String(v).replace(/["\\]/g, '');
+      const champ = el.closest('.rp-champ') ||
+        [...this.querySelectorAll('.rp-champ')].find(c => c._pop && c._pop.contains(el));
+      if (champ) return ['.rp-champ[data-champ="' + q(champ.dataset.champ) + '"] .rp-champ-btn'];
+      if (el.dataset.jour) return ['.rp-jour[data-jour="' + q(el.dataset.jour) + '"]'];
+      if (el.dataset.type) return ['.rp-bascule button[data-type="' + q(el.dataset.type) + '"]'];
+      if (el.hasAttribute('data-aller-jour')) return ['.rp-jour[aria-pressed="true"]'];
+      if (el.hasAttribute('data-aller-registre') || el.id === 'rpRetourSM') {
+        return ['.rp-bascule button[aria-pressed="true"]', '.rp-jour[aria-pressed="true"]'];
+      }
+      if (el.id === 'rpRaz' || el.id === 'rpRaz2') return ['#rpRaz', '.rp-champ .rp-champ-btn'];
+      const tuile = el.closest('.rp-tuile[data-id]');
+      if (tuile) {
+        const t = '.rp-tuile[data-id="' + q(tuile.dataset.id) + '"] ';
+        return el.dataset.carte ? [t + '[data-carte]', t + '.rp-zone'] : [t + '.rp-zone'];
+      }
+      if (el.closest('.rp-silence')) return ['.rp-silence-tete'];
+      if (el.id) return ['#' + q(el.id)];
+      return null;
+    }
+
+    _rendreFocus(cibles) {
+      if (!cibles) return;
+      for (const s of cibles) {
+        const el = this.querySelector(s);
+        if (!el || el.hidden || el.disabled || typeof el.focus !== 'function') continue;
+        try { el.focus({ preventScroll: true }); } catch (e) {   }
+        if (document.activeElement === el) return;
+      }
+    }
+
     _rendre() {
       if (!this._p) {
-        this.innerHTML = this._attente ? this._squelette()
+        this._ecrire(this._attente ? this._squelette()
           : '<div class="rp-root"><div class="rp-vide">' +
             '<h3>Programmation indisponible</h3><p>La programmation n’a pas pu être chargée. ' +
-            'Rafraîchir la page suffit le plus souvent.</p></div></div>';
+            'Rafraîchir la page suffit le plus souvent.</p></div></div>');
         this._i18n(this);
         return;
       }
       const p = this._p;
       const jours = this._jours();
       const liste = this._filtrees(this._jour);
+      const focus = this._cibleFocus();
       
 
 
@@ -5730,7 +5721,7 @@ rdr-programme{display:block;width:100%;}
       const journee = this._type !== 'officielle' ? null
         : (p.journees || []).find(j => j.date === this._jour && j.actif !== false);
 
-      this.innerHTML =
+      this._ecrire(
         '<div class="rp-root' + (this._type === 'off' ? ' est-off' : '') +
           ' est-v2" style="--rp-motif:url(&quot;' + MOTIF + '&quot;)">' +
           '<div class="rp-motif" aria-hidden="true"></div>' +
@@ -5765,7 +5756,7 @@ rdr-programme{display:block;width:100%;}
             '<span class="rp-sig-fil"></span>' +
             '<span class="rp-sig-pts rp-sig-pts--d"><i></i><i></i><i></i></span>' +
           '</p>' +
-        '</div>';
+        '</div>');
 
       
 
@@ -5788,9 +5779,25 @@ rdr-programme{display:block;width:100%;}
 
 
       if (this._juger) this._juger();
-      this._centrerJour();
+      
+
+      if (this._garderRail != null) {
+        const barre = this.querySelector('#rpJours');
+        if (barre) barre.scrollLeft = this._garderRail;
+        this._garderRail = null;
+        if (this._jugerFleches) this._jugerFleches();
+      } else {
+        this._centrerJour();
+      }
       this._rang = 0;
       this._arrivee();
+      this._rendreFocus(focus);
+      const dj = this._jour ? dateDe(this._jour) : null;
+      this._annoncer((dj ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '., ' : '') +
+        this._compte(liste.length));
+      const now = this._maintenant();
+      this._aujVu = now.jour;
+      this._horaireVu = this._etatHoraire(now);
       
 
 
@@ -5939,7 +5946,10 @@ rdr-programme{display:block;width:100%;}
                 
 
 
-                ' onerror="this.remove()">'
+
+
+
+                ' data-repli>'
             : '') +
           (logoVille ? '</div>' : '') +
           '<h1 class="rp-titre"><span>Programmation</span><span class="rp-t2">' +
@@ -5974,8 +5984,13 @@ rdr-programme{display:block;width:100%;}
                 (gp ? esc(p.sousTitreGuadeloupe)
                   : (off && p.sousTitreOff) ? esc(p.sousTitreOff)
                   : p.sousTitre ? esc(p.sousTitre)
-                  : 'Du mardi 20 octobre au dimanche 1<sup>er</sup> novembre 2026, ' +
-                    'treize jours de fête sur les quais de Saint-Malo.') +
+                  
+
+                  : this._lang() === 'en'
+                    ? 'From Tuesday 20 October to Sunday 1<sup>st</sup> November 2026, ' +
+                      'thirteen days of festivities on the quays of Saint-Malo.'
+                    : 'Du mardi 20 octobre au dimanche 1<sup>er</sup> novembre 2026, ' +
+                      'treize jours de fête sur les quais de Saint-Malo.') +
               '</p>') +
         '</div>' +
       '</header>';
@@ -5987,7 +6002,11 @@ rdr-programme{display:block;width:100%;}
         if ((a.type || 'officielle') !== this._type) return;
         parJour.set(a.date, (parJour.get(a.date) || 0) + 1);
       });
-      const journees = new Set((this._p.journees || []).filter(j => j.actif !== false).map(j => j.date));
+      
+
+
+      const journees = this._type !== 'officielle' ? new Set()
+        : new Set((this._p.journees || []).filter(j => j.actif !== false).map(j => j.date));
       
 
 
@@ -6075,7 +6094,8 @@ rdr-programme{display:block;width:100%;}
         '</div>' +
         '<div class="rp-socle-pied">' +
           this._barreRegistres() +
-          '<p class="rp-socle-jour" aria-live="polite">' +
+           
+          '<p class="rp-socle-jour">' +
             '<b>' + esc(jourLong) + '</b>' +
             '<span>' + combien + ' rendez-vous</span>' +
           '</p>' +
@@ -6146,7 +6166,7 @@ rdr-programme{display:block;width:100%;}
       const lieux = (p.lieux || [])
         .filter(l => nomsDuType.has(l.nom) || nomsDuType.has(l.id) || (l.id || l.nom) === f.lieu)
         .map(l => [l.id || l.nom, l.nom]);
-      const cats = (p.categories || []).map(c => [pli(c), c]);
+      const cats = (p.categories || []).map(c => [cleCat(c), c]);
 
       return '<div class="rp-outils">' +
         
@@ -6169,6 +6189,9 @@ rdr-programme{display:block;width:100%;}
           sel('heure', IC.horloge, 'Tous les horaires', f.heure,
               [['matin', 'Matin, avant 12 h'], ['apresmidi', 'Après-midi, 12 h à 18 h'], ['soir', 'Soirée, après 18 h']]) +
           
+
+
+
 
 
 
@@ -6369,17 +6392,25 @@ rdr-programme{display:block;width:100%;}
       const aHeure = (a) => /^\d{1,2}:\d{2}/.test(a.debut || '');
       const liste = tout.filter(aHeure);
       const sansHeure = tout.filter(a => !aHeure(a));
-      const remplis = moments.filter(m =>
-        liste.some(a => minutes(a.debut) < m.fin &&
-          minutes(a.debut) >= (moments[moments.indexOf(m) - 1] || { fin: -1 }).fin));
+      
+
+
+
+
+
+
+
+
+      let bas = 0;
+      const groupes = moments.map(m => {
+        const dedans = liste.filter(a => minutes(a.debut) >= bas && minutes(a.debut) < m.fin);
+        bas = m.fin;
+        return { m, dedans };
+      }).filter(g => g.dedans.length);
 
       const morceaux = [];
-      let borneBasse = -1;
-      moments.forEach(m => {
-        const dedans = liste.filter(a => minutes(a.debut) > borneBasse && minutes(a.debut) <= m.fin);
-        borneBasse = m.fin;
-        if (!dedans.length) return;
-        if (remplis.length > 1) {
+      groupes.forEach(({ m, dedans }) => {
+        if (groupes.length > 1) {
           morceaux.push('<h3 class="rp-moment"><span>' + esc(m.lib) + '</span>' +
             '<i>' + dedans.length + '</i></h3>');
         }
@@ -6403,17 +6434,17 @@ rdr-programme{display:block;width:100%;}
                 ' de libre</span></p>');
             }
           }
-          morceaux.push(this._tuile(a));
+          morceaux.push(this._tuile(a, now));
         });
       });
 
       if (sansHeure.length) {
          
-        if (remplis.length) {
+        if (groupes.length) {
           morceaux.push('<h3 class="rp-moment"><span>' + esc('Horaire à préciser') + '</span>' +
             '<i>' + sansHeure.length + '</i></h3>');
         }
-        sansHeure.forEach(a => morceaux.push(this._tuile(a)));
+        sansHeure.forEach(a => morceaux.push(this._tuile(a, now)));
       }
 
       
@@ -6450,9 +6481,11 @@ rdr-programme{display:block;width:100%;}
       return morceaux.join('');
     }
 
-    _tuile(a) {
+    
+
+    _tuile(a, maintenant) {
       const cat = catDe(a.cat || a.catLib);
-      const now = this._maintenant();
+      const now = maintenant || this._maintenant();
       const ceJour = a.date === now.jour;
       const d = minutes(a.debut), f = finMinutes(a);
       
@@ -6868,7 +6901,13 @@ rdr-programme{display:block;width:100%;}
           'Le détail de cette animation n’est pas encore publié. ' +
           'Il le sera au fil des semaines.</p>' : '') +
         (photo && !a.vedette
-          ? '<figure class="rp-photo"><img src="' + esc(photo) + '" alt="" loading="lazy" decoding="async" data-repli></figure>'
+          
+
+
+
+          ? '<figure class="rp-photo"><img src="' + esc(wixTaille(photo, 520, 293)) + '"' +
+              (wixDensite(photo, 520, 293) ? ' srcset="' + esc(wixDensite(photo, 520, 293)) + '"' : '') +
+              ' alt="" loading="lazy" decoding="async" data-repli></figure>'
           : '') +
         
 
@@ -7316,6 +7355,7 @@ rdr-programme{display:block;width:100%;}
         const id = b.dataset.aller;
         fermer();
         this._ouverts.add(id);
+        this._focusApres = ['.rp-tuile[data-id="' + id.replace(/["\\]/g, '') + '"] .rp-zone'];
         this._rendre();
         const cible = this.querySelector('.rp-tuile[data-id="' + id.replace(/"/g, '') + '"]');
         if (cible) {
@@ -7335,7 +7375,11 @@ rdr-programme{display:block;width:100%;}
 
      
 
+    
+
+
     _fermerChamps(sauf) {
+      const actif = document.activeElement;
       this.querySelectorAll('.rp-champ').forEach(ch => {
         if (ch === sauf) return;
         ch.classList.remove('est-ouvert');
@@ -7343,6 +7387,9 @@ rdr-programme{display:block;width:100%;}
         const btn = ch.querySelector('.rp-champ-btn');
         if (pop) pop.hidden = true;
         if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (btn && pop && actif && pop.contains(actif)) {
+          try { btn.focus({ preventScroll: true }); } catch (e) {   }
+        }
       });
     }
 
@@ -7566,7 +7613,7 @@ rdr-programme{display:block;width:100%;}
           const d = dateDe(this._jour);
           bouts.push(this._jc(d) + ' ' + d.getDate() + ' ' + this._mc(d));
         }
-        if (this._type !== this._registreParDefaut()) bouts.push(REGISTRE_NOMS[this._type].titre);
+        if (this._type !== this._registreParDefaut()) bouts.push(this._t(REGISTRE_NOMS[this._type].titre));
         document.title = bouts.length
           ? (this._lang() === 'en' ? 'Programme, ' : 'Programmation, ') + bouts.join(', ') + ' | Route du Rhum'
           : this._titreOrigine;

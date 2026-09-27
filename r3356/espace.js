@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ede21c7 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ede21c7";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 35aaade | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="35aaade";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -179,6 +179,7 @@ if (!customElements.get('espace-rhum')) {
   const MOIS_FR = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
                    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   const JOURS_FR = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+  const JOURS_EN = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   const ICON_CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
   const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>';
 
@@ -303,11 +304,16 @@ if (!customElements.get('espace-rhum')) {
 
 
 
+
+
+
   const MEMOIRE_KEY = 'erDernierEtatV1';
   const MEMOIRE_TTL_MS = 24 * 3600 * 1000;
   function lireMemoire(membre, lang) {
     try {
       const m = JSON.parse(localStorage.getItem(MEMOIRE_KEY) || 'null');
+       
+      if (m && membre && m.membre && m.membre !== membre) { localStorage.removeItem(MEMOIRE_KEY); return null; }
       if (!m || !membre || m.membre !== membre || m.lang !== lang || !m.payload || typeof m.le !== 'number') return null;
       if (Date.now() - m.le > MEMOIRE_TTL_MS) { localStorage.removeItem(MEMOIRE_KEY); return null; }
       return m;
@@ -393,8 +399,12 @@ if (!customElements.get('espace-rhum')) {
     } catch (e) { return null; }
   }
   function coupPoucePermis(maintenant) {
+    
+
+
+    if (cpSansMemoire > 0) return false;
     const m = coupPouceMemoire();
-    if (!m) return cpSansMemoire === 0;
+    if (!m) return true;
     if (m.silence && maintenant < m.silence) return false;
     if (m.dernier && maintenant - m.dernier < CP_ESPACE) return false;
     return !(m.jour === new Date(maintenant).toDateString() && (m.n || 0) >= CP_PAR_JOUR);
@@ -658,22 +668,6 @@ if (!customElements.get('espace-rhum')) {
 
 
   const PREFS_THEMES = ['Départ', 'Arrivée', 'Direct', 'Classement', 'Météo', 'Avarie', 'Record', 'Interview', 'Portrait', 'Coulisses', 'Décryptage', 'Rookies', 'Femmes', 'Écologie & Océan'];
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function prefsWixImg(u) {
     if (!u) return ''; const s = String(u);
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i); if (m) return 'https://static.wixstatic.com/media/' + m[1];
@@ -860,15 +854,12 @@ if (!customElements.get('espace-rhum')) {
     'Tu es un véritable passionné de la Route du Rhum.': 'You\'re a true Route du Rhum enthusiast.',
     'Pas d\'actu fraîche': 'No fresh news',
     'Reviens plus tard pour la dernière info de la course.': 'Come back later for the latest race update.',
-    'À découvrir': 'To discover', 'activé à la course': 'unlocked during the race',
+    'À découvrir': 'To discover',
     'arrive bientôt': 'coming soon', 'Destination Guadeloupe': 'Destination Guadeloupe',
      
     'Le chargement est un peu plus long que d\'habitude. Merci de patienter, ton espace arrive.': 'Loading is taking a little longer than usual. Please hold on, your space is on its way.',
-    'On est très nombreux à bord !': 'We\'re all aboard in force!',
     'Gros grain passager': 'A passing squall',
-    'Vous êtes exceptionnellement nombreux à vous connecter en ce moment. Le chargement peut prendre un peu plus de temps que d\'habitude. Merci de patienter, ton espace arrive.': 'Exceptionally many of you are connecting right now. Loading may take a little longer than usual. Please hold on, your space is on its way.',
     'Impossible de charger ton espace pour l\'instant : nos serveurs encaissent une belle vague. Réessaie dans quelques instants, tout devrait rentrer dans l\'ordre rapidement.': 'We can\'t load your space right now: our servers are riding a big wave. Try again in a few moments, everything should settle quickly.',
-    'Reconnexion automatique en cours…': 'Reconnecting automatically…',
      
     'Curieux': 'Curious', 'Passionné': 'Enthusiast', 'Inconditionnel': 'Devoted',
     'Fan': 'Fan', 'Suiveur': 'Follower', 'Légende': 'Legend',
@@ -1076,7 +1067,7 @@ if (!customElements.get('espace-rhum')) {
     'Pseudo': 'Nickname', 'Ton nom de fan': 'Your fan name',
     'Civilité': 'Title', 'À préciser': 'To be specified',
     'Madame': 'Ms', 'Monsieur': 'Mr', 'Autre': 'Other', 'Je préfère ne pas dire': 'Prefer not to say',
-    'Date de naissance': 'Date of birth', 'Choisir une date': 'Pick a date',
+    'Date de naissance': 'Date of birth',
     'Année': 'Year', 'Mois': 'Month', 'Effacer': 'Clear',
     'Choisis d\'abord une année et un mois.': 'Pick a year and a month first.',
     'Choisir ta date de naissance': 'Pick your date of birth',
@@ -1110,7 +1101,7 @@ if (!customElements.get('espace-rhum')) {
 
 
      
-    'Premier pas': 'First step', 'Fidèle': 'Loyal', 'Supporter fidèle': 'Loyal supporter',
+    'Premier pas': 'First step', 'Fidèle': 'Loyal',
     'Vétéran': 'Veteran', 'Explorateur': 'Explorer', 'Journaliste': 'Journalist',
     'Analyste': 'Analyst', 'Collectionneur': 'Collector', 'Supporter': 'Supporter',
     'Photographe': 'Photographer', 'Spectateur du départ': 'Start spectator',
@@ -1211,6 +1202,8 @@ if (!customElements.get('espace-rhum')) {
      
      
     'Ne plus suivre': 'Unfollow',
+     
+    'Réduire': 'Show less',
     'Retirer des préférés': 'Remove from favourites',
     'En faire mon préféré': 'Make them my favourite',
     'Choisis ton skipper': 'Choose your skipper',
@@ -1330,7 +1323,7 @@ if (!customElements.get('espace-rhum')) {
     'Mise à jour': 'Update',
     'Rythme de mise à jour des statistiques': 'How often statistics are updated',
     'Tes lectures et découvertes sont comptabilisées une fois par jour. Tes favoris, eux, sont pris en compte tout de suite.':
-      'Your reads and discoveries are counted every night. Your favourites, though, count straight away.',
+      'Your reads and discoveries are counted once a day. Your favourites, though, count straight away.',
     'Comment ça marche ?': 'How does it work?',
     'Le jeu des badges': 'The badge game',
     'Collectionne les badges de la course': 'Collect the race badges',
@@ -1417,7 +1410,7 @@ if (!customElements.get('espace-rhum')) {
     "Tu suis d'autres courses au large ?": 'Do you follow other offshore races?',
     'Ton pseudo Instagram': 'Your Instagram handle',
     'Pseudo invalide : lettres, chiffres, « . » et « _ » uniquement.':
-      'Invalid handle: letters, numbers, ". " and "_" only.',
+      'Invalid handle: letters, numbers, "." and "_" only.',
     'Merci, je vais regarder pour venir autrement': 'Thanks, I will look into coming another way',
     'Je viens en voiture': 'I am coming by car',
     'Mes informations personnelles': 'My personal details',
@@ -1474,8 +1467,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum {
        
       --er-bg-base:           #16355D;
-      --er-bg-section:        #0F2345;
-      --er-bg-section-alt:    #0F2345;
       --er-bg-elevated:       #1E4478;
       --er-bg-card:           #0A1A35;
       --er-bg-overlay:        rgba(10, 18, 40, 0.82);
@@ -1496,8 +1487,6 @@ if (!customElements.get('espace-rhum')) {
       --er-amber:             #F5BE41;
 
       --er-danger:            #E63946;
-      --er-warning:           #F5BE41;
-      --er-success:           #5DBFC0;
 
       
 
@@ -1538,15 +1527,11 @@ if (!customElements.get('espace-rhum')) {
       --er-radius-lg:           20px;
       --er-radius-full:         9999px;
       --er-radius-btn:          3px 15px 3px 15px;
-      --er-radius-btn-inverse:  15px 3px 15px 3px;
       --er-radius-card:         28px 3px 16px 3px;
       --er-radius-card-sm:      14px 3px 10px 3px;
-      --er-radius-card-inverse: 3px 28px 3px 16px;
 
-      --er-shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.2);
       --er-shadow-md:   0 8px 24px rgba(0, 0, 0, 0.35);
       --er-shadow-lg:   0 16px 48px rgba(0, 0, 0, 0.55);
-      --er-shadow-glow: 0 0 32px rgba(93, 191, 192, 0.18);
 
       --er-ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --er-ease-entry:  cubic-bezier(0.22, 1, 0.36, 1);
@@ -1571,29 +1556,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum *,
     espace-rhum *::before,
     espace-rhum *::after { box-sizing: border-box; }
-
-     
-    espace-rhum.er-theme-course, espace-rhum .er-theme-course { }
-    espace-rhum.er-theme-marque, espace-rhum .er-theme-marque {
-      --er-bg-base: #191D31; --er-bg-section: #10142A; --er-bg-elevated: #2A2F4A; --er-bg-card: #0E1122;
-      --er-teal: #419992; --er-teal-deep: #00676E; --er-amber-bright: #FCDD00; --er-amber: #F5BE41;
-    }
-    espace-rhum.er-theme-histoire, espace-rhum .er-theme-histoire {
-      --er-bg-base: #20515E; --er-bg-section: #173F4A; --er-bg-elevated: #2A646D; --er-bg-card: #12333C;
-      --er-teal: #5DBFC0; --er-teal-deep: #2A646D; --er-amber-bright: #F5BE41; --er-amber: #C1E1D9;
-    }
-    espace-rhum.er-theme-evenement-sm, espace-rhum .er-theme-evenement-sm {
-      --er-bg-base: #16355D; --er-bg-section: #0F2345; --er-bg-elevated: #4F5BA5; --er-bg-card: #0A1F3D;
-      --er-teal: #56BCF6; --er-teal-deep: #479ED7; --er-amber-bright: #FCF150; --er-amber: #7894F7;
-    }
-    espace-rhum.er-theme-evenement-pap, espace-rhum .er-theme-evenement-pap {
-      --er-bg-base: #16355D; --er-bg-section: #1E2E50; --er-bg-elevated: #F19F39; --er-bg-card: #0A1F3D;
-      --er-teal: #85D8D5; --er-teal-deep: #5DBFC0; --er-amber-bright: #FCF150; --er-amber: #F19F39;
-    }
-    espace-rhum.er-theme-bilan, espace-rhum .er-theme-bilan {
-      --er-bg-base: #20515E; --er-bg-section: #173F4A; --er-bg-elevated: #2A646D; --er-bg-card: #12333C;
-      --er-teal: #5DBFC0; --er-amber-bright: #F5BE41; --er-amber: #F19F39;
-    }
 
      
     
@@ -1887,8 +1849,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-rang-explique { margin: 0 0 8px; font-size: 11px; line-height: 1.45; color: rgba(238, 242, 248, 0.55); }
      
     espace-rhum .er-sidebar-rank-icon { width: 14px; height: 14px; flex-shrink: 0; stroke: var(--er-amber); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    espace-rhum .er-sidebar-rank-text { font-weight: 700; color: var(--er-amber); letter-spacing: 0.02em; }
-    espace-rhum .er-sidebar-rank-text strong { color: var(--er-amber-bright); margin-right: 4px; }
 
     espace-rhum .er-sidebar-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 24px; }
     espace-rhum .er-sidebar-nav-link { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border: none; background: none; text-align: left; border-radius: 10px; color: var(--er-text-muted); text-decoration: none; font-family: var(--er-font-body); font-size: 13px; font-weight: 600; cursor: pointer; transition: all var(--er-dur-fast) var(--er-ease-smooth); }
@@ -1896,7 +1856,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-sidebar-nav-link--active { background: rgba(93, 191, 192, 0.18); color: var(--er-teal); }
     espace-rhum .er-sidebar-nav-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-    espace-rhum .er-sidebar-section-title { font-family: var(--er-font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--er-text-label); margin-bottom: 10px; padding-left: 4px; }
 
 
     espace-rhum .er-sidebar-preferences-btn { width: 100%; justify-content: center; margin-top: 8px; }
@@ -1981,22 +1940,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-status-text {
       font-family: var(--er-font-body); font-size: 14px; line-height: 1.6;
       color: var(--er-text-secondary); margin: 0;
-    }
-    espace-rhum .er-status-sub {
-      font-family: var(--er-font-body); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--er-text-muted);
-    }
-    espace-rhum .er-status-spinner {
-      width: 28px; height: 28px; margin-top: 4px;
-      border-radius: 50%;
-      border: 3px solid var(--er-teal-soft);
-      border-top-color: var(--er-teal);
-      animation: er-status-spin 0.9s linear infinite;
-    }
-    @keyframes er-status-spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) {
-      espace-rhum .er-status-spinner { animation: none; opacity: 0.6; }
     }
     espace-rhum .er-status-retry { margin-top: 8px; }
 
@@ -2156,14 +2099,6 @@ if (!customElements.get('espace-rhum')) {
       padding: 24px;
       position: relative;
       overflow: hidden;
-    }
-    espace-rhum .er-widget--placeholder {
-      min-height: 180px;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px dashed rgba(93, 191, 192, 0.3);
-      color: var(--er-text-muted);
-      font-family: var(--er-font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; text-align: center;
     }
 
      
@@ -3081,11 +3016,6 @@ if (!customElements.get('espace-rhum')) {
       border: none;
       padding: 0;
     }
-    espace-rhum .er-news-mix-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
     
 
     @media (min-width: 768px) {
@@ -3093,143 +3023,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-widget-suggestions > .er-section-header {
         min-height: 108px;
       }
-    }
-    espace-rhum .er-news-card {
-      position: relative;
-      background: var(--er-bg-card);
-      border: 1px solid var(--er-border-soft);
-      border-radius: 18px 3px 14px 3px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform var(--er-dur-fast) var(--er-ease-smooth),
-                  border-color var(--er-dur-fast) var(--er-ease-smooth),
-                  box-shadow var(--er-dur-fast) var(--er-ease-smooth);
-      padding: 0;
-      font: inherit;
-      color: inherit;
-      text-align: left;
-    }
-    @media (hover:hover) and (pointer:fine){espace-rhum .er-news-card:hover{
-      border-color: var(--er-border-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--er-shadow-md);
-    }}
-    espace-rhum .er-news-card--big {
-      grid-column: span 2;
-      min-height: 405px;
-    }
-    espace-rhum .er-news-card--full-image .er-news-card-img {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-    }
-    espace-rhum .er-news-card--full-image .er-news-card-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      
-
-      background: linear-gradient(to top, rgba(10, 26, 53, 0.96) 0%, rgba(10, 26, 53, 0.66) 26%, rgba(10, 26, 53, 0) 55%);
-    }
-    espace-rhum .er-news-card--full-image .er-news-card-content {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 20px 18px 18px;
-      z-index: 1;
-      display: flex; flex-direction: column; align-items: flex-start;
-    }
-    espace-rhum .er-news-card--full-image .er-news-title {
-      font-size: 22px;
-    }
-
-    espace-rhum .er-news-card-split {
-      display: grid;
-      grid-template-columns: 132px 1fr;
-      min-height: 148px;
-    }
-    espace-rhum .er-news-card-split .er-news-card-img {
-      background-size: cover;
-      background-position: center;
-      min-height: 148px;
-    }
-    espace-rhum .er-news-card-split .er-news-card-content {
-      padding: 15px 16px;
-      display: flex; flex-direction: column; align-items: flex-start;
-    }
-     
-    espace-rhum .er-news-card-split .er-news-title {
-      font-size: 15px; line-height: 1.16;
-      -webkit-line-clamp: 3;
-    }
-
-    espace-rhum .er-news-title {
-      font-family: var(--er-font-display); font-style: italic;
-      text-transform: uppercase;
-      font-size: 16px; line-height: 1.14;
-      color: var(--er-white);
-      margin: 0 0 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-
-    espace-rhum .er-news-meta {
-      display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
-      font-family: var(--er-font-body); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.03em;
-      color: var(--er-text-muted);
-      margin-top: auto;
-    }
-    espace-rhum .er-news-meta-clock { display: inline-flex; align-items: center; gap: 4px; }
-    espace-rhum .er-news-meta-clock svg {
-      width: 11px; height: 11px; stroke: currentColor; stroke-width: 2;
-      fill: none; stroke-linecap: round; stroke-linejoin: round;
-    }
-    espace-rhum .er-news-meta span:not(:last-child)::after {
-      content: '·'; margin-left: 9px; opacity: 0.6;
-    }
-
-    espace-rhum .er-news-placeholder {
-      position: relative;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-      padding: 24px;
-      min-height: 120px;
-      background: var(--er-surface);
-      border: 1.5px dashed rgba(93, 191, 192, 0.25);
-      border-radius: 18px 3px 14px 3px;
-      color: var(--er-text-muted);
-      font-family: var(--er-font-body); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      cursor: pointer;
-      text-align: center;
-      transition: all var(--er-dur-fast) var(--er-ease-smooth);
-    }
-    @media (hover:hover) and (pointer:fine){espace-rhum .er-news-placeholder:hover{
-      border-color: var(--er-teal);
-      color: var(--er-teal);
-      background: var(--er-teal-soft);
-    }}
-    espace-rhum .er-news-placeholder svg {
-      width: 18px; height: 18px;
-      stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-    }
-
-    espace-rhum .er-news-empty {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-      padding: 40px 24px;
-      background: var(--er-bg-card);
-      border: 1px dashed rgba(93, 191, 192, 0.25);
-      border-radius: var(--er-radius-card);
-      text-align: center;
-    }
-    espace-rhum .er-news-empty-text {
-      font-family: var(--er-font-display); font-style: italic;
-      font-size: clamp(22px, 2.8vw, 28px);
-      text-transform: uppercase; line-height: 1;
-      color: var(--er-text-secondary);
     }
 
     
@@ -3528,11 +3321,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-news2-fmt b {
       font-family: var(--er-font-body); font-size: 10px; font-weight: 800;
       letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
-    }
-     
-    espace-rhum .er-sr-only {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
     }
      
     espace-rhum .er-news2-new {
@@ -4898,18 +4686,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-news-lassitude { margin: 0 16px 12px; }
       espace-rhum .er-news-lassitude-acts { width: 100%; justify-content: flex-end; }
 
-    }
-
-     
-    espace-rhum .er-news-saved { margin-top: 22px; }
-    espace-rhum .er-news-saved-head {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-      font-family: var(--er-font-body); font-size: 11px; font-weight: 800;
-      letter-spacing: 0.09em; text-transform: uppercase; color: var(--er-text-label);
-    }
-    espace-rhum .er-news-saved-n {
-      background: rgba(255, 255, 255, 0.07); border-radius: 999px;
-      padding: 2px 8px; letter-spacing: 0; color: var(--er-text-muted);
     }
 
      
@@ -7446,7 +7222,6 @@ if (!customElements.get('espace-rhum')) {
       background: var(--er-surface); border: 1px solid var(--er-border-soft);
     }
     espace-rhum .er-combat-ligne--lecture { grid-template-columns: 150px minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; }
-    espace-rhum .er-combat-ligne--vote { grid-template-columns: 150px minmax(0, 1fr) 128px; align-items: center; }
     espace-rhum .er-combat-classe {
       font-family: var(--er-font-body); font-size: 13px; font-weight: 800;
       letter-spacing: 0.04em; text-transform: uppercase; color: var(--er-white);
@@ -7532,8 +7307,7 @@ if (!customElements.get('espace-rhum')) {
 
     @media (max-width: 1100px) {
       espace-rhum .er-combat-ligne,
-      espace-rhum .er-combat-ligne--lecture,
-      espace-rhum .er-combat-ligne--vote { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+      espace-rhum .er-combat-ligne--lecture { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
       espace-rhum .er-combat-classe { grid-column: 1 / -1; }
       espace-rhum .er-combat-bulletin,
       espace-rhum .er-combat-valider,
@@ -7542,8 +7316,7 @@ if (!customElements.get('espace-rhum')) {
     }
     @media (max-width: 640px) {
       espace-rhum .er-combat-ligne,
-      espace-rhum .er-combat-ligne--lecture,
-      espace-rhum .er-combat-ligne--vote { grid-template-columns: minmax(0, 1fr); }
+      espace-rhum .er-combat-ligne--lecture { grid-template-columns: minmax(0, 1fr); }
       espace-rhum .er-combat-tete { flex-direction: column; gap: 10px; }
       espace-rhum .er-combat-jauge { text-align: left; }
       espace-rhum .er-combat-champ .er-pick-btn,
@@ -7609,7 +7382,7 @@ if (!customElements.get('espace-rhum')) {
       font-family: var(--er-font-body); font-size: 13px; font-weight: 800;
       letter-spacing: 0.04em; text-transform: uppercase; color: var(--er-white);
     }
-    espace-rhum .er-pronos-champ, espace-rhum .er-pronos-cell { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    espace-rhum .er-pronos-cell { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
     espace-rhum .er-pronos-cell-label {
       font-family: var(--er-font-body); font-size: 10px; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--er-text-label);
@@ -7620,18 +7393,6 @@ if (!customElements.get('espace-rhum')) {
     }
      
     espace-rhum .er-pronos-cell-val.est-juste { color: var(--er-amber-bright); font-weight: 700; }
-
-    
-
-
-    espace-rhum .er-pronos-champ .er-pick-btn {
-      padding: 9px 11px; border-radius: var(--er-radius-xs); font-size: 13.5px;
-    }
-    
-
-
-    espace-rhum .er-pronos-quand { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 7px; }
-    espace-rhum .er-pronos-quand .er-pick-list { min-width: 122px; }
 
     espace-rhum .er-pronos-valider {
       padding: 9px 16px; font-family: var(--er-font-body); font-size: 12px;
@@ -7674,8 +7435,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-pronos-tete { flex-direction: column; gap: 10px; }
       espace-rhum .er-pronos-jauge { text-align: left; }
        
-      espace-rhum .er-pronos-champ .er-pick-btn { font-size: 15px; padding: 12px; }
-      espace-rhum .er-pronos-quand { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
       espace-rhum .er-pronos-valider { padding: 13px 16px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -8003,7 +7762,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-prefs-sec { margin-bottom: 22px; }
     espace-rhum .er-prefs-sec-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
     espace-rhum .er-prefs-count { font-size: 12px; color: var(--er-teal); font-weight: 600; }
-    espace-rhum .er-prefs-badge { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--er-amber); font-weight: 700; background: rgba(245,190,65,.12); border: 1px solid rgba(245,190,65,.28); padding: 3px 9px; border-radius: var(--er-radius-full); }
     espace-rhum .er-prefs-hint { font-size: 12px; color: var(--er-text-muted); margin-bottom: 12px; line-height: 1.5; }
     espace-rhum .er-prefs-chips { display: flex; flex-wrap: wrap; gap: 9px; }
     espace-rhum .er-prefs-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--er-surface); border: 1px solid var(--er-border-soft); border-radius: var(--er-radius-full); font: inherit; font-size: 12.5px; font-weight: 600; color: var(--er-text-secondary); cursor: pointer; transition: all .2s var(--er-ease-entry); }
@@ -8278,9 +8036,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-prefs-tete--maj .er-prefs-tete-ico {
       background: rgba(252, 241, 80, 0.14); color: var(--er-amber-bright);
     }
-    espace-rhum .er-prefs-tete--sobre { background: rgba(255, 255, 255, 0.035); }
-    espace-rhum .er-prefs-tete--sobre .er-prefs-tete-titre { color: var(--er-text-secondary); }
-    espace-rhum .er-prefs-tete--sobre[aria-expanded="true"] .er-prefs-tete-fleche { transform: rotate(90deg); }
     espace-rhum .er-prefs-tete-fleche { transition: transform var(--er-dur-fast) var(--er-ease-smooth); }
 
     espace-rhum .er-prefs-jauge { display: block; margin-top: 13px; }
@@ -8330,29 +8085,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-prefs-jauge-txt em { display: none; }
       espace-rhum .er-prefs-jauge-txt { justify-content: flex-start; gap: 5px; }
     }
-
-     
-    espace-rhum .er-prefs-profile {
-      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
-      padding: 14px 15px; margin-bottom: 22px;
-      background: var(--er-surface);
-      border: 1px solid var(--er-border-soft);
-      border-radius: 12px;
-    }
-    espace-rhum .er-prefs-profile-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 220px; }
-    espace-rhum .er-prefs-profile-title { font-size: 13px; font-weight: 700; color: var(--er-text-secondary); }
-    espace-rhum .er-prefs-profile-hint { font-size: 12px; line-height: 1.5; color: var(--er-text-muted); }
-    espace-rhum .er-prefs-profile-btn {
-      flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 16px; cursor: pointer;
-      background: transparent; border: 1px solid rgba(93, 191, 192, 0.5);
-      border-radius: 3px 15px 3px 15px;
-      font-family: var(--er-font-body); font-size: 13px; font-weight: 700; color: var(--er-teal);
-      transition: background var(--er-dur-fast) var(--er-ease-smooth),
-                  border-color var(--er-dur-fast) var(--er-ease-smooth);
-    }
-    @media (hover:hover) and (pointer:fine){espace-rhum .er-prefs-profile-btn:hover{ background: rgba(93, 191, 192, 0.12); border-color: var(--er-teal); }}
-    espace-rhum .er-prefs-profile-btn svg { width: 15px; height: 15px; }
 
     
 
@@ -8966,10 +8698,6 @@ if (!customElements.get('espace-rhum')) {
       accent-color: var(--er-teal); cursor: pointer;
     }
     @media (hover:hover) and (pointer:fine){espace-rhum .er-ident-check:hover{ color: var(--er-text-primary); }}
-    espace-rhum .er-ident-note {
-      margin: 0; font-family: var(--er-font-body); font-size: 11.5px;
-      line-height: 1.5; color: var(--er-text-muted); font-style: italic;
-    }
     espace-rhum .er-profile-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 14px; margin-bottom: 4px; }
      
     espace-rhum .er-profile-field--wide { grid-column: 1 / -1; }
@@ -9164,7 +8892,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-identity-text,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-stats-row,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-rang-pop,
-      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-section-title,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-preferences-btn span,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-nav-link span { display: none; }
       espace-rhum .er-sidebar-nav-link { justify-content: center; padding: 12px 0; }
@@ -9294,10 +9021,6 @@ if (!customElements.get('espace-rhum')) {
         display: flex;
         gap: 8px;
         margin-bottom: 18px;
-      }
-      espace-rhum .er-sidebar[data-expanded="true"] .er-sidebar-section-title {
-        margin-bottom: 10px;
-        padding-left: 4px;
       }
       espace-rhum .er-sidebar[data-expanded="true"] .er-sidebar-nav-link {
         justify-content: flex-start;
@@ -9721,17 +9444,6 @@ if (!customElements.get('espace-rhum')) {
 
       espace-rhum .er-news2--compact .er-news2-act { width: 44px; height: 44px; }
       espace-rhum .er-news2--compact .er-news2-act svg { width: 15px; height: 15px; }
-      espace-rhum .er-news-mix-grid {
-        grid-template-columns: 1fr;
-        padding: 0 16px 16px;
-      }
-      espace-rhum .er-news-card--big { grid-column: auto; min-height: 320px; }
-      espace-rhum .er-news-card-split {
-        grid-template-columns: 110px 1fr;
-        min-height: 104px;
-      }
-      espace-rhum .er-news-card-split .er-news-card-img { min-height: 104px; }
-      espace-rhum .er-news-card--full-image .er-news-title { font-size: 18px; }
 
       espace-rhum .er-widget-suggestions .er-suggestions-list {
         padding: 0 16px 16px;
@@ -10093,7 +9805,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-news-onglet,
       espace-rhum .er-news-plus,
       espace-rhum .er-prefs-btn,
-      espace-rhum .er-prefs-profile-btn,
       espace-rhum .er-votesk-retirer,
       espace-rhum .er-binfo-cta,
       espace-rhum .er-profile-save,
@@ -10291,12 +10002,13 @@ if (!customElements.get('espace-rhum')) {
   }
 
    
-  function computeGreeting() {
+   
+  function computeGreeting(en) {
     const h = new Date().getHours();
-    if (h < 6)  return 'Salut';
-    if (h < 12) return 'Bonjour';
-    if (h < 18) return 'Salut';
-    return 'Bonsoir';
+    if (h < 6)  return en ? 'Hi' : 'Salut';
+    if (h < 12) return en ? 'Good morning' : 'Bonjour';
+    if (h < 18) return en ? 'Hi' : 'Salut';
+    return en ? 'Good evening' : 'Bonsoir';
   }
 
   
@@ -10879,7 +10591,8 @@ if (!customElements.get('espace-rhum')) {
     }
 
     connectedCallback() {
-      injectGlobalStyle(STYLE_ID_TOKENS, sansSurvolTactile(TOKENS_CSS));
+       
+      if (!document.getElementById(STYLE_ID_TOKENS)) injectGlobalStyle(STYLE_ID_TOKENS, sansSurvolTactile(TOKENS_CSS));
       
 
 
@@ -10970,8 +10683,20 @@ if (!customElements.get('espace-rhum')) {
         this._escPackHandler = null;
       }
       if (this._escProfileHandler) {
-        document.removeEventListener('keydown', this._escProfileHandler);
+         
+        document.removeEventListener('keydown', this._escProfileHandler, true);
         this._escProfileHandler = null;
+      }
+      
+
+
+      if (this._escMonteHandler) {
+        document.removeEventListener('keydown', this._escMonteHandler);
+        this._escMonteHandler = null;
+      }
+      if (this._escConfHandler) {
+        document.removeEventListener('keydown', this._escConfHandler);
+        this._escConfHandler = null;
       }
       if (this._trapProfileHandler) {
         document.removeEventListener('keydown', this._trapProfileHandler);
@@ -11062,6 +10787,7 @@ if (!customElements.get('espace-rhum')) {
         this._dateOutsideHandler = null;
       }
       this._datePickState = null;
+      this._datePickFermer = null;
       this._datePickPaint = null;
 
        
@@ -11093,6 +10819,13 @@ if (!customElements.get('espace-rhum')) {
     static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'combat-result', 'export-result', 'account-result', 'article-state-result']; }
 
     _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
+    
+
+
+
+    _cheminLangue(p) {
+      return this._lang() === 'en' && /^\/(?!en(\/|$))/.test(p || '') ? '/en' + p : (p || '');
+    }
 
     attributeChangedCallback(name, _oldVal, newVal) {
       if (name === 'payload') {
@@ -11227,6 +10960,13 @@ if (!customElements.get('espace-rhum')) {
 
     _poserEtatMemoire() {
       this.classList.toggle('er-memoire', !!this._enMemoire);
+      
+
+
+      Array.from(this.children).forEach((c) => {
+        if (c.classList.contains('er-memoire-pill')) return;
+        if (this._enMemoire) c.setAttribute('inert', ''); else c.removeAttribute('inert');
+      });
       if (this._enMemoire) {
         const pill = document.createElement('div');
         pill.className = 'er-memoire-pill'; pill.setAttribute('role', 'status'); pill.setAttribute('aria-live', 'polite');
@@ -11251,7 +10991,7 @@ if (!customElements.get('espace-rhum')) {
       this.classList.toggle('er-memoire', !!(this._enMemoire && this._payload));
        
       if (!this._payload && this._state === 'indispo') {
-        this.innerHTML = this._buildStatusScreen('indispo');
+        this.innerHTML = this._buildStatusScreen();
         this._i18n(this);
         const reload = this.querySelector('[data-action="er-reload"]');
         if (reload) reload.addEventListener('click', () => window.location.reload());
@@ -11450,7 +11190,7 @@ if (!customElements.get('espace-rhum')) {
           zone.setAttribute('aria-hidden', String(!next));
         }
         if (label) {
-          label.textContent = next ? 'Réduire' : `Voir les ${count} suivi${plural}`;
+          label.textContent = this._t(next ? 'Réduire' : `Voir les ${count} suivi${plural}`);
         }
       });
     }
@@ -11458,10 +11198,10 @@ if (!customElements.get('espace-rhum')) {
     _resolveSkipperUrl(id) {
       const all = [this._payload?.skipperDuJour, ...(this._payload?.favSkippers || []), ...(this._payload?.recoSkippers || [])].filter(Boolean);
       const s = all.find(x => (x._id || x.id) === id);
-      if (s?.['link-skippers-prenomNom']) return s['link-skippers-prenomNom'];
+      if (s?.['link-skippers-prenomNom']) return this._cheminLangue(s['link-skippers-prenomNom']);
        
       const c = (this._payload?.skipperCatalog || []).find(x => x && x.id === id);
-      return c?.lien || '';
+      return this._cheminLangue(c?.lien || '');
     }
 
     _resolveArticleUrl(id) {
@@ -11499,7 +11239,7 @@ if (!customElements.get('espace-rhum')) {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const page = link.dataset.page;
-          this._navExternal(page === 'actus' ? ACTUS_PAGE_PATH : SKIPPERS_PAGE_PATH, 'er-go-page', { page });
+          this._navExternal(this._cheminLangue(page === 'actus' ? ACTUS_PAGE_PATH : SKIPPERS_PAGE_PATH), 'er-go-page', { page });
         });
       });
     }
@@ -11713,6 +11453,11 @@ if (!customElements.get('espace-rhum')) {
        
        
       if ((m = key.match(/^, encore (\d+) points?$/)))         return `, ${m[1]} points to go`;
+       
+      if ((m = key.match(/^il y a (\d+) jours$/)))              return `${m[1]} days ago`;
+      if ((m = key.match(/^(\d+) actus?$/)))                    return `${m[1]} ${m[1] === '1' ? 'story' : 'stories'}`;
+      if ((m = key.match(/^(\d+) autres? plus bas dans ta liste, non affichées? ici\.$/)))
+        return `${m[1]} more further down your list, not shown here.`;
 
       
 
@@ -11827,15 +11572,11 @@ if (!customElements.get('espace-rhum')) {
 
      
      
-    _buildStatusScreen(kind) {
-      const isPatience = kind === 'patience';
-      const title = isPatience ? 'On est très nombreux à bord !' : 'Gros grain passager';
-      const text  = isPatience
-        ? "Vous êtes exceptionnellement nombreux à vous connecter en ce moment. Le chargement peut prendre un peu plus de temps que d'habitude. Merci de patienter, ton espace arrive."
-        : "Impossible de charger ton espace pour l'instant : nos serveurs encaissent une belle vague. Réessaie dans quelques instants, tout devrait rentrer dans l'ordre rapidement.";
-      const foot = isPatience
-        ? '<div class="er-status-spinner" aria-hidden="true"></div><div class="er-status-sub">Reconnexion automatique en cours…</div>'
-        : '<button class="er-btn er-btn--primary er-status-retry" type="button" data-action="er-reload">Réessayer</button>';
+     
+    _buildStatusScreen() {
+      const title = 'Gros grain passager';
+      const text  = "Impossible de charger ton espace pour l'instant : nos serveurs encaissent une belle vague. Réessaie dans quelques instants, tout devrait rentrer dans l'ordre rapidement.";
+      const foot  = '<button class="er-btn er-btn--primary er-status-retry" type="button" data-action="er-reload">Réessayer</button>';
       return `
         <div class="er-status-screen" role="status" aria-live="polite">
           <div class="er-status-inner">
@@ -11938,10 +11679,9 @@ if (!customElements.get('espace-rhum')) {
     _buildMobileShell() {
       const payload    = this._payload;
       const prenom     = payload?.member?.prenom || 'Fan';
-      const greeting   = computeGreeting();
+      const greeting   = computeGreeting(this._lang() === 'en');
       const ident      = this._rangIdentite();
 
-      const nbSkippers = payload?.favSkippers?.length || 0;
       const nbArticles = payload?.stats?.nbArticlesLus || 0;
       const nbBadges   = countUnlockedBadges(payload);
       const total      = badgesTotal(payload);
@@ -12190,7 +11930,7 @@ if (!customElements.get('espace-rhum')) {
     _buildSidebar() {
       const payload    = this._payload;
       const prenom     = payload?.member?.prenom || 'Fan';
-      const greeting   = computeGreeting();
+      const greeting   = computeGreeting(this._lang() === 'en');
       const ident      = this._rangIdentite();
 
       const nbSkippers = payload?.favSkippers?.length || 0;
@@ -12521,7 +12261,7 @@ if (!customElements.get('espace-rhum')) {
             ${sk.photo ? `<span class="er-top5-rond" style="background-image:url('${escapeHtml(sk.photo)}')"></span>` : '<span class="er-top5-rond"></span>'}
             <span class="er-top5-nom">${escapeHtml(nom)}</span>
             ${moi ? `<span class="er-top5-coeur" aria-hidden="true">${ICON_HEART_PLEIN}</span>` : ''}
-            <span class="er-top5-n">${Number(x.nbVotes || 0).toLocaleString('fr-FR')}</span>
+            <span class="er-top5-n">${Number(x.nbVotes || 0).toLocaleString(this._lang() === 'en' ? 'en-GB' : 'fr-FR')}</span>
           </li>`;
       }).join('');
       if (!lignes) return '';
@@ -12610,7 +12350,7 @@ if (!customElements.get('espace-rhum')) {
             l: sk.name,
             img: sk.photo || '',
             sub: [sk.class, sk.bateau].filter(Boolean).join(' · '),
-            meta: n ? `♥ ${n.toLocaleString('fr-FR')}` : '',
+            meta: n ? `♥ ${n.toLocaleString(this._lang() === 'en' ? 'en-GB' : 'fr-FR')}` : '',
             col: findClassConfig(sk.class)?.col || ''
           };
         });
@@ -12672,7 +12412,7 @@ if (!customElements.get('espace-rhum')) {
       const fans = nbFans > 0
         ? `<div class="er-votesk-fans">
              <div class="er-votesk-fans-n">
-               <b>${nbFans.toLocaleString('fr-FR')}</b>
+               <b>${nbFans.toLocaleString(en ? 'en-GB' : 'fr-FR')}</b>
                <span class="er-votesk-coeur">${ICON_HEART_PLEIN}</span>
              </div>
              ${
@@ -13299,7 +13039,7 @@ if (!customElements.get('espace-rhum')) {
               <div class="er-section-count-num">${n}</div>
               <div class="er-section-count-label">Suivis</div>
             </div>
-            <a class="er-section-link" href="${SKIPPERS_PAGE_PATH}" data-action="go-page" data-page="skippers">
+            <a class="er-section-link" href="${this._cheminLangue(SKIPPERS_PAGE_PATH)}" data-action="go-page" data-page="skippers">
               Voir tous les skippers
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -13426,7 +13166,7 @@ if (!customElements.get('espace-rhum')) {
           ${classFlagHtml}
           <button class="er-skipper-card-fav" type="button" data-bulle
                   data-action="card-fav" data-skipper-id="${escapeHtml(id)}"
-                  aria-label="Ne plus suivre ${escapeHtml(prenom + ' ' + nom)}">
+                  aria-label="${this._lang() === 'en' ? 'Unfollow' : 'Ne plus suivre'} ${escapeHtml(prenom + ' ' + nom)}">
             ${ICON_CHECK}
             <!-- ══════════════════════════════════════════════════════════
                  ⚠️ UNE BULLE POSEE SUR UN BOUTON NOMME L ACTION, PAS L ETAT.
@@ -13567,7 +13307,7 @@ if (!customElements.get('espace-rhum')) {
               <div class="er-section-count-num">${queue.length}</div>
               <div class="er-section-count-label">À lire</div>
             </div>
-            <a class="er-section-link" href="${ACTUS_PAGE_PATH}" data-action="go-page" data-page="actus">
+            <a class="er-section-link" href="${this._cheminLangue(ACTUS_PAGE_PATH)}" data-action="go-page" data-page="actus">
               Voir toutes les actus
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -13712,8 +13452,8 @@ if (!customElements.get('espace-rhum')) {
 
       const ctaHtml = vide.cta === 'prefs'
         ? `<button class="er-btn er-btn--primary" type="button" data-action="go-preferences">${ICON_GEAR}<span>Régler mes préférences</span></button>
-           <a class="er-news-done-lien" href="${ACTUS_PAGE_PATH}" data-action="go-page" data-page="actus">Ou voir toute l'actu de la course</a>`
-        : `<a class="er-btn er-btn--ghost" href="${ACTUS_PAGE_PATH}" data-action="go-page" data-page="actus">Voir toutes les actus</a>`;
+           <a class="er-news-done-lien" href="${this._cheminLangue(ACTUS_PAGE_PATH)}" data-action="go-page" data-page="actus">Ou voir toute l'actu de la course</a>`
+        : `<a class="er-btn er-btn--ghost" href="${this._cheminLangue(ACTUS_PAGE_PATH)}" data-action="go-page" data-page="actus">Voir toutes les actus</a>`;
 
       const doneHtml = `
         <div class="er-news-done" data-news-done${shown.length ? ' hidden' : ''} role="status">
@@ -14036,7 +13776,7 @@ if (!customElements.get('espace-rhum')) {
         `<p class="er-news-vide-lus-txt">${ICON_LU}<span>Tout ce qui te restait ici, tu l'as déjà lu.</span></p>` +
         `<div class="er-news-vide-lus-acts">` +
         `<button class="er-btn er-btn--ghost" type="button" data-action="revoir-lus">Les revoir</button>` +
-        `<a class="er-news-done-lien" href="${ACTUS_PAGE_PATH}" data-action="go-page" data-page="actus">Ou voir toute l'actu de la course</a>` +
+        `<a class="er-news-done-lien" href="${this._cheminLangue(ACTUS_PAGE_PATH)}" data-action="go-page" data-page="actus">Ou voir toute l'actu de la course</a>` +
         `</div>`;
       this._i18n(el);
       const b = el.querySelector('[data-action="revoir-lus"]');
@@ -14595,7 +14335,7 @@ if (!customElements.get('espace-rhum')) {
         const err = document.createElement('div');
         err.className = 'er-news-annul est-erreur';
         err.setAttribute('role', 'alert');
-        err.textContent = "Ça n'a pas pu être enregistré, l'actu est remise en place.";
+        err.textContent = this._t("Ça n'a pas pu être enregistré, l'actu est remise en place.");
         wrap.insertAdjacentElement('afterend', err);
         const t = setTimeout(() => { if (err.parentNode) err.remove(); }, 6000);
         this._removeTimers.push(t);
@@ -14622,7 +14362,6 @@ if (!customElements.get('espace-rhum')) {
       const queue = w.querySelector('[data-news-queue]');
       if (!queue) return;
 
-      this._filtreRaison = { type, valeur };
       let gardees = 0;
       queue.querySelectorAll('.er-news2').forEach(c => {
         if (c.hasAttribute('data-consumed')) return;
@@ -14660,7 +14399,6 @@ if (!customElements.get('espace-rhum')) {
     }
 
     _retirerFiltreRaison() {
-      this._filtreRaison = null;
       const w = this.querySelector('.er-widget-news-mix');
       if (!w) return;
       const queue = w.querySelector('[data-news-queue]');
@@ -14981,9 +14719,9 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-suggestion-acts">
               <button class="er-suggestion-add" type="button"
                       data-action="add-skipper" data-skipper-id="${escapeHtml(id)}"
-                      data-fav="false" aria-pressed="false" title="Suivre ${escapeHtml(prenom + ' ' + nom)}"
+                      data-fav="false" aria-pressed="false" title="${this._lang() === 'en' ? 'Follow' : 'Suivre'} ${escapeHtml(prenom + ' ' + nom)}"
                       data-nom="${escapeHtml(prenom + ' ' + nom)}"
-                      aria-label="Suivre ${escapeHtml(prenom + ' ' + nom)}">
+                      aria-label="${this._lang() === 'en' ? 'Follow' : 'Suivre'} ${escapeHtml(prenom + ' ' + nom)}">
                 ${ICON_PLUS}
               </button>
               ${why ? `
@@ -15864,24 +15602,12 @@ if (!customElements.get('espace-rhum')) {
           const skipperId = btn.dataset.skipperId;
           if (!skipperId) return;
           const etaitPrefere = this._payload?.monVoteSkipperId === skipperId;
-          const action = etaitPrefere ? 'clear' : 'set';
-          if (this._payload) this._payload.monVoteSkipperId = etaitPrefere ? null : skipperId;
-          this.querySelectorAll('.er-skipper-card-vote').forEach(b => {
-            const on = !etaitPrefere && b.dataset.skipperId === skipperId;
-            b.classList.toggle('is-on', on);
-            b.setAttribute('aria-pressed', on ? 'true' : 'false');
-          });
-          this.dispatchEvent(new CustomEvent('er-vote-skipper', {
-            bubbles: true, composed: true,
-            detail: { skipperId, action }
-          }));
           
 
 
 
 
-
-          this._rafraichirCarteVoteSk();
+          this._voteSkipperEnvoyer(skipperId, etaitPrefere ? 'clear' : undefined);
         });
       });
     }
@@ -15892,15 +15618,12 @@ if (!customElements.get('espace-rhum')) {
         if (active) active.classList.remove('er-sidebar-nav-link--active');
         const next = this.querySelector(`.er-sidebar-nav-link[data-target="${target}"]`);
         if (next) next.classList.add('er-sidebar-nav-link--active');
-        const url = target === 'actus' ? ACTUS_PAGE_PATH : target === 'skippers' ? SKIPPERS_PAGE_PATH : '';
+        const url = this._cheminLangue(target === 'actus' ? ACTUS_PAGE_PATH : target === 'skippers' ? SKIPPERS_PAGE_PATH : '');
         this._navExternal(url, 'er-nav', { target });
       };
 
       this.querySelectorAll('[data-action="nav-skippers"]').forEach(el => {
         el.addEventListener('click', (e) => { e.stopPropagation(); fire('skippers'); });
-      });
-      this.querySelectorAll('[data-action="nav-actus"]').forEach(el => {
-        el.addEventListener('click', (e) => { e.stopPropagation(); fire('actus'); });
       });
        
        
@@ -15918,7 +15641,7 @@ if (!customElements.get('espace-rhum')) {
 
     _wireNewsCards() {
        
-      this.querySelectorAll('.er-news-card, .er-news2-hit[data-article-id], .er-flash-clickable[data-article-id]').forEach(card => {
+      this.querySelectorAll('.er-news2-hit[data-article-id], .er-flash-clickable[data-article-id]').forEach(card => {
         const articleId = card.dataset.articleId;
         const fire = () => {
           
@@ -16032,7 +15755,8 @@ if (!customElements.get('espace-rhum')) {
 
 
           var qui = btn.getAttribute('data-nom') || '';
-          var verbe = next ? 'Ne plus suivre' : 'Suivre';
+          var en = this._lang() === 'en';
+          var verbe = next ? (en ? 'Unfollow' : 'Ne plus suivre') : (en ? 'Follow' : 'Suivre');
           btn.setAttribute('aria-label', qui ? verbe + ' ' + qui : verbe);
           btn.setAttribute('title', qui ? verbe + ' ' + qui : verbe);
           
@@ -16217,6 +15941,10 @@ if (!customElements.get('espace-rhum')) {
 
       let footerHtml = '';
       let ariaLabel;
+      
+
+      const en = this._lang() === 'en';
+      const t = (s) => this._t(s);
       let tone = '';    
       if (state === 'unlocked') {
         const dateStr = this._formatFrDate(badge.unlockedAt);
@@ -16228,7 +15956,9 @@ if (!customElements.get('espace-rhum')) {
           ${achievementHtml}
           <div class="er-badge-tile-date">${escapeHtml(dateStr || 'Débloqué')}</div>
         `;
-        ariaLabel = `Badge ${title}${condition ? ', ' + condition : ''}, débloqué${dateStr ? ' le ' + dateStr : ''}`;
+        ariaLabel = en
+          ? `Badge ${t(title)}${condition ? ', ' + t(condition) : ''}, unlocked${dateStr ? ' on ' + dateStr : ''}`
+          : `Badge ${title}${condition ? ', ' + condition : ''}, débloqué${dateStr ? ' le ' + dateStr : ''}`;
       } else if (state === 'discovered') {
         const cur = badge.progress?.current ?? 0;
         const tgt = badge.progress?.target ?? 1;
@@ -16242,7 +15972,7 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-badge-tile-progress-text">${escapeHtml(label)}</div>
           </div>
         `;
-        ariaLabel = `Badge à découvrir, progression ${label}`;
+        ariaLabel = en ? `Badge to discover, progress ${t(label)}` : `Badge à découvrir, progression ${label}`;
       } else if (state === 'action') {
          
          
@@ -16260,7 +15990,9 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-badge-tile-action-hint">${escapeHtml(desc)}</div>
           <div class="er-badge-tile-cta${muted ? ' is-soon' : ''}">${escapeHtml(cta)}</div>
         `;
-        ariaLabel = `Badge ${title}${flagLabel ? ', ' + flagLabel : ''}, ${desc}`;
+        ariaLabel = en
+          ? `Badge ${t(title)}${flagLabel ? ', ' + t(flagLabel) : ''}, ${t(desc)}`
+          : `Badge ${title}${flagLabel ? ', ' + flagLabel : ''}, ${desc}`;
       } else {
         const hint = badge.hint || "Continue d'explorer";
         footerHtml = `
@@ -16271,7 +16003,7 @@ if (!customElements.get('espace-rhum')) {
             <span>${escapeHtml(hint)}</span>
           </div>
         `;
-        ariaLabel = `Badge verrouillé, ${hint}`;
+        ariaLabel = en ? `Locked badge, ${t(hint)}` : `Badge verrouillé, ${hint}`;
       }
 
       return `
@@ -16834,7 +16566,7 @@ if (!customElements.get('espace-rhum')) {
               ${this._buildPickInline('year', years, 'Année')}
               ${this._buildPickInline('month', months, 'Mois')}
             </div>
-            <div class="er-datepick-week" aria-hidden="true">${JOURS_FR.map(d => `<span>${d}</span>`).join('')}</div>
+            <div class="er-datepick-week" aria-hidden="true">${(this._lang() === 'en' ? JOURS_EN : JOURS_FR).map(d => `<span>${d}</span>`).join('')}</div>
             <div class="er-datepick-grid" data-date-grid role="grid"></div>
             <div class="er-datepick-foot">
               <button class="er-datepick-clear" type="button" data-date-clear>Effacer</button>
@@ -17118,7 +16850,7 @@ if (!customElements.get('espace-rhum')) {
         if (v != null && v !== '' && !String(el.value || '').trim()) el.value = String(v);
       });
       this._updateIdentPreview();
-      this._syncPicks();           
+      this._syncPicks(modal);      
       this._syncVillage();         
       this._clearPhoneError();
       this._updateProfileProgress();
@@ -17128,8 +16860,20 @@ if (!customElements.get('espace-rhum')) {
       this._lockBodyScroll();
       requestAnimationFrame(() => { modal.querySelector('[data-profile="pseudo"]')?.focus(); });
       if (!this._escProfileHandler) {
-        this._escProfileHandler = (e) => { if (e.key === 'Escape' && modal.dataset.open === 'true') this._dismissProfile(false); };
-        document.addEventListener('keydown', this._escProfileHandler);
+        
+
+
+
+
+
+        this._escProfileHandler = (e) => {
+          if (e.key !== 'Escape' || modal.dataset.open !== 'true') return;
+          if (this.querySelector('[data-pick-list]:not([hidden])')) return;
+          if (this.querySelector('.er-vilmob[data-open="true"]')) return;
+          if (modal.querySelector('[data-date-panel]:not([hidden])')) { this._datePickFermer?.(); return; }
+          this._dismissProfile(false);
+        };
+        document.addEventListener('keydown', this._escProfileHandler, true);
       }
        
       if (!this._trapProfileHandler) {
@@ -17150,7 +16894,7 @@ if (!customElements.get('espace-rhum')) {
       const modal = this.querySelector('.er-profile');
       if (modal) { modal.dataset.open = 'false'; modal.setAttribute('aria-hidden', 'true'); }
       this._unlockBodyScroll();
-      if (this._escProfileHandler) { document.removeEventListener('keydown', this._escProfileHandler); this._escProfileHandler = null; }
+      if (this._escProfileHandler) { document.removeEventListener('keydown', this._escProfileHandler, true); this._escProfileHandler = null; }
       if (this._trapProfileHandler) { document.removeEventListener('keydown', this._trapProfileHandler); this._trapProfileHandler = null; }
       if (this._profilePromptTimer) { clearTimeout(this._profilePromptTimer); this._profilePromptTimer = null; }
       this._lastFocused?.focus?.();
@@ -17784,8 +17528,11 @@ if (!customElements.get('espace-rhum')) {
     }
 
      
-    _syncPicks() {
-      this.querySelectorAll('.er-pick[data-pick]').forEach(pick => {
+    
+
+
+    _syncPicks(racine) {
+      (racine || this).querySelectorAll('.er-pick[data-pick]').forEach(pick => {
         const hidden = pick.querySelector('input[data-pick-input]') || pick.querySelector('input[data-profile]');
         const val = pick.querySelector('[data-pick-val]');
         if (!hidden || !val) return;
@@ -17793,7 +17540,7 @@ if (!customElements.get('espace-rhum')) {
         this._pickTous(pick, '.er-pick-opt').forEach(o => o.setAttribute('aria-selected', 'false'));
         if (opt) {
           opt.setAttribute('aria-selected', 'true');
-          val.textContent = opt.textContent;
+          val.textContent = opt.dataset.nom || opt.textContent;
           val.dataset.empty = 'false';
         }
       });
@@ -18000,6 +17747,7 @@ if (!customElements.get('espace-rhum')) {
         document.addEventListener('click', this._dateOutsideHandler);
       }
       this._datePickState = state;
+      this._datePickFermer = close;
       this._datePickPaint = paint;
       this._syncDatePickHead = syncTete;
     }
@@ -18923,7 +18671,7 @@ if (!customElements.get('espace-rhum')) {
 
       if (!cons) {
         if (!total) return '';
-        const nb = total.toLocaleString('fr-FR');
+        const nb = total.toLocaleString(en ? 'en-GB' : 'fr-FR');
         return `
           <p class="er-pronos-participation">
             <b>${nb}</b> ${total > 1
@@ -18964,7 +18712,7 @@ if (!customElements.get('espace-rhum')) {
         <div class="er-cons">
           <div class="er-cons-entete">
             <span class="er-cons-titre">${en ? 'What the fans predicted' : 'Ce que les fans ont pronostiqué'}</span>
-            ${total ? `<span class="er-cons-total">${total.toLocaleString('fr-FR')} ${en ? 'predictions' : 'pronostics'}</span>` : ''}
+            ${total ? `<span class="er-cons-total">${total.toLocaleString(en ? 'en-GB' : 'fr-FR')} ${en ? 'predictions' : 'pronostics'}</span>` : ''}
           </div>
           <div class="er-cons-grille">${blocs}</div>
         </div>`;
@@ -19036,8 +18784,10 @@ if (!customElements.get('espace-rhum')) {
           const opt = id && ligne.querySelector(`.er-pick-opt[data-val="${CSS.escape(id)}"]`);
           const nom = opt ? opt.textContent.trim() : '';
           const img = opt ? (opt.querySelector('img')?.getAttribute('src') || '') : '';
-          ligne.querySelectorAll('[data-prono-choisi-nom],[data-prono-recap-nom]').forEach(e2 => { e2.textContent = nom; });
-          ligne.querySelectorAll('[data-prono-choisi-img],[data-prono-recap-img]').forEach(e2 => {
+          
+
+          ligne.querySelectorAll('[data-prono-choisi-nom]').forEach(e2 => { e2.textContent = nom; });
+          ligne.querySelectorAll('[data-prono-choisi-img]').forEach(e2 => {
             if (img) e2.setAttribute('src', img);
             e2.hidden = !img;
           });
@@ -19205,17 +18955,24 @@ if (!customElements.get('espace-rhum')) {
       if (res?.ok) {
         if (etat) { etat.textContent = ''; etat.dataset.tone = ''; }
         ligne.dataset.fait = '1';
-         
-         
-         
-        const t = ligne.querySelector('[data-prono-recap-temps]');
-        if (t) {
+        this._pronosMemoriser(classe, ligne);
+        
+
+
+
+
+
+
+        const choix = (this._pronosEtat()?.mesChoix || {})[classe];
+        const recap = ligne.querySelector('[data-etape-nom="recap"]');
+        if (choix && recap) {
           const lu = (n) => (ligne.querySelector(`[data-prono-duree="${n}"]`)?.value || '0').padStart(2, '0');
-          t.textContent = res.tempsCourse
-            || (Number(lu('jours')) + ' j ' + lu('heures') + ' h ' + lu('minutes') + ' min ' + lu('secondes') + ' s');
+          choix.tempsCourse = res.tempsCourse
+            || (Number(lu('jours')) + (this._lang() === 'en' ? ' d ' : ' j ') + lu('heures') + ' h ' + lu('minutes') + ' min ' + lu('secondes') + ' s');
+          recap.innerHTML = this._pronoBulletin(choix, this._pronosSkippers(classe), classe);
+          this._i18n(recap);
         }
         this._pronoEtape(ligne, 'recap');
-        this._pronosMemoriser(classe, ligne);
         this._pronosMajJauge();
         return;
       }
@@ -19916,10 +19673,13 @@ if (!customElements.get('espace-rhum')) {
       modal.dataset.open = 'true';
       modal.setAttribute('aria-hidden', 'false');
       this._lockBodyScroll();
-      this._escPackHandler = (e) => {
-        if (e.key === 'Escape' && modal.dataset.open === 'true') { e.stopPropagation(); this._closePackFan(); }
-      };
-      document.addEventListener('keydown', this._escPackHandler);
+       
+      if (!this._escPackHandler) {
+        this._escPackHandler = (e) => {
+          if (e.key === 'Escape' && modal.dataset.open === 'true') { e.stopPropagation(); this._closePackFan(); }
+        };
+        document.addEventListener('keydown', this._escPackHandler);
+      }
       const premier = modal.querySelector('.er-pick [data-pick-btn]');
       if (premier && !modal.querySelector('[data-pack-code]:not([hidden])')) setTimeout(() => premier.focus(), 60);
     }
@@ -20369,6 +20129,10 @@ if (!customElements.get('espace-rhum')) {
           if (this._payload && this._payload.prefs) {
             this._payload.prefs.trackingOptOut = !track.checked;
           }
+          
+
+
+          if (this._prefs) this._prefs.trackingOptOut = !track.checked;
         });
       }
     }
@@ -20490,9 +20254,6 @@ if (!customElements.get('espace-rhum')) {
       };
       this._prefsFavInit = this._prefs.favorites.map(s => s.id);
       this._prefsFillClasses(); this._prefsFillThemes(); this._prefsRenderFavs();
-       
-      const trackBox = modal.querySelector('[data-prefs="track"]');
-      if (trackBox) trackBox.checked = !this._prefs.trackingOptOut;
 
       this._lastFocused = document.activeElement;
       modal.dataset.open = 'true'; modal.setAttribute('aria-hidden', 'false');
@@ -20569,7 +20330,10 @@ if (!customElements.get('espace-rhum')) {
         themes: Array.from(this._prefs.themes),
         favAdd: ids.filter(id => !init.has(id)),
         favRemove: this._prefsFavInit.filter(id => !now.has(id)),
-        trackingOptOut: !!this._prefs.trackingOptOut,
+         
+        trackingOptOut: this._payload && this._payload.prefs
+          ? this._payload.prefs.trackingOptOut === true
+          : !!this._prefs.trackingOptOut,
       } }));
     }
     _wirePackFan() {
@@ -20619,7 +20383,7 @@ if (!customElements.get('espace-rhum')) {
       const suggeree = this._packClasseSuggeree();
       if (champClasse && !champClasse.value && suggeree) {
         champClasse.value = suggeree;
-        this._syncPicks();
+        this._syncPicks(modal);
       }
       this._packPrefillProfil(modal);
     }
@@ -20652,9 +20416,6 @@ if (!customElements.get('espace-rhum')) {
 
         if (t.closest('[data-action="go-privacy"]')) { this._openConfModal(); return; }
         if (t.closest('[data-action="logout"]')) { this._seDeconnecter(t.closest('[data-action="logout"]')); return; }
-        if (t.closest('[data-action="delete-data"]')) { this._requestDeleteData(); return; }
-        if (t.closest('[data-action="export-data"]')) { this._requestExportData(t.closest('[data-action="export-data"]')); return; }
-        if (t.closest('[data-action="delete-account"]')) { this._requestDeleteAccount(); return; }
         const chip = t.closest('.er-prefs-chip');
         if (chip) {
           const on = chip.getAttribute('aria-pressed') === 'true'; chip.setAttribute('aria-pressed', String(!on));
@@ -20677,9 +20438,6 @@ if (!customElements.get('espace-rhum')) {
       });
       const input = modal.querySelector('[data-prefs="q"]');
       if (input) input.addEventListener('input', () => this._prefsSearch(input.value));
-       
-      const trackBox = modal.querySelector('[data-prefs="track"]');
-      if (trackBox) trackBox.addEventListener('change', () => { this._prefs.trackingOptOut = !trackBox.checked; });
     }
 
      

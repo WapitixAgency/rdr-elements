@@ -1,5 +1,5 @@
-/* rdr-elements parcours | source route-du-rhum ede21c7 | rdr-parcours.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="ede21c7";performance.mark("rdr-elements:parcours")}catch(e){}
+/* rdr-elements parcours | source route-du-rhum 35aaade | rdr-parcours.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="35aaade";performance.mark("rdr-elements:parcours")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-parcours")) return;
@@ -50,11 +50,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="ede21c7";performa
 
   
 
+
+
   let geo = null;
-  function script(src) {
+  function script(src, empreinte) {
     return new Promise((ok, ko) => {
       const s = document.createElement('script');
-      s.src = src; s.async = true;
+      s.src = src; s.async = true; s.integrity = empreinte; s.crossOrigin = 'anonymous';
       s.onload = () => ok(); s.onerror = () => ko(new Error('chargement impossible : ' + src));
       document.head.appendChild(s);
     });
@@ -63,8 +65,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="ede21c7";performa
     if (window.d3 && window.d3.geoMercator && window.topojson && window.topojson.feature) return Promise.resolve();
     if (!geo) {
       geo = Promise.all([
-        (window.d3 && window.d3.geoMercator ? Promise.resolve() : script('https://cdn.jsdelivr.net/npm/d3-array@3').then(() => script('https://cdn.jsdelivr.net/npm/d3-geo@3'))),
-        (window.topojson && window.topojson.feature ? Promise.resolve() : script('https://cdn.jsdelivr.net/npm/topojson-client@3'))
+        (window.d3 && window.d3.geoMercator ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js", "sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja").then(() => script("https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js", "sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD"))),
+        (window.topojson && window.topojson.feature ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js", "sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67"))
       ]);
       geo.catch(() => { geo = null; });
     }
@@ -203,7 +205,7 @@ const OPTIONS = {
 const APPROCHE = [[-60.98, 16.62], [-61.4, 16.58], [-61.72, 16.47], [-61.86, 16.33], [-61.86, 16.14], [-61.82, 15.98], [-61.72, 15.9], [-61.61, 15.92], [-61.53, 16.0], [-61.5, 16.12], [-61.53, 16.22]];
 let TERRE = null;
 async function terre() { await chargerGeo(); d3 = window.d3; topojson = window.topojson;
-  if (!TERRE) { const t = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-50m.json')).json(); TERRE = topojson.feature(t, t.objects.land); }
+  if (!TERRE) { const t = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json', { integrity: 'sha384-c0VeCJd1wVbV5WQZNjf1hcMqPr9QXweEArnbdgS1k75TBNjta2M/NddyAulA/Glb' })).json(); TERRE = topojson.feature(t, t.objects.land); }
   return TERRE;
 }
 const FRANCE = { type: 'MultiPolygon', coordinates: GEO.france || [] };
@@ -370,12 +372,17 @@ document.body.dataset.v = 'a1'; document.body.dataset.d = 'a'; monterA().catch((
 
  
 let largeur = innerWidth, attente = 0;
-addEventListener('resize', () => { clearTimeout(attente); attente = setTimeout(() => { if (Math.abs(innerWidth - largeur) < 40) return; largeur = innerWidth; styleCarte = null; if (document.body.dataset.d === 'a') monterA(); }, 300); });
+addEventListener('resize', () => { clearTimeout(attente); attente = setTimeout(() => { if (Math.abs(innerWidth - largeur) < 40) return; largeur = innerWidth; styleCarte = null; if (document.body.dataset.d === 'a') monterA().catch((e) => console.error('carte', e)); }, 300); });
  
+let ticVents = 0;
 addEventListener('scroll', () => {
-  const f = document.getElementById('photo-vents'); const r = f.getBoundingClientRect();
-  if (r.bottom < 0 || r.top > innerHeight || reduit) return;
-  f.style.setProperty('--pv', ((r.top + r.height / 2 - innerHeight / 2) * -0.08).toFixed(1) + 'px');
+  if (ticVents) return;
+  ticVents = requestAnimationFrame(() => {
+    ticVents = 0;
+    const f = document.getElementById('photo-vents'); const r = f.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight || reduit) return;
+    f.style.setProperty('--pv', ((r.top + r.height / 2 - innerHeight / 2) * -0.08).toFixed(1) + 'px');
+  });
 }, { passive: true });
   }
 

@@ -1,5 +1,5 @@
-/* rdr-elements bateaux | source route-du-rhum ede21c7 | rdr-bateaux.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="ede21c7";performance.mark("rdr-elements:bateaux")}catch(e){}
+/* rdr-elements bateaux | source route-du-rhum 35aaade | rdr-bateaux.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="35aaade";performance.mark("rdr-elements:bateaux")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-bateaux")) return;
@@ -243,13 +243,15 @@ const vuChiffres = new IntersectionObserver((es) => es.forEach((e) => {
   tracerRoute(true);
   hote.querySelectorAll('#etapes .et-val').forEach((el, i) => rouler(el, 0.3 + i * 0.16));
 }), { threshold: 0.35 });
-vuChiffres.observe($('route'));
+vuChiffres.observe($('route')); hote.rbtNettoyer.push(() => vuChiffres.disconnect());
 
  
 function idVideo(u) {
   try {
     const url = new URL(u);
     const id = url.hostname.includes('youtu.be') ? url.pathname.slice(1) : url.searchParams.get('v');
+     
+    if (!/^[\w-]{11}$/.test(id || '')) return { id: null, debut: 0 };
     return { id, debut: parseInt(url.searchParams.get('t') || '0', 10) || 0 };
   } catch (e) { return { id: null, debut: 0 }; }
 }
@@ -400,7 +402,7 @@ function placerMedia() {
   if (m.parentNode !== ici) ici.appendChild(m);
 }
 placerMedia();
-ordinateur.addEventListener('change', () => { placerMedia(); placerPointe(); });
+{ const f = () => { placerMedia(); placerPointe(); }; ordinateur.addEventListener('change', f); hote.rbtNettoyer.push(() => ordinateur.removeEventListener('change', f)); }
 
 let courante = -1;
 function montrer(k, garder) {
@@ -434,7 +436,7 @@ $('fiche').classList.remove('change');
 $('bandeau').style.transition = 'none'; placerPointe(); void $('bandeau').offsetWidth; $('bandeau').style.transition = '';
 if (document.fonts) document.fonts.ready.then(() => { placerPointe(); if (routeVue) tracerRoute(false); });
 remesurer();
-if (window.ResizeObserver) new ResizeObserver(remesurer).observe($('nuit'));
+if (window.ResizeObserver) { const ro = new ResizeObserver(remesurer); ro.observe($('nuit')); hote.rbtNettoyer.push(() => ro.disconnect()); }
   }
 
   class RdrBateaux extends HTMLElement {

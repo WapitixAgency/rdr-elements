@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum ede21c7 | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="ede21c7";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum 35aaade | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="35aaade";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';
@@ -8,8 +8,12 @@ if (customElements.get('tournee-map')) return;
 
  
  
-const MAPLIBRE_JS = 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js';
-const MAPLIBRE_CSS = 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css';
+
+
+const MAPLIBRE_JS = ['https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js', 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js'];
+const MAPLIBRE_CSS = ['https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css', 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css'];
+const MAPLIBRE_JS_SRI = 'sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp';
+const MAPLIBRE_CSS_SRI = 'sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK';
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 const GEOCODE_URL = 'https://data.geopf.fr/geocodage/search';
 const FRANCE_CENTER = [2.4, 46.6];
@@ -56,8 +60,6 @@ const TRACE_COURBURE = 0.05;
  
  
  
- 
-const DEMO = false;
 const TRACE_ACTIF = true;
 
  
@@ -112,6 +114,10 @@ const DICT = {
         ville_ph: 'Saint-Malo, Rennes…',
         du: 'Du',
         au: 'Au',
+         
+        cal_jours: 'lu ma me je ve sa di',
+        cal_effacer: 'Effacer',
+        cal_fermer: 'Fermer',
         rayon: 'Rayon',
         chercher: 'Voir si je peux le croiser',
         res_position: 'Indique ta position (bouton 📍) ou une ville.',
@@ -206,6 +212,9 @@ const DICT = {
         ville_ph: 'Saint-Malo, Rennes…',
         du: 'From',
         au: 'To',
+        cal_jours: 'Mo Tu We Th Fr Sa Su',
+        cal_effacer: 'Clear',
+        cal_fermer: 'Close',
         rayon: 'Radius',
         chercher: 'See if our paths cross',
         res_position: 'Give your location (📍 button) or a town.',
@@ -405,7 +414,6 @@ const TYMAL_BRETAGNE = ['rennes', 'brest', 'quimper', 'lorient', 'vannes', 'sain
  
  
 const TROPHEE = 'https://static.wixstatic.com/shapes/df962b_5c53bd7ada884b219bbf484518b01364.svg';
-const DOWS = ['lu', 'ma', 'me', 'je', 've', 'sa', 'di'];
 const ICON_TARGET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
 const ICON_LIST = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></svg>';
 const ICON_ROUTE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path stroke-dasharray="2.4 2.4" d="M7 17 17 7"/></svg>';
@@ -445,72 +453,6 @@ const DRAPEAUX = { fr: DRAPEAU_FR, en: DRAPEAU_EN };
 const ICON_RETOUR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>';
 const ICON_ARROW_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m6 13 6 6 6-6"/></svg>';
 const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-
-const DEMO_ETAPES = (function () {
-    const j = (n) => { const d = new Date(); d.setDate(d.getDate() + n); d.setHours(10, 0, 0, 0); return d.toISOString(); };
-    const villes = [
-        ['Rennes', 'Place de la Mairie', 48.1173, -1.6778, 'Coup d\'envoi breton de la tournée.'],
-        ['Nantes', 'Place du Bouffay', 47.2184, -1.5536, 'Tymal sur les bords de Loire.'],
-        ['La Rochelle', 'Vieux-Port', 46.1603, -1.1511, 'Escale maritime au cœur du Vieux-Port.'],
-        ['Bordeaux', 'Place de la Bourse', 44.8378, -0.5792, 'Tymal face au miroir d\'eau.'],
-        ['Bayonne', 'Place de la Liberté', 43.4929, -1.4748, 'Étape basque festive.'],
-        ['Pau', 'Boulevard des Pyrénées', 43.2951, -0.3708, 'Vue sur les Pyrénées.'],
-        ['Toulouse', 'Place du Capitole', 43.6047, 1.4442, 'La ville rose accueille la mascotte.'],
-        ['Carcassonne', 'La Cité', 43.2130, 2.3491, 'Tymal dans la cité médiévale.'],
-        ['Montpellier', 'Place de la Comédie', 43.6108, 3.8767, 'Escale héraultaise.'],
-        ['Nîmes', 'Les Arènes', 43.8367, 4.3601, 'Au pied des arènes romaines.'],
-        ['Avignon', 'Palais des Papes', 43.9493, 4.8055, 'Tymal sous les remparts.'],
-        ['Marseille', 'Vieux-Port', 43.2965, 5.3698, 'La cité phocéenne et son port.'],
-        ['Toulon', 'Port de Toulon', 43.1242, 5.9280, 'Étape varoise en bord de rade.'],
-        ['Nice', 'Promenade des Anglais', 43.7102, 7.2620, 'Tymal sur la Baie des Anges.'],
-        ['Gap', 'Place Jean Marcellin', 44.5594, 6.0790, 'Escale alpine.'],
-        ['Grenoble', 'Place Grenette', 45.1885, 5.7245, 'Au pied des Alpes.'],
-        ['Lyon', 'Place Bellecour', 45.7640, 4.8357, 'Tymal entre Rhône et Saône.'],
-        ['Dijon', 'Place de la Libération', 47.3220, 5.0415, 'Étape bourguignonne.'],
-        ['Besançon', 'La Citadelle', 47.2378, 6.0241, 'Tymal dans la boucle du Doubs.'],
-        ['Strasbourg', 'Place Kléber', 48.5734, 7.7521, 'Escale alsacienne.'],
-        ['Nancy', 'Place Stanislas', 48.6921, 6.1844, 'Sur la plus belle place de France.'],
-        ['Metz', 'Place de la République', 49.1193, 6.1757, 'Étape mosellane.'],
-        ['Reims', 'Place Drouet d\'Erlon', 49.2583, 4.0317, 'Tymal en Champagne.'],
-        ['Lille', 'Grand-Place', 50.6292, 3.0573, 'Étape nordiste.'],
-        ['Amiens', 'Place Gambetta', 49.8941, 2.2958, 'Tymal en Picardie.'],
-        ['Rouen', 'Place du Vieux-Marché', 49.4432, 1.0993, 'Escale normande.'],
-        ['Le Havre', 'Place de l\'Hôtel de Ville', 49.4944, 0.1079, 'Tymal face à la Manche.'],
-        ['Caen', 'Château de Caen', 49.1829, -0.3707, 'Étape calvadosienne.'],
-        ['Cherbourg', 'La Cité de la Mer', 49.6337, -1.6110, 'Dernière escale avant le retour.'],
-        ['Saint-Malo', 'Esplanade Saint-Vincent', 48.6493, -2.0257, 'Arrivée à Saint-Malo, terre de départ de la Route du Rhum.']
-    ];
-    const img = (s) => 'https://picsum.photos/seed/' + s + '/320/220';
-    const gal = (s) => [img(s + '-a'), img(s + '-b'), img(s + '-c')];
-    const mkAnims = (seed) => [
-        { titre: 'Atelier petits matelots', type: 'Atelier', heureDebut: '10:30', heureFin: '12:00', description: 'Fabrique ton mini-bateau et apprends les nœuds marins avec Tymal. Atelier gratuit, encadré par les animateurs de la tournée.', image: img(seed + '1'), galerie: gal(seed + '1'), infos: 'Sur inscription le matin · 6-12 ans' },
-        { titre: 'Rencontre avec un skipper', type: 'Rencontre', heureDebut: '14:00', heureFin: '15:00', description: 'Échange en direct avec un navigateur de la Route du Rhum, suivi d\'une séance de questions-réponses et de dédicaces.', image: img(seed + '2'), galerie: gal(seed + '2'), infos: 'Accès libre · scène centrale' },
-        { titre: 'Show de matelotage', type: 'Spectacle', heureDebut: '17:30', heureFin: '18:30', description: 'Démonstration vivante de manœuvres et de matelotage par l\'équipage, sur le village de la tournée.', image: img(seed + '3'), galerie: gal(seed + '3'), infos: 'Tout public · durée 1h' }
-    ];
-    const sched = (i) => {
-        if (i === 0) return [-12, -10];
-        if (i === 1) return [-7, -6];
-        if (i === 2) return [-1, 1];
-        const s = Math.round(6 + (i - 3) * 5.5);
-        return [s, s + 1];
-    };
-    const retro = (s) => [img(s + '-r1'), img(s + '-r2'), img(s + '-r3'), img(s + '-r4')];
-    const RETRO = { 'Rennes': retro('rennes'), 'Nantes': retro('nantes') };
-    const creneauxFor = (ville, a, b) => {
-        if (ville === 'Bordeaux') {
-            return [
-                { dateDebut: j(a), dateFin: j(a), animations: mkAnims('bdx-j1') },
-                { dateDebut: j(b), dateFin: j(b), animations: mkAnims('bdx-j2') }
-            ];
-        }
-        const seed = ville.toLowerCase().replace(/[^a-z]/g, '');
-        return [{ dateDebut: j(a), dateFin: j(b), animations: mkAnims(seed) }];
-    };
-    return villes.map((v, i) => {
-        const [a, b] = sched(i);
-        return { _id: 'demo' + i, ville: v[0], lieu: v[1], latitude: v[2], longitude: v[3], dateDebut: j(a), dateFin: j(b), description: v[4], infosPratiques: 'Accès libre. Animations sur place.', statutManuel: '', creneaux: creneauxFor(v[0], a, b), photosRetro: RETRO[v[0]] || [] };
-    });
-})();
 
 class TourneeMap extends HTMLElement {
     static get observedAttributes() { return ['data-payload', 'data-focus', 'lang']; }
@@ -614,13 +556,12 @@ class TourneeMap extends HTMLElement {
                 this._renderListe();
             }, TourneeMap.ATTENTE_DONNEES_MS);
         }
-        if (DEMO) setTimeout(() => {
-            if (!this._etapes.length) { this._etapes = DEMO_ETAPES; this._refresh(); }
-        }, 1500);
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
-        if (name === 'data-payload' && newVal) {
+         
+         
+        if (name === 'data-payload' && newVal && newVal !== oldVal) {
             this._lirePayload(newVal);
             this._renderSwitch();
             this._appliquerParcours(this._choisirParcoursInitial(), { silencieux: true });
@@ -963,6 +904,7 @@ class TourneeMap extends HTMLElement {
         if (this._onKey) { window.removeEventListener('keydown', this._onKey); this._onKey = null; }
         if (this._onVisible) { document.removeEventListener('visibilitychange', this._onVisible); this._onVisible = null; }
         if (this._onDocClick) { document.removeEventListener('click', this._onDocClick); this._onDocClick = null; }
+        if (this._onHoteClic) { this.removeEventListener('click', this._onHoteClic); this._onHoteClic = null; }
          
          
          
@@ -1208,7 +1150,11 @@ class TourneeMap extends HTMLElement {
     _injectStyles() {
         if (!document.getElementById('tm-maplibre-css')) {
             const link = document.createElement('link');
-            link.id = 'tm-maplibre-css'; link.rel = 'stylesheet'; link.href = MAPLIBRE_CSS;
+            link.id = 'tm-maplibre-css'; link.rel = 'stylesheet';
+            link.integrity = MAPLIBRE_CSS_SRI; link.crossOrigin = 'anonymous';
+            let i = 0;
+            link.onerror = () => { if (++i < MAPLIBRE_CSS.length) link.href = MAPLIBRE_CSS[i]; };
+            link.href = MAPLIBRE_CSS[0];
             document.head.appendChild(link);
         }
         
@@ -1641,14 +1587,6 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 
 
 .tm-langue-item[aria-current="true"]{color:#fff;background:rgba(255,255,255,.1);box-shadow:inset 2px 0 0 var(--tm-ac);}
-.tm-devbar{position:absolute;bottom:14px;left:146px;z-index:7;display:flex;align-items:center;gap:5px;background:rgba(7,18,38,.72);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px;box-shadow:0 4px 12px rgba(7,17,31,.32);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:.85;transition:opacity .2s;}
-.tm-devbar.tm-dev-open{opacity:1;}@media (hover:hover) and (pointer:fine){.tm-devbar:hover{opacity:1;}}
-.tm-devtoggle{width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:14px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
-.tm-devbar.tm-dev-open .tm-devtoggle{background:var(--tm-ac);}
-.tm-devbtns{display:none;align-items:center;gap:4px;padding-right:4px;}
-.tm-devbar.tm-dev-open .tm-devbtns{display:flex;}
-.tm-devbtn{font-size:10px;font-weight:700;padding:5px 9px;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);cursor:pointer;font-family:inherit;white-space:nowrap;}
-.tm-devbtn.tm-on{background:var(--tm-ac);color:${NAVY};}
 
 
 
@@ -1961,8 +1899,6 @@ tournee-map.tm-filtered .tm-filterpill{display:inline-flex;}
   .tm-langue-btn{width:34px;height:34px;}
   .tm-trace-btn{position:absolute;top:calc(82px + env(safe-area-inset-top));bottom:auto;left:auto;right:12px;z-index:12;padding:7px 12px;font-size:9.5px;letter-spacing:.05em;gap:6px;}
   .tm-trace-btn svg{width:13px;height:13px;}
-  .tm-devbar{top:calc(12px + env(safe-area-inset-top));left:12px;bottom:auto;}
-  .tm-devbar.tm-dev-open{flex-wrap:wrap;max-width:80vw;}
 }
 
 
@@ -2151,7 +2087,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
       <a class="tm-langue-item" data-el="langueEn" role="menuitem" href="#" lang="en" hreflang="en">${DRAPEAU_EN('menu')}<span>English</span></a>
     </div>
   </div>
-</div>${DEMO ? '<div class="tm-devbar tm-dev-open"><button class="tm-devtoggle" data-act="devToggle" title="Test Tymal">🧪</button><div class="tm-devbtns"><button class="tm-devbtn tm-on" data-act="dev" data-mode="auto">Auto</button><button class="tm-devbtn" data-act="dev" data-mode="ici">Ici</button><button class="tm-devbtn" data-act="dev" data-mode="route">En route</button><button class="tm-devbtn" data-act="dev" data-mode="avant">Avant départ</button></div></div>' : ''}`;
+</div>`;
     }
 
      
@@ -2166,7 +2102,10 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _q(sel) { return this.querySelector(sel); }
 
     _bindUI() {
-        this.addEventListener('click', (ev) => {
+         
+         
+        if (this._onHoteClic) this.removeEventListener('click', this._onHoteClic);
+        this._onHoteClic = (ev) => {
             const actEl = ev.target.closest('[data-act]');
             const act = actEl ? actEl.getAttribute('data-act') : null;
             if (act === 'parcours') {
@@ -2177,7 +2116,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (act === 'match') this._matching();
             if (act === 'closeDetail') this._fermerDetail();
             if (act === 'handle') this._closeSheets();
-            if (act === 'devToggle') { const db = this._q('.tm-devbar'); if (db) db.classList.toggle('tm-dev-open'); }
             if (act === 'scrim') { const d = this._q('[data-el=detail]'); if (d && d.classList.contains('tm-open')) this._fermerDetail(); else this._closeSheets(); }
             if (act === 'clearGroup') this._clearGroup();
             if (act === 'clearAll') this._clearAll();
@@ -2190,7 +2128,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (act === 'fermerAgenda') this._fermerAgenda();
             if (act === 'fermerItineraire') this._fermerItineraire();
             if (act === 'agendaIcs') { this._agenda(this._agendaCible || this._detailEtape); this._fermerAgenda(); }
-            if (act === 'dev') { const m = actEl.getAttribute('data-mode'); this._forceCurrent = (m === 'auto') ? null : m; this.querySelectorAll('.tm-devbtn').forEach((b) => b.classList.toggle('tm-on', b === actEl)); this._addCurrent(); }
             if (act === 'lightbox') this._openLightbox(this._detailGallery, +actEl.getAttribute('data-i'));
             if (act === 'lbClose') this._closeLightbox();
             if (act === 'lbPrev') this._lightboxNav(-1);
@@ -2202,7 +2139,8 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (chip) this._setFiltre(chip.getAttribute('data-filtre'));
             if (!ev.target.closest('.tm-cal') && !ev.target.closest('.tm-datefield')) this._closeCal();
             if (!ev.target.closest('.tm-langue')) this._fermerLangue();
-        });
+        };
+        this.addEventListener('click', this._onHoteClic);
         const rayon = this._q('[data-f=rayon]');
         if (rayon) rayon.addEventListener('input', () => { this._q('[data-el=rayonVal]').textContent = rayon.value + ' km'; });
         const rech = this._q('[data-f=recherche]');
@@ -2243,7 +2181,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (day) this._pickDay(new Date(this._calRef.getFullYear(), this._calRef.getMonth(), parseInt(day, 10)));
         });
         this._bindMobileGestures();
-        if (window.innerWidth <= 768) { const db = this._q('.tm-devbar'); if (db) db.classList.remove('tm-dev-open'); }
     }
 
      
@@ -2271,7 +2208,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         const first = new Date(y, m, 1);
         const startDow = (first.getDay() + 6) % 7;
         const nbDays = new Date(y, m + 1, 0).getDate();
-        const moisFR = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' }).format(first);
+        const mois = new Intl.DateTimeFormat(LOCALES[this._lang] || LOCALES.fr, { month: 'long', year: 'numeric' }).format(first);
         const today = new Date(); today.setHours(0, 0, 0, 0);
         const du = this._du ? this._du.getTime() : null;
         const au = this._au ? new Date(this._au.getFullYear(), this._au.getMonth(), this._au.getDate()).getTime() : null;
@@ -2286,9 +2223,9 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (isStart || isEnd) { cls += ' edge'; if (isStart && isEnd) cls += ' single'; else if (isStart) cls += ' start'; else cls += ' end'; }
             cells += '<div class="' + cls + '" data-day="' + dn + '">' + dn + '</div>';
         }
-        cal.innerHTML = `<div class="tm-cal-head"><button class="tm-cal-nav" data-cal="prev">‹</button><span class="tm-cal-title">${moisFR}</span><button class="tm-cal-nav" data-cal="next">›</button></div>
-<div class="tm-cal-grid">${DOWS.map((d) => '<div class="tm-cal-dow">' + d + '</div>').join('')}${cells}</div>
-<div class="tm-cal-foot"><button class="tm-cal-link" data-cal="clear">Effacer</button><button class="tm-cal-link" data-cal="close">Fermer</button></div>`;
+        cal.innerHTML = `<div class="tm-cal-head"><button class="tm-cal-nav" data-cal="prev">‹</button><span class="tm-cal-title">${mois}</span><button class="tm-cal-nav" data-cal="next">›</button></div>
+<div class="tm-cal-grid">${this._t('cal_jours').split(' ').map((d) => '<div class="tm-cal-dow">' + d + '</div>').join('')}${cells}</div>
+<div class="tm-cal-foot"><button class="tm-cal-link" data-cal="clear">${this._t('cal_effacer')}</button><button class="tm-cal-link" data-cal="close">${this._t('cal_fermer')}</button></div>`;
     }
 
     _updateDateFields() {
@@ -2302,11 +2239,18 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _loadMapLibre() {
         return new Promise((resolve) => {
             if (window.maplibregl) return resolve();
-            const s = document.createElement('script');
-            s.src = MAPLIBRE_JS; s.onload = () => resolve();
-             
-            s.onerror = () => resolve();
-            document.head.appendChild(s);
+            
+
+            const essayer = (i) => {
+                if (window.maplibregl || i >= MAPLIBRE_JS.length) return resolve();
+                const s = document.createElement('script');
+                s.integrity = MAPLIBRE_JS_SRI; s.crossOrigin = 'anonymous';
+                s.onload = () => resolve();
+                s.onerror = () => { s.remove(); essayer(i + 1); };
+                s.src = MAPLIBRE_JS[i];
+                document.head.appendChild(s);
+            };
+            essayer(0);
         });
     }
 
@@ -2537,7 +2481,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             uniq.push({ c: [lng, lat], st: this._statut(e), ville: e.ville || e.titre || '', dateDebut: e.dateDebut, dateFin: e.dateFin });
         });
         if (!uniq.length) return;
-        const mode = this._forceCurrent || 'auto';
         let pos, src, cls, eyebrow, info;
          
          
@@ -2545,25 +2488,15 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         const setIci = (u) => { pos = u.c; src = this._illu('face'); cls = 'tm-cur-ici'; eyebrow = iciTxt; info = this._esc(u.ville) + ' \u00b7 ' + this._fmtPlage(u.dateDebut, u.dateFin); };
         const setRoute = (a, b) => { const arc = this._arc(a.c, b.c, 0.13); pos = arc[Math.floor(arc.length / 2)]; src = this._illu('velo'); cls = 'tm-cur-route'; eyebrow = this._t('cur_route'); info = '\u2192 ' + this._esc(b.ville) + ' \u00b7 ' + this._fmtJour(b.dateDebut); };
         const setAvant = (u) => { pos = u.c; src = this._illu('velo'); cls = 'tm-cur-route'; eyebrow = this._t('cur_bientot'); info = '\u2192 ' + this._esc(u.ville) + ' \u00b7 ' + this._fmtJour(u.dateDebut); };
-        if (mode === 'ici') {
-            setIci(uniq.find((u) => u.st === 'en_cours') || uniq[Math.floor(uniq.length / 2)]);
-        } else if (mode === 'route') {
-            const i = Math.max(0, Math.floor(uniq.length / 2) - 1);
-            const a = uniq[i], b = uniq[Math.min(i + 1, uniq.length - 1)];
-            if (a === b) setIci(a); else setRoute(a, b);
-        } else if (mode === 'avant') {
-            setAvant(uniq[0]);
-        } else {
-            const enCours = uniq.find((u) => u.st === 'en_cours');
-            if (enCours) { setIci(enCours); }
-            else {
-                let lastPast = -1;
-                for (let i = 0; i < uniq.length; i++) { if (uniq[i].st === 'passe' || uniq[i].st === 'annulee') lastPast = i; }
-                const nextIdx = uniq.findIndex((u) => u.st === 'a_venir' || u.st === 'reportee');
-                if (nextIdx === -1) return;
-                if (lastPast === -1 || lastPast >= nextIdx) setAvant(uniq[nextIdx]);
-                else setRoute(uniq[lastPast], uniq[nextIdx]);
-            }
+        const enCours = uniq.find((u) => u.st === 'en_cours');
+        if (enCours) { setIci(enCours); }
+        else {
+            let lastPast = -1;
+            for (let i = 0; i < uniq.length; i++) { if (uniq[i].st === 'passe' || uniq[i].st === 'annulee') lastPast = i; }
+            const nextIdx = uniq.findIndex((u) => u.st === 'a_venir' || u.st === 'reportee');
+            if (nextIdx === -1) return;
+            if (lastPast === -1 || lastPast >= nextIdx) setAvant(uniq[nextIdx]);
+            else setRoute(uniq[lastPast], uniq[nextIdx]);
         }
         const el = document.createElement('div');
         el.className = 'tm-current';

@@ -1,5 +1,5 @@
-/* rdr-elements la-course | source route-du-rhum ede21c7 | rdr-course.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="ede21c7";performance.mark("rdr-elements:la-course")}catch(e){}
+/* rdr-elements la-course | source route-du-rhum 35aaade | rdr-course.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="35aaade";performance.mark("rdr-elements:la-course")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-course")) return;
@@ -59,11 +59,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="ede21c7";perform
 
   
 
+
+
   let geo = null;
-  function script(src) {
+  function script(src, empreinte) {
     return new Promise((ok, ko) => {
       const s = document.createElement('script');
-      s.src = src; s.async = true;
+      s.src = src; s.async = true; s.integrity = empreinte; s.crossOrigin = 'anonymous';
       s.onload = () => ok(); s.onerror = () => ko(new Error('chargement impossible : ' + src));
       document.head.appendChild(s);
     });
@@ -72,8 +74,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="ede21c7";perform
     if (window.d3 && window.d3.geoMercator && window.topojson && window.topojson.feature) return Promise.resolve();
     if (!geo) {
       geo = Promise.all([
-        (window.d3 && window.d3.geoMercator ? Promise.resolve() : script('https://cdn.jsdelivr.net/npm/d3-array@3').then(() => script('https://cdn.jsdelivr.net/npm/d3-geo@3'))),
-        (window.topojson && window.topojson.feature ? Promise.resolve() : script('https://cdn.jsdelivr.net/npm/topojson-client@3'))
+        (window.d3 && window.d3.geoMercator ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js", "sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja").then(() => script("https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js", "sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD"))),
+        (window.topojson && window.topojson.feature ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js", "sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67"))
       ]);
       geo.catch(() => { geo = null; });
     }
@@ -183,7 +185,7 @@ function montrerFait(i, focus) {
   rangs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
   contenu.setAttribute('aria-labelledby', 'an-' + f.annee);
   contenu.innerHTML = '<div class="fm-annee" aria-hidden="true">' + f.annee + '</div><h3 class="fm-titre">' + T(f.titre) + '</h3>' +
-    '<div class="fm-diapo" data-i="0">' + f.images.map((im, k) => '<img src="' + MEDIA(im, 1100, 619) + '" alt="' + f.annee + ', photo d’archives' + (f.images.length > 1 ? ' (' + (k + 1) + ' sur ' + f.images.length + ')' : '') + '" decoding="async"' + (k ? ' loading="lazy"' : ' class="est-la"') + '>').join('') +
+    '<div class="fm-diapo" data-i="0"' + (f.images.length ? '' : ' hidden') + '>' + f.images.map((im, k) => '<img src="' + MEDIA(im, 1100, 619) + '" alt="' + f.annee + ', photo d’archives' + (f.images.length > 1 ? ' (' + (k + 1) + ' sur ' + f.images.length + ')' : '') + '" decoding="async"' + (k ? ' loading="lazy"' : ' class="est-la"') + '>').join('') +
       (f.images.length > 1 ? '<button type="button" class="fleche fleche--p" data-d="-1" aria-label="Photo précédente">' + pic('chevron-left') + '</button><button type="button" class="fleche fleche--n" data-d="1" aria-label="Photo suivante">' + pic('chevron-right') + '</button><div class="points" aria-hidden="true">' + f.images.map((_, k) => '<i' + (k ? '' : ' class="on"') + '></i>').join('') + '</div>' : '') +
     '</div><div class="fm-desc">' + f.items.map((it) => '<p class="fm-item">' + (it.b ? '<b>' + T(it.b) + '</b> ' : '') + T(it.t) + '</p>').join('') + '</div>';
   if (faitCourant >= 0) { contenu.classList.remove('entre'); void contenu.offsetWidth; contenu.classList.add('entre'); }
@@ -206,7 +208,7 @@ rangs.forEach((b, i) => {
 });
 montrerFait(0);
  
-quandCharge(() => FAITS.forEach((f) => { const im = new Image(); im.src = MEDIA(f.images[0], 1100, 619); }));
+quandCharge(() => FAITS.forEach((f) => { if (!f.images[0]) return; const im = new Image(); im.src = MEDIA(f.images[0], 1100, 619); }));
 
 
 
@@ -474,7 +476,7 @@ const FRANCE = { type: 'MultiPolygon', coordinates: GEO.france || [] };
 const GWADA = { type: 'MultiPolygon', coordinates: GEO.guadeloupe || [] };
 let TERRE = null;
 async function terre() { await chargerGeo(); d3 = window.d3; topojson = window.topojson;
-  if (!TERRE) { const t = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-50m.json')).json(); TERRE = topojson.feature(t, t.objects.land); }
+  if (!TERRE) { const t = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json', { integrity: 'sha384-c0VeCJd1wVbV5WQZNjf1hcMqPr9QXweEArnbdgS1k75TBNjta2M/NddyAulA/Glb' })).json(); TERRE = topojson.feature(t, t.objects.land); }
   return TERRE;
 }
 const f1 = (v) => v.toFixed(1);
@@ -565,9 +567,14 @@ if (q.get('entete') === 'non') document.body.classList.add('sans-entete');
  
 if (!tel()) fil.classList.add('fil--route');
 document.fonts.ready.then(() => { tracerFil(); armerFil(); quandProche(hoteCarte, () => dessinerCarte().catch((e) => { carteEchec = true; console.error('carte', e); })); });
-let largeur = innerWidth, attente = 0;
-addEventListener('resize', () => { clearTimeout(attente); attente = setTimeout(() => { tracerFil(); if (Math.abs(innerWidth - largeur) >= 40) { largeur = innerWidth; dessinerCarte(); } }, 250); });
-new ResizeObserver(() => { clearTimeout(attente); attente = setTimeout(tracerFil, 120); }).observe(fil);
+
+
+let largeur = innerWidth, attenteFil = 0, attenteCarte = 0;
+addEventListener('resize', () => {
+  clearTimeout(attenteFil); attenteFil = setTimeout(tracerFil, 250);
+  clearTimeout(attenteCarte); attenteCarte = setTimeout(() => { if (Math.abs(innerWidth - largeur) < 40) return; largeur = innerWidth; if (carte) dessinerCarte().catch((e) => console.error('carte, redessin', e)); }, 250);
+});
+new ResizeObserver(() => { clearTimeout(attenteFil); attenteFil = setTimeout(tracerFil, 120); }).observe(fil);
 
   }
 

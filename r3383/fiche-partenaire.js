@@ -1,5 +1,5 @@
-/* rdr-elements fiche-partenaire | source route-du-rhum ede21c7 | rdr-partenaire.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["fiche-partenaire"]="ede21c7";performance.mark("rdr-elements:fiche-partenaire")}catch(e){}
+/* rdr-elements fiche-partenaire | source route-du-rhum 35aaade | rdr-partenaire.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["fiche-partenaire"]="35aaade";performance.mark("rdr-elements:fiche-partenaire")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-partenaire")) return;
@@ -25,7 +25,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["fiche-partenaire"]="ede21c7";
   function purger(racine) {
     [...racine.querySelectorAll('*')].reverse().forEach((e) => {
       if (!GARDEES.test(e.tagName)) { if (JETEES.test(e.tagName)) e.remove(); else e.replaceWith(...e.childNodes); return; }
-      for (const a of [...e.attributes]) if (!(e.tagName === 'A' && a.name === 'href' && /^(https?:|mailto:|tel:|\/(?!\/))/i.test(a.value.trim()))) e.removeAttribute(a.name);
+      for (const a of [...e.attributes]) if (!(e.tagName === 'A' && a.name === 'href' && /^(https?:|mailto:|tel:|\/(?![\/\\]))/i.test(a.value.replace(/[\s\u0000-\u001f]/g, '')))) e.removeAttribute(a.name);
     });
   }
 
@@ -54,7 +54,7 @@ const T = (s) => typo(esc(String(s == null ? '' : s))).replace(/Rhum - Destinati
 const $ = (id) => (FOND_PAGE.id === id ? FOND_PAGE : FOND_PAGE.querySelector('[id="' + id + '"]'));
 const nom = (p) => p.nom[L] || p.nom.fr;
 const lien = (p) => (L === 'en' ? '/en' : '') + p.lien;
-const slug = (p) => { const s = p.lien.split('/').pop(); try { return decodeURIComponent(s); } catch (e) { return s; } };
+
 const titres = RANGS.flatMap((r) => [r.titre.fr, r.titre.en]).map((s) => s.toLowerCase());
 const accroche = (p) => { const a = (p.accroche[L] || '').trim(); const b = a.toLowerCase(); return !a || b === nom(p).toLowerCase() || titres.includes(b) ? '' : a; };
 const img = (src, cls, alt, extra) => src ? '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + esc(src) + '" alt="' + esc(alt || '') + '"' + (extra || ' loading="lazy"') + ' decoding="async">' : '';

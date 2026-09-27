@@ -1,5 +1,5 @@
-/* rdr-elements heritage | source route-du-rhum ede21c7 | rdr-heritage.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="ede21c7";performance.mark("rdr-elements:heritage")}catch(e){}
+/* rdr-elements heritage | source route-du-rhum 35aaade | rdr-heritage.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="35aaade";performance.mark("rdr-elements:heritage")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-heritage")) return;
@@ -35,7 +35,7 @@ RACINE.querySelectorAll('svg[data-i]').forEach((s) => { s.innerHTML = ICO[s.data
 
 
  
-const $ = (id) => document.getElementById(id);
+const $ = (id) => RACINE.querySelector('[id="' + id + '"]');
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
  
 const typo = (s) => esc(s).replace(/(\d) (\d{3})(?!\d)/g, '$1\u00a0$2');
@@ -43,8 +43,6 @@ const DPR = Math.min(2, window.devicePixelRatio || 1);
 const palier = (px) => Math.max(160, Math.round(Math.min(px * DPR, 1800) / 80) * 80);
 const wix = (id, l, h, q) => 'https://static.wixstatic.com/media/' + id + '/v1/fill/w_' + Math.round(l) + ',h_' + Math.round(h) + ',al_c,q_' + (q || 78) + ',enc_auto/x.jpg';
 const reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const params = new URLSearchParams(location.search);
-if (params.get('entete') === 'non') ENVELOPPE.classList.add('sans-entete');
 ENVELOPPE.style.setProperty('--topo', 'url("' + PAGE.medias.topo + '")');
 ENVELOPPE.style.setProperty('--arcs', 'url("' + PAGE.medias.arcs + '")');
 const EDITIONS = CMS.editions;
@@ -281,7 +279,10 @@ dessinerFrise();
   courante = an; marquer(false); dessinerEdition(false);
   if (m) requestAnimationFrame(() => $('editions').scrollIntoView({ block: 'start' }));
 })();
-window.addEventListener('resize', () => marquer(false));
+
+
+let largeurFrise = innerWidth;
+window.addEventListener('resize', () => { if (innerWidth === largeurFrise) return; largeurFrise = innerWidth; marquer(false); });
 
   }
 

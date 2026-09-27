@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum ede21c7 | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="ede21c7";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum 35aaade | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="35aaade";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -326,6 +326,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="ede21c7";pe
       'padding-right:clamp(22px,3vw,44px);font-family:' + POLICE_TITRE + ';font-style:italic;' +
       'font-size:clamp(15px,1.9vw,25px);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#fff;}',
     R + ' .rac-bandeau svg{width:1em;height:1em;flex:none;stroke:var(--rac-or);fill:none;stroke-width:1.6;stroke-linecap:round;}',
+     
+    R + ' .rac-lu{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}',
     '@media (hover:hover) and (pointer:fine){' + R + ' .rac-bandeau:hover .rac-bandeau-piste{animation-play-state:paused;}}',
     
 
@@ -732,12 +734,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="ede21c7";pe
       }).join('');
     }
 
+    
+
+
     _bandeau() {
       const unite = esc(this._c('bandeau')) + svg('ancre');
       let piste = '';
       for (let i = 0; i < 4; i++) piste += unite;
       return '<div class="rac-bandeau">' +
-        '<div class="rac-bandeau-piste">' +
+        '<span class="rac-lu">' + esc(this._c('bandeau')) + '</span>' +
+        '<div class="rac-bandeau-piste" aria-hidden="true">' +
           '<span>' + piste + '</span><span aria-hidden="true">' + piste + '</span>' +
         '</div></div>';
     }
@@ -1125,13 +1131,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="ede21c7";pe
         pinceG.setAttribute('transform', 'scale(' + (cw / 240).toFixed(3) + ')');
         ancre = { x: W / 2, y: -Math.max(90, cw * 0.62) };
         seg = (repos - ancre.y) / (N - 1);
-        if (!sema) {
+        
+
+
+
+        if (!sema || doux) {
           for (let i = 0; i < N; i++) {
             p[i] = { x: ancre.x, y: ancre.y + i * seg };
             avant[i] = { x: p[i].x, y: p[i].y };
           }
           sema = true;
         }
+        if (doux) { pas(); dessiner(); }
       };
 
       
@@ -1406,7 +1417,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="ede21c7";pe
         pousser();    
       }
 
-      if (doux) { pas(); dessiner(); return; }
+      
+
+      if (doux) return;
 
       boucle();
       

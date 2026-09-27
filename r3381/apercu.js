@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ede21c7 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ede21c7";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 35aaade | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="35aaade";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -37,9 +37,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ede21c7";performanc
     const avant = brut.match(/^\s*/)[0], apres = brut.match(/\s*$/)[0];
     const entier = morceauEn(net);
     if (entier != null) return avant + entier + apres;
-    if (net.indexOf(' · ') < 0) return null;
+    
+
+
+
+    if (net.indexOf('·') < 0) return null;
     let change = false;
-    const t = net.split(' · ').map((m) => { const e = morceauEn(m.trim()); if (e != null) { change = true; return e; } return m; }).join(' · ');
+    const t = net.split(/(\s*·\s*)/).map((m, i) => { if (i % 2 || !m) return m; const e = morceauEn(m.trim()); if (e != null) { change = true; return e; } return m; }).join('');
     return change ? avant + t + apres : null;
   };
   function traduireEn(racine) {
@@ -142,7 +146,6 @@ rdr-accueil-apercu .trame{width:100%;max-width:calc(var(--largeur) + 2 * var(--m
 rdr-accueil-apercu .titre{font-family:var(--titre);font-style:italic;text-transform:uppercase;line-height:1}
 rdr-accueil-apercu .kicker{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;padding:6px 10px;border-radius:6px;background:var(--teal);color:#0E111D;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1}
 rdr-accueil-apercu .kicker--jaune{background:var(--jaune)}
-rdr-accueil-apercu .kicker--blanc{background:#fff}
 rdr-accueil-apercu .kicker--sombre{background:#0E111D;color:#fff}
 rdr-accueil-apercu .trait{display:inline-block;width:54px;height:6px;border-radius:3px;background:var(--jaune);transform:skewX(-20deg)}
 rdr-accueil-apercu .btn{display:inline-flex;align-items:center;justify-content:center;gap:15px;height:44px;padding:10px 20px;border:2px solid currentColor;border-radius:10px 0 10px 0;background:transparent;color:#fff;font:700 14px/1 var(--police);text-decoration:none;transition:background .15s,color .15s;cursor:pointer;white-space:nowrap}
@@ -359,7 +362,6 @@ rdr-accueil-apercu .breve h3{font-size:13px;font-weight:800;line-height:1.3;disp
 rdr-accueil-apercu .breve .cat{margin-bottom:6px;font-size:9.5px;padding:4px 7px}
 rdr-accueil-apercu .breve .quand{display:block;margin-top:5px}
 rdr-accueil-apercu .actus-pied{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:26px;flex-wrap:wrap}
-rdr-accueil-apercu .sujet--moment{border-color:rgba(93,191,192,.6);color:var(--teal)}
 rdr-accueil-apercu .skippers{position:relative;background:#0A1228;color:#fff;padding:clamp(80px,10vh,110px) 0 clamp(124px,15vh,168px);overflow:hidden}
 rdr-accueil-apercu .skippers .topo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;pointer-events:none}
 rdr-accueil-apercu .skippers::before{content:'';position:absolute;left:0;right:0;top:0;height:160px;background:linear-gradient(#0E111D,rgba(14,17,29,0));pointer-events:none}
@@ -1016,7 +1018,16 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       this._dessine = true;
       this._calerEntete();
       this.innerHTML = PAGE;
-      this._defaire = monter(this, this, D);
+      
+
+
+
+      try { this._defaire = monter(this, this, D); } catch (e) {
+        console.warn('[rdr-accueil-apercu] aperçu illisible', e && e.message);
+        this._dessine = false;
+        this._panne();
+        return;
+      }
        
       if (langueDe(this) === 'en') {
         traduireEn(this);
@@ -1041,9 +1052,13 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       } catch (e) {
         console.warn('[rdr-accueil-apercu] aperçu indisponible', e && e.message);
         if (!this._monte || this._dessine) return;
-        this.innerHTML = '<div class="raa-vide"><h3>L\'aperçu revient dans un instant</h3><p>Les données n\'ont pas pu être lues.</p><button type="button">Réessayer</button></div>';
-        this.querySelector('button').onclick = () => { this._attendre(); this._charger(); };
+        this._panne();
       }
+    }
+
+    _panne() {
+      this.innerHTML = '<div class="raa-vide"><h3>L\'aperçu revient dans un instant</h3><p>Les données n\'ont pas pu être lues.</p><button type="button">Réessayer</button></div>';
+      this.querySelector('button').onclick = () => { this._attendre(); this._charger(); };
     }
   }
 
@@ -1052,6 +1067,16 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 function monter(racine, portail, D) {
   'use strict';
   const ecouteurs = [], minuteurs = [], observateurs = [];
+  let heroTimer = null, liaisonTimer = null;
+  const defaire = () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
+  
+
+
+
+
+
+
+  try {
   const ecoute = (cible, type, f) => { cible.addEventListener(type, f); ecouteurs.push(() => cible.removeEventListener(type, f)); };
   const repeter = (f, ms) => { const t = setInterval(f, ms); minuteurs.push(t); return t; };
   const tout = (s) => [...racine.querySelectorAll(s)].concat(portail === racine ? [] : [...portail.querySelectorAll(s)]);
@@ -1090,6 +1115,8 @@ function monter(racine, portail, D) {
   const liberer = () => {
     if (libere) return;
     libere = true;
+     
+    window.removeEventListener('scroll', liberer);
     guetImages.disconnect();
     retenues.splice(0).forEach(([img, src, srcset]) => { if (srcset) img.setAttribute('srcset', srcset); if (src) img.setAttribute('src', src); });
     apres.splice(0).forEach((f) => { try { f(); } catch (e) {   } });
@@ -1217,7 +1244,6 @@ function monter(racine, portail, D) {
 
 
 
-  const PHOTOS = D.photos;
   const PHASES = D.phases;
 
   const $ = (id) => racine.querySelector('#' + id) || portail.querySelector('#' + id);
@@ -1236,15 +1262,13 @@ function monter(racine, portail, D) {
   if (EN) [racine, portail].forEach((z) => z && z.querySelectorAll && z.querySelectorAll('a[href^="/"], form[action^="/"]').forEach((a) => { const k = a.tagName === 'FORM' ? 'action' : 'href'; a.setAttribute(k, a.dataset && a.dataset.en ? a.dataset.en : lien(a.getAttribute(k))); }));
   let phase = 'avant';
 
-   
-  const DEPART = new Date('2026-11-01T13:02:00+01:00').getTime();
-  function barre() {
-    let d = Math.max(0, DEPART - Date.now()); const j = Math.floor(d / 86400000), h = Math.floor(d / 3600000) % 24, m = Math.floor(d / 60000) % 60, s = Math.floor(d / 1000) % 60;
-    const deux = (n) => String(n).padStart(2, '0');
-    const bc = $('barre-compte'); if (bc) bc.innerHTML = '<span>' + String(j).padStart(3, '0') + '<small> j</small></span><span>' + deux(h) + '<small> h</small></span><span>' + deux(m) + '<small> m</small></span><span>' + deux(s) + '<small> s</small></span>';
-    const p = $('ess-pointage'); if (p) { const c = Math.ceil(Date.now() / 14400000) * 14400000 - Date.now(); p.textContent = Math.floor(c / 3600000) + ' h ' + deux(Math.floor(c / 60000) % 60); }
-  }
-  repeter(barre, 1000); barre();
+  
+
+
+
+
+  const pointage = () => { const p = $('ess-pointage'); if (!p) return; const c = Math.ceil(Date.now() / 14400000) * 14400000 - Date.now(); p.textContent = Math.floor(c / 3600000) + ' h ' + String(Math.floor(c / 60000) % 60).padStart(2, '0'); };
+  repeter(pointage, 30000);
 
   const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const JOURS = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
@@ -1339,15 +1363,14 @@ function monter(racine, portail, D) {
     nav.querySelectorAll('[data-sens]').forEach(b => b.addEventListener('click', () => allerDiapo(diapoIdx + Number(b.dataset.sens))));
     nav.querySelectorAll('.hv-barres i').forEach((b, j) => b.addEventListener('click', () => allerDiapo(j)));
     diapoIdx = 0; poserRail();
-    $('hv-titre').innerHTML = contenuDiapo(0);
-    barre();
+    $('hv-titre').innerHTML = contenuDiapo(0); pointage();
     reserverTitre();
   }
   function allerDiapo(i) {
     const n = diapos().length; if (n < 2) return;
     diapoIdx = (i + n) % n; poserRail();
     const t = $('hv-titre'); t.classList.add('sort');
-    setTimeout(() => { t.innerHTML = contenuDiapo(diapoIdx); t.classList.remove('sort'); barre(); noterHauteur(); }, 380);
+    setTimeout(() => { t.innerHTML = contenuDiapo(diapoIdx); t.classList.remove('sort'); pointage(); noterHauteur(); }, 380);
     relancer();
   }
   
@@ -1367,7 +1390,9 @@ function monter(racine, portail, D) {
 
 
   function reserverTitre() {
-    const t = $('hv-titre'); t.style.minHeight = '';
+     
+    const t = $('hv-titre'); if (!t) return;
+    t.style.minHeight = '';
     if (!etroit() || diapos().length < 2) { hautVue = 0; return; }
     const large = t.getBoundingClientRect().width; if (!large) return;
     const copie = t.cloneNode(false);
@@ -1386,7 +1411,8 @@ function monter(racine, portail, D) {
 
   function noterHauteur() {
     if (!etroit()) return;
-    const t = $('hv-titre'); const h = t.getBoundingClientRect().height;
+    const t = $('hv-titre'); if (!t) return;
+    const h = t.getBoundingClientRect().height;
     if (h > hautVue) hautVue = h;
     if (h > (parseFloat(t.style.minHeight) || 0)) t.style.minHeight = Math.ceil(h) + 'px';
   }
@@ -1423,7 +1449,7 @@ function monter(racine, portail, D) {
     if ($('hero').dataset.acces === 'sous') $('hv-slot-acces-sous').appendChild($('ctas')); else $('hv-slot-acces').querySelector('.trame').appendChild($('ctas'));
   }
 
-  let heroTimer = null, heroGen = 0;
+  let heroGen = 0;
   
 
 
@@ -1432,7 +1458,7 @@ function monter(racine, portail, D) {
   const signal = (etape) => { if (window.__rdrIntro) window.__rdrIntro.etape = etape; try { window.dispatchEvent(new CustomEvent('rdr-intro', { detail: { etape } })); } catch (e) {   } };
   function jouerHero() {
     const h = $('hero'); h.classList.remove('est-photo'); clearInterval(diapoTimer);
-    if (diapoIdx !== 0) { diapoIdx = 0; poserRail(); $('hv-titre').innerHTML = contenuDiapo(0); barre(); }
+    if (diapoIdx !== 0) { diapoIdx = 0; poserRail(); $('hv-titre').innerHTML = contenuDiapo(0); pointage(); }
     
 
 
@@ -1474,17 +1500,6 @@ function monter(racine, portail, D) {
   
 
 
-
-  function sansEntree() {
-    const h = $('hero'); ++heroGen; clearTimeout(heroTimer); h.classList.remove('entree-douce');
-    const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
-    racine.classList.add('sans-entree');
-    h.classList.add('est-photo'); poserRail(); relancer(); compter(true);
-    requestAnimationFrame(() => requestAnimationFrame(() => racine.classList.remove('sans-entree')));
-  }
-  
-
-
   function entreeDouce() {
     const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
     const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
@@ -1501,7 +1516,11 @@ function monter(racine, portail, D) {
   
 
 
+
+
+  const mouvementReduit = () => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
   function compter(direct) {
+    direct = direct || mouvementReduit();
     tout('#hv-titre [data-n]').forEach((el, k) => {
       const fin = Number(el.dataset.n); const depart = performance.now() + 500 + k * 90; const duree = 1100;
        
@@ -1551,7 +1570,6 @@ function monter(racine, portail, D) {
   }
   const largeurPage = () => document.documentElement.clientWidth || innerWidth;
   dessinerSillage();
-  let liaisonTimer = null;
   ecoute(window, 'resize', () => { clearTimeout(liaisonTimer); liaisonTimer = setTimeout(() => { dessinerSillage(); reserverTitre(); }, 150); });
    
   if (typeof IntersectionObserver === 'function') {
@@ -1562,7 +1580,8 @@ function monter(racine, portail, D) {
   
 
   $('hv-defiler').innerHTML = '<i>' + CHEV_D + '</i>';
-  ecoute(window, 'scroll', () => { if (scrollY > 40) $('hero').classList.add('a-defile'); });
+  const defiler = () => { if (scrollY <= 40) return; $('hero').classList.add('a-defile'); window.removeEventListener('scroll', defiler); };
+  ecoute(window, 'scroll', defiler);
   
 
   try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => reserverTitre()); } catch (e) {   }
@@ -1588,10 +1607,13 @@ function monter(racine, portail, D) {
   const promosAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('promos')) || 'null'); return Array.isArray(a) ? a : null; } catch (e) { return null; } };
   
 
+
+
+
   const imgPub = (v) => {
     if (!v || typeof v !== 'object') return null;
     const s = String(v.src || '').trim();
-    const m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/) || s.match(/^https:\/\/static\.wixstatic\.com\/media\/([^/#?]+)/);
+    const m = s.match(/^wix:image:\/\/v1\/([\w~.-]+)(?=[/#?]|$)/) || s.match(/^https:\/\/static\.wixstatic\.com\/media\/([\w~.-]+)(?=[/#?]|$)/);
     if (!m) return null;
     const l = Math.max(0, Math.round(Number(v.l) || 0)), h = Math.max(0, Math.round(Number(v.h) || 0));
     return { id: m[1], l: l && h ? l : 0, h: l && h ? h : 0 };
@@ -1676,7 +1698,8 @@ function monter(racine, portail, D) {
   const CAT_HUB = { actu: 'actualites', photo: 'image', video: 'video', audio: 'audio' };
    
   $('onglets').innerHTML = ['actu', 'photo', 'video', 'audio'].map(k => '<a class="onglet"' + href('/medias-actualites?cat=' + (k === 'actu' && EN ? 'news' : CAT_HUB[k])) + ' style="--c:' + HUB[k].c + ';--bg:' + HUB[k].bg + '"><i>' + ICO[k] + '</i>' + (k === 'actu' ? 'Actu' : HUB[k].lib) + '</a>').join('');
-  const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([^/#]+)/); return m ? IMG(m[1], w, h) : esc(String(v || '')); };
+   
+  const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([\w~.-]+)(?=[/#]|$)/); return m ? IMG(m[1], w, h) : esc(String(v || '')); };
   const ilYa = (iso) => { const d = (Date.now() - new Date(iso).getTime()) / 86400000; return d < 1 ? 'aujourd\'hui' : d < 2 ? 'hier' : 'il y a ' + Math.floor(d) + ' j'; };
   const cat = (t) => '<span class="cat" style="--c:' + HUB[t].c + ';--bg:' + HUB[t].bg + '">' + ICO[t] + HUB[t].lib + '</span>';
   
@@ -1786,6 +1809,9 @@ function monter(racine, portail, D) {
    
   const CLASSES = D.classes;
   const ROT = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
+  
+
+  const teinte = (c) => (/^#[0-9a-f]{3,8}$/i.test(String(c || '')) ? c : '');
    
   const vecteur = (v) => { const s = String(v || ''); const m = s.match(/^wix:vector:\/\/v1\/([^/#]+)/); if (m) return 'https://static.wixstatic.com/shapes/' + m[1]; const i = s.match(/^wix:image:\/\/v1\/([^/#]+)/); return i ? 'https://static.wixstatic.com/media/' + i[1] + '/v1/fit/w_32,h_32,q_90,enc_auto/drapeau.png' : s; };
   $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe"' + href('/skippers?classe=' + k.toLowerCase().split(' ').join('-')) + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
@@ -1803,14 +1829,14 @@ function monter(racine, portail, D) {
   function rendreSkippers(s) {
     const liste = tirer(Array.isArray(s) ? s : (s.skippers || Object.values(s)[0]), 6);
     pvI = 0;
-    $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
+    $('skippers').innerHTML = liste.map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = teinte(k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       const fiche = /^\/skippers\/[^\s"'<>]+$/.test(String(k['link-skippers-prenomNom'] || '')) && k.ficheActive !== false ? k['link-skippers-prenomNom'] : '';
       const balise = fiche ? 'a' : 'div';
       return '<' + balise + ' class="sk"' + (fiche ? href(fiche) + ' aria-label="' + esc([k.prenom, k.nom].filter(Boolean).join(' ')) + '"' : '') + ' style="--cc:' + cc + ';--rot:' + ROT[i] + 'deg"><div class="sk-flip"><div class="sk-face sk-front"><img class="sk-img" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 190 : 215), 74)) + '" alt="" loading="lazy">' +
         '<div class="sk-ov"><div class="sk-prenom"><img loading="lazy" decoding="async" src="' + esc(vecteur(k.drapeau)) + '" alt="">' + esc(k.prenom) + '</div><div class="sk-nom">' + esc(k.nom) + '</div><div class="sk-bateau">' + esc(k.bateau || '') + '</div></div></div>' +
         '<div class="sk-face sk-back"></div>' + (cfg.icone ? '<div class="sk-classe"><img loading="lazy" decoding="async" src="' + cfg.icone + '" alt=""></div>' : '') + '</div></' + balise + '>'; }).join('');
      
-    $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = (k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
+    $('pv-skipper').innerHTML = liste.slice(0, 5).map((k, i) => { const cfg = CLASSES[(k.classes && k.classes.nom) || ''] || {}; const cc = teinte(k.classes && k.classes.couleur) || cfg.c || '#5dbfc0';
       return '<div class="pv-sk' + (i === 0 ? ' est-active' : '') + '" style="--cc:' + cc + '"><img loading="lazy" decoding="async" src="' + esc(retaille(k.photoVignette, pourLarge(etroit() ? 150 : 200), 74)) + '" alt="">' + (cfg.icone ? '<img class="pv-sk-classe" src="' + cfg.icone + '" alt="">' : '') +
         '<div class="pv-sk-ov"><span class="pv-micro">' + COEUR + 'Skipper préféré</span><b>' + esc(k.prenom) + '</b><strong>' + esc(k.nom) + '</strong><small>' + esc(k.bateau || '') + '</small></div></div>'; }).join('');
     reveler('#skippers .sk-flip', 150);
@@ -1838,7 +1864,11 @@ function monter(racine, portail, D) {
   }
   if (vivierDessine && tirageAnnonce) skippersFiges = true;
   ecoute(racine, 'raa-skippers', () => { if (skippersFiges) return; const brut = racine.getAttribute('skippers'); if (brut === vivierDessine) return; const v = vivierAttribut(); if (v) { vivierDessine = brut; if (tirageAnnonce) skippersFiges = true; rendreSkippers(v); } });
-  repeter(() => { const c = $('pv-skipper').querySelectorAll('.pv-sk'); if (c.length < 2) return; pvI = pvI % c.length; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
+  
+
+
+  const pastilleSkipper = $('pv-skipper');
+  if (!mouvementReduit()) repeter(() => { if (document.hidden || pastilleSkipper.closest('[data-hors]')) return; const c = pastilleSkipper.querySelectorAll('.pv-sk'); if (c.length < 2) return; pvI = pvI % c.length; c[pvI].classList.remove('est-active'); pvI = (pvI + 1) % c.length; c[pvI].classList.add('est-active'); }, 3400);
   function reveler(sel, pas) {
     const els = [...tout(sel)];
     const io = new IntersectionObserver((ents) => { ents.forEach(e => { if (e.isIntersecting) { const i = els.indexOf(e.target); setTimeout(() => e.target.classList.add('est-la'), 60 + (i % 6) * pas); io.unobserve(e.target); } }); }, { threshold: .1 });
@@ -1907,32 +1937,16 @@ function monter(racine, portail, D) {
     if (politiqueMarketing()) lancerVideo(); else demanderCookies();
   });
 
-   
+  
+
   const DISPOS = { a: 'fondu', b: 'sous' };
   const presse = (sel, b) => tout(sel).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  let note = () => {};
   function disposer(cle) {
     $('hero').dataset.acces = DISPOS[cle];
     presse('[data-dispo]', un('[data-dispo="' + cle + '"]')); placer(); note();
   }
   function marquerDiapos() { const b = $('mq-diapos'); if (!b) return; b.setAttribute('aria-pressed', String(avecDiapos)); b.textContent = avecDiapos ? 'Oui' : 'Non'; }
-  function afficher(cle) { modeAffiche = cle; presse('[data-aff]', un('[data-aff="' + cle + '"]')); rendreAffiche(); }
-  tout('[data-phase]').forEach(b => b.addEventListener('click', () => {
-    phase = b.dataset.phase; presse('[data-phase]', b);
-    rendreHero(); rendreCtas(); sansEntree(); note();
-  }));
-  tout('[data-dispo]').forEach(b => b.addEventListener('click', () => disposer(b.dataset.dispo)));
-  tout('[data-aff]').forEach(b => b.addEventListener('click', () => afficher(b.dataset.aff)));
-  
-
-  if ($('mq')) {
-    $('mq-diapos').addEventListener('click', () => { avecDiapos = !avecDiapos; marquerDiapos(); rendreHero(); if ($('hero').classList.contains('est-photo')) { poserRail(); relancer(); } });
-    $('mq-rejouer').addEventListener('click', jouerHero);
-    un('#mq b').addEventListener('click', () => $('mq').classList.toggle('replie'));
-     
-    if (innerWidth < 760) $('mq').classList.add('replie');
-  }
-  function note() { const n = $('mq-note'); if (n) n.textContent = innerWidth + ' × ' + innerHeight + ' · hero ' + $('hero').offsetHeight + ' px · ' + PHASES[phase].nom; }
-  ecoute(window, 'resize', note);
   
 
 
@@ -1978,8 +1992,11 @@ function monter(racine, portail, D) {
 
 
   const q = new URLSearchParams(location.search);
-  if (PHASES[q.get('phase')]) { phase = q.get('phase'); presse('[data-phase]', un('[data-phase="' + phase + '"]')); }
-  disposer(DISPOS[q.get('dispo')] ? q.get('dispo') : 'b');
+  
+
+  const option = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  if (option(PHASES, q.get('phase'))) { phase = q.get('phase'); presse('[data-phase]', un('[data-phase="' + phase + '"]')); }
+  disposer(option(DISPOS, q.get('dispo')) ? q.get('dispo') : 'b');
   
 
   avecDiapos = q.get('diapos') === 'oui'; marquerDiapos();
@@ -2000,7 +2017,8 @@ function monter(racine, portail, D) {
     minuteurs.push(setTimeout(liberer, 3000));
     ecoute(window, 'scroll', liberer);
   }
-  return () => { ecouteurs.forEach(f => f()); minuteurs.forEach(t => clearInterval(t)); observateurs.forEach(o => o.disconnect()); clearTimeout(heroTimer); clearTimeout(liaisonTimer); };
+  return defaire;
+  } catch (e) { defaire(); throw e; }
 }
  
 

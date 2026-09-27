@@ -1,5 +1,5 @@
-/* rdr-elements licence | source route-du-rhum ede21c7 | rdr-licence-marque.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["licence"]="ede21c7";performance.mark("rdr-elements:licence")}catch(e){}
+/* rdr-elements licence | source route-du-rhum 35aaade | rdr-licence-marque.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["licence"]="35aaade";performance.mark("rdr-elements:licence")}catch(e){}
 ;(function(){
 (function () {
   if (!window.customElements || customElements.get("rdr-licence-marque")) return;
@@ -8,6 +8,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["licence"]="ede21c7";performan
   const SQUELETTE = "<div class=\"rlm-attente\" aria-hidden=\"true\"><div class=\"rlm-sq-haut\"><div class=\"rlm-sq-trame\"><i class=\"rlm-sq-l rlm-sq-k\"></i><i class=\"rlm-sq-l rlm-sq-t\"></i><i class=\"rlm-sq-l rlm-sq-t rlm-sq-t2\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p1\"></i><i class=\"rlm-sq-l rlm-sq-p\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p3\"></i></div></div><div class=\"rlm-sq-trame rlm-sq-sec\"><i class=\"rlm-sq-l rlm-sq-k\"></i><i class=\"rlm-sq-l rlm-sq-t\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p1\"></i><i class=\"rlm-sq-l rlm-sq-p\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p3\"></i></div><div class=\"rlm-sq-trame rlm-sq-cartes\"><i class=\"rlm-sq-c\"></i><i class=\"rlm-sq-c\"></i><i class=\"rlm-sq-c\"></i></div><div class=\"rlm-sq-trame rlm-sq-sec\"><i class=\"rlm-sq-l rlm-sq-k\"></i><i class=\"rlm-sq-l rlm-sq-t\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p1\"></i><i class=\"rlm-sq-l rlm-sq-p\"></i><i class=\"rlm-sq-l rlm-sq-p rlm-sq-p3\"></i></div></div>";
   const SOURCE = 'https://www.routedurhum.com/_functions/licenceMarque';
   const ATTENTE_REPONSE_MS = 12000;
+  const ATTENTE_TARDIVE_MS = 30000;
 
   function poserStyle() {
     if (document.getElementById("rdr-licence-marque-css")) return;
@@ -184,7 +185,7 @@ arriver();
         if (pret && !this._pret) { this._pret = true; if (this._attente) this._emettre(); } else this._pret = pret;
         return;
       }
-      if (nom === 'envoi-etat') { if (val && val !== avant) this._reponse(String(val).replace(/#.*$/, '')); return; }
+      if (nom === 'envoi-etat') { if (val && val !== avant) { const p = String(val).split('#'); this._reponse(p[0], p.length > 2 ? Number(p[1]) : null); } return; }
       this._tenter();
     }
     _lang() {
@@ -236,6 +237,10 @@ arriver();
 
     
 
+
+
+
+
     _envoyer(f, m, b, TX) {
       if (this._envoi) return;
       const valeurs = {};
@@ -243,21 +248,30 @@ arriver();
       const piege = f.querySelector('input[name="site"]');
       this._form = { f, m, b, TX };
       this._envoi = true;
+      this._n = (this._n || 0) + 1;
+      this._tardif = null;
       f.setAttribute('aria-busy', 'true');
-      this._attente = { valeurs, dureeMs: Date.now() - (this._naissance || Date.now()), piege: piege ? piege.value : '' };
+      this._attente = { n: this._n, valeurs, dureeMs: Date.now() - (this._naissance || Date.now()), piege: piege ? piege.value : '' };
       clearTimeout(this._garde);
-      this._garde = setTimeout(() => this._reponse('erreur:delai'), ATTENTE_REPONSE_MS);
+      const n = this._n;
+      this._garde = setTimeout(() => this._reponse('erreur:delai', n), ATTENTE_REPONSE_MS);
       if (this._pret) this._emettre();
     }
     _emettre() {
       if (!this._attente) return;
       this.dispatchEvent(new CustomEvent('licence-envoi', { detail: this._attente, bubbles: true, composed: true }));
     }
-    _reponse(etat) {
+    _reponse(etat, n) {
       const F = this._form;
-      if (!F || !this._envoi || etat === 'envoi') return;
+      if (!F || etat === 'envoi' || (n != null && n !== this._n)) return;
+      if (!this._envoi) {
+        const t = this._tardif;
+        if (etat === 'ok' && t && n === t.n && Date.now() < t.jusqua) { this._tardif = null; F.f.hidden = true; F.m.hidden = false; }
+        return;
+      }
       clearTimeout(this._garde); this._garde = null;
       this._envoi = false; this._attente = null;
+      if (etat === 'erreur:delai') this._tardif = { n: this._n, jusqua: Date.now() + ATTENTE_TARDIVE_MS };
       F.f.removeAttribute('aria-busy');
       if (etat === 'ok') { F.f.hidden = true; F.m.hidden = false; return; }
       F.b.disabled = false;

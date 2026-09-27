@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum ede21c7 | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="ede21c7";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 35aaade | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="35aaade";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -710,12 +710,15 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       
 
 
-      this._maj = '2026-09-24';
+
+
+      this._maj = '2026-09-26';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
       this._rafId = 0;
+      this._ancreFaite = false;
     }
 
     connectedCallback() {
@@ -1037,6 +1040,53 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       const surRedim = () => { this._racine.style.setProperty('--cfd-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
+
+      
+
+
+
+
+
+
+
+
+
+      const sectionDe = (h) => {
+        let v = String(h || '').replace(/^#/, '');
+        try { v = decodeURIComponent(v); } catch (e) {   }
+        if (!v) return null;
+        const toutes = this._racine ? Array.from(this._racine.querySelectorAll('.cfd-sec[id]')) : [];
+        return toutes.find(s => s.id === v) || toutes.find(s => s.id === 'cfd-' + v) || null;
+      };
+      const surAdresse = () => {
+        const s = sectionDe(window.location.hash);
+        if (!s) return;
+        const doux = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        s.scrollIntoView({ behavior: doux ? 'smooth' : 'auto', block: 'start' });
+      };
+      window.addEventListener('hashchange', surAdresse);
+      this._ecouteurs.push([window, 'hashchange', surAdresse]);
+
+      if (!this._ancreFaite) {
+        this._ancreFaite = true;
+        const visee = sectionDe(window.location.hash);
+        if (visee) {
+          const id = visee.id;
+          let pose = -1;
+          const recaler = () => {
+            if (!this.isConnected) return;
+            if (pose >= 0 && Math.abs(window.scrollY - pose) > 2) return;
+            const s = sectionDe(id);
+            if (!s) return;
+            s.scrollIntoView({ behavior: 'auto', block: 'start' });
+            pose = window.scrollY;
+          };
+          requestAnimationFrame(() => requestAnimationFrame(recaler));
+          try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(recaler)); } catch (e) {   }
+          setTimeout(recaler, 600);
+          setTimeout(recaler, 1500);
+        }
+      }
     }
   });
 })();

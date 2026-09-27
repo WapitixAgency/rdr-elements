@@ -1,5 +1,5 @@
-/* rdr-elements edition2022 | source route-du-rhum ede21c7 | rdr-edition-2022.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="ede21c7";performance.mark("rdr-elements:edition2022")}catch(e){}
+/* rdr-elements edition2022 | source route-du-rhum 35aaade | rdr-edition-2022.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="35aaade";performance.mark("rdr-elements:edition2022")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-edition-2022")) return;
@@ -39,7 +39,7 @@ RACINE.querySelectorAll('svg[data-i]').forEach((s) => { s.innerHTML = ICO[s.data
 
 
  
-const $ = (id) => document.getElementById(id);
+const $ = (id) => RACINE.querySelector('[id="' + id + '"]');
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
  
 const typo = (s) => esc(s).replace(/(\d) (\d{3})(?!\d)/g, '$1 $2');
@@ -49,11 +49,8 @@ const wix = (id, l, h, q) => 'https://static.wixstatic.com/media/' + id + '/v1/f
 const wixFit = (id, l, h, q) => 'https://static.wixstatic.com/media/' + id + '/v1/fit/w_' + Math.round(l) + ',h_' + Math.round(h) + ',q_' + (q || 85) + ',enc_auto/x.jpg';
 const reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const params = new URLSearchParams(location.search);
-if (params.get('entete') === 'non') ENVELOPPE.classList.add('sans-entete');
-if (params.get('bandeau') === 'non') ENVELOPPE.classList.add('sans-bandeau');
 ENVELOPPE.style.setProperty('--arcs', 'url("' + PAGE.medias.arcs + '")');
 const LARG = () => document.documentElement.clientWidth || innerWidth;
-const presse = (sel, attr, val) => RACINE.querySelectorAll(sel).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset[attr] === val)));
 
  
 (() => { const m = PAGE.medias.hero, L = Math.min(m.l, palier(LARG())); $('tete-photo').src = wix(m.id, L, L * 0.45, 74); })();
@@ -191,7 +188,6 @@ $('lien-archives').href = ARCHIVES_2022;
     let tours = 0; const guet = setInterval(() => { if (++tours > 150) { clearInterval(guet); return; } if (politiqueMarketing()) { clearInterval(guet); lancer(); } }, 600);
   };
   $('video').querySelector('button').addEventListener('click', () => { if (politiqueMarketing()) lancer(); else demander(); });
-  window.__demanderCookies = demander;
 })();
 
  
@@ -214,7 +210,6 @@ function charger(racine) {
 }
 function dessinerPhotos() {
   const mode = ENVELOPPE.dataset.photos;
-  presse('.mq [data-photos]', 'photos', mode);
   if (mode === 'toutes') {
     $('mosaique').innerHTML = '';
     $('toutes').innerHTML = PH.map((_, i) => casePhoto(i, '')).join('');
@@ -239,7 +234,6 @@ $('photos-plus').addEventListener('click', () => {
   if (!$('toutes').hidden) requestAnimationFrame(() => charger($('toutes')));
   else $('photos').scrollIntoView({ block: 'start', behavior: reduit ? 'auto' : 'smooth' });
 });
-RACINE.querySelectorAll('.mq [data-photos]').forEach((b) => b.addEventListener('click', () => { ENVELOPPE.dataset.photos = b.dataset.photos; dessinerPhotos(); }));
 if (params.get('photos') === 'toutes') ENVELOPPE.dataset.photos = 'toutes';
 dessinerPhotos();
 window.addEventListener('resize', () => { charger($('mosaique')); charger($('toutes')); });

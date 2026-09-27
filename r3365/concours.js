@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum ede21c7 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="ede21c7";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 35aaade | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="35aaade";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -678,6 +678,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 
     disconnectedCallback() {
       this._monte = false;
+       
+      this._gen = (this._gen || 0) + 1;
       (this._nettoyages || []).forEach(f => { try { f(); } catch (e) {   } });
       this._nettoyages = [];
       if (this._portail) { this._portail.remove(); this._portail = null; }
@@ -686,16 +688,20 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 
     async _charger() {
       const grille = this.querySelector('#cp-grille');
+      
+
+
+      const gen = this._gen = (this._gen || 0) + 1;
       try {
         const r = await fetch(this.getAttribute('source') || SOURCE, { credentials: 'omit' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const donnees = await r.json();
-        if (!this._monte) return;
+        if (!this._monte || gen !== this._gen) return;
         if (!donnees || !Array.isArray(donnees.photos) || !donnees.photos.length) throw new Error('jeu vide');
         this._nettoyages.push(monter(this, this._portail, donnees, this._options));
       } catch (e) {
         console.warn('[rdr-concours-photo] aperçu indisponible', e && e.message);
-        if (grille && this._monte) {
+        if (grille && this._monte && gen === this._gen) {
            
           this.querySelectorAll('.cp-att').forEach(n => n.remove());
           const jour = this.querySelector('#cp-jour');
@@ -1214,20 +1220,25 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     function ouvrirDepot() {
       if (!exigerCompte()) return;
       $('cp-depot').dataset.ouverte = 1; $('cp-depot-etape1').style.display = ''; $('cp-depot-ok').dataset.on = 0; $('cp-apercu').dataset.on = 0; $('cp-progress').dataset.on = 0; $('cp-progress').firstElementChild.style.width = '0';
-      $('cp-c1').checked = false; $('cp-c2').checked = false; $('cp-legende').value = ''; $('cp-envoyer').disabled = true; depot.fichier = null;
+      $('cp-c1').checked = false; $('cp-c2').checked = false; $('cp-legende').value = ''; $('cp-envoyer').disabled = true; depot.fichier = null; libererApercu();
     }
-    const depot = { fichier: null };
+    const depot = { fichier: null, url: '' };
+     
+    const libererApercu = () => { if (depot.url) { URL.revokeObjectURL(depot.url); depot.url = ''; } };
+    nettoyages.push(libererApercu);
     const verifierDepot = () => { $('cp-envoyer').disabled = !(depot.fichier && $('cp-c1').checked && $('cp-c2').checked); };
     $('cp-c1').onchange = verifierDepot; $('cp-c2').onchange = verifierDepot;
     $('cp-fichier').onchange = (e) => {
       const f = e.target.files && e.target.files[0]; if (!f) return;
       depot.fichier = f;
-      const url = URL.createObjectURL(f);
+      libererApercu();
+      const url = depot.url = URL.createObjectURL(f);
       const img = new Image();
       img.onload = () => {
+        if (depot.url !== url) return;
         $('cp-apercu-img').src = url; $('cp-apercu').dataset.on = 1;
         const grand = Math.max(img.naturalWidth, img.naturalHeight); const facteur = Math.min(1, 2400 / grand);
-        $('cp-apercu-i').innerHTML = `<b>${f.name}</b><br>${img.naturalWidth} × ${img.naturalHeight} px, ${(f.size / 1048576).toFixed(1)} Mo<br>Sera envoyée en ${Math.round(img.naturalWidth * facteur)} × ${Math.round(img.naturalHeight * facteur)} px, sans données de localisation.`;
+        $('cp-apercu-i').innerHTML = `<b>${esc(f.name)}</b><br>${img.naturalWidth} × ${img.naturalHeight} px, ${(f.size / 1048576).toFixed(1)} Mo<br>Sera envoyée en ${Math.round(img.naturalWidth * facteur)} × ${Math.round(img.naturalHeight * facteur)} px, sans données de localisation.`;
         verifierDepot();
       };
       img.src = url;

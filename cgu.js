@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum ede21c7 | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="ede21c7";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 35aaade | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="35aaade";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -565,12 +565,15 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
       this._lang = 'fr';
       
 
-      this._maj = '2026-09-14';
+
+
+      this._maj = '2026-09-16';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
       this._rafId = 0;
+      this._ancreFaite = false;
     }
 
     connectedCallback() {
@@ -878,6 +881,51 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
       const surRedim = () => { this._racine.style.setProperty('--cgu-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
+
+      
+
+
+
+
+
+
+
+      const sectionDe = (h) => {
+        let v = String(h || '').replace(/^#/, '');
+        try { v = decodeURIComponent(v); } catch (e) {   }
+        if (!v) return null;
+        const toutes = this._racine ? Array.from(this._racine.querySelectorAll('.cgu-sec[id]')) : [];
+        return toutes.find(s => s.id === v) || toutes.find(s => s.id === 'cgu-' + v) || null;
+      };
+      const surAdresse = () => {
+        const s = sectionDe(window.location.hash);
+        if (!s) return;
+        const doux = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        s.scrollIntoView({ behavior: doux ? 'smooth' : 'auto', block: 'start' });
+      };
+      window.addEventListener('hashchange', surAdresse);
+      this._ecouteurs.push([window, 'hashchange', surAdresse]);
+
+      if (!this._ancreFaite) {
+        this._ancreFaite = true;
+        const visee = sectionDe(window.location.hash);
+        if (visee) {
+          const id = visee.id;
+          let pose = -1;
+          const recaler = () => {
+            if (!this.isConnected) return;
+            if (pose >= 0 && Math.abs(window.scrollY - pose) > 2) return;
+            const s = sectionDe(id);
+            if (!s) return;
+            s.scrollIntoView({ behavior: 'auto', block: 'start' });
+            pose = window.scrollY;
+          };
+          requestAnimationFrame(() => requestAnimationFrame(recaler));
+          try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(recaler)); } catch (e) {   }
+          setTimeout(recaler, 600);
+          setTimeout(recaler, 1500);
+        }
+      }
     }
   });
 })();

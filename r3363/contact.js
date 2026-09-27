@@ -1,5 +1,5 @@
-/* rdr-elements contact | source route-du-rhum ede21c7 | rdr-contact.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["contact"]="ede21c7";performance.mark("rdr-elements:contact")}catch(e){}
+/* rdr-elements contact | source route-du-rhum 35aaade | rdr-contact.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["contact"]="35aaade";performance.mark("rdr-elements:contact")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-contact")) return;
@@ -8,6 +8,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["contact"]="ede21c7";performan
   const ATTENTE = "<div class=\"rcn-attente\" aria-hidden=\"true\"><div class=\"rcn-sq-haut\"><div class=\"rcn-sq-trame\"><i class=\"rcn-sq-l rcn-sq-k\"></i><i class=\"rcn-sq-l rcn-sq-t\"></i><i class=\"rcn-sq-l rcn-sq-t rcn-sq-t2\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p1\"></i><i class=\"rcn-sq-l rcn-sq-p\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p3\"></i></div></div><div class=\"rcn-sq-trame rcn-sq-sec\"><i class=\"rcn-sq-l rcn-sq-k\"></i><i class=\"rcn-sq-l rcn-sq-t\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p1\"></i><i class=\"rcn-sq-l rcn-sq-p\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p3\"></i></div><div class=\"rcn-sq-trame rcn-sq-cartes\"><i class=\"rcn-sq-c\"></i><i class=\"rcn-sq-c\"></i><i class=\"rcn-sq-c\"></i></div><div class=\"rcn-sq-trame rcn-sq-sec\"><i class=\"rcn-sq-l rcn-sq-k\"></i><i class=\"rcn-sq-l rcn-sq-t\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p1\"></i><i class=\"rcn-sq-l rcn-sq-p\"></i><i class=\"rcn-sq-l rcn-sq-p rcn-sq-p3\"></i></div></div>";
   const SOURCE = 'https://www.routedurhum.com/_functions/contact';
   const ATTENTE_REPONSE_MS = 12000;
+  const ATTENTE_TARDIVE_MS = 30000;
 
   function poserStyle() {
     if (document.getElementById("rdr-contact-css")) return;
@@ -261,7 +262,7 @@ function monter(lang) {
         if (pret && !this._pret) { this._pret = true; if (this._attente) this._emettre(); } else this._pret = pret;
         return;
       }
-      if (nom === 'envoi-etat') { if (val && val !== avant) this._reponse(String(val).replace(/#.*$/, '')); return; }
+      if (nom === 'envoi-etat') { if (val && val !== avant) { const p = String(val).split('#'); this._reponse(p[0], p.length > 2 ? Number(p[1]) : null); } return; }
       this._tenter();
     }
     _lang() {
@@ -308,24 +309,37 @@ function monter(lang) {
     
 
 
+
+
+
+
     _envoyer(envoi, repondre) {
       if (this._envoi) return;
       this._envoi = true;
+      this._n = (this._n || 0) + 1;
+      this._tardif = null;
       this._repondre = repondre;
-      this._attente = { valeurs: envoi.valeurs, dureeMs: envoi.dureeMs, piege: envoi.piege || '' };
+      this._attente = { n: this._n, valeurs: envoi.valeurs, dureeMs: envoi.dureeMs, piege: envoi.piege || '' };
       clearTimeout(this._garde);
-      this._garde = setTimeout(() => this._reponse('erreur:delai'), ATTENTE_REPONSE_MS);
+      const n = this._n;
+      this._garde = setTimeout(() => this._reponse('erreur:delai', n), ATTENTE_REPONSE_MS);
       if (this._pret) this._emettre();
     }
     _emettre() {
       if (!this._attente) return;
       this.dispatchEvent(new CustomEvent('contact-envoi', { detail: this._attente, bubbles: true, composed: true }));
     }
-    _reponse(etat) {
-      if (!this._envoi || etat === 'envoi') return;
+    _reponse(etat, n) {
+      if (etat === 'envoi' || (n != null && n !== this._n)) return;
+      if (!this._envoi) {
+        const t = this._tardif;
+        if (etat === 'ok' && t && n === t.n && Date.now() < t.jusqua) { this._tardif = null; t.repondre('ok'); }
+        return;
+      }
       clearTimeout(this._garde); this._garde = null;
       this._envoi = false; this._attente = null;
       const r = this._repondre; this._repondre = null;
+      if (etat === 'erreur:delai' && r) this._tardif = { n: this._n, jusqua: Date.now() + ATTENTE_TARDIVE_MS, repondre: r };
       if (r) r(etat);
     }
   }

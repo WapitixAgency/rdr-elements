@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum ede21c7 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="ede21c7";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 35aaade | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="35aaade";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -57,7 +57,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="ede21c7";performance
     individuelle: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
     velo: '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
     pied: '<path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>',
-    autre: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
     jourPlus: '<path d="M16 18h6"/><path d="M16 2v3"/><path d="M19 15v6"/><path d="M21 11.5V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h8.3"/><path d="M3 9h18"/><path d="M8 2v3"/>',
     cadeau: '<path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/>',
     vague: '<path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"/>',
@@ -119,7 +118,7 @@ const ER_EN = {
     'Challenge Mobilité': 'Mobility Challenge',
     'Jeu-concours': 'Prize draw',
     'Participer au challenge': 'Enter the challenge',
-    'Chaque jour à 11 h': 'Every day at 11 am',
+    'Chaque jour à 10 h': 'Every day at 10 am',
     'À la fin du challenge': 'At the end of the challenge',
     'tentez de gagner': 'try to win',
     'un grand tirage au sort pour gagner': 'a grand prize draw to win',
@@ -146,8 +145,7 @@ const ER_EN = {
     'Choisissez un jour': 'Choose a day',
     'Comment venez-vous au village ?': 'How are you getting to the village?',
     'Jours précédents': 'Previous days', 'Jours suivants': 'Next days',
-    'Train': 'Train', 'Bus': 'Bus', 'Covoiturage': 'Car-sharing', 'Vélo': 'Bike', 'À pied': 'On foot', 'Autre': 'Other',
-    'Précisez votre mode de transport': 'Tell us more about your transport',
+    'Train': 'Train', 'Bus': 'Bus', 'Covoiturage': 'Car-sharing', 'Vélo': 'Bike', 'À pied': 'On foot',
     'Votre justificatif de transport': 'Your proof of transport',
     'Déposez ici votre justificatif de mobilité.': 'Upload your proof of mobility here.',
     'Exemples de justificatifs acceptés : billet de train ou de bus, titre de transport, confirmation de covoiturage, photo de votre vélo ou de vous à pied.': 'Accepted proofs include: train or bus ticket, travel pass, car-sharing confirmation, a photo of your bike or of you on foot.',
@@ -1185,9 +1183,10 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     
 
 
+
     _chaqueJour() {
-      const m = String(this._cms('heureTirage') || '11:00').match(/^(\d{1,2})(?::(\d{2}))?$/);
-      const h = m ? Number(m[1]) : 11, mn = m && m[2] && m[2] !== '00' ? ' ' + m[2] : '';
+      const m = String(this._cms('heureTirage') || '10:00').match(/^(\d{1,2})(?::(\d{2}))?$/);
+      const h = m ? Number(m[1]) : 10, mn = m && m[2] && m[2] !== '00' ? ' ' + m[2] : '';
       return 'Chaque jour à ' + h + ' h' + mn;
     }
 
@@ -1303,10 +1302,6 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       try { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { s.scrollIntoView(); }
     }
 
-    _emettre(nom, detail) {
-      try { this.dispatchEvent(new CustomEvent(nom, { bubbles: true, composed: true, detail: detail })); } catch (e) {   }
-    }
-
      
     _rendreHero() {
       const s = this._section('hero');
@@ -1417,8 +1412,16 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     _rendreCo2(rebatir) {
       const s = this._section('co2');
       if (!s) return;
+      
+
+
+
+      const signature = [this._lang(), JSON.stringify(this._p.co2 || null), this._page('titreCo2')].join('\u0001');
+      if (rebatir && s.firstChild && this._signatureCo2 === signature) rebatir = false;
       if (rebatir || !s.firstChild) {
+        this._signatureCo2 = signature;
         this._simMonte = false;
+        this._etat.co2.ouverts.simulateur = false;
         this._etat.co2.trajet = 0;
         const pli = (p) =>
           '<section class="rv-co2__pli">' +
@@ -1562,6 +1565,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       bloc.hidden = false;
       const lots = this._cms('lotsQuotidiens');
       const grand = this._cms('grandLot');
+      
+
+      const deuxPoints = this._en() ? ': ' : ' : ';
       s.innerHTML =
         '<section class="rv-mob" aria-labelledby="rv-mob-titre">' +
           '<span class="rv-mob__tag">' + esc(this._cms('etiquette')) + '</span>' +
@@ -1572,8 +1578,8 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
               '<p class="rv-mob__accroche">' + esc(this._cms('accroche')) + '</p>' +
               '<p class="rv-mob__texte">' + esc(this._cms('texte')) + '</p>' +
               '<ul class="rv-mob__lots">' +
-                '<li>' + ico('cadeau') + '<span><b>' + esc(this._chaqueJour()) + '</b> : <span>tentez de gagner</span> ' + esc(lots) + '.</span></li>' +
-                '<li>' + ico('vague') + '<span><b>À la fin du challenge</b> : <span>un grand tirage au sort pour gagner</span> ' + esc(grand) + '.</span></li>' +
+                '<li>' + ico('cadeau') + '<span><b>' + esc(this._chaqueJour()) + '</b>' + deuxPoints + '<span>tentez de gagner</span> ' + esc(lots) + '.</span></li>' +
+                '<li>' + ico('vague') + '<span><b>À la fin du challenge</b>' + deuxPoints + '<span>un grand tirage au sort pour gagner</span> ' + esc(grand) + '.</span></li>' +
               '</ul>' +
               '<div class="rv-mob__actions">' +
                 '<button type="button" class="rv-btn" data-ouvrir>' + ico('fleche') + esc(this._cms('bouton')) + '</button>' +
@@ -1589,7 +1595,12 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       if (!this._etat.ouvert) this._retirerFenetre();
       this._poserFlottant();
       this._observerEncart();
-      if (/challenge-mobilite/.test(String(location.hash || ''))) setTimeout(() => this._ouvrirFenetre(), 300);
+      
+
+      if (!this._ancreOuverte && /challenge-mobilite/.test(String(location.hash || ''))) {
+        this._ancreOuverte = true;
+        setTimeout(() => this._ouvrirFenetre(), 300);
+      }
     }
 
     
@@ -1851,7 +1862,6 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
         this._rendreRegions();
         const meme = this.querySelector('.rv-reg__r[data-i="' + this._etat.regions.active + '"]');
         if (meme) meme.focus();
-        this._emettre('venir-region', { index: this._etat.regions.active, nom: (this._regions()[this._etat.regions.active] || {}).nom || '' });
       }
     }
 
@@ -1880,10 +1890,17 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     _flottantFerme() { try { return sessionStorage.getItem(CLE_FERME) === '1'; } catch (e) { return false; } }
 
      
+    
+
+
     _ouvrirFenetre() {
       if (!this._ouvertAuPublic()) return;
+      if (this._etat.ouvert && this._fenetre) return;
       if (!this._fenetre) this._construireFenetre();
       this._etat.ouvert = true;
+       
+      const avant = document.activeElement;
+      this._focusAvant = avant && avant !== document.body ? avant : null;
       if (this._flottant) this._flottant.setAttribute('data-cache', '1');
       this._fenetre.setAttribute('data-open', 'true');
       this._verrou = this._verrouiller();
@@ -1898,12 +1915,43 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       if (this._verrou) { this._verrou(); this._verrou = null; }
       if (this._flottant && !this._aParticipe()) this._flottant.setAttribute('data-cache', '0');
       if (this._etat.resultat) this._poserFlottant();
+      this._rendreFocus();
+    }
+
+    
+
+
+    _rendreFocus() {
+      const avant = this._focusAvant;
+      this._focusAvant = null;
+      const cible = (avant && avant.isConnected && !avant.closest('[hidden]')) ? avant : this.querySelector('[data-ouvrir]');
+      if (!cible || typeof cible.focus !== 'function') return;
+      try { cible.focus({ preventScroll: true }); } catch (e) {   }
+    }
+
+    
+
+    _focusables() {
+      const panneau = this._fenetre && this._fenetre.querySelector('.rv-fen__panneau');
+      if (!panneau) return [];
+      return [...panneau.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]')]
+        .filter(x => x.tabIndex >= 0 && x.getClientRects().length > 0 && !x.closest('[hidden]'));
+    }
+
+    _retenirFocus(e) {
+      const f = this._focusables();
+      if (!f.length) { e.preventDefault(); return; }
+      const actif = document.activeElement;
+      const dedans = this._fenetre.contains(actif);
+      if (e.shiftKey) { if (!dedans || actif === f[0]) { e.preventDefault(); f[f.length - 1].focus(); } }
+      else if (!dedans || actif === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
     }
 
     _retirerFenetre() {
       if (this._verrou) { this._verrou(); this._verrou = null; }
       if (this._fenetre) { this._fenetre.remove(); this._fenetre = null; }
       if (this._surTouche) { document.removeEventListener('keydown', this._surTouche); this._surTouche = null; }
+      this._etat.ouvert = false;
     }
 
      
@@ -1938,7 +1986,11 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       this._fenetre = f;
       f.querySelector('.rv-fen__x').addEventListener('click', () => this._fermerFenetre());
       f.querySelector('.rv-fen__fond').addEventListener('click', () => { if (!this._etat.envoi) this._fermerFenetre(); });
-      this._surTouche = (e) => { if (e.key === 'Escape' && this._etat.ouvert && !this._etat.envoi) this._fermerFenetre(); };
+      this._surTouche = (e) => {
+        if (!this._etat.ouvert) return;
+        if (e.key === 'Escape' && !this._etat.envoi) this._fermerFenetre();
+        else if (e.key === 'Tab') this._retenirFocus(e);
+      };
       document.addEventListener('keydown', this._surTouche);
       this._rendreFormulaire();
     }
@@ -1967,9 +2019,11 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
 
       const interne = (h) => (en && h && h.charAt(0) === '/' && h !== '/en' && h.indexOf('/en/') !== 0) ? '/en' + h : h;
-      const lienR = r.lienReglement ? esc(interne(r.lienReglement)) : '';
-      const lienC = r.lienConfidentialite ? esc(interne(r.lienConfidentialite)) : '';
-      const lien = (href, texte) => href ? '<a href="' + href + '" target="_blank" rel="noopener">' + texte + '</a>' : '<a href="#" data-lien-absent>' + texte + '</a>';
+      
+
+      const lienR = adresseSure(interne(r.lienReglement));
+      const lienC = adresseSure(interne(r.lienConfidentialite));
+      const lien = (href, texte) => href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + texte + '</a>' : '<a href="#" data-lien-absent>' + texte + '</a>';
       const max = Number(r.tailleMaxMo) > 0 ? Math.min(10, Number(r.tailleMaxMo)) : 10;
       
 
@@ -2022,7 +2076,6 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
                 '<div class="rv-modes" role="radiogroup">' +
                   modes.map(m => '<label class="rv-mode"><input type="radio" name="mode" value="' + esc(m.cle) + '"><span>' + ico(m.cle) + esc(m.libelle) + '</span></label>').join('') +
                 '</div><span class="rv-err"></span></div>' +
-              '<div class="rv-champ" data-champ="precision" hidden data-precision><label for="rv-precision">Précisez votre mode de transport</label><input id="rv-precision" name="precision" type="text" maxlength="200"><span class="rv-err"></span></div>' +
             '</div>' +
           '</fieldset>' +
           '<fieldset class="rv-etape" data-etape="3">' +
@@ -2096,8 +2149,6 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       });
 
       form.querySelectorAll('input[name="mode"]').forEach(rd => rd.addEventListener('change', () => {
-        const prec = form.querySelector('[data-precision]');
-        if (prec) prec.hidden = form.querySelector('input[name="mode"]:checked')?.value !== 'autre';
         this._effacerErreur(form, 'mode');
         this._etapes(form);
       }));
@@ -2128,10 +2179,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const d = this._lireFormulaire(form);
       const ok = {
         prenom: d.prenom.length >= 2, nom: d.nom.length >= 2,
-        dateNaissance: /^\d{4}-\d{2}-\d{2}$/.test(d.dateNaissance) && Number(d.dateNaissance.slice(0, 4)) >= 1900 && Number(d.dateNaissance.slice(0, 4)) <= new Date().getFullYear() && !isNaN(new Date(d.dateNaissance + 'T12:00:00Z').getTime()),
+        dateNaissance: this._dateValide(d.dateNaissance),
         email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email),
-        telephone: /^\d{9,15}$/.test(d.telephone.replace(/[^\d+]/g, '').replace(/^00/, '+').replace(/^\+33/, '0').replace(/^\+/, '')),
-        precision: d.precision.length > 0
+        telephone: /^\d{9,15}$/.test(d.telephone.replace(/[^\d+]/g, '').replace(/^00/, '+').replace(/^\+33/, '0').replace(/^\+/, ''))
       };
       Object.keys(ok).forEach(k => {
         const c = form.querySelector('.rv-champ[data-champ="' + k + '"]');
@@ -2144,6 +2194,15 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
         const et = form.querySelector('.rv-etape[data-etape="' + n + '"]');
         if (et) et.setAttribute('data-complete', v ? '1' : '0');
       });
+    }
+
+    
+
+
+    _dateValide(iso) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+      const n = new Date(iso + 'T12:00:00Z');
+      return !isNaN(n.getTime()) && n.toISOString().slice(0, 10) === iso && n.getUTCFullYear() >= 1900 && iso <= new Date().toISOString().slice(0, 10);
     }
 
     _effacerErreur(form, champ) {
@@ -2164,12 +2223,19 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       if (!file) return 'Fichier vide ou illisible.';
       const ext = (/\.([a-z0-9]+)$/i.exec(file.name || '') || [])[1];
       if (!ext || !/^(pdf|jpe?g|png)$/i.test(ext)) return 'Format non accepté : PDF, JPG ou PNG.';
-      const r = this._etat.reglages || {};
-      const max = (Number(r.tailleMaxMo) > 0 ? Math.min(10, Number(r.tailleMaxMo)) : 10) * 1024 * 1024;
-      if (file.size > max) return 'Fichier trop lourd (10 Mo au plus).';
+      if (file.size > this._maxMo() * 1024 * 1024) return this._messagePoids();
       if (file.size < 1024) return 'Fichier vide ou illisible.';
       return null;
     }
+
+    _maxMo() {
+      const r = this._etat.reglages || {};
+      return Number(r.tailleMaxMo) > 0 ? Math.min(10, Number(r.tailleMaxMo)) : 10;
+    }
+
+    
+
+    _messagePoids() { return this._t('Fichier trop lourd (10 Mo au plus).').replace('10', String(this._maxMo())); }
 
     async _prendreFichier(form, file) {
       const err = this._controlerFichier(file);
@@ -2240,7 +2306,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const mode = form.querySelector('input[name="mode"]:checked');
       return {
         prenom: v('prenom').trim(), nom: v('nom').trim(), dateNaissance: v('dateNaissance'), email: v('email').trim(),
-        telephone: v('telephone').trim(), jour: v('jour'), mode: mode ? mode.value : '', precision: v('precision').trim(),
+        telephone: v('telephone').trim(), jour: v('jour'), mode: mode ? mode.value : '',
         consentReglement: !!form.querySelector('input[name="consentReglement"]:checked'),
         consentDonnees: !!form.querySelector('input[name="consentDonnees"]:checked'),
         fileId: this._etat.fichier && this._etat.fichier.id ? this._etat.fichier.id : '',
@@ -2253,12 +2319,11 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       if (d.prenom.length < 2) erreurs.prenom = 'Ce champ est requis.';
       if (d.nom.length < 2) erreurs.nom = 'Ce champ est requis.';
       if (!/^\d{4}-\d{2}-\d{2}$/.test(d.dateNaissance)) erreurs.dateNaissance = 'Ce champ est requis.';
-      else { const an = Number(d.dateNaissance.slice(0, 4)); if (an < 1900 || an > new Date().getFullYear()) erreurs.dateNaissance = 'Date invalide.'; }
+      else if (!this._dateValide(d.dateNaissance)) erreurs.dateNaissance = 'Date invalide.';
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email)) erreurs.email = 'Adresse e-mail invalide.';
       if (!/^\d{9,15}$/.test(d.telephone.replace(/[^\d+]/g, '').replace(/^00/, '+').replace(/^\+33/, '0').replace(/^\+/, ''))) erreurs.telephone = 'Numéro de téléphone invalide.';
       if (!d.jour) erreurs.jour = 'Ce champ est requis.';
       if (!d.mode) erreurs.mode = 'Ce champ est requis.';
-      if (d.precision.length > 200) erreurs.precision = 'Trop long.';
       if (!d.fileId) erreurs.justificatif = this._etat.fichier ? 'Vérification…' : 'Ajoutez votre justificatif.';
       if (!d.consentReglement) erreurs.consentReglement = 'Ce champ est requis.';
       if (!d.consentDonnees) erreurs.consentDonnees = 'Ce champ est requis.';
@@ -2267,22 +2332,39 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     }
 
     _codeVersMessage(code) {
+      if (code === 'poids') return this._messagePoids();
       return ({
         doublon: 'Vous participez déjà pour ce jour. Une seule participation par personne et par jour.',
         ferme: 'Le challenge est fermé pour le moment.',
         trop: 'Trop de tentatives, réessayez dans quelques minutes.',
         champs: 'Vérifiez les champs signalés.',
         format: 'Format non accepté : PDF, JPG ou PNG.',
-        poids: 'Fichier trop lourd (10 Mo au plus).',
         vide: 'Fichier vide ou illisible.'
       })[code] || 'Envoi impossible pour le moment, réessayez.';
+    }
+
+    
+
+
+
+    _erreurServeur(form, champ, code) {
+      if (champ === 'justificatif' && code === 'invalide') {
+        this._etat.fichier = null;
+        this._rendreFichier(form);
+        this._etapes(form);
+        this._poserErreur(form, champ, 'Envoi impossible pour le moment, réessayez.');
+        return;
+      }
+      const invalide = { email: 'Adresse e-mail invalide.', telephone: 'Numéro de téléphone invalide.', dateNaissance: 'Date invalide.' };
+      const message = code === 'long' ? 'Trop long.' : (code === 'invalide' && invalide[champ]) ? invalide[champ] : 'Ce champ est requis.';
+      this._poserErreur(form, champ, message);
     }
 
     async _envoyer(form) {
       if (this._etat.envoi) return;
       const general = form.querySelector('[data-general]');
       general.hidden = true;
-      ['prenom', 'nom', 'dateNaissance', 'email', 'telephone', 'jour', 'mode', 'precision', 'justificatif', 'consentReglement', 'consentDonnees'].forEach(k => this._effacerErreur(form, k));
+      ['prenom', 'nom', 'dateNaissance', 'email', 'telephone', 'jour', 'mode', 'justificatif', 'consentReglement', 'consentDonnees'].forEach(k => this._effacerErreur(form, k));
       const d = this._lireFormulaire(form);
       if (!this._controler(form, d)) {
         general.textContent = this._t('Vérifiez les champs signalés.');
@@ -2298,7 +2380,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       try {
         const res = await this._postJson(ENDPOINT_PARTICIPER, d, null);
         if (!res || !res.ok) {
-          if (res && res.erreurs) Object.keys(res.erreurs).forEach(k => this._poserErreur(form, k, 'Ce champ est requis.'));
+          if (res && res.erreurs) Object.keys(res.erreurs).forEach(k => this._erreurServeur(form, k, res.erreurs[k]));
           general.textContent = this._t(this._codeVersMessage(res && res.code));
           general.hidden = false;
           return;
@@ -2322,6 +2404,12 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
     _rendreConfirmation(res) {
       const corps = this._fenetre.querySelector('.rv-fen__corps');
+      
+
+
+      const nbJours = this._jours().length || 13;
+      const final = this._t('Vous participez automatiquement au tirage au sort quotidien correspondant à votre venue, et vous êtes aussi enregistré pour le grand tirage au sort final, à l’issue des 13 jours du village.').replace('13', String(nbJours));
+      const deuxPoints = this._en() ? ': ' : ' : ';
       corps.innerHTML =
         '<div class="rv-ok">' +
           '<img class="rv-ok__tymal" src="' + TYMAL_CLIN + '" alt="" aria-hidden="true">' +
@@ -2329,10 +2417,10 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
           '<p>Merci pour votre participation au Challenge Mobilité de la Route du Rhum – Destination Guadeloupe !</p>' +
           '<p>Votre participation pour la journée du <b>' + esc(res.jourLabel || this._libelleJour(res.jour)) + '</b> est bien enregistrée.</p>' +
           '<div class="rv-ok__id"><small>Votre identifiant de participation</small><b>' + esc(res.identifiant || '') + '</b></div>' +
-          '<p>Vous participez automatiquement au tirage au sort quotidien correspondant à votre venue, et vous êtes aussi enregistré pour le grand tirage au sort final, à l’issue des 13 jours du village.</p>' +
+          '<p>' + esc(final) + '</p>' +
           '<ul class="rv-ok__lots">' +
-            '<li>' + ico('cadeau') + '<span><b>Chaque jour</b> : ' + esc(res.lotsQuotidiens || this._cms('lotsQuotidiens')) + '</span></li>' +
-            '<li>' + ico('vague') + '<span><b>Grand tirage final</b> : ' + esc(res.grandLot || this._cms('grandLot')) + '</span></li>' +
+            '<li>' + ico('cadeau') + '<span><b>Chaque jour</b>' + deuxPoints + esc(res.lotsQuotidiens || this._cms('lotsQuotidiens')) + '</span></li>' +
+            '<li>' + ico('vague') + '<span><b>Grand tirage final</b>' + deuxPoints + esc(res.grandLot || this._cms('grandLot')) + '</span></li>' +
           '</ul>' +
           (this._jours().some(j => (this._etat.joursPris || []).indexOf(j) === -1)
             ? '<div class="rv-ok__autre"><p>Vous venez plusieurs jours ? Chaque jour de venue vous donne une chance de plus, au tirage du jour comme au grand tirage final.</p>' +

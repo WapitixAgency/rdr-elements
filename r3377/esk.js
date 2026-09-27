@@ -1,5 +1,5 @@
-/* rdr-elements esk | source route-du-rhum ede21c7 | rdr-espace-skippers.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["esk"]="ede21c7";performance.mark("rdr-elements:esk")}catch(e){}
+/* rdr-elements esk | source route-du-rhum 35aaade | rdr-espace-skippers.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["esk"]="35aaade";performance.mark("rdr-elements:esk")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-espace-skippers")) return;
@@ -86,8 +86,7 @@ function vues() {
   return RUBRIQUES.map((r) => ({ r, liste: DOCUMENTS.filter((d) => d.rubrique === r.cle && actions(d).length) }))
     .filter((v) => v.liste.length || (v.r.bientot && RUBRIQUE_VIDE === 'bientot'));
 }
- 
-const sections = (V) => X.sections.slice(0, 2).concat(V.filter((v) => v.liste.length).map(({ r, liste }) => ({ id: r.cle, titre: r.titre[L], mots: liste.map((d) => d.titre[L]) })), X.sections.slice(2));
+
 
  
 function haut() {
