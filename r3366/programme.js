@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 1a9092d | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum deaa497 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="deaa497";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -203,6 +203,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
 
 
 
+
+
+
+
+
+
+
+
+
+
   const i18nNorm = s => String(s).replace(/[‘’]/g, "'").replace(/[–—]/g, '-')
     .replace(/\s+/g, ' ').trim();
 
@@ -234,7 +244,21 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
     'Les lieux': 'Venues',
     'Les catégories': 'Categories',
     'Thématique': 'Theme',
-    'Tout afficher': 'Show all',
+    
+
+
+    'Voir tout le programme': 'See the full programme',
+     
+    'Cérémonie': 'Ceremony',
+    'Nautique': 'On the water',
+    'Concert': 'Concert',
+    'Conférence': 'Conference',
+    'Talk': 'Talk',
+    'Spectacle': 'Show',
+    'Exposition': 'Exhibition',
+    'Animation': 'Activity',
+    'Famille': 'Family',
+    'Feu d’artifice': 'Fireworks',
     'Partager cette sélection de la programmation': 'Share this selection of the programme',
     'Lien copié': 'Link copied',
     'Copie impossible': 'Copy failed',
@@ -244,6 +268,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
     'Matin': 'Morning',
     'Horaire à préciser': 'Time to be confirmed',
     'Après-midi': 'Afternoon',
+     
     'Soirée': 'Evening',
      
     'Durée': 'Duration',
@@ -319,6 +344,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
   const ER_EN_NORM = {};
   for (const k in ER_EN) ER_EN_NORM[i18nNorm(k)] = ER_EN[k];
 
+  
+
+
+
+
+  const plieLettres = (s) => pli(s).replace(/[^a-z]/g, '');
+  const ER_EN_LETTRES = {};
+  for (const k in ER_EN) {
+    const c = plieLettres(k);
+    if (c && !(c in ER_EN_LETTRES)) ER_EN_LETTRES[c] = ER_EN[k];
+  }
+
    
   const dateDe = (iso) => new Date(iso + 'T12:00:00');
 
@@ -351,7 +388,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
     carte: 'M9 4 3 6.5v13L9 17l6 2.5 6-2.5v-13L15 7 9 4Zm0 0v13m6-10v12.5',
     
 
-    silence: 'M11 5 6 9H3v6h3l5 4V5ZM22 9l-6 6M16 9l6 6'
+    silence: 'M11 5 6 9H3v6h3l5 4V5ZM22 9l-6 6M16 9l6 6',
+    
+
+
+
+    toutVoir: 'M21 5H3M7 12H3M7 19H3M12 18a5 5 0 0 0 9-3 4.5 4.5 0 0 0-4.5-4.5c-1.33 0-2.54.54-3.41 1.41L11 14M11 10v4h4'
   };
 
   const svg = (d, cls) =>
@@ -630,7 +672,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
     animation:  { ic: IC.etoile,    c: '#F19F39' },   
     famille:    { ic: IC.famille,   c: '#C1E1D9' },   
     soiree:     { ic: IC.lune,      c: '#4F5BA5' },   
-    feu:        { ic: IC.feu,       c: '#F8D849' }    
+    feu:        { ic: IC.feu,       c: '#F8D849' },   
+     
+    feudartifice: { ic: IC.feu,     c: '#F8D849' }
   };
   
 
@@ -654,7 +698,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
     animation:  '#FF9A2E',
     famille:    '#9BE8D2',
     soiree:     '#6C7BFF',
-    feu:        '#FFD93D'
+    feu:        '#FFD93D',
+    feudartifice: '#FFD93D'
   };
 
   
@@ -700,7 +745,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1a9092d";perform
 
   const SIGNE_DE = {
     concert: 'egaliseur', soiree: 'egaliseur',
-    nautique: 'onde', feu: 'rayons', spectacle: 'rayons',
+    nautique: 'onde', feu: 'rayons', feudartifice: 'rayons', spectacle: 'rayons',
     
 
 
@@ -1939,12 +1984,23 @@ rdr-programme{display:block;width:100%;}
   font-style:normal;font:600 var(--t-2)/1 Montserrat,sans-serif;color:var(--rp-encre-3);
 }
 .rp-compte em{font-style:normal;color:var(--rp-filet-fort);margin:0 3px;}
+
+
+
 .rp-raz{
-  padding:7px 14px;border-radius:var(--rp-r-btn);border:1px solid var(--rp-filet);
-  font-size:var(--t-2);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  cursor:pointer;color:var(--rp-encre-2);transition:border-color .2s,color .2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--e-2);
+  min-height:40px;padding:0 var(--e-4);
+  border-radius:var(--rp-r-btn);border:1px solid transparent;
+  background:#FFFFFF;color:#16355D;box-shadow:0 8px 22px rgba(0,0,0,.28);
+  font:700 var(--t-2)/1.2 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:box-shadow .2s;
 }
+.rp-raz .rp-ic{width:16px;height:16px;flex:none;}
+.rp-root.est-off .rp-raz{background:linear-gradient(165deg,#F8EB59 0%,#F6BE42 100%);color:#17355B;}
 .rp-raz[hidden]{display:none;}
+
+
+.rp-root.sous-420 .rp-compte .rp-raz{width:100%;}
  
 
 
@@ -4042,7 +4098,7 @@ rdr-programme{display:block;width:100%;}
   .rp-tuile--vedette:hover{border-color:color-mix(in srgb, var(--c) 80%, transparent);}
   .rp-cta:hover{background:var(--rp-verre-fort);}
   .rp-cta--fort:hover{filter:brightness(1.12);}
-  .rp-raz:hover{border-color:var(--rp-filet-fort);color:var(--rp-encre);}
+  .rp-raz:hover{box-shadow:0 10px 26px rgba(0,0,0,.4),0 0 0 3px var(--rp-halo);}
   .rp-champ:hover{border-color:var(--rp-filet-fort);}
 }
 
@@ -5212,6 +5268,16 @@ rdr-programme{display:block;width:100%;}
       return en === undefined ? chaine : en;
     }
 
+    
+
+
+
+    _cat(lib) {
+      if (this._lang() !== 'en' || !lib) return lib;
+      const en = ER_EN_LETTRES[plieLettres(lib)];
+      return en === undefined ? lib : en;
+    }
+
     _i18n(racine) {
       if (this._lang() !== 'en' || !racine) return;
       const marcheur = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT, null);
@@ -6158,15 +6224,31 @@ rdr-programme{display:block;width:100%;}
 
 
       const nomsDuType = new Set();
+      
+
+
+
+
+
+
+
+      const catsDuType = new Set();
       this._anims().forEach(a => {
         if ((a.type || 'officielle') !== this._type) return;
         if (a.lieu) nomsDuType.add(a.lieu);
         if (a.lieuId) nomsDuType.add(a.lieuId);
+        if (a.cat || a.catLib) catsDuType.add(cleCat(a.cat || a.catLib));
       });
       const lieux = (p.lieux || [])
         .filter(l => nomsDuType.has(l.nom) || nomsDuType.has(l.id) || (l.id || l.nom) === f.lieu)
         .map(l => [l.id || l.nom, l.nom]);
-      const cats = (p.categories || []).map(c => [cleCat(c), c]);
+      
+
+
+      const cats = (p.categories || [])
+        .filter(c => catsDuType.has(cleCat(c)) || cleCat(c) === f.cat)
+        .map(c => [cleCat(c), this._cat(c)]);
+      if (this._lang() === 'en') cats.sort((x, y) => String(x[1]).localeCompare(String(y[1]), 'en'));
 
       return '<div class="rp-outils">' +
         
@@ -6220,10 +6302,26 @@ rdr-programme{display:block;width:100%;}
 
 
 
-        '<div class="rp-compte">' +
-          '<button type="button" class="rp-raz" id="rpRaz"' + (pose ? '' : ' hidden') + '>Tout afficher</button>' +
-        '</div>' +
+        '<div class="rp-compte">' + this._boutonTout('rpRaz', !pose) + '</div>' +
       '</div>';
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    _boutonTout(id, cache) {
+      return '<button type="button" class="rp-raz" id="' + id + '"' + (cache ? ' hidden' : '') + '>' +
+        svg(IC.toutVoir, 'rp-ic') + '<span>Voir tout le programme</span></button>';
     }
 
     
@@ -6408,6 +6506,20 @@ rdr-programme{display:block;width:100%;}
         return { m, dedans };
       }).filter(g => g.dedans.length);
 
+      
+
+
+
+
+
+
+
+
+
+      const finDejaCommence = new Map();
+      let plusTard = -Infinity;
+      liste.forEach(a => { finDejaCommence.set(a, plusTard); plusTard = Math.max(plusTard, finMinutes(a)); });
+
       const morceaux = [];
       groupes.forEach(({ m, dedans }) => {
         if (groupes.length > 1) {
@@ -6423,10 +6535,8 @@ rdr-programme{display:block;width:100%;}
 
 
         dedans.forEach((a, k) => {
-          const prec = dedans[k - 1];
-          if (prec) {
-            const fin = finMinutes(prec);
-            const creux = minutes(a.debut) - fin;
+          if (k > 0) {
+            const creux = minutes(a.debut) - finDejaCommence.get(a);
             if (creux >= 90) {
               const h = Math.floor(creux / 60), m = creux % 60;
               morceaux.push('<p class="rp-creux" aria-hidden="true"><span>' +
@@ -6583,7 +6693,7 @@ rdr-programme{display:block;width:100%;}
       const meta = '<div class="rp-meta rp-meta--v2">' +
             '<span class="rp-dest">' +
               (a.catLib
-                ? '<span class="rp-dest-cat">' + svg(cat.ic) + '<span>' + esc(a.catLib) + '</span></span>'
+                ? '<span class="rp-dest-cat">' + svg(cat.ic) + '<span>' + esc(this._cat(a.catLib)) + '</span></span>'
                 : '') +
               (a.lieu ? '<span class="rp-dest-lieu">' + esc(a.lieu) + '</span>' : '') +
             '</span>' +
@@ -6658,7 +6768,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-            '<span class="rp-vtitre">' + esc(a.titre || a.catLib) + '</span>' +
+            '<span class="rp-vtitre">' + esc(a.titre || this._cat(a.catLib)) + '</span>' +
             
 
 
@@ -6717,7 +6827,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-            (a.catLib ? '<small>' + esc(a.catLib) + '</small>' : '') +
+            (a.catLib ? '<small>' + esc(this._cat(a.catLib)) + '</small>' : '') +
             
 
 
@@ -6998,7 +7108,7 @@ rdr-programme{display:block;width:100%;}
                   (en ? 'See ' : 'Voir ') + esc(this._t(REGISTRE_NOMS[ailleurs.type].onglet)) +
                   ', ' + esc(nomDe(ailleurs.date)) + svg(IC.fleche) + '</button>'
               : '') +
-            '<button type="button" class="rp-cta" id="rpRaz2">Tout afficher</button>' +
+            this._boutonTout('rpRaz2') +
           '</div>' +
         '</div>';
       }

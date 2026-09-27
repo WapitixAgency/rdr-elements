@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 1a9092d | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="1a9092d";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum deaa497 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="deaa497";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -205,6 +205,18 @@ if (!customElements.get('espace-rhum')) {
   
 
   const PACK_VR_ACTIVATION = Date.UTC(2026, 8, 30, 22, 0, 0);
+  
+
+
+
+
+
+
+
+
+
+
+  const ROUE_RETRAIT_BRANCHE = false;
    
   const ICON_COPIER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
    
@@ -843,7 +855,10 @@ if (!customElements.get('espace-rhum')) {
 
     'Il grimpe surtout avec tes jours de visite, puis tes lectures, tes skippers suivis et tes badges. Un palier atteint reste acquis.': 'It climbs mostly with the days you visit, then your reading, the skippers you follow and your badges. A tier once reached is yours to keep.',
     'Voir tous les paliers': 'See all tiers',
-    'Le top 50 des fans les plus actifs sera dévoilé au grand départ.': 'The top 50 most active fans will be revealed at the grand départ.',
+    
+
+    'Le top 50 des fans les plus actifs sera dévoilé à l\'ouverture du village.': 'The top 50 most active fans will be revealed when the village opens.',
+    '20 octobre 2026 · Saint-Malo': 'October 20, 2026 · Saint-Malo',
     'Tes favoris apparaissent ici. Ajoute-en depuis la recherche.': 'Your favourites appear here. Add some from the search.',
     'Tu ne suis encore personne': 'You\'re not following anyone yet',
 
@@ -1319,7 +1334,11 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    'Chiffres recalculés tous les jours': 'Figures recalculated every day',
+    
+
+
+    'Chiffres recalculés tous les jours.': 'Figures recalculated every day.',
+    'Mis à jour': 'Updated',
     'Mise à jour': 'Update',
     'Rythme de mise à jour des statistiques': 'How often statistics are updated',
     'Tes lectures et découvertes sont comptabilisées une fois par jour. Tes favoris, eux, sont pris en compte tout de suite.':
@@ -1363,8 +1382,10 @@ if (!customElements.get('espace-rhum')) {
     'Récupère dans un fichier tout ce que ton espace sait de toi.':
       'Download everything your space knows about you in a single file.',
     'Télécharger': 'Download',
-    'Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Irréversible.':
-      'Erases everything your space has remembered: your stats, badges, favourites, preferences and entries. Your account starts from scratch, except in the games: a wheel spin played and a code received stay with the account. Irreversible.',
+    
+
+    'Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Si tu as coupé le suivi, ce refus est gardé pour continuer d\'être respecté. Irréversible.':
+      'Erases everything your space has remembered: your stats, badges, favourites, preferences and entries. Your account starts from scratch, except in the games: a wheel spin played and a code received stay with the account. If you turned tracking off, that choice is kept so it stays respected. Irreversible.',
     'Ton compte, tes infos et tout ton espace disparaissent définitivement. Tu seras déconnecté immédiatement. Cette action ne peut pas être annulée.':
       'Your account, your details and your whole space disappear for good. You will be logged out immediately. This action cannot be undone.',
     "Ces réglages s'appliquent immédiatement.": 'These settings apply immediately.',
@@ -2240,6 +2261,17 @@ if (!customElements.get('espace-rhum')) {
 
 
     espace-rhum .er-hero-content { max-width: 62%; }
+    
+
+    espace-rhum .er-hero-chip {
+      display: inline-block; margin-bottom: 12px;
+      font-family: var(--er-font-body); font-size: 9px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 99px; white-space: nowrap;
+      color: var(--er-text-primary);
+      border: 1px solid rgba(245, 190, 65, 0.55);
+      background: rgba(245, 190, 65, 0.16);
+    }
     espace-rhum .er-hero-firstname {
       font-family: var(--er-font-body); font-size: 13px; font-weight: 700;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -8848,6 +8880,20 @@ if (!customElements.get('espace-rhum')) {
       color: var(--er-text-primary);
       letter-spacing: 0.02em;
     }
+    
+
+    espace-rhum .er-toast--simple { padding: 14px 18px; }
+    
+
+
+    espace-rhum:has(.er-prefs[data-open="true"]) .er-toasts-container { bottom: 128px; }
+    espace-rhum .er-toast--simple .er-toast-title {
+      font-family: var(--er-font-body);
+      font-style: normal;
+      font-size: 14px; font-weight: 600; line-height: 1.45;
+      text-transform: none;
+      letter-spacing: 0;
+    }
 
      
     espace-rhum button:focus-visible,
@@ -8866,6 +8912,45 @@ if (!customElements.get('espace-rhum')) {
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @media (min-width: 1100px) and (max-height: 820px) {
+      espace-rhum .er-cockpit { padding-top: 20px; }
+      espace-rhum .er-widget--hero { min-height: 0; }
+      espace-rhum .er-hero-inner,
+      espace-rhum .er-hero-empty { min-height: clamp(400px, calc(100vh - 250px), 600px); padding: 28px 32px; }
+      espace-rhum .er-hero-reason { margin-bottom: 16px; }
+      espace-rhum .er-hero-boat { margin-bottom: 20px; }
+      espace-rhum .er-widget--flash-news,
+      espace-rhum .er-widget--badges-mini { min-height: 0; padding-top: 20px; padding-bottom: 20px; }
+      espace-rhum .er-badges-mini-header { margin-bottom: 12px; }
+      espace-rhum .er-badges-mini-grid > :nth-child(n+4) { display: none; }
     }
 
      
@@ -10816,7 +10901,12 @@ if (!customElements.get('espace-rhum')) {
      
      
      
-    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'combat-result', 'export-result', 'account-result', 'article-state-result']; }
+    
+
+
+
+
+    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'combat-result', 'export-result', 'account-result', 'article-state-result', 'prefs-result', 'profile-result', 'village-result', 'insta-result', 'dismiss-result', 'delete-result', 'fav-result']; }
 
     _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
     
@@ -10883,6 +10973,20 @@ if (!customElements.get('espace-rhum')) {
         let res = null;
         try { res = JSON.parse(newVal); } catch { res = null; }
         this.deleteAccountResultat(res);
+      }
+      if (/^(prefs|profile|village|insta|dismiss|delete)-result$/.test(name)) {
+        
+
+        if (!newVal) return;
+        let res = null;
+        try { res = JSON.parse(newVal); } catch { res = null; }
+        this._retourReglage(name.slice(0, -'-result'.length), res);
+      }
+      if (name === 'fav-result') {
+        if (!newVal) return;
+        let res = null;
+        try { res = JSON.parse(newVal); } catch { res = null; }
+        this._retourFavori(res);
       }
       if (name === 'article-state-result') {
         
@@ -11056,6 +11160,7 @@ if (!customElements.get('espace-rhum')) {
       if (this._remonter && !this._remonteAuRendu) { this._remonteAuRendu = true; this._remonter(); }
       this._honorerAller();
       this._honorerSuiviRejoue();
+      this._reposerAnnonces();
     }
 
     
@@ -12061,6 +12166,15 @@ if (!customElements.get('espace-rhum')) {
       const heroReason = reason
         ? `<div class="er-hero-reason">${escapeHtml(reason)}</div>`
         : '';
+      
+
+
+
+
+
+
+      const etiquette = String(this._payload?.skipperDuJourEtiquette || s.etiquette || '').trim();
+      const heroChip = etiquette ? `<span class="er-hero-chip">${escapeHtml(etiquette)}</span>` : '';
 
       
 
@@ -12079,6 +12193,7 @@ if (!customElements.get('espace-rhum')) {
               ${heroReason}
             </div>
             <div class="er-hero-content">
+              ${heroChip}
               <div class="er-hero-firstname">
                 <span class="er-flag-circle" ${flagCircleStyle}></span>
                 ${escapeHtml(prenom)}
@@ -14833,7 +14948,7 @@ if (!customElements.get('espace-rhum')) {
           </div>
           <div class="er-stats-updated" tabindex="0" role="note" aria-label="Rythme de mise à jour des statistiques">
             <svg class="er-stats-updated-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            <span>Chiffres recalculés tous les jours${age ? ` — <b>${age}</b>` : ''}</span>
+            <span><span>Chiffres recalculés tous les jours.</span>${age ? ` <span>Mis à jour <b>${age}</b>.</span>` : ''}</span>
             <span class="er-stats-tip">
               <strong>Mise à jour</strong>
               Tes lectures et découvertes sont comptabilisées une fois par jour. Tes favoris, eux, sont pris en compte tout de suite.
@@ -15260,8 +15375,8 @@ if (!customElements.get('espace-rhum')) {
         <div class="er-widget er-widget--leaderboard-teaser er-motif-host" data-slot="leaderboard-teaser" role="region" aria-label="Classement à venir">
           <div class="er-leaderboard-icon">${ICON_TROPHY_LARGE}</div>
           <h3 class="er-leaderboard-teaser-title">Classement à venir</h3>
-          <p class="er-leaderboard-teaser-text">Le top 50 des fans les plus actifs sera dévoilé au grand départ.</p>
-          <div class="er-leaderboard-teaser-date">20 Octobre 2026 · St-Malo</div>
+          <p class="er-leaderboard-teaser-text">Le top 50 des fans les plus actifs sera dévoilé à l'ouverture du village.</p>
+          <div class="er-leaderboard-teaser-date">20 octobre 2026 · Saint-Malo</div>
         </div>
       `;
     }
@@ -15516,6 +15631,13 @@ if (!customElements.get('espace-rhum')) {
       const idOf = s => String((s && (s.id || s._id)) || '');
       const favs = Array.isArray(p.favSkippers) ? p.favSkippers : [];
       if (action === 'remove') {
+        
+
+        const index = favs.findIndex(s => idOf(s) === sid);
+        if (index >= 0) {
+          this._favRetires = this._favRetires || {};
+          this._favRetires[sid] = { objet: favs[index], index };
+        }
         p.favSkippers = favs.filter(s => idOf(s) !== sid);
         return;
       }
@@ -15547,17 +15669,106 @@ if (!customElements.get('espace-rhum')) {
             detail: { skipperId, action }
           }));
 
-          const next = !currently;
-          follow.dataset.following = String(next);
-          follow.setAttribute('aria-pressed', String(next));
-          const label = follow.querySelector('.er-hero-suivre-label');
-          if (label) label.textContent = next ? 'Suivi' : 'Suivre';
-           
-          const icone = follow.querySelector('.er-hero-suivre-icone');
-          if (icone) icone.innerHTML = next ? ICON_CHECK : ICON_PLUS;
-          this._i18n(follow);
+          this._peindreSuiviHero(follow, !currently);
         });
       }
+    }
+
+    _peindreSuiviHero(follow, next) {
+      follow.dataset.following = String(next);
+      follow.setAttribute('aria-pressed', String(next));
+      const label = follow.querySelector('.er-hero-suivre-label');
+      if (label) label.textContent = next ? 'Suivi' : 'Suivre';
+       
+      const icone = follow.querySelector('.er-hero-suivre-icone');
+      if (icone) icone.innerHTML = next ? ICON_CHECK : ICON_PLUS;
+      this._i18n(follow);
+    }
+
+    _peindreSuiviSuggestion(btn, next) {
+      btn.dataset.fav = String(next);
+      btn.classList.toggle('is-favorited', next);
+      btn.setAttribute('aria-pressed', String(next));
+      
+
+
+
+      const qui = btn.getAttribute('data-nom') || '';
+      const en = this._lang() === 'en';
+      const verbe = next ? (en ? 'Unfollow' : 'Ne plus suivre') : (en ? 'Follow' : 'Suivre');
+      btn.setAttribute('aria-label', qui ? verbe + ' ' + qui : verbe);
+      btn.setAttribute('title', qui ? verbe + ' ' + qui : verbe);
+      
+
+      btn.innerHTML = next ? ICON_CHECK : ICON_PLUS;
+    }
+
+    
+
+
+
+
+
+
+
+
+    _retourFavori(res) {
+      if (!res || !res.skipperId) return;
+      const sid = String(res.skipperId);
+      const action = res.action === 'remove' ? 'remove' : 'add';
+      const retire = this._favRetires && this._favRetires[sid];
+      const carte = this._cartesRetirees && this._cartesRetirees[sid];
+      if (this._favRetires) delete this._favRetires[sid];
+      if (this._cartesRetirees) delete this._cartesRetirees[sid];
+      if (res.success === true) return;
+
+       
+      const suivi = action === 'remove';
+      const p = this._payload;
+      const idOf = s => String((s && (s.id || s._id)) || '');
+      let redessiner = false;
+      if (p) {
+        const favs = Array.isArray(p.favSkippers) ? p.favSkippers : [];
+        if (!suivi) p.favSkippers = favs.filter(s => idOf(s) !== sid);
+        else if (retire && !favs.some(s => idOf(s) === sid)) {
+          const copie = favs.slice();
+          copie.splice(Math.min(retire.index, copie.length), 0, retire.objet);
+          p.favSkippers = copie;
+        }
+      }
+      if (carte) {
+        clearTimeout(carte.minuterie);
+        carte.card.classList.remove('is-removing');
+        if (carte.parent && carte.parent.isConnected) {
+          if (!carte.card.isConnected) {
+            const avant = carte.suivante && carte.suivante.parentNode === carte.parent ? carte.suivante : null;
+            carte.parent.insertBefore(carte.card, avant);
+          }
+        } else {
+          
+
+
+          redessiner = true;
+        }
+      }
+      this.querySelectorAll(`.er-widget--hero [data-action="hero-fav"][data-skipper-id="${CSS.escape(sid)}"]`)
+        .forEach(b => this._peindreSuiviHero(b, suivi));
+      this.querySelectorAll(`.er-suggestion-add[data-skipper-id="${CSS.escape(sid)}"]`)
+        .forEach(b => this._peindreSuiviSuggestion(b, suivi));
+      if (redessiner) { this._renderedSig = null; this._render(); }
+
+      const en = this._lang() === 'en';
+      const fiche = (p && Array.isArray(p.skipperCatalog) ? p.skipperCatalog : []).find(s => s && s.id === sid);
+      const nom = fiche && fiche.name ? String(fiche.name) : '';
+      let texte;
+      if (en) {
+        texte = (suivi ? (nom ? 'Unfollowing ' + nom : 'This unfollow') : (nom ? 'Following ' + nom : 'This follow'))
+          + ' could not be saved. Try again in a moment.';
+      } else {
+        texte = (suivi ? (nom ? 'Le retrait de ' + nom : 'Ce retrait') : (nom ? 'Le suivi de ' + nom : 'Ce suivi'))
+          + ' n’a pas pu être enregistré. Réessaie dans un instant.';
+      }
+      this._annoncer(texte);
     }
 
     _wireSkipperCards() {
@@ -15586,8 +15797,13 @@ if (!customElements.get('espace-rhum')) {
           }));
           const card = btn.closest('.er-skipper-card');
           if (card) {
+             
+            this._cartesRetirees = this._cartesRetirees || {};
+            const garde = { card, parent: card.parentNode, suivante: card.nextSibling, minuterie: null };
+            this._cartesRetirees[skipperId] = garde;
             card.classList.add('is-removing');
             const t = setTimeout(() => card.remove(), 450);
+            garde.minuterie = t;
             this._removeTimers.push(t);
           }
         });
@@ -15746,22 +15962,7 @@ if (!customElements.get('espace-rhum')) {
             detail: { skipperId, action }
           }));
            
-          const next = !currently;
-          btn.dataset.fav = String(next);
-          btn.classList.toggle('is-favorited', next);
-          btn.setAttribute('aria-pressed', String(next));
-          
-
-
-
-          var qui = btn.getAttribute('data-nom') || '';
-          var en = this._lang() === 'en';
-          var verbe = next ? (en ? 'Unfollow' : 'Ne plus suivre') : (en ? 'Follow' : 'Suivre');
-          btn.setAttribute('aria-label', qui ? verbe + ' ' + qui : verbe);
-          btn.setAttribute('title', qui ? verbe + ' ' + qui : verbe);
-          
-
-          btn.innerHTML = next ? ICON_CHECK : ICON_PLUS;
+          this._peindreSuiviSuggestion(btn, !currently);
         });
       });
 
@@ -19269,6 +19470,7 @@ if (!customElements.get('espace-rhum')) {
 
 
     _roueRetrait(etat) {
+      if (!ROUE_RETRAIT_BRANCHE) return '';
       const gagne = etat && !etat.peutTourner && etat.dejaTire && etat.dejaTire.physique === true;
       const fait = etat && etat.retrait;
       return `
@@ -19484,31 +19686,40 @@ if (!customElements.get('espace-rhum')) {
 
 
 
+
+
+
     _packClasses() {
       const p = this._payload || {};
-      const enStock = p.packFan && Array.isArray(p.packFan.classesDisponibles)
+      return p.packFan && Array.isArray(p.packFan.classesDisponibles)
         ? p.packFan.classesDisponibles.filter(Boolean)
-        : null;
-      if (enStock) return enStock;
-
-       
-       
-      const brut = (p.catalogs && p.catalogs.classesRDR) || p.classesRDR || p.skipperCatalogClasses;
-      return Array.isArray(brut)
-        ? brut.map(c => (typeof c === 'string' ? c : c?.nom)).filter(Boolean)
         : [];
     }
 
     
 
 
+
+
+
+
+
+
+
+
+
+
     _packClasseSuggeree() {
       const p = this._payload || {};
-      const id = p.monVoteSkipperId || (p.skippersSuivis && p.skippersSuivis[0] && p.skippersSuivis[0].id);
-      if (!id) return '';
-      const sk = (p.skipperCatalog || []).find(s => s.id === id);
       const dispo = this._packClasses();
-      return sk && dispo.includes(sk.class) ? sk.class : '';
+      const vote = p.monVoteSkipperId
+        ? (p.skipperCatalog || []).find(s => s.id === p.monVoteSkipperId)
+        : null;
+      if (vote) return vote.class && dispo.includes(vote.class) ? vote.class : '';
+      const noms = (Array.isArray(p.favSkippers) ? p.favSkippers : [])
+        .map(s => (s && s.classes && s.classes.nom) || '');
+      if (!noms.length || noms.some(n => !n) || new Set(noms).size !== 1) return '';
+      return dispo.includes(noms[0]) ? noms[0] : '';
     }
 
     
@@ -20008,7 +20219,7 @@ if (!customElements.get('espace-rhum')) {
                 <div class="er-prefs-danger">
                   <div class="er-prefs-danger-txt">
                     <span class="er-prefs-danger-title">Supprimer mes données</span>
-                    <span class="er-prefs-danger-hint">Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Irréversible.</span>
+                    <span class="er-prefs-danger-hint">Efface tout ce que ton espace a retenu de toi : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte repart de zéro, sauf aux jeux : un tour de roue joué et un code reçu restent acquis. Si tu as coupé le suivi, ce refus est gardé pour continuer d'être respecté. Irréversible.</span>
                   </div>
                   <button class="er-prefs-btn er-prefs-btn--danger" type="button" data-action="delete-data">Tout effacer</button>
                 </div>
@@ -20121,7 +20332,8 @@ if (!customElements.get('espace-rhum')) {
               classes: Array.isArray(p.classes) ? p.classes : [],
               themes: Array.isArray(p.themes) ? p.themes : [],
               favAdd: [], favRemove: [],
-              trackingOptOut: !track.checked
+              trackingOptOut: !track.checked,
+              origine: 'suivi'
             }
           }));
           
@@ -20334,6 +20546,9 @@ if (!customElements.get('espace-rhum')) {
         trackingOptOut: this._payload && this._payload.prefs
           ? this._payload.prefs.trackingOptOut === true
           : !!this._prefs.trackingOptOut,
+        
+
+        origine: 'prefs',
       } }));
     }
     _wirePackFan() {
@@ -20390,18 +20605,29 @@ if (!customElements.get('espace-rhum')) {
 
     
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     _packPrefillProfil(modal) {
-      const prefs = (this._payload && (this._payload.preferences || this._payload.profil)) || {};
-      const poser = (nom, valeur) => {
-        if (valeur === undefined || valeur === null || valeur === '') return;
-        const c = modal.querySelector('[data-pack="' + nom + '"]');
-        if (!c || c.value) return;
-        if (c.type === 'checkbox') c.checked = valeur === true;
-        else c.value = String(valeur);
-      };
-      poser('vientSaintMalo', prefs.vientSaintMalo);
-      poser('vientGuadeloupe', prefs.vientGuadeloupe);
-      poser('pratiqueVoile', prefs.pratiqueVoile);
+      const venue = this._payload && this._payload.profilePrompt && this._payload.profilePrompt.village
+        ? this._payload.profilePrompt.village.venue : '';
+      if (venue !== 'oui' && venue !== 'non') return;
+      if (modal.querySelector('.er-pack-choice[data-q="stmalo"].is-on')) return;
+      const choix = modal.querySelector(`.er-pack-choice[data-q="stmalo"][data-val="${venue}"]`);
+      if (!choix) return;
+      choix.classList.add('is-on');
+      choix.setAttribute('aria-pressed', 'true');
     }
 
     _wirePrefsModal() {
@@ -20543,17 +20769,164 @@ if (!customElements.get('espace-rhum')) {
                            : 'La suppression a échoué, rien n’a été modifié.');
     }
 
-     
-    _toastSimple(texte) {
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _retourReglage(action, res) {
+      const en = this._lang() === 'en';
+      const r = res || {};
+      const ok = r.success === true;
+      const dire = (fr, anglais) => this._annoncer(en ? anglais : fr);
+
+      if (action === 'prefs') {
+        if (r.origine === 'suivi') {
+          if (ok) return;
+          
+
+
+          const demande = r.trackingOptOut === true;
+          const p = this._payload && this._payload.prefs;
+          if (p && p.trackingOptOut === demande) {
+            p.trackingOptOut = !demande;
+            if (this._prefs) this._prefs.trackingOptOut = !demande;
+            const track = this.querySelector('.er-conf [data-prefs="track"]');
+            if (track) track.checked = demande;
+          }
+          dire('Ton choix sur le suivi n’a pas pu être enregistré. Réessaie dans un instant.',
+               'Your tracking choice could not be saved. Try again in a moment.');
+          return;
+        }
+        const btn = this.querySelector('[data-action="save-prefs"]');
+        if (btn) { btn.disabled = false; btn.textContent = this._t('Enregistrer'); }
+        if (!ok) {
+          
+
+          dire('Tes préférences n’ont pas pu être enregistrées. Réessaie dans un instant.',
+               'Your preferences could not be saved. Try again in a moment.');
+          return;
+        }
+        const prefs = this.querySelector('.er-prefs:not(.er-conf)');
+        if (prefs && prefs.dataset.open === 'true') this._closePrefsModal();
+        if (Number(r.favEchecs) > 0) {
+          dire('Tes préférences sont enregistrées, sauf une partie de tes skippers suivis. Réessaie dans un instant.',
+               'Your preferences are saved, except some of your followed skippers. Try again in a moment.');
+        }
+        return;
+      }
+
+      if (action === 'profile') {
+        if (!ok) {
+          dire('Ton profil n’a pas pu être enregistré. Réessaie dans un instant.',
+               'Your profile could not be saved. Try again in a moment.');
+          return;
+        }
+        if (r.phoneRejected) {
+          dire('Ton profil est enregistré, mais pas ton numéro de téléphone. Vérifie-le et réessaie.',
+               'Your profile is saved, but not your phone number. Check it and try again.');
+        }
+        return;
+      }
+
+      if (action === 'village') {
+        if (!ok) {
+          dire('Une partie de tes réponses n’a pas pu être enregistrée. Réessaie dans un instant.',
+               'Some of your answers could not be saved. Try again in a moment.');
+        }
+        return;
+      }
+
+      if (action === 'insta') {
+        if (ok) return;
+        if (r.reason === 'invalid_pseudo') {
+          dire('Ce pseudo Instagram n’est pas valide. Vérifie-le et réessaie.',
+               'This Instagram handle is not valid. Check it and try again.');
+        } else if (r.reason === 'too_many_attempts') {
+          dire('Trop de demandes pour ce badge. Contacte-nous si ton pseudo est le bon.',
+               'Too many requests for this badge. Contact us if your handle is right.');
+        } else {
+          dire('Ta demande n’a pas pu être envoyée. Réessaie dans un instant.',
+               'Your request could not be sent. Try again in a moment.');
+        }
+        return;
+      }
+
+      if (action === 'dismiss') {
+        
+
+
+        if (!ok && r.optOut === true) {
+          dire('Ton choix n’a pas pu être enregistré, cette fenêtre pourra revenir.',
+               'Your choice could not be saved, this window may come back.');
+        }
+        return;
+      }
+
+      if (action === 'delete') {
+        if (ok) {
+          dire('Tes données ont été effacées.', 'Your data has been erased.');
+        } else {
+          dire('L’effacement de tes données n’a pas pu aller au bout. Réessaie ou contacte-nous.',
+               'Your data could not be fully erased. Try again or contact us.');
+        }
+      }
+    }
+
+    
+
+
+
+    _annoncer(texte) {
+      const maintenant = Date.now();
+      this._annonces = (this._annonces || []).filter(a => a.fin > maintenant && a.texte !== texte);
+      this._annonces.push({ texte, fin: maintenant + 6500 });
+      this._toastSimple(texte, 6500);
+    }
+
+    _reposerAnnonces() {
+      const maintenant = Date.now();
+      this._annonces = (this._annonces || []).filter(a => a.fin > maintenant + 400);
+      this._annonces.forEach(a => this._toastSimple(a.texte, a.fin - maintenant));
+    }
+
+    
+
+
+
+
+
+    _toastSimple(texte, duree) {
       const container = this.querySelector('.er-toasts-container');
       if (!container) return;
       const t = document.createElement('div');
-      t.className = 'er-toast';
+      t.className = 'er-toast er-toast--simple';
       t.setAttribute('role', 'status');
       t.innerHTML = '<div class="er-toast-content"><div class="er-toast-title"></div></div>';
       t.querySelector('.er-toast-title').textContent = texte;
       container.appendChild(t);
-      setTimeout(() => { t.remove(); }, 5200);
+      
+
+
+      t.getBoundingClientRect();
+      t.dataset.visible = 'true';
+      const reste = Math.max(800, Number(duree) || 5200);
+      setTimeout(() => { t.dataset.visible = 'false'; }, reste - 400);
+      setTimeout(() => { t.remove(); }, reste);
     }
 
     
@@ -20657,8 +21030,8 @@ if (!customElements.get('espace-rhum')) {
       const ok = await this._confirmerGrave({
         titre: en ? 'Delete all your data?' : 'Supprimer toutes tes données ?',
         texte: en
-          ? 'Everything your space has learned about you is erased: your stats, your badges, your favourites, your preferences and your entries. Your account remains but starts from zero. One exception, the games: a wheel spin already played and codes already received stay with the account, without your name or contact details, so they cannot be played again. This cannot be undone.'
-          : 'Tout ce que ton espace a retenu de toi est effacé : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte reste mais repart de zéro. Seule exception, les jeux : le tour de roue déjà joué et les codes déjà reçus restent acquis au compte, sans ton nom ni tes coordonnées, pour qu’ils ne se rejouent pas. Cette action est irréversible.',
+          ? 'Everything your space has learned about you is erased: your stats, your badges, your favourites, your preferences and your entries. Your account remains but starts from zero. One exception, the games: a wheel spin already played and codes already received stay with the account, without your name or contact details, so they cannot be played again. If you turned tracking off, that choice is kept so it stays respected. This cannot be undone.'
+          : 'Tout ce que ton espace a retenu de toi est effacé : tes stats, tes badges, tes favoris, tes préférences et tes participations. Ton compte reste mais repart de zéro. Seule exception, les jeux : le tour de roue déjà joué et les codes déjà reçus restent acquis au compte, sans ton nom ni tes coordonnées, pour qu’ils ne se rejouent pas. Si tu as coupé le suivi, ce refus est gardé pour continuer d’être respecté. Cette action est irréversible.',
         bouton: en ? 'Delete my data' : 'Supprimer mes données',
         delai: 5
       });

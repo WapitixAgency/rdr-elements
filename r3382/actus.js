@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 1a9092d | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum deaa497 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="deaa497";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -123,13 +123,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
     en: { 'THE RACE': ['Start', 'Arrivals', 'Live', 'Rankings', 'Weather', 'Damage', 'Record'], 'STORIES': ['Interview', 'Portrait', 'Behind the scenes', 'Analysis', 'History'], 'ANGLES': ['Rookies', 'Women', 'A sustainable future'], 'TERRITORIES': ['Saint-Malo', 'Guadeloupe', 'Race village', 'Hospitality'] }
   };
 
-   
-   
-   
-   
-  const ESPACE_LIVE = false;
+  
 
-   
+
+
+
+
+
+
    
    
    
@@ -165,12 +166,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
       title: 'Actualités',
       intro: "Toute l'info du plus mythique des sprints transatlantiques — départ le 1er novembre 2026, Saint-Malo → Pointe-à-Pitre.",
       all: 'TOUT', search: 'Rechercher', filters: 'Filtres', close: 'Fermer',
-      mesprefs: 'Mes préférences',
-      mesprefs_tip: 'Filtrer sur les skippers, les classes et les sujets que tu suis dans Mon Espace Rhum',
-      mesprefs_vide: 'Rien à appliquer',
-      mesprefs_rien_suivi: 'Aucune préférence',
-      mesprefs_deja: 'Déjà appliquées',
-      mesprefs_ko: 'Indisponible',
       hide_read: 'Masquer les déjà lus', show_read: 'Réafficher les déjà lus', read_hidden: 'Déjà lus masqués',
       search_ph: 'Un skipper, un sujet, un article…',
       search_hints: ['Qui sont les rookies 2026 ?', 'Le record de la traversée', 'Objectif Pointe-à-Pitre', 'Les coulisses de la course', 'Le village de Saint-Malo', 'La météo du départ'],
@@ -198,7 +193,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
       loading_title: 'CHARGEMENT EN COURS', loading_img: 'On rassemble les images, encore un petit instant…', loading_vid: 'On charge les vidéos, encore un petit instant…', loading_gen: 'On rassemble le contenu, encore un petit instant…',
       partner: 'PARTENAIRE', partner_content: 'CONTENU PARTENAIRE', partner_by: 'Proposé par {n}', partner_hide: 'Masquer ce partenaire',
       remove_filter: 'Retirer ce filtre', open_search: 'Ouvrir la recherche', open_filters: 'Ouvrir les filtres',
-      deja_lu: 'Déjà lu', apply_my_filters: 'Appliquer mes filtres de mon Espace Rhum',
+      deja_lu: 'Déjà lu',
       route_from: 'SAINT-MALO', route_to: 'POINTE-À-PITRE', route_nm: '3 542 MILLES'
     },
     en: {
@@ -206,12 +201,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
       title: 'Latest news',
       intro: 'All the news from the most legendary of transatlantic sprints — start on 1 November 2026, Saint-Malo → Pointe-à-Pitre.',
       all: 'ALL', search: 'Search', filters: 'Filters', close: 'Close',
-      mesprefs: 'My preferences',
-      mesprefs_tip: 'Filter on the skippers, classes and topics you follow in My Espace Rhum',
-      mesprefs_vide: 'Nothing to apply',
-      mesprefs_rien_suivi: 'No preferences yet',
-      mesprefs_deja: 'Already applied',
-      mesprefs_ko: 'Unavailable',
       hide_read: 'Hide read articles', show_read: 'Show read articles', read_hidden: 'Read articles hidden',
       search_ph: 'A skipper, a topic, an article…',
       search_hints: ['Who are the 2026 rookies?', 'The crossing record', 'Destination Pointe-à-Pitre', 'Behind the scenes', 'The Saint-Malo village', 'Start weather'],
@@ -239,7 +228,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
       loading_title: 'LOADING', loading_img: 'Gathering the images, just a moment…', loading_vid: 'Loading the videos, just a moment…', loading_gen: 'Gathering the content, just a moment…',
       partner: 'PARTNER', partner_content: 'PARTNER CONTENT', partner_by: 'Brought to you by {n}', partner_hide: 'Hide this partner',
       remove_filter: 'Remove this filter', open_search: 'Open search', open_filters: 'Open filters',
-      deja_lu: 'Read', apply_my_filters: 'Apply my Espace Rhum filters',
+      deja_lu: 'Read',
       route_from: 'SAINT-MALO', route_to: 'POINTE-À-PITRE', route_nm: '3,542 NM'
     }
   };
@@ -266,9 +255,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
     searchIc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
     filterIc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>',
-     
-     
-    sparkIc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M4.2 7.2l2.1 2.1M17.7 14.7l2.1 2.1M3 12h3M18 12h3M4.2 16.8l2.1-2.1M17.7 9.3l2.1-2.1"/><circle cx="12" cy="12" r="2.4"/></svg>',
     chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
     down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>',
     boat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 20c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0M4 16 12 4l8 12"/><path d="M12 4v12"/></svg>',
@@ -393,14 +379,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="1a9092d";performance
 @media (hover:hover) and (pointer:fine){.rn__iconbtn:hover{border-color:var(--rn-teal);color:var(--rn-teal-deep);transform:translateY(-1px);box-shadow:var(--rn-shadow-lift)}}
 .rn__iconbtn svg{width:17px;height:17px}
 .rn__filterbtn{padding:0 16px;gap:9px;font-size:10.5px;font-weight:800;letter-spacing:.09em}
-.rn__mesprefs{padding:0 16px;gap:9px;font-size:10.5px;font-weight:800;letter-spacing:.09em}
-.rn__mesprefs.is-loading{opacity:.55;pointer-events:none}
-.rn__mesprefs.is-loading svg{animation:rn-mp-spin 1.1s linear infinite}
-@keyframes rn-mp-spin{to{transform:rotate(360deg)}}
-
-
-@media (max-width:1023px){.rn__mesprefs span.rn__mpl{display:none}.rn__mesprefs{padding:0 13px}}
-@media (prefers-reduced-motion:reduce){.rn__mesprefs.is-loading svg{animation:none}}
 .rn__badge-n{min-width:19px;height:19px;border-radius:10px;background:var(--rn-amber);color:var(--rn-navy-1);font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 5px}
 @media (max-width:1023px){.rn__filterbtn span.rn__fbl{display:none}.rn__filterbtn{padding:0 13px}}
 
@@ -988,7 +966,7 @@ dialog[open] .rn__search-panel{animation:rn-dlg-up .3s cubic-bezier(.22,1,.36,1)
   }
 
 class RdrNews extends HTMLElement {
-    static get observedAttributes() { return ['payload', 'results', 'lang', 'deeplink', 'membre', 'mes-facettes']; }
+    static get observedAttributes() { return ['payload', 'results', 'lang', 'deeplink']; }
 
     constructor() {
       super();
@@ -997,8 +975,6 @@ class RdrNews extends HTMLElement {
       this._renderRAF = null;
       this._state = {
         payload: null, lang: 'fr',
-         
-        membre: false, facettes: null, facettesEnCours: false,
         cat: 'all', themes: new Set(), classes: new Set(), q: '',
         sort: 'recent', shown: PAGE_STEP, bannerClosed: false,
          
@@ -1008,8 +984,6 @@ class RdrNews extends HTMLElement {
       this._reqId = 0;
       this._pendingPayload = null;
       this._pendingLang = null;
-      this._pendingMembre = false;
-      this._pendingFacettes = null;
       this._searchTimer = null;
     }
 
@@ -1035,9 +1009,6 @@ class RdrNews extends HTMLElement {
           try { this._state.payload = JSON.parse(m.payload); this._brut = m.payload; this._depuisMemoire = true; } catch (e) { this._state.payload = null; }
         }
       }
-       
-      this._state.membre = !!this._pendingMembre;
-      if (this._pendingFacettes) { const v = this._pendingFacettes; this._pendingFacettes = null; setTimeout(() => this._recevoirFacettes(v), 0); }
 
        
        
@@ -1093,11 +1064,6 @@ class RdrNews extends HTMLElement {
       if (!this._initialized) {
         if (name === 'payload') { try { this._pendingPayload = JSON.parse(newVal || 'null'); this._brut = newVal; } catch (e) { console.error('[rn] payload parse', e); } }
         else if (name === 'lang') this._pendingLang = newVal;
-        
-
-
-        else if (name === 'membre') this._pendingMembre = newVal === '1';
-        else if (name === 'mes-facettes') this._pendingFacettes = newVal;
         else if (name === 'deeplink') {
           try { this._applyDeeplink(JSON.parse(newVal || '{}')); }
           catch (e) {   }
@@ -1117,11 +1083,6 @@ class RdrNews extends HTMLElement {
         this._state.server = { items: null, hasMore: false, cursor: null, total: 0, loading: false };
         if (this._isFiltering()) this._requestServer('replace');
         this._scheduleRender();
-      } else if (name === 'membre') {
-        this._state.membre = newVal === '1';
-        this._scheduleRender();
-      } else if (name === 'mes-facettes') {
-        this._recevoirFacettes(newVal);
       } else if (name === 'deeplink') {
          
          
@@ -1754,89 +1715,6 @@ class RdrNews extends HTMLElement {
       return '<div class="rn__seghead"><h2 class="rn__segtitle"><span class="rn__segico" aria-hidden="true">' + icon + '</span>' + title + '</h2>' +
         '<span class="rn__segrule" aria-hidden="true"></span>' + (right || '') + '</div>';
     }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    _boutonMesPrefs() {
-      const t = k => this._t(k);
-      const s = this._state;
-      const etat = s.facettesEnCours ? ' is-loading' : '';
-      const lib = this._mesPrefsFlash || t('mesprefs');
-      return '<button type="button" class="rn__iconbtn rn__mesprefs' + etat + '" data-rn-mes-prefs' +
-        ' aria-label="' + escAttr(lib) + '" title="' + escAttr(t('mesprefs_tip')) + '">' +
-        IC.sparkIc + '<span class="rn__mpl">' + escapeHTML(lib) + '</span></button>';
-    }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    _facettesApplicables(libelles) {
-      return (Array.isArray(libelles) ? libelles : []).slice(0, 12);
-    }
-
-    _recevoirFacettes(brut) {
-      const s = this._state;
-      s.facettesEnCours = false;
-      let d = null;
-      try { d = JSON.parse(brut || 'null'); } catch (e) { d = null; }
-      
-
-      if (!d || d.lu === false) { this._flashMesPrefs(this._t('mesprefs_ko')); this._render(); return; }
-      const applicables = this._facettesApplicables(Array.isArray(d.libelles) ? d.libelles : []);
-      
-
-
-
-
-      if (!applicables.length) {
-        const cle = !d.suivies ? 'mesprefs_rien_suivi'
-                  : d.catalogueLu === false ? 'mesprefs_ko'
-                  : 'mesprefs_vide';
-        this._flashMesPrefs(this._t(cle)); this._render(); return;
-      }
-      s.facettes = applicables;
-      applicables.forEach(x => s.themes.add(x));
-      this._filterChange();
-    }
-
-    
-
-
-    _flashMesPrefs(txt) {
-      this._mesPrefsFlash = txt;
-      clearTimeout(this._mesPrefsTimer);
-      this._mesPrefsTimer = setTimeout(() => { this._mesPrefsFlash = null; this._render(); }, 3200);
-    }
-
     _sortToggle() {
       const s = this._state.sort;
        
@@ -1975,13 +1853,6 @@ class RdrNews extends HTMLElement {
         '<button type="button" class="rn__iconbtn rn__filterbtn" data-rn-open-sheet aria-label="' + escAttr(t('open_filters')) + '">' + IC.filterIc + '<span class="rn__fbl">' + t('filters') + '</span>' +
         (n ? '<span class="rn__badge-n">' + n + '</span>' : '') + '</button>' +
         (n ? '<button type="button" class="rn__clearbtn" data-rn-reset aria-label="' + escAttr(t('reset')) + '" title="' + escAttr(t('reset')) + '">' + IC.close + '</button>' : '') +
-        
-
-
-
-
-
-        (this._state.membre ? this._boutonMesPrefs() : '') +
         '</div>' +
         '<div class="rn__chipswrap"><div class="rn__chips" role="group" aria-label="' + escAttr(t('cat_label')) + '">' + chips + '</div>' +
         '<span class="rn__chips-hint" aria-hidden="true">' + IC.chev + '</span></div>' +
@@ -2235,7 +2106,6 @@ class RdrNews extends HTMLElement {
         editionAcc +
         '<details class="rn__facc" open><summary><span class="rn__fic">' + IC.boat + '</span>' + t('classes_label') + '<span class="rn__chev">' + IC.chev + '</span></summary><div class="rn__faccin">' + classChips + '</div></details>' +
         '</div>' +
-        (ESPACE_LIVE ? '<div class="rn__sheetespace"><button type="button" class="rn__ghost" data-rn-espace-filters>' + t('apply_my_filters') + '</button></div>' : '') +
         '<div class="rn__sheetfoot"><button type="button" class="rn__ghost" data-rn-reset>' + t('reset') + '</button>' +
         '<button type="button" class="rn__apply' + (this._applyCounting() ? ' is-counting' : '') + '" data-rn-close-sheet>' + this._applyLabel() + '</button></div>' +
         '</div></dialog>';
@@ -2481,34 +2351,9 @@ class RdrNews extends HTMLElement {
           if (extra) { extra.hidden = false; more.setAttribute('aria-expanded', 'true'); more.hidden = true; }
           return;
         }
-        const el = e.target.closest('[data-rn-cat],[data-rn-cat-s],[data-rn-theme],[data-rn-edition],[data-rn-class],[data-rn-sort],[data-rn-lus],[data-rn-rm-cat],[data-rn-rm-theme],[data-rn-rm-class],[data-rn-rm-q],[data-rn-reset],[data-rn-mes-prefs],[data-rn-more],[data-rn-top],[data-rn-open-search],[data-rn-open-sheet],[data-rn-close-search],[data-rn-close-sheet],[data-rn-close-banner],[data-rn-sg-q],[data-rn-sg-theme],[data-rn-sg-url]');
+        const el = e.target.closest('[data-rn-cat],[data-rn-cat-s],[data-rn-theme],[data-rn-edition],[data-rn-class],[data-rn-sort],[data-rn-lus],[data-rn-rm-cat],[data-rn-rm-theme],[data-rn-rm-class],[data-rn-rm-q],[data-rn-reset],[data-rn-more],[data-rn-top],[data-rn-open-search],[data-rn-open-sheet],[data-rn-close-search],[data-rn-close-sheet],[data-rn-close-banner],[data-rn-sg-q],[data-rn-sg-theme],[data-rn-sg-url]');
         if (!el) return;
         const d = el.dataset;
-        if (d.rnMesPrefs !== undefined) {
-          const st = this._state;
-          if (st.facettesEnCours) return;
-           
-          if (st.facettes) {
-            const neuves = st.facettes.filter(x => !st.themes.has(x));
-            if (!neuves.length) { this._flashMesPrefs(this._t('mesprefs_deja')); this._render(); return; }
-            neuves.forEach(x => st.themes.add(x));
-            this._filterChange();
-            return;
-          }
-          st.facettesEnCours = true;
-          this._render();
-          this._emit('rn-mes-preferences', {});
-          
-
-          clearTimeout(this._mesPrefsAttente);
-          this._mesPrefsAttente = setTimeout(() => {
-            if (!this._state.facettesEnCours) return;
-            this._state.facettesEnCours = false;
-            this._flashMesPrefs(this._t('mesprefs_ko'));
-            this._render();
-          }, 8000);
-          return;
-        }
         if (d.rnCat !== undefined) { this._state.cat = this._state.cat === d.rnCat ? 'all' : d.rnCat; this._filterChange(); }
         else if (d.rnCatS !== undefined) { this._state.cat = this._state.cat === d.rnCatS ? 'all' : d.rnCatS; this._filterChange(); }
         else if (d.rnTheme !== undefined) { const th = d.rnTheme; this._state.themes.has(th) ? this._state.themes.delete(th) : this._state.themes.add(th); this._filterChange(); }
@@ -2563,7 +2408,6 @@ class RdrNews extends HTMLElement {
         else if (d.rnRmTheme !== undefined) { this._state.themes.delete(d.rnRmTheme); this._filterChange(); }
         else if (d.rnRmClass !== undefined) { this._state.classes.delete(d.rnRmClass); this._filterChange(); }
         else if (d.rnRmQ !== undefined) { this._state.q = ''; this._filterChange(); }
-        else if (d.rnEspaceFilters !== undefined) { this._emit('rn-espace-filters', {}); }
         else if (d.rnReset !== undefined) { this._resetAll(); }
         else if (d.rnMore !== undefined) { this._loadMore(); }
         else if (d.rnTop !== undefined) {
@@ -3286,6 +3130,33 @@ class RdrNews extends HTMLElement {
     cover: '', categories: ['Interviews']
   };
 
+  
+
+
+
+
+
+
+
+
+
+
+
+  var VIDE = (function () {
+    var v = {};
+    Object.keys(DEMO).forEach(function (k) {
+      var d = DEMO[k];
+      v[k] = Array.isArray(d) ? [] : (d && typeof d === 'object' ? {} : null);
+    });
+    return v;
+  })();
+  var DEMO_AUTORISEE = (function () {
+    try {
+      return location.hostname === 'localhost' ||
+             location.search.indexOf('demoEntete=1') !== -1;
+    } catch (e) { return false; }
+  })();
+
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -3664,8 +3535,8 @@ class RdrNews extends HTMLElement {
      
     _data() {
       var raw = this.getAttribute('data-payload');
-      if (raw) { try { return Object.assign({}, DEMO, JSON.parse(raw)); } catch (e) {   } }
-      return null;
+      if (raw) { try { return Object.assign({}, VIDE, JSON.parse(raw)); } catch (e) {   } }
+      return DEMO_AUTORISEE ? Object.assign({}, DEMO) : null;
     }
 
      
@@ -3710,6 +3581,14 @@ class RdrNews extends HTMLElement {
        
       var crumbDouble = /^(actualit|news$)/i.test(String(crumbCat).normalize('NFD').replace(/[̀-ͯ]/g, '').trim());
       var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="" fetchpriority="high" decoding="async">' : coverPlaceholder();
+      
+
+      var fmt = d.formatLabel || d.format;
+      var kick = (fmt ? '<span class="rph-b fmt">' + esc(fmt) + '</span>' : '') +
+        (d.featured ? '<span class="rph-b une">' + IC.flame + 'À la une</span>' : '');
+      var meta = (d.date ? '<span class="m">' + IC.cal + esc(d.date) + '</span>' : '') +
+        (d.readingTime ? '<span class="m">' + IC.clock + esc(d.readingTime) + ' min de lecture</span>' : '') +
+        (d.author ? '<span class="m">Par ' + esc(d.author) + '</span>' : '');
 
       this.innerHTML =
         '<div class="rph-root">' +
@@ -3728,17 +3607,10 @@ class RdrNews extends HTMLElement {
           '<div class="rph-hw"><section class="rph-hero">' +
             '<div class="rph-blur" aria-hidden="true">' + (d.cover ? '<img src="' + esc(d.cover) + '" alt="">' : '<div class="ph"></div>') + '</div>' +
             '<div class="rph-main">' +
-              '<div class="rph-kick">' +
-                '<span class="rph-b fmt">' + esc(d.formatLabel || d.format) + '</span>' +
-                (d.featured ? '<span class="rph-b une">' + IC.flame + 'À la une</span>' : '') +
-              '</div>' +
+              (kick ? '<div class="rph-kick">' + kick + '</div>' : '') +
               '<h1>' + esc(d.title) + '</h1>' +
               (d.excerpt ? '<p class="rph-chap">' + esc(d.excerpt) + '</p>' : '') +
-              '<div class="rph-meta">' +
-                '<span class="m">' + IC.cal + esc(d.date) + '</span>' +
-                (d.readingTime ? '<span class="m">' + IC.clock + esc(d.readingTime) + ' min de lecture</span>' : '') +
-                (d.author ? '<span class="m">Par ' + esc(d.author) + '</span>' : '') +
-              '</div>' +
+              (meta ? '<div class="rph-meta">' + meta + '</div>' : '') +
             '</div>' +
             '<div class="rph-media"><div class="card">' + coverInner + '</div></div>' +
             '<svg class="rph-waves" viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 100 Q150 60 300 100 T600 100 T900 100 T1200 100 V200 H0Z" fill="currentColor"/></svg>' +

@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 1a9092d | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum deaa497 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="deaa497";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -431,6 +431,40 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
     '.rdrc-gagnant b{font-size:15px;color:var(--ink)}.rdrc-gagnant p{margin:6px 0 0;font-size:12.5px;color:var(--ink-2)}',
     '.rdrc-gagnant .rdrc-mob-acts{justify-content:flex-start;margin-top:10px}',
     '@media(max-width:760px){.rdrc-mob{grid-template-columns:minmax(0,1fr) auto}.rdrc-mob-id,.rdrc-mob-mode{grid-column:1/-1}}',
+
+    
+
+
+
+    '.rdrc-manque{grid-column:1 / -1;padding:16px 18px 16px;background:#FFF6E6;border:1px solid #F0D398;',
+    'border-left:4px solid var(--amber);border-radius:12px}',
+    '.rdrc-manque-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}',
+    '.rdrc-manque-h svg{width:20px;height:20px;color:var(--warn);flex:0 0 auto;display:block}',
+    '.rdrc-manque-t{font-size:15px;font-weight:800;color:var(--navy);margin:0;line-height:1.3}',
+    '.rdrc-manque-p{margin:0 0 12px;font-size:12px;line-height:1.55;color:var(--ink-2)}',
+    '.rdrc-manque-l{list-style:none;margin:0;padding:0;display:grid;gap:8px}',
+    '.rdrc-manque-i{display:grid;grid-template-columns:24px minmax(0,1fr) 150px;gap:12px;align-items:start;',
+    'background:#fff;border:1px solid #F0E0BC;border-radius:10px;padding:11px 13px}',
+    '.rdrc-manque-n{width:24px;height:24px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:800;',
+    'display:flex;align-items:center;justify-content:center}',
+    '.rdrc-manque-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
+    '.rdrc-manque-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-manque-qui{font-size:12px;font-weight:800;color:var(--navy);text-align:right;line-height:1.35;padding-top:2px}',
+    '.rdrc-manque-qui i{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;',
+    'text-transform:uppercase;color:var(--warn);margin-bottom:2px}',
+    '.rdrc-pret-l{list-style:none;margin:0;padding:0;display:grid;gap:1px}',
+    '.rdrc-pret-i{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:10px 8px;border-radius:8px}',
+    '.rdrc-pret-i:nth-child(odd){background:var(--bg)}',
+    '.rdrc-pret-ic{width:22px;height:22px;border-radius:50%;background:var(--teal-soft);color:var(--ok);',
+    'display:flex;align-items:center;justify-content:center}',
+    '.rdrc-pret-ic svg{width:13px;height:13px;display:block}',
+    '.rdrc-pret-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
+    '.rdrc-pret-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-pret-d a{color:var(--teal);font-weight:700}',
+    '.rdrc-pret-d code{font:inherit;font-weight:700;color:var(--navy);white-space:nowrap}',
+    '.rdrc-pret-ic.is-n{background:var(--line-2);color:var(--ink-3);font-size:11px;font-weight:800}',
+    '@media(max-width:640px){.rdrc-manque{padding:14px 13px}.rdrc-manque-i{grid-template-columns:22px minmax(0,1fr)}',
+    '.rdrc-manque-qui{grid-column:2;text-align:left;padding-top:0}}',
     '@media(max-width:560px){.rdrc-body{padding:13px}.rdrc-row{align-items:flex-start}',
     '.rdrc-acts{width:100%}.rdrc-btn{flex:1}.rdrc-bar-r{width:100%;justify-content:space-between}}'
   ].join('');
@@ -1532,18 +1566,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
 
 
 
-
-
-
-
-
-
-    
-
-
-
-
-
     _mobiliteHtml(p) {
       var self = this;
       var m = p.mobilite;
@@ -1574,16 +1596,23 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
             kpi('Éligibles au tirage', nfmt(enCours.eligibles || 0), '', 'ce jour', enCours.eligibles ? '' : 'alert')) +
       '</div>';
 
+      
+
+      var champContact = final ? 'grandContact' : 'contactGagnant';
+      var contactDe = function (g) { return (g && g[champContact]) || ''; };
       var tirageHtml = function (t, gagnant, quoi) {
         var quand = t.effectueLe ? new Date(t.effectueLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
         var g = gagnant || {};
+        var contact = contactDe(g);
+        var lot = final ? (g.grandLot || t.lot) : g.lot;
         return '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">🏆 ' + esc(quoi) + ' effectué le ' + esc(quand) + ' · ' + esc(t.nbEligibles) + ' éligible' + (t.nbEligibles > 1 ? 's' : '') + '</span><br>' +
           '<b>' + esc(t.gagnantNom || g.prenom + ' ' + g.nom) + '</b> <span class="rdrc-mob-id">' + esc(t.gagnantId) + '</span>' +
-          (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + (g.lot ? ' · lot : ' + esc(g.lot) : '') + '</p>' : '') +
+          (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + (lot ? ' · lot : ' + esc(lot) : '') +
+            (final && g.gagnant ? ' · a aussi gagné le lot du jour' + (g.lot ? ' (' + esc(g.lot) + ')' : '') : '') + '</p>' : '') +
           (g.id ? '<div class="rdrc-mob-acts">' +
-            '<span class="rdrc-mob-st" data-s="' + (g.contactGagnant === 'Contacté' ? 'Validé' : g.contactGagnant === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(g.contactGagnant || 'À contacter') + '</span>' +
-            '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="contactGagnant" data-valeur="Contacté">Contacté</button>' +
-            '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="contactGagnant" data-valeur="Injoignable">Injoignable</button>' +
+            '<span class="rdrc-mob-st" data-s="' + (contact === 'Contacté' ? 'Validé' : contact === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(contact || 'À contacter') + '</span>' +
+            '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Contacté">Contacté</button>' +
+            '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Injoignable">Injoignable</button>' +
           '</div>' : '') +
         '</div>';
       };
@@ -1591,15 +1620,17 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
        
       var tirageBloc;
       var t = final ? m.final : enCours.tirage;
-      var gagnantDuTirage = t ? (m.participations || []).find(function (x) { return x.id === t.gagnantId; }) : null;
-      if (t && !(gagnantDuTirage && gagnantDuTirage.contactGagnant === 'Injoignable')) {
+      var gagnantDuTirage = !t ? null : final
+        ? (m.finalGagnant && m.finalGagnant.id === t.gagnantId ? m.finalGagnant : null)
+        : (m.participations || []).find(function (x) { return x.id === t.gagnantId; });
+      if (t && !(gagnantDuTirage && contactDe(gagnantDuTirage) === 'Injoignable')) {
         tirageBloc = tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour');
       } else {
         var n = final ? (m.eligiblesFinal || 0) : (enCours.eligibles || 0);
         var arme = this._mobConfirme === (final ? 'final' : jourVu);
         tirageBloc = (t ? tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour') : '') +
           '<div class="rdrc-tirage">' +
-            '<div class="rdrc-tirage-t">' + (t ? 'Le gagnant est injoignable : on peut retirer parmi les autres. ' : '') +
+            '<div class="rdrc-tirage-t">' + (t ? 'Le gagnant est injoignable. On peut retirer au sort parmi les autres' + (final ? ', sans aucune de ses participations. ' : '. ') : '') +
               (n ? '<b>' + n + '</b> participation' + (n > 1 ? 's' : '') + ' éligible' + (n > 1 ? 's' : '') + (final ? ' au grand tirage final' : ' pour ce jour') + '.'
                  : 'Aucune participation éligible' + (final ? '' : ' ce jour') + ' : validez d\'abord les justificatifs.') + '</div>' +
             (arme
@@ -1612,9 +1643,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
       var lignes = (m.participations || []).map(function (x) {
         var inscrit = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
         var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
-        return '<div class="rdrc-mob"' + (x.gagnant ? ' data-gagnant="1"' : '') + '>' +
+        return '<div class="rdrc-mob"' + (x.gagnant || x.grandGagnant ? ' data-gagnant="1"' : '') + '>' +
           '<span class="rdrc-mob-id">' + esc(x.id) + '</span>' +
           '<span class="rdrc-mob-nom">' + esc(x.prenom + ' ' + x.nom) + (x.gagnant ? ' <span class="rdrc-mob-trophee">🏆</span>' : '') +
+            (x.grandGagnant ? ' <span class="rdrc-mob-trophee">🏆 grand tirage</span>' : '') +
             '<small>' + esc(x.email) + ' · ' + esc(x.telephone) + ' · inscrit le ' + esc(inscrit) + '</small></span>' +
           '<span class="rdrc-mob-mode">' + esc(x.mode) + (x.precision ? ' (' + esc(x.precision) + ')' : '') +
             (x.justificatifUrl ? '<a href="' + esc(x.justificatifUrl) + '" target="_blank" rel="noopener">Voir le justificatif' + (x.justificatifNom ? ' · ' + esc(x.justificatifNom) : '') + '</a>' : '<a>aucun fichier</a>') + '</span>' +
@@ -1645,62 +1677,105 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="1a9092d";performan
         '</div>';
     }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     _photoHtml() {
-      var decisions = [
-        ['Le reglement du jeu',
-         'Aucun reglement n existe a ce jour, et il en faut un pour la roue, les '
-         + 'pronostics, la combativite ET le concours photo. Ce n est pas un sujet '
-         + 'technique : c est une obligation des qu il y a un lot.',
+      var manque = [
+        ['Le règlement du Challenge photo',
+         'Un jeu doté d\'un lot en demande un. La page Règlements, en ligne depuis le 23/09, '
+         + 'lui donnera sa propre adresse et le publiera le jour de l\'annonce du concours.',
+         'Alexis et le juridique d\'OC Sport'],
+        ['La modération',
+         'Qui relit chaque photo avant sa mise en ligne (la stagiaire, selon le call du 27/08, '
+         + 'à confirmer), et ce qui fait refuser une image, par exemple une personne reconnaissable, '
+         + 'une marque concurrente, un mauvais cadrage ou une photo floue.',
          'Alexis'],
-        ['Qui modere, et sur quels criteres',
-         'Une photo envoyee par un visiteur ne se publie pas sans relecture. Il faut '
-         + 'nommer la personne, et ecrire ce qui fait refuser une image : personnes '
-         + 'reconnaissables, marques concurrentes, cadrage, qualite.',
+        ['Les données GPS des photos',
+         'Une photo de téléphone garde la position exacte de la prise de vue. Nous proposons '
+         + 'de l\'effacer dès la réception, avant tout stockage. Il reste à le valider.',
          'Alexis'],
-        ['Le traitement des donnees GPS',
-         'Une photo de telephone porte la position exacte de la prise de vue dans ses '
-         + 'metadonnees. Publiee telle quelle, elle revele ou etait la personne. On '
-         + 'efface a la reception, ou on garde et on le dit : le premier choix est le '
-         + 'seul defendable.',
-         'nous, des que la regle est posee']
+        ['Les dates',
+         'L\'ouverture et la clôture des dépôts, puis la clôture des votes. Sans elles, '
+         + 'le concours n\'a pas d\'échéance.',
+         'Alexis'],
+        ['Le lot',
+         'Ce que gagne la photo la plus étoilée. Il sera écrit dans le règlement.',
+         'Alexis et le juridique d\'OC Sport'],
+        ['Le nom du challenge',
+         '« Challenge photo Alpina » avec le bloc de la marque, ou un autre nom. '
+         + 'L\'aperçu sait déjà s\'afficher sans le bloc.',
+         'Alexis']
       ];
+      var encart = '<section class="rdrc-manque" aria-labelledby="rdrc-manque-t">' +
+        '<div class="rdrc-manque-h">' + IC.alerte +
+          '<h3 class="rdrc-manque-t" id="rdrc-manque-t">Ce qu\'il nous manque pour finaliser le concours photo</h3></div>' +
+        '<p class="rdrc-manque-p">Le concours n\'est pas encore ouvert, et il ne peut pas l\'être sans ces six réponses. '
+          + 'Aucune n\'est technique. Dès qu\'elles arrivent, il nous faut deux à trois jours pour le construire et l\'ouvrir.</p>' +
+        '<ol class="rdrc-manque-l">' + manque.map(function (x, i) {
+          return '<li class="rdrc-manque-i">' +
+            '<span class="rdrc-manque-n" aria-hidden="true">' + (i + 1) + '</span>' +
+            '<span><span class="rdrc-manque-q">' + esc(x[0]) + '</span><span class="rdrc-manque-d">' + esc(x[1]) + '</span></span>' +
+            '<span class="rdrc-manque-qui"><i>À fournir par</i>' + esc(x[2]) + '</span>' +
+          '</li>';
+        }).join('') + '</ol>' +
+      '</section>';
 
-      var liste = decisions.map(function (x, i) {
-        return '<div class="rdrc-art rdrc-art--libre">' +
-          '<span class="rdrc-art-r">' + (i + 1) + '</span>' +
-          '<span class="rdrc-art-t"><b>' + esc(x[0]) + '</b><br>' +
-            '<span style="opacity:.7;font-weight:400">' + esc(x[1]) + '</span></span>' +
-          '<span class="rdrc-art-s">' + esc(x[2]) + '<i>a trancher par</i></span>' +
-        '</div>';
+      var coche = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7"/></svg>';
+      var pret = [
+        ['L\'aperçu en ligne',
+         'La page <a href="/concours-photo-2026" target="_blank" rel="noopener">/concours-photo-2026</a>, masquée des menus '
+         + 'et non indexée, se montre en interne et aux partenaires. Ses 600 photos viennent de la médiathèque du site, '
+         + 'les auteurs, les cœurs et les étoiles sont inventés.'],
+        ['La fenêtre de dépôt',
+         'Dessinée et visible dans l\'aperçu, en ajoutant <code>?etat=aucune</code> à l\'adresse. L\'envoi y est encore simulé, '
+         + 'aucune photo ne part à la médiathèque.'],
+        ['Les situations à montrer',
+         'Un visiteur sans compte (<code>?etat=visiteur</code>), une photo en attente ou refusée (<code>?etat=attente</code>, '
+         + '<code>?etat=refusee</code>), la page sans le bloc Alpina (<code>?marque=sans</code>).'],
+        ['Le référencement',
+         'Le titre, la description et le texte pour les moteurs sont prêts pour le jour de l\'ouverture. '
+         + 'La page reste hors des moteurs tant que c\'est un aperçu.']
+      ].map(function (x) {
+        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic" aria-hidden="true">' + coche + '</span>' +
+          '<span><span class="rdrc-pret-q">' + esc(x[0]) + '</span><span class="rdrc-pret-d">' + x[1] + '</span></span></li>';
       }).join('');
 
-      var suite = ['La file des photos en attente, avec l apercu, l auteur et la date',
-        'Le drapeau des photos portant une position GPS, avant toute publication',
-        'Accepter ou refuser, avec le motif du refus renvoye a l auteur',
-        'Le compte des envois par jour, pour voir si l animation prend'
+      var suite = ['Le vrai dépôt, qui envoie la photo à la médiathèque du site sans sa position GPS',
+        'Les cœurs et l\'étoile enregistrés sur le compte du membre, et l\'encart dans son Espace Rhum',
+        'Dans cet onglet, la file des photos en attente (aperçu, auteur, date), avec Accepter ou Refuser et le motif renvoyé à l\'auteur',
+        'Le compte des dépôts par jour, pour voir si l\'animation prend',
+        'La version anglaise de la page'
       ].map(function (t, i) {
-        return '<div class="rdrc-art rdrc-art--libre"><span class="rdrc-art-r">' + (i + 1) + '</span>' +
-          '<span class="rdrc-art-t">' + esc(t) + '</span></div>';
+        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic is-n" aria-hidden="true">' + (i + 1) + '</span>' +
+          '<span class="rdrc-pret-d">' + esc(t) + '</span></li>';
       }).join('');
 
-      return '<div class="rdrc-grid">' +
-        card('Le concours n est pas ouvert', 'et il ne peut pas l etre',
-          '<div class="rdrc-state">Le module d envoi est ecrit et teste. Ce qui manque '
-          + 'n est pas du code, ce sont trois decisions, listees ci-dessous. Tant '
-          + 'qu elles ne sont pas prises, ouvrir le concours ferait prendre un risque '
-          + 'au Groupe Telegramme et exposerait la position des participants.</div>',
-          true, IC.alerte) +
-        card('Ce qu il faut trancher', '3 decisions, aucune technique',
-          '<div class="rdrc-arts">' + liste + '</div>' +
-          '<p class="rdrc-help" style="margin:12px 0 0">L ouverture du concours n est '
-          + 'pas encore datee, et ses dates sont a fixer avec ces trois reponses. '
-          + 'Aucune echeance avant cela.</p>',
-          true, IC.badge) +
-        card('Ce que cet onglet montrera', 'une fois le concours ouvert',
-          '<div class="rdrc-arts">' + suite + '</div>' +
-          '<p class="rdrc-help" style="margin:12px 0 0">La file reprendra celle '
-          + 'd Instagram, un onglet plus haut : c est le meme metier.</p>',
-          true, IC.people) +
+      return '<div class="rdrc-grid">' + encart +
+        card('Ce qui est prêt', 'pour montrer le concours', '<ul class="rdrc-pret-l">' + pret + '</ul>', false, IC.valide) +
+        card('Ce que nous construirons ensuite', 'deux à trois jours, une fois les réponses reçues',
+          '<ol class="rdrc-pret-l">' + suite + '</ol>' +
+          '<p class="rdrc-help" style="margin:12px 0 0">La file de modération fonctionnera comme celle '
+          + 'd\'Instagram, un onglet plus haut.</p>',
+          false, IC.people) +
       '</div>';
     }
 

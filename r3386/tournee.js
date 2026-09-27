@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum a1d35ad | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="a1d35ad";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum deaa497 | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="deaa497";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';
@@ -7,8 +7,13 @@ if (typeof window === 'undefined' || !window.customElements) return;
 if (customElements.get('tournee-map')) return;
 
  
-const MAPLIBRE_JS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js';
-const MAPLIBRE_CSS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css';
+ 
+
+
+const MAPLIBRE_JS = ['https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js', 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js'];
+const MAPLIBRE_CSS = ['https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css', 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css'];
+const MAPLIBRE_JS_SRI = 'sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp';
+const MAPLIBRE_CSS_SRI = 'sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK';
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 const GEOCODE_URL = 'https://data.geopf.fr/geocodage/search';
 const FRANCE_CENTER = [2.4, 46.6];
@@ -55,8 +60,6 @@ const TRACE_COURBURE = 0.05;
  
  
  
- 
-const DEMO = false;
 const TRACE_ACTIF = true;
 
  
@@ -111,6 +114,10 @@ const DICT = {
         ville_ph: 'Saint-Malo, Rennes…',
         du: 'Du',
         au: 'Au',
+         
+        cal_jours: 'lu ma me je ve sa di',
+        cal_effacer: 'Effacer',
+        cal_fermer: 'Fermer',
         rayon: 'Rayon',
         chercher: 'Voir si je peux le croiser',
         res_position: 'Indique ta position (bouton 📍) ou une ville.',
@@ -205,6 +212,9 @@ const DICT = {
         ville_ph: 'Saint-Malo, Rennes…',
         du: 'From',
         au: 'To',
+        cal_jours: 'Mo Tu We Th Fr Sa Su',
+        cal_effacer: 'Clear',
+        cal_fermer: 'Close',
         rayon: 'Radius',
         chercher: 'See if our paths cross',
         res_position: 'Give your location (📍 button) or a town.',
@@ -404,7 +414,6 @@ const TYMAL_BRETAGNE = ['rennes', 'brest', 'quimper', 'lorient', 'vannes', 'sain
  
  
 const TROPHEE = 'https://static.wixstatic.com/shapes/df962b_5c53bd7ada884b219bbf484518b01364.svg';
-const DOWS = ['lu', 'ma', 'me', 'je', 've', 'sa', 'di'];
 const ICON_TARGET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
 const ICON_LIST = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></svg>';
 const ICON_ROUTE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path stroke-dasharray="2.4 2.4" d="M7 17 17 7"/></svg>';
@@ -445,72 +454,6 @@ const ICON_RETOUR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 const ICON_ARROW_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m6 13 6 6 6-6"/></svg>';
 const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
 
-const DEMO_ETAPES = (function () {
-    const j = (n) => { const d = new Date(); d.setDate(d.getDate() + n); d.setHours(10, 0, 0, 0); return d.toISOString(); };
-    const villes = [
-        ['Rennes', 'Place de la Mairie', 48.1173, -1.6778, 'Coup d\'envoi breton de la tournée.'],
-        ['Nantes', 'Place du Bouffay', 47.2184, -1.5536, 'Tymal sur les bords de Loire.'],
-        ['La Rochelle', 'Vieux-Port', 46.1603, -1.1511, 'Escale maritime au cœur du Vieux-Port.'],
-        ['Bordeaux', 'Place de la Bourse', 44.8378, -0.5792, 'Tymal face au miroir d\'eau.'],
-        ['Bayonne', 'Place de la Liberté', 43.4929, -1.4748, 'Étape basque festive.'],
-        ['Pau', 'Boulevard des Pyrénées', 43.2951, -0.3708, 'Vue sur les Pyrénées.'],
-        ['Toulouse', 'Place du Capitole', 43.6047, 1.4442, 'La ville rose accueille la mascotte.'],
-        ['Carcassonne', 'La Cité', 43.2130, 2.3491, 'Tymal dans la cité médiévale.'],
-        ['Montpellier', 'Place de la Comédie', 43.6108, 3.8767, 'Escale héraultaise.'],
-        ['Nîmes', 'Les Arènes', 43.8367, 4.3601, 'Au pied des arènes romaines.'],
-        ['Avignon', 'Palais des Papes', 43.9493, 4.8055, 'Tymal sous les remparts.'],
-        ['Marseille', 'Vieux-Port', 43.2965, 5.3698, 'La cité phocéenne et son port.'],
-        ['Toulon', 'Port de Toulon', 43.1242, 5.9280, 'Étape varoise en bord de rade.'],
-        ['Nice', 'Promenade des Anglais', 43.7102, 7.2620, 'Tymal sur la Baie des Anges.'],
-        ['Gap', 'Place Jean Marcellin', 44.5594, 6.0790, 'Escale alpine.'],
-        ['Grenoble', 'Place Grenette', 45.1885, 5.7245, 'Au pied des Alpes.'],
-        ['Lyon', 'Place Bellecour', 45.7640, 4.8357, 'Tymal entre Rhône et Saône.'],
-        ['Dijon', 'Place de la Libération', 47.3220, 5.0415, 'Étape bourguignonne.'],
-        ['Besançon', 'La Citadelle', 47.2378, 6.0241, 'Tymal dans la boucle du Doubs.'],
-        ['Strasbourg', 'Place Kléber', 48.5734, 7.7521, 'Escale alsacienne.'],
-        ['Nancy', 'Place Stanislas', 48.6921, 6.1844, 'Sur la plus belle place de France.'],
-        ['Metz', 'Place de la République', 49.1193, 6.1757, 'Étape mosellane.'],
-        ['Reims', 'Place Drouet d\'Erlon', 49.2583, 4.0317, 'Tymal en Champagne.'],
-        ['Lille', 'Grand-Place', 50.6292, 3.0573, 'Étape nordiste.'],
-        ['Amiens', 'Place Gambetta', 49.8941, 2.2958, 'Tymal en Picardie.'],
-        ['Rouen', 'Place du Vieux-Marché', 49.4432, 1.0993, 'Escale normande.'],
-        ['Le Havre', 'Place de l\'Hôtel de Ville', 49.4944, 0.1079, 'Tymal face à la Manche.'],
-        ['Caen', 'Château de Caen', 49.1829, -0.3707, 'Étape calvadosienne.'],
-        ['Cherbourg', 'La Cité de la Mer', 49.6337, -1.6110, 'Dernière escale avant le retour.'],
-        ['Saint-Malo', 'Esplanade Saint-Vincent', 48.6493, -2.0257, 'Arrivée à Saint-Malo, terre de départ de la Route du Rhum.']
-    ];
-    const img = (s) => 'https://picsum.photos/seed/' + s + '/320/220';
-    const gal = (s) => [img(s + '-a'), img(s + '-b'), img(s + '-c')];
-    const mkAnims = (seed) => [
-        { titre: 'Atelier petits matelots', type: 'Atelier', heureDebut: '10:30', heureFin: '12:00', description: 'Fabrique ton mini-bateau et apprends les nœuds marins avec Tymal. Atelier gratuit, encadré par les animateurs de la tournée.', image: img(seed + '1'), galerie: gal(seed + '1'), infos: 'Sur inscription le matin · 6-12 ans' },
-        { titre: 'Rencontre avec un skipper', type: 'Rencontre', heureDebut: '14:00', heureFin: '15:00', description: 'Échange en direct avec un navigateur de la Route du Rhum, suivi d\'une séance de questions-réponses et de dédicaces.', image: img(seed + '2'), galerie: gal(seed + '2'), infos: 'Accès libre · scène centrale' },
-        { titre: 'Show de matelotage', type: 'Spectacle', heureDebut: '17:30', heureFin: '18:30', description: 'Démonstration vivante de manœuvres et de matelotage par l\'équipage, sur le village de la tournée.', image: img(seed + '3'), galerie: gal(seed + '3'), infos: 'Tout public · durée 1h' }
-    ];
-    const sched = (i) => {
-        if (i === 0) return [-12, -10];
-        if (i === 1) return [-7, -6];
-        if (i === 2) return [-1, 1];
-        const s = Math.round(6 + (i - 3) * 5.5);
-        return [s, s + 1];
-    };
-    const retro = (s) => [img(s + '-r1'), img(s + '-r2'), img(s + '-r3'), img(s + '-r4')];
-    const RETRO = { 'Rennes': retro('rennes'), 'Nantes': retro('nantes') };
-    const creneauxFor = (ville, a, b) => {
-        if (ville === 'Bordeaux') {
-            return [
-                { dateDebut: j(a), dateFin: j(a), animations: mkAnims('bdx-j1') },
-                { dateDebut: j(b), dateFin: j(b), animations: mkAnims('bdx-j2') }
-            ];
-        }
-        const seed = ville.toLowerCase().replace(/[^a-z]/g, '');
-        return [{ dateDebut: j(a), dateFin: j(b), animations: mkAnims(seed) }];
-    };
-    return villes.map((v, i) => {
-        const [a, b] = sched(i);
-        return { _id: 'demo' + i, ville: v[0], lieu: v[1], latitude: v[2], longitude: v[3], dateDebut: j(a), dateFin: j(b), description: v[4], infosPratiques: 'Accès libre. Animations sur place.', statutManuel: '', creneaux: creneauxFor(v[0], a, b), photosRetro: RETRO[v[0]] || [] };
-    });
-})();
-
 class TourneeMap extends HTMLElement {
     static get observedAttributes() { return ['data-payload', 'data-focus', 'lang']; }
 
@@ -550,6 +493,7 @@ class TourneeMap extends HTMLElement {
         this._charge = false;
         this._chargePerdue = false;
         this._minuteurCharge = 0;
+        this._minuteurCarte = 0;
         this._ready = false;
         this._filtre = 'tous';
         this._recherche = '';
@@ -596,6 +540,11 @@ class TourneeMap extends HTMLElement {
             this._appliquerParcours(this._cleActive || this._choisirParcoursInitial(), { silencieux: true });
         }
         this._loadMapLibre().then(() => this._initMap());
+        
+
+
+        if (this._minuteurCarte) clearTimeout(this._minuteurCarte);
+        this._minuteurCarte = setTimeout(() => { this._minuteurCarte = 0; this._carteArrivee(); }, TourneeMap.ATTENTE_DONNEES_MS);
         this._refresh();
         
 
@@ -607,13 +556,12 @@ class TourneeMap extends HTMLElement {
                 this._renderListe();
             }, TourneeMap.ATTENTE_DONNEES_MS);
         }
-        if (DEMO) setTimeout(() => {
-            if (!this._etapes.length) { this._etapes = DEMO_ETAPES; this._refresh(); }
-        }, 1500);
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
-        if (name === 'data-payload' && newVal) {
+         
+         
+        if (name === 'data-payload' && newVal && newVal !== oldVal) {
             this._lirePayload(newVal);
             this._renderSwitch();
             this._appliquerParcours(this._choisirParcoursInitial(), { silencieux: true });
@@ -935,7 +883,7 @@ class TourneeMap extends HTMLElement {
     _url(u, repli) {
         const fallback = arguments.length > 1 ? repli : '';
         if (u == null) return fallback;
-        let s = String(u).trim();
+        let s = String(u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
         if (!s) return fallback;
         let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
         if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -948,11 +896,15 @@ class TourneeMap extends HTMLElement {
 
     disconnectedCallback() {
         if (this._minuteurCharge) { clearTimeout(this._minuteurCharge); this._minuteurCharge = 0; }
+        if (this._minuteurCarte) { clearTimeout(this._minuteurCarte); this._minuteurCarte = 0; }
         if (this._pulseRAF) cancelAnimationFrame(this._pulseRAF);
+        this._pulseRAF = null;
+        if (this._io) { this._io.disconnect(); this._io = null; this._horsEcran = false; }
         if (this._ro) this._ro.disconnect();
         if (this._onKey) { window.removeEventListener('keydown', this._onKey); this._onKey = null; }
         if (this._onVisible) { document.removeEventListener('visibilitychange', this._onVisible); this._onVisible = null; }
         if (this._onDocClick) { document.removeEventListener('click', this._onDocClick); this._onDocClick = null; }
+        if (this._onHoteClic) { this.removeEventListener('click', this._onHoteClic); this._onHoteClic = null; }
          
          
          
@@ -1198,26 +1150,33 @@ class TourneeMap extends HTMLElement {
     _injectStyles() {
         if (!document.getElementById('tm-maplibre-css')) {
             const link = document.createElement('link');
-            link.id = 'tm-maplibre-css'; link.rel = 'stylesheet'; link.href = MAPLIBRE_CSS;
+            link.id = 'tm-maplibre-css'; link.rel = 'stylesheet';
+            link.integrity = MAPLIBRE_CSS_SRI; link.crossOrigin = 'anonymous';
+            let i = 0;
+            link.onerror = () => { if (++i < MAPLIBRE_CSS.length) link.href = MAPLIBRE_CSS[i]; };
+            link.href = MAPLIBRE_CSS[0];
             document.head.appendChild(link);
         }
-        if (!document.getElementById('tm-varien')) {
+        
+
+
+
+        if (!document.getElementById('tm-police')) {
             const f = document.createElement('style');
-            f.id = 'tm-varien';
-            f.textContent = "@font-face{font-family:'Varien';src:url('https://cdn.jsdelivr.net/gh/WapitixAgency/fonts/Varien.woff2') format('woff2');font-weight:normal;font-style:normal;font-display:swap}@font-face{font-family:'Varien';src:url('https://cdn.jsdelivr.net/gh/WapitixAgency/fonts/Varien-Italic.woff2') format('woff2');font-weight:normal;font-style:italic;font-display:swap}";
+            f.id = 'tm-police';
+            f.textContent = "@font-face{font-family:'RDR Montserrat';src:url('https://cdn.jsdelivr.net/npm/@fontsource-variable/montserrat@5.3.0/files/montserrat-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}";
             document.head.appendChild(f);
         }
         if (document.getElementById('tm-style')) return;
         const style = document.createElement('style');
         style.id = 'tm-style';
         style.textContent = `
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 
 
 
 
-tournee-map{display:block;position:relative;width:100%;height:100%;min-height:520px;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#fff;}
+tournee-map{display:block;position:relative;width:100%;height:100%;min-height:520px;font-family:'RDR Montserrat','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#fff;}
 
 
 
@@ -1245,10 +1204,17 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 
 
 
-.tm-root{position:absolute;inset:0;max-height:100vh;max-height:100dvh;}
+.tm-root{position:absolute;inset:0;max-height:100vh;max-height:100dvh;background:${CARTE.terre};}
+
+
+
+
+
+
+.tm-root.tm-carte-attente::before{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.5) 50%,transparent 75%);animation:tm-sq-luire 1.6s ease-in-out infinite;pointer-events:none;}
 
 .tm-marker{width:22px;height:22px;border-radius:50%;border:3px solid #fff;cursor:pointer;box-shadow:0 2px 8px rgba(12,33,67,.55);transition:transform .15s ease;}
-.tm-marker:hover{transform:scale(1.28);}
+@media (hover:hover) and (pointer:fine){.tm-marker:hover{transform:scale(1.28);}}
 .tm-passe{opacity:.55;}
 .tm-en_cours{position:relative;}
 .tm-en_cours::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--tm-ac);animation:tm-pulse 1.7s ease-out infinite;}
@@ -1281,7 +1247,7 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 
 
 .tm-switch-btn[data-cle="trophee"] .tm-switch-illu{background:none;}
-.tm-switch-btn:hover:not(.tm-on){background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);color:#fff;}
+@media (hover:hover) and (pointer:fine){.tm-switch-btn:hover:not(.tm-on){background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);color:#fff;}}
 .tm-switch-btn.tm-on{background:linear-gradient(135deg,var(--tm-ac-clair),var(--tm-ac));border-color:rgba(255,255,255,.35);color:#0b2545;font-weight:800;box-shadow:0 6px 16px -4px rgba(0,0,0,.6);}
 .tm-switch-btn.tm-on .tm-switch-illu{background:rgba(255,255,255,.45);}
 .tm-switch-btn[data-cle="trophee"].tm-on .tm-switch-illu{background:none;}
@@ -1296,12 +1262,16 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 
 .tm-topbar{position:absolute;top:18px;left:18px;z-index:16;display:flex;align-items:center;gap:8px;max-width:calc(100% - 36px);}
 .tm-retour{flex:0 0 auto;align-self:stretch;display:inline-flex;align-items:center;gap:7px;padding:0 16px 0 13px;border-radius:999px;background:rgba(9,26,52,.82);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.86);font-family:inherit;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 28px rgba(7,17,31,.45);transition:background .18s,color .18s;}
-.tm-retour:hover{background:rgba(16,40,74,.92);color:#fff;}
+@media (hover:hover) and (pointer:fine){.tm-retour:hover{background:rgba(16,40,74,.92);color:#fff;}}
 .tm-retour:focus-visible{outline:2px solid #fff;outline-offset:2px;}
 .tm-retour svg{width:17px;height:17px;flex:0 0 auto;}
 .tm-switch-flottant{display:inline-flex;position:static;z-index:auto;width:auto;max-width:100%;margin:0;padding:4px;gap:4px;background:rgba(9,26,52,.82);border-color:rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 28px rgba(7,17,31,.45);}
 .tm-switch-flottant .tm-switch-btn{flex:0 0 auto;min-height:42px;padding:11px 20px;font-size:12.5px;color:rgba(255,255,255,.8);white-space:nowrap;overflow:visible;text-overflow:clip;}
-.tm-switch-flottant .tm-switch-btn:not(.tm-on):hover{background:rgba(255,255,255,.11);color:#fff;}
+
+
+
+.tm-switch[hidden]{display:none;}
+@media (hover:hover) and (pointer:fine){.tm-switch-flottant .tm-switch-btn:not(.tm-on):hover{background:rgba(255,255,255,.11);color:#fff;}}
 
 
 
@@ -1347,7 +1317,7 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 .tm-field input:focus{border-color:rgba(var(--tm-ac-rgb),.5);border-bottom-color:var(--tm-ac);background:rgba(var(--tm-ac-rgb),.1);box-shadow:0 0 0 3px rgba(var(--tm-ac-rgb),.1);}
 .tm-dates{display:flex;gap:9px;}
 .tm-datefield{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-bottom:2px solid rgba(var(--tm-ac-rgb),.35);border-radius:8px;padding:9px 12px;cursor:pointer;font-family:inherit;text-align:left;transition:border-color .2s;}
-.tm-datefield:hover{border-bottom-color:var(--tm-ac);}
+@media (hover:hover) and (pointer:fine){.tm-datefield:hover{border-bottom-color:var(--tm-ac);}}
 .tm-datefield-row{display:flex;align-items:center;gap:7px;width:100%;}
 .tm-datefield-row svg{width:15px;height:15px;color:var(--tm-ac);flex:0 0 auto;}
 .tm-dateval{font-size:14px;font-weight:600;color:#fff;}
@@ -1358,11 +1328,11 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 .tm-cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .tm-cal-title{font-weight:800;font-size:13px;text-transform:capitalize;color:#fff;}
 .tm-cal-nav{background:rgba(var(--tm-ac-rgb),.14);border:0;color:var(--tm-ac);width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;font-family:inherit;}
-.tm-cal-nav:hover{background:rgba(var(--tm-ac-rgb),.26);}
+@media (hover:hover) and (pointer:fine){.tm-cal-nav:hover{background:rgba(var(--tm-ac-rgb),.26);}}
 .tm-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .tm-cal-dow{font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;padding:3px 0 6px;}
 .tm-cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border-radius:7px;cursor:pointer;color:#fff;transition:background .12s;}
-.tm-cal-day:hover{background:rgba(var(--tm-ac-rgb),.22);}
+@media (hover:hover) and (pointer:fine){.tm-cal-day:hover{background:rgba(var(--tm-ac-rgb),.22);}}
 .tm-cal-day.empty{visibility:hidden;cursor:default;}
 .tm-cal-day.today{box-shadow:inset 0 0 0 1.5px rgba(var(--tm-ac-rgb),.6);}
 .tm-cal-day.in-range{background:rgba(var(--tm-ac-rgb),.2);border-radius:0;}
@@ -1378,12 +1348,12 @@ tournee-map,tournee-map *,tournee-map *::before,tournee-map *::after{box-sizing:
 .tm-rayon-val{font-weight:700;font-size:13px;color:var(--tm-ac);}
 input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-btn{border:0;border-radius:10px 0 10px 0;padding:13px 14px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;font-family:inherit;width:100%;transition:filter .15s,transform .1s,box-shadow .2s;}
-.tm-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+@media (hover:hover) and (pointer:fine){.tm-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}}
 .tm-btn:active{transform:translateY(1px);}
 .tm-btn-primary{background:linear-gradient(135deg,var(--tm-ac),var(--tm-ac-sombre));color:${NAVY};box-shadow:0 6px 18px rgba(var(--tm-ac-rgb),.4);}
 .tm-btn-ghost{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.16);}
 .tm-geo{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:12px;background:rgba(var(--tm-ac-rgb),.14);border:1px solid rgba(var(--tm-ac-rgb),.35);border-radius:9px;padding:11px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;color:var(--tm-ac);font-family:inherit;width:100%;transition:background .2s;}
-.tm-geo:hover{background:rgba(var(--tm-ac-rgb),.24);}
+@media (hover:hover) and (pointer:fine){.tm-geo:hover{background:rgba(var(--tm-ac-rgb),.24);}}
 .tm-result{margin-top:13px;font-size:13px;line-height:1.5;padding:12px 13px;border-radius:10px 0 10px 0;display:none;font-weight:600;}
 .tm-result.tm-hit{background:rgba(var(--tm-ac-rgb),.14);border:1px solid rgba(var(--tm-ac-rgb),.45);color:#fff;display:block;}
 .tm-result.tm-miss{background:rgba(255,237,0,.12);border:1px solid rgba(255,237,0,.45);color:#fff;display:block;}
@@ -1415,7 +1385,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-chip[data-filtre="a_venir"]::before{background:var(--tm-st-avenir);}
 .tm-chip[data-filtre="en_cours"]::before{background:var(--tm-st-encours);}
 .tm-chip[data-filtre="passe"]::before{background:var(--tm-st-passe);}
-.tm-chip:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(var(--tm-ac-rgb),.45);}
+@media (hover:hover) and (pointer:fine){.tm-chip:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(var(--tm-ac-rgb),.45);}}
 .tm-chip.tm-active{background:var(--tm-ac);border-color:var(--tm-ac);color:#0b2545;font-weight:800;}
 
 
@@ -1430,7 +1400,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-list::-webkit-scrollbar{width:6px;}
 .tm-list::-webkit-scrollbar-thumb{background:rgba(var(--tm-ac-rgb),.35);border-radius:999px;}
 .tm-card{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--cc,var(--tm-ac));border-radius:0 12px 12px 0;padding:13px;margin-bottom:9px;cursor:pointer;transition:background .18s,transform .14s,box-shadow .18s;}
-.tm-card:hover{background:rgba(var(--tm-ac-rgb),.1);transform:translateX(3px);box-shadow:0 6px 20px rgba(7,17,31,.3);}
+@media (hover:hover) and (pointer:fine){.tm-card:hover{background:rgba(var(--tm-ac-rgb),.1);transform:translateX(3px);box-shadow:0 6px 20px rgba(7,17,31,.3);}}
 .tm-card-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
 .tm-badge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:4px 9px;border-radius:999px;white-space:nowrap;}
 .tm-card h4{margin:0;flex:1;font-family:'Varien',sans-serif;font-style:italic;text-transform:uppercase;font-size:22px;line-height:.95;color:#fff;letter-spacing:-.01em;}
@@ -1440,11 +1410,28 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-grpbanner button{background:none;border:0;color:var(--tm-ac);font-weight:800;font-size:11px;cursor:pointer;font-family:inherit;text-transform:uppercase;letter-spacing:.04em;}
 .tm-group-list{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
 .tm-group-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 13px;cursor:pointer;font-family:inherit;text-align:left;transition:background .15s,transform .12s;}
-.tm-group-item:hover{background:rgba(var(--tm-ac-rgb),.12);transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){.tm-group-item:hover{background:rgba(var(--tm-ac-rgb),.12);transform:translateX(3px);}}
 .tm-group-when{font-weight:700;color:#fff;font-size:13px;}
 .tm-group-lieu{font-size:12px;color:rgba(255,255,255,.55);width:100%;font-weight:500;}
 .tm-empty{padding:26px 18px 30px;text-align:center;color:rgba(255,255,255,.4);font-size:13px;font-weight:600;}
 .tm-empty img{width:84px;height:auto;margin-bottom:10px;opacity:.92;filter:drop-shadow(0 6px 12px rgba(7,17,31,.4));}
+
+
+
+
+
+.tm-list[aria-busy="true"]{overflow:hidden;}
+.tm-sq-carte{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-left:3px solid rgba(var(--tm-ac-rgb),.4);border-radius:0 12px 12px 0;padding:13px;margin-bottom:9px;height:85px;}
+.tm-sq-haut{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.tm-sq-l{position:relative;display:block;overflow:hidden;height:10px;border-radius:4px;background:rgba(255,255,255,.1);}
+.tm-sq-badge{flex:none;width:62px;height:17px;border-radius:999px;background:rgba(var(--tm-ac-rgb),.3);}
+.tm-sq-ville{width:46%;height:19px;border-radius:5px;}
+.tm-sq-meta{width:58%;margin-top:7px;}
+.tm-sq-court{width:40%;}
+.tm-sq-l::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);animation:tm-sq-luire 1.6s ease-in-out infinite;}
+@keyframes tm-sq-luire{to{transform:translateX(100%)}}
+ 
+@media (prefers-reduced-motion:reduce){.tm-sq-l::after,.tm-root.tm-carte-attente::before{animation:none;display:none;}}
 
 .tm-detail{position:absolute;bottom:22px;left:50%;width:min(540px,calc(100% - 36px));border-radius:16px;z-index:8;opacity:0;transform:translateX(-50%) translateY(26px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;overflow:visible;}
 .tm-detail.tm-open{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
@@ -1457,7 +1444,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 
 
 .tm-lien-externe{display:inline-block;margin-top:14px;color:var(--tm-ac);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px;}
-.tm-lien-externe:hover{color:#fff;}
+@media (hover:hover) and (pointer:fine){.tm-lien-externe:hover{color:#fff;}}
 .tm-lien-externe:focus-visible{outline:2px solid #fff;outline-offset:3px;}
 .tm-detail-passe h3{opacity:.78;}
 .tm-detail-passe .tm-meta{color:rgba(255,255,255,.48);}
@@ -1477,7 +1464,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-anim-titre{font-size:14px;font-weight:700;color:#fff;line-height:1.2;}
 .tm-anim-desc{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;margin-top:3px;}
 .tm-anim{cursor:pointer;transition:border-color .2s,background .2s;}
-.tm-anim:hover{border-color:rgba(var(--tm-ac-rgb),.3);}
+@media (hover:hover) and (pointer:fine){.tm-anim:hover{border-color:rgba(var(--tm-ac-rgb),.3);}}
 .tm-anim-caret{margin-left:auto;color:rgba(255,255,255,.4);font-size:15px;line-height:1;transition:transform .25s;}
 .tm-anim-open .tm-anim-caret{transform:rotate(180deg);}
 .tm-anim-detail{max-height:0;overflow:hidden;transition:max-height .3s ease;width:100%;}
@@ -1493,19 +1480,19 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-car-track::-webkit-scrollbar{height:0;display:none;}
 .tm-slide{flex:0 0 62%;scroll-snap-align:center;padding:0;border:none;background:rgba(255,255,255,.05);border-radius:13px;overflow:hidden;cursor:pointer;position:relative;height:188px;box-shadow:0 6px 16px rgba(7,17,31,.35);}
 .tm-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
-.tm-slide:hover img{transform:scale(1.04);}
+@media (hover:hover) and (pointer:fine){.tm-slide:hover img{transform:scale(1.04);}}
 .tm-car-single .tm-slide{flex:0 0 96%;}
 .tm-slide-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;background:rgba(0,0,0,.3);}
 .tm-car-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(7,18,38,.82);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 4px 12px rgba(7,17,31,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
 .tm-car-prev{left:6px;}
 .tm-car-next{right:6px;}
-.tm-car-arrow:hover{background:${NAVY};}
+@media (hover:hover) and (pointer:fine){.tm-car-arrow:hover{background:${NAVY};}}
 .tm-agenda{position:absolute;inset:0;z-index:21;display:flex;align-items:center;justify-content:center;background:rgba(5,12,26,.62);opacity:0;pointer-events:none;transition:opacity .2s;padding:20px;}
 .tm-agenda.tm-open{opacity:1;pointer-events:auto;}
 .tm-agenda-card{width:min(340px,100%);border-radius:16px;padding:22px 20px 18px;position:relative;display:flex;flex-direction:column;gap:9px;}
 .tm-agenda-card h4{margin:0 0 4px;font-family:'Varien',sans-serif;font-style:italic;text-transform:uppercase;font-size:19px;color:#fff;padding-right:34px;}
 .tm-agenda-choix{display:block;width:100%;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:13px 15px;color:#fff;font-family:inherit;font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;transition:background .18s,border-color .18s;}
-.tm-agenda-choix:hover{background:rgba(var(--tm-ac-rgb),.16);border-color:rgba(var(--tm-ac-rgb),.5);}
+@media (hover:hover) and (pointer:fine){.tm-agenda-choix:hover{background:rgba(var(--tm-ac-rgb),.16);border-color:rgba(var(--tm-ac-rgb),.5);}}
 .tm-agenda-note{margin:4px 0 0;font-size:11px;line-height:1.45;color:rgba(255,255,255,.5);}
 .tm-lightbox{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(4,9,18,.93);opacity:0;pointer-events:none;transition:opacity .2s;}
 .tm-lightbox.tm-open{opacity:1;pointer-events:auto;}
@@ -1520,7 +1507,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
 .tm-lb-prev{left:18px;}
 .tm-lb-next{right:18px;}
-.tm-lb-nav:hover,.tm-lb-close:hover{background:rgba(255,255,255,.22);}
+@media (hover:hover) and (pointer:fine){.tm-lb-nav:hover,.tm-lb-close:hover{background:rgba(255,255,255,.22);}}
 .tm-lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;color:rgba(255,255,255,.85);background:rgba(0,0,0,.45);padding:5px 13px;border-radius:999px;}
 .tm-datetabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
 .tm-datechip{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font-family:inherit;text-transform:capitalize;}
@@ -1540,7 +1527,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-village-title{display:block;font-family:'Varien',sans-serif;font-style:italic;text-transform:uppercase;font-size:15px;color:#fff;line-height:1;margin:2px 0;}
 .tm-village-dates{display:block;font-size:9px;font-weight:700;color:${JAUNE};}
 .tm-village-masc{width:60px;height:auto;filter:drop-shadow(0 6px 10px rgba(7,17,31,.5));transition:transform .2s ease;}
-.tm-village:hover .tm-village-masc{transform:translateY(-2px) scale(1.04);}
+@media (hover:hover) and (pointer:fine){.tm-village:hover .tm-village-masc{transform:translateY(-2px) scale(1.04);}}
 .tm-village-point{margin-top:2px;color:var(--tm-ac);filter:drop-shadow(0 2px 5px rgba(7,17,31,.5));}
 .tm-village-point svg{width:17px;height:17px;display:block;}
 .tm-village-min .tm-village-card{display:none;}
@@ -1586,28 +1573,20 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 
 .tm-langue-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;border-radius:50%;background:rgba(7,18,38,.72);border:1px solid rgba(255,255,255,.18);cursor:pointer;overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:border-color .18s,box-shadow .18s;}
 .tm-langue-btn .tm-drapeau{width:19px;height:13px;border-radius:2.5px;display:block;box-shadow:0 0 0 1px rgba(255,255,255,.28);filter:saturate(.85);transition:filter .18s;}
-.tm-langue-btn:hover,.tm-langue-btn[aria-expanded="true"]{border-color:rgba(255,255,255,.45);box-shadow:0 0 0 3px rgba(255,255,255,.08);}
-.tm-langue-btn:hover .tm-drapeau,.tm-langue-btn[aria-expanded="true"] .tm-drapeau{filter:none;}
+.tm-langue-btn[aria-expanded="true"]{border-color:rgba(255,255,255,.45);box-shadow:0 0 0 3px rgba(255,255,255,.08);}@media (hover:hover) and (pointer:fine){.tm-langue-btn:hover{border-color:rgba(255,255,255,.45);box-shadow:0 0 0 3px rgba(255,255,255,.08);}}
+.tm-langue-btn[aria-expanded="true"] .tm-drapeau{filter:none;}@media (hover:hover) and (pointer:fine){.tm-langue-btn:hover .tm-drapeau{filter:none;}}
 .tm-langue-btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
  
 .tm-langue-menu{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:136px;padding:4px;border-radius:13px;background:rgba(9,22,44,.96);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 34px rgba(7,17,31,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
 .tm-langue-menu[hidden]{display:none;}
 .tm-langue-item{display:flex;align-items:center;gap:10px;padding:8px 12px 8px 9px;border-radius:9px;font-family:inherit;font-size:12px;font-weight:600;color:rgba(255,255,255,.76);text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
 .tm-langue-item .tm-drapeau{width:22px;height:15px;flex:0 0 auto;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(255,255,255,.2);}
-.tm-langue-item:hover{background:rgba(255,255,255,.1);color:#fff;}
+@media (hover:hover) and (pointer:fine){.tm-langue-item:hover{background:rgba(255,255,255,.1);color:#fff;}}
 .tm-langue-item:focus-visible{outline:2px solid #fff;outline-offset:-2px;}
 
 
 
 .tm-langue-item[aria-current="true"]{color:#fff;background:rgba(255,255,255,.1);box-shadow:inset 2px 0 0 var(--tm-ac);}
-.tm-devbar{position:absolute;bottom:14px;left:146px;z-index:7;display:flex;align-items:center;gap:5px;background:rgba(7,18,38,.72);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px;box-shadow:0 4px 12px rgba(7,17,31,.32);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:.85;transition:opacity .2s;}
-.tm-devbar:hover,.tm-devbar.tm-dev-open{opacity:1;}
-.tm-devtoggle{width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:14px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
-.tm-devbar.tm-dev-open .tm-devtoggle{background:var(--tm-ac);}
-.tm-devbtns{display:none;align-items:center;gap:4px;padding-right:4px;}
-.tm-devbar.tm-dev-open .tm-devbtns{display:flex;}
-.tm-devbtn{font-size:10px;font-weight:700;padding:5px 9px;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);cursor:pointer;font-family:inherit;white-space:nowrap;}
-.tm-devbtn.tm-on{background:var(--tm-ac);color:${NAVY};}
 
 
 
@@ -1644,13 +1623,13 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 
 
 .tm-root .maplibregl-ctrl-group button + button{box-shadow:inset -1px 0 0 rgba(255,255,255,.16);}
-.tm-root .maplibregl-ctrl-group button:hover{background:rgba(255,255,255,.08);}
+@media (hover:hover) and (pointer:fine){.tm-root .maplibregl-ctrl-group button:hover{background:rgba(255,255,255,.08);}}
 .tm-root .maplibregl-ctrl-group button:focus-visible{outline:2px solid #fff;outline-offset:-2px;}
 
 
 .tm-root .maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:invert(1) brightness(1.6);
   opacity:.82;}
-.tm-root .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{opacity:1;}
+@media (hover:hover) and (pointer:fine){.tm-root .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{opacity:1;}}
 
 
 
@@ -1674,8 +1653,8 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
   filter:none;background-color:transparent;background-repeat:no-repeat;
   background-position:center;background-size:17px 17px;
   background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23ffffff%27 stroke-width=%272%27 stroke-linecap=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%279%27/%3E%3Cpath d=%27M12 11.4v4.8%27/%3E%3Cpath d=%27M12 7.9h.01%27/%3E%3C/svg%3E");}
-.tm-root .maplibregl-ctrl-attrib:hover .maplibregl-ctrl-attrib-button{opacity:1;}
-.tm-root .maplibregl-ctrl-attrib-button:hover{opacity:1;}
+@media (hover:hover) and (pointer:fine){.tm-root .maplibregl-ctrl-attrib:hover .maplibregl-ctrl-attrib-button{opacity:1;}}
+@media (hover:hover) and (pointer:fine){.tm-root .maplibregl-ctrl-attrib-button:hover{opacity:1;}}
 
 
 
@@ -1712,7 +1691,7 @@ input[type=range]{width:100%;accent-color:var(--tm-ac);cursor:pointer;}
 .tm-filterpill{display:none;position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:15;align-items:center;gap:8px;background:var(--tm-ac);border:0;color:${NAVY};border-radius:999px;padding:10px 17px;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(7,17,31,.45);white-space:nowrap;text-transform:uppercase;letter-spacing:.03em;}
 .tm-filterpill svg{width:15px;height:15px;color:${NAVY};flex:0 0 auto;}
 .tm-filterpill b{text-decoration:underline;}
-.tm-filterpill:hover{filter:brightness(1.06);}
+@media (hover:hover) and (pointer:fine){.tm-filterpill:hover{filter:brightness(1.06);}}
 tournee-map.tm-filtered .tm-filterpill{display:inline-flex;}
 
 
@@ -1920,8 +1899,6 @@ tournee-map.tm-filtered .tm-filterpill{display:inline-flex;}
   .tm-langue-btn{width:34px;height:34px;}
   .tm-trace-btn{position:absolute;top:calc(82px + env(safe-area-inset-top));bottom:auto;left:auto;right:12px;z-index:12;padding:7px 12px;font-size:9.5px;letter-spacing:.05em;gap:6px;}
   .tm-trace-btn svg{width:13px;height:13px;}
-  .tm-devbar{top:calc(12px + env(safe-area-inset-top));left:12px;bottom:auto;}
-  .tm-devbar.tm-dev-open{flex-wrap:wrap;max-width:80vw;}
 }
 
 
@@ -2013,7 +1990,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
      
     _buildDom() {
         this.innerHTML = `
-<div class="tm-root"></div>
+<div class="tm-root tm-carte-attente"></div>
 <div class="tm-panel tm-glass">
   <div class="tm-handle" data-act="handle"></div>
   <img class="tm-sheet-masc" src="${TYMAL.pouce}" alt="">
@@ -2110,7 +2087,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
       <a class="tm-langue-item" data-el="langueEn" role="menuitem" href="#" lang="en" hreflang="en">${DRAPEAU_EN('menu')}<span>English</span></a>
     </div>
   </div>
-</div>${DEMO ? '<div class="tm-devbar tm-dev-open"><button class="tm-devtoggle" data-act="devToggle" title="Test Tymal">🧪</button><div class="tm-devbtns"><button class="tm-devbtn tm-on" data-act="dev" data-mode="auto">Auto</button><button class="tm-devbtn" data-act="dev" data-mode="ici">Ici</button><button class="tm-devbtn" data-act="dev" data-mode="route">En route</button><button class="tm-devbtn" data-act="dev" data-mode="avant">Avant départ</button></div></div>' : ''}`;
+</div>`;
     }
 
      
@@ -2125,7 +2102,10 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _q(sel) { return this.querySelector(sel); }
 
     _bindUI() {
-        this.addEventListener('click', (ev) => {
+         
+         
+        if (this._onHoteClic) this.removeEventListener('click', this._onHoteClic);
+        this._onHoteClic = (ev) => {
             const actEl = ev.target.closest('[data-act]');
             const act = actEl ? actEl.getAttribute('data-act') : null;
             if (act === 'parcours') {
@@ -2136,7 +2116,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (act === 'match') this._matching();
             if (act === 'closeDetail') this._fermerDetail();
             if (act === 'handle') this._closeSheets();
-            if (act === 'devToggle') { const db = this._q('.tm-devbar'); if (db) db.classList.toggle('tm-dev-open'); }
             if (act === 'scrim') { const d = this._q('[data-el=detail]'); if (d && d.classList.contains('tm-open')) this._fermerDetail(); else this._closeSheets(); }
             if (act === 'clearGroup') this._clearGroup();
             if (act === 'clearAll') this._clearAll();
@@ -2149,7 +2128,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (act === 'fermerAgenda') this._fermerAgenda();
             if (act === 'fermerItineraire') this._fermerItineraire();
             if (act === 'agendaIcs') { this._agenda(this._agendaCible || this._detailEtape); this._fermerAgenda(); }
-            if (act === 'dev') { const m = actEl.getAttribute('data-mode'); this._forceCurrent = (m === 'auto') ? null : m; this.querySelectorAll('.tm-devbtn').forEach((b) => b.classList.toggle('tm-on', b === actEl)); this._addCurrent(); }
             if (act === 'lightbox') this._openLightbox(this._detailGallery, +actEl.getAttribute('data-i'));
             if (act === 'lbClose') this._closeLightbox();
             if (act === 'lbPrev') this._lightboxNav(-1);
@@ -2161,7 +2139,8 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (chip) this._setFiltre(chip.getAttribute('data-filtre'));
             if (!ev.target.closest('.tm-cal') && !ev.target.closest('.tm-datefield')) this._closeCal();
             if (!ev.target.closest('.tm-langue')) this._fermerLangue();
-        });
+        };
+        this.addEventListener('click', this._onHoteClic);
         const rayon = this._q('[data-f=rayon]');
         if (rayon) rayon.addEventListener('input', () => { this._q('[data-el=rayonVal]').textContent = rayon.value + ' km'; });
         const rech = this._q('[data-f=recherche]');
@@ -2202,7 +2181,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (day) this._pickDay(new Date(this._calRef.getFullYear(), this._calRef.getMonth(), parseInt(day, 10)));
         });
         this._bindMobileGestures();
-        if (window.innerWidth <= 768) { const db = this._q('.tm-devbar'); if (db) db.classList.remove('tm-dev-open'); }
     }
 
      
@@ -2230,7 +2208,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         const first = new Date(y, m, 1);
         const startDow = (first.getDay() + 6) % 7;
         const nbDays = new Date(y, m + 1, 0).getDate();
-        const moisFR = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' }).format(first);
+        const mois = new Intl.DateTimeFormat(LOCALES[this._lang] || LOCALES.fr, { month: 'long', year: 'numeric' }).format(first);
         const today = new Date(); today.setHours(0, 0, 0, 0);
         const du = this._du ? this._du.getTime() : null;
         const au = this._au ? new Date(this._au.getFullYear(), this._au.getMonth(), this._au.getDate()).getTime() : null;
@@ -2245,9 +2223,9 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             if (isStart || isEnd) { cls += ' edge'; if (isStart && isEnd) cls += ' single'; else if (isStart) cls += ' start'; else cls += ' end'; }
             cells += '<div class="' + cls + '" data-day="' + dn + '">' + dn + '</div>';
         }
-        cal.innerHTML = `<div class="tm-cal-head"><button class="tm-cal-nav" data-cal="prev">‹</button><span class="tm-cal-title">${moisFR}</span><button class="tm-cal-nav" data-cal="next">›</button></div>
-<div class="tm-cal-grid">${DOWS.map((d) => '<div class="tm-cal-dow">' + d + '</div>').join('')}${cells}</div>
-<div class="tm-cal-foot"><button class="tm-cal-link" data-cal="clear">Effacer</button><button class="tm-cal-link" data-cal="close">Fermer</button></div>`;
+        cal.innerHTML = `<div class="tm-cal-head"><button class="tm-cal-nav" data-cal="prev">‹</button><span class="tm-cal-title">${mois}</span><button class="tm-cal-nav" data-cal="next">›</button></div>
+<div class="tm-cal-grid">${this._t('cal_jours').split(' ').map((d) => '<div class="tm-cal-dow">' + d + '</div>').join('')}${cells}</div>
+<div class="tm-cal-foot"><button class="tm-cal-link" data-cal="clear">${this._t('cal_effacer')}</button><button class="tm-cal-link" data-cal="close">${this._t('cal_fermer')}</button></div>`;
     }
 
     _updateDateFields() {
@@ -2261,9 +2239,18 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _loadMapLibre() {
         return new Promise((resolve) => {
             if (window.maplibregl) return resolve();
-            const s = document.createElement('script');
-            s.src = MAPLIBRE_JS; s.onload = () => resolve();
-            document.head.appendChild(s);
+            
+
+            const essayer = (i) => {
+                if (window.maplibregl || i >= MAPLIBRE_JS.length) return resolve();
+                const s = document.createElement('script');
+                s.integrity = MAPLIBRE_JS_SRI; s.crossOrigin = 'anonymous';
+                s.onload = () => resolve();
+                s.onerror = () => { s.remove(); essayer(i + 1); };
+                s.src = MAPLIBRE_JS[i];
+                document.head.appendChild(s);
+            };
+            essayer(0);
         });
     }
 
@@ -2300,9 +2287,17 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         this._map.on('sourcedata', soigner);
     }
 
+     
+    _carteArrivee() {
+        const racine = this._q('.tm-root');
+        if (racine) racine.classList.remove('tm-carte-attente');
+        if (this._minuteurCarte) { clearTimeout(this._minuteurCarte); this._minuteurCarte = 0; }
+    }
+
     _initMap() {
         const container = this._q('.tm-root');
         if (!container || !window.maplibregl) return;
+        if (!this.isConnected || this._map) return;
         const mobile = window.innerWidth <= 768;
         this._map = new window.maplibregl.Map({
             container, style: STYLE_URL,
@@ -2372,6 +2367,17 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             };
             document.addEventListener('visibilitychange', this._onVisible);
         }
+        if (!this._io && window.IntersectionObserver) {
+            this._io = new window.IntersectionObserver((entrees) => {
+                const hors = !entrees[entrees.length - 1].isIntersecting;
+                if (hors === !!this._horsEcran) return;
+                this._horsEcran = hors;
+                if (hors) { if (this._pulseRAF) cancelAnimationFrame(this._pulseRAF); this._pulseRAF = null; }
+                else this._startPulse();
+            });
+            this._io.observe(this);
+        }
+        if (this._ro) this._ro.disconnect();
         this._ro = new ResizeObserver(() => {
              
              
@@ -2389,6 +2395,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         if (this.parentElement) this._ro.observe(this.parentElement);
         this._map.on('load', () => {
             this._ready = true;
+            this._carteArrivee();
              
              
              
@@ -2474,7 +2481,6 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
             uniq.push({ c: [lng, lat], st: this._statut(e), ville: e.ville || e.titre || '', dateDebut: e.dateDebut, dateFin: e.dateFin });
         });
         if (!uniq.length) return;
-        const mode = this._forceCurrent || 'auto';
         let pos, src, cls, eyebrow, info;
          
          
@@ -2482,25 +2488,15 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         const setIci = (u) => { pos = u.c; src = this._illu('face'); cls = 'tm-cur-ici'; eyebrow = iciTxt; info = this._esc(u.ville) + ' \u00b7 ' + this._fmtPlage(u.dateDebut, u.dateFin); };
         const setRoute = (a, b) => { const arc = this._arc(a.c, b.c, 0.13); pos = arc[Math.floor(arc.length / 2)]; src = this._illu('velo'); cls = 'tm-cur-route'; eyebrow = this._t('cur_route'); info = '\u2192 ' + this._esc(b.ville) + ' \u00b7 ' + this._fmtJour(b.dateDebut); };
         const setAvant = (u) => { pos = u.c; src = this._illu('velo'); cls = 'tm-cur-route'; eyebrow = this._t('cur_bientot'); info = '\u2192 ' + this._esc(u.ville) + ' \u00b7 ' + this._fmtJour(u.dateDebut); };
-        if (mode === 'ici') {
-            setIci(uniq.find((u) => u.st === 'en_cours') || uniq[Math.floor(uniq.length / 2)]);
-        } else if (mode === 'route') {
-            const i = Math.max(0, Math.floor(uniq.length / 2) - 1);
-            const a = uniq[i], b = uniq[Math.min(i + 1, uniq.length - 1)];
-            if (a === b) setIci(a); else setRoute(a, b);
-        } else if (mode === 'avant') {
-            setAvant(uniq[0]);
-        } else {
-            const enCours = uniq.find((u) => u.st === 'en_cours');
-            if (enCours) { setIci(enCours); }
-            else {
-                let lastPast = -1;
-                for (let i = 0; i < uniq.length; i++) { if (uniq[i].st === 'passe' || uniq[i].st === 'annulee') lastPast = i; }
-                const nextIdx = uniq.findIndex((u) => u.st === 'a_venir' || u.st === 'reportee');
-                if (nextIdx === -1) return;
-                if (lastPast === -1 || lastPast >= nextIdx) setAvant(uniq[nextIdx]);
-                else setRoute(uniq[lastPast], uniq[nextIdx]);
-            }
+        const enCours = uniq.find((u) => u.st === 'en_cours');
+        if (enCours) { setIci(enCours); }
+        else {
+            let lastPast = -1;
+            for (let i = 0; i < uniq.length; i++) { if (uniq[i].st === 'passe' || uniq[i].st === 'annulee') lastPast = i; }
+            const nextIdx = uniq.findIndex((u) => u.st === 'a_venir' || u.st === 'reportee');
+            if (nextIdx === -1) return;
+            if (lastPast === -1 || lastPast >= nextIdx) setAvant(uniq[nextIdx]);
+            else setRoute(uniq[lastPast], uniq[nextIdx]);
         }
         const el = document.createElement('div');
         el.className = 'tm-current';
@@ -2696,9 +2692,17 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     }
 
     _startPulse() {
+         
+        if (this._pulseRAF) cancelAnimationFrame(this._pulseRAF);
+        this._pulseRAF = null;
+        try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {   }
+        
+
+
+        if (this._horsEcran || !(this._etapes || []).some((e) => this._statut(e) === 'en_cours')) return;
         const start = performance.now();
         const step = (t) => {
-            if (!this._map || !this._map.getLayer('points-pulse')) return;
+            if (!this._map || !this._map.getLayer('points-pulse')) { this._pulseRAF = null; return; }
             const k = ((t - start) % 1600) / 1600;
             this._map.setPaintProperty('points-pulse', 'circle-radius', 8 + k * 16);
             this._map.setPaintProperty('points-pulse', 'circle-opacity', 0.45 * (1 - k));
@@ -2713,6 +2717,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         if (s) s.setData(this._geojson());
         const t = this._map.getSource('trace');
         if (t) t.setData(this._buildTrace());
+        if (!this._pulseRAF) this._startPulse();
         this._addCurrent();
     }
 
@@ -2891,6 +2896,14 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         });
     }
 
+     
+     
+    _squeletteListe() {
+        const carte = '<div class="tm-sq-carte"><div class="tm-sq-haut"><i class="tm-sq-l tm-sq-badge"></i><i class="tm-sq-l tm-sq-ville"></i></div>' +
+            '<i class="tm-sq-l tm-sq-meta"></i><i class="tm-sq-l tm-sq-meta tm-sq-court"></i></div>';
+        return '<div class="tm-sq-liste" aria-hidden="true">' + carte.repeat(8) + '</div>';
+    }
+
     _groupBanner() {
         if (!this._groupIds) return '';
         const e0 = this._etapes.find((x) => this._groupIds.indexOf(String(x._id)) !== -1);
@@ -2901,6 +2914,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
     _renderListe() {
         const list = this._q('[data-el=list]');
         if (!list) return;
+        list.removeAttribute('aria-busy');
         let items = this._filtrer();
         const banner = this._groupBanner();
         if (this._position) {
@@ -2926,11 +2940,13 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
 
 
 
+
             if (!this._charge) {
+                if (!this._chargePerdue) list.setAttribute('aria-busy', 'true');
                 list.innerHTML = banner + (this._chargePerdue
                     ? '<div class="tm-empty"><img src="' + this._illu('banderole') + '" alt="' + this._altIllu() +
                       '"><div>' + this._esc(this._t('charge_echec')) + '</div></div>'
-                    : '');
+                    : this._squeletteListe());
                 return;
             }
              

@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 1a9092d | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="1a9092d";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum deaa497 | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="deaa497";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -163,12 +163,22 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="1a9092d";performance.m
             '{cl}6.5 Droits, exercés depuis l’Espace.{/cl} Le Membre dispose des droits d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité, dans les conditions de la Politique de confidentialité. {b}Trois d’entre eux s’exercent directement depuis l’Espace, sans démarche{/b} :',
             { droits: [
               { icone: 'download', titre: 'Télécharger ses données', texte: 'Le Membre obtient, dans son navigateur, un fichier de l’ensemble de ses données d’Espace.' },
-              { icone: 'trash', titre: 'Supprimer ses données', texte: 'Le Membre efface l’ensemble de ses données d’Espace (activité, favoris, préférences, badges, participations) tout en conservant son compte, qui repart de zéro. L’action est irréversible et fait l’objet d’une confirmation.' },
-              { icone: 'userOff', titre: 'Supprimer son compte', texte: 'Le Membre efface ses données puis son compte, après avoir recopié son adresse e-mail. L’action est irréversible.' }
+              { icone: 'trash', titre: 'Supprimer ses données', texte: 'Le Membre efface ses données d’Espace (activité, favoris, préférences, badges, participations) tout en conservant son compte, qui repart de zéro, sauf une trace minimale de participation aux Jeux, décrite à l’article 6.6. L’action est irréversible et fait l’objet d’une confirmation.' },
+              { icone: 'userOff', titre: 'Supprimer son compte', texte: 'Le Membre efface ses données, sous la même réserve, puis son compte, après avoir recopié son adresse e-mail. L’action est irréversible.' }
             ] },
             'La suppression n’emporte que les données du Membre qui l’a demandée, et rien d’autre.',
-            '{cl}6.6 Ce qui survit à une suppression.{/cl} Lorsque le Membre a gagné un lot, la ligne correspondante n’est pas supprimée mais {b}anonymisée{/b} : le lot, sa date et l’état de sa remise sont conservés afin que l’Organisateur puisse honorer un envoi engagé et tenir sa comptabilité des lots ; le nom, l’adresse e-mail, le téléphone et l’adresse postale sont effacés.',
-            '{cl}6.7 Stockage local.{/cl} L’Espace mémorise dans le navigateur du Membre, sans cookie tiers, deux informations techniques : le fait qu’une session a déjà été comptée, pour ne pas la compter deux fois, et le choix de désactiver l’enregistrement d’activité. Elles sont propres à l’appareil.'
+            '{cl}6.6 Ce qui survit à une suppression.{/cl} Quand le Membre efface ses données, ou quand son compte est supprimé, une trace de chaque participation aux Jeux est conservée, réduite au strict nécessaire : l’identifiant technique du compte, la date de participation et son résultat (le lot tiré à la roue, le code Virtual Regatta ou le code de réduction remis). Elle ne contient ni le nom du Membre, ni son adresse e-mail, ni son adresse postale. Elle sert uniquement à garantir qu’un compte ne participe qu’une fois à chaque Jeu et qu’un code n’est remis qu’une fois (intérêt légitime de l’Organisateur à prévenir la fraude). Ces traces sont supprimées à la clôture des Jeux de l’édition 2026.',
+            'Lorsque le Membre a gagné un lot, la ligne correspondante n’est pas supprimée mais {b}anonymisée{/b} : le lot, sa date et l’état de sa remise sont conservés afin que l’Organisateur puisse honorer un envoi engagé et tenir sa comptabilité des lots ; le nom, l’adresse e-mail, le téléphone et l’adresse postale sont effacés.',
+            'Si le Membre a désactivé l’enregistrement d’activité (article 3.2), ce refus est conservé après l’effacement de ses données, tant que son compte existe, pour continuer d’être respecté.',
+            '{cl}6.7 Stockage local.{/cl} L’Espace mémorise dans le navigateur du Membre, sans cookie tiers, quelques informations propres à cet appareil :',
+            { ul: [
+              'le fait qu’une session a déjà été comptée, pour ne pas la compter deux fois ;',
+              'le choix de désactiver l’enregistrement d’activité ;',
+              'les événements d’activité que le site n’a pas encore reçus, par exemple après une coupure de réseau, gardés une semaine au plus ;',
+              'le dernier état de l’Espace, pour l’afficher dès l’ouverture de la page, gardé vingt-quatre heures au plus et effacé quand le Membre se déconnecte depuis l’Espace ou efface ses données ;',
+              'la liste des articles lus sur cet appareil, commune à l’Espace et à la page des actualités ;',
+              'des préférences d’affichage, comme un bloc replié, les articles lus masqués ou la fréquence d’une invitation à partager.'
+            ] }
           ]
         },
         {
@@ -303,12 +313,22 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="1a9092d";performance.m
             '{cl}6.5 Rights, exercised from the Space.{/cl} The Member has the rights of access, rectification, erasure, restriction, objection and portability, under the conditions of the Privacy policy. {b}Three of them can be exercised directly from the Space, with no formalities{/b}:',
             { droits: [
               { icone: 'download', titre: 'Download your data', texte: 'The Member receives, in their browser, a file of all their Space data.' },
-              { icone: 'trash', titre: 'Delete your data', texte: 'The Member erases all their Space data (activity, favourites, preferences, badges, entries) while keeping their account, which starts again from scratch. The action is irreversible and asks for confirmation.' },
-              { icone: 'userOff', titre: 'Delete your account', texte: 'The Member erases their data and then their account, after typing their e-mail address again. The action is irreversible.' }
+              { icone: 'trash', titre: 'Delete your data', texte: 'The Member erases their Space data (activity, favourites, preferences, badges, entries) while keeping their account, which starts again from scratch, except for a minimal record of Game entries described in article 6.6. The action is irreversible and asks for confirmation.' },
+              { icone: 'userOff', titre: 'Delete your account', texte: 'The Member erases their data, with the same exception, and then their account, after typing their e-mail address again. The action is irreversible.' }
             ] },
             'Deletion only affects the data of the Member who requested it, and nothing else.',
-            '{cl}6.6 What survives a deletion.{/cl} When the Member has won a prize, the corresponding record is not deleted but {b}anonymised{/b}: the prize, its date and its delivery status are kept so that the Organiser can honour a dispatch already under way and keep its prize accounts; the name, e-mail address, telephone and postal address are erased.',
-            '{cl}6.7 Local storage.{/cl} The Space stores two technical pieces of information in the Member’s browser, without any third-party cookie: the fact that a session has already been counted, so that it is not counted twice, and the choice to switch activity recording off. They belong to the device.'
+            '{cl}6.6 What survives a deletion.{/cl} When the Member erases their data, or when their account is deleted, a record of each Game entry is kept, limited to what is strictly necessary: the technical identifier of the account, the date of entry and its result (the prize drawn on the wheel, or the Virtual Regatta or discount code issued). It contains neither the Member’s name, nor their e-mail address, nor their postal address. Its only purpose is to ensure that an account enters each Game only once and that a code is issued only once (the Organiser’s legitimate interest in preventing fraud). These records are deleted when the Games of the 2026 edition close.',
+            'When the Member has won a prize, the corresponding record is not deleted but {b}anonymised{/b}: the prize, its date and its delivery status are kept so that the Organiser can honour a dispatch already under way and keep its prize accounts; the name, e-mail address, telephone and postal address are erased.',
+            'If the Member has switched activity recording off (article 3.2), that choice is kept after their data is erased, for as long as their account exists, so that it continues to be respected.',
+            '{cl}6.7 Local storage.{/cl} The Space stores, in the Member’s browser and without any third-party cookie, a few pieces of information specific to that device:',
+            { ul: [
+              'the fact that a session has already been counted, so that it is not counted twice;',
+              'the choice to switch activity recording off;',
+              'activity events the site has not yet received, for example after a network outage, kept for one week at most;',
+              'the last state of the Space, so that it can be shown as soon as the page opens, kept for twenty-four hours at most and erased when the Member signs out from the Space or erases their data;',
+              'the list of articles read on this device, shared by the Space and the news page;',
+              'display preferences, such as a collapsed section, read articles hidden, or how often an invitation to share appears.'
+            ] }
           ]
         },
         {
@@ -567,7 +587,9 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
 
 
 
-      this._maj = '2026-09-16';
+
+
+      this._maj = '2026-09-27';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];

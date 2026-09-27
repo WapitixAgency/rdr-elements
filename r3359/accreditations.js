@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum 1a9092d | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="1a9092d";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum deaa497 | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="deaa497";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -923,6 +923,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="1a9092d";pe
 
 
 
+
     _depots() {
       const bouton = this._q('envoi');
       const weez = this._q('weez');
@@ -1000,15 +1001,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="1a9092d";pe
 
     
 
-
-
-
-
-
-
-
-
-    
 
 
 

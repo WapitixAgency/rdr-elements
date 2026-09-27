@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 1a9092d | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="1a9092d";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum deaa497 | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="deaa497";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -11,7 +11,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="1a9092d";performance
       prenom: 'Prénom', email: 'Adresse e-mail', emailCourt: 'Email', langue: 'Langue de la newsletter', envoyer: "JE M'ABONNE !",
       envoi: 'Envoi en cours…', prenomVide: 'Indiquez votre prénom.', emailVide: 'Indiquez votre adresse e-mail.',
       emailFaux: 'Cette adresse ne semble pas valide.', erreur: "L'inscription n'a pas abouti. Réessayez dans un instant.",
-      erreurDeja: 'Cette adresse est déjà inscrite.', reessayer: 'Réessayer', consentVide: 'Cochez la case pour vous abonner.', merciTitre: 'Merci pour votre inscription !',
+      reessayer: 'Réessayer', consentVide: 'Cochez la case pour vous abonner.', merciTitre: 'Merci pour votre inscription !',
       merciTexte: 'Vous recevrez bientôt nos prochaines actualités directement par e-mail.',
       partenaires: 'Nos partenaires', obligatoire: 'obligatoire'
     },
@@ -19,7 +19,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="1a9092d";performance
       prenom: 'First name', email: 'Email address', emailCourt: 'Email', langue: 'Newsletter language', envoyer: 'SUBSCRIBE',
       envoi: 'Sending…', prenomVide: 'Please enter your first name.', emailVide: 'Please enter your email address.',
       emailFaux: 'This address does not look valid.', erreur: 'Your subscription could not be saved. Please try again in a moment.',
-      erreurDeja: 'This address is already subscribed.', reessayer: 'Try again', consentVide: 'Tick the box to subscribe.', merciTitre: 'Thank you for subscribing!',
+      reessayer: 'Try again', consentVide: 'Tick the box to subscribe.', merciTitre: 'Thank you for subscribing!',
       merciTexte: 'You will soon receive our latest news directly by email.',
       partenaires: 'Our partners', obligatoire: 'required'
     }
@@ -467,6 +467,63 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
     catch (e) {   }
   }
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const LIEN_RSE = { page: '/espace-skippers', rubrique: 'developpement-durable', module: 'rdr-espace-skippers', attenteMs: 12000 };
+  let lienVu = false;
+  function lienProfond() {
+    if (lienVu) return;
+    lienVu = true;
+    let go = '';
+    try { go = String(new URLSearchParams(location.search).get('go') || '').trim().toLowerCase(); } catch (e) { return; }
+    if (go !== 'rse') return;
+    let chemin = location.pathname || '/';
+    try { chemin = decodeURIComponent(chemin); } catch (e) {   }
+    chemin = chemin.replace(/\/+$/, '') || '/';
+    const page = (/^\/en(\/|$)/.test(chemin) ? '/en' : '') + LIEN_RSE.page;
+    const surPlace = () => chemin === page || !!document.querySelector(LIEN_RSE.module);
+    const suite = () => {
+      if (!surPlace()) { try { location.replace(page + '?go=rse'); } catch (e) {   } return; }
+      let touche = false;
+      const stop = () => { touche = true; };
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((t) => window.addEventListener(t, stop, { once: true, passive: true }));
+      const cible = () => { const r = document.getElementById(LIEN_RSE.rubrique); return r && r.closest(LIEN_RSE.module) ? r : null; };
+      const amener = () => { const r = cible(); if (!r || touche) return !!r; r.scrollIntoView({ block: 'start' }); return true; };
+      const debut = Date.now();
+      const tenter = () => {
+        if (touche) return;
+        if (amener()) {
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(amener, () => {});
+          setTimeout(amener, 1200);
+          setTimeout(amener, 3000);
+          return;
+        }
+        if (Date.now() - debut < LIEN_RSE.attenteMs) setTimeout(tenter, 150);
+      };
+      tenter();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', suite, { once: true });
+    else suite();
+  }
+
   class PiedHaut extends HTMLElement {
     constructor() {
       super();
@@ -504,7 +561,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
       if (!this._brut.reglages || !this._brut.partenaires) return;
       memEcrire(this._lang, { reglages: this._brut.reglages, partenaires: this._brut.partenaires });
     }
-    connectedCallback() { this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); }
+    connectedCallback() { lienProfond(); this._depuisLaMemoire(); if (!this._depuisMemoire) this._memoriser(); this._render(); }
     disconnectedCallback() {
       if (this._obs) { this._obs.disconnect(); this._obs = null; }
       if (this._filet) { clearTimeout(this._filet); this._filet = null; }
@@ -767,9 +824,11 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
       if (!val) return;
       if (val === 'envoi') { this._etat('envoi'); return; }
       if (this._minuteur) { clearTimeout(this._minuteur); this._minuteur = null; }
-      if (val === 'ok') { this._attente = null; this._etat('merci'); return; }
-      const code = val.replace(/^erreur:?/, '');
-      this._etat('erreur', code === 'deja' ? this._t.erreurDeja : this._t.erreur);
+      
+
+
+      if (val === 'ok' || val === 'erreur:deja') { this._attente = null; this._etat('merci'); return; }
+      this._etat('erreur', this._t.erreur);
     }
     _etat(etat, message) {
       this._etatNews = etat;

@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum 1a9092d | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="1a9092d";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum deaa497 | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="deaa497";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -159,7 +159,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="1a9092d";p
             
 
 
-            { ajout: { titre: 'Trace de participation aux jeux de « Mon Espace Rhum »', icone: 'trophy', texte: 'Quand vous effacez vos données depuis « Mon Espace Rhum », ou quand votre compte est supprimé, une trace de chaque participation aux jeux est conservée, réduite au strict nécessaire : l’identifiant technique du compte, la date de participation et son résultat (le lot tiré à la roue, le code Virtual Regatta ou le code de réduction remis). Elle ne contient ni votre nom, ni votre adresse e-mail, ni votre adresse postale. Elle sert uniquement à garantir qu’un compte ne participe qu’une fois à chaque jeu et qu’un code n’est remis qu’une fois (intérêt légitime de l’organisateur à prévenir la fraude). Pour un lot gagné, la trace de son attribution et de sa livraison est conservée de la même façon, sans vos coordonnées. Ces traces sont supprimées à la clôture des jeux de l’édition 2026.' } }
+
+
+
+            { ajout: { titre: 'Trace de participation aux jeux de « Mon Espace Rhum »', icone: 'trophy', texte: 'Quand vous effacez vos données depuis « Mon Espace Rhum », ou quand votre compte est supprimé, une trace de chaque participation aux jeux est conservée, réduite au strict nécessaire : l’identifiant technique du compte, la date de participation et son résultat (le lot tiré à la roue, le code Virtual Regatta ou le code de réduction remis). Elle ne contient ni votre nom, ni votre adresse e-mail, ni votre adresse postale. Elle sert uniquement à garantir qu’un compte ne participe qu’une fois à chaque jeu et qu’un code n’est remis qu’une fois (intérêt légitime de l’organisateur à prévenir la fraude). Pour un lot gagné, la trace de son attribution et de sa livraison est conservée de la même façon, sans vos coordonnées. Ces traces sont supprimées à la clôture des jeux de l’édition 2026. Si vous avez refusé l’enregistrement de votre activité dans « Mon Espace Rhum », ce refus est également conservé après l’effacement de vos données, tant que votre compte existe, pour continuer d’être respecté.' } }
           ]
         },
         {
@@ -346,7 +349,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="1a9092d";p
             } },
             { h3: 'Archiving and deletion' },
             'At the end of the defined retention periods, personal data is either deleted, anonymized, or archived in accordance with applicable legal obligations.',
-            { ajout: { titre: 'Record of game entries in “Mon Espace Rhum”', icone: 'trophy', texte: 'When you erase your data from “Mon Espace Rhum”, or when your account is deleted, a record of each game entry is kept, limited to what is strictly necessary: the technical identifier of the account, the date of entry and its result (the prize drawn on the wheel, or the Virtual Regatta or discount code issued). It contains neither your name, nor your email address, nor your postal address. Its only purpose is to ensure that an account enters each game only once and that a code is issued only once (the organizer’s legitimate interest in preventing fraud). For a prize won, the record of its allocation and delivery is kept in the same way, without your contact details. These records are deleted when the games of the 2026 edition close.' } }
+            { ajout: { titre: 'Record of game entries in “Mon Espace Rhum”', icone: 'trophy', texte: 'When you erase your data from “Mon Espace Rhum”, or when your account is deleted, a record of each game entry is kept, limited to what is strictly necessary: the technical identifier of the account, the date of entry and its result (the prize drawn on the wheel, or the Virtual Regatta or discount code issued). It contains neither your name, nor your email address, nor your postal address. Its only purpose is to ensure that an account enters each game only once and that a code is issued only once (the organizer’s legitimate interest in preventing fraud). For a prize won, the record of its allocation and delivery is kept in the same way, without your contact details. These records are deleted when the games of the 2026 edition close. If you have refused the recording of your activity in “Mon Espace Rhum”, that refusal is also kept after your data is erased, for as long as your account exists, so that it continues to be respected.' } }
           ]
         },
         {
@@ -712,7 +715,8 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
 
 
 
-      this._maj = '2026-09-26';
+
+      this._maj = '2026-09-27';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];
