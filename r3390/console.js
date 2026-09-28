@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 18517f5 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 854ec9b | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="854ec9b";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -40,18 +40,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
    
    
    
-   
-   
-  var RDR_LOGO = 'data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%22100%22%20width%3D%22100%22%3E%3Cg%3E%3Cpath%20fill%3D%22url(%23ee63fb4c-1830-4ba8-864e-80778395f02c_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M100%200H0v100h100z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M34.485%2030.557a18.7%2018.7%200%200%200-2.304-2.665l-.227-.222a11%2011%200%200%200-2.279-1.655c-1.257-.788-2.99-1.092-4.886-1.278%202.48%201.335%206.624%204.124%206.856%204.64.103%201.932-1.165%204.004-2.96%206.535-2.185%203.093-13.21%2013.974-15.252%2019.84-2.417%206.964.294%2010.702%202.377%2014.088a13.5%2013.5%200%200%200%203.092%203.418%2014%2014%200%200%200%201.944%201.288c1.546.835%202.17%201.35%203.845%201.34h.124a38%2038%200%200%201-6.593-4.035c-.114-1.269%201.345-2.712%202.062-4.124%202.268-4.48%2011.118-11.856%2014.799-18.346%201.546-2.696%203.062-4.876%203.185-9.226.108-4.547-3.18-8.902-3.783-9.598%22%2F%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M17.325%2049.2a44%2044%200%200%200-2.119%203.047h17.892a30%2030%200%200%200%201.948-3%20.2.2%200%200%201%200-.046zm14.232-20.19c.108%201.959-1.16%204.072-2.954%206.655-.139.19-.309.417-.515.67h9.608a19.2%2019.2%200%200%200-3.289-6.186%2018%2018%200%200%200-2.314-2.685l-.232-.227a10.8%2010.8%200%200%200-2.299-1.65c-1.263-.788-3-1.087-4.907-1.257%202.5%201.33%206.665%204.108%206.902%204.68m-4.856%2030.825H12.459c-.096.977-.077%201.96.056%202.933h11.573c.835-.943%201.7-1.923%202.613-2.933m-3.078-18.299h14.475c.062-.515.103-1.077.118-1.675q.014-.591-.04-1.18H26.107c-.742.86-1.588%201.824-2.485%202.855Zm-9.752%2013.077q-.296.627-.516%201.284a20%2020%200%200%200-.463%201.572h15.927c.83-.943%201.655-1.897%202.439-2.856H13.87Zm6.361%2013.367a17.6%2017.6%200%200%201%201.887-2.846h-9.026a26%2026%200%200%200%202.665%205.026%2013.6%2013.6%200%200%200%203.093%203.448%2014%2014%200%200%200%201.953%201.294%2010%2010%200%200%200%204.902%201.31.5.5%200%200%200%20.124%200%2037.2%2037.2%200%200%201-6.66-4.042%208.2%208.2%200%200%201%201.062-4.19m1.356-24.078c-.81.959-1.63%201.943-2.423%202.933h17.222c.505-.935.916-1.917%201.227-2.933z%22%2F%3E%3Cpath%20fill%3D%22url(%23b76e3fef-ee30-4f04-9bb7-be606762fe7c_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M12.165%2059.35c1.449%201.062%205.098%202.702%206.598%202.8a11.4%2011.4%200%200%201-5.423-1.593%204.2%204.2%200%200%201-1.175-1.206Z%22%2F%3E%3Cpath%20fill%3D%22url(%23fddb3550-482d-4de2-a1e4-ff7251f44c79_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M24.335%206.959a4.46%204.46%200%200%201%201.5%201.546c-.773-.825-4.464-2.7-6.933-3.093%202.113.263%204.041.645%205.433%201.547%22%2F%3E%3Cpath%20fill%3D%22url(%23c3cafdf6-f6b0-4c52-a86c-b43232003b96_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M18.902%2062.155h-.14c-1.5-.098-5.154-1.737-6.597-2.8a3.9%203.9%200%200%201-.578-1.824%2042.3%2042.3%200%200%200%207.315%204.624%22%2F%3E%3Cpath%20fill%3D%22url(%2328b2b744-eab8-4b02-b1fd-bc1d839f2242_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M26.392%2010.093q.066.316.077.639c-.252-.603-4.82-3.768-7.556-5.304%202.469.397%206.16%202.273%206.933%203.093.27.488.456%201.02.546%201.572%22%2F%3E%3Cpath%20fill%3D%22url(%23ef65524b-f297-4c02-acd0-001252a980c0_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M25.835%208.526a4.46%204.46%200%200%200-1.5-1.547%2012%2012%200%200%201%202.505%201.882l.253.258a6.77%206.77%200%200%201%201.984%204.309c.114%202.366-.593%204.49-2.309%207.14-3.866%205.979-15.876%2017.329-18.495%2022.68-2.706%205.551-2.69%207.938-.464%2011.958-2.247-3.794-5.19-8.005-2.33-15.66%202.418-6.453%2015-18.278%2017.526-21.649%202.062-2.763%203.536-5.03%203.464-7.175a4%204%200%200%200-.067-.64%204.9%204.9%200%200%200-.567-1.556%22%2F%3E%3Cpath%20fill%3D%22url(%237273e887-29b7-440b-b1cb-161465f93b4f_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M29.603%2012.098c.66.81%204.237%205.711%203.99%2010.727-.232%204.82-2%207.216-3.773%2010.15-4.263%207.102-14.33%2015.076-16.975%2019.989-.84%201.546-1.355%203.154-1.257%204.562.039.646.237%201.273.577%201.824.306.477.704.887%201.17%201.207a16%2016%200%200%201-2.144-1.475c-2.578-2.458-3.16-5.067-1.547-8.953%202.753-6.516%2014.531-16.995%2017.856-22.114%201.031-1.582%203.902-5.226%204.124-9.675.103-2.386-.882-4.546-2.02-6.242Z%22%2F%3E%3Cpath%20fill%3D%22url(%230932f294-0251-451e-9a6a-6cd24f2ff8dd_comp-mmv1wb4b_r_comp-mm3m0qfp)%22%20d%3D%22M29.603%2012.098c1.14%201.696%202.124%203.856%202.01%206.242-.211%204.449-3.092%208.098-4.123%209.676-3.34%205.154-15.12%2015.598-17.856%2022.098-1.64%203.886-1.031%206.494%201.546%208.953a15.1%2015.1%200%200%201-3.37-3.86c-2.228-4.021-2.243-6.408.463-11.96%202.619-5.37%2014.629-16.721%2018.495-22.68%201.716-2.65%202.423-4.773%202.31-7.14a6.77%206.77%200%200%200-1.985-4.308c.93.91%201.77%201.908%202.51%202.979%22%2F%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M26.747%2059.789H12.505c-.1.976-.084%201.96.046%202.933h11.583c.82-.944%201.701-1.923%202.613-2.933%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M54.407%2050.2h-.979v3.037h-2.19v-9.124h3.468c2.294%200%203.634%201.201%203.634%203.093a2.58%202.58%200%200%201-1.716%202.577l2.062%203.444h-2.578l-1.7-3.026Zm.444-1.747c.809%200%201.247-.402%201.247-1.17a1.114%201.114%200%200%200-1.263-1.216h-1.407v2.386zm9.02-4.546a4.743%204.743%200%201%201-4.81%204.743%204.59%204.59%200%200%201%204.81-4.743m0%207.413a2.68%202.68%200%201%200-2.608-2.67%202.51%202.51%200%200%200%202.608%202.67m13.789-2.176c0%202.753-1.588%204.248-3.974%204.248s-3.975-1.495-3.975-4.248v-5.056h2.217v4.99c0%201.546.598%202.242%201.783%202.242s1.79-.676%201.79-2.243v-4.99h2.159zm5.933-3.02v7.113h-2.191v-7.113h-2.789v-2.062h7.768v2.062zm3.82-2.036h6.65v2.062h-4.46v1.546h3.284v1.825h-3.284v1.654h4.52v2.062h-6.7l-.01-9.15ZM39.83%2055.943c2.727%200%204.809%201.85%204.809%204.603s-2.098%204.547-4.768%204.547h-3.923v-9.124zm-.114%207.088c1.356%200%202.722-.69%202.722-2.49%200-1.799-1.366-2.577-2.722-2.577H38.14v5.067zM53.623%2061c0%202.753-1.592%204.248-3.974%204.248-2.381%200-3.98-1.495-3.98-4.248v-5.057h2.217v4.995c0%201.547.603%202.237%201.79%202.237%201.185%200%201.783-.675%201.783-2.237v-4.995h2.164zm7.599%201.057h-.975v3.036h-2.19v-9.124h3.464c2.293%200%203.634%201.201%203.634%203.093a2.58%202.58%200%200%201-1.722%202.577l2.088%203.443h-2.578zm.443-1.748c.81%200%201.252-.402%201.252-1.17a1.118%201.118%200%200%200-1.262-1.216h-1.408v2.386zm10.392%201.175h-3.505v3.609H66.36v-9.124h2.19v3.443h3.506V55.97h2.19v9.124h-2.19v-3.609ZM83.474%2061c0%202.753-1.587%204.248-3.974%204.248-2.386%200-3.974-1.495-3.974-4.248v-5.057h2.216v4.995c0%201.547.598%202.237%201.784%202.237s1.783-.675%201.783-2.237v-4.995h2.165zm8.278%201.84v-3.247s-.453.835-.897%201.618l-.886%201.603h-1.227l-.887-1.577c-.453-.81-.886-1.629-.897-1.644h-.04v5.5h-2.191v-9.124h2.32l2.293%204.077h.041l2.304-4.077h2.232v9.124h-2.19z%22%2F%3E%3Cpath%20fill%3D%22%23FBDD00%22%20d%3D%22M31.005%2070.19c2.109%200%203.727%201.439%203.727%203.568s-1.624%203.5-3.716%203.5h-3V70.19h2.99Zm-.087%205.496c1.03%200%202.108-.516%202.108-1.928%200-1.413-1.062-1.964-2.108-1.964h-1.222v3.917zm4.52-5.496h5.155v1.604h-3.454v1.211h2.541v1.366h-2.546v1.294h3.5v1.546h-5.196v-7.02Zm7.372%204.867c.138.515.633.85%201.401.85.645%200%201.031-.221%201.031-.68%200-.675-.845-.634-1.711-.846-.959-.231-2.15-.675-2.15-2.17s1.088-2.16%202.67-2.16c1.444%200%202.475.588%202.866%201.846l-1.613.438a1.186%201.186%200%200%200-1.283-.799c-.645%200-.918.253-.918.624%200%20.598.68.685%201.665.892s2.19.644%202.19%202.164-1.03%202.18-2.741%202.18c-1.233%200-2.624-.37-3.032-1.906zm8.427-3.263v5.464h-1.696v-5.464h-2.16v-1.577h6.016v1.577zm2.897-1.604h1.716v7.068h-1.696l-.02-7.067Zm4.392%202.851h-.031v4.217h-1.696V70.19h1.716l3.005%204.123h.031v-4.139h1.696v7.083H61.52zm7.5%203.047-.428%201.17h-1.783l2.721-7.067h1.928l2.737%207.067h-1.814l-.428-1.17zm1.876-2.949c-.222-.582-.386-1.03-.397-1.03h-.026s-.175.443-.397%201.03l-.515%201.413h1.83zm6.351-1.345v5.464h-1.696v-5.464h-2.16v-1.577h6.015v1.577zm2.897-1.604h1.695v7.068H77.15zm6.123-.138a3.676%203.676%200%201%201-3.721%203.675%203.563%203.563%200%200%201%203.721-3.675m0%205.742a2.062%202.062%200%201%200-2.015-2.062%201.944%201.944%200%200%200%202.015%202.062m6.139-2.753h-.03v4.217h-1.676V70.19h1.717l3.005%204.123h.02v-4.139h1.696v7.083h-1.727zM32.86%2087.567v-.515a3.26%203.26%200%200%201-1.989.634%203.577%203.577%200%200%201-3.608-3.68%203.53%203.53%200%200%201%203.665-3.666%203.43%203.43%200%200%201%203.289%202.062l-1.676.454a1.88%201.88%200%200%200-1.696-.902c-1.139%200-1.876.85-1.876%202.062a1.943%201.943%200%200%200%202.062%202.061%202.24%202.24%200%200%200%201.799-.726v-.335h-1.804v-1.547h3.35v4.098zm8.48-3.149c0%202.128-1.226%203.288-3.092%203.288s-3.093-1.16-3.093-3.288V80.5h1.716v3.866c0%201.211.464%201.737%201.382%201.737s1.381-.515%201.381-1.737V80.5h1.675zm2.232%201.979-.422%201.17h-1.784l2.722-7.067h1.928l2.737%207.067h-1.82l-.422-1.17zm1.882-2.949c-.227-.582-.387-1.03-.397-1.03h-.031s-.17.443-.392%201.03l-.515%201.413h1.83zm6.86-2.948c2.108%200%203.727%201.438%203.727%203.567s-1.624%203.5-3.716%203.5h-3.016V80.5zm-.072%205.495c1.031%200%202.108-.516%202.108-1.928s-1.077-1.964-2.108-1.964h-1.237v3.918zm4.506-5.495h5.154v1.603h-3.474v1.211h2.577v1.366h-2.577v1.294h3.5v1.547h-5.18zm6.046%200h1.696v5.495h3.17v1.546h-4.866zm8.69-.14a3.675%203.675%200%201%201-3.721%203.676%203.556%203.556%200%200%201%203.721-3.675Zm0%205.743a2.062%202.062%200%201%200-2.02-2.062%201.94%201.94%200%200%200%202.02%202.062m10.619-1.685c0%202.128-1.232%203.288-3.093%203.288s-3.093-1.16-3.093-3.288V80.5h1.717v3.866c0%201.211.464%201.737%201.381%201.737.918%200%201.382-.515%201.382-1.737V80.5h1.675zM85.67%2080.5c1.732%200%202.784.923%202.784%202.433s-1.031%202.433-2.784%202.433h-.953v2.201h-1.691V80.5zm.047%203.392c.716%200%201.03-.371%201.03-.928s-.324-.918-1.03-.918h-1v1.846zm3.376-3.392h5.154v1.603h-3.453v1.211h2.546v1.366h-2.546v1.294h3.505v1.547h-5.206z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M5.99%2093.552c.041.32.33.577.845.577.412%200%20.675-.16.675-.516%200-.463-.474-.515-1.082-.623-.438-.098-.959-.273-.959-.954s.516-1.005%201.294-1.005%201.222.289%201.376.85l-.572.15c-.082-.304-.32-.49-.768-.49s-.665.16-.665.464.345.433.897.516c.443.087%201.14.257%201.14%201.03%200%20.774-.558%201.032-1.336%201.032-.572%200-1.289-.17-1.438-.933zm4.232.2-.304.815h-.66l1.35-3.459h.789l1.35%203.459h-.67l-.304-.814h-1.551Zm1.098-1.221c-.222-.598-.31-.871-.315-.882l-.335.918-.232.624h1.145zm2.747-1.423h.65v3.459h-.65zm4.67%203.459-1.763-2.464v2.464h-.634v-3.459h.665l1.763%202.418v-2.418h.65v3.459zm3.923-2.856v2.856h-.65V91.71h-1.175v-.603h2.995v.603h-1.17Zm2.453%201.377v-.573H27.5v.573zm7.057-.16v-.86l-.892%201.674h-.427l-.902-1.711v2.546h-.645V91.12h.773l.64%201.16c.221.401.345.67.35.67%200%200%20.14-.269.366-.676l.624-1.154h.727v3.458h-.614zm2.933.824-.299.815h-.665l1.356-3.459h.768l1.355%203.459h-.66l-.303-.814h-1.552Zm1.103-1.221c-.222-.598-.31-.871-.314-.882l-.335.918-.227.624h1.144zm2.748-1.423h.65v2.85h1.705v.604h-2.355zm5.196-.067a1.8%201.8%200%201%201-1.83%201.8%201.77%201.77%200%200%201%201.83-1.8m0%203a1.206%201.206%200%201%200-1.176-1.2%201.144%201.144%200%200%200%201.176%201.2m10.67.526v-.433a1.54%201.54%200%200%201-1.196.516%201.804%201.804%200%201%201%20.036-3.609%201.71%201.71%200%200%201%201.65%201.031l-.594.165a1.16%201.16%200%200%200-1.03-.593%201.13%201.13%200%200%200-1.196%201.212%201.17%201.17%200%200%200%201.273%201.211%201.46%201.46%200%200%200%201.077-.443v-.356h-1.052v-.577h1.583v1.892zm5.113-1.552c0%201.109-.582%201.624-1.546%201.624s-1.547-.515-1.547-1.624v-1.907h.665v1.97c0%20.654.284.963.877.963.592%200%20.876-.31.876-.964v-1.969h.644zm2.031.737-.304.815h-.655l1.35-3.459h.79l1.35%203.459h-.67l-.304-.814h-1.557Zm1.098-1.221c-.222-.598-.31-.871-.314-.882l-.33.918-.232.624h1.144zm4.015-1.423c1.114%200%201.923.655%201.923%201.742%200%201.088-.81%201.717-1.902%201.717h-1.289v-3.459zm0%202.856c.748%200%201.253-.346%201.253-1.114s-.516-1.139-1.273-1.139h-.614v2.248zm3.335-2.856h2.526v.603h-1.876v.794h1.417v.572h-1.417v.882h1.912v.603h-2.577zm4.047%200h.65v2.85h1.706v.604h-2.356zm5.195-.067a1.8%201.8%200%201%201-1.83%201.8%201.77%201.77%200%200%201%201.83-1.8m0%203a1.206%201.206%200%201%200-1.175-1.2%201.146%201.146%200%200%200%201.175%201.2m6.259-1.026c0%201.109-.583%201.624-1.547%201.624s-1.546-.515-1.546-1.624v-1.907h.66v1.97c0%20.654.288.963.881.963s.876-.31.876-.964v-1.969h.645l.03%201.907Zm2.803-1.907c.882%200%201.392.449%201.392%201.134%200%20.686-.515%201.129-1.392%201.129h-.577v1.196h-.65v-3.459zm0%201.722c.475%200%20.707-.227.707-.572%200-.346-.227-.578-.707-.578h-.597v1.15zm2.732-1.722h2.547v.603h-1.882v.794h1.418v.572h-1.418v.882h1.882v.603h-2.578zM48.17%2094.686l-.567-.052%202.031-3.294.546.041z%22%2F%3E%3Cdefs%20fill%3D%22none%22%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2210.062%22%20x2%3D%22107.041%22%20y1%3D%2289.943%22%20x1%3D%22-7.046%22%20id%3D%22ee63fb4c-1830-4ba8-864e-80778395f02c_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23006E78%22%20offset%3D%22.36%22%2F%3E%3Cstop%20stop-color%3D%22%23006669%22%20offset%3D%22.88%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2260.748%22%20x2%3D%2218.763%22%20y1%3D%2260.748%22%20x1%3D%2212.165%22%20id%3D%22b76e3fef-ee30-4f04-9bb7-be606762fe7c_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23632114%22%2F%3E%3Cstop%20stop-color%3D%22%23A93E1B%22%20offset%3D%22.57%22%2F%3E%3Cstop%20stop-color%3D%22%23B5421D%22%20offset%3D%22.6%22%2F%3E%3Cstop%20stop-color%3D%22%23DA4E24%22%20offset%3D%22.7%22%2F%3E%3Cstop%20stop-color%3D%22%23E85227%22%20offset%3D%22.76%22%2F%3E%3Cstop%20stop-color%3D%22%23F7B03E%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%226.072%22%20x2%3D%2218.995%22%20y1%3D%227.67%22%20x1%3D%2225.685%22%20id%3D%22fddb3550-482d-4de2-a1e4-ff7251f44c79_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23053E1B%22%2F%3E%3Cstop%20stop-color%3D%22%233BA52B%22%20offset%3D%22.39%22%2F%3E%3Cstop%20stop-color%3D%22%2340A62A%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%234EA929%22%20offset%3D%22.61%22%2F%3E%3Cstop%20stop-color%3D%22%2352AB39%22%20offset%3D%22.73%22%2F%3E%3Cstop%20stop-color%3D%22%233BA530%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%233EA633%22%20offset%3D%22.87%22%2F%3E%3Cstop%20stop-color%3D%22%2348A93F%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23078B46%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2259.84%22%20x2%3D%2218.902%22%20y1%3D%2259.84%22%20x1%3D%2211.587%22%20id%3D%22c3cafdf6-f6b0-4c52-a86c-b43232003b96_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%231C2972%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%231D2D76%22%20offset%3D%22.42%22%2F%3E%3Cstop%20stop-color%3D%22%231F3A82%22%20offset%3D%22.51%22%2F%3E%3Cstop%20stop-color%3D%22%23234F95%22%20offset%3D%22.6%22%2F%3E%3Cstop%20stop-color%3D%22%232766AB%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23BECEE0%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23B6C6D9%22%20offset%3D%22.85%22%2F%3E%3Cstop%20stop-color%3D%22%23A1AFC4%22%20offset%3D%22.88%22%2F%3E%3Cstop%20stop-color%3D%22%237E8AA3%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%234F5775%22%20offset%3D%22.96%22%2F%3E%3Cstop%20stop-color%3D%22%231A1E42%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%226.093%22%20x2%3D%2218.206%22%20y1%3D%229.629%22%20x1%3D%2226.866%22%20id%3D%2228b2b744-eab8-4b02-b1fd-bc1d839f2242_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%234EA8D9%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%234AA7D9%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%233DA5D8%22%20offset%3D%22.56%22%2F%3E%3Cstop%20stop-color%3D%22%232AA2D7%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23C2E2D8%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23BBDAD5%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23A6C3CB%22%20offset%3D%22.89%22%2F%3E%3Cstop%20stop-color%3D%22%23859EBC%22%20offset%3D%22.94%22%2F%3E%3Cstop%20stop-color%3D%22%23576BA8%22%20offset%3D%22.99%22%2F%3E%3Cstop%20stop-color%3D%22%234B5DA2%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%2217.727%22%20x2%3D%2235.149%22%20y1%3D%2242.794%22%20x1%3D%22-.66%22%20id%3D%22ef65524b-f297-4c02-acd0-001252a980c0_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%2398191B%22%2F%3E%3Cstop%20stop-color%3D%22%23B84A1D%22%20offset%3D%22.07%22%2F%3E%3Cstop%20stop-color%3D%22%23D3751F%22%20offset%3D%22.13%22%2F%3E%3Cstop%20stop-color%3D%22%23E79321%22%20offset%3D%22.19%22%2F%3E%3Cstop%20stop-color%3D%22%23F3A522%22%20offset%3D%22.24%22%2F%3E%3Cstop%20stop-color%3D%22%23F7AC22%22%20offset%3D%22.27%22%2F%3E%3Cstop%20stop-color%3D%22%23FBD725%22%20offset%3D%22.55%22%2F%3E%3Cstop%20stop-color%3D%22%23FBE25C%22%20offset%3D%22.62%22%2F%3E%3Cstop%20stop-color%3D%22%23FBEB88%22%20offset%3D%22.69%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF1A7%22%20offset%3D%22.75%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF5BA%22%20offset%3D%22.8%22%2F%3E%3Cstop%20stop-color%3D%22%23FBF6C1%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23FBEF9C%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23FBD723%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23F8BD22%22%20offset%3D%22.95%22%2F%3E%3Cstop%20stop-color%3D%22%23F6AA22%22%20offset%3D%22.98%22%2F%3E%3Cstop%20stop-color%3D%22%23F5A322%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%224801.36%22%20x2%3D%223376.32%22%20y1%3D%226202.7%22%20x1%3D%22829.373%22%20id%3D%227273e887-29b7-440b-b1cb-161465f93b4f_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%230A1D31%22%2F%3E%3Cstop%20stop-color%3D%22%234EA8D9%22%20offset%3D%22.33%22%2F%3E%3Cstop%20stop-color%3D%22%234AA7D9%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%233DA5D8%22%20offset%3D%22.56%22%2F%3E%3Cstop%20stop-color%3D%22%232AA2D7%22%20offset%3D%22.68%22%2F%3E%3Cstop%20stop-color%3D%22%23C2E2D8%22%20offset%3D%22.84%22%2F%3E%3Cstop%20stop-color%3D%22%23BBDAD5%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%23A6C3CB%22%20offset%3D%22.89%22%2F%3E%3Cstop%20stop-color%3D%22%23859EBC%22%20offset%3D%22.94%22%2F%3E%3Cstop%20stop-color%3D%22%23576BA8%22%20offset%3D%22.99%22%2F%3E%3Cstop%20stop-color%3D%22%234B5DA2%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20gradientUnits%3D%22userSpaceOnUse%22%20y2%3D%224867.67%22%20x2%3D%223040.98%22%20y1%3D%225811.13%22%20x1%3D%22669.781%22%20id%3D%220932f294-0251-451e-9a6a-6cd24f2ff8dd_comp-mmv1wb4b_r_comp-mm3m0qfp%22%3E%3Cstop%20stop-color%3D%22%23053E1B%22%2F%3E%3Cstop%20stop-color%3D%22%233BA52B%22%20offset%3D%22.39%22%2F%3E%3Cstop%20stop-color%3D%22%2340A62A%22%20offset%3D%22.44%22%2F%3E%3Cstop%20stop-color%3D%22%234EA929%22%20offset%3D%22.61%22%2F%3E%3Cstop%20stop-color%3D%22%2352AB39%22%20offset%3D%22.73%22%2F%3E%3Cstop%20stop-color%3D%22%233BA530%22%20offset%3D%22.86%22%2F%3E%3Cstop%20stop-color%3D%22%233EA633%22%20offset%3D%22.87%22%2F%3E%3Cstop%20stop-color%3D%22%2348A93F%22%20offset%3D%22.92%22%2F%3E%3Cstop%20stop-color%3D%22%23078B46%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3C%2Fg%3E%3C%2Fsvg%3E';
+  var RDR_LOGO = 'https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg';
 
   var CSS = [
     
 
-
-    "@font-face{font-family:'Varien';font-style:normal;font-weight:400;font-display:swap;",
-    "src:url('https://static.wixstatic.com/ufonts/5fefd8_af84a32872e54b0dbdf0bf5c76f52c89/woff2/file.woff2') format('woff2')}",
-    "@font-face{font-family:'Varien';font-style:italic;font-weight:400;font-display:swap;",
-    "src:url('https://static.wixstatic.com/ufonts/5fefd8_1e5b9ef92f5440db968e5ef2f46acb27/woff2/file.woff2') format('woff2')}",
 
     'rdr-console{',
     '--navy:#0A1A35;--teal:#00676E;--teal-soft:#E4F0F0;--line:#E1E6EE;--line-2:#EEF2F7;',
@@ -142,7 +135,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
     '.rdrc-tab:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}',
     '.rdrc-badge{font-size:10px;font-weight:800;line-height:1;padding:3px 6px;border-radius:999px;background:var(--no);color:#fff}',
     '.rdrc-badge[data-zero="1"]{background:var(--line);color:var(--ink-3)}',
-    '.rdrc-soon{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}',
 
     
 
@@ -439,6 +431,40 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
     '.rdrc-gagnant b{font-size:15px;color:var(--ink)}.rdrc-gagnant p{margin:6px 0 0;font-size:12.5px;color:var(--ink-2)}',
     '.rdrc-gagnant .rdrc-mob-acts{justify-content:flex-start;margin-top:10px}',
     '@media(max-width:760px){.rdrc-mob{grid-template-columns:minmax(0,1fr) auto}.rdrc-mob-id,.rdrc-mob-mode{grid-column:1/-1}}',
+
+    
+
+
+
+    '.rdrc-manque{grid-column:1 / -1;padding:16px 18px 16px;background:#FFF6E6;border:1px solid #F0D398;',
+    'border-left:4px solid var(--amber);border-radius:12px}',
+    '.rdrc-manque-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}',
+    '.rdrc-manque-h svg{width:20px;height:20px;color:var(--warn);flex:0 0 auto;display:block}',
+    '.rdrc-manque-t{font-size:15px;font-weight:800;color:var(--navy);margin:0;line-height:1.3}',
+    '.rdrc-manque-p{margin:0 0 12px;font-size:12px;line-height:1.55;color:var(--ink-2)}',
+    '.rdrc-manque-l{list-style:none;margin:0;padding:0;display:grid;gap:8px}',
+    '.rdrc-manque-i{display:grid;grid-template-columns:24px minmax(0,1fr) 150px;gap:12px;align-items:start;',
+    'background:#fff;border:1px solid #F0E0BC;border-radius:10px;padding:11px 13px}',
+    '.rdrc-manque-n{width:24px;height:24px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:800;',
+    'display:flex;align-items:center;justify-content:center}',
+    '.rdrc-manque-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
+    '.rdrc-manque-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-manque-qui{font-size:12px;font-weight:800;color:var(--navy);text-align:right;line-height:1.35;padding-top:2px}',
+    '.rdrc-manque-qui i{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;',
+    'text-transform:uppercase;color:var(--warn);margin-bottom:2px}',
+    '.rdrc-pret-l{list-style:none;margin:0;padding:0;display:grid;gap:1px}',
+    '.rdrc-pret-i{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:10px 8px;border-radius:8px}',
+    '.rdrc-pret-i:nth-child(odd){background:var(--bg)}',
+    '.rdrc-pret-ic{width:22px;height:22px;border-radius:50%;background:var(--teal-soft);color:var(--ok);',
+    'display:flex;align-items:center;justify-content:center}',
+    '.rdrc-pret-ic svg{width:13px;height:13px;display:block}',
+    '.rdrc-pret-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
+    '.rdrc-pret-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-pret-d a{color:var(--teal);font-weight:700}',
+    '.rdrc-pret-d code{font:inherit;font-weight:700;color:var(--navy);white-space:nowrap}',
+    '.rdrc-pret-ic.is-n{background:var(--line-2);color:var(--ink-3);font-size:11px;font-weight:800}',
+    '@media(max-width:640px){.rdrc-manque{padding:14px 13px}.rdrc-manque-i{grid-template-columns:22px minmax(0,1fr)}',
+    '.rdrc-manque-qui{grid-column:2;text-align:left;padding-top:0}}',
     '@media(max-width:560px){.rdrc-body{padding:13px}.rdrc-row{align-items:flex-start}',
     '.rdrc-acts{width:100%}.rdrc-btn{flex:1}.rdrc-bar-r{width:100%;justify-content:space-between}}'
   ].join('');
@@ -773,7 +799,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
         { nom: 'Mousse',      de: 1,              a: Math.ceil(maxB * 0.22) - 1 },
         { nom: 'Aucun badge', de: 0,              a: 0,        ton: 'zero' }
       ];
-      var somme = function (de, a2) {
+      var sommePaliers = function (de, a2) {
         var s = 0;
         for (var i = de; i <= a2 && i < dist.length; i++) s += (dist[i] || 0);
         return s;
@@ -785,7 +811,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
                                        : p2.de + ' à ' + p2.a + ' badges';
           return {
             label: p2.nom + ' · ' + etendue,
-            count: somme(p2.de, p2.a),
+            count: sommePaliers(p2.de, p2.a),
              
              
             color: p2.ton === 'zero' ? 'var(--ink-3)' : (p2.ton === 'or' ? '#E0A83B' : null)
@@ -948,20 +974,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
                          : 'L\'ordinateur reste majoritaire, mais le mobile pèse déjà lourd dans les arbitrages de mise en page.'));
       }
 
-       
-       
-      if (x.articles.length >= 3) {
-        var pop = x.articles[0];
-        var fidele = null;
-        x.articles.slice(1).forEach(function (a) {
-          if (a.scroll && a.vues >= 50 && (!fidele || a.scroll > fidele.scroll)) fidele = a;
-        });
-        if (pop && fidele && pop.scroll && fidele.scroll - pop.scroll >= 15) {
-          dits.push('Le plus vu n\'est pas le mieux lu. <b>« ' + esc(pop.titre) +' »</b> fait ' + nfmt(pop.vues) +
-            ' vues mais n\'est parcouru qu\'à ' + pop.scroll + '&nbsp;%, quand <b>« ' + esc(fidele.titre) + ' »</b> n\'en fait que ' +
-            nfmt(fidele.vues) + ' et est lu à ' + fidele.scroll + '&nbsp;%. Le premier a bien accroché, le second a tenu.');
-        }
-      }
+      
+
+
+
+
 
       if (x.pays.length) {
         var totPays = x.pays.reduce(function (s, p) { return s + p.sessions; }, 0);
@@ -1192,7 +1209,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
 
       var total = (p.audience.kpi || {}).total || 0;
       var inscrits = (p.audience.kpi || {}).inscrits || 0;
-      var base = inscrits || total;
+      var baseNombre = inscrits || total;
       var baseNom = inscrits ? 'des inscrits' : 'des membres actifs';
       var ages = d.ages || [], civ = d.civilites || [], reg = d.regions || [];
       var dep = d.departements || [], voile = d.voile || [];
@@ -1218,7 +1235,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
 
       var kpis = '<div class="rdrc-kpis">' +
         kpi('Profils renseignés', nfmt(d.agesBase || 0), '',
-            base ? '<b>' + pct(d.agesBase || 0, base) + ' %</b> ' + baseNom +
+            baseNombre ? '<b>' + pct(d.agesBase || 0, baseNombre) + ' %</b> ' + baseNom +
                    (inscrits ? ' (' + nfmt(inscrits) + ')' : '') : '', 'lead') +
         kpi('Tranche dominante', domAge ? domAge.label.replace(' ans', '') : '—', domAge ? 'ans' : '',
             domAge ? pct(domAge.count, d.agesBase) + ' % des répondants' : 'pas encore de tranche') +
@@ -1549,18 +1566,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
 
 
 
-
-
-
-
-
-
-    
-
-
-
-
-
     _mobiliteHtml(p) {
       var self = this;
       var m = p.mobilite;
@@ -1591,16 +1596,23 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
             kpi('Éligibles au tirage', nfmt(enCours.eligibles || 0), '', 'ce jour', enCours.eligibles ? '' : 'alert')) +
       '</div>';
 
+      
+
+      var champContact = final ? 'grandContact' : 'contactGagnant';
+      var contactDe = function (g) { return (g && g[champContact]) || ''; };
       var tirageHtml = function (t, gagnant, quoi) {
         var quand = t.effectueLe ? new Date(t.effectueLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
         var g = gagnant || {};
+        var contact = contactDe(g);
+        var lot = final ? (g.grandLot || t.lot) : g.lot;
         return '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">🏆 ' + esc(quoi) + ' effectué le ' + esc(quand) + ' · ' + esc(t.nbEligibles) + ' éligible' + (t.nbEligibles > 1 ? 's' : '') + '</span><br>' +
           '<b>' + esc(t.gagnantNom || g.prenom + ' ' + g.nom) + '</b> <span class="rdrc-mob-id">' + esc(t.gagnantId) + '</span>' +
-          (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + (g.lot ? ' · lot : ' + esc(g.lot) : '') + '</p>' : '') +
+          (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + (lot ? ' · lot : ' + esc(lot) : '') +
+            (final && g.gagnant ? ' · a aussi gagné le lot du jour' + (g.lot ? ' (' + esc(g.lot) + ')' : '') : '') + '</p>' : '') +
           (g.id ? '<div class="rdrc-mob-acts">' +
-            '<span class="rdrc-mob-st" data-s="' + (g.contactGagnant === 'Contacté' ? 'Validé' : g.contactGagnant === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(g.contactGagnant || 'À contacter') + '</span>' +
-            '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="contactGagnant" data-valeur="Contacté">Contacté</button>' +
-            '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="contactGagnant" data-valeur="Injoignable">Injoignable</button>' +
+            '<span class="rdrc-mob-st" data-s="' + (contact === 'Contacté' ? 'Validé' : contact === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(contact || 'À contacter') + '</span>' +
+            '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Contacté">Contacté</button>' +
+            '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Injoignable">Injoignable</button>' +
           '</div>' : '') +
         '</div>';
       };
@@ -1608,15 +1620,17 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
        
       var tirageBloc;
       var t = final ? m.final : enCours.tirage;
-      var gagnantDuTirage = t ? (m.participations || []).find(function (x) { return x.id === t.gagnantId; }) : null;
-      if (t && !(gagnantDuTirage && gagnantDuTirage.contactGagnant === 'Injoignable')) {
+      var gagnantDuTirage = !t ? null : final
+        ? (m.finalGagnant && m.finalGagnant.id === t.gagnantId ? m.finalGagnant : null)
+        : (m.participations || []).find(function (x) { return x.id === t.gagnantId; });
+      if (t && !(gagnantDuTirage && contactDe(gagnantDuTirage) === 'Injoignable')) {
         tirageBloc = tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour');
       } else {
         var n = final ? (m.eligiblesFinal || 0) : (enCours.eligibles || 0);
         var arme = this._mobConfirme === (final ? 'final' : jourVu);
         tirageBloc = (t ? tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour') : '') +
           '<div class="rdrc-tirage">' +
-            '<div class="rdrc-tirage-t">' + (t ? 'Le gagnant est injoignable : on peut retirer parmi les autres. ' : '') +
+            '<div class="rdrc-tirage-t">' + (t ? 'Le gagnant est injoignable. On peut retirer au sort parmi les autres' + (final ? ', sans aucune de ses participations. ' : '. ') : '') +
               (n ? '<b>' + n + '</b> participation' + (n > 1 ? 's' : '') + ' éligible' + (n > 1 ? 's' : '') + (final ? ' au grand tirage final' : ' pour ce jour') + '.'
                  : 'Aucune participation éligible' + (final ? '' : ' ce jour') + ' : validez d\'abord les justificatifs.') + '</div>' +
             (arme
@@ -1629,9 +1643,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
       var lignes = (m.participations || []).map(function (x) {
         var inscrit = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
         var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
-        return '<div class="rdrc-mob"' + (x.gagnant ? ' data-gagnant="1"' : '') + '>' +
+        return '<div class="rdrc-mob"' + (x.gagnant || x.grandGagnant ? ' data-gagnant="1"' : '') + '>' +
           '<span class="rdrc-mob-id">' + esc(x.id) + '</span>' +
           '<span class="rdrc-mob-nom">' + esc(x.prenom + ' ' + x.nom) + (x.gagnant ? ' <span class="rdrc-mob-trophee">🏆</span>' : '') +
+            (x.grandGagnant ? ' <span class="rdrc-mob-trophee">🏆 grand tirage</span>' : '') +
             '<small>' + esc(x.email) + ' · ' + esc(x.telephone) + ' · inscrit le ' + esc(inscrit) + '</small></span>' +
           '<span class="rdrc-mob-mode">' + esc(x.mode) + (x.precision ? ' (' + esc(x.precision) + ')' : '') +
             (x.justificatifUrl ? '<a href="' + esc(x.justificatifUrl) + '" target="_blank" rel="noopener">Voir le justificatif' + (x.justificatifNom ? ' · ' + esc(x.justificatifNom) : '') + '</a>' : '<a>aucun fichier</a>') + '</span>' +
@@ -1662,62 +1677,105 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
         '</div>';
     }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     _photoHtml() {
-      var decisions = [
-        ['Le reglement du jeu',
-         'Aucun reglement n existe a ce jour, et il en faut un pour la roue, les '
-         + 'pronostics, la combativite ET le concours photo. Ce n est pas un sujet '
-         + 'technique : c est une obligation des qu il y a un lot.',
+      var manque = [
+        ['Le règlement du Challenge photo',
+         'Un jeu doté d\'un lot en demande un. La page Règlements, en ligne depuis le 23/09, '
+         + 'lui donnera sa propre adresse et le publiera le jour de l\'annonce du concours.',
+         'Alexis et le juridique d\'OC Sport'],
+        ['La modération',
+         'Qui relit chaque photo avant sa mise en ligne (la stagiaire, selon le call du 27/08, '
+         + 'à confirmer), et ce qui fait refuser une image, par exemple une personne reconnaissable, '
+         + 'une marque concurrente, un mauvais cadrage ou une photo floue.',
          'Alexis'],
-        ['Qui modere, et sur quels criteres',
-         'Une photo envoyee par un visiteur ne se publie pas sans relecture. Il faut '
-         + 'nommer la personne, et ecrire ce qui fait refuser une image : personnes '
-         + 'reconnaissables, marques concurrentes, cadrage, qualite.',
+        ['Les données GPS des photos',
+         'Une photo de téléphone garde la position exacte de la prise de vue. Nous proposons '
+         + 'de l\'effacer dès la réception, avant tout stockage. Il reste à le valider.',
          'Alexis'],
-        ['Le traitement des donnees GPS',
-         'Une photo de telephone porte la position exacte de la prise de vue dans ses '
-         + 'metadonnees. Publiee telle quelle, elle revele ou etait la personne. On '
-         + 'efface a la reception, ou on garde et on le dit : le premier choix est le '
-         + 'seul defendable.',
-         'nous, des que la regle est posee']
+        ['Les dates',
+         'L\'ouverture et la clôture des dépôts, puis la clôture des votes. Sans elles, '
+         + 'le concours n\'a pas d\'échéance.',
+         'Alexis'],
+        ['Le lot',
+         'Ce que gagne la photo la plus étoilée. Il sera écrit dans le règlement.',
+         'Alexis et le juridique d\'OC Sport'],
+        ['Le nom du challenge',
+         '« Challenge photo Alpina » avec le bloc de la marque, ou un autre nom. '
+         + 'L\'aperçu sait déjà s\'afficher sans le bloc.',
+         'Alexis']
       ];
+      var encart = '<section class="rdrc-manque" aria-labelledby="rdrc-manque-t">' +
+        '<div class="rdrc-manque-h">' + IC.alerte +
+          '<h3 class="rdrc-manque-t" id="rdrc-manque-t">Ce qu\'il nous manque pour finaliser le concours photo</h3></div>' +
+        '<p class="rdrc-manque-p">Le concours n\'est pas encore ouvert, et il ne peut pas l\'être sans ces six réponses. '
+          + 'Aucune n\'est technique. Dès qu\'elles arrivent, il nous faut deux à trois jours pour le construire et l\'ouvrir.</p>' +
+        '<ol class="rdrc-manque-l">' + manque.map(function (x, i) {
+          return '<li class="rdrc-manque-i">' +
+            '<span class="rdrc-manque-n" aria-hidden="true">' + (i + 1) + '</span>' +
+            '<span><span class="rdrc-manque-q">' + esc(x[0]) + '</span><span class="rdrc-manque-d">' + esc(x[1]) + '</span></span>' +
+            '<span class="rdrc-manque-qui"><i>À fournir par</i>' + esc(x[2]) + '</span>' +
+          '</li>';
+        }).join('') + '</ol>' +
+      '</section>';
 
-      var liste = decisions.map(function (x, i) {
-        return '<div class="rdrc-art rdrc-art--libre">' +
-          '<span class="rdrc-art-r">' + (i + 1) + '</span>' +
-          '<span class="rdrc-art-t"><b>' + esc(x[0]) + '</b><br>' +
-            '<span style="opacity:.7;font-weight:400">' + esc(x[1]) + '</span></span>' +
-          '<span class="rdrc-art-s">' + esc(x[2]) + '<i>a trancher par</i></span>' +
-        '</div>';
+      var coche = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7"/></svg>';
+      var pret = [
+        ['L\'aperçu en ligne',
+         'La page <a href="/concours-photo-2026" target="_blank" rel="noopener">/concours-photo-2026</a>, masquée des menus '
+         + 'et non indexée, se montre en interne et aux partenaires. Ses 600 photos viennent de la médiathèque du site, '
+         + 'les auteurs, les cœurs et les étoiles sont inventés.'],
+        ['La fenêtre de dépôt',
+         'Dessinée et visible dans l\'aperçu, en ajoutant <code>?etat=aucune</code> à l\'adresse. L\'envoi y est encore simulé, '
+         + 'aucune photo ne part à la médiathèque.'],
+        ['Les situations à montrer',
+         'Un visiteur sans compte (<code>?etat=visiteur</code>), une photo en attente ou refusée (<code>?etat=attente</code>, '
+         + '<code>?etat=refusee</code>), la page sans le bloc Alpina (<code>?marque=sans</code>).'],
+        ['Le référencement',
+         'Le titre, la description et le texte pour les moteurs sont prêts pour le jour de l\'ouverture. '
+         + 'La page reste hors des moteurs tant que c\'est un aperçu.']
+      ].map(function (x) {
+        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic" aria-hidden="true">' + coche + '</span>' +
+          '<span><span class="rdrc-pret-q">' + esc(x[0]) + '</span><span class="rdrc-pret-d">' + x[1] + '</span></span></li>';
       }).join('');
 
-      var suite = ['La file des photos en attente, avec l apercu, l auteur et la date',
-        'Le drapeau des photos portant une position GPS, avant toute publication',
-        'Accepter ou refuser, avec le motif du refus renvoye a l auteur',
-        'Le compte des envois par jour, pour voir si l animation prend'
+      var suite = ['Le vrai dépôt, qui envoie la photo à la médiathèque du site sans sa position GPS',
+        'Les cœurs et l\'étoile enregistrés sur le compte du membre, et l\'encart dans son Espace Rhum',
+        'Dans cet onglet, la file des photos en attente (aperçu, auteur, date), avec Accepter ou Refuser et le motif renvoyé à l\'auteur',
+        'Le compte des dépôts par jour, pour voir si l\'animation prend',
+        'La version anglaise de la page'
       ].map(function (t, i) {
-        return '<div class="rdrc-art rdrc-art--libre"><span class="rdrc-art-r">' + (i + 1) + '</span>' +
-          '<span class="rdrc-art-t">' + esc(t) + '</span></div>';
+        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic is-n" aria-hidden="true">' + (i + 1) + '</span>' +
+          '<span class="rdrc-pret-d">' + esc(t) + '</span></li>';
       }).join('');
 
-      return '<div class="rdrc-grid">' +
-        card('Le concours n est pas ouvert', 'et il ne peut pas l etre',
-          '<div class="rdrc-state">Le module d envoi est ecrit et teste. Ce qui manque '
-          + 'n est pas du code, ce sont trois decisions, listees ci-dessous. Tant '
-          + 'qu elles ne sont pas prises, ouvrir le concours ferait prendre un risque '
-          + 'au Groupe Telegramme et exposerait la position des participants.</div>',
-          true, IC.alerte) +
-        card('Ce qu il faut trancher', '3 decisions, aucune technique',
-          '<div class="rdrc-arts">' + liste + '</div>' +
-          '<p class="rdrc-help" style="margin:12px 0 0">L ouverture du concours n est '
-          + 'pas encore datee, et ses dates sont a fixer avec ces trois reponses. '
-          + 'Aucune echeance avant cela.</p>',
-          true, IC.badge) +
-        card('Ce que cet onglet montrera', 'une fois le concours ouvert',
-          '<div class="rdrc-arts">' + suite + '</div>' +
-          '<p class="rdrc-help" style="margin:12px 0 0">La file reprendra celle '
-          + 'd Instagram, un onglet plus haut : c est le meme metier.</p>',
-          true, IC.people) +
+      return '<div class="rdrc-grid">' + encart +
+        card('Ce qui est prêt', 'pour montrer le concours', '<ul class="rdrc-pret-l">' + pret + '</ul>', false, IC.valide) +
+        card('Ce que nous construirons ensuite', 'deux à trois jours, une fois les réponses reçues',
+          '<ol class="rdrc-pret-l">' + suite + '</ol>' +
+          '<p class="rdrc-help" style="margin:12px 0 0">La file de modération fonctionnera comme celle '
+          + 'd\'Instagram, un onglet plus haut.</p>',
+          false, IC.people) +
       '</div>';
     }
 
@@ -1755,6 +1813,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
      
      
     _canExport(p) {
+      
+
+
+      if (this._view === 'mobilite' || this._view === 'photo') return false;
       if (this._view === 'insta') return !!(p.claims || p.approved);
       if (this._view === 'village') return !!(p.audience && p.audience.village && p.audience.village.repondu);
       if (this._view === 'contenu') return !!(p.contenu && (p.contenu.jours || []).length);
@@ -1799,8 +1861,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
           rc.push([APPAREIL_LABELS[x.label] || x.label, x.count, pct(x.count, (ct.totaux || {}).sessions) + ' %', '']);
         });
         rc.push([]);
-        rc.push(['Article', 'Vues', 'Lecture (s)', 'Part parcourue']);
-        (ct.articles || []).forEach(function (a) { rc.push([a.titre, a.vues, a.lecture, a.scroll + ' %']); });
+         
+        rc.push(['Article', 'Vues', 'Lecture (s)', 'Lecteurs']);
+        (ct.articles || []).forEach(function (a) { rc.push([a.titre, a.vues, a.lecture, a.lecteurs || '']); });
         rc.push([]);
         rc.push(['Pays', 'Sessions', '', '']);
         (ct.pays || []).forEach(function (x) { rc.push([x.pays, x.sessions, '', '']); });
@@ -1942,11 +2005,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
         var extra = '';
         if (v.id === 'insta') {
           extra = '<span class="rdrc-badge" data-zero="' + (claims.length ? '0' : '1') + '">' + claims.length + '</span>';
-        } else if (v.soon) {
-          extra = '<span class="rdrc-soon">bientôt</span>';
         }
         return '<button class="rdrc-tab" type="button" role="tab" data-view="' + v.id + '"' +
-          ' aria-selected="' + (on ? 'true' : 'false') + '"' + (v.soon ? ' disabled' : '') + '>' +
+          ' aria-selected="' + (on ? 'true' : 'false') + '">' +
           esc(v.label) + extra + '</button>';
       }).join('');
 
@@ -1964,9 +2025,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
        
        
        
+       
+       
+       
       var perime = false;
-      if (p.audience && p.audience.generatedAt) {
-        var age = (Date.now() - new Date(p.audience.generatedAt).getTime()) / 3600000;
+      if (p.audience && p.audience.derniereNuit) {
+        var age = (Date.now() - new Date(p.audience.derniereNuit).getTime()) / 3600000;
         perime = age > 30;
       }
 
@@ -1993,7 +2057,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="18517f5";performan
             '</div>' +
             '<div class="rdrc-bar-r">' +
               (stamp ? '<span class="rdrc-stamp' + (perime ? ' is-perime' : '') + '"' +
-                (perime ? ' title="Les chiffres datent de plus de 30 h : la passe nocturne n\'a probablement pas tourné."' : '') +
+                (perime ? ' title="La dernière passe nocturne date de plus de 30 h : elle n\'a probablement pas tourné."' : '') +
                 '>' + (perime ? IC.alerte : '') + esc(stamp) + '</span>' : '') +
               '<button class="rdrc-export" type="button" data-export' + (this._canExport(p) ? '' : ' disabled') + '>' +
                 IC.down + '<span>Exporter</span></button>' +
