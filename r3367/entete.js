@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 0c7450a | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="0c7450a";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum cc0a75c | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="cc0a75c";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -1112,7 +1112,7 @@ const TXT = {
         ferme: (j) => 'The Saint-Malo village closed on ' + j + '.', rdv: (n) => n + (n > 1 ? ' events' : ' event'), avec: 'with', gratuit: 'Free', chargement: 'Loading the programme', progIndispo: 'The programme is not available right now.',
         annuler: 'Cancel', espaceMeta: 'Members area', boutiqueCourt: ['Store', 'Play'], departCourt: 'Race start', progDuJour: 'Today\'s programme', placeholderCourt: 'A page, an article, a skipper', ouvreDansCourt: (n) => 'The village opens in ' + n + (n > 1 ? ' days' : ' day'),
         aujourdhuiVillage: (n) => 'Today at the village: ' + n + (n > 1 ? ' highlights' : ' highlight'), aujourdhuiProgramme: 'Today at the village',
-        themes: { animation: 'Activities', ceremonie: 'Ceremonies', concert: 'Concerts', conference: 'Talks', exposition: 'Exhibitions', nautique: 'On the water', soiree: 'Evenings', spectacle: 'Shows' } }
+        themes: { animation: 'Activities', ceremonie: 'Ceremonies', concert: 'Concerts', conference: 'Conferences', exposition: 'Exhibitions', nautique: 'On the water', soiree: 'Evenings', spectacle: 'Shows' } }
 }[LANG];
 
 const trait = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
