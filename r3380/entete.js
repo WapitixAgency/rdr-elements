@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 1242024 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="1242024";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum d0bca13 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="d0bca13";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -30,7 +30,9 @@ const ARBORESCENCE = {
         { libelle: 'Plan interactif', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Programmation', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
-    { cle: 'a-propos', libelle: 'À propos', panneau: 'a-propos',
+    
+
+    { cle: 'a-propos', libelle: 'À propos', panneau: 'a-propos', lienMenu: '/qu-est-ce-que-la-route-du-rhum',
       liens: [
         { libelle: 'Héritage', lien: '/heritage', source: { panneau: 'a-propos', lien: '/heritage' } },
         { libelle: 'Édition 2022', lien: '/edition-2022', source: { panneau: 'a-propos', lien: '/edition-2022' } },
@@ -67,7 +69,7 @@ const ARBORESCENCE = {
         { libelle: 'Interactive map', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Village programme', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
-    { cle: 'a-propos', libelle: 'About', panneau: 'a-propos',
+    { cle: 'a-propos', libelle: 'About', panneau: 'a-propos', lienMenu: '/qu-est-ce-que-la-route-du-rhum',
       liens: [
         { libelle: 'Heritage', lien: '/heritage', source: { panneau: 'a-propos', lien: '/heritage' } },
         { libelle: '2022 edition', lien: '/edition-2022', source: { panneau: 'a-propos', lien: '/edition-2022' } },
@@ -1232,7 +1234,7 @@ const domaine = (u) => String(u || '').replace(/^https?:\/\//, '').replace(/\/.*
 function modele() {
   const menus = J.menus || {};
   return MENU.map((e, i) => {
-    const base = { cle: e.cle, num: pad(i + 1), libelle: e.libelle, lien: e.lien || '', liens: e.liens || [], prefixes: e.prefixes || [], panneau: e.panneau || '', cartes: [] };
+    const base = { cle: e.cle, num: pad(i + 1), libelle: e.libelle, lien: e.lien || '', lienMenu: e.lienMenu || '', liens: e.liens || [], prefixes: e.prefixes || [], panneau: e.panneau || '', cartes: [] };
      
     if (!e.panneau) return Object.assign(base, { dispo: 'lien', titre: e.libelle, sous: '', note: '', tout: null });
      
@@ -1692,11 +1694,17 @@ window.addEventListener('scroll', () => surDefilement(), { passive: true });
 
 function construireLarge() {
   if (large) return;
+  
+
   const onglets = RUBS.map((r) => {
     const encours = estActif(r) ? '<span class="gl-vh">, ' + esc(TXT.enCours) + '</span>' : '';
     const dedans = '<span class="gl-num">' + r.num + '</span>' + rubLibHTML(r.libelle).replace('gl-rub-lib', 'gl-onglet-lib').replace('gl-rub-lib--long', 'gl-onglet-lib--long') + encours;
+    const vers = r.lienMenu || r.lien;
+    const attrs = ' id="gl-t-' + r.cle + '" data-cle="' + r.cle + '" aria-expanded="false" aria-controls="gl-p-' + r.cle + '"';
     return '<li>' + (r.panneau
-      ? '<button type="button" class="gl-onglet' + (estActif(r) ? ' est-actif' : '') + '" id="gl-t-' + r.cle + '" data-cle="' + r.cle + '" aria-expanded="false" aria-controls="gl-p-' + r.cle + '">' + dedans + '</button>'
+      ? (vers
+        ? '<a class="gl-onglet' + (estActif(r) ? ' est-actif' : '') + '" href="' + esc(lien(vers)) + '"' + cible(vers) + (estCourant(vers) ? ' aria-current="page"' : '') + attrs + ' data-vers="' + esc(vers) + '">' + dedans + '</a>'
+        : '<button type="button" class="gl-onglet' + (estActif(r) ? ' est-actif' : '') + '"' + attrs + '>' + dedans + '</button>')
       : '<a class="gl-onglet gl-onglet--lien' + (estActif(r) ? ' est-actif' : '') + '" href="' + esc(lien(r.lien)) + '"' + (estCourant(r.lien) ? ' aria-current="page"' : '') + '>' + dedans + '<span class="gl-onglet-fleche">' + ICO.fleche + '</span></a>') + '</li>';
   }).join('');
   const max = { actus: 5, skippers: 6 };
@@ -1734,10 +1742,21 @@ function construireLarge() {
   chargerProgramme().then((p) => { if (p) remplirProgramme(); });
   large.addEventListener('pointerenter', () => clearTimeout(tFermer));
   large.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') planifierFermeture(); });
-  large.querySelectorAll('button.gl-onglet').forEach((t) => {
+  large.querySelectorAll('.gl-onglet[data-cle]').forEach((t) => {
+    let pointeur = '';
+    t.addEventListener('pointerdown', (e) => { pointeur = e.pointerType; });
     t.addEventListener('pointerenter', (e) => { if (e.pointerType === 'touch') return; clearTimeout(tOnglet); tOnglet = setTimeout(() => choisirOnglet(t.dataset.cle), 70); });
     t.addEventListener('pointerleave', () => clearTimeout(tOnglet));
-    t.addEventListener('click', () => choisirOnglet(t.dataset.cle));
+    t.addEventListener('click', (e) => {
+      const touche = pointeur === 'touch';
+      pointeur = '';
+      if (t.tagName !== 'A') { choisirOnglet(t.dataset.cle); return; }
+      if (touche && large.dataset.cle !== t.dataset.cle) { e.preventDefault(); choisirOnglet(t.dataset.cle); return; }
+      
+
+      if (estCourant(t.dataset.vers)) { e.preventDefault(); fermerLarge(); }
+    });
+    if (t.tagName === 'A') t.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); choisirOnglet(t.dataset.cle); } });
   });
   large.querySelector('.gl-onglets').addEventListener('keydown', (e) => {
     const liste = [...large.querySelectorAll('.gl-onglet')];
@@ -1799,7 +1818,7 @@ function choisirOnglet(cle) {
   const avant = large.dataset.cle;
   large.dataset.cle = cle;
   if (etat.large) etat.large = cle;
-  large.querySelectorAll('button.gl-onglet').forEach((t) => t.setAttribute('aria-expanded', String(t.dataset.cle === cle)));
+  large.querySelectorAll('.gl-onglet[data-cle]').forEach((t) => t.setAttribute('aria-expanded', String(t.dataset.cle === cle)));
   large.querySelectorAll('.gl-contenu').forEach((p) => {
     const oui = p.dataset.cle === cle;
     if (oui && p.hidden) { p.hidden = false; rejouer(p, 'est-entree'); } else if (!oui) p.hidden = true;
