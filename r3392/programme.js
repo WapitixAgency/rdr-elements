@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 0e744b2 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="0e744b2";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 38691c3 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="38691c3";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -89,7 +89,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="0e744b2";perform
 
   const ecussons = (liste) => {
     if (!Array.isArray(liste) || !liste.length) return '';
-    return liste.slice(0, 4).map(nom => {
+    
+
+    return liste.slice(0, 6).map(nom => {
       
 
       const cle = pli(nom);
