@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum cc0a75c | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="cc0a75c";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 69640f6 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="69640f6";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3088,6 +3088,14 @@ class RdrNews extends HTMLElement {
     '.rph-rprog{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:linear-gradient(90deg,var(--amber),var(--teal))}',
 
     '@media(max-width:1060px){.rph-hero{grid-template-columns:1fr}.rph-media{order:-1;max-height:280px;padding:16px 16px 0}}',
+    
+
+
+
+
+
+
+    '@media (max-height:820px) and (min-width:1061px){.rph-hw{padding-top:12px}.rph-hero{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);min-height:clamp(300px,calc(100vh - 300px),470px)}.rph-main{padding:28px 32px;gap:10px}.rph-hero h1{font-size:clamp(25px,2.6vw,34px)}.rph-chap{font-size:15px;max-width:62ch}.rph-media{padding:18px}}',
     '@media(max-width:860px){.rph-crumb{display:none}}',
     '@media(max-width:620px){.rph-hw,.rph-read .in{padding-left:14px;padding-right:14px}.rph-rtitle{font-size:12.5px}}',
     '@media(prefers-reduced-motion:reduce){.rph-root *,.rph-portal *{transition:none!important}}'

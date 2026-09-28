@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum cc0a75c | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="cc0a75c";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum 69640f6 | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="69640f6";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -175,10 +175,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="cc0a75c";pe
 
 
 
-  function adresseSure(u, relatifOk) {
+
+  function adresseSure(u) {
     const v = String(u == null ? '' : u).trim();
     if (!v) return '';
-    if (relatifOk && /^\/[^/]/.test(v)) return v;
     if (!/^https:\/\//i.test(v)) return '';
     try { return new URL(v).href; } catch (e) { return ''; }
   }

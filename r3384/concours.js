@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum cc0a75c | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="cc0a75c";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 69640f6 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="69640f6";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
