@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum c7a21a8 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="c7a21a8";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 941a9a0 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="941a9a0";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -214,6 +214,7 @@ rdr-accueil-apercu .hv-v small{font:800 .46em/1 var(--police);margin-left:4px;co
 rdr-accueil-apercu .hv-l{display:flex;flex-direction:column;gap:3px;min-width:0}
 rdr-accueil-apercu .hv-l b{font:800 9px/1.1 var(--police);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 rdr-accueil-apercu .hv-l span{font-size:10px;line-height:1.2;font-weight:600;color:var(--t2);white-space:nowrap}
+rdr-accueil-apercu .hv-l .hv-n{font-size:8.5px;font-weight:600;color:rgba(255,255,255,.66);letter-spacing:.01em}
 rdr-accueil-apercu .hero .hv-fait{opacity:0;transform:translateX(-16px)}
 rdr-accueil-apercu .hero.est-photo .hv-fait{opacity:1;transform:none;transition:opacity .5s ease,transform .7s cubic-bezier(.22,.8,.3,1);transition-delay:calc(.5s + var(--i) * .09s)}
 rdr-accueil-apercu .hv-defiler{display:none}
@@ -619,6 +620,7 @@ rdr-accueil-apercu .hv-scene{position:relative;height:clamp(320px,58svh,480px)}
 rdr-accueil-apercu .hv-logo{width:118px}
 rdr-accueil-apercu .hv-devise{font-size:21px}
 rdr-accueil-apercu .hv-contenu{position:relative;bottom:auto;margin-top:-118px;padding-bottom:18px}
+rdr-accueil-apercu .hv-contenu:has(.hv-n){margin-top:-131px}
 rdr-accueil-apercu .hv-ligne{flex-direction:column;align-items:flex-start;gap:22px}
 rdr-accueil-apercu .hv-titre{max-width:none}
 rdr-accueil-apercu .hv-titre h2{font-size:clamp(26px,7.8vw,33px);line-height:1.05}
@@ -1345,8 +1347,10 @@ function monter(racine, portail, D) {
       '<div class="hv-faits">' + p.faits.map((f, i) => {
          
         const n = /^[0-9 ]+$/.test(f.v) ? Number(f.v.split(' ').join('')) : null;
-        return '<div class="hv-fait" style="--i:' + i + '"><em class="hv-v"><i' + (f.id ? ' id="' + f.id + '"' : '') + (n !== null ? ' data-n="' + n + '"' : '') + '>' + esc(f.v) + '</i>' + (f.u ? '<small>' + esc(f.u) + '</small>' : '') + '</em>' +
-          '<span class="hv-l"><b>' + esc(f.b) + '</b><span>' + esc(f.s) + '</span></span></div>';
+         
+        const etoile = f.n ? '*' : '';
+        return '<div class="hv-fait" style="--i:' + i + '"><em class="hv-v"><i' + (f.id ? ' id="' + f.id + '"' : '') + (n !== null ? ' data-n="' + n + '"' : '') + '>' + esc(f.v) + '</i>' + (f.u || etoile ? '<small>' + esc(f.u || '') + etoile + '</small>' : '') + '</em>' +
+          '<span class="hv-l"><b>' + esc(f.b) + '</b><span>' + esc(f.s) + '</span>' + (f.n ? '<span class="hv-n">*' + esc(f.n) + '</span>' : '') + '</span></div>';
       }).join('') + '</div>';
   }
   const largeurPhoto = () => Math.min(2560, Math.ceil((innerWidth * Math.min(2, window.devicePixelRatio || 1)) / 160) * 160);
