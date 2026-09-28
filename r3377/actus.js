@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 941a9a0 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="941a9a0";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 0e744b2 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="0e744b2";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -4652,7 +4652,9 @@ class RdrNews extends HTMLElement {
         });
       });
     }
-    attributeChangedCallback() { if (this._wired) { this._render(); this._reveal(); } }
+    
+
+    attributeChangedCallback(nom, avant, apres) { if (avant === apres) return; if (this._wired) { this._render(); this._reveal(); } }
 
     
 
