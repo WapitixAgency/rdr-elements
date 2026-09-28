@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 369a235 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="369a235";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum bd3f8b1 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="bd3f8b1";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';

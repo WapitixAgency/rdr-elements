@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 369a235 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="369a235";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum bd3f8b1 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="bd3f8b1";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';

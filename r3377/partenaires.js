@@ -1,5 +1,5 @@
-/* rdr-elements partenaires | source route-du-rhum 369a235 | rdr-partenaires.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["partenaires"]="369a235";performance.mark("rdr-elements:partenaires")}catch(e){}
+/* rdr-elements partenaires | source route-du-rhum bd3f8b1 | rdr-partenaires.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["partenaires"]="bd3f8b1";performance.mark("rdr-elements:partenaires")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-partenaires")) return;
