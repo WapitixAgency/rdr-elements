@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum cd1947d | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="cd1947d";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 1242024 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="1242024";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -166,7 +166,7 @@ class SkipperGallery extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -1153,7 +1153,7 @@ class SkipperGallery extends HTMLElement {
         -webkit-user-drag: none;
         user-select: none;
       }
-      .sg-photo:hover img { transform: scale(1.04); filter: brightness(1.04); }
+      @media (hover:hover) and (pointer:fine){.sg-photo:hover img{ transform: scale(1.04); filter: brightness(1.04); }}
 
       .sg-photo-index {
         position: absolute;
@@ -1173,7 +1173,7 @@ class SkipperGallery extends HTMLElement {
         pointer-events: none;
       }
       .sg-photo-index strong { color: var(--sg-accent); }
-      .sg-photo:hover .sg-photo-index { opacity: 1; transform: translateY(0); }
+      @media (hover:hover) and (pointer:fine){.sg-photo:hover .sg-photo-index{ opacity: 1; transform: translateY(0); }}
 
       .sg-photo-zoom {
         position: absolute;
@@ -1190,7 +1190,7 @@ class SkipperGallery extends HTMLElement {
         transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         pointer-events: none;
       }
-      .sg-photo:hover .sg-photo-zoom { opacity: 1; transform: scale(1); }
+      @media (hover:hover) and (pointer:fine){.sg-photo:hover .sg-photo-zoom{ opacity: 1; transform: scale(1); }}
       .sg-photo-zoom svg { width: 18px; height: 18px; }
 
       .sg-photo::after {
@@ -1203,7 +1203,7 @@ class SkipperGallery extends HTMLElement {
         pointer-events: none;
         z-index: 2;
       }
-      .sg-photo:hover::after { opacity: 1; }
+      @media (hover:hover) and (pointer:fine){.sg-photo:hover::after{ opacity: 1; }}
 
       .sg-m-hero {
         position: relative;
@@ -1402,12 +1402,12 @@ class SkipperGallery extends HTMLElement {
         padding: 0;
         transition: all 0.3s ease;
       }
-      .sg-lb-close:hover {
+      @media (hover:hover) and (pointer:fine){.sg-lb-close:hover{
         background: var(--sg-accent);
         color: #0d1b3a;
         border-color: var(--sg-accent);
         transform: rotate(90deg);
-      }
+      }}
       .sg-lb-close svg { width: 18px; height: 18px; }
 
       .sg-lb-stage {
@@ -1457,13 +1457,13 @@ class SkipperGallery extends HTMLElement {
       }
       .sg-lb-prev { left: 16px; }
       .sg-lb-next { right: 16px; }
-      .sg-lb-nav:hover {
+      @media (hover:hover) and (pointer:fine){.sg-lb-nav:hover{
         background: var(--sg-accent);
         border-color: var(--sg-accent);
         color: #0d1b3a;
-      }
-      .sg-lb-prev:hover { transform: translateY(-50%) translateX(-4px); }
-      .sg-lb-next:hover { transform: translateY(-50%) translateX(4px); }
+      }}
+      @media (hover:hover) and (pointer:fine){.sg-lb-prev:hover{ transform: translateY(-50%) translateX(-4px); }}
+      @media (hover:hover) and (pointer:fine){.sg-lb-next:hover{ transform: translateY(-50%) translateX(4px); }}
       .sg-lb-nav svg { width: 20px; height: 20px; }
 
       @media (max-width: 640px) {
@@ -1917,7 +1917,7 @@ class SkipperOutro extends HTMLElement {
         border: 0; background: transparent; color: var(--sout-text); font: inherit; text-align: left; text-decoration: none; cursor: pointer;
         -webkit-tap-highlight-color: transparent; transition: background-color .25s ease;
       }
-      .sout-row:hover { background: color-mix(in srgb, var(--sout-accent) 9%, transparent); }
+      @media (hover:hover) and (pointer:fine){.sout-row:hover{ background: color-mix(in srgb, var(--sout-accent) 9%, transparent); }}
       .sout-row:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
       .sout-row-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--sout-accent) 14%, transparent); color: var(--sout-accent); }
       .sout-row-icon span { display: flex; }
@@ -1927,22 +1927,22 @@ class SkipperOutro extends HTMLElement {
       .sout-row-desc { font-family: ${FONT_FAMILY}; font-size: 12.5px; line-height: 1.35; color: var(--sout-text-muted); }
       .sout-row-go { display: flex; color: var(--sout-accent); }
       .sout-row-go svg { width: 18px; height: 18px; transition: translate .3s ease; }
-      .sout-row:hover .sout-row-go svg { translate: 3px 0; }
-      .sout-row[data-go="download"]:hover .sout-row-go svg { translate: 0 2px; }
+      @media (hover:hover) and (pointer:fine){.sout-row:hover .sout-row-go svg{ translate: 3px 0; }}
+      @media (hover:hover) and (pointer:fine){.sout-row[data-go="download"]:hover .sout-row-go svg{ translate: 0 2px; }}
        
       .sout-row.is-follow .sout-row-icon { background: rgba(252,241,80,0.13); color: #FCF150; }
       .sout-row.is-follow .sout-row-go { width: 30px; height: 30px; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid rgba(252,241,80,0.6); color: #FCF150; transition: background-color .25s ease, color .25s ease; }
       .sout-row.is-follow .sout-row-go svg { width: 14px; height: 14px; }
-      .sout-row.is-follow:hover { background: rgba(252,241,80,0.07); }
-      .sout-row.is-follow:hover .sout-row-go { background: #FCF150; color: #0A1A35; }
-      .sout-row.is-follow:hover .sout-row-go svg { translate: none; }
+      @media (hover:hover) and (pointer:fine){.sout-row.is-follow:hover{ background: rgba(252,241,80,0.07); }}
+      @media (hover:hover) and (pointer:fine){.sout-row.is-follow:hover .sout-row-go{ background: #FCF150; color: #0A1A35; }}
+      @media (hover:hover) and (pointer:fine){.sout-row.is-follow:hover .sout-row-go svg{ translate: none; }}
       
 
 
       .sout-row.is-follow.is-active .sout-row-go { background: #5DBFC0; border-color: #5DBFC0; color: #06283B; }
-      .sout-row.is-follow.is-active:hover { background: rgba(93,191,192,0.08); }
+      @media (hover:hover) and (pointer:fine){.sout-row.is-follow.is-active:hover{ background: rgba(93,191,192,0.08); }}
       .sout-row.is-soon { cursor: default; color: var(--sout-soon-color); }
-      .sout-row.is-soon:hover { background: transparent; }
+      @media (hover:hover) and (pointer:fine){.sout-row.is-soon:hover{ background: transparent; }}
       .sout-row.is-soon .sout-row-icon { opacity: .55; }
       @media (prefers-reduced-motion: reduce) { .sout-row, .sout-row-go, .sout-row-go svg { transition: none; } }
 
@@ -2025,7 +2025,7 @@ class SkippersCarousel extends HTMLElement {
     }[c]));
   }
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -2059,20 +2059,32 @@ class SkippersCarousel extends HTMLElement {
 
   connectedCallback() {
     if (!this.ready) this.init();
+    
+
+
+
+    let largeurVue = window.innerWidth;
     this._resizeHandler = () => {
-      this.update();
-      const hide = window.innerWidth < 768;
-      const root = this.shadowRoot;
-      if (root.querySelector('.arrow-left')) {
-        root.querySelector('.arrow-left').style.display = hide ? 'none' : 'flex';
-        root.querySelector('.arrow-right').style.display = hide ? 'none' : 'flex';
-      }
+      if (this._resizeTrame) return;
+      this._resizeTrame = requestAnimationFrame(() => {
+        this._resizeTrame = 0;
+        if (window.innerWidth === largeurVue) return;
+        largeurVue = window.innerWidth;
+        this.update();
+        const hide = window.innerWidth < 768;
+        const root = this.shadowRoot;
+        if (root.querySelector('.arrow-left')) {
+          root.querySelector('.arrow-left').style.display = hide ? 'none' : 'flex';
+          root.querySelector('.arrow-right').style.display = hide ? 'none' : 'flex';
+        }
+      });
     };
     window.addEventListener('resize', this._resizeHandler);
   }
 
   disconnectedCallback() {
     window.removeEventListener('resize', this._resizeHandler);
+    if (this._resizeTrame) { cancelAnimationFrame(this._resizeTrame); this._resizeTrame = 0; }
   }
 
   wixToUrl(url) {
@@ -2085,11 +2097,12 @@ class SkippersCarousel extends HTMLElement {
     return url;
   }
 
-  getPositionStyle(offset) {
+   
+  getPositionStyle(offset, largeur) {
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
-      const w = this.shadowRoot.querySelector('.carousel-wrapper')?.offsetWidth || 360;
+      const w = largeur || this.shadowRoot.querySelector('.carousel-wrapper')?.offsetWidth || 360;
       const sideX = w * 0.38;
       const farX = w * 0.65;
       const positions = {
@@ -2137,11 +2150,15 @@ class SkippersCarousel extends HTMLElement {
     const focusedCard = root.activeElement && root.activeElement.classList && root.activeElement.classList.contains('card-item')
       ? root.activeElement : null;
 
+    
+
+    const largeur = window.innerWidth < 768 ? (root.querySelector('.carousel-wrapper')?.offsetWidth || 360) : 0;
+
     root.querySelectorAll('.card-item').forEach(el => {
       const skipperIdx = parseInt(el.dataset.skipperIdx);
       const offset = ((skipperIdx - this.currentIndex + total) % total + total) % total;
       const normalizedOffset = offset > total / 2 ? offset - total : offset;
-      const p = this.getPositionStyle(normalizedOffset);
+      const p = this.getPositionStyle(normalizedOffset, largeur);
 
       if (!p) {
         el.style.transform = 'translateX(calc(0px - 50%)) translateZ(-300px) scale(0.3)';
@@ -2249,7 +2266,7 @@ class SkippersCarousel extends HTMLElement {
           position: absolute; left: 50%; overflow: visible;
           transition: transform 0.6s cubic-bezier(0.34, 1.1, 0.64, 1), opacity 0.5s ease;
         }
-        .card-item:not([data-offset="0"]):hover .skipper-card { filter: brightness(1.2); }
+        @media (hover:hover) and (pointer:fine){.card-item:not([data-offset="0"]):hover .skipper-card{ filter: brightness(1.2); }}
 
         .skipper-card {
           position: relative; overflow: hidden; background: #0d1f35;
@@ -2297,7 +2314,7 @@ class SkippersCarousel extends HTMLElement {
           transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
           user-select: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
         }
-        .arrow:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.8); transform: translateY(-50%) scale(1.1); }
+        @media (hover:hover) and (pointer:fine){.arrow:hover{ background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.8); transform: translateY(-50%) scale(1.1); }}
         .arrow:active { transform: translateY(-50%) scale(0.92); }
         .arrow-left { left: 24px; }
         .arrow-right { right: 24px; }
@@ -2589,10 +2606,10 @@ customElements.define('skippers-carousel', SkippersCarousel);
     '.rep-root a.rep-cta{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:12px 3px 12px 3px;background:#F7EC4B;color:#13204A;white-space:nowrap;' +
       'font:italic 400 20px/1 Varien,Impact,sans-serif;text-transform:uppercase;box-shadow:0 12px 24px -12px rgba(80,24,0,.7);transition:transform .2s ease,box-shadow .2s ease;}' +
     '.rep-root a.rep-cta svg{width:18px;height:18px;transition:transform .2s ease;}' +
-    '.rep-root a.rep-cta:hover{transform:translateY(-2px);box-shadow:0 16px 28px -12px rgba(80,24,0,.8);}' +
-    '.rep-root a.rep-cta:hover svg{transform:translateX(3px);}' +
+    '@media (hover:hover) and (pointer:fine){.rep-root a.rep-cta:hover{transform:translateY(-2px);box-shadow:0 16px 28px -12px rgba(80,24,0,.8);}}' +
+    '@media (hover:hover) and (pointer:fine){.rep-root a.rep-cta:hover svg{transform:translateX(3px);}}' +
     '.rep-root a.rep-lien{font:700 12px/1.3 Montserrat,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.5);}' +
-    '.rep-root a.rep-lien:hover{text-decoration-color:#fff;}' +
+    '@media (hover:hover) and (pointer:fine){.rep-root a.rep-lien:hover{text-decoration-color:#fff;}}' +
     '.rep-root a:focus-visible{outline:3px solid #13204A;outline-offset:3px;}' +
     '.rep-root .rep-visuel{position:absolute;z-index:1;pointer-events:none;}' +
 
@@ -3019,7 +3036,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
         '.rdr-cartepop-x{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:44px;height:44px;margin:0;padding:0;border-radius:50%;',
         'display:grid;place-items:center;cursor:pointer;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);',
         'opacity:0;transition:opacity .25s ease,background .15s ease,border-color .15s ease}',
-        '.rdr-cartepop-x:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}',
+        '@media (hover:hover) and (pointer:fine){.rdr-cartepop-x:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}}',
         '.rdr-cartepop-x svg{width:18px;height:18px}',
         '.rdr-cartepop-corps{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;width:max(var(--w),310px);max-width:100%;',
         'outline:none;opacity:0;transform:translateY(28px) scale(.94);transition:opacity .3s ease,transform .55s cubic-bezier(.2,.9,.25,1.15)}',
@@ -3051,7 +3068,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
         '.rdr-cartepop-partager{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;margin:0;padding:0 20px;border:0;',
         'border-radius:3px 15px 3px 15px;cursor:pointer;background:#FCF150;color:#16355D;' + F + 'font-size:13px;font-weight:800;letter-spacing:.08em;',
         'text-transform:uppercase;transition:background .15s ease,transform .15s ease,box-shadow .15s ease}',
-        '.rdr-cartepop-partager:hover{background:#FFE500;transform:translateY(-1px);box-shadow:0 6px 18px rgba(252,241,80,.25)}',
+        '@media (hover:hover) and (pointer:fine){.rdr-cartepop-partager:hover{background:#FFE500;transform:translateY(-1px);box-shadow:0 6px 18px rgba(252,241,80,.25)}}',
         '.rdr-cartepop-partager:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}',
         '.rdr-cartepop svg{flex:none}',
         '.rdr-cartepop-partager svg,.rdr-cartepop-second svg{width:16px;height:16px}',
@@ -3060,7 +3077,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
         'background:transparent;cursor:pointer;white-space:nowrap;' + F + 'font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;',
         'color:#5DBFC0;transition:color .15s ease,background .15s ease}',
         '.rdr-cartepop-second span{overflow:hidden;text-overflow:ellipsis}',
-        '.rdr-cartepop-second:hover{color:#fff;background:rgba(255,255,255,.06)}',
+        '@media (hover:hover) and (pointer:fine){.rdr-cartepop-second:hover{color:#fff;background:rgba(255,255,255,.06)}}',
         '.rdr-cartepop-second[hidden]{display:none}',
         '.rdr-cartepop :focus-visible{outline:2px solid #5DBFC0;outline-offset:3px}',
         
@@ -3761,11 +3778,11 @@ rdr-skipper .sk .sk-btn{display:inline-flex;align-items:center;justify-content:c
   transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;}
 rdr-skipper .sk .sk-btn svg{width:18px;height:18px;}
 rdr-skipper .sk .sk-btn--suivre{background:var(--sk-jaune);color:#0B1B33;}
-rdr-skipper .sk .sk-btn--suivre:hover{transform:translateY(-1px);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-btn--suivre:hover{transform:translateY(-1px);}}
 rdr-skipper .sk .sk-btn--suivre[aria-pressed="true"]{background:var(--sk-teal);color:#06283B;}
 rdr-skipper .sk .sk-btn--ligne{border:1.5px solid rgba(238,242,248,.55);color:var(--sk-encre);background:rgba(14,17,29,.28);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
-rdr-skipper .sk .sk-btn--ligne:hover{border-color:var(--sk-encre);background:rgba(14,17,29,.5);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-btn--ligne:hover{border-color:var(--sk-encre);background:rgba(14,17,29,.5);}}
 
  
 rdr-skipper .sk .sk-hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:clamp(600px,88svh,880px);
@@ -3788,11 +3805,11 @@ rdr-skipper .sk .sk-hero--portrait .sk-hero-img{position:absolute;right:0;top:0;
 rdr-skipper .sk .sk-retour{position:absolute;z-index:7;top:var(--e5);left:calc(max(0px, (100% - 1280px) / 2) + clamp(20px, 5vw, 72px));display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px 0 10px;border-radius:12px 3px 12px 3px;
   background:rgba(14,17,29,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:rgba(238,242,248,.82);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:color .2s ease,background-color .2s ease;}
 rdr-skipper .sk .sk-retour svg{width:14px;height:14px;transform:scaleX(-1);transition:transform .25s cubic-bezier(.22,1,.36,1);}
-rdr-skipper .sk .sk-retour:hover{color:#fff;background-color:rgba(14,17,29,.7);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-retour:hover{color:#fff;background-color:rgba(14,17,29,.7);}}
 rdr-skipper .sk .sk-retour--attente{opacity:.6;cursor:progress;}
 rdr-skipper .sk .sk-retour--attente svg{animation:sk-retour-va .7s ease-in-out infinite alternate;}
 @keyframes sk-retour-va{to{transform:scaleX(-1) translateX(6px);}}
-rdr-skipper .sk .sk-retour:hover svg{transform:scaleX(-1) translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-retour:hover svg{transform:scaleX(-1) translateX(3px);}}
 rdr-skipper .sk .sk-retour:focus-visible{outline:2px solid #fff;outline-offset:3px;}
 rdr-skipper .sk .sk-liste-pied{display:flex;justify-content:center;margin-top:var(--e7);}
 rdr-skipper .sk .sk-liste-pied svg{width:16px;height:16px;}
@@ -4018,7 +4035,7 @@ rdr-skipper .sk .sk-bord-outils{grid-column:1 / -1;display:flex;flex-wrap:wrap;a
 rdr-skipper .sk .sk-bord-outils p{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0;}
 rdr-skipper .sk .sk-bord-avance-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:14px 3px 14px 3px;
   font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(238,242,248,.08);box-shadow:inset 0 0 0 1px rgba(238,242,248,.22);transition:background-color .2s ease;}
-rdr-skipper .sk .sk-bord-avance-btn:hover{background:rgba(238,242,248,.14);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-bord-avance-btn:hover{background:rgba(238,242,248,.14);}}
 rdr-skipper .sk .sk-bord-avance-btn svg{width:16px;height:16px;transition:transform .25s ease;}
 rdr-skipper .sk .sk-bord-avance-btn[aria-expanded="true"] svg{transform:rotate(180deg);}
 rdr-skipper .sk .sk-bord-avance{grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;overflow:hidden;border-radius:var(--r-carte);background:rgba(238,242,248,.1);}
@@ -4077,16 +4094,16 @@ rdr-skipper .sk .sk-nav-indic.est-pose{opacity:1;}
 rdr-skipper .sk .sk-nav-lien{position:relative;display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;white-space:nowrap;border-radius:14px 3px 14px 3px;
   font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--sk-encre-3);transition:color .2s ease;}
 rdr-skipper .sk .sk-nav-lien svg{width:16px;height:16px;transition:color .2s ease;}
-rdr-skipper .sk .sk-nav-lien:hover,rdr-skipper .sk .sk-nav-lien[aria-current="true"]{color:#fff;}
+rdr-skipper .sk .sk-nav-lien[aria-current="true"]{color:#fff;}@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-nav-lien:hover{color:#fff;}}
 rdr-skipper .sk .sk-nav-lien[aria-current="true"] svg{color:var(--sk-accent);}
 rdr-skipper .sk .sk-nav-actions{display:flex;align-items:center;gap:6px;flex:none;}
 rdr-skipper .sk .sk-nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 16px;border-radius:14px 3px 14px 3px;
   font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sk-encre);background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(238,242,248,.16);
   transition:background-color .2s ease,box-shadow .2s ease,color .2s ease;}
 rdr-skipper .sk .sk-nav-btn svg{width:16px;height:16px;}
-rdr-skipper .sk .sk-nav-btn:hover{background:rgba(255,255,255,.12);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-nav-btn:hover{background:rgba(255,255,255,.12);}}
 rdr-skipper .sk .sk-nav-btn--suivre{background:var(--sk-jaune);box-shadow:none;color:#0B1B33;}
-rdr-skipper .sk .sk-nav-btn--suivre:hover{background:#FFF36A;}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-nav-btn--suivre:hover{background:#FFF36A;}}
 rdr-skipper .sk .sk-nav-btn--suivre[aria-pressed="true"]{background:var(--sk-teal);color:#06283B;}
  
 rdr-skipper .sk .sk-nav + .sk-sec{padding-top:calc(var(--e9) + var(--sk-nav-h) * .5);}
@@ -4206,7 +4223,7 @@ rdr-skipper .sk .sk-reseau{display:inline-flex;align-items:center;gap:10px;min-h
   font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sk-encre);box-shadow:inset 0 0 0 1.5px rgba(238,242,248,.4);
   background:rgba(14,17,29,.22);transition:background-color .2s ease,box-shadow .2s ease;}
 rdr-skipper .sk .sk-reseau svg{width:18px;height:18px;}
-rdr-skipper .sk .sk-reseau:hover{background:rgba(14,17,29,.55);box-shadow:inset 0 0 0 1.5px var(--sk-encre);}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-reseau:hover{background:rgba(14,17,29,.55);box-shadow:inset 0 0 0 1.5px var(--sk-encre);}}
 
 
 
@@ -4288,21 +4305,21 @@ rdr-skipper .sk .sk-pref-action:not(.est-premier){box-shadow:inset 1px 0 0 rgba(
 rdr-skipper .sk .sk-pref-action svg{flex:none;width:16px;height:16px;}
  
 rdr-skipper .sk .sk-pref-action.est-dernier{padding-right:calc(var(--e3) + 14px);}
-rdr-skipper .sk .sk-pref-action:hover{background:rgba(238,242,248,.07);color:#fff;}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-pref-action:hover{background:rgba(238,242,248,.07);color:#fff;}}
 rdr-skipper .sk .sk-pref-action:focus-visible{outline:2px solid #fff;outline-offset:-4px;}
 
 
 
 rdr-skipper .sk .sk-pref-action.est-principal{flex-grow:1.35;background:#D8323F;color:#fff;}
-rdr-skipper .sk .sk-pref-action.est-principal:hover{background:#C92A37;}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-pref-action.est-principal:hover{background:#C92A37;}}
 rdr-skipper .sk .sk-pref[data-mode="choisi"] .sk-pref-action.est-principal{flex-grow:1.3;background:rgba(216,50,63,.24);color:#fff;}
 
 
 
 rdr-skipper .sk .sk-pref[data-mode="discret"] .sk-pref-action.est-principal{flex-grow:1;background:transparent;color:var(--sk-encre-2);}
 rdr-skipper .sk .sk-pref[data-mode="discret"] .sk-pref-action.est-principal svg{color:#F2636E;}
-rdr-skipper .sk .sk-pref[data-mode="discret"] .sk-pref-action.est-principal:hover{background:rgba(216,50,63,.2);color:#fff;}
-rdr-skipper .sk .sk-pref[data-mode="choisi"] .sk-pref-action.est-principal:hover{background:#D8323F;}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-pref[data-mode="discret"] .sk-pref-action.est-principal:hover{background:rgba(216,50,63,.2);color:#fff;}}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-pref[data-mode="choisi"] .sk-pref-action.est-principal:hover{background:#D8323F;}}
 rdr-skipper .sk .sk-pref-action.est-retrait{color:var(--sk-encre-3);}
 rdr-skipper .sk .sk-pref-action.est-retrait.est-armee{background:#D8323F;color:#fff;}
 
@@ -4497,7 +4514,7 @@ rdr-skipper .sk .sk-bateau-choix{display:flex;flex-wrap:wrap;gap:var(--e3);margi
 rdr-skipper .sk .sk-bateau-choix button{display:block;width:clamp(96px,10vw,140px);aspect-ratio:16 / 10;overflow:hidden;border-radius:14px 3px 14px 3px;opacity:.6;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:opacity .2s ease,box-shadow .2s ease;}
 rdr-skipper .sk .sk-bateau-choix img{width:100%;height:100%;object-fit:cover;}
-rdr-skipper .sk .sk-bateau-choix button:hover{opacity:.9;}
+@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-bateau-choix button:hover{opacity:.9;}}
 rdr-skipper .sk .sk-bateau-choix button[aria-pressed="true"]{opacity:1;box-shadow:0 0 0 2px var(--sk-accent);}
 rdr-skipper .sk .sk-fiche{padding:var(--e5) var(--e6) var(--e3);}
 rdr-skipper .sk .sk-echelle{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,3vw,48px);align-items:center;margin-top:clamp(64px,7vw,104px);
@@ -4655,7 +4672,7 @@ body > .rdr-sk-toast.est-visible{opacity:1;transform:translate(-50%,0);}
 body > .rdr-sk-toast.a-une-action{display:flex;align-items:center;gap:14px;padding:10px 10px 10px 22px;text-align:left;}
 body > .rdr-sk-toast.a-une-action.est-visible{pointer-events:auto;}
 body > .rdr-sk-toast button{flex:none;min-height:40px;padding:0 14px;border:0;border-radius:10px 2px 10px 2px;background:#191D31;color:#fff;font:800 11px/1 Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
-body > .rdr-sk-toast button:hover{background:#0B1B33;}
+@media (hover:hover) and (pointer:fine){body > .rdr-sk-toast button:hover{background:#0B1B33;}}
 @media (prefers-reduced-motion:reduce){body > .rdr-sk-toast{transition:none;}}
 
  
@@ -4905,10 +4922,13 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
   const memEcrire = (k, v) => { try { sessionStorage.setItem(MEM + k, JSON.stringify(Object.assign({ le: Date.now() }, v))); } catch (e) {   } };
    
   const memSlug = () => { try { return decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase().slice(0, 80); } catch (e) { return ''; } };
+  
+
   const memElaguer = () => { try {
-    const le = (k) => (memLire(k.slice(MEM.length)) || {}).le || 0;
-    const cles = Object.keys(sessionStorage).filter(k => k.indexOf(MEM) === 0).sort((x, y) => le(x) - le(y));
-    cles.slice(0, Math.max(0, cles.length - 6)).forEach(k => sessionStorage.removeItem(k));
+    const cles = Object.keys(sessionStorage).filter(k => k.indexOf(MEM) === 0);
+    if (cles.length <= 6) return;
+    const le = new Map(cles.map(k => [k, (memLire(k.slice(MEM.length)) || {}).le || 0]));
+    cles.sort((x, y) => le.get(x) - le.get(y)).slice(0, cles.length - 6).forEach(k => sessionStorage.removeItem(k));
   } catch (e) {   } };
 
   class RdrSkipper extends HTMLElement {
@@ -4982,12 +5002,12 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         
 
         if (this._depuisMemoire) { this._depuisMemoire = false; this._memoriser(String(apres == null ? '' : apres).trim()); return; }
-        if (this._appliquerCharge(apres)) { this._memoriser(this._chargeBrute); this._rendre(); }
+        if (this._appliquerCharge(apres)) { this._rendre(); this._memoriser(this._chargeBrute); }
         return;
       }
       this._appliquer(nom, apres);
       if (nom === 'suivi') this._confirmerSuivi();
-      else if (nom === 'membre') { this._peindreSuivi(); this._rejouerGeste(); }
+      else if (nom === 'membre') { this._peindreSuivi(); this._rejouerGeste(); this._prechargerListe(); }
       else if (nom === 'prefere') this._confirmerPrefere();
       else if (nom === 'prefere-actuel') this._peindrePrefere();
       else if (nom === 'live-url') {   }
@@ -5020,7 +5040,15 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
     _memCle() { return this._lang + ':' + memSlug(); }
-    _memoriser(brut) { if (brut) { memEcrire(this._memCle(), { payload: brut }); memElaguer(); } }
+    
+
+
+    _memoriser(brut) {
+      if (!brut) return;
+      const cle = this._memCle();
+      const ecrire = () => { memEcrire(cle, { payload: brut }); memElaguer(); };
+      if (typeof requestIdleCallback === 'function') requestIdleCallback(ecrire, { timeout: 1000 }); else setTimeout(ecrire, 0);
+    }
 
     _appliquerCharge(v) {
       const brut = String(v == null ? '' : v).trim();
@@ -5088,8 +5116,12 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
 
+
+
+
+
     _prechargerListe() {
-      if (this._listePrechargee) return;
+      if (this._listePrechargee || this._membre !== 'non') return;
       this._listePrechargee = true;
       try {
         if (!HTMLScriptElement.supports('speculationrules')) return;
@@ -7056,13 +7088,21 @@ const PROFIL_CONFIG = {
   'INTERNATIONAUX':    { label: 'Internationaux',     sub: 'Hors France',                               couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' },
 };
 
+
+
+
+const URL_CLASSES = { 'ultim': 'Ultim', 'ocean-fifty': 'Ocean Fifty', 'class40': 'Class40', 'imoca': 'IMOCA', 'vintage-mono': 'Vintage Mono', 'vintage-multi': 'Vintage Multi' };
+const URL_PROFILS = { 'rookies': 'ROOKIES', 'femmes': 'FEMMES', 'hommes': 'HOMMES', 'vainqueurs': 'ANCIENS VAINQUEURS', 'locaux': 'LOCAUX', 'internationaux': 'INTERNATIONAUX' };
+
  
 const HOMMES_CFG = { label: 'Hommes', couleur: '#72b9f1', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="19" y1="5" x2="14.15" y2="9.85"/><polyline points="15 5 19 5 19 9"/></svg>' };
 
 const CARD_ROTATIONS = [-0.5,0.4,-0.3,0.5,-0.4,0.3,-0.5,0.4,-0.2,0.5,-0.4,0.3,0.5,-0.3,0.4,-0.5,0.2,-0.4,0.5,-0.3,0.5,-0.2,0.4,-0.5,0.3,-0.4,0.5,-0.3];
 
-const FAV_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-const FAV_ON  = '<svg viewBox="0 0 24 24" fill="#e63946" stroke="#e63946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+
+
+
 
 function escapeHTML(s) {
   return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -7098,7 +7138,6 @@ const SL_DICT = {
     sort_random: 'Aléatoire',
     reset: 'Réinitialiser ×',
     view_grid: 'Vue grille',
-    view_list: 'Vue liste',
     fab_open_aria: 'Ouvrir les filtres',
     close: 'Fermer',
     empty_title: 'Cap dans le vide',
@@ -7106,8 +7145,9 @@ const SL_DICT = {
     empty_reset: 'Tout réinitialiser',
     see_profile: 'Voir le profil',
     profile_soon: 'Fiche bientôt disponible',
-    fav_add: 'Ajouter aux favoris',
-    fav_remove: 'Retirer des favoris',
+    page_prev: 'Page précédente',
+    page_next: 'Page suivante',
+    search_clear: 'Effacer la recherche',
     'pf_ROOKIES': 'Rookies', 'pf_ROOKIES_sub': 'Première participation',
     'pf_FEMMES': 'Femmes',
     'pf_HOMMES': 'Hommes',
@@ -7127,7 +7167,6 @@ const SL_DICT = {
     sort_random: 'Random',
     reset: 'Reset ×',
     view_grid: 'Grid view',
-    view_list: 'List view',
     fab_open_aria: 'Open filters',
     close: 'Close',
     empty_title: 'Nothing on the horizon',
@@ -7135,8 +7174,9 @@ const SL_DICT = {
     empty_reset: 'Reset all',
     see_profile: 'View profile',
     profile_soon: 'Profile coming soon',
-    fav_add: 'Add to favorites',
-    fav_remove: 'Remove from favorites',
+    page_prev: 'Previous page',
+    page_next: 'Next page',
+    search_clear: 'Clear search',
     'pf_ROOKIES': 'Rookies', 'pf_ROOKIES_sub': 'First-time entry',
     'pf_FEMMES': 'Women',
     'pf_HOMMES': 'Men',
@@ -7154,7 +7194,6 @@ const SL_DICT = {
 
   const MEM_CLE = 'rdrMemSkippersListeV1';
   const MEM_TTL_MS = 30 * 60 * 1000;
-  const memLangue = () => /^\/en(\/|$)/.test((typeof location !== 'undefined' && location.pathname) || '') ? 'en' : 'fr';
   function memLire(suffixe) {
     try { const m = JSON.parse(sessionStorage.getItem(MEM_CLE + ':' + suffixe) || 'null'); return (m && typeof m.le === 'number' && Date.now() - m.le < MEM_TTL_MS) ? m : null; }
     catch (e) { return null; }
@@ -7175,15 +7214,11 @@ class SkippersList extends HTMLElement {
     this._activeGenre = null;
     this._search = '';
     this._sort = 'random';
-    this._view = 'grid';
     this._searchTimer = null;
-    this._favoris = {};
     this._counterRaf = null;
     this._shellReady = false;
     this._pendingSkippers = null;
-    this._pendingFavoris = null;
     this._dataLoaded = false;
-    this._allById = null;
     this._shuffledAll = null;
     this._cleanups = [];
     this._portalRoot    = null;
@@ -7213,9 +7248,47 @@ class SkippersList extends HTMLElement {
     setTimeout(() => { try { card.classList.remove('sl-navloading'); spin.remove(); } catch (e) {   } }, 6000);
   }
 
+  _lireAdresse() {
+    let p;
+    try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
+    const classe = URL_CLASSES[String(p.get('classe') || '').toLowerCase()];
+    if (classe) this._activeClasse = classe;
+    String(p.get('profil') || '').toLowerCase().split(',').map((x) => x.trim()).forEach((k) => {
+      const f = URL_PROFILS[k];
+      if (!f) return;
+      if (f === 'HOMMES') { this._activeGenre = 'HOMMES'; this._activeFilters['FEMMES'] = false; return; }
+      this._activeFilters[f] = true;
+      if (f === 'FEMMES') this._activeGenre = null;
+    });
+    if (this._activeFilters['ROOKIES'] && this._activeFilters['ANCIENS VAINQUEURS']) this._activeFilters['ANCIENS VAINQUEURS'] = false;
+    const q = String(p.get('q') || '').trim().slice(0, 60);
+    if (q) this._search = q;
+    if (p.get('tri') === 'az') this._sort = 'az';
+  }
+
+  _ecrireAdresse() {
+    let u;
+    try { u = new URL(window.location.href); } catch (e) { return; }
+    const p = u.searchParams;
+    const classe = Object.keys(URL_CLASSES).find((k) => URL_CLASSES[k] === this._activeClasse);
+    if (classe) p.set('classe', classe); else p.delete('classe');
+    const profils = Object.keys(URL_PROFILS).filter((k) => {
+      const f = URL_PROFILS[k];
+      return f === 'HOMMES' ? this._activeGenre === 'HOMMES' : !!this._activeFilters[f];
+    });
+    if (profils.length) p.set('profil', profils.join(',')); else p.delete('profil');
+    if (this._search.trim()) p.set('q', this._search.trim()); else p.delete('q');
+    if (this._sort === 'az') p.set('tri', 'az'); else p.delete('tri');
+    const requete = p.toString().split('%2C').join(',');
+    const cible = u.pathname + (requete ? '?' + requete : '') + u.hash;
+    if (cible === location.pathname + location.search + location.hash) return;
+    try { history.replaceState(history.state, '', cible); } catch (e) {   }
+  }
+
   connectedCallback() {
     this.style.display = 'block';
     this.style.width = '100%';
+    if (!this._adresseLue) { this._adresseLue = true; this._lireAdresse(); }
      
      
     if (!this._onPageShow) {
@@ -7223,6 +7296,8 @@ class SkippersList extends HTMLElement {
         try {
           this.querySelectorAll('.sl-navloading').forEach(n => n.classList.remove('sl-navloading'));
           this.querySelectorAll('.sl-navspin').forEach(n => n.remove());
+           
+          this._navEnCours = false;
         } catch (e) {   }
       };
       window.addEventListener('pageshow', this._onPageShow);
@@ -7230,6 +7305,10 @@ class SkippersList extends HTMLElement {
     this._renderShell();
     this._shellReady = true;
     this._appliedLang = this._lang();
+    if (this._activeFilterCount() || this._sort !== 'random') {
+      ['#sl-search', '#sl-search-mobile'].forEach((sel) => { const i = this.querySelector(sel); if (i) i.value = this._search; });
+      this._updateFilterStyles();
+    }
     if (this._pendingSkippers !== null) {
       this._processSkippers(this._pendingSkippers);
       this._pendingSkippers = null;
@@ -7242,10 +7321,10 @@ class SkippersList extends HTMLElement {
         try { parsed = JSON.parse(m.skippers); } catch (e) { parsed = null; }
         if (Array.isArray(parsed) && parsed.length) { this._brut = m.skippers; this._depuisMemoire = true; this._processSkippers(parsed); }
       }
-    }
-    if (this._pendingFavoris !== null) {
-      this._favoris = this._pendingFavoris;
-      this._pendingFavoris = null;
+    } else {
+      
+
+      this._redessiner();
     }
   }
 
@@ -7267,7 +7346,7 @@ class SkippersList extends HTMLElement {
     }
   }
 
-  static get observedAttributes() { return ['skippers','favoris','lang']; }
+  static get observedAttributes() { return ['skippers','lang']; }
 
    
   _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
@@ -7291,21 +7370,20 @@ class SkippersList extends HTMLElement {
     this._cleanups.forEach(fn => fn());       
     this._cleanups = [];
     this._renderShell();
-    if (this._dataLoaded) {
-      const si = this.querySelector('#sl-search'); if (si) si.value = this._search || '';
-      const sm = this.querySelector('#sl-search-mobile'); if (sm) sm.value = this._search || '';
-      if (this._view === 'list') {
-        this.querySelector('#sl-view-list')?.classList.add('active');
-        this.querySelector('#sl-view-grid')?.classList.remove('active');
-      }
-      this._animateCounter(this._filtered.length);
-      this._renderGrid();
-      this._renderPagination();
-      this._updateFilterStyles();
-      this._refreshFavoriButtons();
-      const block = this.querySelector('#sl-counter-block');
-      if (block) block.classList.add('visible');
-    }
+    if (this._dataLoaded) this._redessiner();
+  }
+
+  
+
+  _redessiner() {
+    const si = this.querySelector('#sl-search'); if (si) si.value = this._search || '';
+    const sm = this.querySelector('#sl-search-mobile'); if (sm) sm.value = this._search || '';
+    this._animateCounter(this._filtered.length);
+    this._renderGrid();
+    this._renderPagination();
+    this._updateFilterStyles();
+    const block = this.querySelector('#sl-counter-block');
+    if (block) block.classList.add('visible');
   }
 
   attributeChangedCallback(name, _, val) {
@@ -7325,18 +7403,15 @@ class SkippersList extends HTMLElement {
       if (!this._shellReady) { this._pendingSkippers = parsed; return; }
       this._processSkippers(parsed);
     }
-    if (name === 'favoris') {
-      let parsed;
-      try { parsed = JSON.parse(val || '{}'); } catch(e) { parsed = {}; }
-      if (!this._shellReady) { this._pendingFavoris = parsed; return; }
-      this._favoris = parsed;
-      this._refreshFavoriButtons();
-    }
   }
 
   _naviguer(url) {
     if (!url || this._navEnCours) return;
+     
+    if (this._lang() === 'en' && /^\/(?!en\/)/.test(url)) url = '/en' + url;
     this._navEnCours = true;
+     
+    setTimeout(() => { this._navEnCours = false; }, 6000);
     try { location.assign(url); } catch (e) { this._navEnCours = false; }
   }
 
@@ -7353,7 +7428,6 @@ class SkippersList extends HTMLElement {
         _searchKey: ((s.prenom||'')+' '+(s.nom||'')+' '+(s.bateau||'')+' '+(s.nationalite||'')).toLowerCase(),
       };
     });
-    this._allById = new Map(this._all.map(s => [s._id, s]));
     this._shuffledAll = [...this._all];
     for (let i=this._shuffledAll.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[this._shuffledAll[i],this._shuffledAll[j]]=[this._shuffledAll[j],this._shuffledAll[i]];}
     this._applyFilters();
@@ -7402,7 +7476,7 @@ class SkippersList extends HTMLElement {
 
    
   _safeUrl(u) {
-    let s = String(u == null ? '' : u).trim();
+    let s = String(u == null ? '' : u).replace(/[\u0000-\u001F\u007F]/g, '').trim();
     if (!s) return '';
     let m = s.match(/^wix:image:\/\/v1\/([^/#?]+)/i);
     if (m) s = 'https://static.wixstatic.com/media/' + m[1];
@@ -7434,8 +7508,6 @@ class SkippersList extends HTMLElement {
       r = r.filter(s => (s._searchKey || '').includes(q));
     }
     if (this._sort === 'az') r.sort((a,b) => (a.nom||'').localeCompare(b.nom||''));
-     
-     
     this._filtered = r;
     this._page = 0;
   }
@@ -7473,16 +7545,6 @@ class SkippersList extends HTMLElement {
       else { el.dataset.val = String(target); el.textContent = target; }
     };
     this._counterRaf = requestAnimationFrame(tick);
-  }
-
-  _refreshFavoriButtons() {
-    this.querySelectorAll('[data-favori-id]').forEach(btn => {
-      const isFav = !!this._favoris[btn.dataset.favoriId];
-      btn.classList.toggle('is-fav', isFav);
-      btn.querySelector('.sl-fav-icon').innerHTML = isFav ? FAV_ON : FAV_OFF;
-      btn.setAttribute('aria-label', isFav ? this._t('fav_remove') : this._t('fav_add'));
-      btn.setAttribute('aria-pressed', String(isFav));
-    });
   }
 
   _renderShell() {
@@ -7523,10 +7585,10 @@ class SkippersList extends HTMLElement {
       .sl-class-btn { cursor:pointer; border:none; background:none; padding:0; flex-shrink:0; transition:transform 0.3s cubic-bezier(0.25,0,0,1), opacity 0.3s ease; }
       .sl-class-btn img { display:block; height:100px; width:auto; pointer-events:none; }
       .sl-class-btn.filter-default { opacity:1; transform:translateY(0); }
-      .sl-class-btn.filter-default:hover { transform:translateY(-8px); }
+      @media (hover:hover) and (pointer:fine){.sl-class-btn.filter-default:hover{ transform:translateY(-8px); }}
       .sl-class-btn.filter-active { opacity:1; transform:scale(1.12) translateY(-6px); }
       .sl-class-btn.filter-inactive { opacity:0.25; }
-      .sl-class-btn.filter-inactive:hover { opacity:0.5; transform:translateY(-3px); }
+      @media (hover:hover) and (pointer:fine){.sl-class-btn.filter-inactive:hover{ opacity:0.5; transform:translateY(-3px); }}
       @media (hover:none) {
         .sl-class-btn.filter-default:hover { transform:translateY(0); }
         .sl-class-btn.filter-inactive:hover { opacity:0.25; transform:translateY(0); }
@@ -7544,7 +7606,10 @@ class SkippersList extends HTMLElement {
         backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
         border:1px solid rgba(93,191,192,0.15);
         border-radius:14px; padding:22px 18px 26px;
-        position:sticky; top:24px;
+        
+
+
+        position:relative;
         display:flex; flex-direction:column; gap:28px;
         box-shadow:0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(93,191,192,0.1);
         transition:box-shadow 0.4s ease;
@@ -7554,7 +7619,7 @@ class SkippersList extends HTMLElement {
       .sl-search-wrap { position:relative; }
       .sl-search { width:100%; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-bottom:2px solid rgba(93,191,192,0.3); border-radius:8px; padding:10px 12px 10px 36px; color:#fff; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; transition:border-color 0.25s, background 0.25s, box-shadow 0.25s; }
       .sl-search::placeholder { color:rgba(255,255,255,0.3); }
-      .sl-search:hover { border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.09); }
+      @media (hover:hover) and (pointer:fine){.sl-search:hover{ border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.09); }}
       .sl-search:focus { border-color:rgba(93,191,192,0.4); border-bottom-color:rgba(93,191,192,0.8); background:rgba(93,191,192,0.08); box-shadow:0 0 0 3px rgba(93,191,192,0.08), 0 4px 20px rgba(93,191,192,0.1); }
       .sl-search-icon { position:absolute; left:11px; top:50%; transform:translateY(-50%); color:rgba(255,255,255,0.3); pointer-events:none; }
       .sl-search-icon svg { display:block; width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
@@ -7576,14 +7641,14 @@ class SkippersList extends HTMLElement {
         transition:background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
         user-select:none;
       }
-      .sl-pill:hover { background:rgba(var(--pill-rgb),0.08); color:rgba(255,255,255,0.85); transform:translateX(2px); border-color:rgba(var(--pill-rgb),0.2); border-left-color:var(--pill-c); }
+      @media (hover:hover) and (pointer:fine){.sl-pill:hover{ background:rgba(var(--pill-rgb),0.08); color:rgba(255,255,255,0.85); transform:translateX(2px); border-color:rgba(var(--pill-rgb),0.2); border-left-color:var(--pill-c); }}
       .sl-pill.active { background:rgba(var(--pill-rgb),0.18); border-color:rgba(var(--pill-rgb),0.35); border-left-color:var(--pill-c); border-left-width:4px; color:var(--pill-c); box-shadow:0 0 16px rgba(var(--pill-rgb),0.2), inset 0 0 8px rgba(var(--pill-rgb),0.06); transform:translateX(4px); font-weight:800; }
       .sl-pill svg { width:14px; height:14px; flex-shrink:0; stroke:currentColor; opacity:0.6; transition:opacity 0.2s; }
-      .sl-pill:hover svg, .sl-pill.active svg { opacity:1; }
+      .sl-pill.active svg{ opacity:1; }@media (hover:hover) and (pointer:fine){.sl-pill:hover svg{ opacity:1; }}
       .sl-pill-text { display:flex; flex-direction:column; gap:1px; }
       .sl-pill-sub { font-size:9px; font-weight:500; color:rgba(255,255,255,0.38); text-transform:none; letter-spacing:0; line-height:1.2; transition:color 0.2s; }
       .sl-pill.active .sl-pill-sub { color:rgba(var(--pill-rgb),0.75); }
-      .sl-pill:hover .sl-pill-sub { color:rgba(255,255,255,0.6); }
+      @media (hover:hover) and (pointer:fine){.sl-pill:hover .sl-pill-sub{ color:rgba(255,255,255,0.6); }}
 
        
       .sl-sort-btns { display:flex; position:relative; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:3px; gap:0; }
@@ -7591,23 +7656,21 @@ class SkippersList extends HTMLElement {
       .sl-sort-btn { flex:1; padding:7px 4px; border-radius:5px; cursor:pointer; border:none; background:transparent; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:rgba(255,255,255,0.35); transition:color 0.2s; text-align:center; position:relative; z-index:1; }
       .sl-sort-btn + .sl-sort-btn::before { content:''; position:absolute; left:0; top:20%; height:60%; width:1px; background:rgba(255,255,255,0.08); transition:opacity 0.2s; }
       .sl-sort-btn.active + .sl-sort-btn::before, .sl-sort-btn + .sl-sort-btn.active::before { opacity:0; }
-      .sl-sort-btn:hover { color:rgba(255,255,255,0.65); }
+      @media (hover:hover) and (pointer:fine){.sl-sort-btn:hover{ color:rgba(255,255,255,0.65); }}
       .sl-sort-btn.active { color:#5DBFC0; }
 
       .sl-reset { padding-top:2px; display:none; }
       .sl-reset.visible { display:block; }
       .sl-reset-btn { width:100%; padding:9px; background:none; border:1px solid rgba(255,255,255,0.08); border-radius:6px; color:rgba(255,255,255,0.3); font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; cursor:pointer; transition:border-color 0.2s, color 0.2s; }
-      .sl-reset-btn:hover { border-color:rgba(220,60,60,0.4); color:rgba(255,100,100,0.8); }
+      @media (hover:hover) and (pointer:fine){.sl-reset-btn:hover{ border-color:rgba(220,60,60,0.4); color:rgba(255,100,100,0.8); }}
 
        
       .sl-main { flex:1; min-width:0; }
       .sl-toolbar { display:flex; align-items:center; justify-content:flex-end; margin-bottom:16px; gap:8px; }
       .sl-view-btn { width:34px; height:34px; border:1px solid rgba(255,255,255,0.1); border-radius:6px; background:rgba(255,255,255,0.03); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s, color 0.2s, background 0.2s; color:rgba(255,255,255,0.3); }
-      .sl-view-btn:hover { border-color:rgba(255,255,255,0.25); color:rgba(255,255,255,0.7); }
+      @media (hover:hover) and (pointer:fine){.sl-view-btn:hover{ border-color:rgba(255,255,255,0.25); color:rgba(255,255,255,0.7); }}
       .sl-view-btn.active { background:rgba(93,191,192,0.12); border-color:rgba(93,191,192,0.4); color:#5DBFC0; }
       .sl-view-btn svg { width:16px; height:16px; fill:currentColor; }
-       
-      #sl-view-list { display:none !important; }
 
        
       .sl-pill-genre-wrap { display:flex; gap:0; align-items:stretch; width:100%; }
@@ -7630,8 +7693,8 @@ class SkippersList extends HTMLElement {
         user-select:none;
       }
       .sl-pill-hommes svg { width:12px; height:12px; stroke:currentColor; flex-shrink:0; opacity:0.6; transition:opacity 0.2s; }
-      .sl-pill-hommes:hover { background:rgba(114,185,241,0.08); color:rgba(255,255,255,0.75); }
-      .sl-pill-hommes:hover svg { opacity:1; }
+      @media (hover:hover) and (pointer:fine){.sl-pill-hommes:hover{ background:rgba(114,185,241,0.08); color:rgba(255,255,255,0.75); }}
+      @media (hover:hover) and (pointer:fine){.sl-pill-hommes:hover svg{ opacity:1; }}
       .sl-pill-hommes.active { background:rgba(114,185,241,0.18); border-color:rgba(114,185,241,0.35); color:#72b9f1; font-weight:800; }
       .sl-pill-hommes.active svg { opacity:1; }
        
@@ -7664,14 +7727,13 @@ class SkippersList extends HTMLElement {
         isolation:isolate;
       }
       .sl-card-wrap--clickable { cursor:pointer; }
-      .sl-card-wrap--clickable:hover,
-      .sl-card-wrap--revealed:hover {
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover,.sl-card-wrap--revealed:hover{
         transform:rotate(0deg) translateY(-10px) scale(1.035);
         transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1), filter 0.25s ease;
         will-change:transform;
-      }
-      .sl-card-wrap--clickable:hover { filter:brightness(1.08); }
-      .sl-card-wrap--revealed:hover  { filter:brightness(1.06); }
+      }}
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover{ filter:brightness(1.08); }}
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--revealed:hover{ filter:brightness(1.06); }}
       @media (hover:none) {
         .sl-card-wrap--clickable:hover,
         .sl-card-wrap--revealed:hover { transform:rotate(var(--rot,0deg)); filter:none; will-change:auto; }
@@ -7695,13 +7757,11 @@ class SkippersList extends HTMLElement {
         transition:box-shadow 0.3s ease, border-color 0.3s;
         contain:layout paint;
       }
-      .sl-card-wrap--clickable:hover .sl-card,
-      .sl-card-wrap--revealed:hover .sl-card { border-color:var(--cc); box-shadow:0 0 0 1px var(--cc), 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(var(--cc-rgb),0.12); }
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover .sl-card,.sl-card-wrap--revealed:hover .sl-card{ border-color:var(--cc); box-shadow:0 0 0 1px var(--cc), 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(var(--cc-rgb),0.12); }}
 
       .sl-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--cc); opacity:0.4; transition:opacity 0.3s, height 0.3s; }
       .sl-card.mystery-card::after { display:none; }
-      .sl-card-wrap--clickable:hover .sl-card::after,
-      .sl-card-wrap--revealed:hover .sl-card::after { opacity:1; height:4px; box-shadow:0 0 8px var(--cc); }
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover .sl-card::after,.sl-card-wrap--revealed:hover .sl-card::after{ opacity:1; height:4px; box-shadow:0 0 8px var(--cc); }}
 
       .sl-card-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; }
       .sl-card-img.mystery-img { object-position:center center; }
@@ -7719,15 +7779,14 @@ class SkippersList extends HTMLElement {
       @keyframes sl-spin-in { from { opacity:0; transform:translate(-50%,-50%) scale(0.6); } to { opacity:1; transform:translate(-50%,-50%) scale(1); } }
       .sl-grid[data-hover-classe] .sl-card-wrap:not([data-classe-match]) { opacity:0.35; transform:scale(0.97); }
       .sl-grid[data-hover-classe] .sl-card-wrap[data-classe-match] { transform:scale(1.01); }
-      .sl-card-wrap--clickable:hover .sl-card-img,
-      .sl-card-wrap--revealed:hover .sl-card-img { transform:scale(1.07); transition:transform 0.4s cubic-bezier(0.34,1.1,0.64,1); }
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover .sl-card-img,.sl-card-wrap--revealed:hover .sl-card-img{ transform:scale(1.07); transition:transform 0.4s cubic-bezier(0.34,1.1,0.64,1); }}
 
       @keyframes mystery-pulse { 0%,100%{opacity:0.35;} 50%{opacity:0.6;} }
       .sl-card.mystery-card { filter:saturate(0.72) brightness(0.85); }
       .sl-card.mystery-card .sl-card-img { object-position:center center; transform:scale(1.08); }
       .sl-card.mystery-card::before { content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(135deg, rgba(var(--cc-rgb),0.08) 0%, transparent 60%); animation:mystery-pulse 4s ease-in-out infinite; }
       @media (max-width:860px) { .sl-card.mystery-card::before { animation:none; } }
-      @media (prefers-reduced-motion:reduce) { .sl-card.mystery-card::before { animation:none; } .sl-fav-btn.popping { animation:none; } @keyframes sl-fadeup { from { opacity:0; } to { opacity:1; } } }
+      @media (prefers-reduced-motion:reduce) { .sl-card.mystery-card::before { animation:none; } @keyframes sl-fadeup { from { opacity:0; } to { opacity:1; } } }
 
       .sl-card-soon-overlay { position:absolute; inset:0; z-index:5; background:rgba(6,14,26,0.82); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.3s ease; border-radius:inherit; }
       .sl-card-soon-overlay.show { opacity:1; }
@@ -7737,7 +7796,7 @@ class SkippersList extends HTMLElement {
       .sl-card-overlay { position:absolute; bottom:0; left:0; right:0; z-index:3; padding:44px 14px 18px; background:linear-gradient(to top, rgba(6,14,26,1) 0%, rgba(6,14,26,0.92) 40%, rgba(6,14,26,0.55) 70%, transparent 100%); }
       .sl-card-cta { display:inline-flex; align-items:center; gap:5px; margin-top:6px; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--cc); opacity:0; transform:translateY(4px); transition:opacity 0.25s, transform 0.25s; }
       .sl-card-cta svg { width:10px; height:10px; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-      .sl-card-wrap--clickable:hover .sl-card-cta { opacity:1; transform:translateY(0); }
+      @media (hover:hover) and (pointer:fine){.sl-card-wrap--clickable:hover .sl-card-cta{ opacity:1; transform:translateY(0); }}
 
       .sl-card-class { position:absolute; top:-8px; right:0; z-index:10; pointer-events:none; }
       .sl-card-class img { height:clamp(67px, 6.5vw, 98px); width:auto; display:block; }
@@ -7756,53 +7815,18 @@ class SkippersList extends HTMLElement {
       .sl-card-bateau { font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--cc); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
        
-      
-
-
-
-
-
-      .sl-fav-btn { display:none !important; }
-
-       
       .sl-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:100px 20px; gap:16px; }
       @keyframes boat-rock { 0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(5deg);} }
       .sl-empty-boat { font-size:52px; animation:boat-rock 3s ease-in-out infinite; }
       .sl-empty-title { font-family:'Varien',sans-serif; font-style:italic; font-size:32px; color:rgba(255,255,255,0.3); text-transform:uppercase; }
       .sl-empty-sub { font-family:'Montserrat',sans-serif; font-size:13px; color:rgba(255,255,255,0.2); }
       .sl-empty-reset { margin-top:8px; padding:10px 24px; border-radius:6px; border:1px solid rgba(93,191,192,0.3); background:rgba(93,191,192,0.08); color:#5DBFC0; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; cursor:pointer; transition:background 0.2s; }
-      .sl-empty-reset:hover { background:rgba(93,191,192,0.15); }
-
-       
-      .sl-list { display:flex; flex-direction:column; gap:6px; }
-      .sl-list-item { display:grid; grid-template-columns:36px 72px 44px 20px 1fr auto auto 20px; align-items:center; gap:14px; padding:0 18px 0 0; border-radius:10px; background:rgba(9,21,37,0.8); border:1px solid rgba(255,255,255,0.06); border-left:3px solid var(--cc); height:100px; overflow:hidden; transition:background 0.2s, transform 0.2s; animation:sl-fadeup 0.3s ease both; }
-      .sl-list-item:nth-child(even) { background:rgba(13,28,48,0.8); }
-      .sl-list-item--clickable { cursor:pointer; }
-      .sl-list-item--clickable:hover { background:rgba(93,191,192,0.06); transform:translateX(3px); box-shadow:0 4px 20px rgba(0,0,0,0.2); }
-      .sl-list-item.mystery { opacity:0.4; cursor:default; }
-      .sl-list-num { font-family:'VarienOutline',sans-serif; font-style:italic; font-size:15px; color:rgba(255,255,255,0.15); text-align:center; padding-left:10px; }
-      .sl-list-img { width:60px; height:78px; border-radius:22px 2px 10px 2px; object-fit:cover; object-position:top; }
-      .sl-list-class img { height:46px; width:auto; }
-      .sl-list-flag { width:18px; height:18px; border-radius:50%; object-fit:cover; }
-      .sl-list-name { min-width:0; }
-      .sl-list-prenom { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.5); margin-bottom:2px; }
-      .sl-list-nom { font-family:'Varien',sans-serif; font-style:italic; font-size:26px; color:#fff; text-transform:uppercase; line-height:1; margin-bottom:4px; }
-      .sl-list-bateau { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--cc); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-      .sl-list-stats { display:flex; flex-direction:column; gap:5px; align-items:flex-end; flex-shrink:0; min-width:140px; }
-      .sl-list-stat { display:flex; align-items:center; gap:5px; }
-      .sl-list-stat-icon { width:12px; height:12px; stroke:rgba(255,255,255,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-      .sl-list-stat-val { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); white-space:nowrap; }
-      .sl-list-stat-val.accent { color:var(--cc); }
-      .sl-list-tags { display:flex; gap:4px; flex-wrap:wrap; flex-shrink:0; max-width:120px; justify-content:flex-end; }
-      .sl-list-tag { padding:3px 7px; border-radius:3px; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.07); }
-      .sl-list-chevron { color:rgba(255,255,255,0.15); transform:translateX(-4px); opacity:0; transition:transform 0.2s, opacity 0.2s; }
-      .sl-list-item--clickable:hover .sl-list-chevron { transform:translateX(0); opacity:0.6; }
-      .sl-list-chevron svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+      @media (hover:hover) and (pointer:fine){.sl-empty-reset:hover{ background:rgba(93,191,192,0.15); }}
 
        
       .sl-pagination { display:flex; align-items:center; justify-content:center; gap:5px; margin-top:48px; }
       .sl-page-btn { min-width:36px; height:36px; border-radius:6px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); color:rgba(255,255,255,0.35); font-family:'Varien',sans-serif; font-style:italic; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s, color 0.2s, transform 0.2s, background 0.2s; padding:0 8px; }
-      .sl-page-btn:hover:not(:disabled) { border-color:rgba(255,255,255,0.3); color:#fff; transform:translateY(-2px); }
+      @media (hover:hover) and (pointer:fine){.sl-page-btn:hover:not(:disabled){ border-color:rgba(255,255,255,0.3); color:#fff; transform:translateY(-2px); }}
       .sl-page-btn.active { background:rgba(93,191,192,0.15); border-color:rgba(93,191,192,0.5); color:#5DBFC0; }
       .sl-page-btn:disabled { opacity:0.2; cursor:default; }
       .sl-page-info { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; color:rgba(255,255,255,0.35); letter-spacing:0.08em; padding:0 12px; line-height:36px; }
@@ -7851,7 +7875,6 @@ class SkippersList extends HTMLElement {
         .sl-counter-block { padding-left:14px; }
         .sl-toolbar { margin-bottom:12px; }
         .sl-card-wrap { animation-duration:0.25s; }
-        .sl-list-item { animation-duration:0.2s; }
         .sl-card-nom { font-size:clamp(22px,5vw,32px); }
         .sl-card-nom[data-len="7"], .sl-card-nom[data-len="8"] { font-size:clamp(21px,4.8vw,30px); }
         .sl-card-nom[data-len="9"], .sl-card-nom[data-len="10"] { font-size:clamp(20px,4.6vw,30px); }
@@ -7880,7 +7903,7 @@ class SkippersList extends HTMLElement {
           </div>
         </div>
         <div class="sl-class-filters">
-          ${Object.entries(CLASSES_CONFIG).map(([nom, cfg]) => `<button class="sl-class-btn filter-default" data-classe="${nom}" title="${cfg.label}"><img src="${cfg.icon}" alt="${cfg.label}" /></button>`).join('')}
+          ${Object.entries(CLASSES_CONFIG).map(([nom, cfg]) => `<button class="sl-class-btn filter-default" data-classe="${nom}" title="${cfg.label}" aria-pressed="false"><img src="${cfg.icon}" alt="${cfg.label}" /></button>`).join('')}
         </div>
       </div>
 
@@ -7891,14 +7914,14 @@ class SkippersList extends HTMLElement {
           <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
           ${this._t('filtres')}
         </button>
-        <div class="sl-mobile-search"><div style="position:relative"><svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="sl-search-mobile" type="text" placeholder="${this._t('search_ph_mobile')}" autocomplete="off" aria-label="${this._t('search_aria')}" style="padding-left:34px;" /><button id="sl-search-mobile-clear" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;cursor:pointer;display:none;line-height:1;padding:2px 4px">×</button></div></div>
+        <div class="sl-mobile-search"><div style="position:relative"><svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="sl-search-mobile" type="text" placeholder="${this._t('search_ph_mobile')}" autocomplete="off" aria-label="${this._t('search_aria')}" style="padding-left:34px;" /><button id="sl-search-mobile-clear" type="button" aria-label="${this._t('search_clear')}" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;cursor:pointer;display:none;line-height:1;padding:2px 4px">×</button></div></div>
       </div>
 
       <div class="sl-layout">
         <div class="sl-sidebar" id="sl-sidebar">
           <div class="sl-search-wrap">
             <div class="sl-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-            <input class="sl-search" id="sl-search" type="text" placeholder="${this._t('search_ph')}" autocomplete="off" />
+            <input class="sl-search" id="sl-search" type="text" placeholder="${this._t('search_ph')}" autocomplete="off" aria-label="${this._t('search_aria')}" />
           </div>
           <div class="sl-filter-section">
             <div class="sl-filter-label">${this._t('label_profil')}</div>
@@ -7921,7 +7944,6 @@ class SkippersList extends HTMLElement {
               <div class="sl-sort-slider" id="sl-sort-slider"></div>
               <button class="sl-sort-btn active" data-sort="random">${this._t('sort_random')}</button>
               <button class="sl-sort-btn" data-sort="az">A → Z</button>
-              <!-- tri +rhums désactivé temporairement -->
             </div>
           </div>
           <div class="sl-reset" id="sl-reset">
@@ -7933,7 +7955,6 @@ class SkippersList extends HTMLElement {
           <div class="sl-toolbar">
             <div style="display:flex;gap:4px">
               <button class="sl-view-btn active" id="sl-view-grid" title="${this._t('view_grid')}"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></button>
-              <button class="sl-view-btn" id="sl-view-list" title="${this._t('view_list')}"><svg viewBox="0 0 16 16"><rect x="1" y="2" width="4" height="4" rx="1"/><rect x="7" y="3" width="8" height="2" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="8" width="8" height="2" rx="1"/><rect x="1" y="12" width="4" height="2" rx="1"/><rect x="7" y="12" width="8" height="2" rx="1"/></svg></button>
             </div>
           </div>
           <div id="sl-content"><div class="sl-skeleton-grid">${Array.from({length:8},()=>'<div class="sl-skeleton-card"></div>').join('')}</div></div>
@@ -7964,11 +7985,7 @@ class SkippersList extends HTMLElement {
     }
     const page = Math.min(this._page, Math.max(0, Math.ceil(total / PAGE_SIZE) - 1));
     const items = this._filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-    if (this._view === 'list') {
-      content.innerHTML = `<div class="sl-list">${items.map((s,i) => this._renderListItem(s,i,page)).join('')}</div>`;
-    } else {
-      content.innerHTML = `<div class="sl-grid">${items.map((s,i) => this._renderCard(s,i)).join('')}</div>`;
-    }
+    content.innerHTML = `<div class="sl-grid">${items.map((s,i) => this._renderCard(s,i)).join('')}</div>`;
   }
 
   _renderCard(s, i) {
@@ -7985,12 +8002,11 @@ class SkippersList extends HTMLElement {
     const drapeau = this._safeUrl(this._wixToUrl(s.drapeau || ''));
     const rot = CARD_ROTATIONS[i % CARD_ROTATIONS.length];
     const delay = Math.min(i * 35, 450);
-    const isFav = !!this._favoris[s._id];
     const wrapClass = link ? 'sl-card-wrap--clickable' : (isSoon ? 'sl-card-wrap--revealed' : '');
     const wrapA11y = link ? 'role="button" tabindex="0"' : (isSoon ? 'role="button" tabindex="0"' : '');
     return `<div class="sl-card-wrap${wrapClass ? ' '+wrapClass : ''}${estMystere ? ' mystery' : ''}" ${link ? `data-link="${link}"` : ''} ${isSoon ? 'data-soon="1"' : ''} ${wrapA11y} style="--rot:${rot}deg;animation-delay:${delay}ms">
       <div class="sl-card${estMystere ? ' mystery-card' : ''}" style="--cc:${cc};--cc-rgb:${ccRGB}">
-        <img class="sl-card-img" src="${photo}" alt="" loading="lazy" />
+        <img class="sl-card-img" src="${photo}" alt="" ${i < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} />
         ${!estMystere ? `<div class="sl-card-overlay">
           <div class="sl-card-flag-prenom">
             ${drapeau ? `<img class="sl-card-flag" src="${drapeau}" alt="" />` : ''}
@@ -8001,45 +8017,8 @@ class SkippersList extends HTMLElement {
           ${link ? `<div class="sl-card-cta">${this._t('see_profile')} <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>` : ''}
         </div>` : ''}
         ${isSoon ? `<div class="sl-card-soon-overlay"><div class="sl-card-soon-overlay-icon">⚓</div><div class="sl-card-soon-overlay-txt">${this._t('profile_soon')}</div></div>` : ''}
-        ${!estMystere ? `<button type="button" class="sl-fav-btn${isFav ? ' is-fav' : ''}" data-favori-id="${s._id}" aria-label="${isFav ? this._t('fav_remove') : this._t('fav_add')}" aria-pressed="${isFav}"><span class="sl-fav-icon">${isFav ? FAV_ON : FAV_OFF}</span></button>` : ''}
       </div>
       ${cfg.icon ? `<div class="sl-card-class"><img src="${this._safeUrl(cfg.icon)}" alt="${escapeHTML(classeNom)}" /></div>` : ''}
-    </div>`;
-  }
-
-  _renderListItem(s, i, page) {
-    const estMystere = !s.skipperDevoile;
-    const ficheActive = s.ficheActive === true;
-    const link = (!estMystere && ficheActive) ? this._safeUrl(s['link-skippers-prenomNom'] || '') : '';
-     
-    const photo = estMystere ? MYSTERE_IMG : this._safeUrl(this._wixToUrl(s.photoVignette || '', 600, 750));
-    const classeNom = s.classes?.nom || '';
-    const cfg = CLASSES_CONFIG[classeNom] || {};
-    const cc = this._safeColor(s.classes?.couleur, cfg.couleur || 'rgba(255,255,255,0.2)');
-    const drapeau = this._safeUrl(this._wixToUrl(s.drapeau || ''));
-    const delay = Math.min(i * 22, 300);
-    const num = page * PAGE_SIZE + i + 1;
-    const tags = (s._filtreArr || []).map(t => {
-      const cfg = PROFIL_CONFIG[t];
-      return cfg ? (this._t('pf_'+t) || cfg.label) : t;
-    }).filter(Boolean);
-    const statsHtml = !estMystere ? `<div class="sl-list-stats">
-      ${s.nationalite ? `<div class="sl-list-stat"><svg class="sl-list-stat-icon" viewBox="0 0 24 24"><path d="M3 6l9-3 9 3v9l-9 3-9-3V6z"/><path d="M12 3v18"/></svg><span class="sl-list-stat-val">${escapeHTML(s.nationalite)}</span></div>` : ''}
-      ${s.portDAttache ? `<div class="sl-list-stat"><svg class="sl-list-stat-icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 16h14"/></svg><span class="sl-list-stat-val">${escapeHTML(s.portDAttache)}</span></div>` : ''}
-    </div>` : '<div></div>';
-    return `<div class="sl-list-item${estMystere?' mystery':''}${link?' sl-list-item--clickable':''}" ${link?`data-link="${link}"`:''} style="--cc:${cc};animation-delay:${delay}ms">
-      <div class="sl-list-num">${num}</div>
-      <img class="sl-list-img" src="${photo}" alt="" loading="lazy" />
-      ${cfg.icon ? `<div class="sl-list-class"><img src="${this._safeUrl(cfg.icon)}" alt="${escapeHTML(classeNom)}" /></div>` : '<div></div>'}
-      ${drapeau && !estMystere ? `<img class="sl-list-flag" src="${drapeau}" alt="" />` : '<div></div>'}
-      <div class="sl-list-name">
-        ${estMystere
-          ? `<div class="sl-list-nom" style="font-family:'VarienOutline',sans-serif;font-size:22px;color:rgba(255,255,255,0.2)">???</div>`
-          : `<div class="sl-list-prenom">${escapeHTML(s.prenom)}</div><div class="sl-list-nom">${escapeHTML(s.nom)}</div>${s.bateau?`<div class="sl-list-bateau">${escapeHTML(s.bateau)}</div>`:''}`}
-      </div>
-      ${statsHtml}
-      ${tags.length ? `<div class="sl-list-tags">${tags.map(t=>`<span class="sl-list-tag">${escapeHTML(t)}</span>`).join('')}</div>` : '<div></div>'}
-      <div class="sl-list-chevron"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>
     </div>`;
   }
 
@@ -8060,9 +8039,9 @@ class SkippersList extends HTMLElement {
     }
     el.innerHTML = `
       <div class="sl-page-info">${p+1} / ${totalPages}</div>
-      <button class="sl-page-btn" id="sl-prev" ${p===0?'disabled':''}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="sl-page-btn" id="sl-prev" aria-label="${this._t('page_prev')}" ${p===0?'disabled':''}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       ${pages.map(pg=>pg.type==='ellipsis'?`<span class="sl-page-ellipsis">…</span>`:`<button class="sl-page-btn${pg.n===p?' active':''}" data-page="${pg.n}">${pg.n+1}</button>`).join('')}
-      <button class="sl-page-btn" id="sl-next" ${p>=totalPages-1?'disabled':''}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></button>`;
+      <button class="sl-page-btn" id="sl-next" aria-label="${this._t('page_next')}" ${p>=totalPages-1?'disabled':''}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></button>`;
     el.querySelector('#sl-prev')?.addEventListener('click', () => this._goPage(p-1));
     el.querySelector('#sl-next')?.addEventListener('click', () => this._goPage(p+1));
     el.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => this._goPage(parseInt(btn.dataset.page))));
@@ -8095,8 +8074,8 @@ class SkippersList extends HTMLElement {
         btn.classList.remove('filter-default','filter-active','filter-inactive');
         btn.classList.add(wanted);
       }
+      btn.setAttribute('aria-pressed', wanted === 'filter-active' ? 'true' : 'false');
     });
-    this.shadowRoot?.querySelectorAll('.sl-genre-btn')?.forEach(btn => btn.classList.toggle('active', btn.dataset.genre === this._activeGenre));
     this.querySelectorAll('.sl-pill').forEach(pill => { const on = !!this._activeFilters[pill.dataset.filter]; pill.classList.toggle('active', on); pill.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     const _hb = this.querySelector('#sl-hommes-btn'); if (_hb) { const on = this._activeGenre === 'HOMMES'; _hb.classList.toggle('active', on); _hb.setAttribute('aria-pressed', on ? 'true' : 'false'); }
     this.querySelector('#sl-sort-btns')?.querySelectorAll('.sl-sort-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.sort === this._sort));
@@ -8130,6 +8109,7 @@ class SkippersList extends HTMLElement {
     this._updateFilterStyles();
     this._renderGrid();
     this._renderPagination();
+    this._ecrireAdresse();
   }
 
   _reshuffle() {
@@ -8181,10 +8161,18 @@ class SkippersList extends HTMLElement {
     if (!sidebar || !layout) return;
     let ticking = false;
     let cachedSidebarH = sidebar.offsetHeight;
-    const ro = new ResizeObserver(() => { cachedSidebarH = sidebar.offsetHeight; });
+    
+
+    const ro = new ResizeObserver(() => {
+      const avant = cachedSidebarH;
+      cachedSidebarH = sidebar.offsetHeight;
+      if (!avant && cachedSidebarH) onScroll();
+    });
     ro.observe(sidebar);
     this._cleanups.push(() => ro.disconnect());
     const update = () => {
+      ticking = false;
+      if (!cachedSidebarH) return;
       const layoutRect = layout.getBoundingClientRect();
       const offset = 24;
       if (layoutRect.top <= offset) {
@@ -8193,7 +8181,6 @@ class SkippersList extends HTMLElement {
       } else {
         sidebar.style.transform = 'translateY(0)';
       }
-      ticking = false;
     };
     const onScroll = () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } };
     window.addEventListener('scroll', onScroll, { passive:true });
@@ -8207,24 +8194,6 @@ class SkippersList extends HTMLElement {
     const content = this.querySelector('#sl-content');
     if (content) {
       content.addEventListener('click', (e) => {
-         
-        const btn = e.target.closest('[data-favori-id]');
-        if (btn) {
-          e.stopPropagation();
-          const id = btn.dataset.favoriId;
-          const nowFav = !btn.classList.contains('is-fav');
-          btn.classList.toggle('is-fav', nowFav);
-          const favIcon = btn.querySelector('.sl-fav-icon');
-          if (favIcon) favIcon.innerHTML = nowFav ? FAV_ON : FAV_OFF;
-          btn.setAttribute('aria-label', nowFav ? this._t('fav_remove') : this._t('fav_add'));
-          btn.setAttribute('aria-pressed', String(nowFav));
-          btn.classList.add('popping');
-          btn.addEventListener('animationend', () => btn.classList.remove('popping'), {once:true});
-          this._favoris[id] = nowFav;
-          const s = this._allById?.get(id);
-          this.dispatchEvent(new CustomEvent('sl-toggle-favori', { detail:{ id, slug:s?.['link-skippers-prenomNom']||'', isFavori:nowFav }, bubbles:true, composed:true }));
-          return;
-        }
         const soon = e.target.closest('[data-soon]');
         if (soon) {
           const overlay = soon.querySelector('.sl-card-soon-overlay');
@@ -8234,16 +8203,16 @@ class SkippersList extends HTMLElement {
         const link = e.target.closest('[data-link]');
         if (link) {
           this._markNavLoading(link.closest('.sl-card') || link);
-          this.dispatchEvent(new CustomEvent('sl-navigate', { detail:{ url:link.dataset.link }, bubbles:true, composed:true }));
           
 
 
           this._naviguer(link.dataset.link);
         }
       });
+       
       content.addEventListener('keydown', (e) => {
         if (e.key!=='Enter' && e.key!==' ') return;
-        const link = e.target.closest('[data-link]');
+        const link = e.target.closest('[data-link], [data-soon]');
         if (link) { e.preventDefault(); link.click(); }
       });
     }
@@ -8284,6 +8253,8 @@ class SkippersList extends HTMLElement {
     const si = this.querySelector('#sl-search');
     if (si) {
       const clrDesktop = document.createElement('button');
+      clrDesktop.type = 'button';
+      clrDesktop.setAttribute('aria-label', this._t('search_clear'));
       clrDesktop.style.cssText = 'position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;cursor:pointer;display:none;line-height:1;padding:2px 4px';
       clrDesktop.textContent = '×';
       si.parentElement.appendChild(clrDesktop);
@@ -8312,18 +8283,7 @@ class SkippersList extends HTMLElement {
 
     this.querySelector('#sl-reset-btn')?.addEventListener('click', () => this._resetAll());
 
-    this.querySelector('#sl-view-grid')?.addEventListener('click', () => {
-      this._view = 'grid';
-      this.querySelector('#sl-view-grid').classList.add('active');
-      this.querySelector('#sl-view-list').classList.remove('active');
-      this._renderGrid();
-    });
-    this.querySelector('#sl-view-list')?.addEventListener('click', () => {
-      this._view = 'list';
-      this.querySelector('#sl-view-list').classList.add('active');
-      this.querySelector('#sl-view-grid').classList.remove('active');
-      this._renderGrid();
-    });
+    this.querySelector('#sl-view-grid')?.addEventListener('click', () => this._renderGrid());
 
     this.querySelector('#sl-mobile-filter-btn')?.addEventListener('click', () => this._openDrawer());
     this.querySelector('#sl-fab-filter')?.addEventListener('click', () => this._openDrawer());
@@ -8359,7 +8319,7 @@ class SkippersList extends HTMLElement {
         <div class="sl-portal-title">${this._t('filtres')}</div>
         <div style="position:relative;margin-bottom:16px">
           <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input id="sl-portal-search-${uid}" class="sl-portal-search" type="text" placeholder="${this._t('search_ph_drawer')}" autocomplete="off" />
+          <input id="sl-portal-search-${uid}" class="sl-portal-search" type="text" placeholder="${this._t('search_ph_drawer')}" autocomplete="off" aria-label="${this._t('search_aria')}" />
         </div>
         <div id="sl-portal-content-${uid}"></div>
       </div>
@@ -8454,7 +8414,7 @@ class SkippersList extends HTMLElement {
     const ptitle = this._portalDrawer.querySelector('.sl-portal-title');
     if (ptitle) ptitle.textContent = this._t('filtres');
     this._portalDrawer.setAttribute('aria-label', this._t('filtres'));
-    if (this._portalSearch) this._portalSearch.placeholder = this._t('search_ph_drawer');
+    if (this._portalSearch) { this._portalSearch.placeholder = this._t('search_ph_drawer'); this._portalSearch.setAttribute('aria-label', this._t('search_aria')); }
     this._renderDrawer();
     if (this._portalSearch) this._portalSearch.value = this._search || '';
     this._lockBodyScroll();
@@ -8531,7 +8491,6 @@ class SkippersList extends HTMLElement {
           <div class="sl-sort-slider" id="sl-drawer-sort-slider"></div>
           <button class="sl-sort-btn${this._sort==='random'?' active':''}" data-sort="random">${this._t('sort_random')}</button>
           <button class="sl-sort-btn${this._sort==='az'?' active':''}" data-sort="az">A → Z</button>
-          <!-- tri +rhums désactivé temporairement -->
         </div>
       </div>
       ${this._activeFilterCount()>0 ? `<button class="sl-reset-btn" id="sl-drawer-reset">${this._t('reset')}</button>` : ''}
@@ -8542,10 +8501,6 @@ class SkippersList extends HTMLElement {
       r.addEventListener('click', act);
       this._key(r, act);
     });
-    dc.querySelectorAll('.sl-genre-btn').forEach(b => b.addEventListener('click', () => {
-      this._activeGenre = this._activeGenre === b.dataset.genre ? null : b.dataset.genre;
-      this._filterChange(); this._renderDrawer();
-    }));
     dc.querySelectorAll('.sl-drawer-hommes-btn').forEach(b => {
       const act = () => {
         if (this._activeGenre === 'HOMMES') { this._activeGenre = null; }
