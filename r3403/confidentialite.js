@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum 96c7ec8 | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="96c7ec8";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 0c32b70 | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="0c32b70";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -155,7 +155,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="96c7ec8";p
               ]
             } },
             { h3: 'Archivage et suppression' },
-            'À l’issue des durées de conservation définies, les données personnelles sont soit supprimées, soit anonymisées, soit archivées conformément aux obligations légales en vigueur.'
+            'À l’issue des durées de conservation définies, les données personnelles sont soit supprimées, soit anonymisées, soit archivées conformément aux obligations légales en vigueur.',
+            
+
+
+
+
+
+            { ajout: { titre: 'Trace de participation aux jeux de « Mon Espace Rhum »', icone: 'trophy', texte: 'Quand vous effacez vos données depuis « Mon Espace Rhum », ou quand votre compte est supprimé, une trace de chaque participation aux jeux est conservée, réduite au strict nécessaire : l’identifiant technique du compte, la date de participation et son résultat (le lot tiré à la roue, le code Virtual Regatta ou le code de réduction remis). Elle ne contient ni votre nom, ni votre adresse e-mail, ni votre adresse postale. Elle sert uniquement à garantir qu’un compte ne participe qu’une fois à chaque jeu et qu’un code n’est remis qu’une fois (intérêt légitime de l’organisateur à prévenir la fraude). Pour un lot gagné, la trace de son attribution et de sa livraison est conservée de la même façon, sans vos coordonnées. Ces traces sont supprimées à la clôture des jeux de l’édition 2026. Si vous avez refusé l’enregistrement de votre activité dans « Mon Espace Rhum », ce refus est également conservé après l’effacement de vos données, tant que votre compte existe, pour continuer d’être respecté.' } }
           ]
         },
         {
@@ -341,7 +348,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="96c7ec8";p
               ]
             } },
             { h3: 'Archiving and deletion' },
-            'At the end of the defined retention periods, personal data is either deleted, anonymized, or archived in accordance with applicable legal obligations.'
+            'At the end of the defined retention periods, personal data is either deleted, anonymized, or archived in accordance with applicable legal obligations.',
+            { ajout: { titre: 'Record of game entries in “Mon Espace Rhum”', icone: 'trophy', texte: 'When you erase your data from “Mon Espace Rhum”, or when your account is deleted, a record of each game entry is kept, limited to what is strictly necessary: the technical identifier of the account, the date of entry and its result (the prize drawn on the wheel, or the Virtual Regatta or discount code issued). It contains neither your name, nor your email address, nor your postal address. Its only purpose is to ensure that an account enters each game only once and that a code is issued only once (the organizer’s legitimate interest in preventing fraud). For a prize won, the record of its allocation and delivery is kept in the same way, without your contact details. These records are deleted when the games of the 2026 edition close. If you have refused the recording of your activity in “Mon Espace Rhum”, that refusal is also kept after your data is erased, for as long as your account exists, so that it continues to be respected.' } }
           ]
         },
         {
@@ -541,7 +549,7 @@ rdr-confidentialite .cfd .cfd-som-lien{display:flex;align-items:center;gap:var(-
 rdr-confidentialite .cfd .cfd-som-num{flex:0 0 auto;min-width:1.6em;font-variant-numeric:tabular-nums;font-size:var(--cfd-t1);font-weight:700;letter-spacing:.04em;color:var(--cfd-encre-sourde);transition:color .15s;}
 rdr-confidentialite .cfd .cfd-som-lien svg{flex:0 0 auto;width:16px;height:16px;color:var(--cfd-or);}
 rdr-confidentialite .cfd .cfd-som-lib{min-width:0;}
-rdr-confidentialite .cfd .cfd-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-som-lien:hover{background:rgba(255,255,255,.06);color:#FFFFFF;}}
 rdr-confidentialite .cfd .cfd-som-lien:focus-visible{outline:2px solid var(--cfd-or);outline-offset:2px;}
 rdr-confidentialite .cfd .cfd-som-lien.est-actif{background:var(--cfd-or-voile);border-left-color:var(--cfd-or);color:#FFFFFF;font-weight:600;}
 rdr-confidentialite .cfd .cfd-som-lien.est-actif .cfd-som-num{color:var(--cfd-or);}
@@ -558,7 +566,7 @@ rdr-confidentialite .cfd .cfd-sec-titre{margin:0;font-family:Varien,Impact,sans-
 rdr-confidentialite .cfd .cfd-carte{display:grid;gap:var(--cfd-e4);padding:var(--cfd-e6);border-radius:var(--cfd-r-carte);background:var(--cfd-carte);color:var(--cfd-carte-texte);min-width:0;}
 rdr-confidentialite .cfd .cfd-carte p{color:var(--cfd-carte-texte);}
 rdr-confidentialite .cfd .cfd-carte a{color:var(--cfd-vert);font-weight:600;text-decoration:underline;text-decoration-color:rgba(0,111,123,.35);text-underline-offset:3px;overflow-wrap:anywhere;}
-rdr-confidentialite .cfd .cfd-carte a:hover{text-decoration-color:var(--cfd-vert);}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-carte a:hover{text-decoration-color:var(--cfd-vert);}}
 rdr-confidentialite .cfd .cfd-carte a:focus-visible{outline:2px solid var(--cfd-vert);outline-offset:2px;border-radius:2px;}
 rdr-confidentialite .cfd .cfd-carte strong{color:var(--cfd-carte-encre);font-weight:700;}
 rdr-confidentialite .cfd .cfd-h3{margin:var(--cfd-e3) 0 0;font-size:var(--cfd-t4);font-weight:700;color:var(--cfd-carte-encre);}
@@ -610,7 +618,7 @@ rdr-confidentialite .cfd .cfd-ajout-titre{display:block;margin:0 0 var(--cfd-e1)
 rdr-confidentialite .cfd .cfd-cookies{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cfd-e3) var(--cfd-e4);margin-top:var(--cfd-e2);}
 rdr-confidentialite .cfd .cfd-bouton{display:inline-flex;align-items:center;gap:var(--cfd-e2);min-height:44px;padding:0 var(--cfd-e5);border:0;border-radius:999px;background:var(--cfd-carte-encre);color:#FFFFFF;font-weight:700;font-size:var(--cfd-t2);letter-spacing:.04em;cursor:pointer;transition:background .15s;}
 rdr-confidentialite .cfd .cfd-bouton svg{width:18px;height:18px;color:var(--cfd-or);}
-rdr-confidentialite .cfd .cfd-bouton:hover{background:#1E2640;}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-bouton:hover{background:#1E2640;}}
 rdr-confidentialite .cfd .cfd-bouton:focus-visible{outline:2px solid var(--cfd-vert);outline-offset:3px;}
 rdr-confidentialite .cfd .cfd-cookies-repli{font-size:var(--cfd-t2);color:var(--cfd-carte-sourd);}
 rdr-confidentialite .cfd .cfd-cookies-repli[hidden]{display:none;}
@@ -625,7 +633,7 @@ rdr-confidentialite .cfd .cfd-lies p{margin:0 0 var(--cfd-e4);color:var(--cfd-en
 rdr-confidentialite .cfd .cfd-lies-liens{display:flex;flex-wrap:wrap;gap:var(--cfd-e2) var(--cfd-e5);}
 rdr-confidentialite .cfd .cfd-lies-liens a{display:inline-flex;align-items:center;gap:var(--cfd-e2);font-weight:600;color:var(--cfd-or);}
 rdr-confidentialite .cfd .cfd-lies-liens a svg{width:18px;height:18px;transition:transform .15s;}
-rdr-confidentialite .cfd .cfd-lies-liens a:hover svg{transform:translateX(3px);}
+@media (hover:hover) and (pointer:fine){rdr-confidentialite .cfd .cfd-lies-liens a:hover svg{transform:translateX(3px);}}
 rdr-confidentialite .cfd .cfd-lies-liens a:focus-visible{outline:2px solid var(--cfd-or);outline-offset:3px;border-radius:2px;}
 
  
@@ -705,12 +713,16 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       
 
 
-      this._maj = '2026-09-24';
+
+
+
+      this._maj = '2026-09-27';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];
       this._ecouteurs = [];
       this._rafId = 0;
+      this._ancreFaite = false;
     }
 
     connectedCallback() {
@@ -1032,6 +1044,53 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
       const surRedim = () => { this._racine.style.setProperty('--cfd-chrome', this._haut() + 'px'); demander(); marquerDebord(); };
       window.addEventListener('resize', surRedim, { passive: true });
       this._ecouteurs.push([window, 'resize', surRedim]);
+
+      
+
+
+
+
+
+
+
+
+
+      const sectionDe = (h) => {
+        let v = String(h || '').replace(/^#/, '');
+        try { v = decodeURIComponent(v); } catch (e) {   }
+        if (!v) return null;
+        const toutes = this._racine ? Array.from(this._racine.querySelectorAll('.cfd-sec[id]')) : [];
+        return toutes.find(s => s.id === v) || toutes.find(s => s.id === 'cfd-' + v) || null;
+      };
+      const surAdresse = () => {
+        const s = sectionDe(window.location.hash);
+        if (!s) return;
+        const doux = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        s.scrollIntoView({ behavior: doux ? 'smooth' : 'auto', block: 'start' });
+      };
+      window.addEventListener('hashchange', surAdresse);
+      this._ecouteurs.push([window, 'hashchange', surAdresse]);
+
+      if (!this._ancreFaite) {
+        this._ancreFaite = true;
+        const visee = sectionDe(window.location.hash);
+        if (visee) {
+          const id = visee.id;
+          let pose = -1;
+          const recaler = () => {
+            if (!this.isConnected) return;
+            if (pose >= 0 && Math.abs(window.scrollY - pose) > 2) return;
+            const s = sectionDe(id);
+            if (!s) return;
+            s.scrollIntoView({ behavior: 'auto', block: 'start' });
+            pose = window.scrollY;
+          };
+          requestAnimationFrame(() => requestAnimationFrame(recaler));
+          try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(recaler)); } catch (e) {   }
+          setTimeout(recaler, 600);
+          setTimeout(recaler, 1500);
+        }
+      }
     }
   });
 })();
