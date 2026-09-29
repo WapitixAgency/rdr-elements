@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum 3c98ec8 | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="3c98ec8";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum c29e719 | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="c29e719";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';
@@ -2321,7 +2321,7 @@ tournee-map[data-parcours="trophee"] .tm-current img{width:44px;}
         this._map.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
         this._map.addControl(new window.maplibregl.AttributionControl({
             compact: true,
-            customAttribution: 'Carte développée par <a href="https://wapitix.fr" target="_blank" rel="noopener">Wapitix</a>'
+            customAttribution: (this._lang === 'en' ? 'Map built by ' : 'Carte développée par ') + '<a href="https://www.wapia.fr/?depuis=wapitix" target="_blank" rel="noopener">Wapia</a>'
             
 
 
