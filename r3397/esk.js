@@ -1,5 +1,5 @@
-/* rdr-elements esk | source route-du-rhum 52c2200 | rdr-espace-skippers.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["esk"]="52c2200";performance.mark("rdr-elements:esk")}catch(e){}
+/* rdr-elements esk | source route-du-rhum 6fb0dd8 | rdr-espace-skippers.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["esk"]="6fb0dd8";performance.mark("rdr-elements:esk")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-espace-skippers")) return;
