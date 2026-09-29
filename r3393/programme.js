@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum e112f0e | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e112f0e";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum a7fe96e | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="a7fe96e";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -276,9 +276,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e112f0e";perform
     'Durée': 'Duration',
     'Lieu': 'Venue',
     'Accès': 'Access',
-    'Gratuit, accès libre': 'Free, open access',
      
-    'Gratuit': 'Free',
+    'Payant': 'Paid',
     'Sur réservation': 'Booking required',
     'Réserver': 'Book',
     'En savoir plus': 'Find out more',
@@ -2942,7 +2941,7 @@ rdr-programme{display:block;width:100%;}
 
 .rp-badge--complet{--b:#F19F39;}
 .rp-badge--annule{--b:#F19F39;text-decoration:line-through;text-decoration-thickness:1px;}
-.rp-badge--gratuit{--b:#85D8D5;}
+.rp-badge--payant{--b:#85D8D5;}
 .rp-badge--resa{--b:#FCF150;}
 .rp-badge--live{--b:#5DBFC0;}
 .rp-badge--live::after{
@@ -6626,7 +6625,8 @@ rdr-programme{display:block;width:100%;}
         (annule ? '<span class="rp-badge rp-badge--annule">Annulé</span>' : '') +
         (a.statut === 'complet' ? '<span class="rp-badge rp-badge--complet">Complet</span>' : '') +
         (a.reservation ? '<span class="rp-badge rp-badge--resa">Sur réservation</span>' : '') +
-        (a.gratuit ? '<span class="rp-badge rp-badge--gratuit">Gratuit</span>' : '') +
+         
+        (a.payant ? '<span class="rp-badge rp-badge--payant">Payant</span>' : '') +
         
 
 
@@ -6967,7 +6967,7 @@ rdr-programme{display:block;width:100%;}
 
       const acces = a.statut === 'complet' ? 'Complet'
         : a.reservation ? 'Sur réservation'
-        : a.gratuit ? 'Gratuit, accès libre'
+        : a.payant ? 'Payant'
         : '';
 
       const faits = [

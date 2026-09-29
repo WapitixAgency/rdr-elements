@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum e112f0e | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="e112f0e";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum a7fe96e | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="a7fe96e";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -105,8 +105,8 @@ function fusionner(liste) {
   liste.forEach((a) => {
     const k = a.date + '|' + (a.debut || '') + '|' + a.cat + '|' + (a.photo || norm(a.titre));
     const deja = parCle.get(k);
-    if (deja) { if (a.lieu && !deja.lieux.includes(a.lieu)) deja.lieux.push(a.lieu); deja.gratuit = deja.gratuit || !!a.gratuit; return; }
-    const item = { titre: sansEmoji(a.titre), date: a.date, debut: a.debut || '', fin: a.fin || '', lieux: a.lieu ? [a.lieu] : [], cat: a.cat, catLib: a.catLib, photo: a.photo || '', gratuit: !!a.gratuit, vedette: !!a.vedette, _a: a };
+    if (deja) { if (a.lieu && !deja.lieux.includes(a.lieu)) deja.lieux.push(a.lieu); deja.payant = deja.payant || !!a.payant; return; }
+    const item = { titre: sansEmoji(a.titre), date: a.date, debut: a.debut || '', fin: a.fin || '', lieux: a.lieu ? [a.lieu] : [], cat: a.cat, catLib: a.catLib, photo: a.photo || '', payant: !!a.payant, vedette: !!a.vedette, _a: a };
     parCle.set(k, item);
     sortie.push(item);
   });
@@ -1097,7 +1097,7 @@ const TXT = {
         progTitre: 'Programmation', progTout: 'Toute la programmation', billetAvant: '13 jours de fête au village', billetJour: 'Le programme du jour', progJour: 'Toute la programmation du jour', aVenir: 'À venir', journees: 'Journées thématiques', parTheme: 'Par thème',
         tempsForts: 'Temps forts du jour', tempsFortsPremier: 'Temps forts du premier jour', suite: 'La suite aujourd\'hui', enCeMoment: 'En ce moment', aujourdhui: 'Aujourd\'hui',
         ouvreDans: (n, j) => 'Le village ouvre dans ' + n + (n > 1 ? ' jours' : ' jour') + ', le ' + j + '.', ouvert: (j) => 'Le village est ouvert jusqu\'au ' + j + '.',
-        ferme: (j) => 'Le village de Saint-Malo s\'est achevé le ' + j + '.', rdv: (n) => n + (n > 1 ? ' rendez-vous' : ' rendez-vous'), avec: 'avec', gratuit: 'Gratuit', chargement: 'Chargement de la programmation', progIndispo: 'La programmation ne répond pas pour l\'instant.',
+        ferme: (j) => 'Le village de Saint-Malo s\'est achevé le ' + j + '.', rdv: (n) => n + (n > 1 ? ' rendez-vous' : ' rendez-vous'), avec: 'avec', payant: 'Payant', chargement: 'Chargement de la programmation', progIndispo: 'La programmation ne répond pas pour l\'instant.',
         annuler: 'Annuler', espaceMeta: 'Espace membre', boutiqueCourt: ['Boutique', 'Jouer'], departCourt: 'Départ', progDuJour: 'Programmation du jour', placeholderCourt: 'Une page, un article, un skipper', ouvreDansCourt: (n) => 'Le village ouvre dans ' + n + (n > 1 ? ' jours' : ' jour'),
         aujourdhuiVillage: (n) => 'Aujourd\'hui au village : ' + n + (n > 1 ? ' temps forts' : ' temps fort'), aujourdhuiProgramme: 'Aujourd\'hui au village',
         themes: { animation: 'Animations', ceremonie: 'Cérémonies', concert: 'Concerts', conference: 'Conférences', exposition: 'Expositions', nautique: 'Nautique', soiree: 'Soirées', spectacle: 'Spectacles' } },
@@ -1111,7 +1111,7 @@ const TXT = {
         progTitre: 'Programme', progTout: 'Full programme', billetAvant: '13 festival days at the village', billetJour: 'Today\'s programme', progJour: 'Full programme of the day', aVenir: 'Coming up', journees: 'Theme days', parTheme: 'By theme',
         tempsForts: 'Today\'s highlights', tempsFortsPremier: 'First day highlights', suite: 'Later today', enCeMoment: 'Right now', aujourdhui: 'Today',
         ouvreDans: (n, j) => 'The village opens in ' + n + (n > 1 ? ' days' : ' day') + ', on ' + j + '.', ouvert: (j) => 'The village is open until ' + j + '.',
-        ferme: (j) => 'The Saint-Malo village closed on ' + j + '.', rdv: (n) => n + (n > 1 ? ' events' : ' event'), avec: 'with', gratuit: 'Free', chargement: 'Loading the programme', progIndispo: 'The programme is not available right now.',
+        ferme: (j) => 'The Saint-Malo village closed on ' + j + '.', rdv: (n) => n + (n > 1 ? ' events' : ' event'), avec: 'with', payant: 'Paid', chargement: 'Loading the programme', progIndispo: 'The programme is not available right now.',
         annuler: 'Cancel', espaceMeta: 'Members area', boutiqueCourt: ['Store', 'Play'], departCourt: 'Race start', progDuJour: 'Today\'s programme', placeholderCourt: 'A page, an article, a skipper', ouvreDansCourt: (n) => 'The village opens in ' + n + (n > 1 ? ' days' : ' day'),
         aujourdhuiVillage: (n) => 'Today at the village: ' + n + (n > 1 ? ' highlights' : ' highlight'), aujourdhuiProgramme: 'Today at the village',
         themes: { animation: 'Activities', ceremonie: 'Ceremonies', concert: 'Concerts', conference: 'Conferences', exposition: 'Exhibitions', nautique: 'On the water', soiree: 'Evenings', spectacle: 'Shows' } }
@@ -2214,7 +2214,7 @@ function themesHTML(p, cls) {
 }
 function itemJourHTML(a) {
   return '<li><a class="gl-pj-item' + (a.vedette ? ' gl-pj-item--vedette' : '') + '" href="' + esc(lien(lienJour(a.date))) + '"><span class="gl-pj-heure">' + esc(heureLib(a.debut) || '·') + '</span>' +
-    '<span class="gl-pj-txt"><span class="gl-pj-titre">' + esc(a.titre) + '</span><span class="gl-pj-meta">' + esc([a.lieux.join(' · '), libTheme({ slug: a.cat, lib: a.catLib })].filter(Boolean).join(' · ')) + (a.gratuit ? ' · <b>' + esc(TXT.gratuit) + '</b>' : '') + '</span></span></a></li>';
+    '<span class="gl-pj-txt"><span class="gl-pj-titre">' + esc(a.titre) + '</span><span class="gl-pj-meta">' + esc([a.lieux.join(' · '), libTheme({ slug: a.cat, lib: a.catLib })].filter(Boolean).join(' · ')) + (a.payant ? ' · <b>' + esc(TXT.payant) + '</b>' : '') + '</span></span></a></li>';
 }
 
 const EGALISEUR = [8, 14, 22, 17, 29, 24, 36, 30, 41, 33, 38, 26, 32, 21, 27, 18, 22, 14, 17, 10];
