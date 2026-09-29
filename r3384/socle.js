@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 38691c3 | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="38691c3";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum e112f0e | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="e112f0e";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -63,6 +63,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="38691c3";performance
     const relatif = /^(\/|#|\?|\.\/|\.\.\/)/.test(s) || !/^[a-z][a-z0-9+.\-]*:/i.test(s);
     if (!http && !relatif) return repli || '';
     return s.replace(/"/g, '%22').replace(/'/g, '%27');
+  }
+  
+
+
+  function creditAgence(b) {
+    const a = b.agence;
+    if (a && a.lien && a.logo) {
+      const img = (u, cls, alt) => '<img class="' + cls + '" src="' + esc(urlSure(u)) + '" alt="' + esc(alt) + '" width="86" height="20" loading="lazy" decoding="async">';
+      return '<p class="pb-credit"><a href="' + esc(urlSure(a.lien)) + '" target="_blank" rel="noopener"><span>' + esc(b.credit || '') + '</span><span class="pb-agence">'
+        + img(a.logo, 'pb-agence-repos', a.nom || 'Wapia') + (a.logoSurvol ? img(a.logoSurvol, 'pb-agence-survol', '') : '') + '</span></a></p>';
+    }
+    return b.wapitix ? '<p class="pb-credit"><a href="' + esc(urlSure(b.wapitix)) + '" target="_blank" rel="noopener">' + esc(b.credit || '') + ' <b>WAPITIX</b></a></p>' : '';
   }
   
 
@@ -291,7 +303,13 @@ rdr-pied-haut .pb-legal ul{display:flex;flex-wrap:wrap;justify-content:flex-end;
 rdr-pied-haut .pb-legal a,rdr-pied-haut .pb-legal button{color:var(--pb-texte);text-decoration:none;transition:color .2s ease}
 rdr-pied-haut .pb-legal button{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;font-size:13px;line-height:inherit;cursor:pointer}
 rdr-pied-haut .pb-credit{grid-area:credit;display:flex;justify-content:center;margin:0;padding:clamp(34px,4vw,46px) 0 clamp(44px,5vw,64px);border-top:1px solid var(--pb-filet)}
-rdr-pied-haut .pb-credit a{color:var(--pb-texte);font-size:12.5px;text-decoration:none;transition:color .2s ease}
+rdr-pied-haut .pb-credit a{display:inline-flex;align-items:center;gap:10px;color:var(--pb-texte);font-size:12.5px;text-decoration:none;transition:color .25s ease}
+rdr-pied-haut .pb-credit a:focus-visible{outline:2px solid var(--pb-jaune);outline-offset:6px;border-radius:4px}
+rdr-pied-haut .pb-agence{position:relative;display:block;flex:none;width:86px;height:20px;transform:translateY(1px)}
+rdr-pied-haut .pb-agence img{position:absolute;inset:0;display:block;width:100%;height:100%;transition:opacity .3s ease}
+rdr-pied-haut .pb-agence-survol{opacity:0}
+rdr-pied-haut .pb-credit a:focus-visible .pb-agence-survol{opacity:1}
+rdr-pied-haut .pb-credit a:focus-visible .pb-agence-repos{opacity:0}
 rdr-pied-haut .pb-credit b{font-weight:800;letter-spacing:.06em;color:#fff}
 @media (hover:hover) and (pointer:fine){
   rdr-pied-haut .pb-reseaux a:hover{background:rgba(252,221,0,.18);transform:translateY(-2px)}
@@ -302,6 +320,8 @@ rdr-pied-haut .pb-credit b{font-weight:800;letter-spacing:.06em;color:#fff}
   rdr-pied-haut .pb-legal a:hover,rdr-pied-haut .pb-legal button:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
   rdr-pied-haut .pb-credit a:hover{color:#fff}
   rdr-pied-haut .pb-credit a:hover b{color:var(--pb-jaune)}
+  rdr-pied-haut .pb-credit a:hover .pb-agence-survol{opacity:1}
+  rdr-pied-haut .pb-credit a:hover .pb-agence-repos{opacity:0}
 }
 rdr-pied-haut .pb a:focus-visible,rdr-pied-haut .pb summary:focus-visible,rdr-pied-haut .pb button:focus-visible{outline:2px solid var(--pb-jaune);outline-offset:3px;border-radius:4px}
 @media (max-width:1320px){ rdr-pied-haut .pb-plan{gap:30px 20px} rdr-pied-haut .pb-rub a{font-size:13.5px} }
@@ -705,7 +725,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
           + (r.liens || []).map(l => '<li>' + lien(l) + '</li>').join('') + '</ul></details>').join('') + '</nav>'
         + '<div class="pb-orga"><p>' + esc(b.evenement || '') + '</p><div>' + (b.orga || []).map(o => '<a href="' + esc(urlSure(o.lien)) + '" target="_blank" rel="noopener" aria-label="' + esc(o.alt) + '"><img src="' + esc(urlSure(o.src)) + '" alt="' + esc(o.alt) + '" width="' + (Number(o.largeur) || 60) + '" height="' + (Number(o.hauteur) || 40) + '" loading="lazy" decoding="async"></a>').join('') + '</div></div>'
         + '<nav class="pb-legal" aria-label="' + esc(b.legalTitre || '') + '"><ul>' + (b.legal || []).map(l => '<li>' + lien(l) + '</li>').join('') + '</ul></nav>'
-        + (b.wapitix ? '<p class="pb-credit"><a href="' + esc(urlSure(b.wapitix)) + '" target="_blank" rel="noopener">' + esc(b.credit || '') + ' <b>WAPITIX</b></a></p>' : '')
+        + creditAgence(b)
         + '</div></div>';
     }
     
