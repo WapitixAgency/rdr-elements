@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum db0b578 | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum a015d5e | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="a015d5e";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -175,10 +175,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
 
 
 
-  function adresseSure(u, relatifOk) {
+
+  function adresseSure(u) {
     const v = String(u == null ? '' : u).trim();
     if (!v) return '';
-    if (relatifOk && /^\/[^/]/.test(v)) return v;
     if (!/^https:\/\//i.test(v)) return '';
     try { return new URL(v).href; } catch (e) { return ''; }
   }
@@ -326,7 +326,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
       'padding-right:clamp(22px,3vw,44px);font-family:' + POLICE_TITRE + ';font-style:italic;' +
       'font-size:clamp(15px,1.9vw,25px);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#fff;}',
     R + ' .rac-bandeau svg{width:1em;height:1em;flex:none;stroke:var(--rac-or);fill:none;stroke-width:1.6;stroke-linecap:round;}',
-    R + ' .rac-bandeau:hover .rac-bandeau-piste{animation-play-state:paused;}',
+     
+    R + ' .rac-lu{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}',
+    '@media (hover:hover) and (pointer:fine){' + R + ' .rac-bandeau:hover .rac-bandeau-piste{animation-play-state:paused;}}',
     
 
 
@@ -343,8 +345,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
       'opacity:0;transform:translateY(26px);' +
       'transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), border-color .3s ease, box-shadow .3s ease;}',
     R + ' .rac-bloc.est-la{opacity:1;transform:none;}',
-    R + ' .rac-bloc.est-la:hover{border-color:rgba(var(--acc),.45);' +
-      'box-shadow:0 26px 60px -34px rgba(0,0,0,.9), 0 0 46px -16px rgba(var(--acc),.35);}',
+    '@media (hover:hover) and (pointer:fine){' + R + ' .rac-bloc.est-la:hover{border-color:rgba(var(--acc),.45);' +
+      'box-shadow:0 26px 60px -34px rgba(0,0,0,.9), 0 0 46px -16px rgba(var(--acc),.35);}}',
     R + ' .rac-bloc--or{--acc:245,190,65;}',
     R + ' .rac-rail{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;' +
       'gap:14px;padding:clamp(22px,2.6vw,32px) 10px;overflow:hidden;' +
@@ -403,10 +405,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
       'letter-spacing:.06em;text-transform:uppercase;cursor:pointer;' +
       'background:linear-gradient(94deg,var(--rac-teal-f),var(--rac-teal-m) 45%,var(--rac-teal));' +
       'transition:filter .2s ease, transform .12s ease;}',
-    R + ' .rac-envoi:hover:not(:disabled){filter:brightness(1.12);}',
+    '@media (hover:hover) and (pointer:fine){' + R + ' .rac-envoi:hover:not(:disabled){filter:brightness(1.12);}}',
     R + ' .rac-envoi:active:not(:disabled){transform:translateY(1px);}',
     R + ' .rac-envoi svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease;}',
-    R + ' .rac-envoi:hover:not(:disabled) svg{transform:translateX(4px);}',
+    '@media (hover:hover) and (pointer:fine){' + R + ' .rac-envoi:hover:not(:disabled) svg{transform:translateX(4px);}}',
     R + ' .rac-envoi:disabled{background:rgba(93,191,192,.14);color:var(--rac-pale);cursor:not-allowed;}',
     R + ' .rac-envoi:disabled svg{display:none;}',
     R + ' .rac-weez{display:none;}',
@@ -732,12 +734,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
       }).join('');
     }
 
+    
+
+
     _bandeau() {
       const unite = esc(this._c('bandeau')) + svg('ancre');
       let piste = '';
       for (let i = 0; i < 4; i++) piste += unite;
       return '<div class="rac-bandeau">' +
-        '<div class="rac-bandeau-piste">' +
+        '<span class="rac-lu">' + esc(this._c('bandeau')) + '</span>' +
+        '<div class="rac-bandeau-piste" aria-hidden="true">' +
           '<span>' + piste + '</span><span aria-hidden="true">' + piste + '</span>' +
         '</div></div>';
     }
@@ -917,6 +923,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
 
 
 
+
     _depots() {
       const bouton = this._q('envoi');
       const weez = this._q('weez');
@@ -994,15 +1001,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
 
     
 
-
-
-
-
-
-
-
-
-    
 
 
 
@@ -1125,13 +1123,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
         pinceG.setAttribute('transform', 'scale(' + (cw / 240).toFixed(3) + ')');
         ancre = { x: W / 2, y: -Math.max(90, cw * 0.62) };
         seg = (repos - ancre.y) / (N - 1);
-        if (!sema) {
+        
+
+
+
+        if (!sema || doux) {
           for (let i = 0; i < N; i++) {
             p[i] = { x: ancre.x, y: ancre.y + i * seg };
             avant[i] = { x: p[i].x, y: p[i].y };
           }
           sema = true;
         }
+        if (doux) { pas(); dessiner(); }
       };
 
       
@@ -1283,8 +1286,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
           ' perspective(1100px) rotateY(' + vrille.toFixed(2) + 'deg) rotateX(' + (vrille * 0.10).toFixed(2) + 'deg)';
       };
 
+      
+
       const boucle = () => {
-        if (visible) { pas(); dessiner(); }
+        if (!visible) { this._rafId = 0; return; }
+        pas(); dessiner();
         this._rafId = requestAnimationFrame(boucle);
       };
 
@@ -1395,6 +1401,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
         const io = new IntersectionObserver(es => {
           visible = es.some(e => e.isIntersecting);
           if (visible && !doux) pousser();
+          if (visible && !doux && !this._rafId && this.isConnected) this._rafId = requestAnimationFrame(boucle);
         }, { threshold: 0 });
         io.observe(stage);
         this._observateurs.push(io);
@@ -1402,7 +1409,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="db0b578";pe
         pousser();    
       }
 
-      if (doux) { pas(); dessiner(); return; }
+      
+
+      if (doux) return;
 
       boucle();
       
