@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum b7b4ebd | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b7b4ebd";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum bb7e145 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="bb7e145";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2975,8 +2975,9 @@ class RdrEntete extends HTMLElement {
 const RANGE_PAGES = /\/carte-village-saint-malo\/?$/;
 const RANGE_ATTENTE_MS = 3500, RANGE_DOIGT_MS = 6000;
 let rangement = null;
+
 function pageQuiRange(el) {
-  return el.getAttribute('rangement') === 'carte' || RANGE_PAGES.test((window.location && window.location.pathname) || '');
+  return el.getAttribute('rangement') === 'carte' || (el.getAttribute('rangement') === 'adresse' && RANGE_PAGES.test((window.location && window.location.pathname) || ''));
 }
 function activerRangement(el) {
   if (rangement) { rangement.el = el; return; }
