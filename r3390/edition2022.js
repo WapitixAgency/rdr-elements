@@ -1,5 +1,5 @@
-/* rdr-elements edition2022 | source route-du-rhum a869134 | rdr-edition-2022.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="a869134";performance.mark("rdr-elements:edition2022")}catch(e){}
+/* rdr-elements edition2022 | source route-du-rhum 24f6b95 | rdr-edition-2022.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="24f6b95";performance.mark("rdr-elements:edition2022")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-edition-2022")) return;

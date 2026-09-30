@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum a869134 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="a869134";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 24f6b95 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="24f6b95";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -28,7 +28,7 @@ const ARBORESCENCE = {
       liens: [
         { libelle: 'Présentation', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Préparer sa venue', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
-        { libelle: 'Covoiturage', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
+        { libelle: 'Covoiturage', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: { panneau: 'villages', lien: 'https://covoiturage.routedurhum.com/' } },
         { libelle: 'Plan interactif', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Programmation', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
@@ -65,7 +65,7 @@ const ARBORESCENCE = {
       liens: [
         { libelle: 'Overview', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Plan your visit', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
-        { libelle: 'Carpooling', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: 'wix:image://v1/df962b_446304e46a934e66b494d083b4199f11~mv2.jpg/ponton-village-saint-malo.jpg' },
+        { libelle: 'Carpooling', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: { panneau: 'villages', lien: 'https://covoiturage.routedurhum.com/' } },
         { libelle: 'Interactive map', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Village programme', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
@@ -1280,7 +1280,8 @@ function modele() {
       }
       
 
-      const img = idMedia(l.image);
+      const refImage = l.image && typeof l.image === 'object' ? carteSource(l.image) : null;
+      const img = idMedia(refImage ? refImage.c.image : l.image);
       return Object.assign(commun, { type: 'carte', titre: l.libelle, sous: externe(l.lien) ? domaine(l.lien) : '', image: img, tuile: !img });
     });
     const dates = e.dates ? carteSource(e.dates) : null;
