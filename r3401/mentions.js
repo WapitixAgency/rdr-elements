@@ -1,5 +1,5 @@
-/* rdr-elements mentions | source route-du-rhum 0d5d54c | rdr-mentions.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="0d5d54c";performance.mark("rdr-elements:mentions")}catch(e){}
+/* rdr-elements mentions | source route-du-rhum a5b8cc0 | rdr-mentions.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="a5b8cc0";performance.mark("rdr-elements:mentions")}catch(e){}
 ;(function(){
 (function () {
   'use strict';

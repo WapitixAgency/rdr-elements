@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 0d5d54c | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="0d5d54c";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum a5b8cc0 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="a5b8cc0";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
