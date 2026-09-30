@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum bb7e145 | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="bb7e145";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 301661b | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="301661b";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -507,25 +507,30 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
 
 
 
-  const LIEN_RSE = { page: '/espace-skippers', rubrique: 'developpement-durable', module: 'rdr-espace-skippers', attenteMs: 12000 };
+
+
+
+  const LIEN_RSE = { page: '/espace-skippers', module: 'rdr-espace-skippers', attenteMs: 12000,
+    rubriques: { rse: 'developpement-durable', documents: 'documents-officiels' } };
   let lienVu = false;
   function lienProfond() {
     if (lienVu) return;
     lienVu = true;
     let go = '';
     try { go = String(new URLSearchParams(location.search).get('go') || '').trim().toLowerCase(); } catch (e) { return; }
-    if (go !== 'rse') return;
+    const rubrique = Object.prototype.hasOwnProperty.call(LIEN_RSE.rubriques, go) ? LIEN_RSE.rubriques[go] : '';
+    if (!rubrique) return;
     let chemin = location.pathname || '/';
     try { chemin = decodeURIComponent(chemin); } catch (e) {   }
     chemin = chemin.replace(/\/+$/, '') || '/';
     const page = (/^\/en(\/|$)/.test(chemin) ? '/en' : '') + LIEN_RSE.page;
     const surPlace = () => chemin === page || !!document.querySelector(LIEN_RSE.module);
     const suite = () => {
-      if (!surPlace()) { try { location.replace(page + '?go=rse'); } catch (e) {   } return; }
+      if (!surPlace()) { try { location.replace(page + '?go=' + go); } catch (e) {   } return; }
       let touche = false;
       const stop = () => { touche = true; };
       ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((t) => window.addEventListener(t, stop, { once: true, passive: true }));
-      const cible = () => { const r = document.getElementById(LIEN_RSE.rubrique); return r && r.closest(LIEN_RSE.module) ? r : null; };
+      const cible = () => { const r = document.getElementById(rubrique); return r && r.closest(LIEN_RSE.module) ? r : null; };
       const amener = () => { const r = cible(); if (!r || touche) return !!r; r.scrollIntoView({ block: 'start' }); return true; };
       const debut = Date.now();
       const tenter = () => {
