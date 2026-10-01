@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum adbb2ac | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="adbb2ac";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum ecf2270 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ecf2270";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -2547,6 +2547,73 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-badges-mini-more svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
      
+     
+    espace-rhum .er-chasse-place { grid-column: span 12; scroll-margin-top: 100px; }
+    espace-rhum .er-chasse-place:empty { display: none; }
+    espace-rhum .er-chasse { position: relative; overflow: hidden; background: var(--er-bg-card); border: 1px solid rgba(93, 191, 192, 0.35); border-radius: var(--er-radius-card); padding: 24px 26px 26px; box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.7); }
+    espace-rhum .er-chasse::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(70% 90% at 100% 0%, rgba(252, 241, 80, 0.10), transparent 60%), radial-gradient(60% 80% at 0% 100%, rgba(93, 191, 192, 0.10), transparent 60%); }
+    espace-rhum .er-chasse-tete { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    espace-rhum .er-chasse-titre { margin: 0; font-family: var(--er-font-display); font-style: italic; font-weight: 400; font-size: clamp(26px, 3vw, 34px); line-height: 1; text-transform: uppercase; color: #fff; }
+    espace-rhum .er-chasse-titre em { font-style: inherit; color: var(--er-amber-bright); }
+    espace-rhum .er-chasse-sous { margin: 8px 0 0; max-width: 520px; font-family: var(--er-font-body); font-size: 13.5px; line-height: 1.55; color: var(--er-text-secondary); }
+    espace-rhum .er-chasse-sous b { color: #fff; }
+    espace-rhum .er-chasse-jauge { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    espace-rhum .er-chasse-jauge-n { font-family: var(--er-font-display); font-style: italic; font-size: 44px; line-height: 1; color: var(--er-amber-bright); }
+    espace-rhum .er-chasse-jauge-n small { font-size: 22px; color: rgba(255, 255, 255, 0.55); }
+    espace-rhum .er-chasse-segments { display: flex; gap: 5px; }
+    espace-rhum .er-chasse-segments i { width: 26px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); }
+    espace-rhum .er-chasse-segments i.ok { background: var(--c); }
+    espace-rhum .er-chasse-badge { flex: none; display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border-radius: 16px 4px 16px 4px; background: rgba(252, 241, 80, 0.08); border: 1px solid rgba(252, 241, 80, 0.35); }
+    espace-rhum .er-chasse-badge img { width: 56px; height: 64px; object-fit: contain; }
+    espace-rhum .er-chasse-badge b { display: block; font-family: var(--er-font-display); font-style: italic; font-weight: 400; font-size: 16px; line-height: 1.05; text-transform: uppercase; color: var(--er-amber-bright); }
+    espace-rhum .er-chasse-badge span { font-family: var(--er-font-body); font-size: 11.5px; font-weight: 700; color: var(--er-text-secondary); }
+    espace-rhum .er-chasse-corps { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: "cartes indices" "actions indices"; grid-template-rows: auto 1fr; gap: 16px 20px; margin-top: 20px; }
+    espace-rhum .er-chasse-cartes { grid-area: cartes; align-self: start; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    espace-rhum .er-chasse-carte { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 178px; padding: 14px 8px; border-radius: 14px 3px 10px 3px; background: var(--er-surface); border: 1px solid var(--er-border-soft); text-align: center; }
+    espace-rhum .er-chasse-carte img { width: 74px; height: 90px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.12; }
+    espace-rhum .er-chasse-carte div { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; }
+    espace-rhum .er-chasse-n { position: absolute; left: 8px; top: 8px; font-family: var(--er-font-body); font-size: 10px; font-weight: 800; line-height: 1; color: rgba(255, 255, 255, 0.4); }
+    espace-rhum .er-chasse-carte b { font-family: var(--er-font-body); font-size: 12.5px; font-weight: 800; line-height: 1.2; color: #fff; }
+    espace-rhum .er-chasse-carte span { font-family: var(--er-font-body); font-size: 11px; font-weight: 600; color: var(--er-text-muted); }
+    espace-rhum .er-chasse-carte.ok { background: linear-gradient(170deg, color-mix(in srgb, var(--c) 30%, transparent), rgba(255, 255, 255, 0.03) 70%); border-color: color-mix(in srgb, var(--c) 60%, transparent); }
+    espace-rhum .er-chasse-carte.ok img { filter: none; opacity: 1; }
+    espace-rhum .er-chasse-carte.ok .er-chasse-n { color: var(--c); }
+    espace-rhum .er-chasse-carte.ok span { color: var(--er-text-secondary); }
+    espace-rhum .er-chasse-carte:not(.ok) b { font-family: var(--er-font-display); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1; color: rgba(255, 255, 255, 0.35); }
+    espace-rhum .er-chasse-indices { grid-area: indices; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    espace-rhum .er-chasse-prochain { position: relative; padding: 14px 16px 14px 58px; border-radius: 16px; background: #F7F1E1; color: #3a2e14; }
+    espace-rhum .er-chasse-prochain svg { position: absolute; left: 12px; top: 50%; width: 34px; height: 34px; margin-top: -17px; }
+    espace-rhum .er-chasse-prochain small { display: block; font-family: var(--er-font-body); font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #a07a2c; }
+    espace-rhum .er-chasse-prochain p { margin: 3px 0 0; font-family: var(--er-font-body); font-size: 15px; line-height: 1.45; font-weight: 600; font-style: italic; }
+    espace-rhum .er-chasse-mini { margin: 0; font-family: var(--er-font-body); font-size: 10.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--er-text-muted); }
+    espace-rhum .er-chasse-resolus { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    espace-rhum .er-chasse-resolus li { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: baseline; padding: 8px 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); font-family: var(--er-font-body); font-size: 12.5px; line-height: 1.45; }
+    espace-rhum .er-chasse-resolus li i { grid-row: span 2; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A1A35; font-size: 10px; font-weight: 800; font-style: normal; line-height: 1; }
+    espace-rhum .er-chasse-resolus li em { font-style: italic; color: var(--er-text-secondary); }
+    espace-rhum .er-chasse-resolus li span { font-size: 11.5px; font-weight: 700; color: #fff; }
+    espace-rhum .er-chasse-vide { margin: 6px 0 0; font-family: var(--er-font-body); font-size: 12.5px; color: var(--er-text-muted); }
+    espace-rhum .er-chasse-actions { grid-area: actions; align-self: start; display: flex; flex-wrap: wrap; gap: 10px; }
+    espace-rhum .er-chasse-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 0; border-radius: var(--er-radius-btn); background: var(--er-amber-bright); color: #16355D; font-family: var(--er-font-body); font-size: 12.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+    espace-rhum .er-chasse-btn:hover { background: #fff; }
+    espace-rhum .er-chasse-btn:focus-visible { outline: 2px solid var(--er-teal); outline-offset: 3px; }
+    @media (max-width: 900px) {
+      espace-rhum .er-chasse-corps { grid-template-columns: 1fr; grid-template-areas: "cartes" "indices" "actions"; grid-template-rows: auto; }
+    }
+    @media (max-width: 560px) {
+      espace-rhum .er-chasse { padding: 18px 16px; border-radius: 20px 3px 14px 3px; }
+      espace-rhum .er-chasse-tete { flex-direction: column; gap: 12px; }
+      espace-rhum .er-chasse-jauge { flex-direction: row; align-items: center; gap: 12px; }
+      espace-rhum .er-chasse-jauge-n { font-size: 34px; }
+      espace-rhum .er-chasse-badge { width: 100%; }
+      espace-rhum .er-chasse-corps { gap: 16px; margin-top: 14px; }
+      espace-rhum .er-chasse-cartes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      espace-rhum .er-chasse-carte { flex-direction: row; justify-content: flex-start; text-align: left; min-height: 0; padding: 8px 10px; gap: 10px; }
+      espace-rhum .er-chasse-carte img { width: 44px; height: 54px; }
+      espace-rhum .er-chasse-carte div { align-items: flex-start; gap: 2px; }
+      espace-rhum .er-chasse-n { display: none; }
+      espace-rhum .er-chasse-carte:not(.ok) b { font-size: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { espace-rhum .er-chasse-place { scroll-behavior: auto; } }
     espace-rhum .er-widget-fav-skippers {
       grid-column: span 12;
       background: transparent;
@@ -10770,6 +10837,7 @@ if (!customElements.get('espace-rhum')) {
        
       if (this._fermerCarteFan) { this._fermerCarteFan(); this._fermerCarteFan = null; }
       if (this._surAllerNotif) { window.removeEventListener('rdr-espace-aller', this._surAllerNotif); this._surAllerNotif = null; }
+      if (this._surChasse) { window.removeEventListener('rdr-chasse', this._surChasse); this._surChasse = null; }
       this._debrancherRelaisNotifications();
       this._teardown();
        
@@ -11172,6 +11240,7 @@ if (!customElements.get('espace-rhum')) {
       this._wireSectionLinks();
       this._wireSkippersExpand();
       this._wireBadges();
+      this._wireChasse();
       this._poserEtatMemoire();
       if (rafraichi) this._finirEntrees();
        
@@ -11744,6 +11813,7 @@ if (!customElements.get('espace-rhum')) {
             ${this._buildHeroWidget()}
             ${this._buildFlashNewsWidget()}
             ${this._buildBadgesMiniWidget()}
+            <div class="er-chasse-place" id="chasse-tymal"></div>
             ${this._buildRoueWidget()}
             ${this._buildPronosWidget()}
             ${this._buildCombatWidget()}
@@ -12271,6 +12341,127 @@ if (!customElements.get('espace-rhum')) {
           </div>
         </div>
       `;
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _chasseEtat() {
+      const ch = this._payload && this._payload.chasse;
+      const C = window.__rdrChasse;
+      if (!ch || !C || typeof C.indice !== 'function' || !C.image(1, 'visuel', 20, 20)) return null;
+      
+
+      if (typeof C.fusionner === 'function' && Array.isArray(ch.trouves) && ch.trouves.length) C.fusionner(ch.trouves);
+      const locales = typeof C.trouves === 'function' ? C.trouves() : [];
+      const trouves = [...new Set([...(ch.trouves || []), ...locales].map(Number))].filter((n) => n >= 1 && n <= 4).sort((a, b) => a - b);
+      if (!ch.ouvert && !trouves.length) return null;
+      const dates = ch.dates || {};
+      const fini = trouves.length === 4;
+      let finLe = ch.badgeLe || null;
+      if (fini && !finLe) {
+        const toutes = Object.values(dates).map((d) => new Date(d).getTime()).filter(Number.isFinite);
+        if (toutes.length) finLe = new Date(Math.max(...toutes)).toISOString();
+      }
+       
+      if (fini && finLe && Date.now() - new Date(finLe).getTime() > 2 * 24 * 3600 * 1000) return null;
+      return { C, trouves, dates, fini, finLe };
+    }
+
+    _chasseHtml(e) {
+      const en = this._lang() === 'en';
+      const T = en
+        ? { label: 'The TyMAL hunt', titre0: 'Four TyMALs <em>to find</em>', titreN: (n) => n + ' <em>of 4</em> found', titreFin: 'Hunt <em>complete</em>',
+            sous0: 'They are hiding on the site. Each find gives you the clue to another, and all four earn you the <b>TyMAL Hunter</b> badge.',
+            sousN: (r) => r + ' more to find. Each find gives you the clue to another, and all four earn you the <b>TyMAL Hunter</b> badge.',
+            sousFin: 'You tracked down all four. Your riddles stay here, as a keepsake.',
+            trouveLe: 'Found on', trouve: 'Found', aTrouver: 'To find', prochain: 'Your next clue', commencer: 'To start',
+            resolus: 'Your solved riddles', vide: 'Your solved riddles will line up here.', carnet: 'Open my logbook', badge: 'See my badge',
+            badgeNom: 'TyMAL Hunter', badgeLe: 'Badge unlocked on', g: ['“', '”'] }
+        : { label: 'La chasse à TyMAL', titre0: 'Quatre TyMAL <em>à trouver</em>', titreN: (n) => n + ' <em>sur 4</em> trouvés', titreFin: 'Chasse <em>terminée</em>',
+            sous0: 'Ils se cachent sur le site. Chaque trouvaille te donne l’indice d’une autre, et les quatre te donnent le badge <b>Chasseur de TyMAL</b>.',
+            sousN: (r) => 'Encore ' + r + ' à dénicher. Chaque trouvaille te donne l’indice d’une autre, et les quatre te donnent le badge <b>Chasseur de TyMAL</b>.',
+            sousFin: 'Tu as déniché les quatre. Tes énigmes restent ici, pour le souvenir.',
+            trouveLe: 'Trouvé le', trouve: 'Trouvé', aTrouver: 'À trouver', prochain: 'Ton prochain indice', commencer: 'Pour commencer',
+            resolus: 'Tes énigmes résolues', vide: 'Tes énigmes résolues viendront se ranger ici.', carnet: 'Ouvrir mon carnet', badge: 'Voir mon badge',
+            badgeNom: 'Chasseur de TyMAL', badgeLe: 'Badge débloqué le', g: ['«\u00a0', '\u00a0»'] };
+      const COUL = { 1: '#5DBFC0', 2: '#56BCF6', 3: '#FCF150', 4: '#EFA253' };
+      const { C, trouves, dates, fini, finLe } = e;
+      const n = trouves.length;
+       
+      let suiv = null;
+      const dernier = n ? trouves[n - 1] : 0;
+      for (let k = 1; k <= 4 && !suiv; k++) { const c = ((dernier - 1 + k + 4) % 4) + 1; if (!trouves.includes(c)) suiv = c; }
+      const titre = !n ? T.titre0 : fini ? T.titreFin : T.titreN(n);
+      const sous = !n ? T.sous0 : fini ? T.sousFin : T.sousN(4 - n);
+      const droite = fini
+        ? '<div class="er-chasse-badge"><img src="' + escapeHtml(C.image('badge', null, 120, 140)) + '" alt="" loading="lazy" decoding="async"><div><b>' + T.badgeNom + '</b><span>' + (finLe ? T.badgeLe + ' ' + escapeHtml(this._formatFrDate(finLe)) : '') + '</span></div></div>'
+        : '<div class="er-chasse-jauge"><div class="er-chasse-jauge-n">' + n + '<small>/4</small></div><div class="er-chasse-segments">' + [1, 2, 3, 4].map((k) => '<i class="' + (trouves.includes(k) ? 'ok' : '') + '" style="--c:' + COUL[k] + '"></i>').join('') + '</div></div>';
+      const cartes = '<ol class="er-chasse-cartes">' + [1, 2, 3, 4].map((k) => {
+        const ok = trouves.includes(k);
+        const date = ok && dates[k] ? T.trouveLe + ' ' + escapeHtml(this._formatFrDate(dates[k])) : T.trouve;
+        const texte = ok ? '<b>' + escapeHtml(C.lieu(k)) + '</b><span>' + date + '</span>' : '<b>?</b><span>' + T.aTrouver + '</span>';
+        return '<li class="er-chasse-carte' + (ok ? ' ok' : '') + '" style="--c:' + COUL[k] + '"><span class="er-chasse-n">' + k + '/4</span><img src="' + escapeHtml(C.image(k, 'visuel', 160, 200)) + '" alt="" loading="lazy" decoding="async"><div>' + texte + '</div></li>';
+      }).join('') + '</ol>';
+      const bouteille = '<svg viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-35 20 20)"><rect x="14" y="4" width="12" height="6" rx="2" fill="#b98b4a"/><path d="M15 10h10v4c4 2 6 6 6 11v9a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3v-9c0-5 2-9 6-11z" fill="#5DBFC0" opacity=".85"/><rect x="13" y="20" width="14" height="10" rx="1.5" fill="#F7F1E1" stroke="#a07a2c" stroke-width="1"/><path d="M16 23h8M16 26h6" stroke="#a07a2c" stroke-width="1.2" stroke-linecap="round"/></g></svg>';
+      const prochain = suiv ? '<div class="er-chasse-prochain">' + bouteille + '<small>' + (n ? T.prochain : T.commencer) + '</small><p>' + T.g[0] + escapeHtml(C.indice(suiv)) + T.g[1] + '</p></div>' : '';
+      const resolus = n
+        ? '<div><p class="er-chasse-mini">' + T.resolus + '</p><ul class="er-chasse-resolus">' + trouves.map((k) => '<li style="--c:' + COUL[k] + '"><i>' + k + '</i><em>' + T.g[0] + escapeHtml(C.indice(k)) + T.g[1] + '</em><span>' + escapeHtml(C.lieu(k)) + '</span></li>').join('') + '</ul></div>'
+        : '<p class="er-chasse-vide">' + T.vide + '</p>';
+      const actions = '<div class="er-chasse-actions">' + (fini
+        ? '<button type="button" class="er-chasse-btn" data-chasse="badge">' + T.badge + '</button>'
+        : '<button type="button" class="er-chasse-btn" data-chasse="carnet">' + T.carnet + '</button>') + '</div>';
+      return '<section class="er-chasse" aria-label="' + T.label + '"><div class="er-chasse-tete"><div><p class="er-widget-label">' + T.label + '</p><h2 class="er-chasse-titre">' + titre + '</h2><p class="er-chasse-sous">' + sous + '</p></div>' + droite + '</div>' +
+        '<div class="er-chasse-corps">' + cartes + '<div class="er-chasse-indices">' + prochain + resolus + '</div>' + actions + '</div></section>';
+    }
+
+    _rendreChasse() {
+      const place = this.querySelector('.er-chasse-place');
+      if (!place) return;
+      const e = this._chasseEtat();
+      const html = e ? this._chasseHtml(e) : '';
+      if (place._html === html) return;
+      place._html = html;
+      place.innerHTML = html;
+       
+      if (html && !this._chasseVue && /#chasse-tymal$/.test(String(location.hash))) {
+        this._chasseVue = true;
+        setTimeout(() => { try { place.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) { place.scrollIntoView(); } }, 300);
+      }
+    }
+
+    _wireChasse() {
+      if (!this._surChasse) {
+        this._surChasse = () => this._rendreChasse();
+        window.addEventListener('rdr-chasse', this._surChasse);
+      }
+      const place = this.querySelector('.er-chasse-place');
+      if (place && !place._branche) {
+        place._branche = true;
+        place.addEventListener('click', (ev) => {
+          const b = ev.target.closest && ev.target.closest('[data-chasse]');
+          if (!b) return;
+          if (b.dataset.chasse === 'badge') this._openBadgeModal('chasse-tymal');
+          else this.dispatchEvent(new CustomEvent('er-chasse', { bubbles: true, composed: true }));
+        });
+      }
+      this._rendreChasse();
     }
 
     _buildBadgesMiniWidget() {
@@ -16066,7 +16257,9 @@ if (!customElements.get('espace-rhum')) {
       const MONTHS = this._lang() === 'en'
         ? ['January','February','March','April','May','June','July','August','September','October','November','December']
         : ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-      return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+       
+      const jour = d.getDate() === 1 && this._lang() !== 'en' ? '1er' : d.getDate();
+      return `${jour} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
     }
 
     _buildBadgesSection() {

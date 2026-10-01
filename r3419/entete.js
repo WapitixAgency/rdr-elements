@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum adbb2ac | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="adbb2ac";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum ecf2270 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ecf2270";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2790,7 +2790,7 @@ function brancherChasse(o) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && E.boite) fermerBoite(); });
   let tRedim = null;
   window.addEventListener('resize', () => { clearTimeout(tRedim); tRedim = setTimeout(bordsAccueil, 250); }, { passive: true });
-  E.api = { ouvert, trouve, attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
+  E.api = { ouvert, trouve, trouves: () => E.trouves.slice(), fusionner, indice: indiceDe, lieu: (n) => T().lieux[n] || '', attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
   window.__rdrChasse = E.api;
   notifier();
   return E.api;
@@ -2830,6 +2830,16 @@ function suivante(n) {
   const depart = Number(n) || 0;
   for (let k = 1; k <= 4; k++) { const c = ((depart - 1 + k + 4) % 4) + 1; if (!trouve(c)) return c; }
   return null;
+}
+ 
+function fusionner(liste) {
+  const l = nums(liste);
+  const t = nums(E.trouves.concat(l)), env = nums(E.envoyes.concat(l));
+  if (t.length === E.trouves.length && env.length === E.envoyes.length) return false;
+  E.trouves = t; E.envoyes = env;
+  sauver();
+  notifier();
+  return true;
 }
 function sauver() { ecrireLocal(CLE, { trouves: E.trouves, envoyes: E.envoyes }); }
 function cachette(n) { return (E.jeu && E.jeu.cachettes || []).find((c) => c && c.n === Number(n)) || null; }
@@ -3015,7 +3025,8 @@ function ouvrir(type, n) {
   fermerBoite(true);
   const t = T();
   const membre = E.membre === true;
-  const espace = E.o.lien('/mon-espace-rhum');
+   
+  const espace = E.o.lien('/mon-espace-rhum') + '#chasse-tymal';
   let dansEspace = false;
   try { dansEspace = /\/mon-espace-rhum(\/|$)/.test(window.location.pathname); } catch (e) { dansEspace = false; }
   const dernier = n || (E.trouves.length ? E.trouves[E.trouves.length - 1] : 0);
