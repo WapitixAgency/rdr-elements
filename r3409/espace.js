@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ecf2270 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ecf2270";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 0703e5b | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0703e5b";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1163,12 +1163,10 @@ if (!customElements.get('espace-rhum')) {
      
     'Chasseur de TyMAL': 'TyMAL Hunter',
     'Les quatre TyMAL cachés sur le site': 'The four TyMALs hidden on the site',
-    'Quatre TyMAL se cachent sur le site. Chaque trouvaille donne l’indice de la suivante.': 'Four TyMALs are hiding on the site. Each find gives the clue to the next.',
     'Les quatre TyMAL sont à toi.\nChasseur confirmé\u00a0!': 'All four TyMALs are yours.\nA true hunter!',
      
     'Les quatre TyMAL sont à toi.': 'All four TyMALs are yours.',
     'Chasseur confirmé\u00a0!': 'A true hunter!',
-    'Mon carnet': 'My logbook',
      
     'Tu as franchi le pas. Bienvenue dans l\'aventure.': 'You took the plunge. Welcome to the adventure.',
     'Ton assiduité paie. Dix jours d\'aventure ensemble.': 'Your dedication pays off. Ten days of adventure together.',
@@ -2591,7 +2589,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-chasse-resolus li i { grid-row: span 2; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A1A35; font-size: 10px; font-weight: 800; font-style: normal; line-height: 1; }
     espace-rhum .er-chasse-resolus li em { font-style: italic; color: var(--er-text-secondary); }
     espace-rhum .er-chasse-resolus li span { font-size: 11.5px; font-weight: 700; color: #fff; }
-    espace-rhum .er-chasse-vide { margin: 6px 0 0; font-family: var(--er-font-body); font-size: 12.5px; color: var(--er-text-muted); }
     espace-rhum .er-chasse-actions { grid-area: actions; align-self: start; display: flex; flex-wrap: wrap; gap: 10px; }
     espace-rhum .er-chasse-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 0; border-radius: var(--er-radius-btn); background: var(--er-amber-bright); color: #16355D; font-family: var(--er-font-body); font-size: 12.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
     espace-rhum .er-chasse-btn:hover { background: #fff; }
@@ -12371,7 +12368,8 @@ if (!customElements.get('espace-rhum')) {
       if (typeof C.fusionner === 'function' && Array.isArray(ch.trouves) && ch.trouves.length) C.fusionner(ch.trouves);
       const locales = typeof C.trouves === 'function' ? C.trouves() : [];
       const trouves = [...new Set([...(ch.trouves || []), ...locales].map(Number))].filter((n) => n >= 1 && n <= 4).sort((a, b) => a - b);
-      if (!ch.ouvert && !trouves.length) return null;
+       
+      if (!trouves.length) return null;
       const dates = ch.dates || {};
       const fini = trouves.length === 4;
       let finLe = ch.badgeLe || null;
@@ -12387,29 +12385,27 @@ if (!customElements.get('espace-rhum')) {
     _chasseHtml(e) {
       const en = this._lang() === 'en';
       const T = en
-        ? { label: 'The TyMAL hunt', titre0: 'Four TyMALs <em>to find</em>', titreN: (n) => n + ' <em>of 4</em> found', titreFin: 'Hunt <em>complete</em>',
-            sous0: 'They are hiding on the site. Each find gives you the clue to another, and all four earn you the <b>TyMAL Hunter</b> badge.',
+        ? { label: 'The TyMAL hunt', titreN: (n) => n + ' <em>of 4</em> found', titreFin: 'Hunt <em>complete</em>',
             sousN: (r) => r + ' more to find. Each find gives you the clue to another, and all four earn you the <b>TyMAL Hunter</b> badge.',
             sousFin: 'You tracked down all four. Your riddles stay here, as a keepsake.',
-            trouveLe: 'Found on', trouve: 'Found', aTrouver: 'To find', prochain: 'Your next clue', commencer: 'To start',
-            resolus: 'Your solved riddles', vide: 'Your solved riddles will line up here.', carnet: 'Open my logbook', badge: 'See my badge',
+            trouveLe: 'Found on', trouve: 'Found', aTrouver: 'To find', prochain: 'Your next clue',
+            resolus: 'Your solved riddles', carnet: 'Open my logbook', badge: 'See my badge',
             badgeNom: 'TyMAL Hunter', badgeLe: 'Badge unlocked on', g: ['“', '”'] }
-        : { label: 'La chasse à TyMAL', titre0: 'Quatre TyMAL <em>à trouver</em>', titreN: (n) => n + ' <em>sur 4</em> trouvés', titreFin: 'Chasse <em>terminée</em>',
-            sous0: 'Ils se cachent sur le site. Chaque trouvaille te donne l’indice d’une autre, et les quatre te donnent le badge <b>Chasseur de TyMAL</b>.',
+        : { label: 'La chasse à TyMAL', titreN: (n) => n + ' <em>sur 4</em> trouvés', titreFin: 'Chasse <em>terminée</em>',
             sousN: (r) => 'Encore ' + r + ' à dénicher. Chaque trouvaille te donne l’indice d’une autre, et les quatre te donnent le badge <b>Chasseur de TyMAL</b>.',
             sousFin: 'Tu as déniché les quatre. Tes énigmes restent ici, pour le souvenir.',
-            trouveLe: 'Trouvé le', trouve: 'Trouvé', aTrouver: 'À trouver', prochain: 'Ton prochain indice', commencer: 'Pour commencer',
-            resolus: 'Tes énigmes résolues', vide: 'Tes énigmes résolues viendront se ranger ici.', carnet: 'Ouvrir mon carnet', badge: 'Voir mon badge',
+            trouveLe: 'Trouvé le', trouve: 'Trouvé', aTrouver: 'À trouver', prochain: 'Ton prochain indice',
+            resolus: 'Tes énigmes résolues', carnet: 'Ouvrir mon carnet', badge: 'Voir mon badge',
             badgeNom: 'Chasseur de TyMAL', badgeLe: 'Badge débloqué le', g: ['«\u00a0', '\u00a0»'] };
       const COUL = { 1: '#5DBFC0', 2: '#56BCF6', 3: '#FCF150', 4: '#EFA253' };
       const { C, trouves, dates, fini, finLe } = e;
       const n = trouves.length;
        
       let suiv = null;
-      const dernier = n ? trouves[n - 1] : 0;
+      const dernier = trouves[n - 1];
       for (let k = 1; k <= 4 && !suiv; k++) { const c = ((dernier - 1 + k + 4) % 4) + 1; if (!trouves.includes(c)) suiv = c; }
-      const titre = !n ? T.titre0 : fini ? T.titreFin : T.titreN(n);
-      const sous = !n ? T.sous0 : fini ? T.sousFin : T.sousN(4 - n);
+      const titre = fini ? T.titreFin : T.titreN(n);
+      const sous = fini ? T.sousFin : T.sousN(4 - n);
       const droite = fini
         ? '<div class="er-chasse-badge"><img src="' + escapeHtml(C.image('badge', null, 120, 140)) + '" alt="" loading="lazy" decoding="async"><div><b>' + T.badgeNom + '</b><span>' + (finLe ? T.badgeLe + ' ' + escapeHtml(this._formatFrDate(finLe)) : '') + '</span></div></div>'
         : '<div class="er-chasse-jauge"><div class="er-chasse-jauge-n">' + n + '<small>/4</small></div><div class="er-chasse-segments">' + [1, 2, 3, 4].map((k) => '<i class="' + (trouves.includes(k) ? 'ok' : '') + '" style="--c:' + COUL[k] + '"></i>').join('') + '</div></div>';
@@ -12420,10 +12416,8 @@ if (!customElements.get('espace-rhum')) {
         return '<li class="er-chasse-carte' + (ok ? ' ok' : '') + '" style="--c:' + COUL[k] + '"><span class="er-chasse-n">' + k + '/4</span><img src="' + escapeHtml(C.image(k, 'visuel', 160, 200)) + '" alt="" loading="lazy" decoding="async"><div>' + texte + '</div></li>';
       }).join('') + '</ol>';
       const bouteille = '<svg viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-35 20 20)"><rect x="14" y="4" width="12" height="6" rx="2" fill="#b98b4a"/><path d="M15 10h10v4c4 2 6 6 6 11v9a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3v-9c0-5 2-9 6-11z" fill="#5DBFC0" opacity=".85"/><rect x="13" y="20" width="14" height="10" rx="1.5" fill="#F7F1E1" stroke="#a07a2c" stroke-width="1"/><path d="M16 23h8M16 26h6" stroke="#a07a2c" stroke-width="1.2" stroke-linecap="round"/></g></svg>';
-      const prochain = suiv ? '<div class="er-chasse-prochain">' + bouteille + '<small>' + (n ? T.prochain : T.commencer) + '</small><p>' + T.g[0] + escapeHtml(C.indice(suiv)) + T.g[1] + '</p></div>' : '';
-      const resolus = n
-        ? '<div><p class="er-chasse-mini">' + T.resolus + '</p><ul class="er-chasse-resolus">' + trouves.map((k) => '<li style="--c:' + COUL[k] + '"><i>' + k + '</i><em>' + T.g[0] + escapeHtml(C.indice(k)) + T.g[1] + '</em><span>' + escapeHtml(C.lieu(k)) + '</span></li>').join('') + '</ul></div>'
-        : '<p class="er-chasse-vide">' + T.vide + '</p>';
+      const prochain = suiv ? '<div class="er-chasse-prochain">' + bouteille + '<small>' + T.prochain + '</small><p>' + T.g[0] + escapeHtml(C.indice(suiv)) + T.g[1] + '</p></div>' : '';
+      const resolus = '<div><p class="er-chasse-mini">' + T.resolus + '</p><ul class="er-chasse-resolus">' + trouves.map((k) => '<li style="--c:' + COUL[k] + '"><i>' + k + '</i><em>' + T.g[0] + escapeHtml(C.indice(k)) + T.g[1] + '</em><span>' + escapeHtml(C.lieu(k)) + '</span></li>').join('') + '</ul></div>';
       const actions = '<div class="er-chasse-actions">' + (fini
         ? '<button type="button" class="er-chasse-btn" data-chasse="badge">' + T.badge + '</button>'
         : '<button type="button" class="er-chasse-btn" data-chasse="carnet">' + T.carnet + '</button>') + '</div>';
@@ -16347,7 +16341,8 @@ if (!customElements.get('espace-rhum')) {
 
       const iconInner = badgeIconInner(key);
       const rot = this._badgeRotation(key);
-      const displayName = (state === 'unlocked' || state === 'action') ? title : '???';
+       
+      const displayName = (state === 'unlocked' || state === 'action' || badge.revele === true) ? title : '???';
       const nameLen = displayName.length;
       const wrapCls = nameLen >= 20 ? ' er-badge-tile-name--wrap' : '';
 
@@ -16384,7 +16379,9 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-badge-tile-progress-text">${escapeHtml(label)}</div>
           </div>
         `;
-        ariaLabel = en ? `Badge to discover, progress ${t(label)}` : `Badge à découvrir, progression ${label}`;
+        ariaLabel = badge.revele === true
+          ? (en ? `Badge ${t(title)}, progress ${t(label)}` : `Badge ${title}, progression ${label}`)
+          : (en ? `Badge to discover, progress ${t(label)}` : `Badge à découvrir, progression ${label}`);
       } else if (state === 'action') {
          
          
@@ -16608,7 +16605,12 @@ if (!customElements.get('espace-rhum')) {
         '.er-badge-tile:not([data-state="action"]), .er-badge-tile-mini[data-badge-key]'
       );
       tiles.forEach(tile => {
-        const handler = () => this._openBadgeModal(tile.dataset.badgeKey);
+        const handler = () => {
+           
+          const bloc = tile.dataset.badgeKey === 'chasse-tymal' && tile.dataset.state === 'discovered' && this.querySelector('.er-chasse-place');
+          if (bloc && bloc.querySelector('.er-chasse')) { try { bloc.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) { bloc.scrollIntoView(); } return; }
+          this._openBadgeModal(tile.dataset.badgeKey);
+        };
         tile.addEventListener('click', handler);
         const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
         tile.addEventListener('keydown', keyHandler);
@@ -16624,8 +16626,6 @@ if (!customElements.get('espace-rhum')) {
           if (key === 'profil-complet') this._openProfilePrompt();
           else if (key === 'instagram') this._openInstaClaim();
           else if (key === 'newsletter') this.dispatchEvent(new CustomEvent('er-newsletter', { bubbles: true, composed: true }));
-           
-          else if (key === 'chasse-tymal') this.dispatchEvent(new CustomEvent('er-chasse', { bubbles: true, composed: true }));
         };
         tile.addEventListener('click', handler);
         const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
@@ -16735,7 +16735,7 @@ if (!customElements.get('espace-rhum')) {
        
        
        
-      const enClair = isUnlocked || state === 'action';
+      const enClair = isUnlocked || state === 'action' || badge.revele === true;
 
       const iconEl = modal.querySelector('.er-badge-modal-icon');
        

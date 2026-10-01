@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum ecf2270 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ecf2270";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 0703e5b | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="0703e5b";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2718,7 +2718,7 @@ const TEXTES = {
     premier: '<b>Vous avez trouvé TyMAL !</b> Trois autres se cachent sur le site : chaque trouvaille donne l’indice de la suivante.',
     numero: (n, r) => '<b>TyMAL numéro ' + n + ' !</b> ' + (r === 1 ? 'Plus qu’un à dénicher.' : 'Encore ' + r + ' à dénicher.'),
     prochain: 'Prochain indice', commencer: 'Pour commencer',
-    creer: 'Créer mon Espace Rhum', garder: 'et gardez vos trouvailles', recevoir: 'et récupérez votre badge exclusif',
+    creer: 'Créer mon Espace Rhum', garder: 'et garder mes trouvailles', recevoir: 'et récupérer mon badge exclusif',
     continuer: 'Continuer la chasse', voirChasse: 'Voir ma chasse dans mon Espace', voirBadge: 'Voir mon badge',
     fermer: 'Fermer', plusTard: 'Plus tard',
     bandeau: (r) => (r === 0 ? '🎉 Les quatre TyMAL sont trouvés !' : '👀 Vous avez trouvé TyMAL ! ' + (r === 1 ? 'Plus qu’un.' : 'Il en reste ' + r + '.')),
@@ -2738,7 +2738,7 @@ const TEXTES = {
     premier: '<b>You found TyMAL!</b> Three more are hiding on the site: each find gives the clue to the next.',
     numero: (n, r) => '<b>TyMAL number ' + n + '!</b> ' + (r === 1 ? 'Just one left to find.' : r + ' more to find.'),
     prochain: 'Next clue', commencer: 'To start',
-    creer: 'Create my Espace Rhum', garder: 'and keep your finds', recevoir: 'and claim your exclusive badge',
+    creer: 'Create my Espace Rhum', garder: 'and keep my finds', recevoir: 'and claim my exclusive badge',
     continuer: 'Keep hunting', voirChasse: 'See my hunt in my Espace', voirBadge: 'See my badge',
     fermer: 'Close', plusTard: 'Later',
     bandeau: (r) => (r === 0 ? '🎉 All four TyMALs found!' : '👀 You found TyMAL! ' + (r === 1 ? 'Just one left.' : r + ' left.')),
