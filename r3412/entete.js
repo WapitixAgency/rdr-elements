@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 79fbd1e | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="79fbd1e";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 9954979 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="9954979";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2779,7 +2779,7 @@ function brancherChasse(o) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && E.boite) fermerBoite(); });
   let tRedim = null;
   window.addEventListener('resize', () => { clearTimeout(tRedim); tRedim = setTimeout(bordsAccueil, 250); }, { passive: true });
-  E.api = { ouvert, trouve, accessible, attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
+  E.api = { ouvert, trouve, attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
   window.__rdrChasse = E.api;
   notifier();
   return E.api;
@@ -2814,9 +2814,12 @@ function lireApercu() {
 }
 function ouvert() { return !!(E && jeuValide(E.jeu) && (E.jeu.ouvert === true || E.apercu)); }
 function trouve(n) { return !!E && E.trouves.includes(Number(n)); }
- 
-function prochaine() { for (let k = 1; k <= 4; k++) if (!trouve(k)) return k; return null; }
-function accessible(n) { return trouve(n) || Number(n) === prochaine(); }
+
+function suivante(n) {
+  const depart = Number(n) || 0;
+  for (let k = 1; k <= 4; k++) { const c = ((depart - 1 + k + 4) % 4) + 1; if (!trouve(c)) return c; }
+  return null;
+}
 function sauver() { ecrireLocal(CLE, { trouves: E.trouves, envoyes: E.envoyes }); }
 function cachette(n) { return (E.jeu && E.jeu.cachettes || []).find((c) => c && c.n === Number(n)) || null; }
 function urlMedia(m, l, h) {
@@ -2904,7 +2907,7 @@ function onde(x, y) {
  
 function attraper(n, cible) {
   n = Number(n);
-  if (!ouvert() || !cachette(n) || !accessible(n)) return false;
+  if (!ouvert() || !cachette(n)) return false;
   if (trouve(n)) { ouvrir('carnet'); return true; }
   E.trouves = nums(E.trouves.concat(n));
   sauver();
@@ -2987,7 +2990,7 @@ function ouvrir(type, n) {
   const membre = E.membre === true;
   const espace = E.o.lien('/mon-espace-rhum');
   const dernier = n || (E.trouves.length ? E.trouves[E.trouves.length - 1] : 0);
-  const suiv = prochaine();
+  const suiv = suivante(dernier);
   const indice = suiv ? '<div class="rch-indice">' + BOUTEILLE + '<small>' + esc(type === 'carnet' && !E.trouves.length ? t.commencer : t.prochain) + '</small><p>' + t.guillemets[0] + esc(indiceDe(suiv)) + t.guillemets[1] + '</p></div>' : '';
   let corps = '';
   if (type === 'trouve') {
