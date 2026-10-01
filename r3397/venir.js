@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 4e7de43 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="4e7de43";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum b9dc64a | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="b9dc64a";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -589,6 +589,21 @@ rdr-venir .rv-hero__p{margin:18px 0 0;font-family:${POLICE_TEXTE};font-size:clam
 
 
 rdr-venir .rv-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:28px;}
+ 
+rdr-venir .rv-chasse{position:absolute;z-index:3;padding:0;margin:0;border:0;background:none;cursor:pointer;transition:left .5s cubic-bezier(.3,.8,.3,1),top .5s cubic-bezier(.3,.8,.3,1);-webkit-tap-highlight-color:transparent;}
+rdr-venir .rv-chasse img{display:block;width:100%;height:auto;pointer-events:none;user-select:none;transition:transform .25s;}
+rdr-venir .rv-chasse--gauche img{transform:scaleX(-1);}
+rdr-venir .rv-chasse--court{animation:rvChSaute .5s ease-in-out;}
+@keyframes rvChSaute{0%,100%{translate:0 0}50%{translate:0 -22px}}
+rdr-venir .rv-chasse--las img{animation:rvChSouffle 1.4s ease-in-out infinite;}
+@keyframes rvChSouffle{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.95) translateY(2px)}}
+rdr-venir .rv-chasse:focus-visible{outline:2px solid ${T.ambreVif};outline-offset:4px;border-radius:12px;}
+rdr-venir .rv-chasse-bulle{position:absolute;z-index:4;padding:6px 10px;border-radius:12px 12px 12px 3px;background:#fff;color:${T.marine};font-family:${POLICE_TEXTE};font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.25);opacity:0;transform:translateY(6px) scale(.9);transition:opacity .25s,transform .3s cubic-bezier(.2,1.35,.4,1);pointer-events:none;}
+rdr-venir .rv-chasse-bulle.rv-vu{opacity:1;transform:none;}
+rdr-venir .rv-chasse-poussiere{position:absolute;z-index:2;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);pointer-events:none;animation:rvChPoussiere .6s ease-out forwards;}
+@keyframes rvChPoussiere{from{transform:scale(.3);opacity:1}to{transform:scale(2.2);opacity:0}}
+rdr-venir .rv-chasse-goutte{position:absolute;z-index:4;font-size:16px;pointer-events:none;animation:rvChGoutte 1.2s ease-in infinite;}
+@keyframes rvChGoutte{0%{transform:translate(0,0);opacity:0}20%{opacity:1}100%{transform:translate(10px,26px);opacity:0}}
 rdr-venir .rv-hero__photo{position:relative;margin:0;border-radius:28px 6px 28px 6px;overflow:hidden;aspect-ratio:2.4/1;max-height:460px;background:${T.voile};box-shadow:0 40px 80px -40px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08);}
 rdr-venir .rv-hero__photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:60% 50%;opacity:0;transition:opacity .6s ease;will-change:transform;}
  
@@ -1060,7 +1075,12 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     }
 
     connectedCallback() {
-      if (this._initialise) return;
+       
+      if (!this._surChasse) {
+        this._surChasse = () => this._chasseTymal();
+        window.addEventListener('rdr-chasse', this._surChasse);
+      }
+      if (this._initialise) { this._chasseTymal(); return; }
       this._initialise = true;
       if (!document.getElementById('rv-style')) {
         const s = document.createElement('style');
@@ -1097,6 +1117,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     disconnectedCallback() {
       this._retirerFlottant();
       this._retirerFenetre();
+      this._chasseRetirer();
+      if (this._surChasse) { window.removeEventListener('rdr-chasse', this._surChasse); this._surChasse = null; }
+      if (this._chasseRedim) { window.removeEventListener('resize', this._chasseRedim); this._chasseRedim = null; }
       if (this._minuteurSim) { clearTimeout(this._minuteurSim); this._minuteurSim = null; }
       if (this._minuteurSquelette) { clearTimeout(this._minuteurSquelette); this._minuteurSquelette = null; }
       if (this._ioReveles) { this._ioReveles.disconnect(); this._ioReveles = null; }
@@ -1334,6 +1357,146 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
         if (img.complete && img.naturalWidth) prete();
         else { img.addEventListener('load', prete, { once: true }); img.addEventListener('error', prete, { once: true }); }
       }
+      this._chasseRetirer();
+      this._chasseTymal();
+    }
+
+    
+
+
+
+
+
+
+
+
+    _chasseTymal() {
+      const bloc = this.querySelector('[data-bloc="hero"]');
+      const texte = bloc && bloc.querySelector('.rv-hero__texte');
+      const C = window.__rdrChasse;
+      if (!texte || !C || !C.ouvert()) { this._chasseRetirer(); return; }
+      if (this._fuyard && this._fuyard.f.isConnected) { if (C.trouve(3) && !this._fuyard.las) this._chasseLas(true); return; }
+      const pc = (() => { try { return window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { return false; } })();
+      let reduit = false;
+      try { reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { reduit = false; }
+      const T = pc ? 118 : 80;
+      const pose = C.image(3, 'pose', T * 2, T * 2), poseLas = C.image(3, 'poseBis', T * 2, T * 2);
+      if (!pose || !poseLas) return;
+      const en = this._lang() === 'en';
+      const F = {
+        bloc, texte, T, pc, poseLas, i: 0, fuites: 0, las: false, vient: false,
+        max: pc ? 4 : 2,
+        spots: pc ? [[0.78, 0.08], [0.49, 0.78], [0.67, 0.36], [0.84, 0.74], [0.37, 0.04]] : [[0.75, 0.1], [0.77, 0.55], [0.09, 0.76]],
+        dits: en ? { defi: pc ? 'Catch me if you can!' : 'Catch me!', rate: ['Missed!', 'Too slow!', 'Almost!', 'Missed again!'], fin: 'Phew… fine, you got me!' }
+                 : { defi: pc ? 'Même pas cap !' : 'Attrape-moi !', rate: ['Raté !', 'Trop lent !', 'Presque !', 'Encore raté !'], fin: 'Pff… d’accord, vous m’avez eu !' }
+      };
+      F.f = document.createElement('button');
+      F.f.type = 'button';
+      F.f.className = 'rv-chasse';
+      F.f.style.width = T + 'px';
+      F.f.setAttribute('aria-label', 'TyMAL');
+      F.f.innerHTML = '<img src="' + esc(pose) + '" alt="" draggable="false">';
+      F.bulle = document.createElement('span');
+      F.bulle.className = 'rv-chasse-bulle';
+      F.bulle.setAttribute('aria-live', 'polite');
+      bloc.append(F.f, F.bulle);
+      this._fuyard = F;
+      this._chassePlacer();
+      F.f.addEventListener('click', () => {
+        if (C.trouve(3)) { C.carnet(); return; }
+        if (!F.las) { this._chasseFuir(); return; }
+        F.bulle.classList.remove('rv-vu');
+        (F.gouttes || []).forEach((g) => g.remove());
+        C.attraper(3, F.f);
+      });
+      if (C.trouve(3) || reduit) this._chasseLas(false);
+      else {
+        if (pc) {
+          F.approche = (ev) => {
+            if (F.las || F.vient) return;
+            const r = F.f.getBoundingClientRect();
+            if (Math.hypot(ev.clientX - (r.left + r.width / 2), ev.clientY - (r.top + r.height / 2)) < T * 1.35) {
+              F.vient = true; this._chasseFuir(); setTimeout(() => { F.vient = false; }, 650);
+            }
+          };
+          bloc.addEventListener('pointermove', F.approche);
+        }
+        F.tDefi = setTimeout(() => this._chasseDire(F.dits.defi, 1800), 1400);
+      }
+      if (!this._chasseRedim) {
+        this._chasseRedim = () => this._chassePlacer();
+        window.addEventListener('resize', this._chasseRedim, { passive: true });
+      }
+    }
+    _chassePlacer() {
+      const F = this._fuyard;
+      if (!F || !F.f.isConnected) return;
+      const rb = F.bloc.getBoundingClientRect(), rt = F.texte.getBoundingClientRect();
+      const [x, y] = F.spots[F.i];
+      const l = Math.max(8, Math.min(rb.width - F.T - 8, rb.width * x - F.T / 2));
+      F.f.style.left = Math.round(l) + 'px';
+      F.f.style.top = Math.round(Math.max(12, rt.top - rb.top + rt.height * y - F.T / 2)) + 'px';
+    }
+    _chasseDire(texte, ms) {
+      const F = this._fuyard;
+      if (!F) return;
+      F.bulle.textContent = texte;
+      
+
+      const haut = parseFloat(F.f.style.top);
+      const large = F.bloc.getBoundingClientRect().width;
+      F.bulle.style.left = Math.max(8, Math.min(large - 250, parseFloat(F.f.style.left) + F.T * 0.55)) + 'px';
+      F.bulle.style.top = (haut < 40 ? haut + F.T + 4 : haut - 28) + 'px';
+      F.bulle.classList.add('rv-vu');
+      clearTimeout(F.tBulle);
+      if (ms) F.tBulle = setTimeout(() => F.bulle.classList.remove('rv-vu'), ms);
+    }
+    _chasseFuir() {
+      const F = this._fuyard;
+      if (!F || F.las) return;
+      clearTimeout(F.tDefi);
+      const p = document.createElement('span');
+      p.className = 'rv-chasse-poussiere';
+      p.style.left = (parseFloat(F.f.style.left) + F.T / 2 - 20) + 'px';
+      p.style.top = (parseFloat(F.f.style.top) + F.T - 30) + 'px';
+      F.bloc.appendChild(p);
+      setTimeout(() => p.remove(), 700);
+      const avant = F.spots[F.i][0];
+      F.i = (F.i + 1) % F.spots.length;
+      F.f.classList.toggle('rv-chasse--gauche', F.spots[F.i][0] < avant);
+      F.f.classList.remove('rv-chasse--court'); void F.f.offsetWidth; F.f.classList.add('rv-chasse--court');
+      this._chassePlacer();
+      F.fuites += 1;
+      F.bulle.classList.remove('rv-vu');
+      if (F.fuites >= F.max) setTimeout(() => this._chasseLas(true), 520);
+      else setTimeout(() => this._chasseDire(F.dits.rate[F.fuites - 1] || F.dits.rate[0], 1200), 480);
+    }
+    _chasseLas(parler) {
+      const F = this._fuyard;
+      if (!F || F.las) return;
+      F.las = true;
+      F.f.classList.add('rv-chasse--las');
+      F.f.querySelector('img').src = F.poseLas;
+      if (!parler) return;
+      F.gouttes = [0, 1].map((k) => {
+        const g = document.createElement('span');
+        g.className = 'rv-chasse-goutte';
+        g.textContent = '💦';
+        g.style.left = (parseFloat(F.f.style.left) + F.T * (0.2 + k * 0.5)) + 'px';
+        g.style.top = (parseFloat(F.f.style.top) - 6) + 'px';
+        g.style.animationDelay = (k * 0.5) + 's';
+        F.bloc.appendChild(g);
+        return g;
+      });
+      this._chasseDire(F.dits.fin);
+    }
+    _chasseRetirer() {
+      const F = this._fuyard;
+      if (!F) return;
+      clearTimeout(F.tDefi); clearTimeout(F.tBulle);
+      if (F.approche) F.bloc.removeEventListener('pointermove', F.approche);
+      [F.f, F.bulle].concat(F.gouttes || []).forEach((n) => n && n.remove());
+      this._fuyard = null;
     }
 
     

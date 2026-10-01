@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 4e7de43 | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="4e7de43";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum b9dc64a | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="b9dc64a";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1331,7 +1331,9 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
 
     'fidele':            'https://static.wixstatic.com/media/df962b_ec370a13e64d4fc8bdf6193fd8b6e135~mv2.png',
     'profil-complet':    'https://static.wixstatic.com/media/df962b_252a12cbd3d8467bbe4c21905d730aed~mv2.png',
-    'instagram':         'https://static.wixstatic.com/media/df962b_dda7012dccd14ff0b438a9d03af55442~mv2.png'
+    'instagram':         'https://static.wixstatic.com/media/df962b_dda7012dccd14ff0b438a9d03af55442~mv2.png',
+     
+    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png'
   };
 
   function esc(s) {

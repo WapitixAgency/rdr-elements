@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 4e7de43 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="4e7de43";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum b9dc64a | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="b9dc64a";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -7139,6 +7139,7 @@ const SL_DICT = {
     reset: 'Réinitialiser ×',
     view_grid: 'Vue grille',
     fab_open_aria: 'Ouvrir les filtres',
+    chasse_yeux: 'Deux yeux dans le noir',
     close: 'Fermer',
     empty_title: 'Cap dans le vide',
     empty_sub: 'Aucun skipper ne correspond à ces filtres',
@@ -7168,6 +7169,7 @@ const SL_DICT = {
     reset: 'Reset ×',
     view_grid: 'Grid view',
     fab_open_aria: 'Open filters',
+    chasse_yeux: 'Two eyes in the dark',
     close: 'Close',
     empty_title: 'Nothing on the horizon',
     empty_sub: 'No skipper matches these filters',
@@ -7302,6 +7304,10 @@ class SkippersList extends HTMLElement {
       };
       window.addEventListener('pageshow', this._onPageShow);
     }
+    if (!this._surChasse) {
+      this._surChasse = () => this._chasseTymal();
+      window.addEventListener('rdr-chasse', this._surChasse);
+    }
     this._renderShell();
     this._shellReady = true;
     this._appliedLang = this._lang();
@@ -7331,6 +7337,8 @@ class SkippersList extends HTMLElement {
   disconnectedCallback() {
     this._closeDrawer();
     if (this._onPageShow) { window.removeEventListener('pageshow', this._onPageShow); this._onPageShow = null; }
+    if (this._surChasse) { window.removeEventListener('rdr-chasse', this._surChasse); this._surChasse = null; }
+    this._chasseRegard(null);
     this._cleanups.forEach(fn => fn());
     this._cleanups = [];
     if (this._counterRaf) cancelAnimationFrame(this._counterRaf);
@@ -7856,6 +7864,21 @@ class SkippersList extends HTMLElement {
       .sl-fab-badge { display:none; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:#5DBFC0; color:#0A1A35; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:800; line-height:1; }
       .sl-fab-badge.show { display:inline-flex; }
 
+      
+
+
+      .sl-chasse { position:absolute; right:14%; bottom:0; z-index:2; width:96px; height:120px; pointer-events:none; }
+      .sl-chasse-yeux { position:absolute; left:8px; bottom:-15px; display:flex; gap:6px; padding:0; border:0; background:none; cursor:pointer; pointer-events:auto; -webkit-tap-highlight-color:transparent; transition:opacity .2s; }
+      .sl-chasse-yeux:focus-visible { outline:2px solid #FCDD00; outline-offset:4px; border-radius:12px; }
+      .sl-chasse-oeil { position:relative; width:30px; height:36px; border-radius:50%; background:#fff; overflow:hidden; box-shadow:inset 0 -4px 0 rgba(0,0,0,.12),0 0 18px rgba(255,255,255,.35); animation:sl-cligne 4.8s infinite; }
+      .sl-chasse-oeil b { position:absolute; left:50%; top:50%; width:14px; height:16px; margin:-8px 0 0 -7px; border-radius:50%; background:#101522; transition:transform .12s linear; }
+      .sl-chasse-oeil b::after { content:''; position:absolute; left:3px; top:3px; width:5px; height:5px; border-radius:50%; background:#fff; }
+      @keyframes sl-cligne { 0%,46%,50%,100% { transform:scaleY(1); } 48% { transform:scaleY(.08); } }
+      .sl-chasse-surgit { position:absolute; left:0; bottom:-6px; width:96px; height:96px; object-fit:contain; transform:translateY(90%); opacity:0; transition:transform .6s cubic-bezier(.2,1.35,.4,1),opacity .2s; cursor:pointer; }
+      .sl-chasse--hop .sl-chasse-yeux, .sl-chasse--pris .sl-chasse-yeux { opacity:0; pointer-events:none; }
+      .sl-chasse--hop .sl-chasse-surgit, .sl-chasse--pris .sl-chasse-surgit { transform:none; opacity:1; pointer-events:auto; }
+      @media (max-width:860px) { .sl-chasse { right:auto; left:24%; } .sl-chasse-oeil { width:26px; height:31px; } .sl-chasse-yeux { bottom:-13px; } }
+
        
       @media (min-width:1401px) { .sl-grid { grid-template-columns:repeat(5,1fr); } .sl-skeleton-grid { grid-template-columns:repeat(5,1fr); } }
       @media (max-width:1100px) { .sl-inner { padding:40px 24px 60px; } }
@@ -7981,11 +8004,68 @@ class SkippersList extends HTMLElement {
     if (!total) {
       content.innerHTML = `<div class="sl-empty"><div class="sl-empty-boat">⛵</div><div class="sl-empty-title">${this._t('empty_title')}</div><div class="sl-empty-sub">${this._t('empty_sub')}</div><button class="sl-empty-reset" id="sl-empty-reset">${this._t('empty_reset')}</button></div>`;
       content.querySelector('#sl-empty-reset')?.addEventListener('click', () => this._resetAll());
+      this._chasseTymal();
       return;
     }
     const page = Math.min(this._page, Math.max(0, Math.ceil(total / PAGE_SIZE) - 1));
     const items = this._filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
     content.innerHTML = `<div class="sl-grid">${items.map((s,i) => this._renderCard(s,i)).join('')}</div>`;
+    this._chasseTymal();
+  }
+
+  
+
+
+
+
+
+  _chasseTymal() {
+    const racine = this.querySelector('.sl-root');
+    const C = window.__rdrChasse;
+    const voulu = !!(racine && C && C.ouvert() && this._activeClasse === 'Ocean Fifty' && this._filtered.length);
+    let z = this.querySelector('.sl-chasse');
+    if (!voulu) { if (z) z.remove(); this._chasseRegard(null); return; }
+    if (z) { z.classList.toggle('sl-chasse--pris', C.trouve(2)); return; }
+    const pose = C.image(2, 'pose', 240, 240);
+    if (!pose) return;
+    z = document.createElement('div');
+    z.className = 'sl-chasse' + (C.trouve(2) ? ' sl-chasse--pris' : '');
+    z.innerHTML = `<img class="sl-chasse-surgit" src="${escapeHTML(pose)}" alt="" draggable="false"><button type="button" class="sl-chasse-yeux" aria-label="${escapeHTML(this._t('chasse_yeux'))}"><span class="sl-chasse-oeil"><b></b></span><span class="sl-chasse-oeil"><b></b></span></button>`;
+    racine.appendChild(z);
+    const surgit = z.querySelector('.sl-chasse-surgit');
+    z.querySelector('.sl-chasse-yeux').addEventListener('click', () => {
+      if (C.trouve(2)) { C.carnet(); return; }
+      z.classList.add('sl-chasse--hop');
+      setTimeout(() => C.attraper(2, surgit), 450);
+    });
+    surgit.addEventListener('click', () => C.carnet());
+    this._chasseRegard(z);
+  }
+  _chasseRegard(z) {
+    if (this._chasseSuivre) { window.removeEventListener('pointermove', this._chasseSuivre); this._chasseSuivre = null; }
+    clearTimeout(this._chasseErrer);
+    if (!z) return;
+    const pupilles = [...z.querySelectorAll('.sl-chasse-oeil b')];
+    const regarder = (px, py) => pupilles.forEach((b) => {
+      const r = b.parentNode.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const a = Math.atan2(py - cy, px - cx), d = Math.min(1, Math.hypot(px - cx, py - cy) / 200);
+      b.style.transform = `translate(${Math.cos(a) * 7 * d}px,${Math.sin(a) * 8 * d}px)`;
+    });
+    let fin = false;
+    try { fin = window.matchMedia('(pointer: fine)').matches; } catch (e) { fin = false; }
+    if (fin) {
+      this._chasseSuivre = (ev) => { if (z.isConnected) regarder(ev.clientX, ev.clientY); };
+      window.addEventListener('pointermove', this._chasseSuivre, { passive: true });
+    } else {
+      const errer = () => {
+        if (!z.isConnected) return;
+        const a = Math.random() * Math.PI * 2;
+        pupilles.forEach((b) => { b.style.transform = `translate(${Math.cos(a) * 6}px,${Math.sin(a) * 7}px)`; });
+        this._chasseErrer = setTimeout(errer, 700 + Math.random() * 900);
+      };
+      errer();
+    }
   }
 
   _renderCard(s, i) {

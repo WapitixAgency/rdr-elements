@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 4e7de43 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="4e7de43";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum b9dc64a | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="b9dc64a";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -709,7 +709,9 @@ if (!customElements.get('espace-rhum')) {
     'profil-complet':    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>',
     'instagram':         '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
      
-    'newsletter':        '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'
+    'newsletter':        '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+     
+    'chasse-tymal':      '<path d="M12 22c4.4 0 7-3.1 7-7.5C19 9.3 15.9 2 12 2S5 9.3 5 14.5C5 18.9 7.6 22 12 22z"/>'
   };
    
   const BADGE_ICON_FALLBACK = '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>';
@@ -749,7 +751,12 @@ if (!customElements.get('espace-rhum')) {
 
     'fidele':            'https://static.wixstatic.com/media/df962b_ec370a13e64d4fc8bdf6193fd8b6e135~mv2.png',
     'profil-complet':    'https://static.wixstatic.com/media/df962b_252a12cbd3d8467bbe4c21905d730aed~mv2.png',
-    'instagram':         'https://static.wixstatic.com/media/df962b_dda7012dccd14ff0b438a9d03af55442~mv2.png'
+    'instagram':         'https://static.wixstatic.com/media/df962b_dda7012dccd14ff0b438a9d03af55442~mv2.png',
+    
+
+
+
+    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png'
   };
 
    
@@ -1153,6 +1160,12 @@ if (!customElements.get('espace-rhum')) {
     "Abonne-toi avec l'e-mail de ton compte.": 'Subscribe with your account email.',
     "Bienvenue dans Rhum Express ! L'actu de la course arrive dans ta boîte.": 'Welcome to Rhum Express! Race news is heading to your inbox.',
     "M'abonner": 'Subscribe',
+     
+    'Chasseur de TyMAL': 'TyMAL Hunter',
+    'Les quatre TyMAL cachés sur le site': 'The four TyMALs hidden on the site',
+    'Quatre TyMAL se cachent sur le site. Chaque trouvaille donne l’indice de la suivante.': 'Four TyMALs are hiding on the site. Each find gives the clue to the next.',
+    'Les quatre TyMAL sont à toi. Chasseur confirmé !': 'All four TyMALs are yours. A true hunter!',
+    'Mon carnet': 'My logbook',
      
     'Tu as franchi le pas. Bienvenue dans l\'aventure.': 'You took the plunge. Welcome to the adventure.',
     'Ton assiduité paie. Dix jours d\'aventure ensemble.': 'Your dedication pays off. Ten days of adventure together.',
@@ -16413,6 +16426,8 @@ if (!customElements.get('espace-rhum')) {
           if (key === 'profil-complet') this._openProfilePrompt();
           else if (key === 'instagram') this._openInstaClaim();
           else if (key === 'newsletter') this.dispatchEvent(new CustomEvent('er-newsletter', { bubbles: true, composed: true }));
+           
+          else if (key === 'chasse-tymal') this.dispatchEvent(new CustomEvent('er-chasse', { bubbles: true, composed: true }));
         };
         tile.addEventListener('click', handler);
         const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
