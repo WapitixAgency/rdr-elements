@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 4dadcb0 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="4dadcb0";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 79fbd1e | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="79fbd1e";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1374,7 +1374,8 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const bloc = this.querySelector('[data-bloc="hero"]');
       const texte = bloc && bloc.querySelector('.rv-hero__texte');
       const C = window.__rdrChasse;
-      if (!texte || !C || !C.ouvert()) { this._chasseRetirer(); return; }
+       
+      if (!texte || !C || !C.ouvert() || !C.accessible(3)) { this._chasseRetirer(); return; }
       if (this._fuyard && this._fuyard.f.isConnected) { if (C.trouve(3) && !this._fuyard.las) this._chasseLas(true); return; }
       const pc = (() => { try { return window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { return false; } })();
       let reduit = false;

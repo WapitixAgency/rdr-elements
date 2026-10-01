@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 4dadcb0 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="4dadcb0";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 79fbd1e | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="79fbd1e";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -8022,7 +8022,8 @@ class SkippersList extends HTMLElement {
   _chasseTymal() {
     const racine = this.querySelector('.sl-root');
     const C = window.__rdrChasse;
-    const voulu = !!(racine && C && C.ouvert() && this._activeClasse === 'Ocean Fifty' && this._filtered.length);
+     
+    const voulu = !!(racine && C && C.ouvert() && C.accessible(2) && this._activeClasse === 'Ocean Fifty' && this._filtered.length);
     let z = this.querySelector('.sl-chasse');
     if (!voulu) { if (z) z.remove(); this._chasseRegard(null); return; }
     if (z) { z.classList.toggle('sl-chasse--pris', C.trouve(2)); return; }

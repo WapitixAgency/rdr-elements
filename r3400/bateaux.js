@@ -1,5 +1,5 @@
-/* rdr-elements bateaux | source route-du-rhum 4dadcb0 | rdr-bateaux.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="4dadcb0";performance.mark("rdr-elements:bateaux")}catch(e){}
+/* rdr-elements bateaux | source route-du-rhum 79fbd1e | rdr-bateaux.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["bateaux"]="79fbd1e";performance.mark("rdr-elements:bateaux")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-bateaux")) return;
@@ -289,7 +289,8 @@ function chasseRetirer() {
 }
 function chasseMat(i, auto) {
   const C = window.__rdrChasse;
-  if (chasseClasse !== 'imoca' || i !== 0 || !C || !C.ouvert()) return;
+   
+  if (chasseClasse !== 'imoca' || i !== 0 || !C || !C.ouvert() || !C.accessible(4)) return;
   if (auto && !C.trouve(4)) return;
   const li = hote.querySelector('.piece[data-i="0"]');
   if (!li || li.querySelector('.perche')) return;

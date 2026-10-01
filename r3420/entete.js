@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 4dadcb0 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="4dadcb0";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 79fbd1e | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="79fbd1e";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2714,17 +2714,17 @@ const COULEURS = { 1: '#5DBFC0', 2: '#56BCF6', 3: '#FCF150', 4: '#EFA253' };
 const TEXTES = {
   fr: {
     lieux: { 1: 'Accueil', 2: 'Skippers', 3: 'Se rendre au village', 4: 'Bateaux' },
-    trouve: 'Trouvé <em>!</em>', guillemets: ['« ', ' »'],
+    trouve: 'Trouvé <em>!</em>', guillemets: ['«\u00a0', '\u00a0»'],
     premier: '<b>Vous avez trouvé TyMAL !</b> Trois autres se cachent sur le site : chaque trouvaille donne l’indice de la suivante.',
     numero: (n, r) => '<b>TyMAL numéro ' + n + ' !</b> ' + (r === 1 ? 'Plus qu’un à dénicher.' : 'Encore ' + r + ' à dénicher.'),
     prochain: 'Prochain indice', commencer: 'Pour commencer',
-    creer: 'Créer mon Espace Rhum', garder: 'et gardez vos trouvailles', recevoir: 'et recevez le badge',
+    creer: 'Créer mon Espace Rhum', garder: 'et gardez vos trouvailles', recevoir: 'et récupérez votre badge exclusif',
     continuer: 'Continuer la chasse', voirChasse: 'Voir ma chasse dans mon Espace', voirBadge: 'Voir mon badge',
     fermer: 'Fermer', plusTard: 'Plus tard',
     bandeau: (r) => (r === 0 ? '🎉 Les quatre TyMAL sont trouvés !' : '👀 Vous avez trouvé TyMAL ! ' + (r === 1 ? 'Plus qu’un.' : 'Il en reste ' + r + '.')),
     finSur: 'Chasse terminée', finTitre: 'Les quatre <em>TyMAL !</em>', ruban: 'Chasseur de TyMAL',
-    finMembre: '<b>Badge débloqué.</b> Il vous attend dans votre Espace Rhum et vous fait monter au classement.',
-    finVisiteur: '<b>Badge débloqué.</b> Créez votre Espace Rhum pour le recevoir : vos quatre trouvailles y sont déjà.',
+    finMembre: '<b>Félicitations, vous avez reçu votre badge !</b> «\u00a0Chasseur de TyMAL\u00a0» est disponible dans votre Espace Rhum.',
+    finVisiteur: '<b>Félicitations, vous avez trouvé les quatre TyMAL !</b> Créez votre Espace Rhum pour récupérer votre badge exclusif «\u00a0Chasseur de TyMAL\u00a0»\u00a0: vos quatre trouvailles vous y attendent.',
     carnetSur: 'Ma chasse à TyMAL', surQuatre: (n) => n + ' <em>sur 4</em>', termine: 'Chasse <em>terminée</em>',
     carnetVide: '<b>Quatre TyMAL se cachent sur le site.</b> Chaque trouvaille donne l’indice de la suivante, et les quatre valent un badge dans votre Espace Rhum.',
     carnetFini: 'Vous avez déniché les quatre. Le badge <b>Chasseur de TyMAL</b> est à vous.',
@@ -2738,13 +2738,13 @@ const TEXTES = {
     premier: '<b>You found TyMAL!</b> Three more are hiding on the site: each find gives the clue to the next.',
     numero: (n, r) => '<b>TyMAL number ' + n + '!</b> ' + (r === 1 ? 'Just one left to find.' : r + ' more to find.'),
     prochain: 'Next clue', commencer: 'To start',
-    creer: 'Create my Espace Rhum', garder: 'and keep your finds', recevoir: 'and get the badge',
+    creer: 'Create my Espace Rhum', garder: 'and keep your finds', recevoir: 'and claim your exclusive badge',
     continuer: 'Keep hunting', voirChasse: 'See my hunt in my Espace', voirBadge: 'See my badge',
     fermer: 'Close', plusTard: 'Later',
     bandeau: (r) => (r === 0 ? '🎉 All four TyMALs found!' : '👀 You found TyMAL! ' + (r === 1 ? 'Just one left.' : r + ' left.')),
     finSur: 'Hunt complete', finTitre: 'All four <em>TyMALs!</em>', ruban: 'TyMAL Hunter',
-    finMembre: '<b>Badge unlocked.</b> It is waiting in your Espace Rhum and moves you up the rankings.',
-    finVisiteur: '<b>Badge unlocked.</b> Create your Espace Rhum to receive it: your four finds are already there.',
+    finMembre: '<b>Congratulations, you have earned your badge!</b> “TyMAL Hunter” is waiting in your Espace Rhum.',
+    finVisiteur: '<b>Congratulations, you found all four TyMALs!</b> Create your Espace Rhum to claim your exclusive “TyMAL Hunter” badge: your four finds are waiting for you there.',
     carnetSur: 'My TyMAL hunt', surQuatre: (n) => n + ' <em>of 4</em>', termine: 'Hunt <em>complete</em>',
     carnetVide: '<b>Four TyMALs are hiding on the site.</b> Each find gives the clue to the next, and all four earn a badge in your Espace Rhum.',
     carnetFini: 'You tracked down all four. The <b>TyMAL Hunter</b> badge is yours.',
@@ -2779,7 +2779,7 @@ function brancherChasse(o) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && E.boite) fermerBoite(); });
   let tRedim = null;
   window.addEventListener('resize', () => { clearTimeout(tRedim); tRedim = setTimeout(bordsAccueil, 250); }, { passive: true });
-  E.api = { ouvert, trouve, attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
+  E.api = { ouvert, trouve, accessible, attraper, carnet: () => ouvrir('carnet'), image, lang: langue };
   window.__rdrChasse = E.api;
   notifier();
   return E.api;
@@ -2814,6 +2814,9 @@ function lireApercu() {
 }
 function ouvert() { return !!(E && jeuValide(E.jeu) && (E.jeu.ouvert === true || E.apercu)); }
 function trouve(n) { return !!E && E.trouves.includes(Number(n)); }
+ 
+function prochaine() { for (let k = 1; k <= 4; k++) if (!trouve(k)) return k; return null; }
+function accessible(n) { return trouve(n) || Number(n) === prochaine(); }
 function sauver() { ecrireLocal(CLE, { trouves: E.trouves, envoyes: E.envoyes }); }
 function cachette(n) { return (E.jeu && E.jeu.cachettes || []).find((c) => c && c.n === Number(n)) || null; }
 function urlMedia(m, l, h) {
@@ -2901,7 +2904,7 @@ function onde(x, y) {
  
 function attraper(n, cible) {
   n = Number(n);
-  if (!ouvert() || !cachette(n)) return false;
+  if (!ouvert() || !cachette(n) || !accessible(n)) return false;
   if (trouve(n)) { ouvrir('carnet'); return true; }
   E.trouves = nums(E.trouves.concat(n));
   sauver();
@@ -2955,8 +2958,6 @@ function retour(r) {
  
 const X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const BOUTEILLE = '<svg class="rch-bouteille" viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-35 20 20)"><rect x="14" y="4" width="12" height="6" rx="2" fill="#b98b4a"/><path d="M15 10h10v4c4 2 6 6 6 11v9a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3v-9c0-5 2-9 6-11z" fill="#5DBFC0" opacity=".85"/><rect x="13" y="20" width="14" height="10" rx="1.5" fill="#F7F1E1" stroke="#a07a2c" stroke-width="1"/><path d="M16 23h8M16 26h6" stroke="#a07a2c" stroke-width="1.2" stroke-linecap="round"/></g></svg>';
- 
-function suivante(n) { for (let k = 1; k <= 4; k++) { const c = ((n - 1 + k) % 4) + 1; if (!trouve(c)) return c; } return null; }
 function telephone() { return window.innerWidth <= LARGEUR_BORDS; }
 function indiceDe(n) {
   const c = cachette(n);
@@ -2986,7 +2987,7 @@ function ouvrir(type, n) {
   const membre = E.membre === true;
   const espace = E.o.lien('/mon-espace-rhum');
   const dernier = n || (E.trouves.length ? E.trouves[E.trouves.length - 1] : 0);
-  const suiv = dernier ? suivante(dernier) : 1;
+  const suiv = prochaine();
   const indice = suiv ? '<div class="rch-indice">' + BOUTEILLE + '<small>' + esc(type === 'carnet' && !E.trouves.length ? t.commencer : t.prochain) + '</small><p>' + t.guillemets[0] + esc(indiceDe(suiv)) + t.guillemets[1] + '</p></div>' : '';
   let corps = '';
   if (type === 'trouve') {
