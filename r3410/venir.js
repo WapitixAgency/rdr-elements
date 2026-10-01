@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum cd7d859 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="cd7d859";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 4dadcb0 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="4dadcb0";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1386,7 +1386,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       const F = {
         bloc, texte, T, pc, poseLas, i: 0, fuites: 0, las: false, vient: false,
         max: pc ? 4 : 2,
-        spots: pc ? [[0.78, 0.08], [0.49, 0.78], [0.67, 0.36], [0.84, 0.74], [0.37, 0.04]] : [[0.75, 0.1], [0.77, 0.55], [0.09, 0.76]],
+        spots: pc ? [[0.78, 0.08], [0.49, 0.78], [0.67, 0.36], [0.84, 0.74], [0.37, 0.04]] : [[0.75, 0.1], [0.77, 0.55], [0.86, 0.36]],
         dits: en ? { defi: pc ? 'Catch me if you can!' : 'Catch me!', rate: ['Missed!', 'Too slow!', 'Almost!', 'Missed again!'], fin: 'Phew… fine, you got me!' }
                  : { defi: pc ? 'Même pas cap !' : 'Attrape-moi !', rate: ['Raté !', 'Trop lent !', 'Presque !', 'Encore raté !'], fin: 'Pff… d’accord, vous m’avez eu !' }
       };
