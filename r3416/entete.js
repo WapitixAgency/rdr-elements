@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum bca7ac2 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="bca7ac2";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum fdd18b1 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="fdd18b1";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2703,6 +2703,8 @@ const __chasse = (function () {
 const CLE = 'rdrChasseTymalV1';
 const CLE_JEU = 'rdrChasseTymalJeuV1:';
 const CLE_APERCU = 'rdrChasseTymalApercuV1';
+const CLE_ETAT = 'rdrChasseTymalEtatV1';
+const ETAT_MS = 12 * 3600 * 1000;
 const JEU_MS = 30 * 60 * 1000;
 
 const RELANCES_MS = [0, 1500, 3500, 6000, 10000, 15000];
@@ -2766,7 +2768,7 @@ let E = null;
 
 function brancherChasse(o) {
   if (E) { E.o = o; return E.api; }
-  E = { o, jeu: null, jeuFrais: false, attenteJeu: null, membre: null, envoi: null, boite: null, bords: null, connexion: null };
+  E = { o, jeu: null, jeuFrais: false, attenteJeu: null, membre: null, envoi: null, etat: null, boite: null, bords: null, connexion: null, debut: Date.now() };
   const memo = lireLocal(CLE, {}) || {};
   E.trouves = nums(memo.trouves);
   E.envoyes = nums(memo.envoyes).filter((n) => E.trouves.includes(n));
@@ -2806,10 +2808,14 @@ function attributChasse(nom, val) {
     if (E.attenteJeu) { E.attenteJeu.forEach(clearTimeout); E.attenteJeu = null; }
     ecrireLocal(CLE_JEU + langue(), { t: Date.now(), v: j });
     notifier();
+    demanderEtat();
   } else if (nom === 'chasse-membre') {
     E.membre = val === 'oui';
-    if (E.membre) synchroniser();
-  } else if (nom === 'chasse-retour') retour(lireJSON(val, null));
+    if (E.membre) { synchroniser(); demanderEtat(); }
+  } else if (nom === 'chasse-retour') {
+    const r = lireJSON(val, null);
+    if (r && E.etat && r.id === E.etat.id) etatRecu(r); else retour(r);
+  }
 }
 
 function langue() { return E && E.o && E.o.lang() === 'en' ? 'en' : 'fr'; }
@@ -2877,7 +2883,8 @@ function lienHub(el) {
 function notifier() {
   document.querySelectorAll(HUB).forEach(lienHub);
   const racine = document.documentElement;
-  const montrer = ouvert() && E.trouves.length > 0;
+   
+  const montrer = ouvert() && E.trouves.length > 0 && E.trouves.length < 4;
   if (montrer) { racine.setAttribute('data-rch', String(E.trouves.length)); racine.style.setProperty('--rch-n', '"' + E.trouves.length + '/4"'); }
   else racine.removeAttribute('data-rch');
   bordsAccueil();
@@ -2923,7 +2930,10 @@ function bordsAccueil() {
 
   const guetter = () => {
     if (!E.bords) return;
-    const visible = window.scrollY < window.innerHeight * 0.55 && document.visibilityState !== 'hidden' && !E.boite;
+    
+
+    const attente = (E.membre === null && Date.now() - E.debut < 8000) || (E.etat && E.etat.enCours);
+    const visible = window.scrollY < window.innerHeight * 0.55 && document.visibilityState !== 'hidden' && !E.boite && !attente;
     if (visible) {
       const b = E.bords.els[E.bords.k++ % 2];
       b.classList.add('rch-guette');
@@ -2992,6 +3002,25 @@ function retour(r) {
     window.dispatchEvent(new CustomEvent('rdr-badges-debloques', { detail: { keys: [BADGE] } }));
   }
   notifier();
+  synchroniser();
+}
+
+ 
+function demanderEtat() {
+  if (E.membre !== true || !ouvert() || E.trouves.length >= 4 || E.etat) return;
+  const der = lireLocal(CLE_ETAT, null);
+  if (der && Date.now() - (Number(der.t) || 0) < ETAT_MS) return;
+  const id = 'etat-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+  E.etat = { id, enCours: true, minuteurs: RELANCES_MS.map((ms) => setTimeout(() => emettre('chasse-etat', { id }), ms)) };
+  E.etat.minuteurs.push(setTimeout(() => { if (E.etat && E.etat.enCours) { E.etat.enCours = false; bordsAccueil(); } }, ENVOI_ABANDON_MS));
+}
+function etatRecu(r) {
+  E.etat.minuteurs.forEach(clearTimeout);
+  E.etat.enCours = false;
+  if (r.visiteur) { E.membre = false; return; }
+  if (!r.ok) return;
+  ecrireLocal(CLE_ETAT, { t: Date.now() });
+  if (!fusionner(r.trouves)) notifier();
   synchroniser();
 }
 
