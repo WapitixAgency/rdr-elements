@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 0703e5b | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0703e5b";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum bca7ac2 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="bca7ac2";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -11840,6 +11840,7 @@ if (!customElements.get('espace-rhum')) {
             ${this._buildTop50Widget()}
             ${this._buildBadgesSection()}
             ${this._buildRangsWidget()}
+            <div class="er-chasse-place er-chasse-place--fin"></div>
           </main>
         </div>
         ${this._buildBadgeModal()}
@@ -12359,6 +12360,7 @@ if (!customElements.get('espace-rhum')) {
 
 
 
+
     _chasseEtat() {
       const ch = this._payload && this._payload.chasse;
       const C = window.__rdrChasse;
@@ -12377,8 +12379,6 @@ if (!customElements.get('espace-rhum')) {
         const toutes = Object.values(dates).map((d) => new Date(d).getTime()).filter(Number.isFinite);
         if (toutes.length) finLe = new Date(Math.max(...toutes)).toISOString();
       }
-       
-      if (fini && finLe && Date.now() - new Date(finLe).getTime() > 2 * 24 * 3600 * 1000) return null;
       return { C, trouves, dates, fini, finLe };
     }
 
@@ -12426,11 +12426,17 @@ if (!customElements.get('espace-rhum')) {
     }
 
     _rendreChasse() {
-      const place = this.querySelector('.er-chasse-place');
-      if (!place) return;
+      const haut = this.querySelector('.er-chasse-place:not(.er-chasse-place--fin)');
+      const bas = this.querySelector('.er-chasse-place--fin');
+      if (!haut) return;
       const e = this._chasseEtat();
       const html = e ? this._chasseHtml(e) : '';
-      if (place._html === html) return;
+       
+      const place = e && e.fini && bas ? bas : haut;
+      const autre = place === haut ? bas : haut;
+      if (place._html === html && (!autre || !autre._html)) return;
+      if (autre) { autre._html = ''; autre.innerHTML = ''; autre.removeAttribute('id'); }
+      place.id = 'chasse-tymal';
       place._html = html;
       place.innerHTML = html;
        
@@ -12445,8 +12451,8 @@ if (!customElements.get('espace-rhum')) {
         this._surChasse = () => this._rendreChasse();
         window.addEventListener('rdr-chasse', this._surChasse);
       }
-      const place = this.querySelector('.er-chasse-place');
-      if (place && !place._branche) {
+      this.querySelectorAll('.er-chasse-place').forEach((place) => {
+        if (place._branche) return;
         place._branche = true;
         place.addEventListener('click', (ev) => {
           const b = ev.target.closest && ev.target.closest('[data-chasse]');
@@ -12454,7 +12460,7 @@ if (!customElements.get('espace-rhum')) {
           if (b.dataset.chasse === 'badge') this._openBadgeModal('chasse-tymal');
           else this.dispatchEvent(new CustomEvent('er-chasse', { bubbles: true, composed: true }));
         });
-      }
+      });
       this._rendreChasse();
     }
 
@@ -16607,7 +16613,7 @@ if (!customElements.get('espace-rhum')) {
       tiles.forEach(tile => {
         const handler = () => {
            
-          const bloc = tile.dataset.badgeKey === 'chasse-tymal' && tile.dataset.state === 'discovered' && this.querySelector('.er-chasse-place');
+          const bloc = tile.dataset.badgeKey === 'chasse-tymal' && tile.dataset.state === 'discovered' && this.querySelector('#chasse-tymal');
           if (bloc && bloc.querySelector('.er-chasse')) { try { bloc.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) { bloc.scrollIntoView(); } return; }
           this._openBadgeModal(tile.dataset.badgeKey);
         };
