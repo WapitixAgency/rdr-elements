@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum bccc899 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="bccc899";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum adbb2ac | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="adbb2ac";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1164,7 +1164,10 @@ if (!customElements.get('espace-rhum')) {
     'Chasseur de TyMAL': 'TyMAL Hunter',
     'Les quatre TyMAL cachés sur le site': 'The four TyMALs hidden on the site',
     'Quatre TyMAL se cachent sur le site. Chaque trouvaille donne l’indice de la suivante.': 'Four TyMALs are hiding on the site. Each find gives the clue to the next.',
-    'Les quatre TyMAL sont à toi. Chasseur confirmé !': 'All four TyMALs are yours. A true hunter!',
+    'Les quatre TyMAL sont à toi.\nChasseur confirmé\u00a0!': 'All four TyMALs are yours.\nA true hunter!',
+     
+    'Les quatre TyMAL sont à toi.': 'All four TyMALs are yours.',
+    'Chasseur confirmé\u00a0!': 'A true hunter!',
     'Mon carnet': 'My logbook',
      
     'Tu as franchi le pas. Bienvenue dans l\'aventure.': 'You took the plunge. Welcome to the adventure.',
@@ -8637,6 +8640,8 @@ if (!customElements.get('espace-rhum')) {
       color: var(--er-text-secondary);
       margin: 0;
     }
+    espace-rhum .er-badge-modal-ligne { display: block; }
+    espace-rhum .er-badge-modal-ligne + .er-badge-modal-ligne { margin-top: 8px; }
 
      
     espace-rhum .er-badges-help {
@@ -16557,7 +16562,16 @@ if (!customElements.get('espace-rhum')) {
        
       const message = isUnlocked ? (badge.message || '')
                     : (state === 'action' ? (badge.condition || '') : '');
-      modal.querySelector('.er-badge-modal-message').textContent = message;
+      
+
+      const msgEl = modal.querySelector('.er-badge-modal-message');
+      msgEl.textContent = '';
+      String(message).split('\n').forEach((ligne) => {
+        const s = document.createElement('span');
+        s.className = 'er-badge-modal-ligne';
+        s.textContent = ligne;
+        msgEl.appendChild(s);
+      });
 
       const prog = modal.querySelector('.er-badge-modal-progress');
       if (prog) {
