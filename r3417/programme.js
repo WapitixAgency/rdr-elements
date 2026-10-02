@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum d47b455 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d47b455";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum d13de8f | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d13de8f";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -112,6 +112,240 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d47b455";perform
         ' alt="' + esc(c.lib) + '" title="' + esc(c.lib) + '"' +
         ' width="144" height="240" loading="lazy" decoding="async">';
     }).join('');
+  };
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const ORDRE_CLASSES = ['ultim', 'ocean fifty', 'class40', 'imoca', 'vintage mono', 'vintage multi'];
+   
+  const CLASSE_DE_FLOTTE = { ultim: 'ultim', 'ocean-fifty': 'ocean fifty', class40: 'class40', imoca: 'imoca', 'v-mono': 'vintage mono', 'v-multi': 'vintage multi' };
+  const classeCanon = (nom) => {
+    const c = CLASSES[pli(nom)];
+    return c ? (ORDRE_CLASSES.find(k => CLASSES[k].lib === c.lib) || '') : '';
+  };
+  const blason = (cle, cls) => {
+    const c = CLASSES[cle];
+    return c && c.f
+      ? '<img class="' + cls + '" src="' + esc(SHAPES + c.f) + '" alt="' + esc(c.lib) + '" title="' + esc(c.lib) + '"' +
+        ' width="144" height="240" loading="lazy" decoding="async">'
+      : '';
+  };
+  const RX_DEDICACE = /(^|[^a-zà-ÿ])(d[ée]dicaces?|signings?|autographs?)([^a-zà-ÿ]|$)/i;
+  const estDedicace = (a) => !!a && (/^dedicaces?$/.test(cleCat(a.cat || a.catLib)) || RX_DEDICACE.test(a.titre || ''));
+  
+
+  const nomPonton = (n) => {
+    const s = String(n || '').trim();
+    if (!s || s !== s.toUpperCase()) return s;
+    const k = ORDRE_CLASSES.find(c => pli(CLASSES[c].lib).replace(/ /g, '') === pli(s).replace(/ /g, ''));
+    return k ? CLASSES[k].lib : s.toLowerCase().replace(/(^|\s)\S/g, x => x.toUpperCase());
+  };
+
+  const R_STOP = new Set(('le la les l de des du d un une et a au aux en pour sur par avec ce cet cette ces y ou qui que quoi quand est il elle on je veux voir ' +
+    'the of and to at in for with an is are what when where').split(' '));
+  
+
+  const R_JOINTS = [
+    [/\bmondays?\b/g, 'lundi'], [/\btuesdays?\b/g, 'mardi'], [/\bwednesdays?\b/g, 'mercredi'], [/\bthursdays?\b/g, 'jeudi'],
+    [/\bfridays?\b/g, 'vendredi'], [/\bsaturdays?\b/g, 'samedi'], [/\bsundays?\b/g, 'dimanche'],
+    [/\btoday\b/g, 'aujourdhui'], [/\btomorrow\b/g, 'demain'], [/\btonight\b/g, 'ce soir'],
+    [/\bmornings?\b/g, 'matin'], [/\bafternoons?\b/g, 'apresmidi'], [/\bevenings?\b/g, 'soir'], [/\bnights?\b/g, 'nuit'],
+    [/\bthis (matin|apresmidi|soir|nuit)\b/g, 'ce $1'], [/\boctober\b/g, 'oct'], [/\bnovember\b/g, 'nov'],
+    [/\b(\d{1,2}) ?pm\b/g, (m, h) => ((+h % 12) + 12) + 'h'], [/\b(\d{1,2}) ?am\b/g, (m, h) => (+h % 12) + 'h'],
+    [/\bclass ?40\b/g, 'class40'], [/\bocean ?(fifty|50)\b/g, 'oceanfifty'], [/\bof ?50\b/g, 'oceanfifty'],
+    [/\b(vintage|rhum) ?mono\b/g, 'vintagemono'], [/\b(vintage|rhum) ?multi\b/g, 'vintagemulti'], [/\borma\b/g, 'vintagemulti'],
+    [/\bultimes?\b/g, 'ultim'], [/\bapres ?midi\b/g, 'apresmidi'], [/\baprem\b/g, 'apresmidi'], [/\baujourd ?hui\b/g, 'aujourdhui'],
+    [/\bweek ?ends?\b/g, 'weekend'], [/\b(\d{1,2}) ?h ?(\d{2})?\b/g, (m, h, mm) => h + 'h' + (mm || '')]
+  ];
+   
+  const R_MOITIES = { class40: ['class', '40'], oceanfifty: ['ocean', 'fifty', '50'], vintagemono: ['vintage', 'mono'], vintagemulti: ['vintage', 'multi', 'orma'] };
+  const R_CLASSE = { ultim: 'ultim', oceanfifty: 'ocean fifty', class40: 'class40', imoca: 'imoca', vintagemono: 'vintage mono', vintagemulti: 'vintage multi' };
+  const R_SYN = {
+    parade: ['defile'], defile: ['parade'], concert: ['musique', 'fanfare', 'live', 'music'], musique: ['concert', 'fanfare'], music: ['concert', 'musique'],
+    fanfare: ['concert'], dedicace: ['autographe', 'signature', 'signing'], autographe: ['dedicace'], signature: ['dedicace'], signing: ['dedicace'],
+    autograph: ['dedicace'], spectacle: ['show'], show: ['spectacle'], conference: ['table', 'talk', 'debat'], debat: ['conference', 'table'],
+    enfant: ['scol', 'famille', 'jeunesse', 'kid', 'child'], famille: ['enfant'], kid: ['enfant'], child: ['enfant'], children: ['enfant'],
+    bapteme: ['initiation'], initiation: ['bapteme'], handicap: ['handi'], bateau: ['voilier', 'boat'], voilier: ['bateau'], boat: ['bateau', 'voilier']
+  };
+  const R_DOW = { dimanche: 0, lundi: 1, mardi: 2, mercredi: 3, jeudi: 4, vendredi: 5, samedi: 6 };
+  const R_PER = { matin: 'matin', apresmidi: 'apresmidi', soir: 'soir', soiree: 'soir', nuit: 'soir' };
+  const rNorm0 = (s) => pli(s).replace(/[^a-z0-9]+/g, ' ').trim();
+  const rNorm = (s) => { let t = rNorm0(s); for (const [r, v] of R_JOINTS) t = t.replace(r, v); return t; };
+  const rSing = (w) => (w.length > 3 && /[sx]$/.test(w) && !/(ss|us|is|ous)$/.test(w)) ? w.slice(0, -1) : w;
+  const rToks = (s) => rNorm(s).split(' ').filter(w => w && !R_STOP.has(w)).map(rSing);
+  const rToksDoc = (s) => rToks(s).flatMap(w => R_MOITIES[w] ? [w, ...R_MOITIES[w]] : [w]);
+  const rLev = (a, b) => {
+    if (Math.abs(a.length - b.length) > 2) return 9;
+    let p = Array.from({ length: b.length + 1 }, (_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+      const c = [i];
+      for (let j = 1; j <= b.length; j++) c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      p = c;
+    }
+    return p[b.length];
+  };
+  
+
+  const rVaut = (q, w) => {
+    if (w === q) return 1;
+    if (q.length >= 2 && w.startsWith(q)) return 0.85;
+    const s = R_SYN[q];
+    if (s && s.some(x => w === x || (x.length >= 3 && w.startsWith(x)))) return 0.75;
+    if (q.length >= 4 && w.length >= 3 && !/\d/.test(q)) {
+      const lim = q.length >= 8 ? 2 : 1;
+      if (rLev(q, w) <= lim) return 0.55;
+      if (w.length > q.length && q.length >= 5 && rLev(q, w.slice(0, q.length)) <= 1) return 0.5;
+    }
+    return 0;
+  };
+  const rTouche = (q, t) => rVaut(q, t) > 0 || (R_MOITIES[q] || []).some(x => rVaut(x, t) >= 0.85);
+   
+  const classesDuTexte = (s) => {
+    const t = new Set(rToks(s));
+    return ORDRE_CLASSES.filter(k => Object.keys(R_CLASSE).some(j => R_CLASSE[j] === k && t.has(j)));
+  };
+
+  
+
+
+  function rAnalyser(texte, ctx) {
+    const r = { brut: String(texte || '').trim(), mots: [], dates: null, dows: null, periodes: null, heure: null, relatif: false };
+    const ajout = (k, v) => { r[k] = r[k] || new Set(); r[k].add(v); };
+    const n0 = rNorm(texte);
+    if (/\b(ce|cet) (soir|matin|apresmidi)\b/.test(n0)) { ajout('dates', ctx.ref); r.relatif = true; }
+    const mois = /\b(oct|octobre)\b/.test(n0) ? '-10-' : (/\b(nov|novembre)\b/.test(n0) ? '-11-' : '');
+    rToks(texte).forEach(w => {
+      if (w in R_DOW) return ajout('dows', R_DOW[w]);
+      if (w in R_PER) return ajout('periodes', R_PER[w]);
+      if (w === 'aujourdhui') { r.relatif = true; return ajout('dates', ctx.ref); }
+      if (w === 'demain') {
+        r.relatif = true;
+        const d = new Date(ctx.ref + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + 1);
+        return ajout('dates', d.toISOString().slice(0, 10));
+      }
+      if (w === 'weekend') { ajout('dows', 6); return ajout('dows', 0); }
+      if (/^(oct|octobre|nov|novembre|h)$/.test(w)) return;
+      const h = w.match(/^(\d{1,2})h(\d{2})?$/);
+      if (h) { r.heure = +h[1]; return; }
+      const n = w.match(/^(\d{1,2})(er)?$/);
+      if (n) {
+        const k = +n[1];
+        const dates = (ctx.jours || []).filter(iso => +iso.slice(8, 10) === k && (!mois || iso.indexOf(mois) === 4));
+        if (dates.length) { dates.forEach(iso => ajout('dates', iso)); return; }
+        if (!n[2] && k >= 6 && k <= 23) { r.heure = k; return; }
+      }
+      r.mots.push(w);
+    });
+    r.temps = !!(r.dates || r.dows || r.periodes || r.heure != null);
+    return r;
+  }
+  const rDansLeTemps = (x, r) => {
+    if (r.dates && !r.dates.has(x.date)) return false;
+    if (r.dows && !r.dows.has(new Date(x.date + 'T12:00:00Z').getUTCDay())) return false;
+    const heuree = /^\d{1,2}:\d{2}/.test(x.debut || '');
+    if (r.periodes && heuree) {
+      const d = minutes(x.debut);
+      const p = d < 12 * 60 ? 'matin' : (d < 18 * 60 ? 'apresmidi' : 'soir');
+      if (!r.periodes.has(p)) return false;
+    }
+    if (r.heure != null && heuree) {
+      const h0 = r.heure * 60, d = minutes(x.debut);
+      if (!((d >= h0 && d < h0 + 60) || (d < h0 && finMinutes(x) > h0))) return false;
+    }
+    return true;
+  };
+   
+  const rIndexer = (a, sk) => [
+    [3, rToksDoc(a.titre)],
+    [2, rToksDoc(a.catLib)],
+    [2, rToksDoc(a.lieu)],
+    [2, rToksDoc((sk ? sk.skipper + ' ' + sk.bateau : '') + ' ' + (Array.isArray(a.classes) ? a.classes.join(' ') : ''))],
+    [1, rToksDoc(a.desc)]
+  ];
+  
+
+  function rTrouver(liste, champsDe, r) {
+    const out = [];
+    liste.forEach(a => {
+      if (!rDansLeTemps(a, r)) return;
+      const champs = champsDe(a);
+      let score = 0;
+      const corr = [];
+      for (const q of r.mots) {
+        let best = 0, mot = '', qual = 0;
+        champs.forEach(([poids, ws]) => ws.forEach(w => {
+          const v = rVaut(q, w);
+          if (poids === 1 && q.length < 4 && v < 1) return;
+          if (v * poids > best) { best = v * poids; mot = w; qual = v; }
+        }));
+        if (!best) return;
+        score += best;
+        if (qual < 0.6) corr.push([q, mot]);
+      }
+      out.push({ a, score, corr });
+    });
+    
+
+    const forts = new Set();
+    out.forEach(x => r.mots.forEach(q => { if (!x.corr.some(([c]) => c === q)) forts.add(q); }));
+    return out.filter(x => !x.corr.some(([q]) => forts.has(q)));
+  }
+   
+  const rSurligner = (texte, r) => !r || !r.mots.length ? esc(texte)
+    : String(texte || '').split(/([^A-Za-zÀ-ÿ0-9]+)/).map(p => {
+      const t = rToks(p)[0];
+      return t && r.mots.some(q => rTouche(q, t)) ? '<mark>' + esc(p) + '</mark>' : esc(p);
+    }).join('');
+  
+
+  const rExtrait = (texte, r) => {
+    const s = String(texte || '');
+    if (!r || !r.mots.length) return s;
+    const re = /[A-Za-zÀ-ÿ0-9]+/g;
+    let m;
+    while ((m = re.exec(s))) {
+      const t = rToks(m[0])[0];
+      if (t && r.mots.some(q => rTouche(q, t))) {
+        if (m.index < 70) return s;
+        const deb = s.lastIndexOf(' ', m.index - 30);
+        return '… ' + s.slice(deb > 0 ? deb + 1 : m.index - 30);
+      }
+    }
+    return s;
   };
 
   const minutes = (hhmm) => {
@@ -307,6 +541,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d47b455";perform
     'Le prochain arrive un peu plus tard.': 'The next one is a little later.',
     'Ceux de cette programmation sont passés.': 'The ones in this programme are over.',
     'Retirer ce filtre': 'Remove this filter',
+     
+    'Effacer la recherche': 'Clear the search',
+    'Classement': 'Sort',
     
 
 
@@ -394,7 +631,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="d47b455";perform
 
 
 
-    toutVoir: 'M21 5H3M7 12H3M7 19H3M12 18a5 5 0 0 0 9-3 4.5 4.5 0 0 0-4.5-4.5c-1.33 0-2.54.54-3.41 1.41L11 14M11 10v4h4'
+    toutVoir: 'M21 5H3M7 12H3M7 19H3M12 18a5 5 0 0 0 9-3 4.5 4.5 0 0 0-4.5-4.5c-1.33 0-2.54.54-3.41 1.41L11 14M11 10v4h4',
+    
+
+    loupe: 'm21 21-4.34-4.34M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z',
+    signature: 'm21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284M3 21h18'
   };
 
   const svg = (d, cls) =>
@@ -4125,7 +4366,9 @@ rdr-programme{display:block;width:100%;}
 
 
 
-.rp-root.sous-1080 .rp-filtres{grid-template-columns:repeat(2,minmax(0,1fr));}
+
+
+
 
 
 
@@ -4805,6 +5048,283 @@ rdr-programme{display:block;width:100%;}
 }
  
 .rp-root.sous-720 .rp-h-badges{justify-content:flex-start;margin-top:8px;}
+
+
+
+
+
+.rp-root .rp-filtres{grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));}
+.rp-root .rp-filtres.a-ded{grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,1fr)) minmax(0,1.25fr);}
+.rp-root .rp-filtres.rp-filtres--ded{grid-template-columns:minmax(0,1fr) auto minmax(250px,.42fr);}
+.rp-partage[hidden]{display:none;}
+.rp-compte .rp-partage{margin-left:auto;}
+
+
+
+
+.rp-q{
+  position:relative;display:flex;align-items:center;gap:var(--e-2);min-width:0;min-height:44px;
+  padding:0 6px 0 var(--e-3);border-radius:var(--rp-r-btn);cursor:text;
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);
+  transition:border-color .2s,background .2s;
+}
+.rp-q:focus-within{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);}
+.rp-q > .rp-ic{flex:none;width:15px;height:15px;color:var(--rp-encre-2);}
+.rp-q input{
+  flex:1 1 auto;min-width:0;padding:11px 0;border:0;outline:0;background:none;
+  color:var(--rp-encre);font:600 var(--t-2) Montserrat,sans-serif;
+}
+.rp-q input::placeholder{color:var(--rp-encre-2);font-weight:500;opacity:1;}
+.rp-q.est-pose:not(:focus-within){background:#FFFFFF;border-color:#FFFFFF;box-shadow:0 8px 22px rgba(0,0,0,.28);}
+.rp-q.est-pose:not(:focus-within) > .rp-ic,.rp-q.est-pose:not(:focus-within) input{color:#0A1630;}
+.rp-q-x{
+  flex:none;width:28px;height:28px;display:grid;place-items:center;padding:0;border:0;
+  border-radius:3px 9px 3px 9px;background:rgba(255,255,255,.12);color:#FFFFFF;cursor:pointer;
+}
+.rp-q-x[hidden]{display:none;}
+.rp-q-x .rp-ic{width:13px;height:13px;}
+.rp-q.est-pose:not(:focus-within) .rp-q-x{background:rgba(10,22,48,.08);color:#0A1630;}
+ 
+.rp-q-ex{
+  display:none;position:absolute;left:-1px;top:calc(100% + 6px);z-index:30;
+  width:min(440px,calc(100vw - 40px));padding:12px 12px 6px;
+  border-radius:var(--rp-r-carte);background:#0E1C3C;border:1px solid var(--rp-filet-fort);
+  box-shadow:0 18px 40px rgba(0,0,0,.45);cursor:default;
+}
+.rp-q:focus-within input:placeholder-shown ~ .rp-q-ex{display:block;}
+.rp-q-ex small{
+  display:block;margin:0 0 8px;font:800 var(--t-1)/1 Montserrat,sans-serif;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rp-encre-3);
+}
+.rp-q-puce{
+  display:inline-block;margin:0 6px 6px 0;padding:6px 10px;cursor:pointer;
+  border:1px solid var(--rp-filet);border-radius:2px 8px 2px 8px;background:rgba(255,255,255,.08);
+  color:#FFFFFF;font:600 var(--t-2)/1.2 Montserrat,sans-serif;
+}
+@media (hover:hover) and (pointer:fine){ .rp-q-puce:hover{border-color:#FCF150;} }
+
+
+
+
+.rp-ded{
+  display:flex;align-items:center;gap:var(--e-3);min-width:0;min-height:44px;
+  padding:5px 10px 5px 7px;border-radius:var(--rp-r-btn);cursor:pointer;text-align:left;
+  border:1px solid rgba(252,241,80,.6);background:linear-gradient(180deg,rgba(10,18,44,.72),rgba(10,18,44,.9));
+  color:#FFFFFF;font:inherit;transition:background .2s,border-color .2s,color .2s;
+}
+.rp-ded[aria-pressed="true"]{background:#FCF150;border-color:#FCF150;color:#0B1B33;}
+@media (hover:hover) and (pointer:fine){ .rp-ded:not([aria-pressed="true"]):hover{border-color:#FCF150;} }
+.rp-ded-v{display:flex;flex:none;align-items:center;}
+.rp-ded-v img{
+  width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:top;
+  border:2px solid #0E1C3C;margin-left:-9px;background:#243766;
+}
+.rp-ded-v img:first-child{margin-left:0;}
+.rp-ded[aria-pressed="true"] .rp-ded-v img{border-color:#FCF150;}
+.rp-ded-v--b img.rp-ded-vb{width:auto;height:36px;border:0;border-radius:0;background:none;margin:-4px 0;}
+.rp-ded-sans{
+  flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;
+  background:rgba(252,241,80,.14);color:#FCF150;
+}
+.rp-ded-sans .rp-ic{width:16px;height:16px;}
+.rp-ded-lib{min-width:0;line-height:1.2;}
+.rp-ded-lib b{display:block;font:800 var(--t-2)/1.2 Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;}
+.rp-ded-lib small{
+  display:block;font:600 11px/1.3 Montserrat,sans-serif;color:var(--rp-encre-2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rp-ded[aria-pressed="true"] .rp-ded-lib small{color:rgba(11,27,51,.72);}
+.rp-ded-n{
+  margin-left:auto;flex:none;padding:3px 8px;border-radius:2px 8px 2px 8px;
+  background:#FCF150;color:#0B1B33;font:800 var(--t-2)/1 Montserrat,sans-serif;
+}
+.rp-ded-x{margin-left:auto;flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(11,27,51,.14);}
+.rp-ded-x .rp-ic{width:13px;height:13px;}
+
+ 
+.rp-seg{display:flex;gap:var(--e-1);padding:4px;border-radius:var(--rp-r-btn);border:1px solid var(--rp-filet);background:var(--rp-verre);}
+.rp-seg button{
+  flex:1 1 0;padding:9px 16px;border:0;border-radius:var(--rp-r-btn);background:none;cursor:pointer;white-space:nowrap;
+  font:700 var(--t-2)/1 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rp-encre-3);
+}
+.rp-seg button[aria-pressed="true"]{background:#FFFFFF;color:#16355D;}
+
+
+
+
+
+.rp-blasons{
+  display:flex;align-items:center;gap:var(--e-5);padding:12px 22px;
+  border-radius:28px 3px 16px 3px;background:rgba(8,16,40,.38);border:1px solid var(--rp-filet);
+}
+.rp-blasons-lbl{
+  flex:none;min-width:76px;font:800 var(--t-1)/1.6 Montserrat,sans-serif;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rp-encre-3);
+}
+.rp-blasons-lbl b{display:block;font-size:var(--t-2);color:#FFFFFF;}
+.rp-blasons-rang{display:flex;align-items:center;gap:14px;}
+.rp-blasons-note{
+  margin:0 0 0 auto;max-width:280px;text-align:right;
+  font:500 var(--t-2)/1.5 Montserrat,sans-serif;color:var(--rp-encre-2);
+}
+.rp-bl{flex:none;padding:0;border:0;background:none;cursor:pointer;transition:transform .3s cubic-bezier(.25,0,0,1),opacity .3s;}
+.rp-bl-i{display:block;height:68px;width:auto;pointer-events:none;filter:drop-shadow(0 5px 8px rgba(0,0,0,.28));}
+.rp-blasons.est-choisi .rp-bl{opacity:.26;}
+.rp-blasons.est-choisi .rp-bl[aria-pressed="true"]{opacity:1;transform:translateY(-3px) scale(1.08);}
+@media (hover:hover) and (pointer:fine){
+  .rp-bl:hover{transform:translateY(-4px);}
+  .rp-blasons.est-choisi .rp-bl:not([aria-pressed="true"]):hover{opacity:.55;}
+}
+
+
+
+.rp-raccord{
+  display:flex;align-items:center;gap:var(--e-3);width:100%;padding:10px 14px;cursor:pointer;
+  border-radius:var(--rp-r-carte);border:1px dashed rgba(252,241,80,.5);background:rgba(252,241,80,.035);
+  color:#FFFFFF;text-align:left;font:inherit;transition:background .2s,border-color .2s;
+}
+@media (hover:hover) and (pointer:fine){ .rp-raccord:hover{background:rgba(252,241,80,.08);border-color:#FCF150;} }
+.rp-raccord-v{display:flex;flex:none;align-items:center;}
+.rp-raccord-v img{
+  width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:top;
+  border:2px solid #0B1B33;margin-left:-9px;background:#243766;
+}
+.rp-raccord-v img:first-child{margin-left:0;}
+.rp-raccord-v img.rp-raccord-b{width:auto;height:38px;border:0;border-radius:0;background:none;margin:-4px 0;}
+.rp-raccord-t{min-width:0;font:500 var(--t-2)/1.45 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-raccord-t b{color:#FFFFFF;font-weight:700;font-size:13px;}
+.rp-raccord-fl{
+  margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  font:800 11px/1 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#FCF150;
+}
+.rp-raccord-fl .rp-ic{width:14px;height:14px;}
+.rp-raccord--rien{border-color:var(--rp-filet);background:none;}
+.rp-raccord--rien .rp-raccord-fl{color:var(--rp-encre-2);}
+
+
+
+.rp-res-tete{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;
+  padding-top:var(--e-4);border-top:1px solid var(--rp-filet);
+}
+.rp-res-tete b{
+  font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:28px;line-height:1;
+  text-transform:uppercase;letter-spacing:.01em;color:#FFFFFF;
+}
+.rp-res-tete span{font:600 var(--t-2)/1.4 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-res-eff{
+  margin-left:auto;padding:4px 0;border:0;background:none;cursor:pointer;
+  font:800 11px/1 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rp-encre-2);
+}
+.rp-res-tete .rp-res-note{flex-basis:100%;font:500 var(--t-2)/1.5 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-res-tete .rp-res-note.est-corr{color:#FCF150;}
+.rp-root mark{background:rgba(252,241,80,.26);color:inherit;border-radius:3px;padding:0 2px;box-shadow:inset 0 -2px 0 #FCF150;}
+.rp-moment--jour,.rp-liste .rp-moment{scroll-margin-top:96px;}
+.rp-res-passes{padding-top:var(--e-1);border-top:1px dashed var(--rp-filet);display:grid;gap:var(--e-4);}
+.rp-res-passes > summary{
+  cursor:pointer;padding:var(--e-2) 0;font:800 var(--t-1)/1 Montserrat,sans-serif;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rp-encre-2);
+}
+.rp-res-passes .rp-tuile{opacity:.66;}
+.rp-res-ailleurs{
+  display:flex;align-items:center;gap:var(--e-3);width:100%;padding:11px 14px;cursor:pointer;text-align:left;
+  border:1px solid var(--rp-filet);border-radius:var(--rp-r-carte);background:none;
+  color:var(--rp-encre-2);font:500 var(--t-2)/1.4 Montserrat,sans-serif;
+}
+.rp-res-ailleurs b{color:#FFFFFF;}
+.rp-res-fl{
+  margin-left:auto;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  font:800 11px/1 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+}
+.rp-res-fl .rp-ic{width:14px;height:14px;}
+@media (hover:hover) and (pointer:fine){ .rp-res-ailleurs:hover{border-color:var(--rp-filet-fort);color:#FFFFFF;} }
+.rp-res-vide{
+  margin:0;padding:var(--e-6) var(--e-4);text-align:center;border:1px dashed var(--rp-filet);
+  border-radius:var(--rp-r-carte);color:var(--rp-encre-2);font:500 var(--t-3)/1.5 Montserrat,sans-serif;
+}
+.rp-res-vide h3{margin:0 0 var(--e-2);font:700 var(--t-4)/1.3 Montserrat,sans-serif;color:#FFFFFF;}
+.rp-res-vide p{margin:0 0 var(--e-3);}
+
+
+
+.rp-dl{
+  display:grid;grid-template-columns:118px 46px minmax(0,1fr) auto 44px;gap:var(--e-3) 14px;align-items:center;
+  padding:10px 16px;border-radius:var(--rp-r-carte);background:rgba(255,255,255,.06);
+  border:1px solid var(--rp-filet);border-left:3px solid var(--c,#8A9BB5);
+}
+.rp-dl-h b{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:22px;line-height:1;color:#FFFFFF;}
+.rp-dl-h{white-space:nowrap;}
+.rp-dl-h small{margin-left:5px;font:600 11px Montserrat,sans-serif;color:var(--rp-encre-3);}
+.rp-dl-h small::before{content:'› ';}
+.rp-dl-p{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;background:#243766;}
+.rp-dl-p--sans,.rp-dk-p--sans{display:grid;place-items:center;background:rgba(255,255,255,.06);color:#FCF150;}
+.rp-dl-p--sans .rp-ic,.rp-dk-p--sans .rp-ic{width:20px;height:20px;}
+.rp-dk-p--sans .rp-ic{width:26px;height:26px;}
+.rp-dl-n{min-width:0;font:600 var(--t-2)/1.35 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-dl-n b{font:800 14px/1.2 Montserrat,sans-serif;color:#FFFFFF;text-transform:uppercase;}
+.rp-dl-n small{display:block;margin-top:2px;font:600 var(--t-2)/1.3 Montserrat,sans-serif;color:var(--rp-encre-2);text-transform:uppercase;letter-spacing:.02em;}
+.rp-dl-ou{font:700 13px/1.3 Montserrat,sans-serif;text-align:right;color:#FFFFFF;}
+.rp-dl-b{display:block;height:58px;width:auto;margin:-8px 0;justify-self:center;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));}
+
+
+
+.rp-dk-grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px 12px;}
+.rp-dk{
+  position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);align-content:start;gap:12px 14px;
+  padding:14px;border-radius:var(--rp-r-carte);background:rgba(255,255,255,.07);
+  border:1px solid var(--rp-filet);border-left:3px solid var(--c,#8A9BB5);
+}
+.rp-dk-p{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:top;background:#243766;border:2px solid var(--c,#8A9BB5);}
+.rp-dk-b{position:absolute;top:-9px;right:12px;height:78px;width:auto;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35));}
+.rp-dk-qui{min-width:0;padding-right:52px;font:600 var(--t-2)/1.35 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-dk-qui b{display:block;font:800 16px/1.2 Montserrat,sans-serif;color:#FFFFFF;text-transform:uppercase;letter-spacing:.01em;}
+.rp-dk-qui > span{display:block;}
+.rp-dk-qui small{display:block;margin-top:4px;font:600 var(--t-2)/1.3 Montserrat,sans-serif;color:var(--rp-encre-2);}
+.rp-dk-cr{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px;}
+.rp-dk-c{
+  display:inline-flex;align-items:baseline;gap:7px;padding:7px 10px;border-radius:var(--rp-r-btn);cursor:pointer;
+  background:rgba(255,255,255,.10);border:1px solid var(--rp-filet);white-space:nowrap;
+  font:600 var(--t-2) Montserrat,sans-serif;color:var(--rp-encre-2);
+}
+.rp-dk-c b{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:17px;line-height:1;color:#FFFFFF;}
+.rp-dk-c.est-jour{border-color:#FCF150;background:rgba(252,241,80,.12);color:#FFFFFF;}
+.rp-dk-plus{cursor:default;}
+
+ 
+.rp-root.sous-1080 .rp-filtres{grid-template-columns:repeat(3,minmax(0,1fr));}
+.rp-root.sous-1080 .rp-filtres .rp-q{grid-column:1 / -1;}
+.rp-root.sous-1080 .rp-filtres.a-ded .rp-q,.rp-root.sous-1080 .rp-filtres--ded .rp-q{grid-column:1 / span 2;grid-row:1;}
+.rp-root.sous-1080 .rp-filtres.a-ded .rp-ded,.rp-root.sous-1080 .rp-filtres--ded .rp-ded{grid-column:3;grid-row:1;}
+.rp-root.sous-1080 .rp-filtres--ded .rp-seg{grid-column:1 / -1;}
+.rp-root.sous-1080 .rp-blasons-note{display:none;}
+.rp-root.sous-720 .rp-filtres{grid-template-columns:repeat(2,minmax(0,1fr));}
+
+
+.rp-root.sous-720 .rp-filtres.a-ded .rp-q,.rp-root.sous-720 .rp-filtres.a-ded .rp-ded,
+.rp-root.sous-720 .rp-filtres--ded .rp-q,.rp-root.sous-720 .rp-filtres--ded .rp-ded,
+.rp-root.sous-720 .rp-filtres--ded .rp-seg,.rp-root.sous-720 .rp-filtres:not(.a-ded) .rp-q{grid-column:1 / -1;grid-row:auto;}
+.rp-root.sous-720 .rp-filtres .rp-q{order:-2;}
+.rp-root.sous-720 .rp-filtres .rp-ded{order:-1;}
+.rp-root.sous-720 .rp-blasons{padding:10px 12px;}
+.rp-root.sous-720 .rp-blasons-lbl{display:none;}
+.rp-root.sous-720 .rp-blasons-rang{flex:1;justify-content:space-between;gap:6px;}
+.rp-root.sous-720 .rp-bl-i{height:58px;}
+.rp-root.sous-720 .rp-dl{grid-template-columns:62px 40px minmax(0,1fr) 36px;gap:6px 10px;padding:10px 12px;}
+.rp-root.sous-720 .rp-dl-p{width:40px;height:40px;}
+.rp-root.sous-720 .rp-dl-ou{grid-column:3;text-align:left;font-size:var(--t-2);color:var(--rp-encre-2);}
+.rp-root.sous-720 .rp-dl-b{grid-column:4;grid-row:1 / span 2;height:52px;}
+.rp-root.sous-720 .rp-dl-h b{font-size:19px;}
+.rp-root.sous-720 .rp-dl-h small{display:block;margin:3px 0 0;}
+.rp-root.sous-720 .rp-dk-grille{grid-template-columns:minmax(0,1fr);}
+.rp-root.sous-720 .rp-res-tete b{font-size:24px;}
+.rp-root.sous-520 .rp-raccord{flex-wrap:wrap;gap:8px 12px;}
+.rp-root.sous-520 .rp-raccord-t{flex:1 1 170px;}
+.rp-root.sous-420 .rp-filtres{grid-template-columns:minmax(0,1fr);}
+ 
+@media (max-height:820px) and (min-width:721px){
+  .rp-bl-i{height:58px;}
+  .rp-dk-b{height:72px;}
+}
 `;
 
   
@@ -4880,7 +5400,7 @@ rdr-programme{display:block;width:100%;}
 
 
     static get observedAttributes() {
-      return ['payload', 'jour', 'lang', 'type', 'heure', 'lieu', 'cat', 'url'];
+      return ['payload', 'jour', 'lang', 'type', 'heure', 'lieu', 'cat', 'url', 'q', 'vue'];
     }
 
     constructor() {
@@ -4912,6 +5432,13 @@ rdr-programme{display:block;width:100%;}
       this._pilote = false;
       this._jourChoisi = false;
       this._demande = null;
+      
+
+      this._q = '';
+      this._ded = false;
+      this._dedTri = 'jour';
+      this._dedQ = '';
+      this._dedClasse = '';
     }
 
     
@@ -5187,7 +5714,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-      if (nom === 'type' || nom === 'heure' || nom === 'lieu' || nom === 'cat') {
+      if (nom === 'type' || nom === 'heure' || nom === 'lieu' || nom === 'cat' || nom === 'q' || nom === 'vue') {
         this._demande = this._demande || {};
         this._demande[nom] = apres || null;
         if (this._p) { this._honorerDemande(); this._rendre(); }
@@ -5285,6 +5812,7 @@ rdr-programme{display:block;width:100%;}
       const noeuds = [];
       while (marcheur.nextNode()) noeuds.push(marcheur.currentNode);
       for (const n of noeuds) {
+        if (n.parentNode && n.parentNode.nodeName === 'MARK') continue;
         const brut = n.nodeValue;
         if (!brut || !/[A-Za-zÀ-ÿ0-9]/.test(brut)) continue;
         const en = this._i18nLookup(brut);
@@ -5338,10 +5866,15 @@ rdr-programme{display:block;width:100%;}
           String(l.id || l.nom) === d.lieu);
         if (t) this._f.lieu = t.id || t.nom;
       }
+      
+
+      if (d.cat && /^dedicaces?$/.test(cleCat(d.cat))) { this._ded = true; d.cat = null; }
       if (d.cat) {
         const t = (this._p.categories || []).find(c => cleCat(c) === cleCat(d.cat));
         if (t) this._f.cat = cleCat(t);
       }
+      if (typeof d.q === 'string' && d.q.trim()) this._q = d.q.trim().slice(0, 80);
+      if (d.vue === 'dedicaces') this._ded = true;
        
       if (!this._jourChoisi) this._calerSurFiltre();
       this._demande = null;
@@ -5395,7 +5928,7 @@ rdr-programme{display:block;width:100%;}
       if (j) { this._jour = j; this._jourChoisi = true; }
       this._pilote = this.getAttribute('url') === '1';
       const d = {};
-      ['heure', 'lieu', 'cat'].forEach(k => {
+      ['heure', 'lieu', 'cat', 'q', 'vue'].forEach(k => {
         const v = this.getAttribute(k);
         if (v) d[k] = v;
       });
@@ -5531,6 +6064,7 @@ rdr-programme{display:block;width:100%;}
 
 
       this._f = { heure: '', theme: '', lieu: '', cat: '' };
+      this._ded = false;
       const jours = this._jours();
        
       const auj = this._maintenant().jour;
@@ -5585,8 +6119,12 @@ rdr-programme{display:block;width:100%;}
     _filtrees(jour) {
       const f = this._f;
       const t = this._type;
+      const rch = this._rch();
       return this._anims().filter(a => {
         if ((a.type || 'officielle') !== t) return false;
+         
+        if (t === 'officielle' && estDedicace(a)) return false;
+        if (rch && !rch.ok.has(a.id)) return false;
         if (jour && a.date !== jour) return false;
         if (f.lieu && (a.lieuId || a.lieu) !== f.lieu && a.lieu !== f.lieu) return false;
         if (f.cat && cleCat(a.cat || a.catLib) !== f.cat) return false;
@@ -5605,7 +6143,7 @@ rdr-programme{display:block;width:100%;}
 
     _filtrePose() {
       const f = this._f;
-      return !!(f.heure || f.theme || f.lieu || f.cat);
+      return !!(f.heure || f.theme || f.lieu || f.cat || this._rch());
     }
 
     
@@ -5747,6 +6285,8 @@ rdr-programme{display:block;width:100%;}
         return el.dataset.carte ? [t + '[data-carte]', t + '.rp-zone'] : [t + '.rp-zone'];
       }
       if (el.closest('.rp-silence')) return ['.rp-silence-tete'];
+      if (el.dataset.dedTri) return ['[data-ded-tri="' + q(el.dataset.dedTri) + '"]'];
+      if (el.dataset.dedClasse) return ['[data-ded-classe="' + q(el.dataset.dedClasse) + '"]'];
       if (el.id) return ['#' + q(el.id)];
       return null;
     }
@@ -5773,6 +6313,7 @@ rdr-programme{display:block;width:100%;}
       const p = this._p;
       const jours = this._jours();
       const liste = this._filtrees(this._jour);
+      const rch = this._rch(), ded = this._dedActif();
       const focus = this._cibleFocus();
       
 
@@ -5789,16 +6330,16 @@ rdr-programme{display:block;width:100%;}
         : (p.journees || []).find(j => j.date === this._jour && j.actif !== false);
 
       this._ecrire(
-        '<div class="rp-root' + (this._type === 'off' ? ' est-off' : '') +
+        '<div class="rp-root' + (this._type === 'off' ? ' est-off' : '') + (ded ? ' est-ded' : '') + (rch ? ' est-rch' : '') +
           ' est-v2" style="--rp-motif:url(&quot;' + MOTIF + '&quot;)">' +
           '<div class="rp-motif" aria-hidden="true"></div>' +
           '<div class="rp-trait-cadre" aria-hidden="true"><div class="rp-trait"></div></div>' +
           this._hero() +
           this._barreJours(jours) +
           this._outils() +
-          this._bandeauJournee(journee, liste.length) +
-          '<div class="rp-liste" id="rpListe">' + this._avecMaintenant(liste) + '</div>' +
-          this._vide(liste.length) +
+          this._bandeauJournee(journee, rch || ded ? 0 : liste.length) +
+          '<div class="rp-liste" id="rpListe">' + this._contenuListe(liste) + '</div>' +
+          (rch || ded ? '<div class="rp-vide" hidden></div>' : this._vide(liste.length)) +
           
 
 
@@ -5859,9 +6400,7 @@ rdr-programme{display:block;width:100%;}
       this._rang = 0;
       this._arrivee();
       this._rendreFocus(focus);
-      const dj = this._jour ? dateDe(this._jour) : null;
-      this._annoncer((dj ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '., ' : '') +
-        this._compte(liste.length));
+      this._annoncer(this._annonceListe(liste));
       const now = this._maintenant();
       this._aujVu = now.jour;
       this._horaireVu = this._etatHoraire(now);
@@ -6081,9 +6620,10 @@ rdr-programme{display:block;width:100%;}
 
 
 
-      const filtre = this._filtrePose();
-      const parFiltre = filtre ? new Map(jours.map(iso => [iso, this._filtrees(iso).length])) : null;
-      const teinte = this._f.cat ? catDe(this._f.cat).c : '#FFFFFF';
+      const dedV = this._dedActif();
+      const filtre = this._filtrePose() || dedV;
+      const parFiltre = filtre ? new Map(jours.map(iso => [iso, dedV ? this._dedsDu(iso).length : this._filtrees(iso).length])) : null;
+      const teinte = dedV ? '#FCF150' : (this._f.cat ? catDe(this._f.cat).c : '#FFFFFF');
 
       
 
@@ -6162,18 +6702,17 @@ rdr-programme{display:block;width:100%;}
         '<div class="rp-socle-pied">' +
           this._barreRegistres() +
            
-          '<p class="rp-socle-jour">' +
-            '<b>' + esc(jourLong) + '</b>' +
-            '<span>' + combien + ' rendez-vous</span>' +
-          '</p>' +
+          '<p class="rp-socle-jour">' + this._socleJour(jourLong, combien) + '</p>' +
         '</div>' +
       '</nav>';
     }
 
     _outils() {
+      if (this._dedActif()) return this._outilsDed();
       const p = this._p;
       const f = this._f;
-      const pose = f.heure || f.theme || f.lieu || f.cat;
+      const pose = f.heure || f.theme || f.lieu || f.cat || this._rch();
+      const avecDed = this._type === 'officielle' && this._deds().length > 0;
 
       
 
@@ -6247,7 +6786,7 @@ rdr-programme{display:block;width:100%;}
 
 
       const cats = (p.categories || [])
-        .filter(c => catsDuType.has(cleCat(c)) || cleCat(c) === f.cat)
+        .filter(c => (catsDuType.has(cleCat(c)) || cleCat(c) === f.cat) && !/^dedicaces?$/.test(cleCat(c)))
         .map(c => [cleCat(c), this._cat(c)]);
       if (this._lang() === 'en') cats.sort((x, y) => String(x[1]).localeCompare(String(y[1]), 'en'));
 
@@ -6268,7 +6807,13 @@ rdr-programme{display:block;width:100%;}
 
 
 
-        '<div class="rp-filtres">' +
+
+
+
+
+
+        '<div class="rp-filtres' + (avecDed ? ' a-ded' : '') + '">' +
+          this._champQ('rpQ', this._q, this._inviteQ(), true) +
           sel('heure', IC.horloge, 'Tous les horaires', f.heure,
               [['matin', 'Matin, avant 12 h'], ['apresmidi', 'Après-midi, 12 h à 18 h'], ['soir', 'Soirée, après 18 h']]) +
           
@@ -6284,11 +6829,7 @@ rdr-programme{display:block;width:100%;}
 
           sel('lieu', IC.epingle, 'Les lieux', f.lieu, lieux) +
           sel('cat', IC.liste, 'Les catégories', f.cat, cats) +
-          (this._pilote && (pose || this._type !== this._registreParDefaut() || this._jourChoisi)
-            ? '<button type="button" class="rp-partage" id="rpPartage"' +
-                ' aria-label="Partager cette sélection de la programmation">' +
-                svg(IC.partage, 'rp-ic') + '<span>Partager</span></button>'
-            : '') +
+          (avecDed ? this._boutonDed() : '') +
         '</div>' +
         
 
@@ -6303,7 +6844,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-        '<div class="rp-compte">' + this._boutonTout('rpRaz', !pose) + '</div>' +
+        '<div class="rp-compte">' + this._boutonTout('rpRaz', !pose) + this._boutonPartage(pose) + '</div>' +
       '</div>';
     }
 
@@ -6521,6 +7062,8 @@ rdr-programme{display:block;width:100%;}
       let plusTard = -Infinity;
       liste.forEach(a => { finDejaCommence.set(a, plusTard); plusTard = Math.max(plusTard, finMinutes(a)); });
 
+       
+      const rac = this._raccords(tout);
       const morceaux = [];
       groupes.forEach(({ m, dedans }) => {
         if (groupes.length > 1) {
@@ -6547,7 +7090,9 @@ rdr-programme{display:block;width:100%;}
           }
           morceaux.push(this._tuile(a, now));
         });
+        if (rac.has(m.cle)) { morceaux.push(rac.get(m.cle)); rac.delete(m.cle); }
       });
+      rac.forEach(h => morceaux.push(h));
 
       if (sansHeure.length) {
          
@@ -6697,7 +7242,7 @@ rdr-programme{display:block;width:100%;}
               (a.catLib
                 ? '<span class="rp-dest-cat">' + svg(cat.ic) + '<span>' + esc(this._cat(a.catLib)) + '</span></span>'
                 : '') +
-              (a.lieu ? '<span class="rp-dest-lieu">' + esc(a.lieu) + '</span>' : '') +
+              (a.lieu ? '<span class="rp-dest-lieu">' + this._hl(a.lieu) + '</span>' : '') +
             '</span>' +
             (versCarte
               ? '<button type="button" class="rp-dest-b" data-carte="' + esc(a.id) + '"' +
@@ -6770,7 +7315,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-            '<span class="rp-vtitre">' + esc(a.titre || this._cat(a.catLib)) + '</span>' +
+            '<span class="rp-vtitre">' + this._hl(a.titre || this._cat(a.catLib)) + '</span>' +
             
 
 
@@ -6839,7 +7384,7 @@ rdr-programme{display:block;width:100%;}
         : (lumiere ? '<div class="rp-lum" aria-hidden="true"></div>' : '') +
           heures +
           '<div class="rp-titre-t">' +
-            esc(a.titre) +
+            this._hl(a.titre) +
             
 
             (lumiere ? this._bandeLumiere(a) : '') +
@@ -6852,7 +7397,7 @@ rdr-programme{display:block;width:100%;}
 
 
 
-            (a.desc ? '<p class="rp-accroche">' + esc(a.desc) + '</p>' : '') +
+            (a.desc ? '<p class="rp-accroche">' + this._hl(this._marque ? rExtrait(a.desc, this._marque) : a.desc) + '</p>' : '') +
             (badges ? '<div class="rp-badges" style="margin-top:6px">' + badges + '</div>' : '') +
           '</div>' +
           meta;
@@ -7142,6 +7687,660 @@ rdr-programme{display:block;width:100%;}
         '</div>' +
       '</div>';
     }
+    
+
+
+
+
+    _en() { return this._lang() === 'en'; }
+
+     
+    _dedActif() { return !!this._ded && this._type === 'officielle' && this._deds().length > 0; }
+
+     
+    _deds() {
+      const c = this._dedCache;
+      if (c && c.p === this._p && c.lg === this._lang()) return c.l;
+      const en = this._en();
+      const sks = (this._p && this._p.skippers) || {};
+      const l = this._anims().filter(a => (a.type || 'officielle') === 'officielle' && estDedicace(a)).map(a => {
+        const sk = a.bateauId ? (sks[a.bateauId] || null) : null;
+        const classes = sk && CLASSE_DE_FLOTTE[sk.classe] ? [CLASSE_DE_FLOTTE[sk.classe]]
+          : (Array.isArray(a.classes) && a.classes.length ? a.classes.map(classeCanon).filter(Boolean) : classesDuTexte(a.titre));
+        return {
+          a, id: a.id, date: a.date, debut: a.debut || '', fin: a.fin || '', sk,
+          cle: sk ? 'b:' + a.bateauId : 't:' + pli(a.titre),
+          classe: classes[0] || '',
+          nom: sk ? (sk.skipper || a.titre) : a.titre,
+          sous: sk ? (sk.bateau || '') : '',
+          ou: a.lieu || (sk && sk.ponton ? (en ? 'At the ' + nomPonton(sk.ponton) + ' pontoon' : 'Au ponton ' + nomPonton(sk.ponton)) : '')
+        };
+      }).sort((x, y) => String(x.date).localeCompare(String(y.date)) || minutes(x.debut) - minutes(y.debut));
+      this._dedCache = { p: this._p, lg: this._lang(), l };
+      return l;
+    }
+    _dedGarde(d) {
+      if (this._dedClasse && d.classe !== this._dedClasse) return false;
+      const q = rNorm0(this._dedQ);
+      return !q || rNorm0(d.nom + ' ' + d.sous + ' ' + d.a.titre + ' ' + (d.classe ? CLASSES[d.classe].lib : '')).includes(q);
+    }
+    _dedsDu(iso) { return this._deds().filter(d => d.date === iso && this._dedGarde(d)); }
+
+     
+    _dedCouleur(d) { return d.classe && CLASSES[d.classe] ? CLASSES[d.classe].c : '#8A9BB5'; }
+    _dedVisage(d, cote, cls) {
+      if (d.sk && d.sk.portrait) {
+        return '<img class="' + cls + '" src="' + esc(wixTaille(d.sk.portrait, cote, cote)) + '" alt="" loading="lazy" decoding="async" data-repli>';
+      }
+       
+      return '<span class="' + cls + ' ' + cls + '--sans">' + svg(IC.signature) + '</span>';
+    }
+    
+
+    _dedNom(d) {
+      if (!d.sk) return '<b>' + esc(d.nom) + '</b>';
+      const t = String(d.nom || '').trim();
+      const m = t.match(/^(.*?)\s*((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/);
+      const parts = m && m[1] ? { p: m[1], n: m[2].trim() } : (() => {
+        const w = t.split(/\s+/);
+        return w.length > 1 ? { p: w.slice(0, -1).join(' '), n: w[w.length - 1].toUpperCase() } : { p: '', n: t };
+      })();
+      return '<b>' + esc(parts.n) + '</b>' + (parts.p ? ' <span>' + esc(parts.p) + '</span>' : '');
+    }
+    _jourLong(iso) {
+      const d = dateDe(iso);
+      const en = this._en();
+      const J = en ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+                   : ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+      const M = en ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                   : ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+      const n = d.getDate();
+      return J[d.getDay()] + ' ' + (n === 1 && !en ? '1er' : n) + ' ' + M[d.getMonth()];
+    }
+    _jourCourt(iso) { const d = dateDe(iso); return this._jc(d) + '. ' + d.getDate() + ' ' + this._mc(d) + '.'; }
+
+    
+
+
+    _rch() {
+      const q = String(this._q || '').trim();
+      if (!this._p || this._dedActif() || rNorm0(q).length < 2) return null;
+      const auj = this._maintenant().jour;
+      const cle = q + '|' + this._type + '|' + this._lang() + '|' + auj + '|' + this._jour;
+      const c = this._rchCache;
+      if (c && c.cle === cle && c.p === this._p) return c.r;
+      const jours = this._jours();
+      const dans = jours.includes(auj);
+      const r = rAnalyser(q, { jours, ref: dans ? auj : this._jour });
+      let res = null;
+      if (r.mots.length || r.temps) {
+        if (!this._rIdx || this._rIdx.p !== this._p || this._rIdx.lg !== this._lang()) this._rIdx = { p: this._p, lg: this._lang(), m: new Map() };
+        const sks = this._p.skippers || {};
+        const champsDe = (a) => {
+          let e = this._rIdx.m.get(a.id);
+          if (!e) {
+            e = rIndexer(a, a.bateauId ? sks[a.bateauId] : null);
+            if (a.catLib) e[1][1].push(...rToksDoc(this._cat(a.catLib)));
+            this._rIdx.m.set(a.id, e);
+          }
+          return e;
+        };
+        const duType = (t) => this._anims().filter(a => (a.type || 'officielle') === t && !(t === 'officielle' && estDedicace(a)));
+        const ici = rTrouver(duType(this._type), champsDe, r);
+        r.ok = new Set(ici.map(x => x.a.id));
+        r.corr = new Map();
+        ici.forEach(x => x.corr.forEach(([mq, w]) => r.corr.set(mq, w)));
+         
+        r.vu = new Map();
+        r.corr.forEach((w, mq) => {
+          for (const x of ici) {
+            const m = String(x.a.titre + ' ' + (x.a.desc || '')).split(/[^A-Za-zÀ-ÿ0-9]+/).find(p => rToks(p)[0] === w);
+            if (m) { r.vu.set(mq, m.toLowerCase()); break; }
+          }
+        });
+        r.ailleurs = this._registresVisibles().filter(t => t !== this._type)
+          .map(t => ({ type: t, n: rTrouver(duType(t), champsDe, r).length })).filter(x => x.n);
+        r.ded = this._type === 'officielle' ? this._dedsRecherche(r) : [];
+        r.dansFenetre = dans;
+        res = r;
+      }
+      this._rchCache = { cle, p: this._p, r: res };
+      return res;
+    }
+    
+
+    _dedsRecherche(r) {
+      const estMot = (q) => rVaut(q, 'dedicace') >= 0.75;
+      const autres = r.mots.filter(q => !estMot(q));
+      const demandees = autres.length < r.mots.length;
+      if (!demandees && !autres.length) return [];
+      return this._deds().filter(d => rDansLeTemps(d, r) && autres.every(q =>
+        rToksDoc(d.nom + ' ' + d.sous + ' ' + (d.classe ? CLASSES[d.classe].lib : '') + (d.sk ? '' : ' ' + d.a.titre)).some(w => rVaut(q, w) >= 0.85)));
+    }
+    _hl(t) { return this._marque ? rSurligner(t, this._marque) : esc(t); }
+
+    
+
+    _contenuListe(liste) {
+      if (this._dedActif()) return this._vueDed();
+      const r = this._rch();
+      return r ? this._listeRch(r) : this._avecMaintenant(liste);
+    }
+    _socleJour(jourLong, combien) {
+      const en = this._en();
+      if (this._rch()) {
+        const n = this._jours().reduce((s, iso) => s + this._filtrees(iso).length, 0);
+        return '<b>' + (en ? 'Search' : 'Recherche') + '</b><span>' + n + ' rendez-vous</span>';
+      }
+      if (this._dedActif()) {
+        const n = this._dedsDu(this._jour).length;
+        return '<b>' + esc(jourLong) + '</b><span>' + (en ? n + (n > 1 ? ' signings' : ' signing') : n + (n > 1 ? ' dédicaces' : ' dédicace')) + '</span>';
+      }
+      return '<b>' + esc(jourLong) + '</b>' + '<span>' + combien + ' rendez-vous</span>';
+    }
+    _annonceListe(liste) {
+      const en = this._en();
+      if (this._rch()) {
+        const n = this._jours().reduce((s, iso) => s + this._filtrees(iso).length, 0);
+        return (en ? 'Search, ' : 'Recherche, ') + this._compte(n);
+      }
+      if (this._dedActif()) {
+        const n = this._dedTri === 'skipper' ? this._deds().filter(d => this._dedGarde(d)).length : this._dedsDu(this._jour).length;
+        return (en ? 'Signings, ' : 'Dédicaces, ') + n;
+      }
+      const dj = this._jour ? dateDe(this._jour) : null;
+      return (dj ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '., ' : '') + this._compte(liste.length);
+    }
+
+     
+    _champQ(id, valeur, invite, exemples) {
+      const en = this._en();
+      return '<label class="rp-q' + (valeur ? ' est-pose' : '') + '">' + svg(IC.loupe) +
+        '<input id="' + id + '" type="text" autocomplete="off" spellcheck="false" enterkeyhint="search" maxlength="80"' +
+          ' aria-label="' + esc(invite) + '" placeholder="' + esc(invite) + '" value="' + esc(valeur) + '">' +
+        '<button type="button" class="rp-q-x" data-q-x="' + id + '" aria-label="' + esc(this._t('Effacer la recherche')) + '"' +
+          (valeur ? '' : ' hidden') + '>' + svg(IC.croix, 'rp-ic') + '</button>' +
+        (exemples ? '<span class="rp-q-ex"><small>' + (en ? 'For example' : 'Par exemple') + '</small>' + this._exemples('rp-q-puce') + '</span>' : '') +
+      '</label>';
+    }
+    _inviteQ() {
+      const en = this._en();
+      if (this._type === 'off') return en ? 'Search the Off' : 'Chercher dans le Off';
+      if (this._type === 'guadeloupe') return en ? 'Search Guadeloupe' : 'Chercher en Guadeloupe';
+      return en ? 'Search the programme' : 'Chercher un rendez-vous';
+    }
+    
+
+
+    _exemples(cls) {
+      const en = this._en();
+      const anims = this._anims().filter(a => (a.type || 'officielle') === this._type && !(this._type === 'officielle' && estDedicace(a)));
+      const out = [];
+      const freq = new Map();
+      anims.forEach(a => {
+        const k = String(a.titre || '').trim();
+        if (!k) return;
+        if (!freq.has(k)) freq.set(k, new Set());
+        freq.get(k).add(a.date);
+      });
+      [...freq].filter(([, s]) => s.size >= 3).sort((x, y) => y[1].size - x[1].size).slice(0, 2)
+        .forEach(([t]) => out.push(t.length > 26 ? t.split(/\s[-–:]\s/)[0].slice(0, 26) : t));
+      const cats = new Map();
+      anims.forEach(a => { if (a.catLib) cats.set(a.catLib, (cats.get(a.catLib) || 0) + 1); });
+      [...cats].sort((x, y) => y[1] - x[1]).slice(0, 3).forEach(([c]) => out.push(this._cat(c)));
+      const cl = new Map();
+      anims.forEach(a => classesDuTexte(a.titre).forEach(k => cl.set(k, (cl.get(k) || 0) + 1)));
+      [...cl].sort((x, y) => y[1] - x[1]).slice(0, 2).forEach(([k]) => out.push(CLASSES[k].lib));
+      out.push(en ? 'Tonight' : 'Ce soir');
+      if (this._type === 'officielle' && this._deds().length) out.push(en ? 'Signings' : 'Dédicaces');
+      return [...new Set(out)].slice(0, 9)
+        .map(x => '<button type="button" class="' + cls + '" data-exemple="' + esc(x) + '">' + esc(x) + '</button>').join('');
+    }
+    _boutonDed() {
+      const en = this._en();
+      const on = this._dedActif();
+      const du = this._deds().filter(d => d.date === this._jour);
+      const n = du.length;
+      const faces = du.filter(d => d.sk && d.sk.portrait).slice(0, 3);
+      const vis = faces.length
+        ? '<span class="rp-ded-v">' + faces.map(d => '<img src="' + esc(wixTaille(d.sk.portrait, 64, 64)) + '" alt="" loading="lazy" decoding="async">').join('') + '</span>'
+        : (n && du[0].classe ? '<span class="rp-ded-v rp-ded-v--b">' + blason(du[0].classe, 'rp-ded-vb') + '</span>'
+          : '<span class="rp-ded-sans">' + svg(IC.signature) + '</span>');
+      const sous = on ? (en ? 'Full programme' : 'Tout le programme')
+        : n ? (en ? 'Meet the skippers' : 'Avec les skippers')
+        : (en ? 'See all sessions' : 'Voir tous les créneaux');
+      return '<button type="button" class="rp-ded" id="rpDed" aria-pressed="' + (on ? 'true' : 'false') + '">' + vis +
+        '<span class="rp-ded-lib"><b>' + (en ? 'Signings' : 'Dédicaces') + '</b><small>' + esc(sous) + '</small></span>' +
+        (on ? '<span class="rp-ded-x">' + svg(IC.croix, 'rp-ic') + '</span>' : (n ? '<span class="rp-ded-n">' + n + '</span>' : '')) +
+      '</button>';
+    }
+    _boutonPartage(pose) {
+      if (!this._pilote) return '';
+      const voir = pose || this._type !== this._registreParDefaut() || this._jourChoisi || this._dedActif();
+      return '<button type="button" class="rp-partage" id="rpPartage"' + (voir ? '' : ' hidden') +
+        ' aria-label="Partager cette sélection de la programmation">' +
+        svg(IC.partage, 'rp-ic') + '<span>Partager</span></button>';
+    }
+
+    
+
+
+    _outilsDed() {
+      const en = this._en();
+      const tri = this._dedTri === 'skipper' ? 'skipper' : 'jour';
+      const classes = ORDRE_CLASSES.filter(c => this._deds().some(d => d.classe === c));
+      return '<div class="rp-outils rp-outils--ded">' +
+        '<div class="rp-filtres rp-filtres--ded">' +
+          this._champQ('rpDq', this._dedQ, en ? 'A skipper, a boat' : 'Un skipper, un bateau', false) +
+          '<div class="rp-seg" role="group" aria-label="' + esc(this._t('Classement')) + '">' +
+            '<button type="button" data-ded-tri="jour" aria-pressed="' + (tri === 'jour') + '">' + (en ? 'This day' : 'Ce jour') + '</button>' +
+            '<button type="button" data-ded-tri="skipper" aria-pressed="' + (tri === 'skipper') + '">' + (en ? 'By skipper' : 'Par skipper') + '</button>' +
+          '</div>' +
+          this._boutonDed() +
+        '</div>' +
+        (classes.length > 1
+          ? '<div class="rp-blasons' + (this._dedClasse ? ' est-choisi' : '') + '">' +
+              '<span class="rp-blasons-lbl"><b>' + (en ? 'Class' : 'Classe') + '</b>' +
+                (this._dedClasse ? esc(CLASSES[this._dedClasse].lib) : (en ? 'All' : 'Toutes')) + '</span>' +
+              '<div class="rp-blasons-rang">' + classes.map(c =>
+                '<button type="button" class="rp-bl" data-ded-classe="' + esc(c) + '" aria-pressed="' + (this._dedClasse === c) + '"' +
+                  ' aria-label="' + esc(CLASSES[c].lib) + '">' + blason(c, 'rp-bl-i') + '</button>').join('') + '</div>' +
+              '<p class="rp-blasons-note">' + (en ? 'Skippers meet the public: a photo, a word, a signature.'
+                : 'Les skippers à la rencontre du public, pour une photo, un mot, une signature.') + '</p>' +
+            '</div>'
+          : '') +
+        '<div class="rp-compte">' + this._boutonPartage(true) + '</div>' +
+      '</div>';
+    }
+
+    
+
+
+
+    _raccords(tout) {
+      const out = new Map();
+      const f = this._f;
+      if (this._type !== 'officielle' || f.lieu || f.cat || f.theme || !tout.length) return out;
+      const en = this._en();
+      const du = this._deds().filter(d => d.date === this._jour);
+      const MOM = [['matin', 0, 12 * 60, en ? 'in the morning' : 'le matin'],
+                   ['apresmidi', 12 * 60, 18 * 60, en ? 'in the afternoon' : 'l’après-midi'],
+                   ['soir', 18 * 60, 48 * 60, en ? 'in the evening' : 'en soirée']];
+      if (!du.length) {
+        const suite = this._deds().find(d => d.date > this._jour);
+        if (suite && !f.heure) {
+          out.set('rien', '<button type="button" class="rp-raccord rp-raccord--rien" data-raccord-jour="' + esc(suite.date) + '">' +
+            '<span class="rp-ded-sans">' + svg(IC.signature) + '</span>' +
+            '<span class="rp-raccord-t"><b>' + (en ? 'No signings this day' : 'Pas de dédicace ce jour') + '</b><br>' +
+              (en ? 'Next on ' : 'Prochaines le ') + esc(this._jourCourt(suite.date)) + '</span>' +
+            '<span class="rp-raccord-fl">' + (en ? 'Go' : 'Y aller') + svg(IC.fleche) + '</span></button>');
+        }
+        return out;
+      }
+      MOM.forEach(([cle, de, a, dit]) => {
+        if (f.heure && f.heure !== cle) return;
+        const ds = du.filter(d => { const m = minutes(d.debut); return m >= de && m < a; });
+        if (!ds.length) return;
+        const noms = ds.slice(0, 3).map(d => {
+          if (!d.sk) return d.nom;
+          const m = String(d.nom).match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/);
+          return m ? m[1].trim() : d.nom;
+        }).join(', ') + (ds.length > 3 ? (en ? ' and ' + (ds.length - 3) + ' more' : ' et ' + (ds.length - 3) + (ds.length > 4 ? ' autres' : ' autre')) : '');
+        const fin = ds.reduce((x, d) => (d.fin && d.fin > x ? d.fin : x), ds[0].fin || '');
+        const faces = ds.filter(d => d.sk && d.sk.portrait).slice(0, 4);
+        const vis = faces.length
+          ? faces.map(d => '<img src="' + esc(wixTaille(d.sk.portrait, 60, 60)) + '" alt="" loading="lazy" decoding="async">').join('')
+          : (ds[0].classe ? blason(ds[0].classe, 'rp-raccord-b') : '<span class="rp-ded-sans">' + svg(IC.signature) + '</span>');
+        out.set(cle, '<button type="button" class="rp-raccord" data-raccord="' + cle + '">' +
+          '<span class="rp-raccord-v">' + vis + '</span>' +
+          '<span class="rp-raccord-t"><b>' + (en ? ds.length + (ds.length > 1 ? ' signings ' : ' signing ') + dit
+              : ds.length + (ds.length > 1 ? ' dédicaces ' : ' dédicace ') + dit) + '</b>' +
+            (ds[0].debut ? (en ? ', ' + esc(ds[0].debut) + (fin ? ' to ' + esc(fin) : '') : ', de ' + esc(ds[0].debut) + (fin ? ' à ' + esc(fin) : '')) : '') +
+            '<br>' + esc(noms) + '</span>' +
+          '<span class="rp-raccord-fl">' + (en ? 'See the signings' : 'Voir les dédicaces') + svg(IC.fleche) + '</span></button>');
+      });
+      return out;
+    }
+
+     
+    _vueDed() {
+      const en = this._en();
+      const lib = (n) => en ? n + (n > 1 ? ' signings' : ' signing') : n + (n > 1 ? ' dédicaces' : ' dédicace');
+      const filtreLib = this._dedClasse ? ' · ' + esc(CLASSES[this._dedClasse].lib) : '';
+      if (this._dedTri === 'skipper') {
+        const groupes = new Map();
+        this._deds().filter(d => this._dedGarde(d)).forEach(d => {
+          if (!groupes.has(d.cle)) groupes.set(d.cle, []);
+          groupes.get(d.cle).push(d);
+        });
+        const nomTri = (d) => { const m = String(d.nom).match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/); return pli(m ? m[1] : d.nom); };
+        const liste = [...groupes.values()].sort((x, y) => (!x[0].sk - !y[0].sk) || nomTri(x[0]).localeCompare(nomTri(y[0]), 'fr'));
+        const tete = '<div class="rp-res-tete"><b>' + (en ? 'All the signings' : 'Toutes les dédicaces') + '</b><span>' +
+          lib(liste.reduce((s, l) => s + l.length, 0)) + filtreLib + '</span></div>';
+        if (!liste.length) return tete + '<p class="rp-res-vide">' + (en ? 'No signing for this choice.' : 'Aucune dédicace pour ce choix.') + '</p>';
+        const auj = this._maintenant().jour;
+        return tete + '<div class="rp-dk-grille">' + liste.map(l => {
+          const d = l[0];
+          const avenir = l.filter(x => x.date >= auj);
+          const montres = (avenir.length ? avenir : l).slice(0, 8);
+          const reste = (avenir.length ? avenir : l).length - montres.length;
+          return '<article class="rp-dk" style="--c:' + this._dedCouleur(d) + '">' +
+            this._dedVisage(d, 128, 'rp-dk-p') +
+            (d.classe ? blason(d.classe, 'rp-dk-b') : '') +
+            '<div class="rp-dk-qui">' + this._dedNom(d) + (d.sous ? '<small>' + esc(d.sous) + '</small>' : (d.a.lieu ? '<small>' + esc(d.a.lieu) + '</small>' : '')) + '</div>' +
+            '<div class="rp-dk-cr">' + montres.map(x =>
+              '<button type="button" class="rp-dk-c' + (x.date === this._jour ? ' est-jour' : '') + '" data-ded-jour="' + esc(x.date) + '">' +
+                esc(this._jourCourt(x.date)) + ' <b>' + esc(x.debut) + '</b></button>').join('') +
+              (reste > 0 ? '<span class="rp-dk-c rp-dk-plus">+' + reste + '</span>' : '') +
+            '</div>' +
+          '</article>';
+        }).join('') + '</div>';
+      }
+      const du = this._dedsDu(this._jour);
+      let html = '<div class="rp-res-tete"><b>' + esc(this._jourLong(this._jour)) + '</b><span>' + lib(du.length) + filtreLib + '</span></div>';
+      if (!du.length) {
+        const suite = this._deds().find(d => d.date > this._jour && this._dedGarde(d));
+        return html + (suite
+          ? '<button type="button" class="rp-raccord rp-raccord--rien" data-ded-jour="' + esc(suite.date) + '">' +
+              '<span class="rp-ded-sans">' + svg(IC.signature) + '</span>' +
+              '<span class="rp-raccord-t"><b>' + (en ? 'No signing this day' : 'Aucune dédicace ce jour') +
+                (this._dedQ || this._dedClasse ? (en ? ' for this choice' : ' pour ce choix') : '') + '</b><br>' +
+                (en ? 'Next on ' : 'Prochaines le ') + esc(this._jourCourt(suite.date)) + '</span>' +
+              '<span class="rp-raccord-fl">' + (en ? 'Go' : 'Y aller') + svg(IC.fleche) + '</span></button>'
+          : '<p class="rp-res-vide">' + (en ? 'No signing this day.' : 'Aucune dédicace ce jour.') + '</p>');
+      }
+      this._moments().forEach((m, k, tous) => {
+        const de = k ? tous[k - 1].fin : 0;
+        const ds = du.filter(d => { const x = minutes(d.debut); return x >= de && x < m.fin; });
+        if (!ds.length) return;
+        html += '<h3 class="rp-moment" id="rpDed-' + m.cle + '"><span>' + esc(m.lib) + '</span><i>' + ds.length + '</i></h3>' +
+          ds.map(d => '<div class="rp-dl" style="--c:' + this._dedCouleur(d) + '">' +
+            '<div class="rp-dl-h"><b>' + esc(d.debut) + '</b>' + (d.fin ? '<small>' + esc(d.fin) + '</small>' : '') + '</div>' +
+            this._dedVisage(d, 92, 'rp-dl-p') +
+            '<div class="rp-dl-n">' + this._dedNom(d) + (d.sous ? '<small>' + esc(d.sous) + '</small>' : '') + '</div>' +
+            '<div class="rp-dl-ou">' + esc(d.ou) + '</div>' +
+            (d.classe ? blason(d.classe, 'rp-dl-b') : '<span class="rp-dl-b"></span>') +
+          '</div>').join('');
+      });
+      return html;
+    }
+
+    
+
+
+
+    _listeRch(r) {
+      const en = this._en();
+      const auj = this._maintenant().jour;
+      const now = this._maintenant();
+      const groupes = this._jours().map(iso => ({ iso, l: this._filtrees(iso) })).filter(g => g.l.length);
+      const n = groupes.reduce((s, g) => s + g.l.length, 0);
+      const avenir = groupes.filter(g => !r.dansFenetre || g.iso >= auj);
+      const passes = groupes.filter(g => r.dansFenetre && g.iso < auj);
+      const nAvenir = avenir.reduce((s, g) => s + g.l.length, 0);
+      const guil = (s) => en ? '“' + s + '”' : '« ' + s + ' »';
+      let compte;
+      if (!n) compte = r.ded.length ? (en ? 'not in the programme, but at a signing' : 'pas au programme, mais en dédicace') : (en ? 'no event' : 'aucun rendez-vous');
+      else {
+        compte = en ? n + (n > 1 ? ' events' : ' event') : n + ' rendez-vous';
+        compte += groupes.length > 1 ? (en ? ' across ' + groupes.length + ' days' : ' sur ' + groupes.length + ' jours') : ', ' + this._jourLong(groupes[0].iso);
+        if (passes.length) compte += en ? ', ' + nAvenir + ' still to come' : ', dont ' + nAvenir + ' à venir';
+      }
+      let html = '<div class="rp-res-tete"><b>' + esc(guil(r.brut)) + '</b><span>' + esc(compte) + '</span>' +
+        '<button type="button" class="rp-res-eff" data-effacer-q>' + (en ? 'Clear the search' : 'Effacer la recherche') + '</button>' +
+        (r.corr.size
+          ? '<span class="rp-res-note est-corr">' + (en ? 'Close matches: ' : 'Résultats approchés : ') +
+              [...r.corr.keys()].map(q => esc(guil(q)) + (en ? ' read as ' : ' lu comme ') + esc(guil(r.vu.get(q) || r.corr.get(q)))).join(', ') + '.</span>'
+          : '') +
+        (r.relatif && !r.dansFenetre
+          ? '<span class="rp-res-note">' + (en
+              ? 'Before the village opens, “today”, “tonight” and “tomorrow” start from the day shown, ' + esc(this._jourLong(this._jour)) + '.'
+              : 'Avant l’ouverture du village, « aujourd’hui », « ce soir » et « demain » partent du jour affiché, le ' + esc(this._jourLong(this._jour)) + '.') + '</span>'
+          : '') +
+      '</div>';
+      if (r.ded.length) {
+        const prochaines = r.ded.filter(d => !r.dansFenetre || d.date >= auj);
+        const liste = prochaines.length ? prochaines : r.ded;
+        const uniques = [...new Map(liste.map(d => [d.cle, d])).values()];
+        const noms = uniques.slice(0, 3).map(d => {
+          if (!d.sk) return d.nom;
+          const m = String(d.nom).match(/((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)$/);
+          return m ? m[1].trim() : d.nom;
+        }).join(', ') + (uniques.length > 3 ? (en ? ' and ' + (uniques.length - 3) + ' more' : ' et ' + (uniques.length - 3) + (uniques.length > 4 ? ' autres' : ' autre')) : '');
+        const p = liste[0];
+        const faces = uniques.filter(d => d.sk && d.sk.portrait).slice(0, 4);
+        html += '<button type="button" class="rp-raccord" data-ded-recherche>' +
+          '<span class="rp-raccord-v">' + (faces.length
+            ? faces.map(d => '<img src="' + esc(wixTaille(d.sk.portrait, 60, 60)) + '" alt="" loading="lazy" decoding="async">').join('')
+            : (p.classe ? blason(p.classe, 'rp-raccord-b') : '<span class="rp-ded-sans">' + svg(IC.signature) + '</span>')) + '</span>' +
+          '<span class="rp-raccord-t"><b>' + (en ? liste.length + (liste.length > 1 ? ' signings' : ' signing') : liste.length + (liste.length > 1 ? ' dédicaces' : ' dédicace')) + '</b>' +
+            (en ? ': ' : ', ') + esc(noms) + '<br>' +
+            (en ? (prochaines.length || !r.dansFenetre ? 'next ' : 'last ') : (prochaines.length || !r.dansFenetre ? 'la prochaine ' : 'la dernière ')) +
+            esc(this._jourCourt(p.date)) + (p.debut ? (en ? ' at ' : ' à ') + esc(p.debut) : '') + '</span>' +
+          '<span class="rp-raccord-fl">' + (en ? 'See the signings' : 'Voir les dédicaces') + svg(IC.fleche) + '</span></button>';
+      }
+      this._marque = r;
+      const groupe = (g) => '<h3 class="rp-moment rp-moment--jour" id="rpRes-' + esc(g.iso) + '"><span>' + esc(this._jourLong(g.iso)) + '</span><i>' + g.l.length + '</i></h3>' +
+        g.l.map(a => this._tuile(a, now)).join('');
+      html += avenir.map(groupe).join('');
+      if (passes.length) {
+        const nP = n - nAvenir;
+        html += '<details class="rp-res-passes"' + (avenir.length ? '' : ' open') + '><summary>' +
+          (en ? nP + (nP > 1 ? ' past events' : ' past event') : nP + (nP > 1 ? ' rendez-vous déjà passés' : ' rendez-vous déjà passé')) + '</summary>' +
+          passes.map(groupe).join('') + '</details>';
+      }
+      this._marque = null;
+      r.ailleurs.forEach(x => {
+        const nom = this._t(REGISTRE_NOMS[x.type].onglet);
+        html += '<button type="button" class="rp-res-ailleurs" data-rch-registre="' + esc(x.type) + '"><span><b>' +
+          (en ? x.n + (x.n > 1 ? ' events' : ' event') : x.n + ' rendez-vous') + '</b> ' +
+          (en ? (x.n > 1 ? 'also match in ' : 'also matches in ') : (x.n > 1 ? 'correspondent aussi dans ' : 'correspond aussi dans ')) +
+          (x.type === 'officielle' ? (en ? 'the ' : 'le ') : (x.type === 'off' ? (en ? 'the ' : 'le ') : (en ? '' : 'la programmation '))) + esc(nom) + '.</span>' +
+          '<span class="rp-res-fl">' + (en ? 'See' : 'Voir') + svg(IC.fleche) + '</span></button>';
+      });
+      if (!n && !r.ded.length) {
+        html += '<div class="rp-res-vide"><h3>' + (en ? 'Nothing for ' : 'Rien pour ') + esc(guil(r.brut)) + '</h3>' +
+          '<p>' + (en ? 'Try one of these, or a skipper’s name:' : 'Essayez l’un de ceux-ci, ou le nom d’un skipper :') + '</p>' +
+          '<div class="rp-res-ex">' + this._exemples('rp-q-puce') + '</div></div>';
+      }
+      return html;
+    }
+
+     
+    _versListe() {
+      const l = this.querySelector('#rpListe');
+      if (l) l.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    _ouvrirDed(moment) {
+      this._ded = true;
+      this._dedTri = 'jour';
+      this._dedQ = '';
+      this._dedClasse = '';
+      this._rendre();
+      const cible = (moment && this.querySelector('#rpDed-' + moment)) || this.querySelector('.rp-outils');
+      if (cible) cible.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+     
+    _actionListe(el) {
+      if (el.hasAttribute('data-raccord')) { this._ouvrirDed(el.dataset.raccord); return true; }
+      if (el.dataset.raccordJour) {
+        this._jour = el.dataset.raccordJour; this._jourChoisi = true;
+        this._ouvrirDed('');
+        return true;
+      }
+      if (el.dataset.dedJour) {
+        this._jour = el.dataset.dedJour; this._jourChoisi = true; this._dedTri = 'jour';
+        this._rendre();
+        this._versListe();
+        return true;
+      }
+      if (el.hasAttribute('data-ded-recherche')) {
+        
+
+        const r = this._rch();
+        if (!r) return true;
+        const autres = r.mots.filter(q => rVaut(q, 'dedicace') < 0.75);
+        const classe = autres.length === 1 ? (R_CLASSE[autres[0]] || '') : '';
+        const unJour = r.dates && r.dates.size === 1 ? [...r.dates][0] : '';
+        this._ded = true;
+        this._dedTri = unJour ? 'jour' : 'skipper';
+        if (unJour) { this._jour = unJour; this._jourChoisi = true; }
+        this._dedClasse = classe;
+        this._dedQ = classe ? '' : autres.join(' ');
+        this._rendre();
+        const o = this.querySelector('.rp-outils');
+        if (o) o.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        return true;
+      }
+      if (el.dataset.rchRegistre) {
+        const t = el.dataset.rchRegistre;
+        if (estRegistre(t)) {
+          this._choisirRegistre(t);
+          const so = this.querySelector('.rp-socle');
+          if (so) so.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+        return true;
+      }
+      if (el.hasAttribute('data-effacer-q')) { this._q = ''; this._rendre(); return true; }
+      if (el.dataset.exemple) {
+        this._q = el.dataset.exemple;
+        const i = this.querySelector('#rpQ');
+        if (i) i.value = this._q;
+        this._majRecherche();
+        return true;
+      }
+      return false;
+    }
+    _brancherRecherche() {
+      const q = (s) => this.querySelector(s);
+      
+
+
+      const brancherChamp = (id, cle) => {
+        const i = q('#' + id);
+        if (!i) return;
+        let minuteur = 0;
+        const maj = () => { clearTimeout(minuteur); this[cle] = i.value; this._majRecherche(); };
+        i.addEventListener('input', () => { this[cle] = i.value; clearTimeout(minuteur); minuteur = setTimeout(maj, 140); });
+        i.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && i.value) { e.preventDefault(); i.value = ''; maj(); }
+          else if (e.key === 'Enter') { e.preventDefault(); maj(); i.blur(); this._versListe(); }
+        });
+      };
+      brancherChamp('rpQ', '_q');
+      brancherChamp('rpDq', '_dedQ');
+      this.querySelectorAll('[data-q-x]').forEach(b => b.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const i = q('#' + b.dataset.qX);
+        if (i) i.value = '';
+        if (b.dataset.qX === 'rpQ') this._q = ''; else this._dedQ = '';
+        this._majRecherche();
+        if (i) i.focus();
+      }));
+       
+      this.querySelectorAll('.rp-q-ex .rp-q-puce').forEach(b => {
+        b.addEventListener('mousedown', (e) => e.preventDefault());
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
+          this._q = b.dataset.exemple;
+          const i = q('#rpQ');
+          if (i) i.value = this._q;
+          this._majRecherche();
+        });
+      });
+      const bd = q('#rpDed');
+      if (bd) bd.addEventListener('click', () => {
+        this._ded = !this._dedActif();
+        if (this._ded) { this._dedTri = 'jour'; this._dedQ = ''; this._dedClasse = ''; }
+        this._rendre();
+      });
+      this.querySelectorAll('[data-ded-tri]').forEach(b => b.addEventListener('click', () => {
+        this._dedTri = b.dataset.dedTri === 'skipper' ? 'skipper' : 'jour';
+        this._rendre();
+      }));
+      this.querySelectorAll('[data-ded-classe]').forEach(b => b.addEventListener('click', () => {
+        this._dedClasse = this._dedClasse === b.dataset.dedClasse ? '' : b.dataset.dedClasse;
+        this._rendre();
+      }));
+    }
+    
+
+    _majRecherche() {
+      if (!this._p) return;
+      const rch = this._rch(), ded = this._dedActif();
+      const liste = this._filtrees(this._jour);
+      
+
+      if (!rch && !ded && !liste.length) { this._rendre(); return; }
+      const racine = this.querySelector('.rp-root');
+      if (racine) racine.classList.toggle('est-rch', !!rch);
+      const l = this.querySelector('#rpListe');
+      if (l) {
+        this._rang = 0;
+        l.innerHTML = this._contenuListe(liste);
+        this._i18n(l);
+        l.querySelectorAll('img[data-repli]').forEach(img => {
+          const cacher = () => { img.style.display = 'none'; };
+          if (img.complete && img.naturalWidth === 0) cacher();
+          else img.addEventListener('error', cacher, { once: true });
+        });
+      }
+      const v = this.querySelector('.rp-vide');
+      if (v) v.hidden = true;
+      const journee = this._type !== 'officielle' ? null
+        : ((this._p.journees || []).find(j => j.date === this._jour && j.actif !== false) || null);
+      const jb = this.querySelector('.rp-jb');
+      if (jb) { jb.outerHTML = this._bandeauJournee(journee, rch || ded ? 0 : liste.length); }
+      this._majRail();
+      const f = this._f;
+      const pose = !!(f.heure || f.theme || f.lieu || f.cat || rch);
+      const raz = this.querySelector('#rpRaz');
+      if (raz) raz.hidden = !pose;
+      const bp = this.querySelector('#rpPartage');
+      if (bp) bp.hidden = !(pose || ded || this._type !== this._registreParDefaut() || this._jourChoisi);
+      this.querySelectorAll('[data-q-x]').forEach(b => {
+        const i = this.querySelector('#' + b.dataset.qX);
+        b.hidden = !(i && i.value);
+        const lab = b.closest('.rp-q');
+        if (lab) lab.classList.toggle('est-pose', !!(i && i.value));
+      });
+      this._annoncer(this._annonceListe(liste));
+      this._ecrireAdresse();
+    }
+     
+    _majRail() {
+      const so = this.querySelector('.rp-socle');
+      if (!so) return;
+      const dedV = this._dedActif();
+      const filtre = this._filtrePose() || dedV;
+      const teinte = dedV ? '#FCF150' : (this._f.cat ? catDe(this._f.cat).c : '#FFFFFF');
+      so.classList.toggle('a-filtre', !!filtre);
+      if (filtre) so.style.setProperty('--rp-teinte', teinte); else so.style.removeProperty('--rp-teinte');
+      const auj = this._maintenant().jour;
+      const journees = this._type !== 'officielle' ? new Set()
+        : new Set((this._p.journees || []).filter(j => j.actif !== false).map(j => j.date));
+      so.querySelectorAll('.rp-jour').forEach(b => {
+        const iso = b.dataset.jour;
+        const nf = filtre && iso >= auj ? (dedV ? this._dedsDu(iso).length : this._filtrees(iso).length) : 0;
+        b.classList.toggle('est-trouve', !!(filtre && nf));
+        b.classList.toggle('est-sans', !!(filtre && !nf));
+        let s = b.querySelector('.rp-jour-n');
+        if (nf) {
+          if (!s) { s = document.createElement('span'); s.className = 'rp-jour-n'; s.setAttribute('aria-hidden', 'true'); b.appendChild(s); }
+          s.textContent = String(nf);
+        } else if (s) s.remove();
+        const pa = b.querySelector('.rp-jour-pastille');
+        if (pa) pa.hidden = !(journees.has(iso) && !filtre);
+      });
+      const sj = so.querySelector('.rp-socle-jour');
+      if (sj) {
+        const dj = this._jour ? dateDe(this._jour) : null;
+        sj.innerHTML = this._socleJour(dj ? this._jc(dj) + '. ' + dj.getDate() + ' ' + this._mc(dj) + '.' : '', this._filtrees(this._jour).length);
+        this._i18n(sj);
+      }
+    }
+
      
 
     _brancher() {
@@ -7173,6 +8372,13 @@ rdr-programme{display:block;width:100%;}
 
       this.querySelectorAll('.rp-jour').forEach(b =>
         b.addEventListener('click', () => {
+          
+
+          if (this._rch()) {
+            const g = this.querySelector('#rpRes-' + b.dataset.jour);
+            if (g) { const d = g.closest('details'); if (d) d.open = true; g.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+            this._q = '';
+          }
           this._jour = b.dataset.jour; this._jourChoisi = true; this._rendre();
         }));
 
@@ -7186,8 +8392,9 @@ rdr-programme{display:block;width:100%;}
       });
 
       this._brancherChamps();
+      this._brancherRecherche();
 
-      const raz = () => { this._f = { heure: '', theme: '', lieu: '', cat: '' }; this._rendre(); };
+      const raz = () => { this._f = { heure: '', theme: '', lieu: '', cat: '' }; this._q = ''; this._rendre(); };
       const r1 = q('#rpRaz'); if (r1) r1.addEventListener('click', raz);
       const r2 = q('#rpRaz2'); if (r2) r2.addEventListener('click', raz);
        
@@ -7266,6 +8473,9 @@ rdr-programme{display:block;width:100%;}
 
       const liste = q('#rpListe');
       if (liste) liste.addEventListener('click', (e) => {
+         
+        const action = e.target.closest('[data-raccord],[data-raccord-jour],[data-ded-jour],[data-ded-recherche],[data-rch-registre],[data-effacer-q],[data-exemple]');
+        if (action && this._actionListe(action)) return;
          
          
         const bc = e.target.closest('[data-carte]');
@@ -7685,6 +8895,8 @@ rdr-programme{display:block;width:100%;}
         p.set('lieu', pli(l ? l.nom : this._f.lieu));
       }
       if (this._f.cat) p.set('cat', this._f.cat);
+      if (String(this._q || '').trim()) p.set('q', String(this._q).trim());
+      if (this._dedActif()) p.set('vue', 'dedicaces');
       return p;
     }
 
