@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum e30fe8f | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e30fe8f";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum be80a72 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="be80a72";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -139,6 +139,8 @@ const ER_EN = {
     'Réduire': 'Zoom out',
     'À vélo': 'By bike',
     'France et Europe': 'France and Europe',
+    'Lien bientôt': 'Link coming soon',
+    'Contenu bientôt disponible.': 'Content coming soon.',
     'billet': 'ticket',
     'Votre': 'Your',
     'de participation': 'to enter',
@@ -251,8 +253,6 @@ const ER_EN = {
       'Fancy turning the event into a cycling trip? Very good idea.',
     "Venez à Saint-Malo avec d'autres fans de voile !":
       'Travel to Saint-Malo with other sailing fans.',
-    'Contenu à compléter — non détaillé dans le cahier des charges actuel.':
-      'Content still to be written.',
 
      
     "Vous venez d'une autre ville": 'Coming from another city',
@@ -795,6 +795,9 @@ rdr-venir .rv-fiche__actions{margin-top:6px;}
 rdr-venir .rv-boutons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 10px;}
 rdr-venir .rv-btn--petit{min-height:44px;padding:0 18px;font-size:11.5px;gap:9px;}
 rdr-venir .rv-btn--petit svg{width:15px;height:15px;}
+ 
+rdr-venir .rv-bientot{display:inline-flex;align-items:center;margin-left:6px;padding:1px 10px;border:1px dashed ${T.marine2};border-radius:999px;font-family:${POLICE_TEXTE};font-size:11.5px;font-weight:700;letter-spacing:.02em;line-height:1.6;color:${T.marine2};white-space:nowrap;vertical-align:1px;cursor:default;}
+rdr-venir .rv-bientot--bouton{min-height:44px;margin-left:0;padding:0 18px;}
 
  
 rdr-venir .rv-pastilles{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:0 0 clamp(24px,3vw,36px);}
@@ -2036,9 +2039,17 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       return avecLiens(s);
     }
 
+    
+
+
+    _bientot(it, bouton) {
+      if (!it || !(it.lien || it.libelle)) return '';
+      return (bouton ? '' : ' ') + '<span class="rv-bientot' + (bouton ? ' rv-bientot--bouton' : '') + '">Lien bientôt</span>';
+    }
+
     _rendreBouton(it) {
       const href = adresseSure(it.lien);
-      if (!href) return '';
+      if (!href) return this._bientot(it, true);
       const externe = /^https?:/i.test(href);
       return '<a class="rv-btn rv-btn--ligne rv-btn--petit" href="' + esc(href) + '"' + (externe ? ' target="_blank" rel="noopener noreferrer"' : '') + '><span>' + esc(it.libelle || 'En savoir plus') + '</span>' + ico(externe ? 'externe' : 'fleche') + '</a>';
     }
@@ -2069,7 +2080,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
     _rendreLien(it) {
       const href = adresseSure(it.lien);
-      if (!href) return '';
+      if (!href) return this._bientot(it, false);
       const libelle = it.libelle || 'En savoir plus';
       
 
