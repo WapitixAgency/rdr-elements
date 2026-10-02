@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 9a19157 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="9a19157";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum d47b455 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="d47b455";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2837,6 +2837,8 @@ function lireApercu() {
   E.apercu = lireLocal(CLE_APERCU, null) === 1;
 }
 function ouvert() { return !!(E && jeuValide(E.jeu) && (E.jeu.ouvert === true || E.apercu)); }
+
+function surAccueil() { return !!(E && E.o.hero() && (typeof E.o.chemin !== 'function' || E.o.chemin() === '/')); }
 function trouve(n) { return !!E && E.trouves.includes(Number(n)); }
 
 function suivante(n) {
@@ -2904,13 +2906,13 @@ function surClicHub(e) {
   if (!t || !ouvert()) return;
   e.preventDefault();
   e.stopPropagation();
-  if (t.classList.contains('gl-tymal') && E.o.hero() && !trouve(1)) { attraper(1, t); return; }
+  if (t.classList.contains('gl-tymal') && surAccueil() && !trouve(1)) { attraper(1, t); return; }
   ouvrir('carnet');
 }
 
  
 function bordsAccueil() {
-  const voulu = !!(E && ouvert() && E.o.hero() && !trouve(1) && window.innerWidth <= LARGEUR_BORDS);
+  const voulu = !!(E && ouvert() && surAccueil() && !trouve(1) && window.innerWidth <= LARGEUR_BORDS);
   if (!voulu) {
     if (E && E.bords) { clearTimeout(E.bords.t); E.bords.els.forEach((b) => b.remove()); E.bords = null; }
     return;
@@ -2940,7 +2942,8 @@ function bordsAccueil() {
     
 
     const attente = (E.membre === null && Date.now() - E.debut < 8000) || (E.etat && E.etat.enCours);
-    const visible = window.scrollY < window.innerHeight * 0.55 && document.visibilityState !== 'hidden' && !E.boite && !attente;
+     
+    const visible = surAccueil() && window.scrollY < window.innerHeight * 0.55 && document.visibilityState !== 'hidden' && !E.boite && !attente;
     if (visible) {
       const b = E.bords.els[E.bords.k++ % 2];
       b.classList.add('rch-guette');
@@ -3229,6 +3232,7 @@ function demarrerChasse() {
     hote: () => courant,
     lang: () => lang,
     hero: () => hero,
+    chemin: () => cheminCourant(base),
     lien: lienSite,
     tournee: () => { const r = lireJSON(brut.reglages, null); return (r && r.tymal && r.tymal.lien) || ''; }
   });
