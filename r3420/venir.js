@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum ba718b0 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="ba718b0";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum e30fe8f | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e30fe8f";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -241,16 +241,6 @@ const ER_EN = {
     'Covoiturez avec StadiumGO': 'Share a ride with StadiumGO',
 
      
-    "+20 trains supplémentaires entre Rennes et Saint-Malo à l'occasion de la Route du Rhum !":
-      'Over 20 extra trains between Rennes and Saint-Malo for the Route du Rhum.',
-    "+20 trains supplémentaires entre Rennes et Saint-Malo à l'occasion de la Route du Rhum ! Ce large réseau de TER n'attend que vous.":
-      'Over 20 extra trains between Rennes and Saint-Malo for the Route du Rhum. This wide regional network is waiting for you.',
-    "Le réseau ferroviaire ne couvre pas toute la Bretagne, mais la région compte de nombreuses lignes de cars BreizhGo permettant de rejoindre les gares — notamment Rennes, d'où un train direct rejoint Saint-Malo.":
-      'The rail network does not reach every corner of Brittany, but the region runs many BreizhGo coach lines to the stations, Rennes in particular, where a direct train takes you on to Saint-Malo.',
-    'Quelques options pour rejoindre Saint-Malo depuis la Normandie (une seule correspondance) :':
-      'A few ways to reach Saint-Malo from Normandy, with a single change:',
-    'Bus directs depuis la région parisienne — retrouvez tous les bus dans l\'onglet "bus" sur SNCF Connect.':
-      'Direct coaches from the Paris region. You will find them all under the "bus" tab on SNCF Connect.',
     'Retrouvez tous les bus dans l\'onglet "bus" sur SNCF Connect.':
       'You will find them all under the "bus" tab on SNCF Connect.',
     'Un large réseau de bus est disponible à Saint-Malo, profitez-en !':
@@ -265,10 +255,7 @@ const ER_EN = {
       'Content still to be written.',
 
      
-    'Vous souhaitez venir avec votre vélo dans le train ?':
-      'Would you like to bring your bike on the train?',
     "Vous venez d'une autre ville": 'Coming from another city',
-    'Paris : train direct, 2h20': 'Paris: direct train, 2h20',
     'Depuis la France métropolitaine': 'From mainland France',
     "Depuis l'étranger": 'From abroad',
     'Barcelone': 'Barcelona',
@@ -277,11 +264,6 @@ const ER_EN = {
     'Londres': 'London',
     "Depuis la Guadeloupe : une fois arrivé à Paris, privilégiez le train !":
       'From Guadeloupe: once you land in Paris, take the train.',
-    "L'option car + train peut être très pertinente, par exemple depuis Loudéac, Pontivy ou Fougères.":
-      'Coach plus train can work very well, for example from Loudéac, Pontivy or Fougères.',
-    'Depuis Caen : bus direct Flixbus, 2h40': 'From Caen: direct Flixbus coach, 2h40',
-    "Depuis Cherbourg : train jusqu'à Caen (1h10) puis bus Flixbus (2h40)":
-      'From Cherbourg: train to Caen (1h10), then Flixbus coach (2h40)',
     "Depuis Le Havre : bus 122 jusqu'à Caen (1h40) puis bus Flixbus (2h40)":
       'From Le Havre: bus 122 to Caen (1h40), then Flixbus coach (2h40)',
     "Depuis Rouen : TER jusqu'à Caen (1h40) puis bus Flixbus (2h40)":
@@ -291,7 +273,6 @@ const ER_EN = {
     'Tarifs : 1,40 € en ligne ou en point de vente, 2 € directement dans le bus':
       'Fares: €1.40 online or from a sales point, €2 on board.',
     'Horaires disponibles en temps réel': 'Live timetables available',
-    'Pour trouver toutes les lignes, arrêts et horaires': 'To find every line, stop and timetable',
     'Les vélos à assistance électrique en libre-service St Malo Vélo MAT sont disponibles dans toute la ville.':
       'The St Malo Vélo MAT shared e-bikes are available all over the city.',
     'Depuis Rennes : 1 à 2 jours, 100 à 120 km': 'From Rennes: 1 to 2 days, 100 to 120 km',
@@ -301,10 +282,6 @@ const ER_EN = {
       'From Morlaix: 3 to 6 days, 337 km along the Vélomaritime',
     'Depuis Vannes : 3 à 5 jours, 285 km via la V45 puis la V42':
       'From Vannes: 3 to 5 days, 285 km along the V45 then the V42',
-    'Eurovélo 4 / Vélomaritime : Roscoff → frontière belge':
-      'EuroVelo 4 / Vélomaritime: Roscoff → Belgian border',
-    'V42 : Océan Atlantique → Manche via Redon et Rennes':
-      'V42: Atlantic Ocean → English Channel via Redon and Rennes',
     'Des parkings sécurisés sont prévus pour vos vélos à chaque entrée du village':
       'Secure bike parking is provided at every village entrance',
     'Parkings sécurisés à chaque entrée du village':
@@ -322,8 +299,6 @@ const ER_EN = {
      
     "Le temps passé dans le train, c'est du temps que vous ne perdez pas au volant : pour échanger, lire, jouer, travailler ou préparer votre séjour à Saint-Malo. Le trajet peut sembler plus long qu'en voiture, mais c'est un temps que vous pouvez réellement mettre à profit.":
       'Time on the train is time you do not spend at the wheel: to talk, read, play, work or plan your stay in Saint-Malo. The journey may look longer than by car, but it is time you can actually use.',
-    "Envie de prendre la mer aussi ? Avec la Compagnie Corsaire, rejoignez Saint-Malo depuis Cancale, Saint-Cast-le-Guildo ou Dinard. Navettes régulières Dinard ↔ Saint-Malo en 10 min, d'avril à début novembre":
-      'Fancy taking to the water too? With Compagnie Corsaire you can reach Saint-Malo from Cancale, Saint-Cast-le-Guildo or Dinard. Regular 10-minute shuttles between Dinard and Saint-Malo, from April to early November.',
     "Venir à pied ou à vélo, même en octobre, c'est l'occasion de profiter de l'air breton, vivifiant et tonique, que toute la France envie !":
       'Coming on foot or by bike, even in October, is a chance to enjoy the bracing Breton air that the rest of France envies.',
     "Challenge Strava ! Plusieurs segments ont été conçus spécialement pour l'événement : c'est votre moment de briller":
@@ -1695,8 +1670,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
           const part = Math.max((v / max) * 100, v === 0 ? 4 : 3);
           return '<li class="rv-co2__l"><span class="rv-co2__nom">' + esc(m.libelle) + '</span>' +
             '<span class="rv-co2__rail"><span class="rv-co2__jauge" data-cible="' + part.toFixed(1) + '" style="width:0;--rv-delai:' + (i * 0.05).toFixed(2) + 's;background:' + (TEINTE[m.famille] || T.ambre) + '"></span></span>' +
-            '<span class="rv-co2__val">' + esc(String(v).replace('.', ',') + ' kg CO2e') + '</span></li>';
+            '<span class="rv-co2__val">' + esc((this._en() ? String(v) : String(v).replace('.', ',')) + ' kg CO2e') + '</span></li>';
         }).join('');
+        this._i18n(liste);
       }
       s.querySelectorAll('.rv-co2__tr').forEach(b => b.setAttribute('aria-selected', Number(b.getAttribute('data-trajet')) === this._etat.co2.trajet ? 'true' : 'false'));
       this._pousserBarres(s);
