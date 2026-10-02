@@ -1,5 +1,5 @@
-/* rdr-elements contact | source route-du-rhum 858c2f2 | rdr-contact.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["contact"]="858c2f2";performance.mark("rdr-elements:contact")}catch(e){}
+/* rdr-elements contact | source route-du-rhum fc0ebd5 | rdr-contact.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["contact"]="fc0ebd5";performance.mark("rdr-elements:contact")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-contact")) return;
