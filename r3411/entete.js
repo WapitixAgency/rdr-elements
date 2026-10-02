@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum c856f00 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="c856f00";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 85113ed | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="85113ed";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -29,7 +29,7 @@ const ARBORESCENCE = {
         { libelle: 'Présentation', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Préparer sa venue', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Covoiturage', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: { panneau: 'villages', lien: 'https://covoiturage.routedurhum.com/' } },
-        { libelle: 'Plan interactif', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
+        { libelle: 'Plan interactif', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Programmation', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'À propos', panneau: 'a-propos',
@@ -67,7 +67,7 @@ const ARBORESCENCE = {
         { libelle: 'Overview', lien: '/saint-malo', source: SM, date: true },
         { libelle: 'Plan your visit', lien: '/se-rendre-au-village', picto: 'itineraire', source: { panneau: 'engagements', lien: '/se-rendre-au-village' } },
         { libelle: 'Carpooling', lien: 'https://covoiturage.routedurhum.com/', picto: 'voiture', image: { panneau: 'villages', lien: 'https://covoiturage.routedurhum.com/' } },
-        { libelle: 'Interactive map', bientot: true, picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
+        { libelle: 'Interactive map', lien: '/carte-village-saint-malo', picto: 'carte', image: 'wix:image://v1/547c0f_c1fe9e114419474891bbdacaa47fc632~mv2.avif/plan-interactif-village.avif' },
         { libelle: 'Village programme', lien: '/programmation', picto: 'calendrier', image: 'wix:image://v1/df962b_de786f93f9294e83a66b853f8ed37af5~mv2.png/menu-villages-programmation-1440.png' }
       ] },
     { cle: 'a-propos', libelle: 'About', panneau: 'a-propos',
