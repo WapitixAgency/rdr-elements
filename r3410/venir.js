@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum b3d6496 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="b3d6496";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum c389e3e | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="c389e3e";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -855,7 +855,7 @@ body .rv-flot[data-cache="1"]{transform:translateY(140%);opacity:0;pointer-event
 
 
 
-body .rv-fen{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s .2s;font-family:${POLICE_TEXTE};}
+body .rv-fen{position:fixed;inset:0;z-index:2147482500;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s .2s;font-family:${POLICE_TEXTE};}
 body .rv-fen[data-open="true"]{opacity:1;visibility:visible;transition:opacity .25s,visibility 0s;}
 .rv-fen .rv-fen__fond{position:absolute;inset:0;background:rgba(5,18,43,.76);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
 .rv-fen .rv-fen__panneau{position:relative;width:100%;max-width:700px;max-height:min(92vh,960px);display:flex;flex-direction:column;color:${T.texte};
@@ -1314,15 +1314,17 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
     
 
+
+
     _suivreAncre() {
       const h = String(location.hash || '').replace(/^#/, '').replace(/^venir-/, '');
       if (ANCRES[h]) setTimeout(() => this._aller(ANCRES[h]), 350);
     }
 
-    _aller(id) {
+    _aller(id, net) {
       const s = this.querySelector('[data-bloc="' + id + '"]');
       if (!s || s.hidden) return;
-      try { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { s.scrollIntoView(); }
+      try { s.scrollIntoView({ behavior: net ? 'auto' : 'smooth', block: 'start' }); } catch (e) { s.scrollIntoView(); }
     }
 
      
@@ -1762,7 +1764,11 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
       if (!this._ancreOuverte && /challenge-mobilite/.test(String(location.hash || ''))) {
         this._ancreOuverte = true;
-        setTimeout(() => this._ouvrirFenetre(), 300);
+        setTimeout(() => {
+          this._aller('mobilite', true);
+          this._depuisAncre = this._ouvertAuPublic();
+          this._ouvrirFenetre();
+        }, 300);
       }
     }
 
@@ -2078,6 +2084,9 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       if (this._verrou) { this._verrou(); this._verrou = null; }
       if (this._flottant && !this._aParticipe()) this._flottant.setAttribute('data-cache', '0');
       if (this._etat.resultat) this._poserFlottant();
+      
+
+      if (this._depuisAncre) { this._depuisAncre = false; this._aller('mobilite', true); }
       this._rendreFocus();
     }
 
