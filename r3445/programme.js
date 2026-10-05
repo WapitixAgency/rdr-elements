@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 5803faa | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="5803faa";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 5488bbb | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="5488bbb";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -690,6 +690,74 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="5803faa";perform
 
 
   const PREFIXE_WIX = 'https://static.wixstatic.com/media/';
+  
+
+
+
+
+
+
+
+  const logoSrc = (u) => {
+    const v = urlSure(u);
+    if (!v || v.slice(0, PREFIXE_WIX.length) !== PREFIXE_WIX) return v;
+    const id = v.slice(PREFIXE_WIX.length);
+    if (!id || /[/?#]/.test(id)) return v;
+    return PREFIXE_WIX + id + '/v1/fit/w_480,h_480,q_90/logo.png';
+  };
+  const logoHTML = (a, cls) => {
+    const src = a && a.logo ? logoSrc(a.logo) : '';
+    if (!src) return '';
+    return '<span class="rp-alogo' + (cls ? ' ' + cls : '') + '"><img src="' + esc(src) + '" alt="' + esc(a.logoNom || '') + '"' +
+      ' loading="lazy" decoding="async" data-logo data-repli></span>';
+  };
+  const LOGOS_RECADRES = new Map();
+  const recadrerLogo = (src) => {
+    if (LOGOS_RECADRES.has(src)) return LOGOS_RECADRES.get(src);
+    const p = new Promise((ok) => {
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload = () => {
+        try {
+          const w = im.naturalWidth, h = im.naturalHeight;
+          const c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          const x = c.getContext('2d');
+          x.drawImage(im, 0, 0);
+          const d = x.getImageData(0, 0, w, h).data;
+          let x0 = w, y0 = h, x1 = -1, y1 = -1;
+          for (let y = 0; y < h; y++) {
+            for (let xx = 0, i = y * w * 4; xx < w; xx++, i += 4) {
+              if (d[i + 3] <= 20 || (d[i] > 245 && d[i + 1] > 245 && d[i + 2] > 245)) continue;
+              if (xx < x0) x0 = xx;
+              if (xx > x1) x1 = xx;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+          }
+          if (x1 < 0) return ok(null);
+          const cw = x1 - x0 + 1, ch = y1 - y0 + 1;
+          if (cw * ch > 0.85 * w * h) return ok(null);
+          const o = document.createElement('canvas');
+          o.width = cw; o.height = ch;
+          o.getContext('2d').drawImage(c, x0, y0, cw, ch, 0, 0, cw, ch);
+          ok(o.toDataURL('image/png'));
+        } catch (e) { ok(null); }
+      };
+      im.onerror = () => ok(null);
+      im.src = src;
+    });
+    LOGOS_RECADRES.set(src, p);
+    return p;
+  };
+  const recadrerLogos = (racine) => {
+    racine.querySelectorAll('img[data-logo]').forEach((img) => {
+      const src = img.getAttribute('src');
+      if (!src || src.slice(0, 5) === 'data:') return;
+      recadrerLogo(src).then((u) => { if (u && img.isConnected && img.getAttribute('src') === src) img.src = u; });
+    });
+  };
+
   const wixTaille = (u, l, h, q) => {
     const v = urlSure(u);
     if (!v) return '';
@@ -3903,6 +3971,46 @@ rdr-programme{display:block;width:100%;}
 .rp-tuile--vedette .rp-accroche{display:none;}
 .rp-root.sous-720 .rp-accroche{font-size:var(--t-1);margin-top:4px;}
 
+
+
+
+
+
+.rp-alogo{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:120px;height:48px;padding:8px 12px;box-sizing:border-box;
+  background:#fff;border-radius:10px 3px 10px 3px;
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
+}
+.rp-alogo img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;}
+.rp-titre-t.a-logo{display:flex;align-items:center;gap:var(--e-5);}
+.rp-titre-c{flex:1 1 auto;min-width:0;}
+.rp-alogo--vmob{display:none;}
+.rp-root.sous-900 .rp-alogo{width:104px;height:42px;padding:7px 10px;}
+
+
+.rp-root.est-v2.sous-1080:not(.sous-720) .rp-tuile--logo .rp-vlieu-bloc{
+  display:grid;grid-template-columns:auto auto;justify-items:end;align-items:center;row-gap:10px;
+}
+
+
+
+.rp-root.sous-1080:not(.sous-720) .rp-tuile--logo .rp-alogo--v{grid-column:1 / -1;grid-row:1;}
+.rp-root.sous-1080:not(.sous-720) .rp-tuile--logo .rp-vlieu-bloc > .rp-vlieu{grid-column:1;grid-row:2;}
+.rp-root.sous-1080:not(.sous-720) .rp-tuile--logo .rp-vlieu-bloc > .rp-dest-b{grid-column:2;grid-row:2;}
+.rp-root.sous-1080:not(.sous-720) .rp-tuile--logo .rp-vlieu-bloc > .rp-vlieu:last-child{grid-column:1 / -1;justify-self:end;}
+.rp-root.sous-720 .rp-titre-t.a-logo{display:block;}
+.rp-root.sous-720 .rp-titre-t.a-logo .rp-alogo{margin-top:10px;}
+.rp-root.sous-720 .rp-tuile--vedette .rp-alogo--v{display:none;}
+
+
+
+
+.rp-root.sous-720 .rp-tuile.rp-tuile--vedette .rp-tete > .rp-alogo.rp-alogo--vmob{
+  display:inline-flex;position:absolute;right:18px;bottom:12px;z-index:4;
+}
+.rp-root.sous-720 .rp-tuile--logo .rp-vpast .rp-signe{display:none;}
+
 .rp-tuile.est-ouvert .rp-plus{grid-template-rows:1fr;}
 
 
@@ -6382,6 +6490,7 @@ rdr-programme{display:block;width:100%;}
         if (img.complete && img.naturalWidth === 0) cacher();
         else img.addEventListener('error', cacher, { once: true });
       });
+      recadrerLogos(this);
       
 
 
@@ -7252,8 +7361,10 @@ rdr-programme{display:block;width:100%;}
               : (a.lieu ? '<span class="rp-dest-p" aria-hidden="true"></span>' : '')) +
           '</div>';
 
+      const logo = a.vedette ? '' : logoHTML(a);
       const classes = ['rp-tuile'];
       if (a.vedette) classes.push('rp-tuile--vedette');
+      if (a.vedette && logoHTML(a)) classes.push('rp-tuile--logo');
        
       if (lumiere) classes.push('rp-tuile--lumiere');
       if (passe && !live) classes.push('est-passe');
@@ -7274,11 +7385,13 @@ rdr-programme{display:block;width:100%;}
 
 
 
-          (a.lieu
-            ? '<span class="rp-vlieu-bloc">' +
-                    '<span class="rp-vlieu">' + svg(IC.epingle) +
-                      '<span>' + esc(a.lieu) + '</span></span>' +
-                    (versCarte
+          
+
+          (a.lieu || a.logo
+            ? '<span class="rp-vlieu-bloc">' + logoHTML(a, 'rp-alogo--v') +
+                    (a.lieu ? '<span class="rp-vlieu">' + svg(IC.epingle) +
+                      '<span>' + esc(a.lieu) + '</span></span>' : '') +
+                    (a.lieu && versCarte
                       ? '<button type="button" class="rp-dest-b" data-carte="' + esc(a.id) + '"' +
                           ' title="' + esc(this._surLaCarte(a.lieu)) + '"' +
                           ' aria-label="' + esc(this._surLaCarte(a.lieu)) + '">' +
@@ -7380,10 +7493,14 @@ rdr-programme{display:block;width:100%;}
 
 
             signeSvg(a.cat || a.catLib) +
-          '</div>'
+          '</div>' +
+          logoHTML(a, 'rp-alogo--vmob')
         : (lumiere ? '<div class="rp-lum" aria-hidden="true"></div>' : '') +
           heures +
-          '<div class="rp-titre-t">' +
+          
+
+          '<div class="rp-titre-t' + (logo ? ' a-logo' : '') + '">' +
+            (logo ? '<div class="rp-titre-c">' : '') +
             this._hl(a.titre) +
             
 
@@ -7399,6 +7516,7 @@ rdr-programme{display:block;width:100%;}
 
             (a.desc ? '<p class="rp-accroche">' + this._hl(this._marque ? rExtrait(a.desc, this._marque) : a.desc) + '</p>' : '') +
             (badges ? '<div class="rp-badges" style="margin-top:6px">' + badges + '</div>' : '') +
+            (logo ? '</div>' + logo : '') +
           '</div>' +
           meta;
 
@@ -8285,6 +8403,7 @@ rdr-programme{display:block;width:100%;}
           if (img.complete && img.naturalWidth === 0) cacher();
           else img.addEventListener('error', cacher, { once: true });
         });
+        recadrerLogos(l);
       }
       const v = this.querySelector('.rp-vide');
       if (v) v.hidden = true;
