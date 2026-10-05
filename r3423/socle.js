@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum 46caa11 | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="46caa11";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 466c4ae | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="466c4ae";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -49,7 +49,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="46caa11";performance
     { cles: ['En collaboration avec', 'Un événement'], pleine: false }
   ];
 
-  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  
+
+
+
+
+  const propre = (s) => String(s == null ? '' : s).normalize('NFKC').replace(/[​-‍⁠﻿­]/g, '').trim();
+  const EMAIL = /^[A-Za-z0-9!#$%&'*+\/=?^_{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/;
   const ATTENTE_REPONSE_MS = 12000;
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
@@ -655,7 +661,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
         + '<div class="pd-champ pd-large"><label class="pd-etq" for="' + idp + '-email">' + t.email + ' (' + t.obligatoire + ')</label>'
         + '<input class="pd-in" id="' + idp + '-email" name="email" type="email" inputmode="email" placeholder="' + t.emailCourt + '" autocomplete="email" maxlength="120" required aria-describedby="' + idp + '-email-msg">'
         + '<p class="pd-msg" id="' + idp + '-email-msg" aria-live="polite"></p></div>'
-        + '<div class="pd-piege" aria-hidden="true"><label>Site<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>'
+        + '<div class="pd-piege" aria-hidden="true"><label>Laisser vide<input type="text" name="pd_hp" tabindex="-1" autocomplete="off"></label></div>'
         + '<div class="pd-global" role="alert"><span class="pd-global-txt"></span><button type="button" class="pd-global-btn">' + t.reessayer + '</button></div>'
         + (consent ? '<div class="pd-consent"><label class="pd-case"><input type="checkbox" name="consentement" value="oui" aria-describedby="' + idp + '-consent-msg"><span class="pd-coche" aria-hidden="true"></span><span>' + consent + ' <span class="pd-etoile" aria-hidden="true">*</span></span></label><p class="pd-msg" id="' + idp + '-consent-msg" aria-live="polite"></p></div>' : '')
         + '<div class="pd-actions"><button type="submit" class="pd-btn"><span class="pd-btn-txt">' + esc(r.boutonLibelle || t.envoyer) + '</span></button></div></form>'
@@ -804,7 +810,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
       const form = this.querySelector('form'); if (!form) return;
       const prenom = form.querySelector('[name=prenom]'), email = form.querySelector('[name=email]');
       const verifier = (champ, quoi) => {
-        const bloc = champ.closest('.pd-champ'); const msg = bloc.querySelector('.pd-msg'); const v = champ.value.trim();
+        const bloc = champ.closest('.pd-champ'); const msg = bloc.querySelector('.pd-msg'); const v = quoi === 'email' ? propre(champ.value) : champ.value.trim();
         let erreur = '';
         if (quoi === 'prenom' && !v) erreur = this._t.prenomVide;
         if (quoi === 'email') { if (!v) erreur = this._t.emailVide; else if (!EMAIL.test(v)) erreur = this._t.emailFaux; }
@@ -831,7 +837,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
         const langue = (form.querySelector('[name=langue]:checked') || {}).value === 'EN' ? 'EN' : 'FR';
         
 
-        const detail = { id: 'pd-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8), prenom: prenom.value.trim().slice(0, 60), email: email.value.trim().slice(0, 120), langue, consentement: true, dureeMs: Date.now() - this._naissance, piege: form.querySelector('[name=site]').value || '' };
+        const detail = { id: 'pd-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8), prenom: prenom.value.trim().slice(0, 60), email: propre(email.value).slice(0, 120), langue, consentement: true, dureeMs: Date.now() - this._naissance, piege: form.querySelector('[name=pd_hp]').value || '' };
         this._etat('envoi');
         this._emettre(detail);
       });
@@ -853,6 +859,13 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
 
 
       if (val === 'ok' || val === 'erreur:deja') { this._attente = null; this._etat('merci'); return; }
+       
+      if (val === 'erreur:email') {
+        this._attente = null; this._etat('repos');
+        const champ = this.querySelector('form [name=email]'), bloc = champ && champ.closest('.pd-champ');
+        if (bloc) { bloc.classList.add('pd-erreur'); bloc.querySelector('.pd-msg').textContent = this._t.emailFaux; champ.setAttribute('aria-invalid', 'true'); champ.focus(); }
+        return;
+      }
       this._etat('erreur', this._t.erreur);
     }
     _etat(etat, message) {
