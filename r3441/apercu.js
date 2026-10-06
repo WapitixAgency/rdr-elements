@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 54016eb | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="54016eb";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 4e6fab2 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4e6fab2";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -23,7 +23,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="54016eb";performanc
     [/^hier$/, () => 'yesterday'],
     [/^(\d+) min de lecture$/, (m, n) => n + ' min read'],
     [/^Dans (\d+) jours$/, (m, n) => 'In ' + n + ' days'],
-    [/^N°(\d+)$/, (m, n) => 'No. ' + n]
+    [/^N°(\d+)$/, (m, n) => 'No. ' + n],
+    [/^1 seule ligne de départ, (\d+) navigateurs\. Six visages au hasard, à chaque visite\.$/, (m, n) => 'A single start line, ' + n + ' sailors. Six faces picked at random on every visit.']
   ];
   const morceauEn = (m) => {
     if (Object.prototype.hasOwnProperty.call(TRAD_EN, m)) return TRAD_EN[m];
@@ -871,7 +872,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu', 'skippers', 'promos', 'actus', 'connexion']; }
+    static get observedAttributes() { return ['jeu', 'skippers', 'effectifs', 'promos', 'actus', 'connexion']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -998,6 +999,10 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (nom === 'skippers') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-skippers')); return; }
+      
+
+
+      if (nom === 'effectifs') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-effectifs')); return; }
       
 
 
@@ -1775,7 +1780,23 @@ function monter(racine, portail, D) {
   const teinte = (c) => (/^#[0-9a-f]{3,8}$/i.test(String(c || '')) ? c : '');
    
   const vecteur = (v) => { const s = String(v || ''); const m = s.match(/^wix:vector:\/\/v1\/([^/#]+)/); if (m) return 'https://static.wixstatic.com/shapes/' + m[1]; const i = s.match(/^wix:image:\/\/v1\/([^/#]+)/); return i ? 'https://static.wixstatic.com/media/' + i[1] + '/v1/fit/w_32,h_32,q_90,enc_auto/drapeau.png' : s; };
-  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe"' + href('/skippers?classe=' + k.toLowerCase().split(' ').join('-')) + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
+  $('classes').innerHTML = Object.keys(CLASSES).map(k => '<a class="classe" data-classe="' + k + '"' + href('/skippers?classe=' + k.toLowerCase().split(' ').join('-')) + ' style="--cc:' + CLASSES[k].c + '" title="' + k + '"><img loading="lazy" decoding="async" src="' + CLASSES[k].icone + '" alt="' + k + '"><b>' + CLASSES[k].n + '</b><small>bateaux</small></a>').join('');
+  
+
+
+
+
+
+
+  const effectifsAttribut = () => { try { const e = JSON.parse((racine.getAttribute && racine.getAttribute('effectifs')) || 'null'); return e && e.classes && typeof e.classes === 'object' && Number.isInteger(e.total) && e.total > 0 ? e : null; } catch (x) { return null; } };
+  function poserEffectifs() {
+    const e = effectifsAttribut();
+    if (!e) return;
+    tout('#classes .classe').forEach((a) => { const n = e.classes[a.getAttribute('data-classe')]; const b = a.querySelector('b'); if (b && Number.isInteger(n) && n >= 0 && b.textContent !== String(n)) b.textContent = String(n); });
+    tout('.skippers .sous').forEach((p) => { const t = p.textContent.replace(/\d+(?= (navigateurs|sailors))/, String(e.total)); if (t !== p.textContent) p.textContent = t; });
+  }
+  poserEffectifs();
+  ecoute(racine, 'raa-effectifs', poserEffectifs);
   
 
 
