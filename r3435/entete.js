@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum b1bbe46 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b1bbe46";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum c79f00e | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="c79f00e";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -1207,8 +1207,10 @@ function vecteur(src) {
   if (i && /^wix:image:/.test(String(src))) return M + i + '/v1/fit/w_32,h_32,q_90,enc_auto/drapeau.png';
   return src || '';
 }
- 
-const wix = (id, w, h, qual, al) => M + id + '/v1/fill/w_' + Math.round(w) + ',h_' + Math.round(h) + ',al_' + (al || 'c') + ',q_' + (qual || 80) + ',enc_avif,quality_auto/i.avif';
+
+const imageExterne = (src) => (/^https:\/\/[\w.-]+\/[^\s"'<>]*$/.test(String(src || '')) && !idMedia(src) ? String(src) : null);
+
+const wix = (id, w, h, qual, al) => (/^https:\/\//.test(String(id)) ? String(id) : M + id + '/v1/fill/w_' + Math.round(w) + ',h_' + Math.round(h) + ',al_' + (al || 'c') + ',q_' + (qual || 80) + ',enc_avif,quality_auto/i.avif');
 function ilYa(iso) {
   const d = (Date.now() - Date.parse(iso)) / 86400000;
   if (!(d >= 0)) return '';
@@ -1252,7 +1254,7 @@ function modele() {
       return Object.assign(base, {
         dispo: 'actus', titre: TXT.actusTitre, sous: TXT.actusSous, note: '',
         tout: { libelle: TXT.voirTout, lien: e.lien },
-        cartes: posts.map((p) => ({ type: 'post', titre: p.title, image: idMedia(p.coverImage), lien: p.postPageUrl, cat: p.categorie || {}, date: p.publishedDate,
+        cartes: posts.map((p) => ({ type: 'post', titre: p.title, image: idMedia(p.coverImage) || imageExterne(p.coverImage), lien: p.postPageUrl, cat: p.categorie || {}, date: p.publishedDate,
           sujet: (Array.isArray(p.tags) ? p.tags : []).map((t) => String((t && typeof t === 'object' ? t.label : t) || '').trim()).find((t) => t && !TAGS_TUS.test(t)) || '' }))
       });
     }
