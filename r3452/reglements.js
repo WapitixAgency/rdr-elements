@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 0327d98 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0327d98";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 49bf6e1 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="49bf6e1";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -21,6 +21,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0327d98";perfor
     calendarDays: '<path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/>',
     listChecks: '<path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/>',
     badgeCheck: '<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>',
+    megaphone: '<path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"/><path d="M8 6v8"/>',
     trophy: '<path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/>',
     phone: '<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
     lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
@@ -68,83 +69,146 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0327d98";perfor
       icone: 'bike',
       nom: 'Challenge Mobilité',
       nature: { fr: 'Jeu-concours', en: 'Prize competition' },
-      debut: '2026-10-20',
-      fin: '2026-11-01',
       
 
+      debut: '2026-09-22',
+      fin: '2026-11-01',
       publieLe: '2026-09-23',
-      version: '2026-09-23',
+      version: '2026-10-06',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/se-rendre-au-village#mobilite', fr: 'Page « Se rendre au village »', en: '“Getting to the village” page' },
       pdf: '',
       articles: [
         {
-          num: '1', icone: 'building', court: 'Société organisatrice', titre: 'Société organisatrice',
+          num: '1', icone: 'building', court: 'Description', titre: 'Description',
           blocs: [
-            'La société OC Sport Pen Duick, SASU (Société par actions simplifiée unipersonnelle) au capital de 884 000€, immatriculée au Registre du Commerce et des Sociétés de Lorient sous le numéro 521 573 394 00074, dont le siège social est situé 6 Bis Rue du Sous-Marin Vénus, 56100 Lorient (ci-après « l’Organisateur »), organise, du 20 octobre 2026 au 1er novembre 2026, un jeu-concours gratuit et sans obligation d’achat intitulé « Challenge Mobilité », dans le cadre de la Route du Rhum – Destination Guadeloupe 2026.'
+            'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Challenge Mobilités » (ci-après le « {b}Jeu{/b} »), accessible sur le à l’url suivante : {a:/se-rendre-au-village}https://www.routedurhum.com/se-rendre-au-village{/a}',
+            'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
+            'Le Règlement est disponible : {a:/reglements}https://www.routedurhum.com/reglements{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
           ]
         },
         {
-          num: '2', icone: 'target', court: 'Objet du jeu', titre: 'Objet du jeu',
+          num: '2', icone: 'calendarDays', court: 'Durée du jeu', titre: 'Durée du jeu',
           blocs: [
-            'Le Challenge Mobilité vise à encourager les visiteurs du village de la Route du Rhum – Destination Guadeloupe à privilégier, pour se rendre sur le village, des modes de transport décarbonés ou partagés (train, bus / transports en commun, covoiturage, vélo, marche à pied), dans le cadre de la démarche RSE « Terres d’engagements » de l’événement.'
+            'Le Jeu se déroule du 22/09/2026 à 00h01 jusqu’au 01/11/2026 à 23h59.',
+            'L’Organisateur se réserve la possibilité de réduire ou de prolonger la durée du Jeu.'
           ]
         },
         {
-          num: '3', icone: 'calendarDays', court: 'Durée du jeu', titre: 'Durée du jeu',
+          num: '3', icone: 'listChecks', court: 'Conditions de participation', titre: 'Conditions de participation',
           blocs: [
-            'Le jeu se déroule du 20 octobre 2026 au 1er novembre 2026 inclus, soit pendant les 13 jours d’ouverture du village de la Route du Rhum – Destination Guadeloupe.'
-          ]
-        },
-        {
-          num: '4', icone: 'listChecks', court: 'Participation', titre: 'Conditions et modalités de participation',
-          blocs: [
-            { h3: '4.1 Participants éligibles' },
-            'Le jeu est ouvert à toute personne physique, à l’exclusion des membres du personnel de l’Organisateur, de ses prestataires directement impliqués dans l’organisation du jeu.',
-            { h3: '4.2 Modalités de participation' },
-            'Pour participer, le visiteur doit, depuis la page {a:/se-rendre-au-village}« Se rendre au village »{/a} du site de la Route du Rhum – Destination Guadeloupe :',
+            '{b}3.1.{/b} Le Jeu est totalement gratuit.',
+            '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant dans l’Union Européenne et/ou en Suisse, disposant d’un accès internet et d’un compte sur le réseau social utilisé (ci-après dénommé le « {b}Participant{/b} »).',
+            '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
+            '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
+            '{b}3.5{/b}. La participation est limitée à une seule participation par personne physique (même nom, même date de naissance, même adresse).',
+            '{b}3.6.{/b} La participation est réservée aux personnes qui utilisent l’un des moyens de transport suivant et qui fournissent les justificatifs associés :',
             { ul: [
-              'Renseigner ses nom, prénom, date de naissance, adresse e-mail et numéro de téléphone ;',
-              'Indiquer la date de sa venue au village, parmi les 13 jours d’ouverture ;',
-              'Indiquer son mode de transport parmi : train (TGV/TER), bus / transports en commun, covoiturage, vélo, à pied ;',
-              'Déposer un justificatif de mobilité correspondant au mode déclaré (billet de train ou de bus, confirmation de covoiturage, photo du vélo ou du participant à pied, etc.), au format PDF, JPG/JPEG ou PNG, dans la limite de 5 à 10 Mo ;',
-              'Cocher la case d’acceptation du présent règlement, distincte de toute case relative à la newsletter ou aux données personnelles.'
+              'Train (TGV, TER…) : billet de train nominatif ;',
+              'Autocars / cars : billet d’autocars / cars nominatif ou photographie dans et/ou devant le véhicule ;',
+              'Autobus urbains : ticket de bus et idéalement photographie dans le bus ;',
+              'Covoiturage, avec au minimum 4 personnes dans le véhicule : photos dans la voiture ou idéalement sur le parking officiel avec les 4 personnes circulant dans la voiture ;',
+              'Marche : photographie ;',
+              'Vélo : photographie.'
+            ] }
+          ]
+        },
+        {
+          num: '4', icone: 'megaphone', court: 'Créateurs de contenu', titre: 'Promotion du jeu concours par un ou plusieurs créateur(s) de contenu',
+          blocs: [
+            'Dans le cas où la promotion du Jeu est effectuée par un ou plusieurs créateurs de contenu (ci-après les « {b}Influenceurs{/b} »), ces derniers ne sont en aucun cas co-organisateurs du Jeu, ils procèdent uniquement à la promotion du jeu concours.',
+            'L’Organisateur décline toute responsabilité, civile ou pénale, à l’égard de tout manquement, déclaration, acte ou omission imputable aux Influenceurs, notamment dans l’hypothèse où ces derniers outrepasseraient leur mission de promotion du Jeu.'
+          ]
+        },
+        {
+          num: '5', icone: 'fileText', court: 'Modalités de participation', titre: 'Modalités de participation',
+          blocs: [
+            'Pour participer, le Participant doit, pour valider sa participation au Jeu :',
+            { ul: [
+              'Compléter le formulaire d’inscription et fournir les documents demandés.'
             ] },
-            { h3: '4.3 Nombre de participations' },
-            'Chaque personne, identifiée par son adresse e-mail et/ou son numéro de téléphone, ne peut participer qu’une seule fois par jour d’ouverture du village. Toute participation supplémentaire pour une même journée sera considérée comme non valide.'
+            'Toute participation incomplète, erronée ou réalisée après la date limite sera considérée comme nulle.'
           ]
         },
         {
-          num: '5', icone: 'badgeCheck', court: 'Contrôle des justificatifs', titre: 'Contrôle des justificatifs',
+          num: '6', icone: 'target', court: 'Désignation des gagnants', titre: 'Désignation des gagnants',
           blocs: [
-            'Chaque participation fait l’objet d’un contrôle interne du justificatif déposé par l’équipe de l’Organisateur, avec l’un des statuts suivants : « à vérifier », « validé » ou « refusé ». Seules les participations dont le justificatif a été validé sont prises en compte dans les tirages au sort.'
+            'Les gagnants seront désignés par tirage au sort parmi les Participants ayant rempli les critères de participation énumérés aux article 3 et 5 des présentes.',
+            { ul: [
+              'Un tirage au sort sera effectué quotidiennement pour les « lots quotidiens », à 14h00 le 20/10/2026 et chaque jour à 10h30 entre le 21/10/2026 et le 01/11/2026 inclus par {b}tirage au sort logiciel aléatoire{/b}.'
+            ] },
+            'Un tirage au sort pour le « lot principal » sera effectué le lundi 02 novembre 2026 à 15h00 par {b}tirage au sort logiciel aléatoire{/b}.',
+            'Les gagnants seront informés directement par l’Organisateur par téléphone dans un délai maximal de 30 minutes suivant le tirage pour les lots quotidiens et par mail et/ou téléphone dans un délai maximal de 30 jours pour le lot principal.'
           ]
         },
         {
-          num: '6', icone: 'trophy', court: 'Tirages et dotations', titre: 'Tirages au sort et dotations',
+          num: '7', icone: 'trophy', court: 'Dotations', titre: 'Désignation et remise des dotations',
           blocs: [
-            { h3: '6.1 Tirages quotidiens' },
-            'Un tirage au sort est organisé chaque jour à 10h, parmi l’ensemble des participations validées et éligibles pour la journée concernée. Le gagnant remporte une expérience liée à la Route du Rhum (à titre d’exemple : accès VIP, visite de bateau, accréditation journalière), dont la nature précise est déterminée par l’Organisateur avant chaque tirage.',
-            { h3: '6.2 Tirage final' },
-            'À l’issue des 13 jours du village, un tirage au sort final est organisé parmi l’ensemble des participations validées et éligibles sur toute la durée du jeu. Le gagnant remporte une sortie en mer à bord d’un Ocean Fifty. La date et lieu seront communiqués à l’issu du tirage au sort.',
-            { h3: '6.3 Cumul des gains' },
-            'Une participation ayant remporté un lot lors d’un tirage quotidien reste éligible au tirage final. Une même personne ne peut en revanche remporter qu’un seul lot quotidien sur l’ensemble du jeu ; ce contrôle est assuré manuellement par l’équipe de l’Organisateur.'
+            '{b}7.1.{/b} Le Jeu est doté des dotations (ci-après désignée les « {b}Dotation(s){/b} ») suivantes :',
+            { ul: [
+              '{b}Lots quotidiens :{/b} visites d’un bateau et/ou pass VIP pour les coulisses de la course et/ou festival de film, cette liste pourra être complétée.',
+              '{b}Lot principal :{/b} une sortie pour 2 personnes sur l’Ocean Fifty UpWind by MerConcept ; cette navigation aura lieu en 2027, les éventuels frais de déplacement et/ou d’hébergement sont à la charge du Gagnant.'
+            ] },
+            'Les éventuels frais de livraison des dotations sont pris en charge par l’Organisateur.',
+            'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
+            '{b}7.2.{/b} Le tirage au sort des gagnants est effectué par un logiciel aléatoire dans le back-office du site internet suivant {a:/}https://www.routedurhum.com/{/a}.',
+            '{b}7.3.{/b} Une fois que l’Organisateur aura contacté les gagnants pour les informer, ils devront communiquer à l’Organisateur les éléments suivants :',
+            { ul: [
+              'Justificatif de domicile ;',
+              'D’éventuelles précisions sur le justificatif de transport ;',
+              'Nom et prénom.'
+            ] },
+            'En outre, en cas d’impossibilité pour l’Organisateur de :',
+            { ul: [
+              'Délivrer aux Gagnants les Dotations remportées, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent,',
+              'De contacter et d’obtenir les informations susmentionnées de la part des Gagnants dans un délai maximal de 1 heure (lots quotidiens) ou de 15 jours (lot principal) à compter de la prise de contact par email et/ou téléphone l’Organisateur se réserve le droit de remettre la Dotation en jeu.'
+            ] },
+            'Aucun message ne sera envoyé aux Participants n’ayant pas remporté les dotations, seuls les Gagnants seront contactés par l’Organisateur.'
           ]
         },
         {
-          num: '7', icone: 'phone', court: 'Information des gagnants', titre: 'Désignation et information des gagnants',
+          num: '8', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
           blocs: [
-            'Les gagnants sont désignés de manière aléatoire par le système de gestion des participations. Ils sont informés par téléphone par l’équipe de l’Organisateur, au numéro communiqué lors de leur participation.',
-            'Si un gagnant ne peut être joint dans un délai de 1 heure, l’Organisateur se réserve le droit de procéder à un nouveau tirage au sort parmi les participations restantes.'
+            'La responsabilité de l’Organisateur ne pourra être engagée en cas de force majeure ou d’événements indépendants de sa volonté empêchant le bon déroulement du Jeu.',
+            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation du réseau social.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu s’il apparaît que des fraudes sont intervenues. A ce titre, il se réserve, le droit de ne pas attribuer les Dotations aux fraudeurs.',
+            'L’Organisateur ne saurait voir sa responsabilité engagée du fait de l’impossibilité de contacter les Gagnants. A ce titre, l’Organisateur ne pourra pas être responsable des erreurs éventuelles portant sur l’adresse postale communiquée par les Gagnants.',
+            'En outre, l’Organisateur ne saurait voir sa responsabilité engagée en cas d’une quelconque complication liée à la livraison des Dotations (retard de livraison, erreur de livraison, Dotation endommagée, etc.).',
+            'Par ailleurs, l’Organisateur décline toute responsabilité pour tous les incidents qui pourraient survenir lors de la jouissance de la Dotation attribuée et/ou du fait et/ou des conséquences de sa mauvaise utilisation.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu-concours s’il apparaît que des fraudes sont intervenues sous quelque forme que ce soit, notamment de manière informatique dans le cadre de la participation au Jeu-concours.'
           ]
         },
         {
-          num: '8', icone: 'lock', court: 'Données personnelles', titre: 'Données personnelles',
+          num: '9', icone: 'lock', court: 'Données personnelles', titre: 'Protection des données à caractère personnel',
           blocs: [
-            'Les données personnelles collectées (nom, prénom, date de naissance, e-mail, téléphone, justificatif de mobilité) sont traitées par l’Organisateur aux seules fins de la gestion du jeu (vérification de l’éligibilité, réalisation des tirages, contact des gagnants) et de l’établissement du bilan RSE de l’événement, sous forme agrégée et anonymisée s’agissant des données de mobilité.',
-            'La participation au jeu n’est conditionnée ni à une inscription à la newsletter de la Route du Rhum – Destination Guadeloupe, ni à l’utilisation des données à des fins commerciales. Toute inscription à la newsletter fait l’objet d’une case à cocher distincte et facultative.',
-            'Conformément au RGPD et à la loi Informatique et Libertés, les participants disposent d’un droit d’accès, de rectification, d’effacement et d’opposition, qu’ils peuvent exercer auprès de {a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a}.',
-            'Les données sont conservées pendant une durée de 3 ans, à l’issue de laquelle elles sont supprimées ou anonymisées.',
+            '{b}9.1.{/b} L’Organisateur se conforme au cadre légal ou réglementaire applicable en matière de protection des données à caractère personnel, en particulier la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée ainsi que le règlement (UE) 2016/679 (RGPD).',
+            'Les termes utilisés dans le présent article sont définis tel qu’indiqué dans le RGPD.',
+            'Dans le cadre de l’exécution du jeu concours, l’Organisateur sera amené à traiter des données à caractère personnel du/des Participants (ci-après dénommées les « {b}Données{/b} ») pour son propre compte et pour ses propres finalités en qualité de responsable de traitement.',
+            '{b}9.2.{/b} L’Organisateur collecte et traite les données personnelles du/des Participants suivantes :',
+            { ul: [
+              'Prénom ;',
+              'Nom ;',
+              'Date de naissance ;',
+              'Numéro de téléphone',
+              'Adresse email ;Photographie (selfie ou portrait) ;',
+              'Justificatif de domicile pour les Gagnants.'
+            ] },
+            '{b}9.3.{/b} L’Organisateur collecte et traite des Données du/des Participant(s) pour les finalités suivantes :',
+            { ul: [
+              'Enregistrement de la participation du/des Participants ;',
+              'Prise de contact avec le/les gagnants et livraison des dotations ;',
+              'Traitement des éventuelles réclamations.'
+            ] },
+            '{b}9.4.{/b} Les données personnelles sont destinées à l’Organisateur. Dans la stricte limite des finalités énoncées, elles sont transmises aux sous-traitants suivants :',
+            { ul: [
+              'Le prestataire en charge de l’hébergement du site internet (outil utilisé pour le tirage au sort).'
+            ] },
+            'Ces sous-traitants interviennent uniquement sur instructions de l’Organisateur et présentent les garanties requises par le RGPD.',
+            '{b}9.5.{/b} Les données collectées sont conservées pendant une durée de 1 an.',
+            '{b}9.6.{/b} Les personnes concernées par le traitement de leurs Données peuvent exercer leurs droits d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité, auprès de OC SPORT PEN DUICK aux coordonnées suivantes :',
+            '{a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a} ;',
+            '6 rue du Sous-Marin Vénus – Zac de Keroman 56100 Lorient.',
+            'En cas de litige non résolu, le participant peut adresser une réclamation auprès de la CNIL (www.cnil.fr).',
             
 
 
@@ -153,21 +217,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0327d98";perfor
           ]
         },
         {
-          num: '9', icone: 'shieldCheck', court: 'Sécurité et fraude', titre: 'Sécurité et lutte contre la fraude',
+          num: '10', icone: 'gavel', court: 'Litiges et loi applicable', titre: 'Règlement des litiges et loi applicable',
           blocs: [
-            'Le formulaire de participation est accessible en connexion sécurisée (HTTPS) et les données sont stockées de façon sécurisée, avec un accès limité aux personnes habilitées d’OC Sport. Toute participation frauduleuse (fausse identité, justificatif falsifié, participations multiples non conformes, recours à des outils automatisés, etc.) entraîne l’exclusion immédiate et définitive du participant, sans préjudice des poursuites éventuelles.'
-          ]
-        },
-        {
-          num: '10', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
-          blocs: [
-            'L’Organisateur ne saurait être tenu responsable en cas de dysfonctionnement du réseau internet, du formulaire de participation, ou de tout événement extérieur à sa volonté, perturbant le bon déroulement du jeu. Il se réserve le droit d’annuler, de reporter ou de modifier le jeu si les circonstances l’exigent, sans que sa responsabilité ne puisse être engagée.'
-          ]
-        },
-        {
-          num: '12', icone: 'gavel', court: 'Loi applicable', titre: 'Loi applicable et litiges',
-          blocs: [
-            'Le présent règlement est soumis au droit français. Tout différend relatif à son interprétation ou à son application, qui n’aurait pu être réglé à l’amiable, sera soumis aux tribunaux compétents.'
+            'Le présent règlement de jeu est soumis à la loi française.',
+            'La participation au Jeu implique l’acceptation sans réserve du présent règlement. En cas de difficulté d’interprétation ou d’application, les décisions de l’Organisateur seront souveraines et sans appel.',
+            'Il ne sera répondu à aucune demande ou réclamation téléphonique concernant l’application ou l’interprétation du Règlement. Toute contestation ou réclamation relative au Jeu-concours devra être formulée par écrit à l’adresse de l’Organisateur au 6 rue du Sous-Marin Vénus – Zac de Keroman 56100 Lorient.',
+            'Plus aucune contestation ne sera prise en compte huit (8) jours après la clôture du Jeu.'
           ]
         }
       ]

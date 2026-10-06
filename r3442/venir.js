@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 0327d98 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="0327d98";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 49bf6e1 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="49bf6e1";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1248,7 +1248,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
 
     _chaqueJour() {
-      const m = String(this._cms('heureTirage') || '10:00').match(/^(\d{1,2})(?::(\d{2}))?$/);
+      const m = String(this._cms('heureTirage') || '10:30').match(/^(\d{1,2})(?::(\d{2}))?$/);
       const h = m ? Number(m[1]) : 10, mn = m && m[2] && m[2] !== '00' ? ' ' + m[2] : '';
       return 'Chaque jour à ' + h + ' h' + mn;
     }
