@@ -1,5 +1,5 @@
-/* rdr-elements littoral | source route-du-rhum 86c9000 | rdr-littoral.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["littoral"]="86c9000";performance.mark("rdr-elements:littoral")}catch(e){}
+/* rdr-elements littoral | source route-du-rhum 3506cea | rdr-littoral.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["littoral"]="3506cea";performance.mark("rdr-elements:littoral")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-littoral")) return;
