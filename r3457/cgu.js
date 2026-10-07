@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 3506cea | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="3506cea";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 6e33e55 | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="6e33e55";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';

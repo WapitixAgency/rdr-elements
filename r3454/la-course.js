@@ -1,5 +1,5 @@
-/* rdr-elements la-course | source route-du-rhum 3506cea | rdr-course.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="3506cea";performance.mark("rdr-elements:la-course")}catch(e){}
+/* rdr-elements la-course | source route-du-rhum 6e33e55 | rdr-course.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="6e33e55";performance.mark("rdr-elements:la-course")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-course")) return;
