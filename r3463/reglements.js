@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 32c6694 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 5c5b2d1 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="5c5b2d1";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -71,10 +71,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";perfor
       nature: { fr: 'Jeu-concours', en: 'Prize competition' },
       
 
+
+
+
+
       debut: '2026-09-22',
       fin: '2026-11-01',
       publieLe: '2026-09-23',
-      version: '2026-10-06',
+      version: '2026-10-08',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/se-rendre-au-village#mobilite', fr: 'Page « Se rendre au village »', en: '“Getting to the village” page' },
       pdf: '',
@@ -82,7 +86,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";perfor
         {
           num: '1', icone: 'building', court: 'Description', titre: 'Description',
           blocs: [
-            'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Challenge Mobilités » (ci-après le « {b}Jeu{/b} »), accessible sur le à l’url suivante : {a:/se-rendre-au-village}https://www.routedurhum.com/se-rendre-au-village{/a}',
+            'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Challenge Mobilité » (ci-après le « {b}Jeu{/b} »), accessible à l’url suivante : {a:/se-rendre-au-village}https://www.routedurhum.com/se-rendre-au-village{/a}',
             'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
             'Le Règlement est disponible : {a:/reglements}https://www.routedurhum.com/reglements{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
           ]
@@ -98,10 +102,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";perfor
           num: '3', icone: 'listChecks', court: 'Conditions de participation', titre: 'Conditions de participation',
           blocs: [
             '{b}3.1.{/b} Le Jeu est totalement gratuit.',
-            '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant dans l’Union Européenne et/ou en Suisse, disposant d’un accès internet et d’un compte sur le réseau social utilisé (ci-après dénommé le « {b}Participant{/b} »).',
+            '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant dans l’Union Européenne et/ou en Suisse, disposant d’un accès internet (ci-après dénommé le « {b}Participant{/b} »).',
             '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
             '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
-            '{b}3.5{/b}. La participation est limitée à une seule participation par personne physique (même nom, même date de naissance, même adresse).',
+            '{b}3.5{/b}. La participation est limitée à une participation par personne physique et par jour (même nom, même date de naissance, même adresse).',
             '{b}3.6.{/b} La participation est réservée aux personnes qui utilisent l’un des moyens de transport suivant et qui fournissent les justificatifs associés :',
             { ul: [
               'Train (TGV, TER…) : billet de train nominatif ;',
@@ -170,7 +174,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";perfor
           num: '8', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
           blocs: [
             'La responsabilité de l’Organisateur ne pourra être engagée en cas de force majeure ou d’événements indépendants de sa volonté empêchant le bon déroulement du Jeu.',
-            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation du réseau social.',
+            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques ou de perte de données.',
             'L’Organisateur pourra annuler tout ou partie du Jeu s’il apparaît que des fraudes sont intervenues. A ce titre, il se réserve, le droit de ne pas attribuer les Dotations aux fraudeurs.',
             'L’Organisateur ne saurait voir sa responsabilité engagée du fait de l’impossibilité de contacter les Gagnants. A ce titre, l’Organisateur ne pourra pas être responsable des erreurs éventuelles portant sur l’adresse postale communiquée par les Gagnants.',
             'En outre, l’Organisateur ne saurait voir sa responsabilité engagée en cas d’une quelconque complication liée à la livraison des Dotations (retard de livraison, erreur de livraison, Dotation endommagée, etc.).',
@@ -189,8 +193,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="32c6694";perfor
               'Prénom ;',
               'Nom ;',
               'Date de naissance ;',
-              'Numéro de téléphone',
-              'Adresse email ;Photographie (selfie ou portrait) ;',
+              'Numéro de téléphone ;',
+              'Adresse email ;',
               'Justificatif de domicile pour les Gagnants.'
             ] },
             '{b}9.3.{/b} L’Organisateur collecte et traite des Données du/des Participant(s) pour les finalités suivantes :',
