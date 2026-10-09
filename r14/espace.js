@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum aceadd0 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="aceadd0";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 80b03e9 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="80b03e9";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -10901,6 +10901,7 @@ if (!customElements.get('espace-rhum')) {
        
        
       if (this._roNomsSugg) { this._roNomsSugg.disconnect(); this._roNomsSugg = null; }
+      if (this._roFrise) { this._roFrise.disconnect(); this._roFrise = null; }
       if (this._escPackHandler) {
         document.removeEventListener('keydown', this._escPackHandler);
         this._escPackHandler = null;
@@ -11265,6 +11266,7 @@ if (!customElements.get('espace-rhum')) {
       this._wireNavLinks();
       this._wireApercu();
       this._wireFrise();
+      this._degagerFrise();
       this._wireRangIdentite();
       this._wireMonte();
       this._wireTop50();
@@ -16256,6 +16258,57 @@ if (!customElements.get('espace-rhum')) {
       }
 
       this._ajusterNomsSuggestions();
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _degagerFrise() {
+      if (this._roFrise) { this._roFrise.disconnect(); this._roFrise = null; }
+      const sec = this.querySelector('[data-section="rangs"]');
+      const phrase = sec && sec.querySelector('.er-frise-phrase');
+      const piste = sec && sec.querySelector('.er-frise-piste');
+      const illu = sec && sec.querySelector('.er-frise-et[data-etat="actuel"] .er-frise-illu');
+      if (!phrase || !piste || !illu || typeof document.createRange !== 'function') return;
+      let largeur = -1;
+      const caler = () => {
+        if (!sec.isConnected || !sec.clientWidth) return;
+        if (Math.abs(sec.clientWidth - largeur) < 0.5) return;
+        largeur = sec.clientWidth;
+        piste.style.removeProperty('padding-top');
+        const r = document.createRange();
+        r.selectNodeContents(phrase);
+        const p = r.getBoundingClientRect();
+        const m = illu.getBoundingClientRect();
+        if (!p.width || !m.width) return;
+        if (m.left >= p.right + 8 || m.right <= p.left - 8) return;
+        const chevauche = (p.bottom + 8) - (m.top - 10);
+        if (chevauche <= 0) return;
+        const base = parseFloat(getComputedStyle(piste).paddingTop) || 0;
+        piste.style.paddingTop = Math.ceil(base + chevauche) + 'px';
+      };
+      caler();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { largeur = -1; caler(); }).catch(() => {});
+      if (typeof ResizeObserver === 'function') {
+        let prevu = 0;
+        this._roFrise = new ResizeObserver(() => {
+          if (prevu) return;
+          prevu = requestAnimationFrame(() => { prevu = 0; caler(); });
+        });
+        this._roFrise.observe(sec);
+      }
     }
 
     
