@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 80b03e9 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="80b03e9";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 179606b | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="179606b";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -39,16 +39,13 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 }
 :is(rdr-concours-photo,.cp-portail) .cp-marque-bloc{display:inline-flex;align-items:center;gap:14px;padding:7px 18px 7px 7px;border-radius:999px;background:rgba(14,17,29,.62);border:1px solid var(--filet);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin:0 0 clamp(14px,2.6vh,24px)}
 :is(rdr-concours-photo,.cp-portail) .cp-montre{width:44px;height:44px;flex:none;border-radius:50%}
-:is(rdr-concours-photo,.cp-portail) .cp-alpina{height:27px;width:auto;aspect-ratio:358/92;object-fit:contain}
-:is(rdr-concours-photo,.cp-portail) .cp-marque-sep{width:1px;height:26px;background:var(--filet)}
-:is(rdr-concours-photo,.cp-portail) .cp-marque-nom{font-family:var(--titre);font-style:italic;text-transform:uppercase;font-size:18px;line-height:1;color:var(--teal);white-space:nowrap}
+:is(rdr-concours-photo,.cp-portail) .cp-alpina{height:40px;width:auto;aspect-ratio:1731/648;object-fit:contain}
 :is(rdr-concours-photo,.cp-portail)[data-marque="sans"] .cp-marque-bloc{display:none}
 :is(rdr-concours-photo,.cp-portail)[data-marque="sans"] .cp-partenaire{display:none}
 @media (max-width:520px){
   :is(rdr-concours-photo,.cp-portail) .cp-marque-bloc{gap:10px;padding:5px 14px 5px 5px}
   :is(rdr-concours-photo,.cp-portail) .cp-montre{width:36px;height:36px}
-  :is(rdr-concours-photo,.cp-portail) .cp-alpina{height:21px}
-  :is(rdr-concours-photo,.cp-portail) .cp-marque-nom{font-size:15px}
+  :is(rdr-concours-photo,.cp-portail) .cp-alpina{height:32px}
 }
 :is(rdr-concours-photo,.cp-portail) .cp-titre{margin:0;font-family:var(--titre);font-style:italic;font-weight:400;font-size:clamp(34px,5vw,70px);line-height:.92;text-transform:uppercase;color:var(--blanc);max-width:none}
 :is(rdr-concours-photo,.cp-portail) .cp-titre em{font-style:italic;color:var(--jaune);white-space:nowrap}
@@ -454,9 +451,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       <div>
         <div class="cp-marque-bloc">
           <alpina-clock class="cp-montre" aria-hidden="true"></alpina-clock>
-          <img class="cp-alpina" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="105" height="27">
-          <span class="cp-marque-sep" aria-hidden="true"></span>
-          <span class="cp-marque-nom">Challenge photo</span>
+          <img class="cp-alpina" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="107" height="40">
         </div>
         <h1 class="cp-titre" id="cp-titre">Votre <em>Route du Rhum</em>,<br> en une photo</h1>
         <p class="cp-accroche">Une photo par membre, celle qui raconte le mieux votre Route du Rhum.</p>
