@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 56bc10d | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="56bc10d";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum e4c1935 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e4c1935";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -219,6 +219,8 @@ if (!customElements.get('espace-rhum')) {
   const ROUE_RETRAIT_BRANCHE = false;
    
   const ICON_COPIER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
+   
+  const ICON_SAC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>';
    
   
 
@@ -1289,6 +1291,16 @@ if (!customElements.get('espace-rhum')) {
     'Ton pack, offert': 'Your pack, on us',
     'Un code à saisir dans Virtual Regatta, pour courir la Route du Rhum aux couleurs de TyMAL.':
       'A code to enter in Virtual Regatta, to race the Route du Rhum in TyMAL colours.',
+     
+    'Un code à saisir dans Virtual Regatta, pour courir la Route du Rhum aux couleurs de TyMAL, et une réduction sur la boutique officielle.':
+      'A code to enter in Virtual Regatta, to race the Route du Rhum in TyMAL colours, and a discount at the official shop.',
+    '5 % de réduction chez Armor Lux': '5% off at Armor Lux',
+    'Sur la collection textile Route du Rhum – Destination Guadeloupe.':
+      'On the Route du Rhum – Destination Guadeloupe clothing collection.',
+    'Ton code de réduction': 'Your discount code',
+    'Profiter de la réduction': 'Get the discount',
+    'En ligne uniquement sur armorlux.com, hors produits « Maison », une utilisation par client ; sans le bouton, saisis le code dans ton panier.':
+      'Online only on armorlux.com, excluding “Maison” products, one use per customer; without the button, enter the code in your basket.',
     'La livrée TyMAL': 'The TyMAL livery',
     "La mascotte de la course sur ton bateau, pendant toute l'épreuve.":
       "The race mascot on your boat, for the whole race.",
@@ -7735,6 +7747,24 @@ if (!customElements.get('espace-rhum')) {
       user-select: all; -webkit-user-select: all; word-break: break-all;
     }
     espace-rhum .er-pack-code-hint { display: block; text-align: center; font-family: var(--er-font-body); font-size: 11.5px; color: var(--er-text-muted); }
+
+    
+
+
+    espace-rhum .er-pack-boutique {
+      display: flex; flex-direction: column; gap: 12px; margin: 0 0 18px;
+      padding: 14px; border-radius: var(--er-radius-md);
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--er-border-soft);
+    }
+    espace-rhum .er-pack-recu:not([hidden]) + .er-pack-boutique { margin: 18px 0 0; }
+    espace-rhum .er-pack-boutique-tete { display: flex; gap: 12px; align-items: flex-start; }
+    espace-rhum .er-pack-code--boutique { padding: 14px 12px; }
+    espace-rhum .er-pack-code--boutique .er-pack-code-value { font-size: 20px; }
+    espace-rhum .er-pack-boutique-lien { justify-content: center; text-decoration: none; }
+    espace-rhum .er-pack-boutique-conditions {
+      margin: 0; text-align: center; font-family: var(--er-font-body);
+      font-size: 11.5px; line-height: 1.45; color: var(--er-text-muted);
+    }
 
     
 
@@ -20119,8 +20149,48 @@ if (!customElements.get('espace-rhum')) {
 
 
 
+
+
+
+
+
+    
+
+
+    _packBoutique() {
+      const b = this._payload && this._payload.packFan && this._payload.packFan.boutique;
+      if (!b || typeof b !== 'object') return null;
+      const code = typeof b.code === 'string' ? b.code.trim() : '';
+      const lien = typeof b.lien === 'string' ? b.lien.trim() : '';
+      if (!/^[A-Za-z0-9][A-Za-z0-9_-]{2,39}$/.test(code) || !/^https:\/\/\S+$/.test(lien)) return null;
+      return { code, lien };
+    }
+
+    _buildPackBoutique(b) {
+      if (!b) return '';
+      return `
+            <section class="er-pack-boutique" data-pack-boutique aria-labelledby="er-pack-boutique-titre">
+              <div class="er-pack-boutique-tete">
+                <span class="er-pack-don-ico" aria-hidden="true">${ICON_SAC}</span>
+                <span class="er-pack-don-txt"><strong id="er-pack-boutique-titre">5&nbsp;% de réduction chez Armor Lux</strong><span>Sur la collection textile Route du Rhum – Destination Guadeloupe.</span></span>
+              </div>
+              <div class="er-pack-code er-pack-code--boutique">
+                <span class="er-pack-code-label">Ton code de réduction</span>
+                <output class="er-pack-code-value" data-pack-boutique-code>${escapeHtml(b.code)}</output>
+                <button class="er-pack-copier" type="button" data-action="copy-pack-code">
+                  <span class="er-pack-copier-ico" aria-hidden="true" data-pack-copier-ico>${ICON_COPIER}</span><span data-pack-copier-txt>Copier le code</span>
+                </button>
+              </div>
+              <a class="er-btn er-btn--ghost er-pack-boutique-lien" data-pack-boutique-lien href="${escapeHtml(b.lien)}" target="_blank" rel="noopener">
+                <span>Profiter de la réduction</span>${ICON_ARROW_RIGHT}
+              </a>
+              <p class="er-pack-boutique-conditions">En ligne uniquement sur armorlux.com, hors produits «&nbsp;Maison&nbsp;», une utilisation par client&nbsp;; sans le bouton, saisis le code dans ton panier.</p>
+            </section>`;
+    }
+
     _buildPackFan() {
       const classes = this._packClasses().map(n => ({ v: n, l: n }));
+      const boutique = this._packBoutique();
       return `
         <div class="er-pack" data-open="false" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="er-pack-title">
           <div class="er-pack-backdrop" data-action="close-pack"></div>
@@ -20128,7 +20198,9 @@ if (!customElements.get('espace-rhum')) {
             <button class="er-pack-close" type="button" data-action="close-pack" aria-label="Fermer">${ICON_CLOSE}</button>
             <div class="er-pack-eyebrow">Pack Fan</div>
             <h2 class="er-pack-title" id="er-pack-title">Ton pack, offert</h2>
-            <p class="er-pack-sub">Un code à saisir dans Virtual Regatta, pour courir la Route du Rhum aux couleurs de TyMAL.</p>
+            <p class="er-pack-sub">${boutique
+              ? 'Un code à saisir dans Virtual Regatta, pour courir la Route du Rhum aux couleurs de TyMAL, et une réduction sur la boutique officielle.'
+              : 'Un code à saisir dans Virtual Regatta, pour courir la Route du Rhum aux couleurs de TyMAL.'}</p>
 
             <div class="er-pack-alert" data-pack-alert data-tone="" role="status" aria-live="polite" hidden>
               <span class="er-pack-alert-ico" data-pack-alert-ico aria-hidden="true"></span>
@@ -20184,6 +20256,7 @@ if (!customElements.get('espace-rhum')) {
 
               <span class="er-pack-code-hint">Ton code reste ici. Tu le retrouveras en revenant sur cette page.</span>
             </div>
+            ${this._buildPackBoutique(boutique)}
 
             <form class="er-pack-form" data-pack-form novalidate>
               <div class="er-pack-regle">
@@ -20324,9 +20397,11 @@ if (!customElements.get('espace-rhum')) {
       this._i18n(boite);
     }
 
+    
+
     async _packCopier(bouton) {
-      const modal = this.querySelector('.er-pack');
-      const code = modal?.querySelector('[data-pack-code-value]')?.textContent || '';
+      const out = bouton?.closest('.er-pack-code')?.querySelector('output') || null;
+      const code = out?.textContent || '';
       if (!code || !bouton) return;
       const txt = bouton.querySelector('[data-pack-copier-txt]');
       const ico = bouton.querySelector('[data-pack-copier-ico]');
@@ -20336,15 +20411,14 @@ if (!customElements.get('espace-rhum')) {
       if (!ok) {
          
          
-        const out = modal.querySelector('[data-pack-code-value]');
         const sel = window.getSelection && window.getSelection();
         if (out && sel) { const r = document.createRange(); r.selectNodeContents(out); sel.removeAllRanges(); sel.addRange(r); }
       }
       if (txt) txt.textContent = ok ? (en ? 'Copied' : 'Copié') : (en ? 'Code selected' : 'Code sélectionné');
       if (ico && ok) ico.innerHTML = ICON_CHECK;
       bouton.classList.toggle('is-ok', ok);
-      clearTimeout(this._packCopieTimer);
-      this._packCopieTimer = setTimeout(() => {
+      clearTimeout(bouton._erCopieTimer);
+      bouton._erCopieTimer = setTimeout(() => {
         if (txt) txt.textContent = en ? 'Copy the code' : 'Copier le code';
         if (ico) ico.innerHTML = ICON_COPIER;
         bouton.classList.remove('is-ok');
