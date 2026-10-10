@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum 179606b | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="179606b";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 4547ea5 | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="4547ea5";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -115,6 +115,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="179606b";p
               entetes: ['Finalité du traitement', 'Fondement juridique'],
               lignes: [
                 ['Gestion de votre compte client, traitement de vos commandes et accès à nos services.', 'Exécution du contrat'],
+                
+
+
+
+                ['Gestion des jeux-concours (enregistrement des participations, prise de contact avec les gagnants et livraison des dotations, traitement des réclamations)', 'Exécution du contrat'],
                 ['Gestion des demandes d’assistance, support client et réclamations', 'Exécution du contrat / Intérêt légitime'],
                 ['Amélioration des services, analyses d’usage et optimisation de l’expérience utilisateur dans le respect des droits et libertés des utilisateurs.', 'Intérêt légitime'],
                 ['Sécurité du site, prévention des fraudes et abus', 'Intérêt légitime / Obligation légale'],
@@ -311,6 +316,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="179606b";p
               entetes: ['Purpose of the processing', 'Legal basis'],
               lignes: [
                 ['Managing your customer account, processing your orders and accessing our services.', 'Contract performance'],
+                ['Running games and contests (recording entries, contacting winners and delivering prizes, handling complaints)', 'Contract performance'],
                 ['Handling support requests, customer support, and complaints', 'Contract performance / Legitimate interest'],
                 ['Improving services, analyzing usage and optimizing the user experience while respecting users’ rights and freedoms.', 'Legitimate interest'],
                 ['Site security, fraud and abuse prevention', 'Legitimate interest / Legal obligation'],
@@ -716,7 +722,9 @@ rdr-confidentialite .cfd.sous-420 .cfd-ajout{flex-direction:column;gap:var(--cfd
 
 
 
-      this._maj = '2026-09-27';
+
+
+      this._maj = '2026-10-10';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];

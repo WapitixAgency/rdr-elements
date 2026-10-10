@@ -1,5 +1,5 @@
-/* rdr-elements cgu | source route-du-rhum 179606b | rdr-cgu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="179606b";performance.mark("rdr-elements:cgu")}catch(e){}
+/* rdr-elements cgu | source route-du-rhum 4547ea5 | rdr-cgu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="4547ea5";performance.mark("rdr-elements:cgu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -74,7 +74,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="179606b";performance.m
     fr: {
       surtitre: 'Mon Espace Rhum',
       titre: 'Conditions d’utilisation',
-      sousTitre: 'Les règles d’accès et d’usage de « Mon Espace Rhum », l’espace personnel des membres de routedurhum.com : suivi de skippers, badges, jeux et données. Elles complètent les Mentions légales et la Politique de confidentialité du site.',
+      sousTitre: 'Les règles d’accès et d’usage de « Mon Espace Rhum », l’espace personnel des membres de routedurhum.com : suivi de skippers, badges, jeux-concours et données. Elles complètent les Mentions légales et la Politique de confidentialité du site.',
       maj: 'Dernière mise à jour :',
       sommaire: 'Sommaire',
       sommaireAria: 'Sommaire des conditions d’utilisation',
@@ -88,7 +88,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="179606b";performance.m
         ],
         blocs: [
           'Le site routedurhum.com est édité par OC Sport Pen Duick, organisatrice de la Route du Rhum, Destination Guadeloupe (ci-après « l’Organisateur »).',
-          '« Mon Espace Rhum » (ci-après « l’Espace ») est l’espace personnel proposé aux personnes qui créent un compte sur le site. Il permet de suivre des skippers, d’accéder à des contenus et à des données personnalisés, de relever des défis, de collectionner des badges et de participer à des jeux et animations.',
+          '« Mon Espace Rhum » (ci-après « l’Espace ») est l’espace personnel proposé aux personnes qui créent un compte sur le site. Il permet de suivre des skippers, d’accéder à des contenus et à des données personnalisés, de relever des défis, de collectionner des badges et de participer à des jeux-concours et à des animations.',
           'Les présentes conditions générales d’utilisation (ci-après « les CGU ») définissent les règles d’accès et d’usage de l’Espace. {b}La création d’un compte vaut acceptation pleine et entière des CGU{/b}, de la {a:' + CONF + '}Politique de confidentialité{/a} et des {a:' + MENTIONS + '}Mentions légales{/a} du site. Une personne qui n’accepte pas ces documents ne doit pas créer de compte.',
           'Les CGU complètent les Mentions légales, qui portent les conditions communes à tout le site (accès, responsabilité, liens, propriété intellectuelle, loi applicable), et la Politique de confidentialité. Elles ne les répètent pas : elles précisent ce qui est propre à l’espace membre.'
         ]
@@ -224,7 +224,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="179606b";performance.m
     en: {
       surtitre: 'My Espace Rhum',
       titre: 'Terms of use',
-      sousTitre: 'The rules for accessing and using “My Espace Rhum”, the personal area for routedurhum.com members: following skippers, badges, games and data. They complement the site’s Legal notice and Privacy policy.',
+      sousTitre: 'The rules for accessing and using “My Espace Rhum”, the personal area for routedurhum.com members: following skippers, badges, games and contests, and data. They complement the site’s Legal notice and Privacy policy.',
       maj: 'Last updated:',
       sommaire: 'Contents',
       sommaireAria: 'Table of contents of the terms of use',
@@ -238,7 +238,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["cgu"]="179606b";performance.m
         ],
         blocs: [
           'The routedurhum.com website is published by OC Sport Pen Duick, organiser of the Route du Rhum, Destination Guadeloupe (hereafter “the Organiser”).',
-          '“My Espace Rhum” (hereafter “the Space”) is the personal area offered to people who create an account on the site. It lets them follow skippers, access personalised content and data, take on challenges, collect badges and take part in games and activities.',
+          '“My Espace Rhum” (hereafter “the Space”) is the personal area offered to people who create an account on the site. It lets them follow skippers, access personalised content and data, take on challenges, collect badges and take part in games and contests and in other activities.',
           'These terms of use (hereafter “the Terms”) set out the rules for accessing and using the Space. {b}Creating an account constitutes full acceptance of the Terms{/b}, of the site’s {a:' + CONF + '}Privacy policy{/a} and of its {a:' + MENTIONS + '}Legal notice{/a}. Anyone who does not accept these documents must not create an account.',
           'The Terms complement the Legal notice, which carries the conditions common to the whole site (access, liability, links, intellectual property, governing law), and the Privacy policy. They do not repeat them: they set out what is specific to the member area.'
         ]
@@ -589,7 +589,9 @@ rdr-cgu .cgu.sous-420 .cgu-droit{flex-direction:column;gap:var(--cgu-e2);}
 
 
 
-      this._maj = '2026-09-27';
+
+
+      this._maj = '2026-10-10';
       this._chrome = null;
       this._attente = {};
       this._observateurs = [];

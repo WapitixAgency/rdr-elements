@@ -1,5 +1,5 @@
-/* rdr-elements mentions | source route-du-rhum 179606b | rdr-mentions.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="179606b";performance.mark("rdr-elements:mentions")}catch(e){}
+/* rdr-elements mentions | source route-du-rhum 4547ea5 | rdr-mentions.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="4547ea5";performance.mark("rdr-elements:mentions")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -67,6 +67,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="179606b";performa
               { label: 'Forme juridique', valeur: 'SASU' },
               { label: 'Numéro SIRET', valeur: '52157339400074' },
               { label: 'Capital social', valeur: '884 000 €' },
+              { label: 'Responsable légal', valeur: 'Hervé Favre, Président' },
               { label: 'Directeur de publication', valeur: 'Joseph Bizard' },
               { label: 'Immatriculation', valeur: 'RCS Lorient n° 521 573 394' },
               { label: 'Conception du site', lignes: ['{a:https://www.wapitix.fr/}Agence Wapitix{/a}'] }
@@ -101,15 +102,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="179606b";performa
         },
         {
           id: 'cgu', icone: 'scale', court: 'Conditions d’utilisation', titre: '5. Conditions Générales d’Utilisation (CGU)',
+          
+
           blocs: [
-            { h3: '5.1 Accès au site' },
-            'L’Editeur ne peut en aucun cas garantir une continuité de service sans interruption, ni les temps de transmission des données ou la sécurité des informations inhérents au réseau internet que l’Utilisateur déclare bien connaître et en accepter les caractéristiques et les limites.',
-            { h3: '5.2 Responsabilité' },
-            'En conséquence, l’Éditeur ne pourra être tenu responsable de tout préjudice ou dommage direct ou indirect, résultant de l’utilisation du Support Numérique ou d’une quelconque information obtenue sur ce Support Numérique.',
-            { h3: '5.3 Liens hypertextes' },
-            'Le Support Numérique peut contenir des liens vers des sites partenaires ou vers d’autres sites ou sources. L’Éditeur n’exerce aucun contrôle sur ces sites et n’assume par conséquent aucune responsabilité quant à leur accessibilité, leur contenu, publicités, produits, services, etc., disponibles sur ou à partir de ces sites.',
-            { h3: '5.4 Loi applicable et juridiction compétente' },
-            'Les présentes CGU sont soumises à la loi française. En cas de litige, la juridiction compétente sera déterminée selon les règles de droit commun.'
+            'Les conditions générales d’utilisation sont consultables dans leur intégralité à l’adresse {a:' + CGU + '}www.routedurhum.com/conditions-d-utilisation{/a}.'
           ]
         },
         {
@@ -150,6 +146,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="179606b";performa
               { label: 'Legal form', valeur: 'SASU' },
               { label: 'SIRET number', valeur: '52157339400074' },
               { label: 'Share capital', valeur: '884 000 €' },
+              { label: 'Legal representative', valeur: 'Hervé Favre, President' },
               { label: 'Publishing director', valeur: 'Joseph Bizard' },
               { label: 'Registration', valeur: 'RCS Lorient n° 521 573 394' },
               { label: 'Website design', lignes: ['{a:https://www.wapitix.fr/}Agence Wapitix{/a}'] }
@@ -185,14 +182,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["mentions"]="179606b";performa
         {
           id: 'cgu', icone: 'scale', court: 'Terms of use', titre: '5. General Terms and Conditions of Use (GTC)',
           blocs: [
-            { h3: '5.1 Access to the site' },
-            'The Publisher cannot under any circumstances guarantee uninterrupted service continuity, nor data transmission times or information security inherent to the internet network, which the User declares to be well aware of and accepts in terms of its characteristics and limitations.',
-            { h3: '5.2 Liability' },
-            'Consequently, the Publisher cannot be held liable for any direct or indirect harm or damage resulting from the use of the Digital Medium or any information obtained on this Digital Medium.',
-            { h3: '5.3 Hyperlinks' },
-            'The Digital Platform may contain links to partner sites or other sites or sources. The Publisher has no control over these sites and therefore assumes no responsibility for their accessibility, content, advertisements, products, services, etc., available on or from these sites.',
-            { h3: '5.4 Applicable Law and Jurisdiction' },
-            'These Terms of Use are governed by French law. In the event of a dispute, the competent court will be determined in accordance with the ordinary rules of law.'
+            'The general terms and conditions of use are available in full at {a:' + CGU + '}www.routedurhum.com/en/conditions-d-utilisation{/a}.'
           ]
         },
         {
@@ -409,8 +399,9 @@ rdr-mentions .mtl.sous-420 .mtl-som-liste{grid-template-columns:minmax(0,1fr);}
       super();
       this._initialise = false;
       this._lang = 'fr';
-       
-      this._maj = '2025-09';
+      
+
+      this._maj = '2026-10-10';
        
       this._chrome = null;
       this._attente = {};
