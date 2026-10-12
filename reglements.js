@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 844c152 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="844c152";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum d202d5c | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d202d5c";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -226,6 +226,160 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="844c152";perfor
             'Le présent règlement de jeu est soumis à la loi française.',
             'La participation au Jeu implique l’acceptation sans réserve du présent règlement. En cas de difficulté d’interprétation ou d’application, les décisions de l’Organisateur seront souveraines et sans appel.',
             'Il ne sera répondu à aucune demande ou réclamation téléphonique concernant l’application ou l’interprétation du Règlement. Toute contestation ou réclamation relative au Jeu-concours devra être formulée par écrit à l’adresse de l’Organisateur au 6 rue du Sous-Marin Vénus – Zac de Keroman 56100 Lorient.',
+            'Plus aucune contestation ne sera prise en compte huit (8) jours après la clôture du Jeu.'
+          ]
+        }
+      ]
+    },
+    {
+      id: 'le-juste-temps',
+      actif: true,
+      icone: 'clock',
+      nom: 'Le Juste Temps',
+      nature: { fr: 'Jeu-concours', en: 'Prize competition' },
+      
+
+
+
+
+
+      debut: '2026-10-13',
+      fin: '2026-11-02',
+      publieLe: '2026-10-12',
+      version: '2026-10-12',
+      organisateur: 'OC Sport Pen Duick',
+      participer: { href: '/mon-espace-rhum?jeu=le-juste-temps', fr: 'Mon Espace Rhum, « Jeux concours »', en: 'My Espace Rhum, “Competitions”' },
+      pdf: '',
+      articles: [
+        {
+          num: '1', icone: 'building', court: 'Description', titre: 'Description',
+          blocs: [
+            'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00 €, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Le Juste Temps » (ci-après le « {b}Jeu{/b} »), accessible dans l’Espace Rhum du site officiel de la course, à l’adresse suivante : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}.',
+            'Le gagnant sera désigné selon les conditions définies à l’article 6 du présent règlement (ci-après le « {b}Règlement{/b} »).',
+            'Le Règlement est disponible à l’adresse {a:/reglements#le-juste-temps}https://www.routedurhum.com/reglements#le-juste-temps{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
+          ]
+        },
+        {
+          num: '2', icone: 'calendarDays', court: 'Durée du jeu', titre: 'Durée du jeu',
+          blocs: [
+            'Le Jeu se déroule du 13/10/2026 à 9h00 jusqu’au 02/11/2026 à 12h00 (heure de Paris).',
+            'L’Organisateur se réserve la possibilité de réduire ou de prolonger la durée du Jeu.'
+          ]
+        },
+        {
+          num: '3', icone: 'listChecks', court: 'Conditions de participation', titre: 'Conditions de participation',
+          blocs: [
+            '{b}3.1.{/b} Le Jeu est totalement gratuit.',
+            '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant en France métropolitaine et les DROM, disposant d’un accès internet et d’un compte Mon Espace Rhum sur le site {a:/}https://www.routedurhum.com{/a} (ci-après dénommé le « {b}Participant{/b} »).',
+            '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
+            '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
+            '{b}3.5.{/b} La participation est limitée à une seule participation par foyer (même nom, même adresse).'
+          ]
+        },
+        {
+          num: '4', icone: 'megaphone', court: 'Créateurs de contenu', titre: 'Promotion du jeu concours par un ou plusieurs créateur(s) de contenu',
+          blocs: [
+            'Dans le cas où la promotion du Jeu est effectuée par un ou plusieurs créateurs de contenu (ci-après les « {b}Influenceurs{/b} »), ces derniers ne sont en aucun cas co-organisateurs du Jeu, ils procèdent uniquement à la promotion du jeu concours.',
+            'L’Organisateur décline toute responsabilité, civile ou pénale, à l’égard de tout manquement, déclaration, acte ou omission imputable aux Influenceurs, notamment dans l’hypothèse où ces derniers outrepasseraient leur mission de promotion du Jeu.'
+          ]
+        },
+        {
+          num: '5', icone: 'fileText', court: 'Modalités de participation', titre: 'Modalités de participation',
+          blocs: [
+            'Pour participer, le Participant doit, pour valider sa participation au Jeu :',
+            { ul: [
+              'se connecter sur le site Route du Rhum et créer son compte Mon Espace Rhum ;',
+              'renseigner, dans la fenêtre du Jeu, un temps de course pour chacune des six classes de la course, puis valider ses pronostics avant la clôture du Jeu ;',
+              'respecter les conditions d’utilisation du site concerné.'
+            ] },
+            'Toute participation incomplète, erronée ou réalisée après la date limite sera considérée comme nulle.'
+          ]
+        },
+        {
+          num: '6', icone: 'target', court: 'Désignation du gagnant', titre: 'Désignation du gagnant',
+          blocs: [
+            '{b}6.1.{/b} Chaque Participant indique, pour chacune des six classes de la course (Ultim, Ocean Fifty, IMOCA, Class40, Vintage Mono, Vintage Multi), le temps de course qu’il prévoit pour le premier bateau de la classe à franchir la ligne d’arrivée à Pointe-à-Pitre, en jours, heures, minutes et secondes. Les pronostics peuvent être modifiés jusqu’à la clôture du Jeu ; seuls ceux enregistrés à la clôture sont pris en compte.',
+            '{b}6.2.{/b} Le temps de référence d’une classe est le temps de course officiel du premier bateau de cette classe, tel que publié par la Direction de course.',
+            '{b}6.3.{/b} Pour chaque classe, l’écart du Participant est la différence, en valeur absolue, entre son pronostic et le temps de référence, divisée par le temps de référence. Le score du Participant est la moyenne de ses écarts sur les classes retenues. Le gagnant est le Participant dont le score est le plus faible, parmi les Participants ayant rempli les critères de participation énumérés aux articles 3 et 5 des présentes.',
+            '{b}6.4.{/b} Une classe dont aucun bateau ne franchit la ligne d’arrivée dans les délais de la course n’est pas retenue : elle ne compte pour aucun Participant, et le score se calcule sur les autres classes.',
+            '{b}6.5.{/b} En cas d’égalité de score, le Participant dont la dernière modification des pronostics est la plus ancienne est désigné gagnant. Si l’égalité persiste, le gagnant est désigné par tirage au sort parmi les Participants à égalité.',
+            '{b}6.6.{/b} Le gagnant sera informé directement par l’Organisateur par email ou appel téléphonique dans un délai maximal de 2 jours après l’arrivée du premier bateau de la dernière classe.'
+          ]
+        },
+        {
+          num: '7', icone: 'trophy', court: 'Dotation', titre: 'Désignation et remise des dotations',
+          blocs: [
+            '{b}7.1.{/b} Le Jeu est doté de la dotation suivante :',
+            { ul: [
+              'une montre officielle de la Route du Rhum x Alpina, d’une valeur commerciale de 1 095 € TTC.'
+            ] },
+            'Les frais de livraison de la dotation sont pris en charge par l’Organisateur. Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
+            '{b}7.2.{/b} Une fois que l’Organisateur aura contacté le gagnant pour l’informer, il devra communiquer à l’Organisateur les éléments suivants :',
+            { ul: [
+              'nom et prénom ;',
+              'adresse postale ;',
+              'numéro de téléphone ;',
+              'adresse email.'
+            ] },
+            'En outre, en cas d’impossibilité pour l’Organisateur de :',
+            { ul: [
+              'délivrer au Gagnant la Dotation remportée, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent ;',
+              'contacter et obtenir les informations susmentionnées de la part du Gagnant dans un délai maximal de 48 heures à compter de la prise de contact par email et/ou appel, l’Organisateur se réserve le droit de remettre la Dotation en jeu.'
+            ] },
+            'Aucun message ne sera envoyé aux Participants n’ayant pas remporté la dotation, seul le Gagnant sera contacté par l’Organisateur.'
+          ]
+        },
+        {
+          num: '8', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
+          blocs: [
+            'La responsabilité de l’Organisateur ne pourra être engagée en cas de force majeure ou d’événements indépendants de sa volonté empêchant le bon déroulement du Jeu.',
+            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation du site.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu s’il apparaît que des fraudes sont intervenues. À ce titre, il se réserve le droit de ne pas attribuer les Dotations aux fraudeurs.',
+            'L’Organisateur ne saurait voir sa responsabilité engagée du fait de l’impossibilité de contacter le Gagnant. À ce titre, l’Organisateur ne pourra pas être responsable des erreurs éventuelles portant sur l’adresse postale ou email communiquée par le Gagnant.',
+            'En outre, l’Organisateur ne saurait voir sa responsabilité engagée en cas d’une quelconque complication liée à la livraison des Dotations (retard de livraison, erreur de livraison, Dotation endommagée, etc).',
+            'Par ailleurs, l’Organisateur décline toute responsabilité pour tous les incidents qui pourraient survenir lors de la jouissance de la Dotation attribuée et/ou du fait et/ou des conséquences de sa mauvaise utilisation.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu-concours s’il apparaît que des fraudes sont intervenues sous quelque forme que ce soit, notamment de manière informatique dans le cadre de la participation au Jeu-concours.'
+          ]
+        },
+        {
+          num: '9', icone: 'lock', court: 'Données personnelles', titre: 'Protection des données à caractère personnel',
+          blocs: [
+            '{b}9.1.{/b} L’Organisateur se conforme au cadre légal ou réglementaire applicable en matière de protection des données à caractère personnel, en particulier la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée ainsi que le règlement (UE) 2016/679 (RGPD).',
+            'Les termes utilisés dans le présent article sont définis tel qu’indiqué dans le RGPD.',
+            'Dans le cadre de l’exécution du jeu concours, l’Organisateur sera amené à traiter des données à caractère personnel du/des Participants (ci-après dénommées les « {b}Données{/b} ») pour son propre compte et pour ses propres finalités en qualité de responsable de traitement.',
+            '{b}9.2.{/b} L’Organisateur collecte et traite les données personnelles du Participant suivantes :',
+            { ul: [
+              'Nom ;',
+              'Prénom ;',
+              'Date de naissance ;',
+              'Adresse email ;',
+              'Numéro de téléphone.'
+            ] },
+            '{b}9.3.{/b} L’Organisateur collecte et traite des Données du Participant pour les finalités suivantes :',
+            { ul: [
+              'enregistrement de la participation du Participant ;',
+              'prise de contact avec le gagnant et livraison des dotations ;',
+              'traitement des éventuelles réclamations.'
+            ] },
+            '{b}9.4.{/b} Les données personnelles sont destinées à l’Organisateur. Dans la stricte limite des finalités énoncées, elles sont transmises aux sous-traitants suivants :',
+            { ul: [
+              'le prestataire en charge de l’hébergement du site internet.'
+            ] },
+            'Ces sous-traitants interviennent uniquement sur instructions de l’Organisateur et présentent les garanties requises par le RGPD.',
+            '{b}9.5.{/b} Les données collectées sont conservées pendant une durée de 1 an.',
+            '{b}9.6.{/b} Les personnes concernées par le traitement de leurs Données peuvent exercer leurs droits d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité, auprès de OC SPORT PEN DUICK aux coordonnées suivantes :',
+            '{a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a} ;',
+            '6 rue du Sous-Marin Vénus - Zac de Keroman 56100 Lorient.',
+            'En cas de litige non résolu, le participant peut adresser une réclamation auprès de la CNIL (www.cnil.fr).',
+            'Pour en savoir plus sur la manière dont OC Sport traite les données personnelles, consultez la {a:/politique-de-confidentialite}politique de confidentialité{/a} du site.'
+          ]
+        },
+        {
+          num: '10', icone: 'gavel', court: 'Litiges et loi applicable', titre: 'Règlement des litiges et loi applicable',
+          blocs: [
+            'Le présent règlement de jeu est soumis à la loi française.',
+            'La participation au Jeu implique l’acceptation sans réserve du présent règlement. En cas de difficulté d’interprétation ou d’application, les décisions de l’Organisateur seront souveraines et sans appel.',
+            'Il ne sera répondu à aucune demande ou réclamation téléphonique concernant l’application ou l’interprétation du Règlement. Toute contestation ou réclamation relative au Jeu-concours devra être formulée par écrit à l’adresse de l’Organisateur au 6 rue du Sous-Marin Vénus - Zac de Keroman 56100 Lorient.',
             'Plus aucune contestation ne sera prise en compte huit (8) jours après la clôture du Jeu.'
           ]
         }
