@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ed13b10 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ed13b10";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 4d1c081 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="4d1c081";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -797,6 +797,51 @@ if (!customElements.get('espace-rhum')) {
     { key: 'badges',       label: 'Mes badges',      icon: ICON_BADGES }
   ];
 
+  
+
+
+
+
+
+
+
+  const JT_REPERES_2022 = {
+    'ultim':         { t: [6, 19, 47] },
+    'ocean-fifty':   { t: [10, 21, 35] },
+    'imoca':         { t: [11, 17, 36] },
+    'class40':       { t: [14, 3, 8] },
+    'vintage-mono':  { t: [16, 13, 57], de: 'Rhum Mono' },
+    'vintage-multi': { t: [16, 6, 37], de: 'Rhum Multi' }
+  };
+   
+  const JT_MAX = [60, 23, 59, 59];
+  const jtSvg = (c) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + c + '</svg>';
+  const JT_I_JEUX = '<path d="M6 11h4M8 9v4"/><path d="M15 10h.01M18 13h.01"/><path d="M17.3 5H6.7a4 4 0 0 0-3.96 3.43L2 14.6a2.5 2.5 0 0 0 4.4 2L8.5 14h7l2.1 2.6a2.5 2.5 0 0 0 4.4-2l-.74-6.17A4 4 0 0 0 17.3 5z"/>';
+  const JT_I_CHRONO = '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/>';
+  const JT_I_FLECHE = '<path d="M5 12h14M13 6l6 6-6 6"/>';
+  const JT_I_RETOUR = '<path d="M19 12H5M11 18l-6-6 6-6"/>';
+  const JT_I_CROIX = '<path d="M6 6l12 12M18 6 6 18"/>';
+  const JT_I_OK = '<path d="M20 6 9 17l-5-5"/>';
+  const jtDeux = (n) => String(n).padStart(2, '0');
+   
+  const jtLib = (en, fr, anglais) => (en ? anglais : fr);
+  function jtReste(fin) {
+    const ms = Math.max(0, fin - Date.now());
+    return { j: Math.floor(ms / 864e5), h: Math.floor(ms / 36e5) % 24, m: Math.floor(ms / 6e4) % 60, s: Math.floor(ms / 1e3) % 60 };
+  }
+   
+  function jtDecoupe(sec) {
+    if (!Number.isFinite(sec) || sec <= 0) return null;
+    return [Math.floor(sec / 86400), Math.floor((sec % 86400) / 3600), Math.floor((sec % 3600) / 60), sec % 60];
+  }
+   
+  function jtImage(v, largeur) {
+    if (!v || !v.src) return '';
+    if (!(v.l > 0 && v.h > 0)) return v.src;
+    const l = Math.min(largeur, v.l), h = Math.round(l * v.h / v.l);
+    return v.src + '/v1/fit/w_' + l + ',h_' + h + ',q_85,enc_auto/jeu.jpg';
+  }
+
    
    
    
@@ -1514,6 +1559,228 @@ if (!customElements.get('espace-rhum')) {
   const MOTIF_FILAIRE_URI = "data:image/svg+xml,%3Csvg id='Calque_1' data-name='Calque 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600.3 972.66'%3E %3Cdefs%3E %3Cstyle%3E .cls-1 %7B fill: none; stroke: %23f5fcfb; stroke-miterlimit: 10; %7D %3C/style%3E %3C/defs%3E %3Cpath class='cls-1' d='M74.69,649.22c-21.75,37.99-35.3,78.52-41.21,119.49h85.66c-16.85,27.16-29.79,56.99-38.25,88.81-9.32,35.07-12.73,70.78-10.43,105.97h66.1c-2.45-29.08-.06-59.04,7.85-88.81,10.63-40,30.18-76.02,56.85-105.97h-78.88c5.23-26.14,14.63-51.53,28.24-75.29,17.79-31.06,41.53-57.29,69.6-77.59v-41.9h-86.94c-22.69,21.89-42.46,47.11-58.6,75.29Z'/%3E %3Cpath class='cls-1' d='M277.39,654.75c-20.76,36.24-33.79,74.88-39.62,113.96h66.77c5.25-27.72,15.04-55.03,29.81-80.81,20.24-35.34,47.55-64.03,79.09-85.37v-28.59h-70.64c-25.35,22.63-47.56,49.67-65.4,80.81Z'/%3E %3Cpath class='cls-1' d='M480.11,855.06c-19.76,34.5-32.26,71.25-38.02,108.44h44.49c5.37-29.62,15.72-58.81,31.49-86.34,22.02-38.46,52.39-70.14,88.58-93.22v-15.22h-53.84c-28.84,23.79-53.52,52.83-72.71,86.34Z'/%3E %3Cpath class='cls-1' d='M682.81,860.58c-18.76,32.76-30.69,67.62-36.36,102.91h22.18c5.48-31.51,16.41-62.59,33.17-91.86,24.54-42.86,58.67-76.72,98.08-100.49v-2.43h-35.79c-32.14,23.99-60.03,54.8-81.27,91.87Z'/%3E %3Cpath class='cls-1' d='M880.78,863.34c-18.26,31.89-29.94,65.8-35.57,100.15h11.08c5.53-32.46,16.72-64.48,33.98-94.62,23.75-41.47,56.62-75.56,95.86-100.15h-19.77c-34.59,24.56-63.79,56.59-85.58,94.62Z'/%3E %3Cpath class='cls-1' d='M151.4,515.61c20.24-20.4,43.54-36.58,68.82-48.2v-88.25h-69.78c-27.73,15.56-53.48,35.08-76.54,58.32-18.07,18.21-33.68,37.97-46.9,58.84v77.61h82c10.82-21.01,24.94-40.72,42.4-58.32Z'/%3E %3Cpath class='cls-1' d='M274.87,445.3c-21.64,21.81-39.94,46.09-54.65,72.2v56.43h69.65c11.8-24.18,27.54-46.52,47-66.14,22.39-22.57,48.35-40.2,76.57-52.48v-76.16h-45.9c-33.96,16.31-65.28,38.53-92.67,66.14Z'/%3E %3Cpath class='cls-1' d='M475.84,647.89c-26.33,26.54-47.08,56.59-62.4,88.64v32.18h57.56c12.33-26.79,29.45-51.88,51.34-73.95,24.87-25.08,53.62-43.92,84.32-56.56v-64.27h-17.34c-41.39,15.82-80.2,40.41-113.48,73.95Z'/%3E %3Cpath class='cls-1' d='M993.09,764.28v4.44h45.61c12.99-29.68,31.46-57.48,55.54-81.77,27.05-27.27,58.51-47.42,92.07-60.58v-46.9c-45.02,14.86-87.35,40.22-123.07,76.23-31.63,31.89-54.96,69-70.15,108.58Z'/%3E %3Cpath class='cls-1' d='M1196.18,768.71h23.6c13.83-33.06,34-63.44,59.93-89.57,29.23-29.46,63.4-50.94,99.82-64.58v-23.49c-42.16,14.49-81.75,38.6-115.32,72.44-30.19,30.43-53.09,66.22-68.03,105.2Z'/%3E %3Cpath class='cls-1' d='M1395.82,768.72h11.87c14.11-33.58,34.61-64.44,60.96-91.01,30.42-30.67,66.09-52.87,104.1-66.72v-11.77c-40.88,14.28-79.26,37.82-111.85,70.68-28.48,28.71-50.4,62.27-65.07,98.82Z'/%3E %3Cpath class='cls-1' d='M145.53,339.18c23.79-13.84,49.07-22.76,74.69-27.11v-127.69h31.67c21.25-15.04,45.17-26.38,71-33.35,19.37-5.23,38.86-7.73,58.02-7.73,10.97,0,21.83.87,32.52,2.46V12.07c-41.29-3.79-83.35-.25-124.59,10.89-24,6.48-46.95,15.34-68.63,26.35v135.07h-37.68c-35.24,7.65-69.91,20.85-102.77,39.98-18.87,10.98-36.49,23.53-52.77,37.44v117.37h68.07c14.65-15.49,31.56-28.98,50.46-39.98Z'/%3E %3Cpath class='cls-1' d='M413.44,486.4v87.53h39.11c18.51-23.17,41.42-43.37,68.46-59.11,26.88-15.65,55.87-25.8,85.65-30.43v-89.26c-45.07,5.12-89.03,19.6-129.49,43.14-23.58,13.73-44.86,29.95-63.73,48.13Z'/%3E %3Cpath class='cls-1' d='M708.74,505.25c28.97-16.86,59.88-27.3,91.13-31.9v-66.9c-42.49,4.95-84.67,18.5-124.01,41.4-25.76,14.99-48.91,33.22-69.21,54.03v72.06h25.03c20.54-27.55,46.56-50.93,77.06-68.68Z'/%3E %3Cpath class='cls-1' d='M993.09,462.02v-44.58c-41.25,5.02-81.46,18.4-118.53,39.97-28.25,16.45-53.3,36.89-74.69,60.5v56.03h11.46c22.11-31.63,50.92-58.33,85.15-78.25,30.28-17.62,63-28.88,96.61-33.67Z'/%3E %3Cpath class='cls-1' d='M993.09,534.61v36.58c23.32-34.51,54.2-63.58,91.13-85.08,31.98-18.61,66.57-30.43,102.09-35.29v-22.28c-39.34,4.97-77.68,17.84-113.05,38.43-30.9,17.99-57.87,40.89-80.17,67.64Z'/%3E %3Cpath class='cls-1' d='M1186.31,545.62v17.95c23.14-32.11,52.86-59.31,87.99-79.75,33.41-19.45,69.16-31.26,105.23-35.99v-11.13c-37.94,4.78-75.57,17.1-110.71,37.55-32.63,18.99-60.23,43.39-82.5,71.37Z'/%3E %3Cpath class='cls-1' d='M428.52,379.16c24.68-19.54,53.24-34.06,84.47-42.49,20.32-5.49,40.76-8.11,60.86-8.11,11.06,0,22.01.84,32.81,2.39v-111.27c-39.89-3.88-81.1-.78-122.03,10.27-25,6.75-48.79,16.24-71.18,28.04v-68.55c-46.24,5.03-92.18,19.59-134.97,44.49-21.25,12.37-40.69,26.7-58.25,42.62v102.61h53.4c16.61-19.23,36.54-36.1,59.65-49.54,25.51-14.85,52.67-24.31,80.17-28.75v78.3h15.08Z'/%3E %3Cpath class='cls-1' d='M993.09,306.91h0v41.02c26.59-20.12,57.29-35.61,91.32-44.81,23.16-6.25,46.45-9.25,69.36-9.25,10.95,0,21.81.69,32.54,2.02v-44.47c-36.97-3.94-75.24-1.27-113.24,9-28.81,7.79-55.6,19.42-79.97,34.2h0v-54.47c-38.44-3.9-77.65-.78-116.08,9.6-27.62,7.46-53.43,18.35-77.14,32.06v80.07c26.96-21.82,58.68-38.52,94.16-48.11,32.81-8.86,66.34-11.07,99.06-6.88Z'/%3E %3Cpath class='cls-1' d='M1463.35,278.91c-30.52,8.25-58.62,21.06-83.83,37.48v13.32c25.77-17.75,54.85-31.54,86.66-40.13,35.29-9.53,71.32-12.06,106.55-7.94v-11.11c-36.18-4.07-73.16-1.4-109.39,8.38Z'/%3E %3Cpath class='cls-1' d='M284.7,860.38c-9.07,34.12-12.3,68.88-9.98,103.11h43.92c-2.41-30.41.34-61.34,8.4-91.67,10.4-39.12,28.9-73.91,53.13-103.11h-54.64c-17.97,27.45-31.94,58.2-40.84,91.67Z'/%3E %3C/svg%3E";
 
    
+  
+
+
+
+  const JEUX_CSS = `
+    espace-rhum .jt-bandeau{grid-column:1/-1;position:relative;display:flex;align-items:center;gap:16px;min-height:60px;margin:0;padding:8px 10px 8px 8px;overflow:hidden;border-radius:var(--er-radius-md,14px);background:radial-gradient(120% 180% at 0% 50%,rgba(93,191,192,.28) 0%,rgba(93,191,192,0) 46%),linear-gradient(100deg,#0D4250 0%,#0B2C4A 52%,#0A1A35 100%);border:1px solid rgba(252,241,80,.3);color:#fff;font-family:var(--er-font-body)}
+    espace-rhum .jt-bandeau-montre{flex:none;display:block;width:50px;height:50px;border-radius:3px 12px 3px 12px;overflow:hidden;background:#0B2C3D;border:1px solid rgba(255,255,255,.14);color:var(--er-amber-bright)}
+    espace-rhum .jt-bandeau-montre img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:68% 74%;transform:scale(2.4);transform-origin:68% 74%}
+    espace-rhum .jt-bandeau-montre svg{display:block;width:24px;height:24px;margin:12px auto}
+    espace-rhum .jt-bandeau-texte{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+    espace-rhum .jt-bandeau-titre{margin:0;font:italic 400 22px/1 var(--er-font-display);text-transform:uppercase;letter-spacing:-.005em;color:#fff}
+    espace-rhum .jt-bandeau-titre em{font-style:inherit;color:var(--er-teal)}
+    espace-rhum .jt-bandeau-ligne{font-size:13.5px;line-height:1.35;color:var(--er-text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    espace-rhum .jt-bandeau-reste{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-right:4px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--er-text-muted);white-space:nowrap}
+    espace-rhum .jt-bandeau-reste b{font-size:15px;letter-spacing:0;text-transform:none;color:#fff;font-variant-numeric:tabular-nums}
+    espace-rhum .jt-jouer{flex:none;display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border:0;border-radius:3px 15px 3px 15px;background:linear-gradient(180deg,#FFF57A 0%,#FCF150 55%,#F1E33A 100%);color:#0A1228;font:800 13px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;box-shadow:0 6px 18px rgba(252,241,80,.22),inset 0 -2px 0 rgba(10,18,40,.12)}
+    espace-rhum .jt-jouer-ico{display:grid;place-items:center;width:30px;height:30px;border-radius:3px 10px 3px 10px;background:#0A1228;color:var(--er-amber-bright)}
+    espace-rhum .jt-jouer-ico svg{width:17px;height:17px}
+    espace-rhum .jt-jouer-fl{width:15px;height:15px;transition:transform .18s ease}
+    @media (hover:hover){espace-rhum .jt-jouer:hover{filter:brightness(1.04);box-shadow:0 8px 24px rgba(252,241,80,.32),inset 0 -2px 0 rgba(10,18,40,.12)}espace-rhum .jt-jouer:hover .jt-jouer-fl{transform:translateX(3px)}}
+    espace-rhum .jt-jouer:focus-visible,espace-rhum .jt-voir:focus-visible{outline:3px solid #fff;outline-offset:2px}
+    espace-rhum .jt-bandeau--joue{border-color:rgba(93,191,192,.4)}
+    espace-rhum .jt-voir{flex:none;display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:3px 15px 3px 15px;border:1.5px solid rgba(93,191,192,.45);background:var(--er-teal-soft);color:var(--er-teal);font:800 12px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+    espace-rhum .jt-voir svg{width:15px;height:15px}
+    @media (max-width:767px){
+      espace-rhum .jt-bandeau{flex-wrap:wrap;gap:10px;padding:10px}
+      espace-rhum .jt-bandeau-texte{flex-basis:calc(100% - 66px)}
+      espace-rhum .jt-bandeau-ligne{white-space:normal}
+      espace-rhum .jt-bandeau-reste{order:3;align-items:flex-start;padding-left:2px}
+      espace-rhum .jt-jouer,espace-rhum .jt-voir{order:4;margin-left:auto}
+    }
+
+    espace-rhum .jt-menu-jeux{width:100%;justify-content:center;gap:8px;margin-top:16px;padding-left:12px;padding-right:12px;color:#fff;border:none;font-weight:800;letter-spacing:.05em;background:linear-gradient(120deg,#1E8C93 0%,#1F67B4 100%);box-shadow:0 6px 18px rgba(31,103,180,.28),inset 0 1px 0 rgba(255,255,255,.18)}
+    espace-rhum .jt-menu-jeux[aria-current="page"]{box-shadow:0 0 0 2px var(--er-amber-bright),0 6px 18px rgba(31,103,180,.28)}
+    espace-rhum .jt-menu-jeux svg{flex:none;width:18px;height:18px}
+    espace-rhum .jt-menu-jeux .jt-compteur{padding:3px 6px;margin-left:2px;border-radius:3px 8px 3px 8px;background:var(--er-amber-bright);color:#0A1228;font-size:10.5px;font-weight:800;letter-spacing:.04em;line-height:1}
+    espace-rhum .er-mobile-sheet-jeux{margin:0 0 8px}
+    @media (hover:hover) and (pointer:fine){espace-rhum .jt-menu-jeux:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(31,103,180,.4),inset 0 1px 0 rgba(255,255,255,.18)}}
+    @media (min-width:768px) and (max-width:1099px){
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .jt-menu-jeux span{display:none}
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .jt-menu-jeux{padding:12px}
+    }
+
+    espace-rhum main.er-dashboard.jt-vue{display:flex;flex-direction:column;gap:22px;min-width:0;font-family:var(--er-font-body);color:#fff;animation:er-fadeup .45s var(--er-ease-entry,ease) both}
+    espace-rhum main.er-dashboard.jt-vue[hidden],espace-rhum main.er-dashboard[hidden]{display:none}
+    espace-rhum .jt-retour{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:0;border:0;background:none;color:var(--er-text-muted);font:700 11px/1 var(--er-font-body);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+    espace-rhum .jt-retour svg{width:14px;height:14px}
+    @media (hover:hover){espace-rhum .jt-retour:hover{color:#fff}}
+    espace-rhum .jt-vue-tete{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px}
+    espace-rhum .jt-kicker{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--er-amber-bright)}
+    espace-rhum .jt-kicker::before{content:"";width:22px;height:2px;background:var(--er-amber-bright)}
+    espace-rhum .jt-vue-titre{margin:0;font:italic 400 clamp(40px,4.4vw,58px)/.9 var(--er-font-display);text-transform:uppercase;letter-spacing:-.01em}
+    espace-rhum .jt-vue-sous{margin:8px 0 0;max-width:60ch;font-size:14px;line-height:1.5;color:var(--er-text-muted)}
+    espace-rhum .jt-onglets{display:inline-flex;gap:4px;padding:4px;border-radius:3px 15px 3px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+    espace-rhum .jt-onglet{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:0;border-radius:3px 12px 3px 12px;background:transparent;color:var(--er-text-secondary);font:800 12px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+    espace-rhum .jt-onglet span{color:var(--er-text-muted);font-weight:700}
+    espace-rhum .jt-onglet[aria-selected="true"]{background:var(--er-amber-bright);color:#0A1228}
+    espace-rhum .jt-onglet[aria-selected="true"] span{color:rgba(10,18,40,.6)}
+    espace-rhum .jt-onglet:focus-visible{outline:2px solid #fff;outline-offset:2px}
+    @media (hover:hover){espace-rhum .jt-onglet:not([aria-selected="true"]):hover{background:rgba(255,255,255,.08);color:#fff}}
+
+    espace-rhum .jt-une{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,330px);gap:clamp(20px,3vw,44px);align-items:center;margin-top:40px;padding:clamp(22px,2.6vw,36px) clamp(22px,3vw,44px);border-radius:20px;background:radial-gradient(70% 90% at 100% 0%,rgba(93,191,192,.32) 0%,rgba(93,191,192,0) 60%),radial-gradient(60% 80% at 0% 100%,rgba(31,103,180,.35) 0%,rgba(31,103,180,0) 60%),linear-gradient(135deg,#0C3A4A 0%,#0A2340 55%,#0A1A35 100%);border:1px solid rgba(252,241,80,.24);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+    espace-rhum .jt-une--seul{grid-template-columns:minmax(0,1fr);margin-top:0}
+    espace-rhum .jt-une::after,espace-rhum .jt-ouvert::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:repeating-radial-gradient(circle at 105% 120%,rgba(255,255,255,.035) 0 1px,transparent 1px 26px)}
+    espace-rhum .jt-corps{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;min-width:0}
+    espace-rhum .jt-etiquettes{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+    espace-rhum .jt-etat{padding:5px 10px;border-radius:3px 10px 3px 10px;background:var(--er-amber-bright);color:#0A1228;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    espace-rhum .jt-etat--joue{background:var(--er-teal)}
+    espace-rhum .jt-etat--ferme{background:rgba(255,255,255,.16);color:#fff}
+    espace-rhum .jt-partenaire{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--er-teal)}
+    espace-rhum .jt-titre{margin:0;font:italic 400 clamp(40px,4.6vw,66px)/.9 var(--er-font-display);text-transform:uppercase;letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+    espace-rhum .jt-titre small{display:block;font-size:.42em;line-height:1;margin-bottom:.12em;color:var(--er-amber-bright)}
+    espace-rhum .jt-texte{margin:0;max-width:54ch;font-size:15px;line-height:1.55;color:var(--er-text-secondary)}
+    espace-rhum .jt-texte b{color:#fff}
+    espace-rhum .jt-compte{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+    espace-rhum .jt-compte-lab{flex-basis:100%;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--er-text-muted)}
+    espace-rhum .jt-case{display:inline-flex;align-items:baseline;justify-content:center;gap:3px;min-width:70px;padding:12px 12px 10px;border-radius:10px;background:linear-gradient(180deg,#0B2A5C 0%,#08214A 100%);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);font:700 30px/1 var(--er-font-body);font-variant-numeric:tabular-nums;letter-spacing:.02em;color:#fff}
+    espace-rhum .jt-case small{font-size:13px;font-weight:700;color:rgba(255,255,255,.6)}
+    espace-rhum .jt-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:4px}
+    espace-rhum .jt-cta{padding:14px 22px;font-size:13.5px}
+    espace-rhum .jt-cta svg{width:17px;height:17px}
+    espace-rhum .jt-lien,.jt-modale .jt-lien{font:600 13px/1.3 Montserrat,system-ui,sans-serif;color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4)}
+    espace-rhum .jt-mes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0}
+    espace-rhum .jt-mes div{display:flex;align-items:center;gap:9px;min-width:0;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    espace-rhum .jt-mes img{width:20px;height:auto;flex:none}
+    espace-rhum .jt-mes dt{font-size:11px;font-weight:700;color:var(--er-text-muted)}
+    espace-rhum .jt-mes dd{margin:0;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+    espace-rhum .jt-affiche{position:relative;z-index:1;margin:-64px 0 -24px;transform:rotate(2.5deg);border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.9);box-shadow:0 26px 60px rgba(0,0,0,.5),0 0 0 1px rgba(252,241,80,.4)}
+    espace-rhum .jt-affiche img{display:block;width:100%;height:auto}
+
+    espace-rhum .jt-ouverts{display:flex;flex-direction:column;gap:18px}
+    espace-rhum .jt-ouvert{position:relative;display:grid;grid-template-columns:clamp(210px,24%,270px) minmax(0,1fr);overflow:hidden;border-radius:18px;background:linear-gradient(120deg,#0C3A4A 0%,#0A2340 55%,#0A1A35 100%);border:1px solid rgba(252,241,80,.22);box-shadow:0 18px 44px rgba(0,0,0,.3)}
+    espace-rhum .jt-cadre{position:relative;overflow:hidden;aspect-ratio:4/5;background:#0B2C3D}
+    espace-rhum .jt-cadre-fond{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(24px) saturate(1.15) brightness(.55);transform:scale(1.05)}
+    espace-rhum .jt-cadre::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(160deg,rgba(12,58,74,.45) 0%,rgba(10,26,53,.6) 100%)}
+    espace-rhum .jt-cadre--ico::after{display:none}
+    espace-rhum .jt-cadre-img{position:relative;z-index:2;display:block;width:100%;height:100%;padding:16px;box-sizing:border-box;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.45))}
+    espace-rhum .jt-cadre--ico{display:grid;place-items:center;background:radial-gradient(80% 70% at 30% 0%,rgba(93,191,192,.45),rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F5A5E,#123C6B);color:#fff}
+    espace-rhum .jt-cadre--ico svg{width:64px;height:64px;opacity:.9}
+    espace-rhum .jt-ouvert > .jt-cadre{aspect-ratio:auto;align-self:stretch;min-height:300px}
+    espace-rhum .jt-ouvert .jt-corps{justify-content:center;gap:12px;padding:24px clamp(20px,2.4vw,32px)}
+    espace-rhum .jt-ouvert .jt-titre{font-size:clamp(28px,2.6vw,38px)}
+    espace-rhum .jt-ouvert .jt-texte{font-size:14.5px;max-width:62ch}
+    espace-rhum .jt-bas{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;margin-top:4px}
+    espace-rhum .jt-ouvert .jt-compte{gap:6px}
+    espace-rhum .jt-ouvert .jt-case{min-width:54px;padding:9px 8px 8px;font-size:22px}
+    espace-rhum .jt-ouvert .jt-case small{font-size:11px}
+    espace-rhum .jt-ouvert .jt-actions{gap:10px 18px;margin-top:0}
+
+    espace-rhum .jt-liste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    espace-rhum .jt-carte{position:relative;display:flex;gap:14px;align-items:center;padding:18px 16px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px dashed rgba(255,255,255,.16);color:#fff}
+    espace-rhum .jt-carte-ico{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:3px 15px 3px 15px;background:rgba(93,191,192,.14);border:1px solid rgba(93,191,192,.3);color:var(--er-teal)}
+    espace-rhum .jt-carte-ico svg{width:24px;height:24px}
+    espace-rhum .jt-carte h3{margin:0 0 3px;font-size:14px;font-weight:800}
+    espace-rhum .jt-carte p{margin:0;font-size:12.5px;line-height:1.4;color:var(--er-text-muted)}
+    espace-rhum .jt-carte .jt-quand{display:block;margin-top:6px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--er-amber-bright)}
+    espace-rhum .jt-vide{padding:36px 24px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);text-align:center;color:var(--er-text-muted);font-size:14px;line-height:1.5}
+    espace-rhum .jt-vide b{display:block;margin-bottom:4px;font:italic 400 22px/1.1 var(--er-font-display);text-transform:uppercase;color:#fff}
+
+    @media (max-width:1099px){
+      espace-rhum .jt-une{grid-template-columns:minmax(0,1fr) 240px}
+      espace-rhum .jt-une--seul{grid-template-columns:minmax(0,1fr)}
+      espace-rhum .jt-liste{grid-template-columns:repeat(2,minmax(0,1fr))}
+      espace-rhum .jt-mes{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:767px){
+      espace-rhum main.er-dashboard.jt-vue{gap:16px}
+      espace-rhum .jt-onglets{display:flex;width:100%}
+      espace-rhum .jt-onglet{flex:1;justify-content:center;padding:10px 6px;font-size:11px;letter-spacing:.06em}
+      espace-rhum .jt-une{grid-template-columns:1fr;margin-top:46px;padding:20px 18px}
+      espace-rhum .jt-une--seul{margin-top:0}
+      espace-rhum .jt-affiche{order:-1;width:min(240px,72%);margin:-62px auto 0;transform:rotate(2deg)}
+      espace-rhum .jt-case{min-width:0;flex:1;font-size:24px;padding:10px 6px 8px}
+      espace-rhum .jt-cta{width:100%;justify-content:center}
+      espace-rhum .jt-liste{grid-template-columns:1fr}
+      espace-rhum .jt-ouvert{grid-template-columns:1fr}
+      espace-rhum .jt-ouvert > .jt-cadre{aspect-ratio:16/10;min-height:0}
+      espace-rhum .jt-ouvert .jt-corps{padding:18px}
+      espace-rhum .jt-bas{flex-direction:column;align-items:stretch}
+    }
+    @media (prefers-reduced-motion:reduce){espace-rhum .jt-vue{animation:none}espace-rhum .jt-jouer-fl{transition:none}}
+
+    .jt-modale{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px;background:rgba(5,10,24,.78);font-family:Montserrat,system-ui,sans-serif;color:#fff;opacity:0;transition:opacity .18s ease}
+    .jt-modale *{box-sizing:border-box}
+    .jt-modale.est-ouverte{opacity:1}
+    .jt-boite{position:relative;display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);width:min(1040px,100%);height:min(680px,calc(100dvh - 32px));overflow:hidden;border-radius:16px;background:#0A1A35;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+    .jt-boite--sans-visuel{grid-template-columns:minmax(0,1fr);width:min(680px,100%)}
+    .jt-boite-visuel{position:relative;background:#0B2C3D}
+    .jt-boite-visuel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+    .jt-boite-corps{display:flex;flex-direction:column;min-height:0}
+    .jt-boite-tete{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 12px}
+    .jt-boite-tete h2{margin:0;font:italic 400 30px/.95 'Varien',serif;text-transform:uppercase;color:#fff}
+    .jt-boite-tete p{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.78);max-width:52ch}
+    .jt-fermer{flex:none;display:grid;place-items:center;width:42px;height:42px;padding:0;border:0;border-radius:3px 12px 3px 12px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+    .jt-fermer svg{width:18px;height:18px}
+    .jt-fermer:focus-visible,.jt-modale input:focus-visible,.jt-modale .jt-btn:focus-visible{outline:3px solid #FCF150;outline-offset:2px}
+    .jt-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:0;border-radius:3px 15px 3px 15px;background:#FCF150;color:#0A1228;font:800 13px/1 Montserrat,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .jt-btn svg{width:16px;height:16px}
+    .jt-btn[disabled]{opacity:.6;cursor:progress}
+    @media (hover:hover){.jt-btn:not([disabled]):hover{filter:brightness(1.05)}}
+    .jt-btn--ligne{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+    .jt-lignes{flex:1;min-height:0;overflow:auto;padding:4px 14px 8px 24px;margin-right:8px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:rgba(93,191,192,.5) transparent}
+    .jt-lignes::-webkit-scrollbar{width:6px}
+    .jt-lignes::-webkit-scrollbar-track{background:transparent;margin:6px 0}
+    .jt-lignes::-webkit-scrollbar-thumb{background:rgba(93,191,192,.45);border-radius:6px}
+    .jt-lignes::-webkit-scrollbar-thumb:hover{background:rgba(93,191,192,.75)}
+    .jt-lignes::-webkit-scrollbar-button{display:none;width:0;height:0}
+    .jt-ligne{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+    .jt-ligne.est-faux{border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.05)}
+    .jt-classe{display:flex;align-items:center;gap:12px;min-width:0}
+    .jt-drapeau{flex:none;width:30px;height:auto;display:block}
+    .jt-classe-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+    .jt-classe-txt b{font-size:14px;font-weight:800}
+    .jt-classe-txt small{font-size:11.5px;color:rgba(255,255,255,.5)}
+    .jt-classe-txt .jt-pb{font-size:11.5px;font-weight:700;color:#FF8A8A}
+    .jt-saisie{display:flex;align-items:center;gap:6px}
+    .jt-champ{display:flex;align-items:baseline;gap:3px;margin:0}
+    .jt-champ input{width:44px;height:42px;margin:0;padding:0;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#0A2350;color:#fff;text-align:center;font:700 19px/1 Montserrat,system-ui,sans-serif;font-variant-numeric:tabular-nums;transition:border-color .12s ease,box-shadow .12s ease}
+    .jt-champ input::placeholder{color:rgba(255,255,255,.16)}
+    .jt-champ input.est-faux{border-color:#FF6B6B;box-shadow:0 0 0 1px #FF6B6B;background:rgba(255,107,107,.1)}
+    .jt-champ span{font-size:11px;font-weight:700;color:rgba(255,255,255,.5)}
+    .jt-boite-pied{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:14px 24px 18px;border-top:1px solid rgba(255,255,255,.08)}
+    .jt-boite-pied p{flex:1 1 260px;margin:0;font-size:12px;line-height:1.45;color:rgba(255,255,255,.6)}
+    .jt-boite-pied p.jt-erreur{color:#FF8A8A;font-weight:700}
+    .jt-merci{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:14px;padding:4px 24px 18px}
+    .jt-merci-ok{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:#5DBFC0}
+    .jt-merci-ok svg{width:22px;height:22px}
+    .jt-recap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+    .jt-recap div{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.05)}
+    .jt-recap dt{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+    .jt-recap dt img{width:20px;height:auto;display:block}
+    .jt-recap dd{margin:0;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums}
+    .jt-merci p{margin:0;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.62)}
+    @media (max-height:760px) and (min-width:768px){
+      .jt-boite-tete{padding:16px 22px 8px}
+      .jt-boite-tete h2{font-size:26px}
+      .jt-boite-tete p{margin-top:6px;font-size:12.5px}
+      .jt-lignes{gap:6px}
+      .jt-ligne{padding:6px 12px}
+      .jt-champ input{height:36px;font-size:17px}
+      .jt-drapeau{width:26px}
+      .jt-boite-pied{padding:10px 22px 14px}
+    }
+    @media (max-width:767px){
+      .jt-modale{padding:0;place-items:stretch}
+      .jt-boite{grid-template-columns:1fr;grid-template-rows:110px minmax(0,1fr);width:100%;height:100dvh;border-radius:0;border:0}
+      .jt-boite--sans-visuel{grid-template-rows:minmax(0,1fr)}
+      .jt-boite-visuel img{object-position:50% 10%}
+      .jt-boite-tete{padding:14px 16px 8px}
+      .jt-boite-tete h2{font-size:24px}
+      .jt-lignes{padding:4px 10px 8px 16px;margin-right:4px}
+      .jt-ligne{grid-template-columns:1fr;gap:8px}
+      .jt-saisie{justify-content:space-between}
+      .jt-champ input{width:52px;font-size:19px}
+      .jt-boite-pied{padding:12px 16px max(14px,env(safe-area-inset-bottom))}
+      .jt-boite-pied .jt-btn{width:100%}
+      .jt-recap{grid-template-columns:1fr}
+      .jt-merci{padding:4px 16px 16px}
+    }
+    @media (prefers-reduced-motion:reduce){.jt-modale{transition:none}}
+  `;
+
   const TOKENS_CSS = `
     espace-rhum {
        
@@ -10856,6 +11123,7 @@ if (!customElements.get('espace-rhum')) {
       const suiviRejoue = this.getAttribute('suivi-rejoue');
       if (suiviRejoue) this._suiviRejoue = suiviRejoue;
       injectGlobalStyle('er-memoire-style', MEMOIRE_CSS);
+      injectGlobalStyle('er-jeux-style', JEUX_CSS);
       const membre = this.getAttribute('membre');
       if (membre) this._membre = membre;
       this._depuisMemoire();
@@ -10916,6 +11184,8 @@ if (!customElements.get('espace-rhum')) {
       if (this._top50Esc) { document.removeEventListener('keydown', this._top50Esc); this._top50Esc = null; }
       if (this._ioCarteFan) { this._ioCarteFan.disconnect(); this._ioCarteFan = null; }
       this._desarmerCoupPouce();
+      clearInterval(this._jeuxMinuteur); this._jeuxMinuteur = null;
+      if (this._jtModale) this._jtFermer();
        
       if (this._fermerCarteFan) { this._fermerCarteFan(); this._fermerCarteFan = null; }
       if (this._surAllerNotif) { window.removeEventListener('rdr-espace-aller', this._surAllerNotif); this._surAllerNotif = null; }
@@ -11075,7 +11345,7 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'combat-result', 'export-result', 'account-result', 'article-state-result', 'prefs-result', 'profile-result', 'village-result', 'insta-result', 'dismiss-result', 'delete-result', 'fav-result']; }
+    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'juste-temps-result', 'combat-result', 'export-result', 'account-result', 'article-state-result', 'prefs-result', 'profile-result', 'village-result', 'insta-result', 'dismiss-result', 'delete-result', 'fav-result']; }
 
     _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
     
@@ -11176,6 +11446,13 @@ if (!customElements.get('espace-rhum')) {
         let res = null;
         try { res = JSON.parse(newVal); } catch { res = null; }
         if (res) this.pronoResultat(res);
+      }
+      if (name === 'juste-temps-result') {
+         
+        if (!newVal) return;
+        let res = null;
+        try { res = JSON.parse(newVal); } catch { res = null; }
+        if (res) this.justeTempsResultat(res);
       }
       if (name === 'roue-result') {
          
@@ -11325,6 +11602,7 @@ if (!customElements.get('espace-rhum')) {
       this._wireSkippersExpand();
       this._wireBadges();
       this._wireChasse();
+      this._wireJeux();
       this._poserEtatMemoire();
       if (rafraichi) this._finirEntrees();
        
@@ -11425,6 +11703,12 @@ if (!customElements.get('espace-rhum')) {
     _honorerAller() {
       const cle = this._aller;
       if (!cle) return;
+      if ((cle === 'jeux' || cle === 'pronos') && this.querySelector('.jt-vue')) {
+        this._aller = null;
+        try { this.removeAttribute('aller'); } catch (e) {   }
+        this._jeuxAller('jeux');
+        return;
+      }
       const SECTION = {
         'skipper-jour': '[data-slot="hero"]',
         'skippers':     '[data-slot="skippers-favoris"]',
@@ -11894,6 +12178,7 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-sidebar-backdrop" data-action="toggle-sidebar" aria-hidden="true"></div>
           ${this._buildSidebar()}
           <main class="er-dashboard${this._payload?.top50 && this._payload.top50.lignes?.length ? ' er-dashboard--top50' : ''}">
+            ${this._buildJeuxBandeau()}
             ${this._buildHeroWidget()}
             ${this._buildFlashNewsWidget()}
             ${this._buildBadgesMiniWidget()}
@@ -11929,6 +12214,7 @@ if (!customElements.get('espace-rhum')) {
             ${this._buildRangsWidget()}
             <div class="er-chasse-place er-chasse-place--fin"></div>
           </main>
+          ${this._buildJeuxVolet()}
         </div>
         ${this._buildBadgeModal()}
         ${this._buildBadgesInfoModal()}
@@ -12113,6 +12399,7 @@ if (!customElements.get('espace-rhum')) {
 
 
  ''}
+              ${this._buildJeuxBouton(true)}
               ${this._animationActive('pack-fan') ? `
               <button class="er-btn ${this._packDejaPris() ? 'er-btn--ghost' : 'er-btn--primary'} er-mobile-sheet-pack" type="button">
                 ${ICON_CADEAU}<span>Mon Pack Fan</span>
@@ -12271,6 +12558,8 @@ if (!customElements.get('espace-rhum')) {
           <nav class="er-sidebar-nav" aria-label="Navigation Espace Rhum">
             ${navHtml}
           </nav>
+
+          ${this._buildJeuxBouton(false)}
 
           ${this._animationActive('pack-fan') ? (this._packDejaPris()
             
@@ -19033,9 +19322,587 @@ if (!customElements.get('espace-rhum')) {
     }
 
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _jtEtat() {
+      const p = this._pronosEtat();
+      return (p && p.sansSkipper) ? p : null;
+    }
+
+    _jtClasses() {
+      const p = this._jtEtat();
+      if (!p) return [];
+      const norme = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      return p.classes.map((nom) => {
+        const cle = norme(nom);
+        const conf = CLASSES_CONFIG.find((c) => c.key === cle || norme(c.label) === cle) || {};
+        return { nom: String(nom), cle, drapeau: conf.icon || '', repere: JT_REPERES_2022[cle] || null };
+      });
+    }
+
+    
+
+    _jeux() {
+      const out = { cours: [], avenir: [], fini: [] };
+      const p = this._jtEtat();
+      if (p) {
+        if (p.phase === 'ouvert') out.cours.push('le-juste-temps');
+        else if (p.phase === 'avant') out.avenir.push('le-juste-temps');
+        else out.fini.push('le-juste-temps');
+      }
+      return out;
+    }
+
+    _jtTemps(sec) {
+      const v = jtDecoupe(sec);
+      if (!v) return '';
+      if (this._lang() === 'en') return v[0] + 'd ' + jtDeux(v[1]) + 'h ' + jtDeux(v[2]) + 'm' + (v[3] ? ' ' + jtDeux(v[3]) + 's' : '');
+      return v[0] + ' j ' + jtDeux(v[1]) + ' h ' + jtDeux(v[2]) + ' min' + (v[3] ? ' ' + jtDeux(v[3]) + ' s' : '');
+    }
+
+    _jtRepere(c) {
+      if (!c.repere) return '';
+      const t = c.repere.t, en = this._lang() === 'en';
+      const de = c.repere.de ? ' (' + c.repere.de + ')' : '';
+      return en ? '2022 winner' + de + ': ' + t[0] + 'd ' + t[1] + 'h ' + t[2] + 'm'
+                : 'Vainqueur 2022' + de + ' : ' + t[0] + ' j ' + t[1] + ' h ' + t[2] + ' min';
+    }
+
+     
+    _jtQuand(iso, court) {
+      const d = new Date(iso);
+      if (!iso || isNaN(d.getTime())) return '';
+      const en = this._lang() === 'en';
+      const jour = d.toLocaleDateString(en ? 'en-GB' : 'fr-FR', court
+        ? { day: 'numeric', month: 'short', timeZone: 'Europe/Paris' }
+        : { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' });
+      const parts = new Intl.DateTimeFormat('fr-FR', { hour: 'numeric', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' }).formatToParts(d);
+      const h = Number((parts.find((x) => x.type === 'hour') || {}).value || 0);
+      const m = Number((parts.find((x) => x.type === 'minute') || {}).value || 0);
+      if (en) return jour + ' at ' + h + ':' + jtDeux(m);
+      return jour + ' à ' + h + ' h' + (m ? ' ' + jtDeux(m) : '');
+    }
+
+    _jtReglement() {
+      const url = this._payload && this._payload.reglements && this._payload.reglements.pronostics;
+      if (!url || !/^https?:\/\/|^\//.test(String(url))) return '';
+      return '<a class="jt-lien" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + (this._lang() === 'en' ? 'Game rules' : 'Règlement du jeu') + '</a>';
+    }
+
+     
+    _buildJeuxBandeau() {
+      const p = this._jtEtat();
+      if (!p || p.phase !== 'ouvert') return '';
+      const en = this._lang() === 'en';
+      const img = jtImage(p.visuel, 400);
+      const montre = '<span class="jt-bandeau-montre" aria-hidden="true">' + (img ? '<img src="' + escapeHtml(img) + '" alt="">' : jtSvg(JT_I_CHRONO)) + '</span>';
+      const titre = escapeHtml(p.libelle || 'Le Juste Temps');
+      const zone = jtLib(en, 'Les jeux', 'Games');
+      if (p.joue) {
+        return '<div class="jt-bandeau jt-bandeau--joue" role="region" aria-label="' + zone + '">' + montre +
+          '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + titre + ' <em>· ' + (en ? 'you\'re in' : 'tu joues') + '</em></p>' +
+          '<span class="jt-bandeau-ligne">' + escapeHtml(en ? 'Your predictions are saved, you can change them until ' + this._jtQuand(p.fermetureLe) + '.'
+                                                           : 'Tes pronos sont enregistrés, modifiables jusqu\'au ' + this._jtQuand(p.fermetureLe) + '.') + '</span></span>' +
+          '<button type="button" class="jt-voir" data-jt-volet>' + (en ? 'See the games' : 'Voir les jeux') + jtSvg(JT_I_FLECHE) + '</button></div>';
+      }
+      const r = jtReste(new Date(p.fermetureLe));
+      return '<div class="jt-bandeau" role="region" aria-label="' + zone + '">' + montre +
+        '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + titre + '</p>' +
+        '<span class="jt-bandeau-ligne">' + (en ? 'Guess the race times and win the official Alpina watch.' : 'Devine les temps de course et gagne la montre officielle Alpina.') + '</span></span>' +
+        '<span class="jt-bandeau-reste">' + (en ? 'Closes in' : 'Fermeture dans') + '<b data-jt-reste="' + escapeHtml(p.fermetureLe) + '">' + r.j + (en ? 'd ' : ' j ') + jtDeux(r.h) + (en ? 'h' : ' h') + '</b></span>' +
+        '<button type="button" class="jt-jouer" data-jt-ouvrir><span class="jt-jouer-ico">' + jtSvg(JT_I_CHRONO) + '</span>' + (en ? 'Play' : 'Jouer') +
+        '<svg class="jt-jouer-fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + JT_I_FLECHE + '</svg></button></div>';
+    }
+
+     
+    _buildJeuxBouton(telephone) {
+      const j = this._jeux();
+      if (!j.cours.length && !j.avenir.length && !j.fini.length) return '';
+      const en = this._lang() === 'en', n = j.cours.length;
+      const compteur = n ? '<span class="jt-compteur">' + n + (en ? ' open' : ' ouvert' + (n > 1 ? 's' : '')) + '</span>' : '';
+      return '<button type="button" class="er-btn jt-menu-jeux' + (telephone ? ' er-mobile-sheet-jeux' : '') + '" data-jt-volet' +
+        (telephone ? '' : ' aria-current="' + (this._jeuxVue === 'jeux' ? 'page' : 'false') + '"') + '>' +
+        jtSvg(JT_I_JEUX) + '<span>' + (en ? 'Games' : 'Les jeux') + '</span>' + compteur + '</button>';
+    }
+
+     
+    _jtCompte(finIso, lab) {
+      const r = jtReste(new Date(finIso));
+      const en = this._lang() === 'en';
+      const u = en ? ['d', 'h', 'm', 's'] : ['j', 'h', 'min', 's'];
+      const etiquette = lab + ' ' + r.j + jtLib(en, ' jours ', ' days ') + r.h + jtLib(en, ' heures', ' hours');
+      return '<div class="jt-compte" data-fin="' + escapeHtml(finIso) + '" aria-label="' + escapeHtml(etiquette) + '">' +
+        '<span class="jt-compte-lab">' + escapeHtml(lab) + '</span>' +
+        [r.j, r.h, r.m, r.s].map((v, i) => '<span class="jt-case">' + jtDeux(v) + '<small>' + u[i] + '</small></span>').join('') + '</div>';
+    }
+
+    _jtMesPronos() {
+      const p = this._jtEtat();
+      const en = this._lang() === 'en';
+      const titreMes = jtLib(en, 'Mes pronos', 'My predictions');
+      return '<dl class="jt-mes" aria-label="' + titreMes + '">' + this._jtClasses().map((c) => {
+        const choix = (p.mesChoix || {})[c.nom];
+        return '<div>' + (c.drapeau ? '<img src="' + escapeHtml(c.drapeau) + '" alt="">' : '') + '<span><dt>' + escapeHtml(c.nom) + '</dt><dd>' +
+          escapeHtml(choix ? this._jtTemps(choix.tempsCourseSec) : '-') + '</dd></span></div>';
+      }).join('') + '</dl>';
+    }
+
+    _jtCorps(grand) {
+      const p = this._jtEtat();
+      const en = this._lang() === 'en';
+      const ouvert = p.phase === 'ouvert';
+      const etat = !ouvert ? '<span class="jt-etat jt-etat--ferme">' + (en ? 'Closed' : 'Fermé') + '</span>'
+        : p.joue ? '<span class="jt-etat jt-etat--joue">' + (en ? 'Predictions saved' : 'Pronos validés') + '</span>'
+        : '<span class="jt-etat">' + (en ? 'Open' : 'Ouvert') + '</span>';
+      const texte = en
+        ? 'For each class, guess the race time of the first boat to cross the line in Pointe-à-Pitre. <b>The closest wins the official watch of the race.</b>'
+        : 'Pour chaque classe, devine le temps de course du premier bateau à couper la ligne à Pointe-à-Pitre. <b>Le plus proche gagne la montre officielle de la course.</b>';
+      const mes = p.joue ? this._jtMesPronos() : '<p class="jt-texte">' + texte + '</p>';
+      let bas = '';
+      if (ouvert) {
+        const actions = '<div class="jt-actions"><button type="button" class="er-btn ' + (p.joue ? 'er-btn--outline' : 'er-btn--primary') + ' jt-cta" data-jt-ouvrir>' + jtSvg(JT_I_CHRONO) +
+          '<span>' + (p.joue ? (en ? 'Change my predictions' : 'Modifier mes pronos') : (en ? 'Make my predictions' : 'Faire mes pronos')) + '</span></button>' + this._jtReglement() + '</div>';
+        const fin = this._jtCompte(p.fermetureLe, p.joue ? (en ? 'Can still be changed' : 'Modifiable encore') : (en ? 'Closes in' : 'Fermeture dans'));
+        bas = grand ? fin + actions : '<div class="jt-bas">' + fin + actions + '</div>';
+      } else {
+        bas = '<p class="jt-texte">' + (en ? 'Predictions are closed. The winner will be named after the class winners finish.' : 'Les pronos sont fermés. Le gagnant sera désigné après l\'arrivée des vainqueurs.') + '</p>' +
+          (this._jtReglement() ? '<div class="jt-actions">' + this._jtReglement() + '</div>' : '');
+      }
+      return '<div class="jt-corps"><div class="jt-etiquettes">' + etat + '<span class="jt-partenaire">' + (en ? 'With Alpina, official timekeeper' : 'Avec Alpina, chronométreur officiel') + '</span></div>' +
+        '<h3 class="jt-titre"><small>' + (en ? 'The' : 'Le') + '</small>Juste Temps</h3>' + mes + bas + '</div>';
+    }
+
+     
+    _jtCadre(v, alt) {
+      const img = jtImage(v, 660);
+      if (!img) return '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_CHRONO) + '</div>';
+      return '<div class="jt-cadre"><img class="jt-cadre-fond" src="' + escapeHtml(jtImage(v, 200)) + '" alt="" aria-hidden="true">' +
+        '<img class="jt-cadre-img" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="' + escapeHtml(alt || '') + '"></div>';
+    }
+
+    _jtAlt() {
+      return this._lang() === 'en' ? 'Le Juste Temps, the official Alpina watch to win' : 'Le Juste Temps, la montre officielle Alpina à gagner';
+    }
+
+     
+    _jtListeGrande(cles) {
+      if (!cles.length) return '';
+      const p = this._jtEtat();
+      if (cles.length === 1) {
+        const img = jtImage(p.visuel, 660);
+        return '<article class="jt-une' + (img ? '' : ' jt-une--seul') + '">' + this._jtCorps(true) +
+          (img ? '<figure class="jt-affiche"><img src="' + escapeHtml(img) + '" alt="' + escapeHtml(this._jtAlt()) + '"></figure>' : '') + '</article>';
+      }
+      return '<div class="jt-ouverts">' + cles.map(() => '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>').join('') + '</div>';
+    }
+
+    _jtVide(titre, texte) {
+      return '<div class="jt-vide"><b>' + titre + '</b>' + texte + '</div>';
+    }
+
+    _jtContenuOnglet(onglet) {
+      const j = this._jeux(), en = this._lang() === 'en';
+      const p = this._jtEtat();
+      if (onglet === 'cours') {
+        return j.cours.length ? this._jtListeGrande(j.cours)
+          : this._jtVide(en ? 'No game right now' : 'Pas de jeu en cours', en ? 'The next game will appear here as soon as it opens.' : 'Le prochain jeu s\'affichera ici dès son ouverture.');
+      }
+      if (onglet === 'avenir') {
+        if (!j.avenir.length) return this._jtVide(en ? 'Nothing announced yet' : 'Rien d\'annoncé pour l\'instant', en ? 'The next Espace Rhum games will appear here.' : 'Les prochains jeux de l\'Espace Rhum s\'afficheront ici.');
+        return '<div class="jt-liste"><div class="jt-carte"><span class="jt-carte-ico">' + jtSvg(JT_I_CHRONO) + '</span><div><h3>' + escapeHtml(p.libelle || 'Le Juste Temps') + '</h3>' +
+          '<p>' + (en ? 'Guess the race times and win the official Alpina watch.' : 'Devine les temps de course et gagne la montre officielle Alpina.') + '</p>' +
+          '<span class="jt-quand">' + escapeHtml((en ? 'Opens ' : 'Ouverture le ') + this._jtQuand(p.ouvertureLe)) + '</span></div></div></div>';
+      }
+      return j.fini.length ? this._jtListeGrande(j.fini)
+        : this._jtVide(en ? 'No results yet' : 'Pas encore de résultats', en ? 'Finished games and their winners will appear here.' : 'Les jeux terminés et leurs gagnants s\'afficheront ici.');
+    }
+
+    _jeuxOngletParDefaut() {
+      const j = this._jeux();
+       
+      if (this._jeuxOngletChoisi && this._jeuxOnglet) return this._jeuxOnglet;
+      if (this._jeuxOnglet && (j[this._jeuxOnglet] || []).length) return this._jeuxOnglet;
+      return j.cours.length ? 'cours' : j.avenir.length ? 'avenir' : j.fini.length ? 'fini' : (this._jeuxOnglet || 'cours');
+    }
+
+    _buildJeuxVolet() {
+      const j = this._jeux();
+      if (!j.cours.length && !j.avenir.length && !j.fini.length) return '';
+      const en = this._lang() === 'en';
+      const onglet = this._jeuxOngletParDefaut();
+      const zone = jtLib(en, 'Les jeux', 'Games');
+      this._jeuxOnglet = onglet;
+      const bouton = (cle, lib) => '<button type="button" class="jt-onglet" role="tab" aria-selected="' + (onglet === cle) + '" data-jt-onglet="' + cle + '">' + lib + '<span>' + j[cle].length + '</span></button>';
+      return '<main class="er-dashboard jt-vue" data-vue="jeux" aria-labelledby="jt-vue-titre"' + (this._jeuxVue === 'jeux' ? '' : ' hidden') + '>' +
+        '<button type="button" class="jt-retour" data-jt-bord>' + jtSvg(JT_I_RETOUR) + (en ? 'Dashboard' : 'Tableau de bord') + '</button>' +
+        '<div class="jt-vue-tete"><div><div class="jt-kicker">' + (en ? 'Competitions' : 'Jeux concours') + '</div><h2 class="jt-vue-titre" id="jt-vue-titre">' + (en ? 'Games' : 'Les jeux') + '</h2>' +
+        '<p class="jt-vue-sous">' + (en ? 'All the Espace Rhum games in one place: the open ones, the upcoming ones, and the results.'
+                                       : 'Tous les jeux de l\'Espace Rhum au même endroit : ceux qui sont ouverts, ceux qui arrivent, et les résultats.') + '</p></div>' +
+        '<div class="jt-onglets" role="tablist" aria-label="' + zone + '">' + bouton('cours', en ? 'Open' : 'En cours') + bouton('avenir', en ? 'Upcoming' : 'À venir') + bouton('fini', en ? 'Finished' : 'Terminés') + '</div></div>' +
+        '<div role="tabpanel">' + this._jtContenuOnglet(onglet) + '</div></main>';
+    }
+
+     
+    _jeuxMontrer(remonter) {
+      const dash = this.querySelector('main.er-dashboard:not(.jt-vue)'), vue = this.querySelector('.jt-vue');
+      if (!dash || !vue) { if (this._jeuxVue === 'jeux') this._jeuxVue = 'bord'; return; }
+      const jeux = this._jeuxVue === 'jeux';
+      dash.hidden = jeux;
+      vue.hidden = !jeux;
+      const btn = this.querySelector('.er-sidebar .jt-menu-jeux');
+      if (btn) btn.setAttribute('aria-current', jeux ? 'page' : 'false');
+      if (jeux) this.querySelectorAll('.er-sidebar-nav-link--active').forEach((b) => b.classList.remove('er-sidebar-nav-link--active'));
+      if (remonter) {
+        const haut = this.getBoundingClientRect().top;
+        if (haut < 0) {
+          const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          try { window.scrollTo({ top: haut + (window.pageYOffset || 0) - 80, behavior: reduce ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, haut + (window.pageYOffset || 0) - 80); }
+        }
+      }
+    }
+
+    _jeuxAller(vue) {
+      this._jeuxVue = vue;
+      try {
+        if (vue === 'jeux' && location.hash !== '#jeux') history.replaceState(history.state, '', location.pathname + location.search + '#jeux');
+        if (vue === 'bord' && location.hash === '#jeux') history.replaceState(history.state, '', location.pathname + location.search);
+      } catch (e) {   }
+      if (vue === 'bord') {
+        const premier = this.querySelector('.er-sidebar-nav-link');
+        if (premier && !this.querySelector('.er-sidebar-nav-link--active')) premier.classList.add('er-sidebar-nav-link--active');
+      }
+      this._jeuxMontrer(true);
+    }
+
+    
+
+    _jeuxRepeindre() {
+      const remplacer = (sel, html) => {
+        const n = this.querySelector(sel);
+        if (!n) return null;
+        if (!html) { n.remove(); return null; }
+        n.insertAdjacentHTML('afterend', html);
+        const neuf = n.nextElementSibling;
+        n.remove();
+        this._i18n(neuf);
+        return neuf;
+      };
+      remplacer('.jt-bandeau', this._buildJeuxBandeau());
+      remplacer('.jt-vue', this._buildJeuxVolet());
+      remplacer('.er-sidebar .jt-menu-jeux', this._buildJeuxBouton(false));
+      remplacer('.er-mobile-sheet-jeux', this._buildJeuxBouton(true));
+      this._jeuxMontrer(false);
+    }
+
+    _wireJeux() {
+      if (!this._jeuxClic) {
+        
+
+
+        this._jeuxClic = (e) => {
+          const t = e.target;
+          if (!t || !t.closest) return;
+          const o = t.closest('[data-jt-ouvrir]');
+          if (o) { e.preventDefault(); this._jtOuvrir(o); return; }
+          const v = t.closest('[data-jt-volet]');
+          if (v) {
+            e.preventDefault();
+            if (v.classList.contains('er-mobile-sheet-jeux')) this._closeFilterSheet();
+            this._jeuxAller('jeux');
+            return;
+          }
+          if (t.closest('[data-jt-bord]')) { e.preventDefault(); this._jeuxAller('bord'); return; }
+          const og = t.closest('[data-jt-onglet]');
+          if (og) {
+            this._jeuxOnglet = og.getAttribute('data-jt-onglet');
+            this._jeuxOngletChoisi = true;
+            const vue = this.querySelector('.jt-vue');
+            if (vue) {
+              vue.insertAdjacentHTML('afterend', this._buildJeuxVolet());
+              const neuf = vue.nextElementSibling;
+              vue.remove();
+              this._i18n(neuf);
+              this._jeuxMontrer(false);
+              const b = this.querySelector('[data-jt-onglet="' + this._jeuxOnglet + '"]');
+              if (b) b.focus();
+            }
+            return;
+          }
+          if (this._jeuxVue === 'jeux' && t.closest('.er-sidebar-nav-link, [data-sheet-nav]')) this._jeuxAller('bord');
+        };
+        this.addEventListener('click', this._jeuxClic, true);
+      }
+      if (this._jeuxVue === undefined) this._jeuxVue = (location.hash === '#jeux') ? 'jeux' : 'bord';
+      this._jeuxMontrer(false);
+      clearInterval(this._jeuxMinuteur);
+      this._jeuxMinuteur = null;
+      if (!this.querySelector('.jt-compte[data-fin], [data-jt-reste]')) return;
+      const en = this._lang() === 'en';
+      this._jeuxMinuteur = setInterval(() => {
+        if (!this.isConnected) { clearInterval(this._jeuxMinuteur); this._jeuxMinuteur = null; return; }
+        this.querySelectorAll('.jt-compte[data-fin]').forEach((c) => {
+          const r = jtReste(new Date(c.getAttribute('data-fin')));
+          const cases = c.querySelectorAll('.jt-case');
+          [r.j, r.h, r.m, r.s].forEach((x, i) => { if (cases[i] && cases[i].firstChild) cases[i].firstChild.nodeValue = jtDeux(x); });
+        });
+        this.querySelectorAll('[data-jt-reste]').forEach((b) => {
+          const r = jtReste(new Date(b.getAttribute('data-jt-reste')));
+          b.textContent = r.j + (en ? 'd ' : ' j ') + jtDeux(r.h) + (en ? 'h' : ' h');
+        });
+      }, 1000);
+    }
+
+     
+    _jtLigne(c, valeurs) {
+      const en = this._lang() === 'en';
+      const unites = en ? ['days', 'hours', 'minutes', 'seconds'] : ['jours', 'heures', 'minutes', 'secondes'];
+      const courts = en ? ['d', 'h', 'm', 's'] : ['j', 'h', 'min', 's'];
+      const v = valeurs || [];
+      const champ = (i) => '<label class="jt-champ"><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" data-c="' + escapeHtml(c.cle) + '" data-i="' + i + '" value="' +
+        (v[i] != null ? jtDeux(v[i]) : '') + '" placeholder="00" aria-label="' + escapeHtml(c.nom + ', ' + unites[i]) + '"><span>' + courts[i] + '</span></label>';
+      return '<div class="jt-ligne" data-ligne="' + escapeHtml(c.cle) + '"><div class="jt-classe">' + (c.drapeau ? '<img class="jt-drapeau" src="' + escapeHtml(c.drapeau) + '" alt="">' : '') +
+        '<span class="jt-classe-txt"><b>' + escapeHtml(c.nom) + '</b>' + (c.repere ? '<small data-ref>' + escapeHtml(this._jtRepere(c)) + '</small>' : '') + '</span></div>' +
+        '<div class="jt-saisie">' + champ(0) + champ(1) + champ(2) + champ(3) + '</div></div>';
+    }
+
+    _jtLireCase(input) {
+      const en = this._lang() === 'en';
+      const i = Number(input.getAttribute('data-i')), t = input.value.trim();
+      const unite = (en ? ['Days', 'Hours', 'Minutes', 'Seconds'] : ['Jours', 'Heures', 'Minutes', 'Secondes'])[i];
+      if (t === '') return { vide: true, ok: i !== 0, val: 0, raison: i === 0 ? (en ? 'The days are missing' : 'Les jours manquent') : '' };
+      const n = Number(t);
+      if (!Number.isInteger(n) || n < 0 || n > JT_MAX[i]) return { ok: false, raison: unite + (en ? ': ' + JT_MAX[i] + ' at most' : ' : ' + JT_MAX[i] + ' au plus') };
+      return { ok: true, val: n };
+    }
+
+    _jtVerifierLigne(cle, strict) {
+      const m = this._jtModale;
+      const champs = Array.from(m.querySelectorAll('input[data-c="' + cle + '"]'));
+      const ligne = m.querySelector('[data-ligne="' + cle + '"]');
+      if (!ligne) return null;
+      const raisons = [];
+      const vals = champs.map((inp) => {
+        const r = this._jtLireCase(inp);
+        const faux = !r.ok && (strict || !r.vide);
+        inp.classList.toggle('est-faux', faux);
+        inp.setAttribute('aria-invalid', String(faux));
+        if (faux) raisons.push(r.raison);
+        return r.val;
+      });
+      if (strict && !raisons.length) {
+        const total = vals[0] * 86400 + vals[1] * 3600 + vals[2] * 60 + vals[3];
+         
+        if (total < 2 * 86400) { champs[0].classList.add('est-faux'); raisons.push(this._lang() === 'en' ? 'At least 2 days' : 'Deux jours au moins'); }
+        else if (total > 60 * 86400) { champs[0].classList.add('est-faux'); raisons.push(this._lang() === 'en' ? '60 days at most' : '60 jours au plus'); }
+      }
+      ligne.classList.toggle('est-faux', raisons.length > 0);
+      const txt = ligne.querySelector('.jt-classe-txt');
+      const ancien = txt.querySelector('.jt-pb');
+      if (ancien) ancien.remove();
+      const ref = txt.querySelector('[data-ref]');
+      if (ref) ref.hidden = raisons.length > 0;
+      if (raisons.length) txt.insertAdjacentHTML('beforeend', '<span class="jt-pb">' + escapeHtml(raisons[0]) + '</span>');
+      return raisons.length ? null : vals;
+    }
+
+    _jtPeindre(vue) {
+      const m = this._jtModale;
+      if (!m) return;
+      const p = this._jtEtat();
+      const en = this._lang() === 'en';
+      const corps = m.querySelector('.jt-boite-corps');
+      const libFermer = jtLib(en, 'Fermer', 'Close');
+      const fermer = '<button type="button" class="jt-fermer" data-jt-fermer aria-label="' + libFermer + '">' + jtSvg(JT_I_CROIX) + '</button>';
+      const titre = '<h2>' + escapeHtml(p ? (p.libelle || 'Le Juste Temps') : 'Le Juste Temps') + '</h2>';
+      if (!p) { corps.innerHTML = '<div class="jt-boite-tete"><div>' + titre + '</div>' + fermer + '</div>'; return; }
+      const classes = this._jtClasses();
+      const choix = p.mesChoix || {};
+      if (vue === 'merci') {
+        corps.innerHTML = '<div class="jt-boite-tete"><div>' + titre + '</div>' + fermer + '</div>' +
+          '<div class="jt-merci"><div class="jt-merci-ok" role="status">' + jtSvg(JT_I_OK) + (en ? 'Done, your predictions are saved.' : 'C\'est noté, tes pronos sont validés.') + '</div>' +
+          '<dl class="jt-recap">' + classes.map((c) => '<div><dt>' + (c.drapeau ? '<img src="' + escapeHtml(c.drapeau) + '" alt="">' : '') + escapeHtml(c.nom) + '</dt><dd>' +
+            escapeHtml(choix[c.nom] ? this._jtTemps(choix[c.nom].tempsCourseSec) : '-') + '</dd></div>').join('') + '</dl>' +
+          '<p>' + escapeHtml(en
+            ? 'Saved on ' + this._jtQuand(p.modifieLe, true) + '. You can change them until ' + this._jtQuand(p.fermetureLe) + '. The winner will be contacted after the class winners finish.'
+            : 'Validés le ' + this._jtQuand(p.modifieLe, true) + '. Tu peux les modifier jusqu\'au ' + this._jtQuand(p.fermetureLe) + '. Le gagnant sera contacté après l\'arrivée des vainqueurs.') + '</p></div>' +
+          '<div class="jt-boite-pied"><button type="button" class="jt-btn jt-btn--ligne" data-jt-modifier>' + (en ? 'Change my predictions' : 'Modifier mes pronos') + '</button>' +
+          '<button type="button" class="jt-btn" data-jt-fermer>' + (en ? 'Close' : 'Fermer') + '</button></div>';
+        this._i18n(corps);
+      } else {
+        const ouvert = p.phase === 'ouvert';
+        corps.innerHTML = '<div class="jt-boite-tete"><div>' + titre + '<p>' + (en
+            ? 'For each class, the race time of the first boat to cross the line in Pointe-à-Pitre. The closest wins the official watch of the race.'
+            : 'Pour chaque classe, le temps de course du premier bateau à couper la ligne à Pointe-à-Pitre. Le plus proche gagne la montre officielle de la course.') + '</p></div>' + fermer + '</div>' +
+          '<div class="jt-lignes">' + classes.map((c) => this._jtLigne(c, choix[c.nom] ? jtDecoupe(choix[c.nom].tempsCourseSec) : null)).join('') + '</div>' +
+          '<div class="jt-boite-pied"><p data-aide>' + (ouvert
+            ? escapeHtml(en ? 'You can change them until ' + this._jtQuand(p.fermetureLe) + '.' : 'Modifiables jusqu\'au ' + this._jtQuand(p.fermetureLe) + '.')
+            : (en ? 'The game is closed.' : 'Le jeu est fermé.')) + (this._jtReglement() ? ' ' + this._jtReglement() : '') + '</p>' +
+          (ouvert ? '<button type="button" class="jt-btn" data-jt-valider>' + (p.joue ? (en ? 'Save' : 'Enregistrer') : (en ? 'Confirm my predictions' : 'Valider mes pronos')) + '</button>' : '') + '</div>';
+        this._i18n(corps);
+      }
+      const f = corps.querySelector('input,[data-jt-fermer]');
+      if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+    }
+
+    _jtOuvrir(declencheur, vue) {
+      const p = this._jtEtat();
+      if (!p) return;
+      this._jtRetour = declencheur || document.activeElement;
+      if (!this._jtModale) {
+        const en = this._lang() === 'en';
+        const img = jtImage(p.visuel, 900);
+        const nomJeu = p.libelle || 'Le Juste Temps';
+        const m = document.createElement('div');
+        m.className = 'jt-modale';
+        m.setAttribute('lang', en ? 'en' : 'fr');
+        m.innerHTML = '<div class="jt-boite' + (img ? '' : ' jt-boite--sans-visuel') + '" role="dialog" aria-modal="true" aria-label="' + escapeHtml(nomJeu) + '">' +
+          (img ? '<div class="jt-boite-visuel"><img src="' + escapeHtml(img) + '" alt=""></div>' : '') + '<div class="jt-boite-corps"></div></div>';
+        document.body.appendChild(m);
+        this._jtModale = m;
+        m.addEventListener('click', (e) => {
+          const t = e.target;
+          if (t === m || t.closest('[data-jt-fermer]')) this._jtFermer();
+          else if (t.closest('[data-jt-valider]')) this._jtValider();
+          else if (t.closest('[data-jt-modifier]')) this._jtPeindre('saisie');
+        });
+        m.addEventListener('input', (e) => {
+          const t = e.target;
+          if (!t.matches || !t.matches('input[data-c]')) return;
+          t.value = t.value.replace(/[^0-9]/g, '').slice(0, 2);
+          const r = this._jtLireCase(t);
+          this._jtVerifierLigne(t.getAttribute('data-c'), false);
+          if (t.value.length === 2 && r.ok) {
+            const tous = Array.from(m.querySelectorAll('input[data-c]'));
+            const suivant = tous[tous.indexOf(t) + 1];
+            if (suivant) suivant.focus();
+          }
+        });
+        m.addEventListener('focusout', (e) => {
+          const t = e.target;
+          if (t.matches && t.matches('input[data-c]') && t.value.length === 1) t.value = jtDeux(t.value);
+        });
+        this._jtClavier = (e) => {
+          if (!this._jtModale) return;
+          if (e.key === 'Escape') { e.preventDefault(); this._jtFermer(); return; }
+          if (e.key !== 'Tab') return;
+          const f = Array.from(this._jtModale.querySelectorAll('button, a[href], input'));
+          if (!f.length) return;
+          const i = f.indexOf(document.activeElement);
+          if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+          else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+        };
+        document.addEventListener('keydown', this._jtClavier);
+        this._lockBodyScroll();
+        requestAnimationFrame(() => { if (this._jtModale) this._jtModale.classList.add('est-ouverte'); });
+      }
+      this._jtPeindre(vue || 'saisie');
+    }
+
+    _jtFermer() {
+      const m = this._jtModale;
+      if (!m) return;
+      clearTimeout(this._jtDelai);
+      this._jtEnvoi = false;
+      if (this._jtClavier) { document.removeEventListener('keydown', this._jtClavier); this._jtClavier = null; }
+      this._unlockBodyScroll();
+      this._jtModale = null;
+      m.classList.remove('est-ouverte');
+      setTimeout(() => m.remove(), 180);
+      
+
+      let r = this._jtRetour;
+      this._jtRetour = null;
+      if (!r || !document.contains(r)) {
+        r = ['.jt-vue:not([hidden]) [data-jt-ouvrir]', '.jt-bandeau [data-jt-ouvrir]', '.jt-bandeau [data-jt-volet]']
+          .map((q) => this.querySelector(q)).find((x) => x && x.offsetParent);
+      }
+      if (r && r.focus) { try { r.focus({ preventScroll: true }); } catch (e) { r.focus(); } }
+    }
+
+    _jtErreur(texte) {
+      const m = this._jtModale;
+      if (!m) return;
+      const aide = m.querySelector('[data-aide]');
+      if (aide) { aide.classList.add('jt-erreur'); aide.setAttribute('role', 'alert'); aide.textContent = texte; }
+      const b = m.querySelector('[data-jt-valider]');
+      if (b) { b.disabled = false; b.textContent = b.getAttribute('data-libelle') || b.textContent; }
+    }
+
+    _jtValider() {
+      const m = this._jtModale;
+      if (!m || this._jtEnvoi) return;
+      const en = this._lang() === 'en';
+      const lues = {}, fausses = [];
+      this._jtClasses().forEach((c) => {
+        const v = this._jtVerifierLigne(c.cle, true);
+        if (v) lues[c.nom] = { jours: v[0], heures: v[1], minutes: v[2], secondes: v[3] };
+        else fausses.push(c.nom);
+      });
+      if (fausses.length) {
+        this._jtErreur((fausses.length === 1 ? (en ? 'One time to fix: ' : 'Un temps à corriger : ') : fausses.length + (en ? ' times to fix: ' : ' temps à corriger : ')) + fausses.join(', ') + '.');
+        const premier = m.querySelector('input.est-faux');
+        if (premier) { premier.focus(); try { premier.scrollIntoView({ block: 'nearest' }); } catch (e) {   } }
+        return;
+      }
+      const b = m.querySelector('[data-jt-valider]');
+      if (b) { b.setAttribute('data-libelle', b.textContent); b.disabled = true; b.textContent = en ? 'Saving…' : 'Validation…'; }
+      this._jtEnvoi = true;
+      clearTimeout(this._jtDelai);
+      this._jtDelai = setTimeout(() => {
+        this._jtEnvoi = false;
+        this._jtErreur(en ? 'The save did not go through. Try again in a moment.' : 'La validation n\'a pas abouti. Réessaie dans un instant.');
+      }, 20000);
+      this.dispatchEvent(new CustomEvent('er-juste-temps', { bubbles: true, composed: true, detail: { temps: lues } }));
+    }
+
+     
+    justeTempsResultat(res) {
+      clearTimeout(this._jtDelai);
+      this._jtEnvoi = false;
+      const en = this._lang() === 'en';
+      const p = this._jtEtat();
+      if (res && res.ok) {
+        if (p) {
+          if (res.mesChoix && typeof res.mesChoix === 'object') p.mesChoix = res.mesChoix;
+          p.joue = true;
+          p.modifieLe = res.modifieLe || new Date().toISOString();
+        }
+        this._jeuxRepeindre();
+        if (this._jtModale) this._jtPeindre('merci');
+        return;
+      }
+      const raison = res && res.raison;
+      if (raison === 'temps_invalide' && Array.isArray(res.classes) && this._jtModale) {
+        const noms = res.classes.map(String);
+        this._jtClasses().filter((c) => noms.includes(c.nom)).forEach((c) => {
+          const l = this._jtModale.querySelector('[data-ligne="' + c.cle + '"]');
+          if (l) l.classList.add('est-faux');
+        });
+        this._jtErreur((en ? 'Times to fix: ' : 'Temps à corriger : ') + noms.join(', ') + '.');
+        return;
+      }
+      this._jtErreur(
+        raison === 'non_authentifie' ? (en ? 'Your session has expired. Reload the page.' : 'Ta session a expiré. Recharge la page.')
+        : (raison === 'concours_ferme' || raison === 'pas_encore_ouvert' || raison === 'concours_inexistant') ? (en ? 'The game is closed.' : 'Le jeu est fermé.')
+        : (en ? 'The save did not go through. Try again in a moment.' : 'La validation n\'a pas abouti. Réessaie dans un instant.'));
+    }
+
     _buildPronosWidget() {
       const etat = this._pronosEtat();
-      if (!etat) return '';
+       
+      if (!etat || etat.sansSkipper) return '';
 
       const ouvert = etat.phase === 'ouvert';
       const avant  = etat.phase === 'avant';
