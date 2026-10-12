@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 32e7cde | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="32e7cde";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 844c152 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="844c152";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -11135,6 +11135,7 @@ if (!customElements.get('espace-rhum')) {
       const membre = this.getAttribute('membre');
       if (membre) this._membre = membre;
       this._depuisMemoire();
+      this._identiteRapide();
       this._tenirLeHaut();
       
 
@@ -11499,6 +11500,47 @@ if (!customElements.get('espace-rhum')) {
       this._memoireVue = false;
       const vue = () => { if (this._enMemoire) this._memoireVue = true; };
       try { requestAnimationFrame(() => requestAnimationFrame(vue)); } catch (e) {   }
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _identiteRapide() {
+      if (this._identiteDemandee || this._membre || this._payload) return;
+      let actif = false;
+      try { actif = window.localStorage.getItem('erIdentiteRapide') === '1'; } catch (e) { actif = false; }
+      if (!actif || typeof window.fetch !== 'function') return;
+      let memoireDe = '';
+      try { const m = JSON.parse(window.localStorage.getItem(MEMOIRE_KEY) || 'null'); memoireDe = (m && typeof m.membre === 'string') ? m.membre : ''; } catch (e) { memoireDe = ''; }
+      if (!memoireDe) return;
+      this._identiteDemandee = true;
+      const Ctrl = window.AbortController;
+      const ctrl = Ctrl ? new Ctrl() : null;
+      const delai = setTimeout(() => { try { if (ctrl) ctrl.abort(); } catch (e) {   } }, 4000);
+      window.fetch('/_api/v1/access-tokens', { credentials: 'same-origin', signal: ctrl ? ctrl.signal : undefined })
+        .then((r) => (r && r.ok ? r.json() : null))
+        .then((j) => {
+          clearTimeout(delai);
+          const id = (j && typeof j.siteMemberId === 'string') ? j.siteMemberId : '';
+          if (!id || id !== memoireDe) return;
+          if (this._membre || this._payload || !this.isConnected) return;
+          this._membre = id;
+          this._depuisMemoire();
+        })
+        .catch(() => { clearTimeout(delai); });
     }
 
     
