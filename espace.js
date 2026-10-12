@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 54b2c98 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="54b2c98";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 8cd1a0f | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="8cd1a0f";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1630,6 +1630,9 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-etat{padding:5px 10px;border-radius:3px 10px 3px 10px;background:var(--er-amber-bright);color:#0A1228;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
     espace-rhum .jt-etat--joue{background:var(--er-teal)}
     espace-rhum .jt-etat--ferme{background:rgba(255,255,255,.16);color:#fff}
+    espace-rhum .jt-etat--bientot{padding:4px 9px;background:transparent;border:1.5px solid var(--er-amber-bright);color:var(--er-amber-bright)}
+    espace-rhum .jt-ouverture{margin:0;font-size:13px;font-weight:700;line-height:1.4;color:var(--er-text-secondary)}
+    espace-rhum .jt-ouvert--avenir .jt-bas{align-items:center}
     espace-rhum .jt-partenaire{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--er-teal)}
     espace-rhum .jt-titre{margin:0;font:italic 400 clamp(40px,4.6vw,66px)/.9 var(--er-font-display);text-transform:uppercase;letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.25)}
     espace-rhum .jt-titre small{display:block;font-size:.42em;line-height:1;margin-bottom:.12em;color:var(--er-amber-bright)}
@@ -19371,7 +19374,7 @@ if (!customElements.get('espace-rhum')) {
       const v = jtDecoupe(sec);
       if (!v) return '';
       if (this._lang() === 'en') return v[0] + 'd ' + jtDeux(v[1]) + 'h ' + jtDeux(v[2]) + 'm' + (v[3] ? ' ' + jtDeux(v[3]) + 's' : '');
-      return v[0] + ' j ' + jtDeux(v[1]) + ' h ' + jtDeux(v[2]) + ' min' + (v[3] ? ' ' + jtDeux(v[3]) + ' s' : '');
+      return v[0] + '\u00a0j ' + jtDeux(v[1]) + '\u00a0h ' + jtDeux(v[2]) + '\u00a0min' + (v[3] ? ' ' + jtDeux(v[3]) + '\u00a0s' : '');
     }
 
     _jtRepere(c) {
@@ -19379,7 +19382,7 @@ if (!customElements.get('espace-rhum')) {
       const t = c.repere.t, en = this._lang() === 'en';
       const de = c.repere.de ? ' (' + c.repere.de + ')' : '';
       return en ? '2022 winner' + de + ': ' + t[0] + 'd ' + t[1] + 'h ' + t[2] + 'm'
-                : 'Vainqueur 2022' + de + ' : ' + t[0] + ' j ' + t[1] + ' h ' + t[2] + ' min';
+                : 'Vainqueur 2022' + de + '\u00a0: ' + t[0] + '\u00a0j ' + t[1] + '\u00a0h ' + t[2] + '\u00a0min';
     }
 
      
@@ -19394,7 +19397,7 @@ if (!customElements.get('espace-rhum')) {
       const h = Number((parts.find((x) => x.type === 'hour') || {}).value || 0);
       const m = Number((parts.find((x) => x.type === 'minute') || {}).value || 0);
       if (en) return jour + ' at ' + h + ':' + jtDeux(m);
-      return jour + ' à ' + h + ' h' + (m ? ' ' + jtDeux(m) : '');
+      return jour + ' à\u00a0' + h + '\u00a0h' + (m ? '\u00a0' + jtDeux(m) : '');
     }
 
     _jtReglement() {
@@ -19423,7 +19426,7 @@ if (!customElements.get('espace-rhum')) {
       return '<div class="jt-bandeau" role="region" aria-label="' + zone + '">' + montre +
         '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + titre + '</p>' +
         '<span class="jt-bandeau-ligne">' + (en ? 'Guess the race times and win the official Alpina watch.' : 'Devine les temps de course et gagne la montre officielle Alpina.') + '</span></span>' +
-        '<span class="jt-bandeau-reste">' + (en ? 'Closes in' : 'Fermeture dans') + '<b data-jt-reste="' + escapeHtml(p.fermetureLe) + '">' + r.j + (en ? 'd ' : ' j ') + jtDeux(r.h) + (en ? 'h' : ' h') + '</b></span>' +
+        '<span class="jt-bandeau-reste">' + (en ? 'Closes in' : 'Fermeture dans') + '<b data-jt-reste="' + escapeHtml(p.fermetureLe) + '">' + r.j + (en ? 'd ' : '\u00a0j ') + jtDeux(r.h) + (en ? 'h' : '\u00a0h') + '</b></span>' +
         '<button type="button" class="jt-jouer" data-jt-ouvrir><span class="jt-jouer-ico">' + jtSvg(JT_I_CHRONO) + '</span>' + (en ? 'Play' : 'Jouer') +
         '<svg class="jt-jouer-fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + JT_I_FLECHE + '</svg></button></div>';
     }
@@ -19510,6 +19513,22 @@ if (!customElements.get('espace-rhum')) {
       return '<div class="jt-ouverts">' + cles.map(() => '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>').join('') + '</div>';
     }
 
+    
+
+
+    _jtCorpsAvenir() {
+      const p = this._jtEtat();
+      const en = this._lang() === 'en';
+      return '<div class="jt-corps"><div class="jt-etiquettes"><span class="jt-etat jt-etat--bientot">' + (en ? 'Coming soon' : 'Bientôt') + '</span>' +
+        '<span class="jt-partenaire">' + (en ? 'With Alpina, official timekeeper' : 'Avec Alpina, chronométreur officiel') + '</span></div>' +
+        '<h3 class="jt-titre"><small>' + (en ? 'The' : 'Le') + '</small>Juste Temps</h3>' +
+        '<p class="jt-texte">' + (en
+          ? 'For each class, guess the race time of the first boat to cross the line in Pointe-à-Pitre. <b>The closest wins the official watch of the race.</b>'
+          : 'Pour chaque classe, devine le temps de course du premier bateau à couper la ligne à Pointe-à-Pitre. <b>Le plus proche gagne la montre officielle de la course.</b>') + '</p>' +
+        '<div class="jt-bas">' + this._jtCompte(p.ouvertureLe, en ? 'Opens in' : 'Ouverture dans') +
+        '<p class="jt-ouverture">' + escapeHtml((en ? 'Opens ' : 'Ouverture le ') + this._jtQuand(p.ouvertureLe)) + '</p></div></div>';
+    }
+
     _jtVide(titre, texte) {
       return '<div class="jt-vide"><b>' + titre + '</b>' + texte + '</div>';
     }
@@ -19523,9 +19542,7 @@ if (!customElements.get('espace-rhum')) {
       }
       if (onglet === 'avenir') {
         if (!j.avenir.length) return this._jtVide(en ? 'Nothing announced yet' : 'Rien d\'annoncé pour l\'instant', en ? 'The next Espace Rhum games will appear here.' : 'Les prochains jeux de l\'Espace Rhum s\'afficheront ici.');
-        return '<div class="jt-liste"><div class="jt-carte"><span class="jt-carte-ico">' + jtSvg(JT_I_CHRONO) + '</span><div><h3>' + escapeHtml(p.libelle || 'Le Juste Temps') + '</h3>' +
-          '<p>' + (en ? 'Guess the race times and win the official Alpina watch.' : 'Devine les temps de course et gagne la montre officielle Alpina.') + '</p>' +
-          '<span class="jt-quand">' + escapeHtml((en ? 'Opens ' : 'Ouverture le ') + this._jtQuand(p.ouvertureLe)) + '</span></div></div></div>';
+        return '<div class="jt-ouverts">' + j.avenir.map(() => '<article class="jt-ouvert jt-ouvert--avenir">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorpsAvenir() + '</article>').join('') + '</div>';
       }
       return j.fini.length ? this._jtListeGrande(j.fini)
         : this._jtVide(en ? 'No results yet' : 'Pas encore de résultats', en ? 'Finished games and their winners will appear here.' : 'Les jeux terminés et leurs gagnants s\'afficheront ici.');
@@ -19650,7 +19667,7 @@ if (!customElements.get('espace-rhum')) {
       this._jeuxMontrer(false);
       clearInterval(this._jeuxMinuteur);
       this._jeuxMinuteur = null;
-      if (!this.querySelector('.jt-compte[data-fin], [data-jt-reste]')) return;
+      if (!this.querySelector('.jt-vue, .jt-bandeau')) return;
       const en = this._lang() === 'en';
       this._jeuxMinuteur = setInterval(() => {
         if (!this.isConnected) { clearInterval(this._jeuxMinuteur); this._jeuxMinuteur = null; return; }
@@ -19661,7 +19678,7 @@ if (!customElements.get('espace-rhum')) {
         });
         this.querySelectorAll('[data-jt-reste]').forEach((b) => {
           const r = jtReste(new Date(b.getAttribute('data-jt-reste')));
-          b.textContent = r.j + (en ? 'd ' : ' j ') + jtDeux(r.h) + (en ? 'h' : ' h');
+          b.textContent = r.j + (en ? 'd ' : '\u00a0j ') + jtDeux(r.h) + (en ? 'h' : '\u00a0h');
         });
       }, 1000);
     }
