@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 698d4ae | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="698d4ae";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum bf9c3a0 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="bf9c3a0";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -919,6 +919,14 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (!((document.documentElement.clientWidth || window.innerWidth || 0) < 760 && !/[?&]intro=oui/.test(location.search))) return false;
+      
+
+
+
+      try {
+        const enCours = rdrPhaseForcee(location.search, D.phases) || rdrPhaseA(rdrHorloge(location.search, D.calendrier).maintenant(), D.phases, rdrInstants(D.calendrier)) || 'avant';
+        if (!D.phases[enCours] || lien.getAttribute('data-rdr-photo') !== D.phases[enCours].photo) return false;
+      } catch (e) { return false; }
       let rv = this.firstElementChild;
       if (!rv || !rv.classList.contains('raa-rv')) {
         if (this.firstChild) return false;
@@ -1101,6 +1109,210 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
     }
   }
 
+   
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  function rdrDecalageParis(t) {
+    const a = new Date(t).getUTCFullYear();
+    const dernierDimanche = (mois) => { const d = new Date(Date.UTC(a, mois + 1, 0, 1)); return d.getTime() - d.getUTCDay() * 86400000; };
+    return t >= dernierDimanche(2) && t < dernierDimanche(9) ? 7200000 : 3600000;
+  }
+  
+  
+
+  function rdrInstantParis(texte) {
+    const s = String(texte == null ? '' : texte).trim();
+    const m = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{1,2})[:h](\d{2})(?::(\d{2}))?)?$/.exec(s);
+    if (!m) {
+      if (!/(Z|[+-]\d{2}:?\d{2})$/i.test(s)) return null;
+      const t = Date.parse(s);
+      return isFinite(t) ? t : null;
+    }
+    const n = m.slice(1).map((x) => Number(x || 0));
+    const local = Date.UTC(n[0], n[1] - 1, n[2], n[3], n[4], n[5]);
+    const d = new Date(local);
+    if (d.getUTCMonth() !== n[1] - 1 || d.getUTCDate() !== n[2] || n[3] > 23 || n[4] > 59 || n[5] > 59) return null;
+    const essai = local - rdrDecalageParis(local - 3600000);
+    return local - rdrDecalageParis(essai);
+  }
+  
+  
+
+  function rdrInstants(calendrier) {
+    const out = {};
+    const m = calendrier && calendrier.moments;
+    if (!m || typeof m !== 'object') return out;
+    Object.keys(m).forEach((k) => {
+      if (k === '__proto__') return;
+      const t = Date.parse(m[k]);
+      if (isFinite(t)) out[k] = t;
+    });
+    return out;
+  }
+  
+  
+
+
+
+
+
+  function rdrPhaseA(t, phases, instants) {
+    let choix = null, debutChoix = -Infinity;
+    Object.keys(phases || {}).forEach((k) => {
+      const p = phases[k];
+      if (!p || typeof p !== 'object') return;
+      if (!p.debut) { if (choix === null) choix = k; return; }
+      if (p.provisoire) return;
+      const d = instants[p.debut];
+      if (typeof d !== 'number' || d > t) return;
+      if (d >= debutChoix) { choix = k; debutChoix = d; }
+    });
+    return choix;
+  }
+  
+   
+  function rdrProchaineBascule(t, phases, instants) {
+    let prochaine = null;
+    Object.keys(phases || {}).forEach((k) => {
+      const p = phases[k];
+      if (!p || !p.debut || p.provisoire) return;
+      const d = instants[p.debut];
+      if (typeof d === 'number' && d > t && (prochaine === null || d < prochaine)) prochaine = d;
+    });
+    return prochaine;
+  }
+  
+  
+
+
+
+  function rdrEmpreinte(texte) {
+    const s = String(texte == null ? '' : texte).trim();
+    if (!s) return '';
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ('0000000' + h.toString(16)).slice(-8);
+  }
+  
+  const parametres = (recherche) => {
+    try { return new URLSearchParams(String(recherche || '')); } catch (e) { return null; }
+  };
+  
+  
+
+
+  function rdrHorloge(recherche, calendrier, reel) {
+    const maintenantReel = typeof reel === 'function' ? reel : () => Date.now();
+    const p = parametres(recherche);
+    const h = p && p.get('horloge');
+    const cle = p && p.get('apercu');
+    const attendue = calendrier && typeof calendrier.apercu === 'string' ? calendrier.apercu : '';
+    const depart = h && cle && attendue && rdrEmpreinte(cle) === attendue ? rdrInstantParis(h) : null;
+    if (depart === null) return { simulee: false, vitesse: 1, maintenant: maintenantReel, delai: (ms) => ms };
+    const v = Math.min(3600, Math.max(1, Number(p.get('vitesse')) || 1));
+    const t0 = maintenantReel();
+    return { simulee: true, vitesse: v, depart, maintenant: () => depart + (maintenantReel() - t0) * v, delai: (ms) => ms / v };
+  }
+  
+  
+
+
+  function rdrPhaseForcee(recherche, phases) {
+    const p = parametres(recherche);
+    const demandee = p && p.get('phase');
+    return demandee && phases && Object.prototype.hasOwnProperty.call(phases, demandee) ? demandee : null;
+  }
+  
+  
+
+
+
+
+
+
+
+  function rdrSuivrePhase(o) {
+    const opt = o || {};
+    const phases = opt.phases || {};
+    const instants = rdrInstants(opt.calendrier);
+    const horloge = opt.horloge || rdrHorloge(opt.recherche, opt.calendrier, opt.reel);
+    const forcee = rdrPhaseForcee(opt.recherche, phases);
+    const calcul = () => rdrPhaseA(horloge.maintenant(), phases, instants) || opt.parDefaut || null;
+    const etat = { phase: forcee || calcul(), horloge, forcee: !!forcee, arreter: () => {} };
+    if (forcee) return etat;
+    let minuteur = 0, fini = false;
+    const doc = opt.doc || null;
+    const armer = () => {
+      clearTimeout(minuteur); minuteur = 0;
+      if (fini) return;
+      const t = horloge.maintenant();
+      const prochaine = rdrProchaineBascule(t, phases, instants);
+      if (prochaine === null) return;
+      minuteur = setTimeout(verifier, Math.min(2073600000, Math.max(0, horloge.delai(prochaine - t))) + 250);
+    };
+    function verifier() {
+      if (fini) return;
+      const p = calcul();
+      if (p !== etat.phase) {
+        etat.phase = p;
+        try { if (typeof opt.quandChange === 'function') opt.quandChange(p); } catch (e) {   }
+      }
+      armer();
+    }
+    const auRetour = () => { if (!doc || doc.visibilityState !== 'hidden') verifier(); };
+    if (doc && doc.addEventListener) doc.addEventListener('visibilitychange', auRetour);
+    armer();
+    etat.verifier = verifier;
+    etat.arreter = () => {
+      fini = true;
+      clearTimeout(minuteur);
+      if (doc && doc.removeEventListener) doc.removeEventListener('visibilitychange', auRetour);
+    };
+    return etat;
+  }
+  
    
    
 function monter(racine, portail, D) {
@@ -1314,14 +1526,29 @@ function monter(racine, portail, D) {
   const lien = (u) => { u = String(u || ''); return (!EN || !/^\/(?!\/)/.test(u) || /^\/en(\/|$)/.test(u)) ? u : '/en' + u; };
   const href = (u) => (u ? ' href="' + esc(lien(u)) + '"' : '');
   if (EN) [racine, portail].forEach((z) => z && z.querySelectorAll && z.querySelectorAll('a[href^="/"], form[action^="/"]').forEach((a) => { const k = a.tagName === 'FORM' ? 'action' : 'href'; a.setAttribute(k, a.dataset && a.dataset.en ? a.dataset.en : lien(a.getAttribute(k))); }));
-  let phase = 'avant';
+  
+
+
+
+
+
+
+
+
+
+
+  const suiviPhase = rdrSuivrePhase({ phases: PHASES, calendrier: D.calendrier, recherche: location.search, parDefaut: 'avant', doc: document, quandChange: (p) => changerPhase(p) });
+  ecouteurs.push(suiviPhase.arreter);
+  const horloge = suiviPhase.horloge;
+  let phase = suiviPhase.phase;
+  racine.dataset.phase = phase;
 
   
 
 
 
 
-  const pointage = () => { const p = $('ess-pointage'); if (!p) return; const c = Math.ceil(Date.now() / 14400000) * 14400000 - Date.now(); p.textContent = Math.floor(c / 3600000) + ' h ' + String(Math.floor(c / 60000) % 60).padStart(2, '0'); };
+  const pointage = () => { const p = $('ess-pointage'); if (!p) return; const t = horloge.maintenant(); const c = Math.ceil(t / 14400000) * 14400000 - t; p.textContent = Math.floor(c / 3600000) + ' h ' + String(Math.floor(c / 60000) % 60).padStart(2, '0'); };
 
   const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const JOURS = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
@@ -1388,6 +1615,65 @@ function monter(racine, portail, D) {
 
 
 
+  function changerPhase(nouvelle) {
+    if (nouvelle === phase || !Object.prototype.hasOwnProperty.call(PHASES, nouvelle)) return;
+    const h = $('hero'); if (!h) return;
+    if (!h.classList.contains('est-photo')) { minuteurs.push(setTimeout(() => changerPhase(nouvelle), 1500)); return; }
+    const img = new Image();
+    img.src = IMG(PHASES[nouvelle].photo, largeurPhoto(), Math.round(largeurPhoto() * 0.5625), 82);
+    let parti = false;
+    const poser = () => {
+      if (parti || !racine.isConnected) return;
+      parti = true;
+      const gen = ++heroGen; clearTimeout(heroTimer);
+      const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
+      h.classList.remove('entree-affiche', 'est-photo'); h.classList.add('entree-douce');
+      heroTimer = setTimeout(() => {
+        if (gen !== heroGen) return;
+        phase = nouvelle; racine.dataset.phase = phase;
+        rendreHero(); rendreCtas(); if (majHorloge) majHorloge();
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); compter(); }));
+        try { racine.dispatchEvent(new CustomEvent('raa-phase', { detail: { phase } })); } catch (e) {   }
+      }, 1000);
+    };
+    if (img.decode) img.decode().then(poser, poser); else { img.onload = poser; img.onerror = poser; }
+    minuteurs.push(setTimeout(poser, 4000));
+  }
+  
+
+
+
+  let majHorloge = null;
+  function montrerHorloge() {
+    const h = $('hero'); if (!h || !horloge.simulee) return;
+    const b = document.createElement('div');
+    b.className = 'raa-horloge';
+    b.setAttribute('role', 'status');
+    
+
+
+    const etroit = (document.documentElement.clientWidth || innerWidth) < 760;
+    const dessus = document.documentElement.dataset.rdrEntete === 'dessus';
+    const place = etroit ? 'top:' + (dessus ? 'calc(var(--rdr-entete-h, 120px) + 10px)' : '10px') + ';font-size:11px' : 'bottom:14px';
+    b.setAttribute('style', 'position:absolute;right:14px;' + place + ';z-index:40;max-width:calc(100% - 28px);padding:7px 12px;border-radius:3px 12px 3px 12px;background:#FCF150;color:#16355D;font-family:Montserrat,system-ui,sans-serif;font-weight:700;line-height:1.35;letter-spacing:.01em;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.25)');
+    if (!etroit) b.style.fontSize = '12px';
+    h.appendChild(b);
+    const deux = (n) => String(n).padStart(2, '0');
+    const maj = () => {
+      const t = horloge.maintenant(); const d = new Date(t + rdrDecalageParis(t));
+      b.textContent = 'Aperçu · horloge simulée · ' + JOURS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MOIS[d.getUTCMonth()] + ' ' + deux(d.getUTCHours()) + ':' + deux(d.getUTCMinutes()) + ':' + deux(d.getUTCSeconds()) + (horloge.vitesse > 1 ? ' · ×' + horloge.vitesse : '') + ' · phase ' + phase;
+    };
+    majHorloge = maj; maj(); repeter(maj, 1000);
+  }
+  
+
+
+
+
+
+
+
+
 
 
 
@@ -1400,7 +1686,7 @@ function monter(racine, portail, D) {
 
   const PARIS = (() => { try { return new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' }); } catch (e) { return null; } })();
   let aujourdhui = () => {
-    const d = new Date();
+    const d = new Date(horloge.maintenant());
     try {
       if (PARIS) { const x = {}; PARIS.formatToParts(d).forEach((m) => { x[m.type] = m.value; }); if (x.year && x.month && x.day) return x.year + '-' + x.month + '-' + x.day; }
     } catch (e) {   }
@@ -1428,7 +1714,10 @@ function monter(racine, portail, D) {
         '<h3>' + esc(r.titre) + '</h3>' + infos + '</a>';
     }).join('');
   }
-  repeter(() => { pointage(); if (jourAffiche && aujourdhui() !== jourAffiche) rendreAffiche(); }, 30000);
+  
+
+
+  repeter(() => { pointage(); if (jourAffiche && aujourdhui() !== jourAffiche) rendreAffiche(); if (suiviPhase.verifier) suiviPhase.verifier(); }, 30000);
 
   let heroGen = 0;
   
@@ -1597,7 +1886,7 @@ function monter(racine, portail, D) {
     if (!boite) return;
     if (pubRecalage) { clearTimeout(pubRecalage); pubRecalage = 0; }
     const liste = promosAttribut() || [];
-    const maintenant = Date.now();
+    const maintenant = horloge.maintenant();
     const promos = liste.filter((x) => x && x[LANGUE_PUB]);
     const p = promos.find((x) => (x.debut === null || x.debut === undefined || x.debut <= maintenant) && (x.fin === null || x.fin === undefined || x.fin > maintenant));
     const v = p && p[LANGUE_PUB];
@@ -1619,7 +1908,7 @@ function monter(racine, portail, D) {
     }
     let suivant = Infinity;
     promos.forEach((x) => [x.debut, x.fin].forEach((t) => { if (typeof t === 'number' && t > maintenant && t < suivant) suivant = t; }));
-    if (suivant - maintenant <= 6 * 60 * 60 * 1000) { pubRecalage = setTimeout(() => { pubRecalage = 0; rendrePub(); }, suivant - maintenant + 500); minuteurs.push(pubRecalage); }
+    if (suivant - maintenant <= 6 * 60 * 60 * 1000) { pubRecalage = setTimeout(() => { pubRecalage = 0; rendrePub(); }, horloge.delai(suivant - maintenant) + 500); minuteurs.push(pubRecalage); }
   }
   rendrePub();
   ecoute(racine, 'raa-promos', rendrePub);
@@ -1969,12 +2258,8 @@ function monter(racine, portail, D) {
 
 
 
-  {
-    let demandee = null;
-    try { demandee = new URLSearchParams(location.search).get('phase'); } catch (e) {   }
-    if (Object.prototype.hasOwnProperty.call(PHASES, demandee)) phase = demandee;
-  }
-  rendreFaq(); rendreHero(); rendreCtas(); entree();
+
+  rendreFaq(); rendreHero(); rendreCtas(); entree(); montrerHorloge();
   {
     const ph = $('hero-photo');
     const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
