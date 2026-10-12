@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 8cd1a0f | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="8cd1a0f";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 32e7cde | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="32e7cde";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -818,6 +818,7 @@ if (!customElements.get('espace-rhum')) {
   const jtSvg = (c) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + c + '</svg>';
    
   const JT_I_CADEAU = '<path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/>';
+  const JT_I_VELO = '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>';
   const JT_I_CHRONO = '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/>';
   const JT_I_FLECHE = '<path d="M5 12h14M13 6l6 6-6 6"/>';
   const JT_I_RETOUR = '<path d="M19 12H5M11 18l-6-6 6-6"/>';
@@ -1664,6 +1665,8 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-cadre--ico{display:grid;place-items:center;background:radial-gradient(80% 70% at 30% 0%,rgba(93,191,192,.45),rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F5A5E,#123C6B);color:#fff}
     espace-rhum .jt-cadre--ico svg{width:64px;height:64px;opacity:.9}
     espace-rhum .jt-ouvert > .jt-cadre{aspect-ratio:auto;align-self:stretch;min-height:300px}
+    espace-rhum .jt-ouvert--mobilite .jt-cadre-img{position:absolute;inset:0;padding:0;object-fit:cover;object-position:33% 58%;filter:none}
+    espace-rhum .jt-ouvert--mobilite .jt-cadre::after{background:linear-gradient(90deg,rgba(10,26,53,0) 70%,rgba(10,26,53,.35) 100%);z-index:3}
     espace-rhum .jt-ouvert .jt-corps{justify-content:center;gap:12px;padding:24px clamp(20px,2.4vw,32px)}
     espace-rhum .jt-ouvert .jt-titre{font-size:clamp(28px,2.6vw,38px)}
     espace-rhum .jt-ouvert .jt-texte{font-size:14.5px;max-width:62ch}
@@ -19367,7 +19370,56 @@ if (!customElements.get('espace-rhum')) {
         else if (p.phase === 'avant') out.avenir.push('le-juste-temps');
         else out.fini.push('le-juste-temps');
       }
+      const m = this._jmEtat();
+      if (m && m.ouvert) out.cours.push('challenge-mobilite');
+      else if (m && m.termine) out.fini.push('challenge-mobilite');
       return out;
+    }
+
+    
+
+
+    _jmEtat() {
+      const m = this._payload && this._payload.jeux && this._payload.jeux.mobilite;
+      return (m && typeof m === 'object') ? m : null;
+    }
+
+    _jmPeriode(m, en) {
+      const jour = (iso) => {
+        const d = new Date(iso + 'T12:00:00Z');
+        if (!iso || isNaN(d.getTime())) return '';
+        if (en) return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', timeZone: 'Europe/Paris' });
+        const n = d.getUTCDate();
+        return (n === 1 ? '1er' : String(n)) + '\u00a0' + d.toLocaleDateString('fr-FR', { month: 'long', timeZone: 'Europe/Paris' });
+      };
+      const a = jour(m.dateDebut), b = jour(m.dateFin);
+      if (!a || !b) return en ? 'During the village' : 'Pendant le village';
+      return en ? 'From ' + a + ' to ' + b : 'Du ' + a + ' au ' + b;
+    }
+
+    _jmCorps() {
+      const m = this._jmEtat();
+      const en = this._lang() === 'en';
+      const titre = (en ? m.titreEn : m.titre) || (en ? 'Mobility Challenge' : 'Challenge Mobilité');
+      const lotJour = (en ? m.lotsQuotidiensEn : m.lotsQuotidiens) || '';
+      const grandLot = (en ? m.grandLotEn : m.grandLot) || '';
+      const etat = m.ouvert ? '<span class="jt-etat">' + (en ? 'Open' : 'Ouvert') + '</span>'
+        : '<span class="jt-etat jt-etat--ferme">' + (en ? 'Finished' : 'Terminé') + '</span>';
+      const texte = en
+        ? 'Come to the village by train, bus, bike, on foot or car-sharing, upload your proof and try your luck in the daily draw.'
+        : 'Viens au village en train, en bus, à vélo, à pied ou en covoiturage, dépose ton justificatif et tente ta chance au tirage du jour.';
+      const lots = (lotJour && grandLot) ? '<p class="jt-texte">' + (en
+        ? 'Every day, <b>' + escapeHtml(lotJour) + '</b> to win, and the final draw offers <b>' + escapeHtml(grandLot) + '</b>.'
+        : 'Chaque jour, <b>' + escapeHtml(lotJour) + '</b> à gagner, et le grand tirage final offre <b>' + escapeHtml(grandLot) + '</b>.') + '</p>' : '';
+      const reglement = (m.lienReglement && /^https?:\/\/|^\//.test(String(m.lienReglement)))
+        ? '<a class="jt-lien" href="' + escapeHtml(m.lienReglement) + '" target="_blank" rel="noopener">' + (en ? 'Game rules' : 'Règlement du jeu') + '</a>' : '';
+      const actions = m.ouvert
+        ? '<div class="jt-actions"><a class="er-btn er-btn--primary jt-cta" href="' + escapeHtml(this._cheminLangue('/se-rendre-au-village') + '#challenge-mobilite') + '">' + jtSvg(JT_I_VELO) +
+          '<span>' + (en ? 'Take part' : 'Participer') + '</span></a>' + reglement + '</div>'
+        : (reglement ? '<div class="jt-actions">' + reglement + '</div>' : '');
+      return '<div class="jt-corps"><div class="jt-etiquettes">' + etat + '<span class="jt-partenaire">' + escapeHtml(this._jmPeriode(m, en)) + '</span></div>' +
+        '<h3 class="jt-titre"><small>' + (en ? 'The' : 'Le') + '</small>' + escapeHtml(titre.replace(/^(le|the)\s+/i, '')) + '</h3>' +
+        '<p class="jt-texte">' + texte + '</p>' + lots + (actions ? '<div class="jt-bas">' + actions + '</div>' : '') + '</div>';
     }
 
     _jtTemps(sec) {
@@ -19490,9 +19542,9 @@ if (!customElements.get('espace-rhum')) {
     }
 
      
-    _jtCadre(v, alt) {
+    _jtCadre(v, alt, picto) {
       const img = jtImage(v, 660);
-      if (!img) return '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_CHRONO) + '</div>';
+      if (!img) return '<div class="jt-cadre jt-cadre--ico">' + jtSvg(picto || JT_I_CHRONO) + '</div>';
       return '<div class="jt-cadre"><img class="jt-cadre-fond" src="' + escapeHtml(jtImage(v, 200)) + '" alt="" aria-hidden="true" loading="lazy" decoding="async">' +
         '<img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="' + escapeHtml(alt || '') + '"></div>';
     }
@@ -19505,12 +19557,16 @@ if (!customElements.get('espace-rhum')) {
     _jtListeGrande(cles) {
       if (!cles.length) return '';
       const p = this._jtEtat();
-      if (cles.length === 1) {
+      if (cles.length === 1 && cles[0] === 'le-juste-temps') {
         const img = jtImage(p.visuel, 660);
         return '<article class="jt-une' + (img ? '' : ' jt-une--seul') + '">' + this._jtCorps(true) +
           (img ? '<figure class="jt-affiche"><img loading="lazy" decoding="async" src="' + escapeHtml(img) + '" alt="' + escapeHtml(this._jtAlt()) + '"></figure>' : '') + '</article>';
       }
-      return '<div class="jt-ouverts">' + cles.map(() => '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>').join('') + '</div>';
+      const m = this._jmEtat();
+      const altM = this._lang() === 'en' ? 'TyMAL on a bike in front of Saint-Malo station' : 'TyMAL à vélo devant la gare de Saint-Malo';
+      return '<div class="jt-ouverts">' + cles.map((c) => (c === 'challenge-mobilite'
+        ? '<article class="jt-ouvert jt-ouvert--mobilite">' + this._jtCadre(m && m.visuel, altM, JT_I_VELO) + this._jmCorps() + '</article>'
+        : '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>')).join('') + '</div>';
     }
 
     
