@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 04bbddfd | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="04bbddfd";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 54b2c98 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="54b2c98";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -816,7 +816,8 @@ if (!customElements.get('espace-rhum')) {
    
   const JT_MAX = [60, 23, 59, 59];
   const jtSvg = (c) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + c + '</svg>';
-  const JT_I_JEUX = '<path d="M6 11h4M8 9v4"/><path d="M15 10h.01M18 13h.01"/><path d="M17.3 5H6.7a4 4 0 0 0-3.96 3.43L2 14.6a2.5 2.5 0 0 0 4.4 2L8.5 14h7l2.1 2.6a2.5 2.5 0 0 0 4.4-2l-.74-6.17A4 4 0 0 0 17.3 5z"/>';
+   
+  const JT_I_CADEAU = '<path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/>';
   const JT_I_CHRONO = '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/>';
   const JT_I_FLECHE = '<path d="M5 12h14M13 6l6 6-6 6"/>';
   const JT_I_RETOUR = '<path d="M19 12H5M11 18l-6-6 6-6"/>';
@@ -1594,7 +1595,8 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-menu-jeux{width:100%;justify-content:center;gap:8px;margin-top:16px;padding-left:12px;padding-right:12px;color:#fff;border:none;font-weight:800;letter-spacing:.05em;background:linear-gradient(120deg,#1E8C93 0%,#1F67B4 100%);box-shadow:0 6px 18px rgba(31,103,180,.28),inset 0 1px 0 rgba(255,255,255,.18)}
     espace-rhum .jt-menu-jeux[aria-current="page"]{box-shadow:0 0 0 2px var(--er-amber-bright),0 6px 18px rgba(31,103,180,.28)}
     espace-rhum .jt-menu-jeux svg{flex:none;width:18px;height:18px}
-    espace-rhum .jt-menu-jeux .jt-compteur{padding:3px 6px;margin-left:2px;border-radius:3px 8px 3px 8px;background:var(--er-amber-bright);color:#0A1228;font-size:10.5px;font-weight:800;letter-spacing:.04em;line-height:1}
+    espace-rhum .jt-menu-jeux{position:relative;overflow:visible}
+    espace-rhum .jt-menu-jeux .jt-compteur{position:absolute;top:-9px;right:-6px;padding:4px 7px;border-radius:3px 8px 3px 8px;background:var(--er-amber-bright);color:#0A1228;font-size:10px;font-weight:800;letter-spacing:.04em;line-height:1;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,.35)}
     espace-rhum .er-mobile-sheet-jeux{margin:0 0 8px}
     @media (hover:hover) and (pointer:fine){espace-rhum .jt-menu-jeux:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(31,103,180,.4),inset 0 1px 0 rgba(255,255,255,.18)}}
     @media (min-width:768px) and (max-width:1099px){
@@ -19407,7 +19409,7 @@ if (!customElements.get('espace-rhum')) {
       if (!p || p.phase !== 'ouvert') return '';
       const en = this._lang() === 'en';
       const img = jtImage(p.visuel, 400);
-      const montre = '<span class="jt-bandeau-montre" aria-hidden="true">' + (img ? '<img src="' + escapeHtml(img) + '" alt="">' : jtSvg(JT_I_CHRONO)) + '</span>';
+      const montre = '<span class="jt-bandeau-montre" aria-hidden="true">' + (img ? '<img src="' + escapeHtml(img) + '" alt="" decoding="async">' : jtSvg(JT_I_CHRONO)) + '</span>';
       const titre = escapeHtml(p.libelle || 'Le Juste Temps');
       const zone = jtLib(en, 'Les jeux', 'Games');
       if (p.joue) {
@@ -19434,7 +19436,7 @@ if (!customElements.get('espace-rhum')) {
       const compteur = n ? '<span class="jt-compteur">' + n + (en ? ' open' : ' ouvert' + (n > 1 ? 's' : '')) + '</span>' : '';
       return '<button type="button" class="er-btn jt-menu-jeux' + (telephone ? ' er-mobile-sheet-jeux' : '') + '" data-jt-volet' +
         (telephone ? '' : ' aria-current="' + (this._jeuxVue === 'jeux' ? 'page' : 'false') + '"') + '>' +
-        jtSvg(JT_I_JEUX) + '<span>' + (en ? 'Games' : 'Les jeux') + '</span>' + compteur + '</button>';
+        jtSvg(JT_I_CADEAU) + '<span>' + (en ? 'Competitions' : 'Jeux concours') + '</span>' + compteur + '</button>';
     }
 
      
@@ -19488,8 +19490,8 @@ if (!customElements.get('espace-rhum')) {
     _jtCadre(v, alt) {
       const img = jtImage(v, 660);
       if (!img) return '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_CHRONO) + '</div>';
-      return '<div class="jt-cadre"><img class="jt-cadre-fond" src="' + escapeHtml(jtImage(v, 200)) + '" alt="" aria-hidden="true">' +
-        '<img class="jt-cadre-img" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="' + escapeHtml(alt || '') + '"></div>';
+      return '<div class="jt-cadre"><img class="jt-cadre-fond" src="' + escapeHtml(jtImage(v, 200)) + '" alt="" aria-hidden="true" loading="lazy" decoding="async">' +
+        '<img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="' + escapeHtml(alt || '') + '"></div>';
     }
 
     _jtAlt() {
@@ -19503,7 +19505,7 @@ if (!customElements.get('espace-rhum')) {
       if (cles.length === 1) {
         const img = jtImage(p.visuel, 660);
         return '<article class="jt-une' + (img ? '' : ' jt-une--seul') + '">' + this._jtCorps(true) +
-          (img ? '<figure class="jt-affiche"><img src="' + escapeHtml(img) + '" alt="' + escapeHtml(this._jtAlt()) + '"></figure>' : '') + '</article>';
+          (img ? '<figure class="jt-affiche"><img loading="lazy" decoding="async" src="' + escapeHtml(img) + '" alt="' + escapeHtml(this._jtAlt()) + '"></figure>' : '') + '</article>';
       }
       return '<div class="jt-ouverts">' + cles.map(() => '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>').join('') + '</div>';
     }
@@ -19652,7 +19654,7 @@ if (!customElements.get('espace-rhum')) {
       const en = this._lang() === 'en';
       this._jeuxMinuteur = setInterval(() => {
         if (!this.isConnected) { clearInterval(this._jeuxMinuteur); this._jeuxMinuteur = null; return; }
-        this.querySelectorAll('.jt-compte[data-fin]').forEach((c) => {
+        this.querySelectorAll('.jt-vue:not([hidden]) .jt-compte[data-fin]').forEach((c) => {
           const r = jtReste(new Date(c.getAttribute('data-fin')));
           const cases = c.querySelectorAll('.jt-case');
           [r.j, r.h, r.m, r.s].forEach((x, i) => { if (cases[i] && cases[i].firstChild) cases[i].firstChild.nodeValue = jtDeux(x); });
