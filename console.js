@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 140fc91 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="140fc91";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 63de465 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63de465";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -79,10 +79,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="140fc91";performan
    
   var CANAL_LABELS = {
     organic_search: 'Recherche Google', direct: 'Accès direct', social: 'Réseaux sociaux',
-    referral: 'Sites référents', email_marketing: 'E-mailing', paid: 'Publicité',
-    ai_platform: 'Assistants IA', inconnu: 'Non identifié'
+    referral: 'Sites référents', email_marketing: 'E-mailing', paid: 'Publicité', paid_ads: 'Publicité',
+    wix_automations: 'Automatisations Wix', ai_platform: 'Assistants IA', inconnu: 'Non identifié'
   };
   var APPAREIL_LABELS = { mobile: 'Mobile', desktop: 'Ordinateur', tablet: 'Tablette', inconnu: 'Inconnu' };
+   
+  var ROBOT_LABELS = {
+    chatgptUtilisateur: 'ChatGPT, pour répondre à une question', perplexityUtilisateur: 'Perplexity, pour répondre à une question',
+    openaiRecherche: 'OpenAI, index de recherche', openaiEntrainement: 'OpenAI, entraînement',
+    claudeEntrainement: 'Claude, entraînement', perplexityEntrainement: 'Perplexity, entraînement',
+    amazonEntrainement: 'Amazon, entraînement', metaEntrainement: 'Meta, entraînement',
+    googleEntrainement: 'Google Gemini, entraînement'
+  };
 
    
    
@@ -1536,6 +1544,45 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="140fc91";performan
         pays.length ? barsH(pays, { whole: pays.reduce(function (s, x) { return s + x.count; }, 0) })
                     : '<div class="rdrc-state">Pas encore de données.</div>', true, IC.pin);
 
+      
+
+
+
+
+
+      var joursRobots = jours.filter(function (j) { return j.robotsIA; });
+      var cardRobots = '';
+      if (joursRobots.length) {
+        var requetes = function (j) { return (j.robotsIA.chatgptUtilisateur || 0) + (j.robotsIA.perplexityUtilisateur || 0); };
+        var totalReq = som(joursRobots, requetes);
+        var parRobot = {};
+        joursRobots.forEach(function (j) { for (var k in j.robotsIA) parRobot[k] = (parRobot[k] || 0) + j.robotsIA[k]; });
+        var robots = Object.keys(parRobot).map(function (k) { return { label: ROBOT_LABELS[k] || k, count: parRobot[k] }; })
+          .sort(function (a, b) { return b.count - a.count; });
+        cardRobots = card('Les IA qui lisent le site',
+          nfmt(totalReq) + ' requêtes d\'utilisateurs',
+          '<p class="rdrc-help" style="margin:0 0 10px"><b>' + nfmt(totalReq) + ' fois</b>' +
+            (joursRobots.length < nJours ? ' depuis le ' + joursRobots[0].jour : ' sur la période') +
+            ', ChatGPT ou Perplexity sont venus lire une page du site pour répondre à la question de quelqu\'un, ' +
+            'soit ' + nfmt(Math.round(totalReq / joursRobots.length)) + ' par jour.</p>' +
+           
+           
+          '<div style="display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center">' +
+            '<div style="flex:1 1 360px;min-width:0">' +
+              areaChart(joursRobots.map(function (j) { return { week: j.jour, value: requetes(j) }; }), {
+                label: function (i) { return joursRobots[i].jour.slice(8) + '/' + joursRobots[i].jour.slice(5, 7); },
+                tip: function (i) { return joursRobots[i].jour + ' : ' + requetes(joursRobots[i]) + ' requêtes d\'utilisateurs'; },
+                aria: 'Requêtes d\'utilisateurs des IA, par jour'
+              }) + '</div>' +
+            '<div style="flex:1 1 360px;min-width:0">' +
+              barsH(robots, { whole: som(robots, function (x) { return x.count; }) }) + '</div>' +
+          '</div>' +
+          '<p class="rdrc-help" style="margin:12px 0 0">Un passage est une page lue par le robot d\'une IA. ' +
+            'Les robots de recherche et d\'entraînement ne répondent à personne sur le moment : ils indexent ou apprennent. ' +
+            'Mesuré par Wix depuis le 1<sup>er</sup>&nbsp;août.</p>',
+          true, IC.pulse);
+      }
+
        
        
       var dits = this._contenuRetenir({
@@ -1556,7 +1603,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="140fc91";performan
         '<span class="rdrc-note-act"><button class="rdrc-goto" type="button" data-rattraper>Rattraper l\'historique</button></span></p>';
 
       return seg + retenir + kpis + '<div class="rdrc-grid">' +
-        courbe + cardProv + cardApp + cardArts + cardPays + '</div>' + note;
+        courbe + cardProv + cardApp + cardArts + cardPays + cardRobots + '</div>' + note;
     }
 
      
