@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum e0bbb94 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="e0bbb94";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 87f6f29 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="87f6f29";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2801,6 +2801,9 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const MYSTERE = MEDIA + '7bb303_fc14c1d1fa984ca5aac30753d24e22cb~mv2.avif';
    
   const DEPART = Date.parse('2026-11-01T12:02:00Z');
+   
+  const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
   
 
   const SEUIL_SUIVIS = 20;
@@ -5316,11 +5319,16 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         '</div>';
     }
 
+    
+
+
+
     _decompte(T) {
       if (this._phase !== 'avant') return '';
-      const jours = Math.ceil((DEPART - Date.now()) / 86400000);
-      if (!(jours >= 0)) return '';
-      const [fort, texte] = T.decompte(jours);
+      const maintenant = Date.now();
+      const [fort, texte] = maintenant >= DEPART
+        ? T.jourCourse(Math.floor((maintenant - DEPART) / 86400000) + 1)
+        : T.decompte(Math.round((jourParis(DEPART) - jourParis(maintenant)) / 86400000));
       return '<p class="sk-decompte"><b>' + esc(fort) + '</b>' + esc(texte) + '</p>';
     }
 
