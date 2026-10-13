@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 0b14f4c | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 0240cf5 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0240cf5";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -23,8 +23,19 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
     { id: 'insta',    label: 'Instagram' },
     { id: 'photo',    label: 'Concours photo' },
     { id: 'village',  label: 'Village' },
-    { id: 'mobilite', label: 'Mobilité' }
+    { id: 'mobilite', label: 'Mobilité' },
+    { id: 'justetemps', label: 'Le Juste Temps' }
   ];
+
+  
+
+
+
+  var JT_REPERES_2022 = {
+    'Ultim': 6 * 86400 + 19 * 3600 + 47 * 60, 'Ocean Fifty': 10 * 86400 + 21 * 3600 + 35 * 60,
+    'IMOCA': 11 * 86400 + 17 * 3600 + 36 * 60, 'Class40': 14 * 86400 + 3 * 3600 + 8 * 60,
+    'Vintage Mono': 16 * 86400 + 13 * 3600 + 57 * 60, 'Vintage Multi': 16 * 86400 + 6 * 3600 + 37 * 60
+  };
 
    
   var CANAL_LABELS = {
@@ -436,6 +447,61 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
 
 
 
+
+    '.rdrc-jt-tete{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px}',
+    '.rdrc-jt-statut{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;background:var(--line-2);color:var(--ink-2)}',
+    '.rdrc-jt-statut::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 auto}',
+    '.rdrc-jt-statut[data-s="ouvert"]{background:#E1F5EA;color:var(--ok)}',
+    '.rdrc-jt-statut[data-s="alerte"]{background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-jt-tete small{font-size:11.5px;font-weight:600;color:var(--ink-3)}',
+    '.rdrc-jt-etat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0}',
+    '.rdrc-jt-f{background:var(--bg);border-radius:10px 3px 10px 3px;padding:10px 12px;min-width:0;margin:0}',
+    '.rdrc-jt-f dt{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px}',
+    '.rdrc-jt-f dd{margin:0;font-size:12.5px;font-weight:700;color:var(--navy);line-height:1.4}',
+    '.rdrc-jt-f dd small{display:block;font-size:11px;font-weight:600;color:var(--ink-3);margin-top:2px}',
+    '.rdrc-jt-f a{color:var(--teal);font-weight:800}',
+    '.rdrc-jt-f[data-s="retenue"] dd{color:var(--ok)}',
+    '.rdrc-jt-f[data-s="illisible"]{background:#FCEDEB}',
+    '.rdrc-jt-defil{overflow:auto;max-height:min(70vh,620px);border:1px solid var(--line-2);border-radius:10px;background:#fff}',
+    '.rdrc-jt-defil--libre{max-height:none}',
+    '.rdrc-jt-t{width:100%;border-collapse:separate;border-spacing:0;font-size:11.5px;font-variant-numeric:tabular-nums}',
+    '.rdrc-jt-t th{position:sticky;top:0;z-index:1;background:#F4F7FB;text-align:left;font-size:9.5px;font-weight:800;letter-spacing:.06em;',
+    'text-transform:uppercase;color:var(--ink-3);padding:8px 9px;border-bottom:1px solid var(--line);white-space:nowrap}',
+    '.rdrc-jt-t td{padding:7px 9px;border-bottom:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap;vertical-align:middle}',
+    '.rdrc-jt-t tbody tr:last-child td{border-bottom:0}',
+    '.rdrc-jt-t tbody tr:nth-child(even) td{background:#FAFBFD}',
+    '.rdrc-jt-t .rdrc-jt-num{text-align:right}',
+    '.rdrc-jt-t .rdrc-jt-nom{font-weight:800;color:var(--navy);white-space:normal;min-width:200px}',
+    '.rdrc-jt-nom small{display:block;font-weight:600;color:var(--ink-3);font-size:11px;margin-top:1px;overflow-wrap:anywhere}',
+    '.rdrc-jt-t th.rdrc-jt-cl{white-space:normal}',
+    '.rdrc-jt-mod{display:block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin-top:2px}',
+    '.rdrc-jt-t .rdrc-jt-vide{color:var(--ink-3)}',
+    '.rdrc-jt-pt{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}',
+    '.rdrc-jt-tag{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;font-size:9.5px;font-weight:800;letter-spacing:.06em;',
+    'text-transform:uppercase;background:#E8EEF7;color:var(--ink-2);vertical-align:1px}',
+    '.rdrc-jt-tag--mod{background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-jt-tag--ex{background:#FCEDEB;color:var(--no)}',
+    '.rdrc-jt-outils{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px}',
+    '.rdrc-jt-cherche{flex:1 1 260px;max-width:380px;font:inherit;font-size:12.5px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}',
+    '.rdrc-jt-cherche:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-jt-compte{font-size:11.5px;font-weight:700;color:var(--ink-3)}',
+    '.rdrc-jt-sous{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:18px 0 8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}',
+    '.rdrc-jt-sous span{font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-3)}',
+    '.rdrc-jt-leg{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;font-size:11px;font-weight:700;color:var(--ink-2)}',
+    '.rdrc-jt-leg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:-1px}',
+    '.rdrc-jt-histo{display:block;width:170px;height:32px;overflow:visible}',
+    '.rdrc-jt-deux{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}',
+    '.rdrc-jt-regle{margin:0;padding-left:18px;font-size:12px;line-height:1.6;color:var(--ink-2)}',
+    '.rdrc-jt-regle li+li{margin-top:5px}',
+    '.rdrc-jt-regle b{color:var(--navy)}',
+    '.rdrc-jt-h{margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}',
+    '.rdrc-jt-gagnants{display:grid;gap:10px;margin:0 0 14px}',
+    '@media(max-width:900px){.rdrc-jt-deux{grid-template-columns:minmax(0,1fr)}}',
+
+    
+
+
+
     '.rdrc-manque{grid-column:1 / -1;padding:16px 18px 16px;background:#FFF6E6;border:1px solid #F0D398;',
     'border-left:4px solid var(--amber);border-radius:12px}',
     '.rdrc-manque-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}',
@@ -689,6 +755,121 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
     return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
   }
 
+   
+   
+   
+  function jtDuree(sec, aLaMinute) {
+    if (sec == null || !isFinite(sec)) return '';
+    var s = Math.round(Math.abs(sec));
+    if (aLaMinute) s = Math.round(s / 60) * 60;
+    var j = Math.floor(s / 86400), r = s % 86400;
+    var h = Math.floor(r / 3600), m = Math.floor((r % 3600) / 60), x = r % 60;
+    return j + ' j ' + h + ' h ' + String(m).padStart(2, '0') + ' min' + (x ? ' ' + String(x).padStart(2, '0') + ' s' : '');
+  }
+   
+   
+  function jtCourt(sec) {
+    if (sec == null || !isFinite(sec)) return '';
+    var s = Math.round(Math.abs(sec));
+    var j = Math.floor(s / 86400), r = s % 86400;
+    var deux = function (n) { return String(n).padStart(2, '0'); };
+    return j + ' j ' + deux(Math.floor(r / 3600)) + ':' + deux(Math.floor((r % 3600) / 60)) + (r % 60 ? ':' + deux(r % 60) : '');
+  }
+  
+
+  function jtParties(t, opts) {
+    try {
+      var o = {};
+      new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: 'Europe/Paris' }, opts)).formatToParts(new Date(t)).forEach(function (x) { o[x.type] = x.value; });
+      return o;
+    } catch (e) { return null; }
+  }
+  function jtHeure(t) {
+    var o = t == null ? null : jtParties(t, { hour: 'numeric', minute: '2-digit', hourCycle: 'h23' });
+    return o ? o.hour + ' h ' + o.minute : '';
+  }
+  function jtJour(t) {
+    var o = t == null ? null : jtParties(t, { year: 'numeric', month: '2-digit', day: '2-digit' });
+    return o ? o.year + '-' + o.month + '-' + o.day : '';
+  }
+  function jtDateCourte(t) {
+    var o = t == null ? null : jtParties(t, { day: '2-digit', month: '2-digit' });
+    return o ? o.day + '/' + o.month + ' ' + jtHeure(t) : '';
+  }
+  function jtDateLongue(isoDate) {
+    var t = Date.parse(isoDate || '');
+    var o = isFinite(t) ? jtParties(t, { weekday: 'long', day: 'numeric', month: 'long' }) : null;
+    return o ? o.weekday + ' ' + o.day + ' ' + o.month + ' à ' + jtHeure(t) : 'non posée';
+  }
+  function jtPct(x, decimales) {
+    return x == null || !isFinite(x) ? '' : (x * 100).toFixed(decimales).replace('.', ',') + ' %';
+  }
+
+   
+   
+  function jtBarresJours(points) {
+    var n = points.length;
+    if (!n) return '';
+    var W = 900, H = 170, padB = 22, padT = 18, padL = 26, padR = 6;
+    var max = Math.max.apply(null, points.map(function (p) { return (p.premiers || 0) + (p.modifs || 0); }).concat([1]));
+    var plotH = H - padB - padT;
+    var pas = (W - padL - padR) / n;
+    var larg = Math.max(3, Math.min(36, pas * 0.62));
+    var tous = Math.max(1, Math.ceil(n / Math.floor((W - padL - padR) / 34)));
+    var grid = '';
+    [0, 0.5, 1].forEach(function (f) {
+      var y = H - padB - f * plotH;
+      grid += '<line class="grid" x1="' + padL + '" y1="' + y.toFixed(1) + '" x2="' + (W - padR) + '" y2="' + y.toFixed(1) + '"/>' +
+        '<text class="axis" x="' + (padL - 7) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end">' + Math.round(max * f) + '</text>';
+    });
+    var cols = points.map(function (p, i) {
+      var x = padL + i * pas + (pas - larg) / 2;
+      var hP = (p.premiers || 0) / max * plotH, hM = (p.modifs || 0) / max * plotH;
+      var yP = H - padB - hP, yM = yP - hM;
+      var etiq = p.jour.slice(8, 10) + '/' + p.jour.slice(5, 7);
+      var dernier = i === n - 1;
+      return '<g><title>' + esc(etiq + ' : ' + (p.premiers || 0) + ' premier' + (p.premiers > 1 ? 's' : '') + ' dépôt' + (p.premiers > 1 ? 's' : '') +
+          ', ' + (p.modifs || 0) + ' dernière' + (p.modifs > 1 ? 's' : '') + ' modification' + (p.modifs > 1 ? 's' : '')) + '</title>' +
+        (hP ? '<rect class="' + (dernier ? 'bar-peak' : 'bar') + '" x="' + x.toFixed(1) + '" y="' + yP.toFixed(1) + '" width="' + larg.toFixed(1) + '" height="' + hP.toFixed(1) + '" rx="2"/>'
+            : '<rect class="bar-empty" x="' + x.toFixed(1) + '" y="' + (H - padB - 2) + '" width="' + larg.toFixed(1) + '" height="2"/>') +
+        (hM ? '<rect fill="#F19F39" x="' + x.toFixed(1) + '" y="' + yM.toFixed(1) + '" width="' + larg.toFixed(1) + '" height="' + hM.toFixed(1) + '" rx="2"/>' : '') +
+        (p.premiers ? '<text class="val' + (dernier ? ' val-peak' : '') + '" x="' + (x + larg / 2).toFixed(1) + '" y="' + (yM - 4).toFixed(1) + '" text-anchor="middle">' + p.premiers + '</text>' : '') +
+        ((i % tous === 0 || dernier) ? '<text class="lbl' + (dernier ? ' lbl-last' : '') + '" x="' + (x + larg / 2).toFixed(1) + '" y="' + (H - padB + 14) + '" text-anchor="middle">' + esc(etiq) + '</text>' : '') +
+      '</g>';
+    }).join('');
+    return '<svg class="rdrc-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Dépôts par jour">' + grid + cols + '</svg>';
+  }
+
+   
+   
+   
+   
+  function jtHisto(cl, repere) {
+    if (!cl || !cl.n) return '';
+    var W = 170, H = 32;
+    var bacs = cl.bacs || [];
+    var lo = Math.min(cl.min, repere || cl.min), hi = Math.max(cl.max, repere || cl.max);
+    var etendue = hi - lo;
+    var xDe = function (s) { return etendue > 0 ? (s - lo) / etendue * W : W / 2; };
+    var pas = (cl.max - cl.min) / (bacs.length || 1);
+    var maxB = Math.max.apply(null, bacs.concat([1]));
+    var barres = bacs.map(function (n, i) {
+      if (!n) return '';
+      var h = Math.max(2, n / maxB * (H - 4));
+      var x = pas > 0 ? xDe(cl.min + i * pas) : xDe(cl.min) - 2;
+      var l = pas > 0 ? Math.max(1.5, pas / (etendue || 1) * W - 1) : 4;
+      return '<rect x="' + x.toFixed(1) + '" y="' + (H - h).toFixed(1) + '" width="' + l.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="#00676E" fill-opacity=".55"/>';
+    }).join('');
+    var trait = function (s, couleur, tirets) {
+      var x = xDe(s).toFixed(1);
+      return '<line x1="' + x + '" y1="0" x2="' + x + '" y2="' + H + '" stroke="' + couleur + '" stroke-width="2"' + (tirets ? ' stroke-dasharray="3 2"' : '') + '/>';
+    };
+    return '<svg class="rdrc-jt-histo" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' +
+      esc('Répartition de ' + jtDuree(cl.min) + ' à ' + jtDuree(cl.max) + ', médiane ' + jtDuree(cl.mediane)) + '">' +
+      '<line x1="0" y1="' + (H - 0.5) + '" x2="' + W + '" y2="' + (H - 0.5) + '" stroke="rgba(10,26,53,.15)"/>' + barres +
+      (repere ? trait(repere, '#F19F39', true) : '') + trait(cl.mediane, '#0A1A35', false) + '</svg>';
+  }
+
   class RdrConsole extends HTMLElement {
     static get observedAttributes() { return ['payload']; }
 
@@ -701,6 +882,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
        
       this._periode = 30;
       this._instaView = 'todo';    
+      this._jtCherche = '';        
       this._busy = {};    
       
 
@@ -1693,6 +1875,221 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
 
 
 
+    _justeTempsHtml(p) {
+      if (p.justeTempsError) return '<p class="rdrc-err">' + esc(p.justeTempsError) + '</p>';
+      var v = p.justeTemps;
+      if (!v) return '<div class="rdrc-state">' + (p.loading ? 'Lecture du jeu…' : 'Aucune donnée pour l\'instant.') + '</div>';
+      var jeu = v.jeu || {};
+      if (!jeu.existe) {
+        return '<div class="rdrc-state"><b>Aucun jeu configuré</b>La ligne « rdr-2026 » de PRONOSTICS_COURSE est absente, ou sans date de fermeture ni classes.</div>';
+      }
+      var classes = jeu.classes || [];
+      var c = v.chiffres || {};
+      var it = jeu.interrupteur || {};
+      var r = v.resultat || {};
+      var parts = v.participants || [];
+      var calcule = Date.parse(v.calculeLe || '') || Date.now();
+      var pastille = function (cl) { return '<span class="rdrc-jt-pt" style="background:' + esc(CLASS_COLORS[cl] || 'var(--teal)') + '"></span>'; };
+      var alerte = function (titre, texte) {
+        return '<div class="rdrc-alerte"><span class="rdrc-alerte-ic" aria-hidden="true">' + IC.alerte + '</span><div><b>' + esc(titre) + '</b>' + texte + '</div></div>';
+      };
+      var fiche = function (titre, valeur, petit, etat) {
+        return '<dl class="rdrc-jt-f"' + (etat ? ' data-s="' + esc(etat) + '"' : '') + '><dt>' + esc(titre) + '</dt><dd>' + valeur + (petit ? '<small>' + petit + '</small>' : '') + '</dd></dl>';
+      };
+
+       
+      var statut, ton = 'ferme';
+      if (jeu.phase === 'avant') statut = 'Pas encore ouvert';
+      else if (jeu.phase === 'ouvert') {
+        if (it.lisible === false) { statut = 'Dans ses dates, interrupteur illisible'; ton = 'alerte'; }
+        else if (it.enService) { statut = 'Ouvert aux membres'; ton = 'ouvert'; }
+        else { statut = 'Dans ses dates, mais interrupteur éteint'; ton = 'alerte'; }
+      } else if (jeu.phase === 'depouille') statut = 'Fermé, dépouillé';
+      else statut = 'Fermé, en attente des temps officiels';
+      var inter = it.lisible === false ? 'Illisible'
+        : it.ligne === false ? 'Allumé'
+        : !it.actif ? 'Éteint'
+        : it.enService ? 'Allumé' : 'Allumé, hors de ses dates';
+      var interPetit = it.lisible === false ? 'lecture en panne, réessayer'
+        : it.ligne === false ? 'pas de ligne : allumé par défaut' : 'ER_ANIMATIONS, ligne « pronostics »';
+      var reste = jeu.phase === 'ouvert' ? jtDuree(Math.round((jeu.resteMs || 0) / 60000) * 60)
+        : jeu.phase === 'avant' ? 'pas encore ouvert' : 'terminé';
+      var etat = '<div class="rdrc-jt-tete"><span class="rdrc-jt-statut" data-s="' + ton + '">' + esc(statut) + '</span>' +
+          '<small>' + esc(jeu.libelle || 'Le Juste Temps') + ' · ' + classes.length + ' classes · lu à ' + esc(jtHeure(calcule)) + '</small></div>' +
+        '<div class="rdrc-jt-etat">' +
+          fiche('Ouverture', esc(jtDateLongue(jeu.ouvertureLe))) +
+          fiche('Fermeture', esc(jtDateLongue(jeu.fermetureLe))) +
+          fiche('Temps restant', esc(reste), jeu.phase === 'ouvert' ? 'au moment de la lecture' : '') +
+          fiche('Interrupteur', esc(inter), esc(interPetit)) +
+          fiche('Règlement', jeu.reglementUrl
+            ? '<a href="' + esc(jeu.reglementUrl) + '" target="_blank" rel="noopener">Ouvrir le règlement</a>'
+            : 'Lien non posé', jeu.reglementUrl ? esc(jeu.reglementUrl) : 'reglementUrl de la ligne « pronostics »') +
+        '</div>';
+      var bandeaux = (v.lectureRatee ? alerte('Lecture en panne', ' Ces chiffres sont ceux de la dernière lecture réussie, à ' + esc(jtHeure(calcule)) + '. « Actualiser » dans un instant.') : '') +
+        (jeu.phase === 'ouvert' && it.lisible !== false && !it.enService
+          ? alerte('Le jeu est dans ses dates, mais aucun membre ne le voit.', ' Son interrupteur est éteint : au CMS, collection ER_ANIMATIONS, ligne « pronostics », case « actif ».') : '');
+
+       
+      var aujourdHui = jtJour(calcule);
+      var dernierJour = c.dernierDepot ? jtJour(c.dernierDepot) : '';
+      var hier = jtJour(calcule - 86400000);
+      var kpis = '<div class="rdrc-kpis">' +
+        kpi('Joueurs', nfmt(c.joueurs), '', 'hors équipe · <b>' + nfmt(c.nouveauxAujourdhui) + '</b> nouveau' + (c.nouveauxAujourdhui > 1 ? 'x' : '') + ' aujourd\'hui', 'lead') +
+        kpi('Pronos complets', nfmt(c.complets), '', '<b>' + pct(c.complets, c.joueurs) + ' %</b> des joueurs' + (c.incomplets ? ' · ' + nfmt(c.incomplets) + ' incomplet' + (c.incomplets > 1 ? 's' : '') : ', six classes')) +
+        kpi('Modifiés', nfmt(c.modifies), '', 'après leur premier dépôt') +
+        kpi('Comptes de l\'équipe', nfmt(c.equipe), '', 'jouent, hors classement' + (c.introuvables ? ' · ' + nfmt(c.introuvables) + ' fiche' + (c.introuvables > 1 ? 's' : '') + ' introuvable' + (c.introuvables > 1 ? 's' : '') : '')) +
+        kpi('Dernier dépôt', c.dernierDepot ? jtHeure(c.dernierDepot) : '', '', c.dernierDepot
+          ? (dernierJour === aujourdHui ? 'aujourd\'hui' : dernierJour === hier ? 'hier' : 'le ' + esc(jtDateCourte(c.dernierDepot).slice(0, 5)))
+          : 'aucun joueur encore') +
+      '</div>';
+
+       
+      var parJour = v.parJour || [];
+      var cardJours = card('Dépôts par jour', nfmt(c.joueurs) + ' joueur' + (c.joueurs > 1 ? 's' : '') + ' depuis l\'ouverture',
+        (parJour.some(function (x) { return x.premiers || x.modifs; })
+          ? jtBarresJours(parJour) +
+            '<div class="rdrc-jt-leg"><span><i style="background:var(--teal)"></i>Premiers dépôts du jour</span>' +
+            '<span><i style="background:#F19F39"></i>Dernière modification faite ce jour-là</span></div>'
+          : '<div class="rdrc-state">Pas encore de dépôt.</div>'), true, IC.trend);
+
+       
+      var lignesClasses = (v.parClasse || []).map(function (cl) {
+        var rep = JT_REPERES_2022[cl.classe] || null;
+        var vide = '<span class="rdrc-jt-vide">aucun</span>';
+        return '<tr><td class="rdrc-jt-nom">' + pastille(cl.classe) + esc(cl.classe) + '</td>' +
+          '<td class="rdrc-jt-num">' + nfmt(cl.n) + '</td>' +
+          '<td><b>' + (cl.n ? esc(jtDuree(cl.mediane, true)) : vide) + '</b></td>' +
+          '<td>' + (cl.n ? esc(jtDuree(cl.min, true)) : vide) + '</td>' +
+          '<td>' + (cl.n ? esc(jtDuree(cl.max, true)) : vide) + '</td>' +
+          '<td>' + (rep ? esc(jtDuree(rep)) : '') + '</td>' +
+          '<td>' + jtHisto(cl, rep) + '</td></tr>';
+      }).join('');
+      var cardClasses = card('Les temps proposés, par classe', 'joueurs seulement, hors équipe',
+        '<div class="rdrc-jt-defil rdrc-jt-defil--libre"><table class="rdrc-jt-t"><thead><tr><th>Classe</th><th class="rdrc-jt-num">Pronos</th><th>Médiane</th><th>Plus court</th><th>Plus long</th><th>Vainqueur 2022</th><th>Répartition</th></tr></thead>' +
+          '<tbody>' + lignesClasses + '</tbody></table></div>' +
+        '<div class="rdrc-jt-leg"><span><i style="background:#00676E;opacity:.55"></i>Joueurs par tranche de temps, du plus court au plus long</span>' +
+          '<span><i style="background:var(--navy)"></i>Médiane</span><span><i style="background:#F19F39"></i>Temps du vainqueur 2022, le repère montré au joueur</span></div>', true, IC.boat);
+
+       
+      var cardResultat = card('Le résultat', ({ attente: 'en attente des temps officiels', provisoire: 'provisoire', complet: 'toutes les classes décidées', 'sans-classe': 'aucune classe retenue' })[r.etat] || '',
+        this._jtResultatHtml(r, classes, alerte, fiche), true, IC.target);
+
+       
+      var avecRang = !!(r.classement && r.classement.length);
+      var entete = '<thead><tr><th>Participant</th><th>Premier dépôt</th><th>Dernière modif.</th>' +
+        classes.map(function (cl) { return '<th class="rdrc-jt-cl">' + pastille(cl) + esc(cl) + '</th>'; }).join('') +
+        (avecRang ? '<th class="rdrc-jt-num">Rang</th><th class="rdrc-jt-num">Score</th>' : '') + '</tr></thead>';
+      var ligne = function (x) {
+        var tags = (x.equipe ? '<span class="rdrc-jt-tag">équipe</span>' : '') + (x.introuvable ? '<span class="rdrc-jt-tag rdrc-jt-tag--ex">fiche introuvable</span>' : '') +
+          (!x.complet ? '<span class="rdrc-jt-tag rdrc-jt-tag--ex">incomplet</span>' : '');
+        return '<tr data-jt-q="' + esc(((x.nom || '') + ' ' + (x.email || '')).toLowerCase()) + '">' +
+          '<td class="rdrc-jt-nom">' + esc(x.nom || 'Sans nom') + tags + '<small>' + esc(x.email || 'adresse inconnue') + '</small></td>' +
+          '<td>' + esc(jtDateCourte(x.premier)) + '</td>' +
+          '<td>' + esc(jtDateCourte(x.dernier)) + (x.modifie ? '<small class="rdrc-jt-mod">modifié</small>' : '') + '</td>' +
+          (x.temps || []).map(function (s) { return s == null ? '<td class="rdrc-jt-vide">vide</td>' : '<td title="' + esc(jtDuree(s)) + '">' + esc(jtCourt(s)) + '</td>'; }).join('') +
+          (avecRang ? '<td class="rdrc-jt-num">' + (x.rang || '') + '</td><td class="rdrc-jt-num">' + (x.score != null ? esc(jtPct(x.score, 3)) : '') + '</td>' : '') +
+        '</tr>';
+      };
+      var tableau = function (liste) {
+        return '<div class="rdrc-jt-defil"><table class="rdrc-jt-t">' + entete + '<tbody>' + liste.map(ligne).join('') + '</tbody></table></div>';
+      };
+      var joueurs = parts.filter(function (x) { return !x.equipe && !x.introuvable; });
+      var equipe = parts.filter(function (x) { return x.equipe; });
+      var introuvables = parts.filter(function (x) { return x.introuvable; });
+      var cardListe = card('Les participants', nfmt(parts.length) + ' compte' + (parts.length > 1 ? 's' : '') + ' ont joué',
+        '<div class="rdrc-jt-outils"><input class="rdrc-jt-cherche" type="search" data-jt-cherche placeholder="Chercher un nom ou une adresse" aria-label="Chercher un participant par son nom ou son adresse" value="' + esc(this._jtCherche || '') + '">' +
+          '<span class="rdrc-jt-compte" data-jt-compte>' + nfmt(parts.length) + ' affiché' + (parts.length > 1 ? 's' : '') + '</span></div>' +
+        (joueurs.length ? '<p class="rdrc-jt-sous">Joueurs <span>' + nfmt(joueurs.length) + ', la dernière modification en tête ; temps en jours et heures:minutes</span></p>' + tableau(joueurs)
+                        : '<div class="rdrc-state">Aucun joueur pour l\'instant.</div>') +
+        (equipe.length ? '<p class="rdrc-jt-sous">Comptes de l\'équipe <span>' + nfmt(equipe.length) + ', jouent normalement mais ne comptent dans aucun chiffre ni classement et ne gagnent rien</span></p>' + tableau(equipe) : '') +
+        (introuvables.length ? '<p class="rdrc-jt-sous">Fiches introuvables <span>' + nfmt(introuvables.length) + ', comptes supprimés depuis leur dépôt : écartés des chiffres</span></p>' + tableau(introuvables) : '') +
+        '<p class="rdrc-note"><b>D\'où viennent ces chiffres.</b> Des lignes PRONOSTICS (une par joueur et par classe), de la ligne « rdr-2026 » de PRONOSTICS_COURSE et de l\'interrupteur « pronostics » d\'ER_ANIMATIONS, relus à la demande et gardés deux minutes. ' +
+          'L\'adresse est celle de connexion du compte, pour joindre le gagnant. Les comptes de l\'équipe (adresses @ocsport.com, @ocgroup.com, @wapitix.fr, comptes d\'aperçu, comptes créés avant le 14/09) sont à part. ' +
+          '« Exporter » télécharge cette liste en CSV : elle contient des adresses, à garder dans l\'équipe.</p>', true, IC.people);
+
+      return bandeaux + '<div class="rdrc-grid" style="margin-bottom:14px">' + card('L\'état du jeu', 'Le Juste Temps, montre Alpina', etat, true, IC.clock) + '</div>' + kpis +
+        '<div class="rdrc-grid">' + cardJours + cardClasses + cardResultat + cardListe + '</div>';
+    }
+
+    
+
+
+
+
+    _jtResultatHtml(r, classes, alerte, fiche) {
+      var REGLE = '<p class="rdrc-jt-h">La règle (article 6 du règlement)</p><ol class="rdrc-jt-regle">' +
+        '<li>Le temps de référence d\'une classe est le temps officiel du <b>premier bateau</b> de la classe.</li>' +
+        '<li>Écart d\'une classe : <b>|pronostic − référence| ÷ référence</b>. Score : la <b>moyenne des écarts</b> sur les classes retenues. Le plus faible gagne.</li>' +
+        '<li>Une classe sans arrivée dans les délais n\'est <b>pas retenue</b>.</li>' +
+        '<li>Score égal : la <b>dernière modification la plus ancienne</b> gagne ; si l\'égalité persiste, <b>tirage au sort</b>.</li>' +
+        '<li>Seuls les joueurs aux six classes renseignées ; l\'équipe jamais (article 3.4).</li></ol>';
+      var MANQUE = '<p class="rdrc-jt-h">Ce qui manque encore</p><ol class="rdrc-jt-regle">' +
+        '<li><b>La saisie des temps officiels</b>, dans PRONOSTICS_COURSE.resultats, une clé par classe : aucun écran ne la fait encore.</li>' +
+        '<li><b>Déclarer une classe non retenue</b> (article 6.4) : la console lit { retenue: false } dans la clé de la classe, format à confirmer avec le calcul de la passe de nuit, pas encore écrit.</li>' +
+        '<li><b>Le tirage au sort</b> en cas d\'égalité persistante : la console nomme les ex aequo, elle ne tire pas. Qui tire, et comment on en garde la trace, reste à décider.</li>' +
+        '<li><b>Avant de contacter le gagnant</b> : une participation par foyer (3.5), majeur et résidant en France ou dans les DROM (3.2). Le site ne connaît ni l\'adresse postale ni l\'âge.</li></ol>';
+      var refs = (r.reference || []).map(function (x) {
+        var val = x.etat === 'retenue' ? esc(jtDuree(x.sec)) : x.etat === 'non-retenue' ? 'Non retenue' : x.etat === 'illisible' ? 'Saisie illisible' : 'En attente';
+        var petit = x.etat === 'retenue' ? 'temps officiel' : x.etat === 'non-retenue' ? 'article 6.4' : x.etat === 'illisible' ? 'à corriger dans resultats' : 'pas encore arrivée';
+        return fiche(x.classe, val, petit, x.etat);
+      }).join('');
+      var grille = '<div class="rdrc-jt-etat" style="margin-bottom:14px">' + refs + '</div>';
+      if (r.etat === 'attente' || !r.etat) {
+        return '<p class="rdrc-help">Cette carte se remplit seule dès qu\'un temps officiel est saisi : temps de référence, écart de chaque joueur, gagnant selon le règlement et son départage. Rien à faire avant les arrivées.</p>' +
+          grille + '<div class="rdrc-jt-deux"><div>' + REGLE + '</div><div>' + MANQUE + '</div></div>';
+      }
+      var tete = '';
+      if (r.etat === 'provisoire') {
+        tete += alerte('Résultat provisoire.', ' ' + r.retenues + ' classe' + (r.retenues > 1 ? 's' : '') + ' retenue' + (r.retenues > 1 ? 's' : '') + ' pour l\'instant : le classement bouge jusqu\'à la dernière classe décidée.');
+      } else if (r.etat === 'sans-classe') {
+        tete += alerte('Aucune classe retenue.', ' Le règlement ne prévoit pas ce cas : à trancher par l\'organisateur.');
+      }
+      var g = r.gagnant;
+      var gagnants = '';
+      if (g) {
+        gagnants = '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">' + (r.etat === 'complet' ? 'Gagnant selon le règlement' : 'En tête pour l\'instant') + '</span><br>' +
+          '<b>' + esc(g.nom || 'Sans nom') + '</b>' +
+          '<p>' + esc(g.email || '') + ' · score ' + esc(jtPct(g.score, 3)) + ' · dernière modification le ' + esc(jtDateCourte(g.dernier)) +
+          (g.par === 'modification' ? ' · départagé de ' + (g.exAequo - 1) + ' ex aequo au score par sa modification la plus ancienne (article 6.5)' : '') + '</p></div>';
+      } else if (r.aTirer && r.aTirer.length) {
+        gagnants = '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">Égalité persistante : tirage au sort à faire (article 6.5)</span>' +
+          '<p>Même score et même dernière modification : ' + r.aTirer.map(function (x) { return '<b>' + esc(x.nom || 'Sans nom') + '</b> (' + esc(x.email || '') + ')'; }).join(', ') + '.</p></div>';
+      }
+      var retenues = (r.reference || []).map(function (x) { return x.etat === 'retenue'; });
+      var lignes = (r.classement || []).map(function (x) {
+        return '<tr><td class="rdrc-jt-num"><b>' + x.rang + '</b></td>' +
+          '<td class="rdrc-jt-nom">' + esc(x.nom || 'Sans nom') + (x.egalite === 'tirage' ? '<span class="rdrc-jt-tag rdrc-jt-tag--ex">à tirer au sort</span>' : x.egalite === 'score' ? '<span class="rdrc-jt-tag rdrc-jt-tag--mod">ex aequo au score</span>' : '') +
+            '<small>' + esc(x.email || '') + '</small></td>' +
+          '<td class="rdrc-jt-num"><b>' + esc(jtPct(x.score, 3)) + '</b></td>' +
+          (x.ecarts || []).map(function (e, i) { return retenues[i] ? '<td class="rdrc-jt-num">' + esc(jtPct(e, 2)) + '</td>' : '<td class="rdrc-jt-num rdrc-jt-vide">·</td>'; }).join('') +
+          '<td>' + esc(jtDateCourte(x.dernier)) + '</td></tr>';
+      }).join('');
+      var table = lignes
+        ? '<div class="rdrc-jt-defil rdrc-jt-defil--libre"><table class="rdrc-jt-t"><thead><tr><th class="rdrc-jt-num">Rang</th><th>Joueur</th><th class="rdrc-jt-num">Score</th>' +
+            classes.map(function (cl) { return '<th class="rdrc-jt-num">' + esc(cl) + '</th>'; }).join('') + '<th>Dernière modif.</th></tr></thead><tbody>' + lignes + '</tbody></table></div>'
+        : '<div class="rdrc-state">Aucun joueur à classer.</div>';
+      return tete + grille + '<div class="rdrc-jt-gagnants">' + gagnants + '</div>' + table +
+        '<p class="rdrc-note"><b>' + nfmt(r.eligibles) + ' joueurs classés</b>' + (r.incompletsEcartes ? ', ' + nfmt(r.incompletsEcartes) + ' incomplet' + (r.incompletsEcartes > 1 ? 's' : '') + ' écarté' + (r.incompletsEcartes > 1 ? 's' : '') : '') +
+          ', l\'équipe jamais. Les écarts sont relatifs (écart ÷ temps officiel) ; le classement entier est dans la liste des participants et dans l\'export (colonnes Rang et Score).</p>' +
+        '<div class="rdrc-jt-deux" style="margin-top:14px"><div>' + REGLE + '</div><div>' + MANQUE + '</div></div>';
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1817,6 +2214,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
 
 
       if (this._view === 'mobilite' || this._view === 'photo') return false;
+      if (this._view === 'justetemps') return !!(p.justeTemps && (p.justeTemps.participants || []).length);
       if (this._view === 'insta') return !!(p.claims || p.approved);
       if (this._view === 'village') return !!(p.audience && p.audience.village && p.audience.village.repondu);
       if (this._view === 'contenu') return !!(p.contenu && (p.contenu.jours || []).length);
@@ -1840,6 +2238,33 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
                      Number(c.attempts) || 0, ok ? 'validé' : 'en attente']);
         });
         csvDownload('rdr-instagram-' + (ok ? 'valides' : 'a-verifier') + '-' + stamp() + '.csv', rows);
+        return;
+      }
+
+      
+
+
+
+      if (this._view === 'justetemps') {
+        var jt = p.justeTemps || {};
+        var cls = (jt.jeu || {}).classes || [];
+        var avecRang = !!((jt.resultat || {}).classement || []).length;
+        var dateCsv = function (t) {
+          var o = t == null ? null : jtParties(t, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+          return o ? o.year + '-' + o.month + '-' + o.day + ' ' + o.hour + ':' + o.minute : '';
+        };
+        var en = ['Nom', 'Adresse de connexion', 'Statut', 'Premier dépôt', 'Dernière modification', 'Modifié', 'Six classes']
+          .concat(cls, cls.map(function (cl) { return cl + ' (secondes)'; }), avecRang ? ['Rang', 'Score (%)'] : []);
+        var rj = [en];
+        (jt.participants || []).forEach(function (x) {
+          var t = x.temps || [];
+          rj.push([x.nom || '', x.email || '', x.introuvable ? 'fiche introuvable' : x.equipe ? 'équipe' : 'joueur',
+            dateCsv(x.premier), dateCsv(x.dernier), x.modifie ? 'oui' : 'non', x.complet ? 'oui' : 'non']
+            .concat(cls.map(function (cl, i) { return t[i] == null ? '' : jtDuree(t[i]); }),
+                    cls.map(function (cl, i) { return t[i] == null ? '' : t[i]; }),
+                    avecRang ? [x.rang || '', x.score != null ? (x.score * 100).toFixed(4).replace('.', ',') : ''] : []));
+        });
+        csvDownload('rdr-juste-temps-participants-' + stamp() + '.csv', rj);
         return;
       }
 
@@ -2019,6 +2444,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
                : this._view === 'profils' ? this._profilsHtml(p)
                : this._view === 'contenu' ? this._contenuHtml(p)
                : this._view === 'mobilite' ? this._mobiliteHtml(p)
+               : this._view === 'justetemps' ? this._justeTempsHtml(p)
                : this._audienceHtml(p);
 
        
@@ -2029,7 +2455,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
        
        
       var perime = false;
-      if (p.audience && p.audience.derniereNuit) {
+      if (this._view !== 'justetemps' && p.audience && p.audience.derniereNuit) {
         var age = (Date.now() - new Date(p.audience.derniereNuit).getTime()) / 3600000;
         perime = age > 30;
       }
@@ -2037,6 +2463,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
       var stamp = '';
       if (this._view === 'contenu') {
         stamp = p.contenu && p.contenu.calculeLe ? 'Instantané ' + since(p.contenu.calculeLe) : '';
+      } else if (this._view === 'justetemps') {
+        
+
+        stamp = p.justeTemps && p.justeTemps.calculeLe ? 'Lu à ' + jtHeure(Date.parse(p.justeTemps.calculeLe)) : '';
       } else if (this._view !== 'insta' && p.audience && p.audience.generatedAt) {
         stamp = 'Calculé ' + since(p.audience.generatedAt);
       } else if (this._view === 'insta' && claims.length) {
@@ -2117,6 +2547,26 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0b14f4c";performan
           self._emit('rc-mob-statut', { id: btn.getAttribute('data-mob-statut'), champ: btn.getAttribute('data-champ'), valeur: btn.getAttribute('data-valeur') });
         });
       });
+
+      
+
+      var cherche = this.querySelector('[data-jt-cherche]');
+      if (cherche) {
+        var filtrer = function () {
+          var q = String(self._jtCherche || '').trim().toLowerCase();
+          var lignes = self.querySelectorAll('tr[data-jt-q]');
+          var n = 0;
+          lignes.forEach(function (tr) {
+            var vu = !q || tr.getAttribute('data-jt-q').indexOf(q) >= 0;
+            tr.hidden = !vu;
+            if (vu) n++;
+          });
+          var compte = self.querySelector('[data-jt-compte]');
+          if (compte) compte.textContent = q ? n + ' sur ' + lignes.length : lignes.length + ' affiché' + (lignes.length > 1 ? 's' : '');
+        };
+        cherche.addEventListener('input', function () { self._jtCherche = cherche.value; filtrer(); });
+        if (this._jtCherche) filtrer();
+      }
 
       var refresh = this.querySelector('[data-refresh]');
       if (refresh) refresh.addEventListener('click', function () { self._emit('rc-refresh', { view: self._view }); });
