@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum bcb6af9 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 63b8072 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b8072";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -16,16 +16,55 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
   var INSTA_COMPTE = 'route_du_rhum';
   var INSTA_FOLLOWERS_URL = 'https://www.instagram.com/' + INSTA_COMPTE + '/followers/';
 
+  
+
+
   var VIEWS = [
     { id: 'audience', label: 'Audience' },
     { id: 'contenu',  label: 'Contenu' },
     { id: 'profils',  label: 'Profils' },
     { id: 'insta',    label: 'Instagram' },
-    { id: 'photo',    label: 'Concours photo' },
     { id: 'village',  label: 'Village' },
-    { id: 'mobilite', label: 'Mobilité' },
-    { id: 'justetemps', label: 'Le Juste Temps' }
+    { id: 'jeux',     label: 'Jeux concours', groupe: true }
   ];
+
+  
+
+
+
+  var JEUX = [
+    { id: 'justetemps', nom: 'Le Juste Temps', panneau: '_justeTempsHtml' },
+    { id: 'mobilite',   nom: 'Challenge Mobilité', panneau: '_mobiliteHtml' },
+    { id: 'photo',      nom: 'Challenge photo', panneau: '_photoHtml' }
+  ];
+  function jeuDe(id) {
+    for (var i = 0; i < JEUX.length; i++) if (JEUX[i].id === id) return JEUX[i];
+    return null;
+  }
+  
+
+  var ALIAS_VUES = {
+    'le-juste-temps': 'justetemps', 'juste-temps': 'justetemps',
+    'challenge-mobilite': 'mobilite', 'concours-photo': 'photo', 'challenge-photo': 'photo'
+  };
+  function vueCanonique(v, dernierJeu) {
+    var x = String(v || '');
+    if (Object.prototype.hasOwnProperty.call(ALIAS_VUES, x)) x = ALIAS_VUES[x];
+    if (x === 'jeux') x = jeuDe(dernierJeu) ? dernierJeu : JEUX[0].id;
+    return x;
+  }
+  
+
+  var CLE_DERNIER_JEU = 'rdrcDernierJeu';
+  function lireDernierJeu() {
+    try { var v = window.localStorage.getItem(CLE_DERNIER_JEU); return jeuDe(v) ? v : ''; } catch (e) { return ''; }
+  }
+  function garderDernierJeu(id) {
+    try { window.localStorage.setItem(CLE_DERNIER_JEU, id); } catch (e) {   }
+  }
+  function survolPossible() {
+    try { return window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { return false; }
+  }
 
   
 
@@ -146,6 +185,30 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
     '.rdrc-tab:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}',
     '.rdrc-badge{font-size:10px;font-weight:800;line-height:1;padding:3px 6px;border-radius:999px;background:var(--no);color:#fff}',
     '.rdrc-badge[data-zero="1"]{background:var(--line);color:var(--ink-3)}',
+
+    
+
+
+
+
+    '.rdrc-navwrap{position:relative}',
+    '.rdrc-caret{width:12px;height:12px;flex:0 0 auto;transition:transform .15s ease}',
+    '.rdrc-tab[aria-expanded="true"] .rdrc-caret{transform:rotate(180deg)}',
+    '.rdrc-tab[aria-expanded="true"]{color:var(--navy)}',
+    '.rdrc-menu{position:absolute;top:calc(100% - 3px);left:0;z-index:30;min-width:260px;padding:6px;display:grid;gap:2px;',
+    'background:#fff;border:1px solid #D7DEE9;border-radius:12px 3px 12px 3px;box-shadow:0 16px 36px -14px rgba(10,26,53,.4)}',
+    '.rdrc-menu[hidden]{display:none}',
+    '.rdrc-menu-k{margin:4px 10px 6px;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}',
+    '.rdrc-menu-i{appearance:none;-webkit-appearance:none;border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:var(--ink-2);',
+    'text-align:left;cursor:pointer;padding:10px 12px;border-radius:8px 2px 8px 2px;display:flex;align-items:center;justify-content:space-between;gap:14px}',
+    '.rdrc-menu-i:hover{background:var(--bg);color:var(--navy)}',
+    '.rdrc-menu-i:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;background:var(--bg);color:var(--navy)}',
+    '.rdrc-menu-i[aria-current="true"]{background:var(--teal-soft);color:var(--navy)}',
+    '.rdrc-menu-i small{font-size:10px;font-weight:700;color:var(--ink-3);white-space:nowrap}',
+    '.rdrc-jeu-tete{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 18px;flex-wrap:wrap;margin:0 0 16px}',
+    '.rdrc-jeu-k{margin:0 0 4px;font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}',
+    '.rdrc-jeu-t{margin:0;font-family:var(--display);font-style:italic;font-weight:400;text-transform:uppercase;font-size:24px;line-height:1.05;color:var(--navy)}',
+    '.rdrc-jeu-tete .rdrc-sub{margin:0}',
 
     
 
@@ -901,12 +964,35 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
       this._toast = null;
       this._toastId = 0;          
       this._toastTimer = null;
+      
+
+
+      this._dernierJeu = lireDernierJeu();
+      this._menuJeux = false;
+      this._menuFocus = -1;
+      this._menuTimer = null;
+      this._pointeur = '';
+      this._focusApres = '';
+      var self = this;
+       
+      this._dehors = function (e) {
+        if (!self._menuJeux) return;
+        var t = e.target;
+        if (t && t.closest && (t.closest('[data-jeux-tab]') || t.closest('.rdrc-menu'))) return;
+        self._fermerMenu(false);
+      };
     }
 
-    connectedCallback() { injectStyles(); this._render(); }
+    connectedCallback() {
+      injectStyles();
+      document.addEventListener('pointerdown', this._dehors, true);
+      this._render();
+    }
 
     disconnectedCallback() {
       if (this._toastTimer) { clearTimeout(this._toastTimer); this._toastTimer = null; }
+      if (this._menuTimer) { clearTimeout(this._menuTimer); this._menuTimer = null; }
+      document.removeEventListener('pointerdown', this._dehors, true);
     }
 
     attributeChangedCallback(name, oldV, newV) {
@@ -914,7 +1000,17 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
       try { this._payload = newV ? JSON.parse(newV) : null; }
       catch (e) { this._payload = null; }
        
-      if (this._payload && this._payload.view) this._view = this._payload.view;
+      
+
+
+      if (this._payload && this._payload.view) {
+        var demandee = String(this._payload.view);
+        this._view = vueCanonique(demandee, this._dernierJeu);
+        if (this._view !== demandee) {
+          var self = this, vue = this._view;
+          setTimeout(function () { self._emit('rc-view', { view: vue }); }, 0);
+        }
+      }
       this._busy = {};    
       this._lireToast();
       this._render();
@@ -944,6 +1040,89 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
 
     _emit(name, detail) {
       this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true, detail: detail || {} }));
+    }
+
+    
+
+
+
+
+
+
+
+
+    _placerMenu() {
+      var tab = this.querySelector('[data-jeux-tab]');
+      var menu = this.querySelector('.rdrc-menu');
+      var nav = this.querySelector('.rdrc-nav');
+      var wrap = this.querySelector('.rdrc-navwrap');
+      if (!tab || !menu || !nav || !wrap) return;
+      var gauche = tab.offsetLeft - nav.scrollLeft;
+      var max = wrap.clientWidth - menu.offsetWidth - 8;
+      menu.style.left = Math.max(8, Math.min(gauche, max)) + 'px';
+    }
+
+    _ouvrirMenu(focus) {
+      if (this._menuTimer) { clearTimeout(this._menuTimer); this._menuTimer = null; }
+      var tab = this.querySelector('[data-jeux-tab]');
+      var menu = this.querySelector('.rdrc-menu');
+      if (!tab || !menu) return;
+      this._menuJeux = true;
+      menu.hidden = false;
+      tab.setAttribute('aria-expanded', 'true');
+      this._placerMenu();
+      if (typeof focus === 'number') this._focusMenu(focus);
+    }
+
+    _fermerMenu(rendreFocus) {
+      if (this._menuTimer) { clearTimeout(this._menuTimer); this._menuTimer = null; }
+      this._menuJeux = false;
+      this._menuFocus = -1;
+      var tab = this.querySelector('[data-jeux-tab]');
+      var menu = this.querySelector('.rdrc-menu');
+      if (menu) menu.hidden = true;
+      if (tab) {
+        tab.setAttribute('aria-expanded', 'false');
+        if (rendreFocus) tab.focus();
+      }
+    }
+
+    _focusMenu(i) {
+      var items = this.querySelectorAll('.rdrc-menu-i');
+      if (!items.length) return;
+      var n = ((i % items.length) + items.length) % items.length;
+      this._menuFocus = n;
+      items[n].focus();
+    }
+
+    _indexJeu(id) {
+      for (var i = 0; i < JEUX.length; i++) if (JEUX[i].id === id) return i;
+      return 0;
+    }
+
+    _choisirJeu(id, parClavier) {
+      if (!jeuDe(id)) return;
+      this._menuJeux = false;
+      this._menuFocus = -1;
+      if (this._menuTimer) { clearTimeout(this._menuTimer); this._menuTimer = null; }
+       
+      this._focusApres = parClavier ? '[data-jeu-sub="' + id + '"]' : '';
+      var change = id !== this._view;
+      this._view = id;
+      this._render();
+      if (change) this._emit('rc-view', { view: id });
+    }
+
+    
+
+    _jeuEnteteHtml(jeu) {
+      var self = this;
+      return '<div class="rdrc-jeu-tete"><div><p class="rdrc-jeu-k">Jeux concours</p><h2 class="rdrc-jeu-t">' + esc(jeu.nom) + '</h2></div>' +
+        '<div class="rdrc-sub" role="tablist" aria-label="Jeux concours">' + JEUX.map(function (j) {
+          var on = j.id === self._view;
+          return '<button class="rdrc-subtab" type="button" role="tab" data-jeu-sub="' + esc(j.id) + '" aria-selected="' + (on ? 'true' : 'false') + '"' +
+            ' tabindex="' + (on ? '0' : '-1') + '">' + esc(j.nom) + '</button>';
+        }).join('') + '</div></div>';
     }
 
      
@@ -2435,7 +2614,24 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
       var self = this;
       var claims = Array.isArray(p.claims) ? p.claims : [];
 
+      
+
+
+      var actif = document.activeElement, focusGarde = '';
+      if (actif && actif !== this && this.contains(actif)) {
+        if (actif.hasAttribute('data-jeu-sub')) focusGarde = '[data-jeu-sub="' + actif.getAttribute('data-jeu-sub') + '"]';
+        else if (actif.hasAttribute('data-jeux-tab')) focusGarde = '[data-jeux-tab]';
+      }
+
+      var jeu = jeuDe(this._view);
+      if (jeu && jeu.id !== this._dernierJeu) { this._dernierJeu = jeu.id; garderDernierJeu(jeu.id); }
+
       var tabs = VIEWS.map(function (v) {
+        if (v.groupe) {
+          return '<button class="rdrc-tab" type="button" role="tab" id="rdrc-tab-jeux" data-jeux-tab aria-haspopup="menu" aria-controls="rdrc-menu-jeux"' +
+            ' aria-expanded="' + (self._menuJeux ? 'true' : 'false') + '" aria-selected="' + (jeu ? 'true' : 'false') + '">' + esc(v.label) +
+            '<svg class="rdrc-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>';
+        }
         var on = v.id === self._view;
         var extra = '';
         if (v.id === 'insta') {
@@ -2448,14 +2644,20 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
 
        
        
-      var body = this._view === 'insta' ? this._instaHtml(p)
-               : this._view === 'photo' ? this._photoHtml()
+      var body = jeu ? this._jeuEnteteHtml(jeu) + this[jeu.panneau](p)
+               : this._view === 'insta' ? this._instaHtml(p)
                : this._view === 'village' ? this._villageHtml(p)
                : this._view === 'profils' ? this._profilsHtml(p)
                : this._view === 'contenu' ? this._contenuHtml(p)
-               : this._view === 'mobilite' ? this._mobiliteHtml(p)
-               : this._view === 'justetemps' ? this._justeTempsHtml(p)
                : this._audienceHtml(p);
+      var dernier = this._dernierJeu;
+      var menu = '<div class="rdrc-menu" id="rdrc-menu-jeux" role="menu" aria-labelledby="rdrc-tab-jeux"' + (this._menuJeux ? '' : ' hidden') + '>' +
+        '<p class="rdrc-menu-k" aria-hidden="true">Choisir un jeu</p>' +
+        JEUX.map(function (j) {
+          var ouvert = j.id === self._view;
+          return '<button class="rdrc-menu-i" type="button" role="menuitem" tabindex="-1" data-jeu="' + esc(j.id) + '"' + (ouvert ? ' aria-current="true"' : '') + '>' +
+            '<span>' + esc(j.nom) + '</span>' + (ouvert ? '<small>ouvert</small>' : j.id === dernier ? '<small>dernier consulté</small>' : '') + '</button>';
+        }).join('') + '</div>';
 
        
        
@@ -2517,15 +2719,93 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="bcb6af9";performan
               '<button class="rdrc-toast-x" type="button" data-toast-x aria-label="Fermer ce message">✕</button>' +
             '</div>'
             : '') +
-          '<div class="rdrc-nav" role="tablist" aria-label="Panneaux de la console">' + tabs + '</div>' +
+          '<div class="rdrc-navwrap"><div class="rdrc-nav" role="tablist" aria-label="Panneaux de la console">' + tabs + '</div>' + menu + '</div>' +
           '<div class="rdrc-body" role="tabpanel">' + body + '</div>' +
         '</div>';
 
       this._wire();
+      
+
+
+      if (this._menuJeux) {
+        this._placerMenu();
+        if (this._menuFocus >= 0) this._focusMenu(this._menuFocus);
+      }
+      if (this._focusApres) {
+        var cible = this.querySelector(this._focusApres);
+        this._focusApres = '';
+        if (cible) cible.focus();
+      } else if (focusGarde && !this._menuJeux) {
+        var garde = this.querySelector(focusGarde);
+        if (garde) garde.focus();
+      }
     }
 
     _wire() {
       var self = this;
+
+       
+      var tabJeux = this.querySelector('[data-jeux-tab]');
+      var menuJeux = this.querySelector('.rdrc-menu');
+      if (tabJeux && menuJeux) {
+        var plusTard = function () {
+          if (self._menuTimer) clearTimeout(self._menuTimer);
+          self._menuTimer = setTimeout(function () { self._menuTimer = null; if (self._menuFocus < 0) self._fermerMenu(false); }, 220);
+        };
+        var resterOuvert = function () { if (self._menuTimer) { clearTimeout(self._menuTimer); self._menuTimer = null; } };
+        tabJeux.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' && survolPossible()) self._ouvrirMenu(); });
+        tabJeux.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && survolPossible()) plusTard(); });
+        menuJeux.addEventListener('pointerenter', resterOuvert);
+        menuJeux.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && survolPossible()) plusTard(); });
+        tabJeux.addEventListener('pointerdown', function (e) { self._pointeur = e.pointerType || ''; });
+        tabJeux.addEventListener('click', function (e) {
+          var souris = self._pointeur === 'mouse' && e.detail > 0 && survolPossible();
+          self._pointeur = '';
+          
+
+
+          if (souris) { self._choisirJeu(self._dernierJeu || JEUX[0].id, false); return; }
+          if (self._menuJeux) self._fermerMenu(e.detail === 0);
+          else self._ouvrirMenu(e.detail === 0 ? self._indexJeu(self._dernierJeu) : undefined);
+        });
+        tabJeux.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            self._ouvrirMenu(self._indexJeu(self._dernierJeu));
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            self._ouvrirMenu(JEUX.length - 1);
+          } else if (e.key === 'Escape' && self._menuJeux) {
+            e.preventDefault();
+            self._fermerMenu(true);
+          }
+        });
+        menuJeux.addEventListener('keydown', function (e) {
+          var i = self._menuFocus;
+          if (e.key === 'ArrowDown') { e.preventDefault(); self._focusMenu(i + 1); }
+          else if (e.key === 'ArrowUp') { e.preventDefault(); self._focusMenu(i - 1); }
+          else if (e.key === 'Home') { e.preventDefault(); self._focusMenu(0); }
+          else if (e.key === 'End') { e.preventDefault(); self._focusMenu(JEUX.length - 1); }
+          else if (e.key === 'Escape') { e.preventDefault(); self._fermerMenu(true); }
+          else if (e.key === 'Tab') { self._fermerMenu(false); }
+        });
+        menuJeux.querySelectorAll('[data-jeu]').forEach(function (b, i) {
+          b.addEventListener('focus', function () { self._menuFocus = i; });
+          b.addEventListener('click', function (e) { self._choisirJeu(b.getAttribute('data-jeu'), e.detail === 0); });
+        });
+        var nav = this.querySelector('.rdrc-nav');
+        if (nav) nav.addEventListener('scroll', function () { if (self._menuJeux) self._placerMenu(); });
+      }
+      var subs = Array.prototype.slice.call(this.querySelectorAll('[data-jeu-sub]'));
+      subs.forEach(function (b, i) {
+        b.addEventListener('click', function (e) { self._choisirJeu(b.getAttribute('data-jeu-sub'), e.detail === 0); });
+        b.addEventListener('keydown', function (e) {
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          subs[(i + d + subs.length) % subs.length].focus();
+        });
+      });
 
        
       this.querySelectorAll('[data-mob-jour]').forEach(function (btn) {
