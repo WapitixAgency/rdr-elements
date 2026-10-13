@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum c4bccef | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="c4bccef";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 0b14f4c | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0b14f4c";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1643,6 +1643,11 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-compte-lab{flex-basis:100%;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--er-text-muted)}
     espace-rhum .jt-case{display:inline-flex;align-items:baseline;justify-content:center;gap:3px;min-width:70px;padding:12px 12px 10px;border-radius:10px;background:linear-gradient(180deg,#0B2A5C 0%,#08214A 100%);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);font:700 30px/1 var(--er-font-body);font-variant-numeric:tabular-nums;letter-spacing:.02em;color:#fff}
     espace-rhum .jt-case small{font-size:13px;font-weight:700;color:rgba(255,255,255,.6)}
+    
+
+
+
+    espace-rhum .jt-n{display:inline-block;min-width:2.2ch;text-align:center;font:inherit;font-variant-numeric:tabular-nums}
     espace-rhum .jt-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:4px}
     espace-rhum .jt-cta{padding:14px 22px;font-size:13.5px}
     espace-rhum .jt-cta svg{width:17px;height:17px}
@@ -1995,7 +2000,10 @@ if (!customElements.get('espace-rhum')) {
 
       display: flex; flex-direction: column; align-items: stretch;
       position: sticky;
-      top: 24px;
+      
+
+
+      top: 80px;
       background: var(--er-bg-card);
       border: 1px solid var(--er-border-soft);
       border-radius: 20px 4px 14px 4px;
@@ -2006,8 +2014,8 @@ if (!customElements.get('espace-rhum')) {
       --er-motif-size: 200% auto; --er-motif-pos: -55% 120%;
       --er-motif-fade: to top;
       --er-motif-flip: scaleX(-1);
-      max-height: calc(100vh - 48px);
-      max-height: calc(100dvh - 48px);  
+      max-height: calc(100vh - 104px);
+      max-height: calc(100dvh - 104px);  
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: var(--er-teal-soft) transparent;
@@ -19544,7 +19552,7 @@ if (!customElements.get('espace-rhum')) {
       const etiquette = lab + ' ' + r.j + jtLib(en, ' jours ', ' days ') + r.h + jtLib(en, ' heures', ' hours');
       return '<div class="jt-compte" data-fin="' + escapeHtml(finIso) + '" aria-label="' + escapeHtml(etiquette) + '">' +
         '<span class="jt-compte-lab">' + escapeHtml(lab) + '</span>' +
-        [r.j, r.h, r.m, r.s].map((v, i) => '<span class="jt-case">' + jtDeux(v) + '<small>' + u[i] + '</small></span>').join('') + '</div>';
+        [r.j, r.h, r.m, r.s].map((v, i) => '<span class="jt-case"><b class="jt-n">' + jtDeux(v) + '</b><small>' + u[i] + '</small></span>').join('') + '</div>';
     }
 
     _jtMesPronos() {
@@ -19772,7 +19780,7 @@ if (!customElements.get('espace-rhum')) {
         this.querySelectorAll('.jt-vue:not([hidden]) .jt-compte[data-fin]').forEach((c) => {
           const r = jtReste(new Date(c.getAttribute('data-fin')));
           const cases = c.querySelectorAll('.jt-case');
-          [r.j, r.h, r.m, r.s].forEach((x, i) => { if (cases[i] && cases[i].firstChild) cases[i].firstChild.nodeValue = jtDeux(x); });
+          [r.j, r.h, r.m, r.s].forEach((x, i) => { const n = cases[i] && cases[i].querySelector('.jt-n'); if (n) n.textContent = jtDeux(x); });
         });
         this.querySelectorAll('[data-jt-reste]').forEach((b) => {
           const r = jtReste(new Date(b.getAttribute('data-jt-reste')));
