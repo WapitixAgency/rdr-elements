@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 0240cf5 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0240cf5";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 543fe88 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="543fe88";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -731,9 +731,19 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0240cf5";performan
    
    
    
+  
+
+
+
+
+
+
+
   function csvCell(v) {
+    if (typeof v === 'number') return String(v);
     var s = String(v == null ? '' : v);
-    return /[";\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    if (/^[=+\-@\t\r]/.test(s)) s = '\'' + s;
+    return /[";\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
   }
   function csvDownload(filename, rows) {
      
