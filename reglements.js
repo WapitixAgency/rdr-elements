@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 0b7d2bf | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0b7d2bf";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 4696d0f | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="4696d0f";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -13,6 +13,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0b7d2bf";perfor
 
 
   const IC = {
+    camera: '<path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/>',
     scrollText: '<path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/>',
     fileText: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>',
     bike: '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
@@ -491,6 +492,27 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0b7d2bf";perfor
           ]
         }
       ]
+    },
+    {
+      
+
+
+
+
+
+
+      id: 'challenge-photo',
+      actif: false,
+      icone: 'camera',
+      nom: 'Challenge photo Alpina',
+      nature: { fr: 'Jeu-concours', en: 'Prize competition' },
+      debut: '',
+      fin: '',
+      version: '',
+      organisateur: 'OC Sport Pen Duick',
+      participer: { href: '/concours-photo-2026', fr: 'La page du Challenge photo, connecté à Mon Espace Rhum', en: 'The photo challenge page, signed in to My Espace Rhum' },
+      pdf: '',
+      articles: []
     }
   ];
 
