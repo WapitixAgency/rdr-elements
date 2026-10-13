@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum a215610 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="a215610";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 140fc91 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="140fc91";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -75,10 +75,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="a215610";perfor
 
 
 
+
+
+
       debut: '2026-09-22',
       fin: '2026-11-01',
       publieLe: '2026-09-23',
-      version: '2026-10-08',
+      version: '2026-10-13',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/se-rendre-au-village#mobilite', fr: 'Page « Se rendre au village »', en: '“Getting to the village” page' },
       pdf: '',
@@ -150,8 +153,112 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="a215610";perfor
           blocs: [
             '{b}7.1.{/b} Le Jeu est doté des dotations (ci-après désignée les « {b}Dotation(s){/b} ») suivantes :',
             { ul: [
-              '{b}Lots quotidiens :{/b} visites d’un bateau et/ou pass VIP pour les coulisses de la course et/ou festival de film, cette liste pourra être complétée.',
-              '{b}Lot principal :{/b} une sortie pour 2 personnes sur l’Ocean Fifty UpWind by MerConcept ; cette navigation aura lieu en 2027, les éventuels frais de déplacement et/ou d’hébergement sont à la charge du Gagnant.'
+              '{b}Lots quotidiens :{/b} les lots mis en jeu à chaque tirage quotidien sont détaillés jour par jour ci-dessous, cette liste pourra être complétée.',
+              '{b}Lot principal :{/b} une sortie pour 2 personnes sur l’Ocean Fifty UpWind by MerConcept ; cette navigation aura lieu en avril ou mai 2027, les éventuels frais de déplacement et/ou d’hébergement sont à la charge du Gagnant.'
+            ] },
+            { h3: 'Mardi 20 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour une place en VIP pour les parades dans les écluses (aucun remboursement / reprogrammation en cas de changement du programme et sous réserve de places disponibles en espace VIP) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Mercredi 21 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour le Festival de film de MerConcept (le 22/10 de 19h00 à 22h00 au Théâtre Chateaubriand, Saint-Malo) ;',
+              '3 packs de 2 places pour une place en VIP pour les parades dans les écluses (aucun remboursement / reprogrammation en cas de changement du programme et sous réserve de places disponibles en espace VIP) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Jeudi 22 octobre 2026' },
+            { ul: [
+              '7 packs de 2 places pour le Festival de film de MerConcept (de 19h00 à 22h00 au Théâtre Chateaubriand, Saint-Malo) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Vendredi 23 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour une place en VIP pour les parades dans les écluses (aucun remboursement / reprogrammation en cas de changement du programme et sous réserve de places disponibles en espace VIP) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Samedi 24 octobre 2026' },
+            { ul: [
+              '5 packs de 2 places pour la visite du Vintage Multi « We Explore » à 15h30 ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Dimanche 25 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Lundi 26 octobre 2026' },
+            { ul: [
+              '5 packs de 2 places pour la visite du Vintage Multi « We Explore » à 15h30 ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Mardi 27 octobre 2026' },
+            { ul: [
+              '5 packs de 2 places pour la visite du Vintage Multi « We Explore » à 15h30 ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Mercredi 28 octobre 2026' },
+            { ul: [
+              '2 packs de 2 places pour visiter l’Ocean Fifty « UpWind by MerConcept » (de 16h00 à 16h30) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Jeudi 29 octobre 2026' },
+            { ul: [
+              '2 packs de 2 places pour visiter l’Ocean Fifty « UpWind by MerConcept » (de 16h00 à 16h30) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Vendredi 30 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour une place en VIP pour les parades dans les écluses (aucun remboursement / reprogrammation en cas de changement du programme et sous réserve de places disponibles en espace VIP) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Samedi 31 octobre 2026' },
+            { ul: [
+              '3 packs de 2 places pour une place en VIP pour les parades dans les écluses (aucun remboursement / reprogrammation en cas de changement du programme et sous réserve de places disponibles en espace VIP) ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
+            ] },
+            { h3: 'Dimanche 1er novembre 2026' },
+            { ul: [
+              '5 packs de 2 places pour le Live Départ avec Sailorz au Palais du Grand Large ;',
+              '3 packs de 2 places pour une visite des coulisses de la course et des pontons (45-60 minutes) ;',
+              '1 kg de café « Café Joyeux », marque inclusive et solidaire ;',
+              'Une carte Avantage (Jeune, Adulte ou Senior) SNCF ;',
+              'Un Full Pack Virtual Regatta pour la Route du Rhum - Destination Guadeloupe 2026.'
             ] },
             'Les éventuels frais de livraison des dotations sont pris en charge par l’Organisateur.',
             'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
