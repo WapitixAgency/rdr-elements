@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 543fe88 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="543fe88";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum bcb6af9 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="bcb6af9";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -673,6 +673,7 @@ rdr-accueil-apercu .carte--une p{display:none}
 rdr-accueil-apercu .actus-droite{grid-template-columns:1fr;gap:12px}
 rdr-accueil-apercu .actus-droite .carte{aspect-ratio:16/9}
 rdr-accueil-apercu .actus-droite .carte h3{font-size:14px}
+rdr-accueil-apercu .actus-droite .carte + .carte{display:none}
 rdr-accueil-apercu .breves{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--marge) 14px;margin:14px calc(-1 * var(--marge)) 0;scrollbar-width:none}
 rdr-accueil-apercu .breve{flex:0 0 78%;scroll-snap-align:start;opacity:1;transform:none}
 rdr-accueil-apercu .actus-pied{gap:14px}
