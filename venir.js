@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 95694b4 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="95694b4";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 29728ad | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="29728ad";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1762,7 +1762,18 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
     _ouvertAuPublic() {
       const r = this._etat.reglages;
-      return !!(r && r.ouvert === true && Array.isArray(r.jours) && r.jours.length);
+      return !!(r && r.ouvert === true && Array.isArray(r.jours) && r.jours.length) && !this._jeuTermine(r.jours);
+    }
+
+    
+
+
+
+    _jeuTermine(jours) {
+      try {
+        const aujourdhui = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(Date.now()));
+        return aujourdhui > jours[jours.length - 1];
+      } catch (e) { return false; }
     }
 
     

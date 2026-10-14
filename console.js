@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 95694b4 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 29728ad | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="29728ad";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -513,6 +513,28 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
     '.rdrc-gagnant b{font-size:15px;color:var(--ink)}.rdrc-gagnant p{margin:6px 0 0;font-size:12.5px;color:var(--ink-2)}',
     '.rdrc-gagnant .rdrc-mob-acts{justify-content:flex-start;margin-top:10px}',
     '@media(max-width:760px){.rdrc-mob{grid-template-columns:minmax(0,1fr) auto}.rdrc-mob-id,.rdrc-mob-mode{grid-column:1/-1}}',
+     
+    '.rdrc-mob-q{flex:1 1 100%;font-size:12.5px;color:var(--ink);font-weight:600}',
+    '.rdrc-mob-equipe{display:inline-block;margin-left:4px;padding:2px 6px;border-radius:999px;background:#EEF2F7;color:var(--ink-3);font:800 9.5px/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;vertical-align:1px}',
+    '.rdrc-mob-avis{margin:0 0 10px;padding:10px 12px;border-radius:10px;font-size:12.5px;line-height:1.45;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}',
+    '.rdrc-mob-avis[data-ton="alerte"]{background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-mob-avis[data-ton="info"]{background:var(--line-2);color:var(--ink-2)}',
+    '.rdrc-lots{display:grid;gap:10px;margin:12px 0 0}',
+    '.rdrc-lot{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}',
+    '.rdrc-lot-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:9px 12px;background:var(--line-2)}',
+    '.rdrc-lot-t{flex:1 1 260px;font-weight:700;font-size:12.5px;color:var(--ink);line-height:1.35}',
+    '.rdrc-lot-n{font:800 11px/1 var(--body);color:var(--ink-3);white-space:nowrap}',
+    '.rdrc-lot-a{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.rdrc-lot-a .rdrc-btn{padding:6px 10px;font-size:11px}',
+    '.rdrc-lot-a .rdrc-btn.rdrc-go{border-color:var(--navy);background:var(--navy);color:#fff}',
+    '.rdrc-place{display:grid;grid-template-columns:22px minmax(0,1fr) auto;align-items:center;gap:6px 10px;padding:8px 12px;border-top:1px solid var(--line-2);font-size:12.5px}',
+    '.rdrc-place-n{font:800 11px/1 var(--body);color:var(--ink-3);text-align:center}',
+    '.rdrc-place-g b{color:var(--ink)}.rdrc-place-g small{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}',
+    '.rdrc-place-vide{color:var(--ink-3);font-style:italic}',
+    '.rdrc-place[data-statut="attribuee"]{background:#FFFBEE}',
+    '.rdrc-place[data-statut="a-retirer"]{background:#FBE3E0}',
+    '.rdrc-place-r{grid-column:2/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px}.rdrc-place-r .rdrc-btn{padding:6px 10px;font-size:11px}',
+    '.rdrc-place-r .rdrc-btn.rdrc-go{border-color:var(--navy);background:var(--navy);color:#fff}',
+    '@media(max-width:760px){.rdrc-place{grid-template-columns:22px minmax(0,1fr)}.rdrc-place .rdrc-mob-acts{grid-column:2/-1;justify-content:flex-start}}',
 
     
 
@@ -2075,24 +2097,56 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     _mobiliteHtml(p) {
       var self = this;
       var m = p.mobilite;
       if (p.mobiliteError) return '<div class="rdrc-state">' + esc(p.mobiliteError) + '</div>';
       if (!m) return '<div class="rdrc-state">' + (p.loading ? 'Lecture des participations…' : 'Aucune donnée pour l\'instant.') + '</div>';
       var jours = m.jours || [];
-      var jourVu = this._mobJour || m.jour || (jours[0] && jours[0].jour) || '';
+      var jourVu = this._mobJour && this._mobJour !== 'final' ? this._mobJour : (m.jour || (jours[0] && jours[0].jour) || '');
+      if (this._mobJour && this._mobJour !== 'final' && m.jour && m.jour !== this._mobJour) jourVu = m.jour;
       var final = this._mobJour === 'final';
+      this._mobJourVu = jourVu;
       var enCours = jours.find(function (j) { return j.jour === jourVu; }) || {};
+      var reg = m.reglages || {};
+      
+
+      if (m !== this._mobVu) { this._mobVu = m; this._mobDecalage = m.maintenant ? Date.parse(m.maintenant) - Date.now() : 0; }
+      var maintenant = Date.now() + (this._mobDecalage || 0);
       var libelle = function (jour) {
         var d = new Date(jour + 'T12:00:00Z');
         if (isNaN(d.getTime())) return jour;
-        return new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(d);
+        var s = new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(d);
+        return d.getUTCDate() === 1 ? s.replace(/(^|\s)1(?=\s)/, '$11er') : s;
       };
+      var heureParis = function (iso) {
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return '';
+        try { return new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' }).format(d).replace(':', ' h '); }
+        catch (e) { return d.toISOString().slice(11, 16); }
+      };
+      var jourParis = function (iso) {
+        try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(iso)); }
+        catch (e) { return String(iso).slice(0, 10); }
+      };
+       
+      var quandParis = function (iso) { return isNaN(Date.parse(iso)) ? '' : libelle(jourParis(iso)) + ' à ' + heureParis(iso); };
+      var pluriel = function (n, un, plusieurs) { return n + ' ' + (n > 1 ? (plusieurs || un + 's') : un); };
 
       var chips = jours.map(function (j) {
         return '<button type="button" class="rdrc-jour" data-mob-jour="' + esc(j.jour) + '" aria-pressed="' + (!final && j.jour === jourVu ? 'true' : 'false') + '"' +
-          (j.tirage ? ' data-tire="1"' : '') + '>' + esc(libelle(j.jour)) + '<small>' + (j.total || 0) + ' inscrit' + (j.total > 1 ? 's' : '') + (j.tirage ? ' · tiré' : '') + '</small></button>';
+          (j.tire ? ' data-tire="1"' : '') + '>' + esc(libelle(j.jour)) + '<small>' + pluriel(j.total || 0, 'inscrit') + (j.tire ? ' · tiré' : '') + '</small></button>';
       }).join('') +
         '<button type="button" class="rdrc-jour" data-mob-jour="final" aria-pressed="' + (final ? 'true' : 'false') + '"' + (m.final ? ' data-tire="1"' : '') + '>Grand tirage<small>' + (m.eligiblesFinal || 0) + ' éligibles' + (m.final ? ' · tiré' : '') + '</small></button>';
 
@@ -2102,60 +2156,154 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
           ? kpi('Éligibles au final', nfmt(m.eligiblesFinal || 0), '', 'justificatif validé, mode éligible')
           : kpi('Ce jour', nfmt(enCours.total || 0), '', (enCours.aVerifier || 0) + ' à vérifier') +
             kpi('Validées', nfmt(enCours.valides || 0), '', (enCours.refuses || 0) + ' refusée' + (enCours.refuses > 1 ? 's' : '')) +
-            kpi('Éligibles au tirage', nfmt(enCours.eligibles || 0), '', 'ce jour', enCours.eligibles ? '' : 'alert')) +
+            kpi('Dans le tirage', nfmt(enCours.dansLeTirage || 0), '', 'pour ' + pluriel(enCours.nbLots || 0, 'lot') + (enCours.equipe ? ', équipe écartée (' + enCours.equipe + ')' : ''), !enCours.dansLeTirage && enCours.libres ? 'alert' : '')) +
       '</div>';
 
-      
+      var parId = {};
+      (m.participations || []).forEach(function (x) { parId[x.id] = x; });
 
-      var champContact = final ? 'grandContact' : 'contactGagnant';
-      var contactDe = function (g) { return (g && g[champContact]) || ''; };
-      var tirageHtml = function (t, gagnant, quoi) {
-        var quand = t.effectueLe ? new Date(t.effectueLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
-        var g = gagnant || {};
-        var contact = contactDe(g);
-        var lot = final ? (g.grandLot || t.lot) : g.lot;
-        return '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">🏆 ' + esc(quoi) + ' effectué le ' + esc(quand) + ' · ' + esc(t.nbEligibles) + ' éligible' + (t.nbEligibles > 1 ? 's' : '') + '</span><br>' +
-          '<b>' + esc(t.gagnantNom || g.prenom + ' ' + g.nom) + '</b> <span class="rdrc-mob-id">' + esc(t.gagnantId) + '</span>' +
-          (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + (lot ? ' · lot : ' + esc(lot) : '') +
-            (final && g.gagnant ? ' · a aussi gagné le lot du jour' + (g.lot ? ' (' + esc(g.lot) + ')' : '') : '') + '</p>' : '') +
-          (g.id ? '<div class="rdrc-mob-acts">' +
-            '<span class="rdrc-mob-st" data-s="' + (contact === 'Contacté' ? 'Validé' : contact === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(contact || 'À contacter') + '</span>' +
-            '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Contacté">Contacté</button>' +
-            '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="' + champContact + '" data-valeur="Injoignable">Injoignable</button>' +
-          '</div>' : '') +
+       
+      var contactActs = function (g, champ) {
+        var contact = (g && g[champ]) || '';
+        return '<div class="rdrc-mob-acts">' +
+          '<span class="rdrc-mob-st" data-s="' + (contact === 'Contacté' ? 'Validé' : contact === 'Injoignable' ? 'Refusé' : 'À vérifier') + '">' + esc(contact || 'À contacter') + '</span>' +
+          '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(g.id) + '" data-champ="' + champ + '" data-valeur="Contacté">Contacté</button>' +
+          '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(g.id) + '" data-champ="' + champ + '" data-valeur="Injoignable">Injoignable</button>' +
         '</div>';
       };
 
        
+      var deuxClics = function (cle, libelleBouton, question, actif) {
+        if (self._mobConfirme === cle) {
+          return '<span class="rdrc-mob-q">' + question + '</span>' +
+            '<button type="button" class="rdrc-btn rdrc-go" data-mob-tirer="' + esc(cle) + '">Confirmer le tirage</button>' +
+            '<button type="button" class="rdrc-btn" data-mob-annuler="1">Annuler</button>';
+        }
+        return '<button type="button" class="rdrc-btn rdrc-go" data-mob-armer="' + esc(cle) + '"' + (actif ? '' : ' disabled') + '>' + libelleBouton + '</button>';
+      };
+
       var tirageBloc;
-      var t = final ? m.final : enCours.tirage;
-      var gagnantDuTirage = !t ? null : final
-        ? (m.finalGagnant && m.finalGagnant.id === t.gagnantId ? m.finalGagnant : null)
-        : (m.participations || []).find(function (x) { return x.id === t.gagnantId; });
-      if (t && !(gagnantDuTirage && contactDe(gagnantDuTirage) === 'Injoignable')) {
-        tirageBloc = tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour');
+      if (final) {
+         
+        var tf = m.final;
+        var gf = tf && m.finalGagnant && m.finalGagnant.id === tf.gagnantId ? m.finalGagnant : null;
+        var finalHtml = function () {
+          var g = gf || {};
+          return '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">🏆 Grand tirage final effectué le ' + esc(tf.effectueLe ? new Date(tf.effectueLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '') + ' · ' + esc(tf.nbEligibles) + ' éligible' + (tf.nbEligibles > 1 ? 's' : '') + '</span><br>' +
+            '<b>' + esc(tf.gagnantNom || ((g.prenom || '') + ' ' + (g.nom || ''))) + '</b> <span class="rdrc-mob-id">' + esc(tf.gagnantId) + '</span>' +
+            (g.email ? '<p>' + esc(g.email) + ' · ' + esc(g.telephone || '') + ((g.grandLot || tf.lot) ? ' · lot : ' + esc(g.grandLot || tf.lot) : '') +
+              (g.gagnant ? ' · a aussi gagné le lot du jour' + (g.lot ? ' (' + esc(g.lot) + ')' : '') : '') + '</p>' : '') +
+            (g.id ? contactActs(g, 'grandContact') : '') + '</div>';
+        };
+        if (tf && !(gf && gf.grandContact === 'Injoignable')) tirageBloc = finalHtml();
+        else {
+          var nf = m.eligiblesFinal || 0;
+          tirageBloc = (tf ? finalHtml() : '') +
+            '<div class="rdrc-tirage"><div class="rdrc-tirage-t">' + (tf ? 'Le gagnant est injoignable. On peut retirer au sort parmi les autres, sans aucune de ses participations. ' : '') +
+              (nf ? '<b>' + nf + '</b> participation' + (nf > 1 ? 's' : '') + ' éligible' + (nf > 1 ? 's' : '') + ' au grand tirage final.' : 'Aucune participation éligible : validez d\'abord les justificatifs.') + '</div>' +
+              deuxClics('final', 'Effectuer le grand tirage final', 'Tirer le grand lot parmi ' + pluriel(nf, 'participation') + ' ?', nf > 0) +
+            '</div>';
+        }
       } else {
-        var n = final ? (m.eligiblesFinal || 0) : (enCours.eligibles || 0);
-        var arme = this._mobConfirme === (final ? 'final' : jourVu);
-        tirageBloc = (t ? tirageHtml(t, gagnantDuTirage, final ? 'Grand tirage final' : 'Tirage du jour') : '') +
-          '<div class="rdrc-tirage">' +
-            '<div class="rdrc-tirage-t">' + (t ? 'Le gagnant est injoignable. On peut retirer au sort parmi les autres' + (final ? ', sans aucune de ses participations. ' : '. ') : '') +
-              (n ? '<b>' + n + '</b> participation' + (n > 1 ? 's' : '') + ' éligible' + (n > 1 ? 's' : '') + (final ? ' au grand tirage final' : ' pour ce jour') + '.'
-                 : 'Aucune participation éligible' + (final ? '' : ' ce jour') + ' : validez d\'abord les justificatifs.') + '</div>' +
-            (arme
-              ? '<button type="button" class="rdrc-btn rdrc-go" data-mob-tirer="' + (final ? 'final' : esc(jourVu)) + '">Confirmer le tirage</button>' +
-                '<button type="button" class="rdrc-btn" data-mob-annuler="1">Annuler</button>'
-              : '<button type="button" class="rdrc-btn rdrc-go" data-mob-armer="' + (final ? 'final' : esc(jourVu)) + '"' + (n ? '' : ' disabled') + '>' + (final ? 'Effectuer le grand tirage final' : 'Effectuer le tirage du jour') + '</button>') +
+        var lots = m.lots || { lignes: [], places: [] };
+        var places = lots.places || [];
+        var ouvertureT = Date.parse(enCours.ouverture || '');
+        var ouvert = isFinite(ouvertureT) && maintenant >= ouvertureT;
+        var parLot = reg.tirageParLot === true;
+        var n = enCours.dansLeTirage || 0;
+        var libres = places.filter(function (x) { return x.statut === 'libre'; });
+        var aVerifier = enCours.aVerifier || 0;
+        var avisVerif = aVerifier ? ' ' + pluriel(aVerifier, 'justificatif') + ' encore à vérifier ' + (aVerifier > 1 ? 'n’y seront pas' : 'n’y sera pas') + '.' : '';
+
+         
+        if (this._mobMinuteur) { clearTimeout(this._mobMinuteur); this._mobMinuteur = null; }
+        if (!ouvert && isFinite(ouvertureT)) {
+          var attente = Math.min(2147000000, Math.max(0, ouvertureT - maintenant) + 250);
+          this._mobMinuteur = setTimeout(function () { self._mobMinuteur = null; if (self.isConnected) self._render(); }, attente);
+        }
+
+        var etat;
+        if (lots.illisibles) etat = '<div class="rdrc-mob-avis" data-ton="alerte">Les lots de ce jour sont illisibles (collection « Mobilité · les lots du jour » absente ou en panne) : le tirage ne part pas. « Actualiser » dans un instant.</div>';
+        else if (!places.length) etat = '<div class="rdrc-mob-avis" data-ton="alerte">Aucun lot au CMS pour ce jour (collection « Mobilité · les lots du jour ») : le tirage ne part pas.</div>';
+        else etat = '';
+
+        var resume = '';
+        if (places.length) {
+          var ops = m.operations || [];
+          var dernier = ops[ops.length - 1];
+          if (!ouvert) {
+            resume = 'Le tirage s’ouvre le <b>' + esc(libelle(jourVu)) + ' à ' + esc(heureParis(enCours.ouverture)) + '</b> (heure de Paris), pas avant. ' +
+              pluriel(enCours.nbLots || 0, 'lot') + ' en jeu ; ' + pluriel(n, 'participant') + ' dans le tirage à cette heure-ci.' + avisVerif;
+          } else if (libres.length) {
+            
+
+            resume = (dernier ? pluriel(libres.length, 'lot') + ' encore à tirer. ' : 'Ouvert depuis ' + esc(heureParis(enCours.ouverture)) + '. ') +
+              (n ? '<b>' + pluriel(n, 'participant') + '</b> dans le tirage, une chance par personne.' : 'Aucune participation éligible ce jour : validez d’abord les justificatifs.') +
+              (n ? '' : avisVerif);
+          } else {
+            resume = 'Tiré' + (dernier ? ' le ' + esc(quandParis(dernier.effectueLe)) + (dernier.par ? ' par ' + esc(dernier.par) : '') : '') + ' : <b>' +
+              pluriel(enCours.attribues + enCours.aRetirer, 'lot attribué', 'lots attribués') + '</b> sur ' + (enCours.nbLots || 0) + '.' +
+              (enCours.aRetirer ? ' ' + pluriel(enCours.aRetirer, 'gagnant injoignable', 'gagnants injoignables') + ' : ' + (enCours.aRetirer > 1 ? 'leurs lots peuvent' : 'son lot peut') + ' être remis en jeu.' : '');
+          }
+          if (enCours.nonAttribues) {
+            etat += '<div class="rdrc-mob-avis" data-ton="info">' + pluriel(enCours.nonAttribues, 'lot non attribué', 'lots non attribués') +
+              ' : pas assez de participants éligibles au moment du tirage. Le règlement ne prévoit rien : ' + (enCours.nonAttribues > 1 ? 'ils restent' : 'il reste') + ' non attribué' + (enCours.nonAttribues > 1 ? 's' : '') + '.</div>';
+          }
+          if (enCours.aReparer) {
+            etat += '<div class="rdrc-mob-avis" data-ton="alerte">' + pluriel(enCours.aReparer, 'fiche de gagnant', 'fiches de gagnants') + ' pas encore à jour au CMS (le tirage, lui, est enregistré). ' +
+              '<button type="button" class="rdrc-btn" data-mob-reparer="' + esc(jourVu) + '">Remettre les fiches à jour</button></div>';
+          }
+        }
+
+        var bouton = '';
+        if (places.length && libres.length && !parLot) {
+          bouton = ouvert
+            ? deuxClics(jourVu, 'Effectuer le tirage du jour (' + pluriel(libres.length, 'lot') + ')', 'Tirer ' + pluriel(libres.length, 'lot') + ' parmi ' + pluriel(n, 'participant') + ' ?' + avisVerif, n > 0)
+            : '<button type="button" class="rdrc-btn rdrc-go" disabled data-mob-attente>S’ouvre à ' + esc(heureParis(enCours.ouverture)) + '</button>';
+        }
+        tirageBloc = etat + (places.length ? '<div class="rdrc-tirage"><div class="rdrc-tirage-t">' + resume + '</div>' + bouton + '</div>' : '');
+
+         
+        var lignes = (lots.lignes || []).slice();
+        places.forEach(function (x) { if (x.horsListe && !lignes.some(function (l) { return l.ligneId === x.ligneId; })) lignes.push({ ligneId: x.ligneId, lot: x.lot, nbGagnants: 0, horsListe: true }); });
+        var lotsHtml = lignes.map(function (l) {
+          var ps = places.filter(function (x) { return x.ligneId === l.ligneId; });
+          var libresLigne = ps.filter(function (x) { return x.statut === 'libre'; }).length;
+          var acte = '';
+          if (parLot && libresLigne) {
+            acte = ouvert ? deuxClics('L|' + l.ligneId, 'Tirer ce lot (' + pluriel(libresLigne, 'gagnant') + ')', 'Tirer ' + pluriel(libresLigne, 'gagnant') + ' pour ce lot parmi ' + pluriel(n, 'participant') + ' ?', n > 0)
+                          : '<button type="button" class="rdrc-btn" disabled>S’ouvre à ' + esc(heureParis(enCours.ouverture)) + '</button>';
+          }
+          return '<div class="rdrc-lot" data-ligne="' + esc(l.ligneId) + '">' +
+            '<div class="rdrc-lot-h"><span class="rdrc-lot-t">' + esc(l.lot) + '</span><span class="rdrc-lot-n">' + (l.horsListe ? 'retiré du CMS' : '× ' + l.nbGagnants) + '</span>' + (acte ? '<span class="rdrc-lot-a">' + acte + '</span>' : '') + '</div>' +
+            ps.map(function (x) {
+              var t = x.titulaire;
+              var g = t ? (parId[t.gagnantId] || { id: t.gagnantId }) : null;
+              var corps;
+              if (!t) corps = '<span class="rdrc-place-g rdrc-place-vide">' + (x.statut === 'non-attribuee' ? 'non attribué' : ouvert ? 'à tirer' : 'à tirer à ' + esc(heureParis(enCours.ouverture))) + '</span>';
+              else {
+                corps = '<span class="rdrc-place-g"><b>' + esc(t.gagnantNom || ((g.prenom || '') + ' ' + (g.nom || ''))) + '</b> <span class="rdrc-mob-id">' + esc(t.gagnantId) + '</span>' +
+                  (g.email ? '<small>' + esc(g.telephone || '') + ' · ' + esc(g.email) + '</small>' : '') +
+                  ((x.anciens || []).length ? '<small>remplace ' + x.anciens.map(function (a) { return esc(a.gagnantNom || a.gagnantId); }).join(', ') + ' (injoignable)</small>' : '') + '</span>' +
+                  (g.id ? contactActs(g, 'contactGagnant') : '') +
+                  (x.statut === 'a-retirer' ? '<span class="rdrc-place-r">' + deuxClics('P|' + x.place, 'Remettre ce lot en jeu', 'Remettre ce lot en jeu, sans ' + esc(t.gagnantNom || t.gagnantId) + ' ni personne déjà tiré ce jour ?', true) + '</span>' : '');
+              }
+              return '<div class="rdrc-place" data-place="' + esc(x.place) + '" data-statut="' + esc(x.statut) + '"><span class="rdrc-place-n">' + (x.rang || '·') + '</span>' + corps + '</div>';
+            }).join('') +
           '</div>';
+        }).join('');
+        if (lotsHtml) tirageBloc += '<div class="rdrc-lots">' + lotsHtml + '</div>';
+        if (places.some(function (x) { return x.titulaire; })) tirageBloc += '<p class="rdrc-note">« Exporter », en haut à droite, télécharge les gagnants de ce jour en CSV : le fichier contient leurs coordonnées, à garder dans l’équipe.</p>';
       }
 
-      var lignes = (m.participations || []).map(function (x) {
+      var lignesParticipations = (m.participations || []).map(function (x) {
         var inscrit = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
         var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
         return '<div class="rdrc-mob"' + (x.gagnant || x.grandGagnant ? ' data-gagnant="1"' : '') + '>' +
           '<span class="rdrc-mob-id">' + esc(x.id) + '</span>' +
           '<span class="rdrc-mob-nom">' + esc(x.prenom + ' ' + x.nom) + (x.gagnant ? ' <span class="rdrc-mob-trophee">🏆</span>' : '') +
             (x.grandGagnant ? ' <span class="rdrc-mob-trophee">🏆 grand tirage</span>' : '') +
+            (x.equipe ? ' <span class="rdrc-mob-equipe" title="Adresse de l’équipe (règlement, article 3.4) : jamais tirée">équipe</span>' : '') +
             '<small>' + esc(x.email) + ' · ' + esc(x.telephone) + ' · inscrit le ' + esc(inscrit) + '</small></span>' +
           '<span class="rdrc-mob-mode">' + esc(x.mode) + (x.precision ? ' (' + esc(x.precision) + ')' : '') +
             (x.justificatifUrl ? '<a href="' + esc(x.justificatifUrl) + '" target="_blank" rel="noopener">Voir le justificatif' + (x.justificatifNom ? ' · ' + esc(x.justificatifNom) : '') + '</a>' : '<a>aucun fichier</a>') + '</span>' +
@@ -2170,13 +2318,17 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
       }).join('');
 
       var modes = Object.keys(m.modes || {}).map(function (k) { return { label: k, count: m.modes[k] }; }).sort(function (a, b) { return b.count - a.count; });
+       
+      var finJeu = reg.finJeu && !isNaN(Date.parse(reg.finJeu)) ? quandParis(new Date(Date.parse(reg.finJeu) - 60000).toISOString()) : '';
+      var sousTitre = reg.ouvert ? 'challenge ouvert' + (finJeu ? ' · se ferme seul le ' + finJeu : '')
+                    : (reg.ouvertCoche ? 'challenge terminé (article 2)' : 'challenge fermé au public');
 
       return '<div class="rdrc-jours">' + chips + '</div>' + kpis +
         '<div class="rdrc-grid">' +
-          card(final ? 'Le grand tirage final' : 'Le tirage du ' + libelle(jourVu), (m.reglages && m.reglages.ouvert) ? 'challenge ouvert' : 'challenge fermé au public', tirageBloc, true) +
-          (final ? '' : card('Les participations du ' + libelle(jourVu), (enCours.total || 0) + ' inscrit' + (enCours.total > 1 ? 's' : ''),
-            (lignes || '<div class="rdrc-state">Personne n\'a encore choisi ce jour.</div>') +
-            '<p class="rdrc-note">Le justificatif s\'ouvre dans un nouvel onglet. « Valider » fait entrer la participation dans les tirages, « Refuser » l\'en écarte, « Exclure » l\'écarte définitivement (fraude, doublon). L\'export CSV se fait depuis le gestionnaire de contenu, collection « Mobilité · les participations ».</p>', true)) +
+          card(final ? 'Le grand tirage final' : 'Le tirage du ' + libelle(jourVu), sousTitre, tirageBloc, true) +
+          (final ? '' : card('Les participations du ' + libelle(jourVu), pluriel(enCours.total || 0, 'inscrit'),
+            (lignesParticipations || '<div class="rdrc-state">Personne n\'a encore choisi ce jour.</div>') +
+            '<p class="rdrc-note">Le justificatif s\'ouvre dans un nouvel onglet. « Valider » fait entrer la participation dans les tirages, « Refuser » l\'en écarte, « Exclure » l\'écarte définitivement (fraude, doublon). Une adresse de l\'équipe est listée mais jamais tirée. L\'export complet des participations se fait depuis le gestionnaire de contenu, collection « Mobilité · les participations ».</p>', true)) +
           card('Modes de transport déclarés', nfmt(m.total || 0) + ' participations',
             modes.length ? barsH(modes, { whole: m.total || 1 }) : '<div class="rdrc-state">Rien encore.</div>', false) +
           card('Par jour', '13 jours du village',
@@ -2644,7 +2796,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
       
 
 
-      if (this._view === 'mobilite' || this._view === 'photo') return false;
+
+      if (this._view === 'photo') return false;
+      if (this._view === 'mobilite') {
+        var mob = p.mobilite;
+        return !!(mob && this._mobJour !== 'final' && mob.lots && (mob.lots.places || []).some(function (x) { return x.titulaire; }));
+      }
       if (this._view === 'justetemps') return !!(p.justeTemps && (p.justeTemps.participants || []).length);
       if (this._view === 'insta') return !!(p.claims || p.approved);
       if (this._view === 'village') return !!(p.audience && p.audience.village && p.audience.village.repondu);
@@ -2659,6 +2816,28 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
     _exportCsv() {
       var p = this._payload || {};
       if (!this._canExport(p)) return;
+
+      
+
+
+
+      if (this._view === 'mobilite') {
+        var mob = p.mobilite;
+        var fiche = {};
+        (mob.participations || []).forEach(function (x) { fiche[x.id] = x; });
+        var rm = [['Jour', 'Lot', 'Statut', 'Identifiant', 'Prénom', 'Nom', 'E-mail', 'Téléphone', 'Contact', 'Tirage']];
+        var ligneDe = function (x, id, statut, tirage) {
+          var f = fiche[id] || {};
+          rm.push([mob.jour, x.lot, statut, id, f.prenom || '', f.nom || '', f.email || '', f.telephone || '', f.contactGagnant || '', tirage || f.tirageId || '']);
+        };
+        (mob.lots.places || []).forEach(function (x) {
+          if (!x.titulaire) return;
+          ligneDe(x, x.titulaire.gagnantId, x.statut === 'a-retirer' ? 'gagnant injoignable' : 'gagnant', x.titulaire.operation);
+          (x.anciens || []).forEach(function (a) { ligneDe(x, a.gagnantId, 'remplacé (injoignable)', ''); });
+        });
+        csvDownload('rdr-mobilite-gagnants-' + mob.jour + '-' + stamp() + '.csv', rm);
+        return;
+      }
 
       if (this._view === 'insta') {
         var ok = this._instaView === 'ok';
@@ -3070,12 +3249,25 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="95694b4";performan
       this.querySelectorAll('[data-mob-annuler]').forEach(function (btn) {
         btn.addEventListener('click', function () { self._mobConfirme = null; self._render(); });
       });
+      
+
       this.querySelectorAll('[data-mob-tirer]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var quoi = btn.getAttribute('data-mob-tirer');
           self._mobConfirme = null;
           btn.disabled = true;
-          self._emit('rc-mob-tirage', quoi === 'final' ? { final: true } : { jour: quoi });
+          var jour = self._mobJourVu;
+          self._emit('rc-mob-tirage', quoi === 'final' ? { final: true }
+            : quoi.indexOf('L|') === 0 ? { jour: jour, ligne: quoi.slice(2) }
+            : quoi.indexOf('P|') === 0 ? { jour: jour, place: quoi.slice(2) }
+            : { jour: quoi });
+        });
+      });
+       
+      this.querySelectorAll('[data-mob-reparer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.disabled = true;
+          self._emit('rc-mob-tirage', { jour: btn.getAttribute('data-mob-reparer'), reparer: true });
         });
       });
       this.querySelectorAll('[data-mob-statut]').forEach(function (btn) {
