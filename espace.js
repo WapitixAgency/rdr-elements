@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 459fc3c | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="459fc3c";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 5d7422d | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="5d7422d";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -846,6 +846,60 @@ if (!customElements.get('espace-rhum')) {
     if (!(v.l > 0 && v.h > 0)) return v.src;
     const l = Math.min(largeur, v.l), h = Math.round(l * v.h / v.l);
     return v.src + '/v1/fit/w_' + l + ',h_' + h + ',q_85,enc_auto/jeu.jpg';
+  }
+
+  
+
+
+
+  const JR_TEINTES = ['#F3C24F', '#6CC3C4', '#FFFFFF'];
+  const JR_I_ROUE = '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.2"/><path d="M12 3v6.8M12 14.2V21M3 12h6.8M14.2 12H21M5.6 5.6l4.8 4.8M13.6 13.6l4.8 4.8M18.4 5.6l-4.8 4.8M10.4 13.6l-4.8 4.8"/>';
+  const JR_I_COPIER = '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>';
+  const JR_I_LIEU = '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>';
+  const JR_I_COLIS = '<path d="M21 8.5 12 4 3 8.5v7L12 20l9-4.5z"/><path d="M3 8.5 12 13l9-4.5M12 13v7"/>';
+  const JR_I_ETINCELLE = '<path fill="currentColor" stroke="none" d="M12 1.5l2.2 7.4 7.3 2.1-7.3 2.1L12 22.5l-2.2-9.4L2.5 11l7.3-2.1z"/>';
+  const jrIc = (c, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + c + '</svg>';
+  
+
+  const JR_TERRITOIRES = ['France métropolitaine', 'Guadeloupe', 'Martinique', 'Guyane', 'La Réunion', 'Mayotte', 'Saint-Martin', 'Saint-Barthélemy', 'Autre pays'];
+  const jrAdresseEnLigne = (a) => [[a.prenom, a.nom].filter(Boolean).join(' '), a.adresse, a.complement, [a.codePostal, a.ville].filter(Boolean).join(' '), a.territoire === 'Autre pays' ? a.pays : a.territoire].filter(Boolean).join(', ');
+
+  
+
+  function jrRoueSvg(segs, o) {
+    o = o || {};
+    const n = segs.length, pas = 360 / n, C = 200, R = 184;
+    const pt = (r, deg) => { const a = (deg - 90) * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
+    const teinte = (i) => { let k = i % 3; if (i === n - 1 && n > 1 && (k === (n - 2) % 3 || k === 0)) k = [0, 1, 2].find((x) => x !== (n - 2) % 3 && x !== 0); return JR_TEINTES[k]; };
+    const lignes = (lib, max) => { const out = []; let cur = ''; String(lib || '').split(/\s+/).filter(Boolean).forEach((m) => { const e = cur ? cur + ' ' + m : m; if (e.length <= max) cur = e; else { if (cur) out.push(cur); cur = m; } }); if (cur) out.push(cur); return out.slice(0, 3); };
+    let cases = '', textes = '';
+    segs.forEach((s, i) => {
+      const [x0, y0] = pt(R, i * pas - pas / 2), [x1, y1] = pt(R, i * pas + pas / 2);
+      cases += '<path d="M' + C + ' ' + C + 'L' + x0.toFixed(2) + ' ' + y0.toFixed(2) + 'A' + R + ' ' + R + ' 0 0 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + 'Z" fill="' + teinte(i) + '"/>';
+      if (o.sansTexte) return;
+      let ang = i * pas - 90; while (ang > 90) ang -= 180; while (ang <= -90) ang += 180;
+      const debout = Math.abs(ang) > 67.5;
+      if (debout) ang = 0;
+      const [tx, ty] = pt(R * 0.6, i * pas);
+      const ls = lignes(o.en ? (s.libelleEn || s.libelle) : s.libelle, debout ? 7 : 12), h = 19;
+      textes += '<text class="jr-txt" text-anchor="middle" transform="rotate(' + ang.toFixed(1) + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + ')">' +
+        ls.map((l, k) => '<tspan x="' + tx.toFixed(1) + '" y="' + (ty + (k - (ls.length - 1) / 2) * h + 5).toFixed(1) + '">' + escapeHtml(l) + '</tspan>').join('') + '</text>';
+    });
+    let lampes = '';
+    for (let k = 0; k < 24; k++) { const [lx, ly] = pt(193, k * 15 + 7.5); lampes += '<circle class="jr-lampe" cx="' + lx.toFixed(1) + '" cy="' + ly.toFixed(1) + '" r="3.4"/>'; }
+    let halo = '<path class="jr-gagnant" d=""/>';
+    if (typeof o.gagnant === 'number' && o.gagnant >= 0) {
+      const [a0, b0] = pt(R - 2, o.gagnant * pas - pas / 2), [a1, b1] = pt(R - 2, o.gagnant * pas + pas / 2);
+      halo = '<path class="jr-gagnant" d="M' + C + ' ' + C + 'L' + a0.toFixed(1) + ' ' + b0.toFixed(1) + 'A' + (R - 2) + ' ' + (R - 2) + ' 0 0 1 ' + a1.toFixed(1) + ' ' + b1.toFixed(1) + 'Z"/>';
+    }
+    return '<span class="jr-roue' + (o.cls ? ' ' + o.cls : '') + '"' + (o.label ? ' role="img" aria-label="' + escapeHtml(o.label) + '"' : ' aria-hidden="true"') + '>' +
+      (o.sansAiguille ? '' : '<svg class="jr-aiguille" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 42 4 6a3 3 0 0 1 2.8-4h26.4A3 3 0 0 1 36 6z" fill="#FCF150" stroke="#0E1B3A" stroke-width="2.5" stroke-linejoin="round"/></svg>') +
+      '<svg class="jr-plateau" viewBox="0 0 400 400" aria-hidden="true">' +
+        '<circle cx="200" cy="200" r="199" fill="#0B1733"/><circle cx="200" cy="200" r="199" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>' + lampes +
+        '<g class="jr-disque" data-jr-disque style="transform:rotate(' + (o.angle || 0) + 'deg)">' + cases + textes + halo + '</g>' +
+        '<circle cx="200" cy="200" r="46" fill="#0E1B3A" stroke="#fff" stroke-opacity=".9" stroke-width="3"/>' +
+        (o.moyeu ? '<image href="' + escapeHtml(o.moyeu) + '" x="160" y="158" width="80" height="84" preserveAspectRatio="xMidYMid meet"/>' : '') +
+      '</svg></span>';
   }
 
    
@@ -1833,6 +1887,215 @@ if (!customElements.get('espace-rhum')) {
       .jt-merci{padding:4px 16px 16px}
     }
     @media (prefers-reduced-motion:reduce){.jt-modale{transition:none}}
+  `;
+
+   
+  const ROUE_CSS = `
+   
+  .jr-roue{position:relative;display:block;aspect-ratio:1;width:100%}
+  .jr-roue > .jr-plateau{display:block;width:100%;height:100%;overflow:visible}
+  .jr-disque{transform-box:view-box;transform-origin:200px 200px}
+  .jr-txt{font:800 17.5px/1 Montserrat,system-ui,sans-serif;fill:#13214A;letter-spacing:-.01em}
+  .jr-roue > .jr-aiguille{position:absolute;left:50%;top:-4.5%;width:9%;height:auto;transform:translateX(-50%);transform-origin:50% 22%;filter:drop-shadow(0 3px 4px rgba(4,10,30,.55));z-index:2}
+  .jr-roue.est-tourne .jr-aiguille{animation:jr-tic 4.6s cubic-bezier(.12,.9,.3,1) both}
+  @keyframes jr-tic{0%,4%{transform:translateX(-50%) rotate(0)}6%{transform:translateX(-50%) rotate(-16deg)}8%{transform:translateX(-50%) rotate(-4deg)}10%{transform:translateX(-50%) rotate(-16deg)}12%{transform:translateX(-50%) rotate(-4deg)}15%{transform:translateX(-50%) rotate(-15deg)}18%{transform:translateX(-50%) rotate(-3deg)}22%{transform:translateX(-50%) rotate(-14deg)}27%{transform:translateX(-50%) rotate(-3deg)}33%{transform:translateX(-50%) rotate(-12deg)}40%{transform:translateX(-50%) rotate(-2deg)}49%{transform:translateX(-50%) rotate(-10deg)}60%{transform:translateX(-50%) rotate(-2deg)}73%{transform:translateX(-50%) rotate(-7deg)}88%{transform:translateX(-50%) rotate(-1deg)}100%{transform:translateX(-50%) rotate(0)}}
+  .jr-lampe{fill:#FCF150;opacity:.95}
+  .jr-lampe:nth-of-type(2n){fill:#fff;opacity:.7}
+  .jr-roue.est-tourne .jr-lampe{animation:jr-clignote .5s steps(2,end) infinite}
+  .jr-roue.est-tourne .jr-lampe:nth-of-type(2n){animation-delay:.25s}
+  @keyframes jr-clignote{50%{opacity:.25}}
+  .jr-gagnant{fill:none;stroke:#FCF150;stroke-width:5;stroke-linejoin:round;opacity:0}
+  .jr-roue.est-gagne .jr-gagnant{animation:jr-halo 1.6s ease-out .1s 2 both}
+  @keyframes jr-halo{0%{opacity:0}25%{opacity:1}100%{opacity:.85}}
+  @media (prefers-reduced-motion:reduce){.jr-roue.est-tourne .jr-aiguille,.jr-roue.est-tourne .jr-lampe{animation:none}.jr-roue.est-gagne .jr-gagnant{animation:none;opacity:.85}}
+
+   
+  espace-rhum .jr-cadre{position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(90% 90% at 45% 40%,#17305C 0%,#0E1B3A 70%)}
+  espace-rhum .jr-cadre::before{content:'';position:absolute;inset:-10% -30% -10% 20%;background:var(--jr-motif) right center/auto 120% no-repeat;opacity:.13;filter:brightness(0) invert(1) sepia(1) hue-rotate(140deg) saturate(2)}
+  espace-rhum .jr-cadre::after{display:none}
+  espace-rhum .jr-cadre .jr-roue{z-index:2;width:min(78%,230px)}
+  espace-rhum .jr-carte-code{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0;font:600 13px/1.3 var(--er-font-body,Montserrat,sans-serif);color:rgba(255,255,255,.8)}
+  espace-rhum .jr-carte-code b{padding:6px 10px;border:2px dashed rgba(252,241,80,.7);border-radius:3px 10px 3px 10px;font:800 15px/1 'Courier New',ui-monospace,monospace;letter-spacing:.1em;color:#FCF150}
+  espace-rhum .jr-carte-code a{color:#fff;font-weight:700;text-underline-offset:3px}
+  espace-rhum .jr-carte .jt-titre small{color:var(--er-amber-bright,#FCF150)}
+  espace-rhum .jr-lots{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px;padding:0;list-style:none}
+  espace-rhum .jr-lots li{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:3px 12px 3px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);font:700 12.5px/1.15 var(--er-font-body,Montserrat,sans-serif);color:#fff;white-space:nowrap}
+  espace-rhum .jr-lots img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+  espace-rhum .jr-lots .jr-lots-code{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#FCF150;color:#0A1228;font:800 11px/1 var(--er-font-body,Montserrat,sans-serif);letter-spacing:-.02em}
+  espace-rhum .jr-resultat{display:flex;align-items:center;gap:14px}
+  espace-rhum .jr-resultat img{flex:none;width:76px;height:76px;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
+  espace-rhum .jr-icone-roue{width:18px;height:18px}
+  @media (max-width:767px){
+    espace-rhum .jt-ouvert > .jt-cadre.jr-cadre{aspect-ratio:auto;padding:26px 0 16px}
+    espace-rhum .jr-cadre .jr-roue{width:min(60%,210px)}
+    espace-rhum .jr-lots{gap:6px}
+    espace-rhum .jr-lots li{gap:6px;padding:3px 10px 3px 3px;font-size:12px}
+    espace-rhum .jr-lots img,espace-rhum .jr-lots .jr-lots-code{width:26px;height:26px}
+    espace-rhum .jr-lots .jr-lots-code{font-size:9px}
+  }
+   
+  espace-rhum .jr-bandeau .jt-bandeau-montre{display:grid;place-items:center;background:radial-gradient(circle at 45% 40%,#17305C,#0E1B3A)}
+  espace-rhum .jr-bandeau .jt-bandeau-montre .jr-roue{width:42px;margin:3px auto}
+  espace-rhum .jr-bandeau .jt-bandeau-montre .jr-roue > svg.jr-plateau{width:100%;height:100%;margin:0}
+  espace-rhum .jr-bandeau .jt-bandeau-montre img{transform:none;object-fit:contain}
+  espace-rhum .jr-bandeau .jt-bandeau-montre.jr-bandeau-lot{background:radial-gradient(circle at 50% 30%,#fff 0%,#D4EBEB 100%)}
+  espace-rhum .jr-bandeau .jt-bandeau-montre.jr-bandeau-lot img{padding:5px;box-sizing:border-box}
+  espace-rhum .jr-carte-retrait{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0;font:600 13.5px/1.4 var(--er-font-body,Montserrat,sans-serif);color:rgba(255,255,255,.85)}
+  espace-rhum .jr-carte-retrait b{padding:4px 9px;border:2px dashed rgba(252,241,80,.7);border-radius:3px 10px 3px 10px;font:800 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.1em;color:#FCF150}
+  espace-rhum .jr-carte-retrait--attente{color:#FCF150}
+  espace-rhum .jr-resultat .jr-resultat-lot{flex:none;display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#fff 0%,#D4EBEB 100%)}
+  espace-rhum .jr-resultat .jr-resultat-lot img{width:60px;height:60px;filter:none}
+
+   
+  .jr-modale *,.jr-modale *::before,.jr-modale *::after{box-sizing:border-box}
+  .jr-essai{margin:0;padding:10px 14px;border-radius:3px 12px 3px 12px;background:rgba(226,78,78,.14);border:1px dashed rgba(226,78,78,.6);font:600 12.5px/1.45 Montserrat,sans-serif;color:#FFD3D3}
+  .jr-modale{position:fixed;inset:0;z-index:2147483100;display:grid;place-items:center;padding:24px;background:rgba(4,9,24,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .2s ease;font-family:Montserrat,system-ui,sans-serif}
+  .jr-modale.est-ouverte{opacity:1}
+  .jr-boite{position:relative;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);width:min(1120px,100%);height:min(640px,calc(100vh - 48px));border-radius:6px 26px 6px 26px;overflow:hidden;background:#0E1B3A;color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08) inset;transform:translateY(10px) scale(.985);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+  .jr-modale.est-ouverte .jr-boite{transform:none}
+  .jr-boite::before{content:'';position:absolute;inset:0 -8% 0 38%;background:var(--jr-motif) right center/auto 112% no-repeat;opacity:.09;filter:brightness(0) invert(1) sepia(1) hue-rotate(140deg) saturate(2);pointer-events:none}
+  .jr-scene{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(34px,6vh,56px);padding:clamp(22px,4vh,40px) 28px;background:radial-gradient(80% 70% at 50% 54%,rgba(93,191,192,.16) 0%,rgba(93,191,192,0) 62%)}
+  .jr-kicker{align-self:flex-start;margin:0;font:italic 400 clamp(26px,2.6vw,38px)/1 'Varien','Archivo Black',Impact,sans-serif;text-transform:uppercase;color:#FCF150;letter-spacing:.005em}
+  .jr-scene [data-jr-place]{display:flex;justify-content:center;width:100%}
+  .jr-scene .jr-roue{width:min(430px,100%,calc(100vh - 250px))}
+  .jr-corps{position:relative;display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0;padding:clamp(28px,5vh,56px) clamp(28px,4vw,60px) clamp(28px,5vh,56px) clamp(8px,1.5vw,24px)}
+  .jr-fermer{position:absolute;top:14px;right:14px;z-index:3;display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:3px 12px 3px 12px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+  .jr-fermer svg{width:20px;height:20px}
+  .jr-fermer:hover{background:rgba(255,255,255,.16)}
+  .jr-fermer:focus-visible,.jr-cta:focus-visible,.jr-lien:focus-visible,.jr-copier:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .jr-sur{margin:0;font:600 13px/1.2 Montserrat,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#FCF150}
+  .jr-titre{margin:0;font:italic 400 clamp(40px,4.1vw,62px)/.92 'Varien','Archivo Black',Impact,sans-serif;text-transform:uppercase;letter-spacing:-.005em;color:#fff}
+  .jr-titre small{display:block;margin-bottom:6px;font-size:.5em;color:#FCF150}
+  .jr-un{margin:-4px 0 0;font:700 15px/1.2 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#FCF150}
+  .jr-texte{margin:0;max-width:44ch;font:500 17px/1.5 Montserrat,sans-serif;color:rgba(255,255,255,.9)}
+  .jr-texte b{color:#fff}
+  .jr-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:8px}
+  .jr-cta{display:inline-flex;align-items:center;gap:12px;padding:15px 26px 15px 16px;border:0;border-radius:3px 15px 3px 15px;background:linear-gradient(180deg,#FFF57A 0%,#FCF150 55%,#F1E33A 100%);color:#0A1228;font:800 14px/1 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;box-shadow:0 8px 24px rgba(252,241,80,.25),inset 0 -2px 0 rgba(10,18,40,.12);transition:transform .15s ease,filter .15s ease}
+  .jr-cta:hover{filter:brightness(1.04);transform:translateY(-1px)}
+  .jr-cta[disabled]{cursor:progress;filter:saturate(.6) brightness(.95)}
+  .jr-cta .jr-cta-ico{display:grid;place-items:center;width:32px;height:32px;border-radius:3px 10px 3px 10px;background:#0A1228;color:#FCF150}
+  .jr-cta .jr-cta-ico svg{width:18px;height:18px}
+  .jr-lien{font:700 15px/1.2 Montserrat,sans-serif;color:#fff;text-decoration:underline;text-underline-offset:4px}
+  .jr-lien:hover{color:#FCF150}
+   
+  .jr-res{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px 26px}
+  .jr-res-plein{grid-column:1/-1}
+  .jr-res-code{display:flex;flex-direction:column;gap:12px}
+  .jr-res-code .jr-actions{margin-top:0}
+  .jr-res-texte{display:flex;flex-direction:column;gap:14px;min-width:0}
+   
+  .jr-lot{position:relative;display:grid;place-items:center;width:clamp(180px,16vw,230px);aspect-ratio:1;min-height:0;margin:0;isolation:isolate}
+  .jr-medaillon{position:absolute;inset:5%;z-index:-1;border-radius:50%;background:radial-gradient(circle at 50% 30%,#FFFFFF 0%,#F2F9F9 45%,#D4EBEB 100%);border:4px solid #fff;box-shadow:0 0 0 10px rgba(108,195,196,.16),0 24px 48px rgba(0,0,0,.45);animation:jr-pose .6s cubic-bezier(.2,1.3,.4,1) both}
+  @keyframes jr-pose{0%{opacity:0;transform:scale(.7)}100%{opacity:1;transform:none}}
+  .jr-lot img{position:absolute;left:15%;top:15%;width:70%;height:70%;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(10,18,40,.3));animation:jr-entre .7s cubic-bezier(.2,1.4,.4,1) .08s both}
+  @keyframes jr-entre{0%{opacity:0;transform:scale(.6) rotate(-8deg)}100%{opacity:1;transform:none}}
+  .jr-bon{display:flex;flex-direction:column;align-items:center;gap:6px;color:#13214A;text-align:center;animation:jr-entre .7s cubic-bezier(.2,1.4,.4,1) .08s both}
+  .jr-bon b{font:italic 400 clamp(38px,3.6vw,54px)/.9 'Varien','Archivo Black',Impact,sans-serif;letter-spacing:-.01em}
+  .jr-bon small{font:700 12.5px/1.3 Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+  .jr-etincelles{position:absolute;inset:0;pointer-events:none}
+  .jr-etincelle{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;color:#FCF150;opacity:0}
+  .jr-etincelle:nth-child(3n){color:#6CC3C4}
+  .jr-etincelle:nth-child(4n){color:#fff}
+  .jr-etincelles.est-joue .jr-etincelle{animation:jr-eclat 1.4s ease-out both}
+  @keyframes jr-eclat{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}30%{opacity:1;transform:translate(calc(var(--dx) * .4),calc(var(--dy) * .4)) scale(1) rotate(30deg)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.5) rotate(90deg)}}
+  .jr-marque{display:inline-flex;align-items:center;width:max-content}
+  .jr-marque img{display:block;height:92px;width:auto}
+  .jr-code{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .jr-code-lab{font:600 14px/1.3 Montserrat,sans-serif;color:rgba(255,255,255,.85)}
+  .jr-code-val{display:inline-flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border:2px dashed rgba(252,241,80,.75);border-radius:3px 12px 3px 12px;background:rgba(252,241,80,.08);font:800 20px/1 'Courier New',ui-monospace,monospace;letter-spacing:.12em;color:#FCF150}
+  .jr-copier{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:0;border-radius:3px 10px 3px 10px;background:#FCF150;color:#0A1228;font:800 11.5px/1 Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .jr-copier svg{width:14px;height:14px}
+  .jr-conditions{margin:0;max-width:52ch;font:500 12.5px/1.45 Montserrat,sans-serif;color:rgba(255,255,255,.62)}
+   
+  .jr-retrait{display:flex;flex-direction:column;gap:12px;margin:2px 0 0;padding:16px 18px;border-radius:3px 16px 3px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13)}
+  .jr-retrait-q{margin:0;font:800 12.5px/1.2 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#FCF150}
+  .jr-retrait-choix{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .jr-choix{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid rgba(255,255,255,.24);border-radius:3px 12px 3px 12px;background:rgba(255,255,255,.04);color:#fff;font:700 14.5px/1.25 Montserrat,sans-serif;text-align:left;cursor:pointer;transition:border-color .15s ease,background .15s ease}
+  .jr-choix:hover{border-color:#FCF150;background:rgba(252,241,80,.07)}
+  .jr-choix small{display:block;margin-top:3px;font-weight:500;font-size:12.5px;color:rgba(255,255,255,.72)}
+  .jr-choix svg{flex:none;width:24px;height:24px;color:#FCF150}
+  .jr-retrait-txt{margin:0;font:500 14.5px/1.5 Montserrat,sans-serif;color:rgba(255,255,255,.9)}
+  .jr-retrait-txt b{color:#fff}
+  .jr-numero{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0;font:600 13px/1.3 Montserrat,sans-serif;color:rgba(255,255,255,.8)}
+  .jr-numero b{padding:7px 12px;border:2px dashed rgba(252,241,80,.75);border-radius:3px 10px 3px 10px;font:800 19px/1 'Courier New',ui-monospace,monospace;letter-spacing:.12em;color:#FCF150}
+  .jr-champs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+  .jr-c-prenom,.jr-c-nom,.jr-c-tel{grid-column:span 2}
+  .jr-c-adresse{grid-column:span 4}.jr-c-complement{grid-column:span 2}
+  .jr-c-cp{grid-column:span 2}.jr-c-ville{grid-column:span 2}.jr-c-territoire{grid-column:span 2}
+  .jr-c-pays{grid-column:1/-1}.jr-c-pays[hidden]{display:none}
+  .jr-champ i{font-style:normal;font-weight:500;color:rgba(255,255,255,.55)}
+  .jr-champ{display:flex;flex-direction:column;gap:5px;min-width:0;font:600 12px/1.2 Montserrat,sans-serif;color:rgba(255,255,255,.75)}
+  .jr-champ--large{grid-column:1/-1}
+  .jr-champ input,.jr-champ select{width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid rgba(255,255,255,.26);border-radius:3px 10px 3px 10px;background:rgba(255,255,255,.07);color:#fff;font:500 15px/1.2 Montserrat,sans-serif}
+  .jr-champ input:focus,.jr-champ select:focus{outline:none;border-color:#FCF150;background:rgba(255,255,255,.1)}
+  .jr-champ select{appearance:none;padding-right:30px;background:rgba(255,255,255,.07) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FCF150' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 9px center/16px no-repeat;cursor:pointer}
+  .jr-champ select option{background:#0E1B3A;color:#fff}
+  .jr-champ select[aria-invalid="true"]{border-color:#FF8A80}
+  .jr-champ input[aria-invalid="true"]{border-color:#FF8A80}
+  .jr-retrait-note{margin:0;font:500 12px/1.4 Montserrat,sans-serif;color:rgba(255,255,255,.6)}
+  .jr-retrait-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+  .jr-cta--petit{padding:11px 20px;font-size:12.5px}
+  .jr-lien-petit{padding:0;border:0;background:none;color:#fff;font:600 13.5px/1.2 Montserrat,sans-serif;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+  .jr-lien-petit:hover{color:#FCF150}
+  .jr-retrait-etat{margin:0;font:600 13px/1.3 Montserrat,sans-serif;color:#FF8A80}
+  .jr-retrait-etat:empty{display:none}
+  .jr-res.est-formulaire .jr-marque,.jr-res.est-formulaire .jr-lot,.jr-res.est-formulaire .jr-res-texte .jr-texte{display:none}
+  .jr-choix:focus-visible,.jr-lien-petit:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .jr-fade{animation:jr-fondu .45s ease both}
+  @keyframes jr-fondu{from{opacity:0;transform:translateY(8px)}}
+  @media (prefers-reduced-motion:reduce){.jr-lot img,.jr-bon,.jr-medaillon,.jr-fade{animation:none}.jr-etincelles{display:none}}
+  .jr-corps{overflow-y:auto;scrollbar-width:thin}
+
+   
+  @media (max-height:780px) and (min-width:761px){
+    .jr-titre{font-size:clamp(40px,4.4vw,60px)}
+    .jr-texte{font-size:15.5px}
+    .jr-corps{gap:12px}
+    .jr-lot{width:clamp(160px,14vw,200px)}
+    .jr-marque img{height:86px}
+    .jr-retrait{padding:13px 16px;gap:10px}
+  }
+  @media (max-width:1060px) and (min-width:761px){
+    .jr-res{grid-template-columns:minmax(0,1fr)}
+    .jr-lot{grid-row:1;justify-self:start;width:170px}
+  }
+   
+  @media (max-width:760px){
+    .jr-modale{padding:0;place-items:stretch}
+    .jr-boite{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-content:start;height:100%;border-radius:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+    .jr-boite::before{inset:0 0 40% 20%;background-size:auto 100%;background-position:left center}
+    .jr-scene{padding:30px 18px 6px;gap:30px}
+    .jr-kicker{align-self:center;font-size:28px;text-align:center}
+    .jr-scene .jr-roue{width:min(290px,76vw,max(200px,calc(100vh - 440px)));transition:width .7s cubic-bezier(.2,.8,.2,1)}
+    .jr-boite.est-resultat .jr-scene{gap:24px}
+    .jr-boite.est-resultat .jr-scene .jr-roue{width:min(180px,48vw)}
+    .jr-corps{overflow:visible;justify-content:flex-start;align-items:center;text-align:center;padding:22px 22px 36px;gap:14px}
+    .jr-titre{font-size:46px}
+    .jr-texte{font-size:15.5px}
+    .jr-actions{justify-content:center}
+    .jr-res{grid-template-columns:minmax(0,1fr);justify-items:center;gap:22px}
+    .jr-res-texte{align-items:center}
+    .jr-lot{grid-row:1;width:min(230px,62vw,max(180px,calc(100vh - 480px)))}
+    .jr-champ input,.jr-champ select{font-size:16px}
+    .jr-res-code{align-items:center;text-align:center}
+    .jr-marque{justify-self:center}
+    .jr-marque img{height:72px}
+    .jr-code{justify-content:center}
+    .jr-retrait{align-self:stretch;text-align:left}
+    .jr-retrait-q{text-align:center}
+    .jr-retrait-choix{grid-template-columns:1fr}
+    .jr-champs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .jr-c-prenom,.jr-c-nom,.jr-c-cp{grid-column:span 1}
+    .jr-c-tel,.jr-c-adresse,.jr-c-complement,.jr-c-territoire{grid-column:1/-1}
+    .jr-c-ville{grid-column:span 1}
+    .jr-retrait-actions{justify-content:center}
+    .jr-cta{width:100%;justify-content:center;letter-spacing:.07em;font-size:13px}
+  }
+  @media (max-width:760px) and (max-height:700px){
+    .jr-scene{padding-top:22px;gap:22px}
+    .jr-titre{font-size:40px}
+    .jr-corps{gap:12px}
+  }
   `;
 
   const TOKENS_CSS = `
@@ -11181,6 +11444,7 @@ if (!customElements.get('espace-rhum')) {
       if (suiviRejoue) this._suiviRejoue = suiviRejoue;
       injectGlobalStyle('er-memoire-style', MEMOIRE_CSS);
       injectGlobalStyle('er-jeux-style', JEUX_CSS);
+      injectGlobalStyle('er-roue-style', ROUE_CSS);
       const membre = this.getAttribute('membre');
       if (membre) this._membre = membre;
       this._depuisMemoire();
@@ -11403,7 +11667,7 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'prono-result', 'juste-temps-result', 'combat-result', 'export-result', 'account-result', 'article-state-result', 'prefs-result', 'profile-result', 'village-result', 'insta-result', 'dismiss-result', 'delete-result', 'fav-result']; }
+    static get observedAttributes() { return ['payload', 'state', 'lang', 'aller', 'membre', 'suivi-rejoue', 'notifications','pack-result', 'roue-result', 'roue-retrait-result', 'prono-result', 'juste-temps-result', 'combat-result', 'export-result', 'account-result', 'article-state-result', 'prefs-result', 'profile-result', 'village-result', 'insta-result', 'dismiss-result', 'delete-result', 'fav-result']; }
 
     _lang() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
     
@@ -11518,6 +11782,12 @@ if (!customElements.get('espace-rhum')) {
         let res = null;
         try { res = JSON.parse(newVal); } catch { res = null; }
         if (res) this.roueResultat(res);
+      }
+      if (name === 'roue-retrait-result') {
+        if (!newVal) return;
+        let res = null;
+        try { res = JSON.parse(newVal); } catch { res = null; }
+        if (res) this._jrRetraitResultat(res);
       }
       if (name === 'pack-result') {
          
@@ -11802,10 +12072,11 @@ if (!customElements.get('espace-rhum')) {
     _honorerAller() {
       const cle = this._aller;
       if (!cle) return;
-      if ((cle === 'jeux' || cle === 'pronos') && this.querySelector('.jt-vue')) {
+      if ((cle === 'jeux' || cle === 'pronos' || (cle === 'roue' && this._jrEtat())) && this.querySelector('.jt-vue')) {
         this._aller = null;
         try { this.removeAttribute('aller'); } catch (e) {   }
         this._jeuxAller('jeux');
+        if (cle === 'roue') { const r = this._jrEtat(); this._jrOuvrir(null, r.peutTourner ? 'jouer' : 'resultat'); }
         return;
       }
       const SECTION = {
@@ -12282,7 +12553,6 @@ if (!customElements.get('espace-rhum')) {
             ${this._buildFlashNewsWidget()}
             ${this._buildBadgesMiniWidget()}
             <div class="er-chasse-place" id="chasse-tymal"></div>
-            ${this._buildRoueWidget()}
             ${this._buildPronosWidget()}
             ${this._buildCombatWidget()}
             ${
@@ -19546,6 +19816,11 @@ if (!customElements.get('espace-rhum')) {
       const m = this._jmEtat();
       if (m && m.ouvert) out.cours.push('challenge-mobilite');
       else if (m && m.termine) out.fini.push('challenge-mobilite');
+      
+
+
+      const r = this._jrEtat();
+      if (r) (r.peutTourner || this._jrJoueIci ? out.cours : out.fini).unshift('jeu-de-la-roue');
       return out;
     }
 
@@ -19846,7 +20121,7 @@ if (!customElements.get('espace-rhum')) {
 
 
     _buildJeuxBandeau() {
-      const b = this._jtBandeau() + this._buildPhotoBandeau();
+      const b = this._jrBandeau() + this._jtBandeau() + this._buildPhotoBandeau();
       return b ? '<div class="jt-bandeaux">' + b + '</div>' : '';
     }
 
@@ -19955,7 +20230,7 @@ if (!customElements.get('espace-rhum')) {
       }
       const m = this._jmEtat();
       const altM = this._lang() === 'en' ? 'TyMAL on a bike in front of Saint-Malo station' : 'TyMAL à vélo devant la gare de Saint-Malo';
-      return '<div class="jt-ouverts">' + cles.map((c) => (c === 'challenge-mobilite'
+      return '<div class="jt-ouverts">' + cles.map((c) => (c === 'jeu-de-la-roue' ? this._jrCarte() : c === 'challenge-mobilite'
         ? '<article class="jt-ouvert jt-ouvert--mobilite">' + this._jtCadre(m && m.visuel, altM, JT_I_VELO) + this._jmCorps() + '</article>'
         : c === 'challenge-photo' ? this._jpCarte()
         : '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>')).join('') + '</div>';
@@ -20043,6 +20318,383 @@ if (!customElements.get('espace-rhum')) {
       }
     }
 
+    
+
+
+
+
+
+
+    _jrEtat() {
+      const r = this._payload && this._payload.roue;
+      return (r && r.disponible && Array.isArray(r.segments) && r.segments.length) ? r : null;
+    }
+
+    _jrLot() {
+      const r = this._jrEtat();
+      return r && r.dejaTire && typeof r.dejaTire.index === 'number' && r.dejaTire.index >= 0 ? r.segments[r.dejaTire.index] : null;
+    }
+
+    _jrMotif() {
+      const r = this._jrEtat();
+      const u = r && r.visuels && r.visuels.motif;
+      return u && /^https:\/\//.test(u) ? ' style="--jr-motif:url(&quot;' + escapeHtml(u) + '&quot;)"' : '';
+    }
+
+    _jrReglement(cls) {
+      const url = this._payload && this._payload.reglements && this._payload.reglements.roue;
+      if (!url || !/^https?:\/\/|^\//.test(String(url))) return '';
+      return '<a class="' + cls + '" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + (this._lang() === 'en' ? 'Game rules' : 'Règlement du jeu') + '</a>';
+    }
+
+    _jrCarte() {
+      const r = this._jrEtat(), lot = this._jrLot();
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const lib = (s) => (en && s.libelleEn) || s.libelle;
+      const joue = !r.peutTourner;
+      const etat = joue ? '<span class="jt-etat jt-etat--joue">' + T('Joué', 'Played') + '</span>' : '<span class="jt-etat">' + T('Ouvert', 'Open') + '</span>';
+      const vus = new Set();
+      const puces = '<ul class="jr-lots" aria-label="' + T('À gagner', 'To win') + '">' + r.segments.filter((s) => s.type !== 'rien' && !vus.has(s.libelle) && vus.add(s.libelle)).map((s) => '<li>' +
+        (s.visuel ? '<img src="' + escapeHtml(s.visuel) + '" alt="" loading="lazy">' : '<span class="jr-lots-code" aria-hidden="true">-10 %</span>') +
+        escapeHtml(s.type === 'code' ? T('Bon de réduction Armor Lux', 'Armor Lux discount') : lib(s)) + '</li>').join('') + '</ul>';
+      let corps;
+      if (!joue) {
+        corps = '<p class="jt-texte">' + T('Un tour, un seul. Tente ta chance, tu ne l\'auras qu\'une fois, prends ton temps. <b>Des cadeaux de la Route du Rhum - Destination Guadeloupe à gagner.</b>',
+          'One spin, just one. Take your chance, you only get it once, so take your time. <b>Route du Rhum - Destination Guadeloupe gifts to win.</b>') + '</p>' + puces +
+          '<div class="jt-bas"><div class="jt-actions"><button type="button" class="er-btn er-btn--primary jt-cta" data-jr-ouvrir>' + jrIc(JR_I_ROUE) + '<span>' + T('Tourner la roue', 'Spin the wheel') + '</span></button>' +
+          this._jrReglement('jt-lien') + '</div></div>';
+      } else {
+        const gagne = lot && lot.type !== 'rien';
+        const rt = r.retrait;
+        const physique = gagne && lot.physique;
+        const retrait = !physique ? ''
+          : rt && rt.mode === 'village' ? '<p class="jr-carte-retrait">' + T('À retirer à l\'espace presse du village, numéro', 'To collect at the village press area, number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>'
+          : rt && rt.mode === 'envoi' ? '<p class="jr-carte-retrait">' + T('Envoi par la poste demandé.', 'Delivery by post requested.') + '</p>'
+          : '<p class="jr-carte-retrait jr-carte-retrait--attente">' + T('Dis-nous comment récupérer ton lot.', 'Tell us how you would like to get your prize.') + '</p>';
+        corps = '<div class="jr-resultat">' + (gagne && lot.visuel ? '<span class="jr-resultat-lot"><img src="' + escapeHtml(lot.visuel) + '" alt=""></span>' : '') +
+          '<p class="jt-texte">' + (gagne ? '<b>' + escapeHtml((en && lot.messageEn) || lot.message) + '</b>'
+            : T('Pas de gain cette fois-ci, mais le vent tourne ! Tente ta chance sur les autres jeux concours.', 'No prize this time, but the wind is turning! Try your luck in the other competitions.')) + '</p></div>' +
+          (gagne && lot.type === 'code' ? '<p class="jr-carte-code">' + T('Ton code', 'Your code') + ' <b>' + escapeHtml(lot.code) + '</b>' + (lot.codeUrl ? '<a href="' + escapeHtml(lot.codeUrl) + '" target="_blank" rel="noopener">armorlux.com</a>' : '') + '</p>' : '') +
+          retrait +
+          '<div class="jt-bas"><div class="jt-actions">' + (physique && !rt
+            ? '<button type="button" class="er-btn er-btn--primary jt-cta" data-jr-ouvrir="revoir">' + jrIc(JR_I_COLIS) + '<span>' + T('Récupérer mon lot', 'Get my prize') + '</span></button>'
+            : '<button type="button" class="er-btn er-btn--outline jt-cta" data-jr-ouvrir="revoir">' + jrIc(JR_I_ROUE) + '<span>' + T('Revoir mon tour', 'See my spin again') + '</span></button>') + '</div></div>';
+      }
+      const v = r.visuels || {};
+      return '<article class="jt-ouvert jr-carte"><div class="jt-cadre jr-cadre"' + this._jrMotif() + '>' + jrRoueSvg(r.segments, { sansTexte: true, moyeu: v.moyeu, angle: lot ? -lot.index * (360 / r.segments.length) : 0 }) + '</div>' +
+        '<div class="jt-corps"><div class="jt-etiquettes">' + etat + '<span class="jt-partenaire">' + T('Avec Armor Lux, partenaire officiel', 'With Armor Lux, official partner') + '</span></div>' +
+        '<h3 class="jt-titre"><small>' + T('Le', 'The') + '</small>' + T('Jeu de la roue', 'Prize wheel') + '</h3>' + corps + '</div></article>';
+    }
+
+    _jrBandeau() {
+      const r = this._jrEtat();
+      if (!r) return '';
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const lot = this._jrLot();
+      const zone = T('Le jeu de la roue', 'The prize wheel');
+      if (r.peutTourner) {
+        return '<div class="jt-bandeau jr-bandeau" role="region" aria-label="' + zone + '"><span class="jt-bandeau-montre" aria-hidden="true">' + jrRoueSvg(r.segments, { sansTexte: true, sansAiguille: true, moyeu: (r.visuels || {}).moyeu }) + '</span>' +
+          '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + zone + ' <em>· ' + T('ton tour t\'attend', 'your spin is waiting') + '</em></p><span class="jt-bandeau-ligne">' +
+          T('Un tour, un seul : casquette, gourde, tote bag, peluche TyMAL ou -10 % chez Armor Lux.', 'One spin, just one: cap, water bottle, tote bag, TyMAL plush or 10% off at Armor Lux.') + '</span></span>' +
+          '<button type="button" class="jt-jouer" data-jr-ouvrir><span class="jt-jouer-ico">' + jrIc(JR_I_ROUE) + '</span>' + T('Tourner', 'Spin') + jrIc(JT_I_FLECHE, 'jt-jouer-fl') + '</button></div>';
+      }
+      if (lot && lot.physique && !r.retrait) {
+        return '<div class="jt-bandeau jr-bandeau" role="region" aria-label="' + zone + '"><span class="jt-bandeau-montre jr-bandeau-lot" aria-hidden="true">' + (lot.visuel ? '<img src="' + escapeHtml(lot.visuel) + '" alt="">' : '') + '</span>' +
+          '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + escapeHtml((en && lot.libelleEn) || lot.libelle) + ' <em>· ' + T('ton lot t\'attend', 'your prize is waiting') + '</em></p><span class="jt-bandeau-ligne">' +
+          T('Dis-nous comment le récupérer : sur le village ou par la poste.', 'Tell us how to get it: at the village or by post.') + '</span></span>' +
+          '<button type="button" class="jt-jouer" data-jr-ouvrir="revoir"><span class="jt-jouer-ico">' + jrIc(JR_I_COLIS) + '</span>' + T('Choisir', 'Choose') + jrIc(JT_I_FLECHE, 'jt-jouer-fl') + '</button></div>';
+      }
+      return '';
+    }
+
+    _jrOuvrir(declencheur, vue) {
+      const r = this._jrEtat();
+      if (!r) return;
+      const en = this._lang() === 'en';
+      this._jrRetour = declencheur || document.activeElement;
+      if (!this._jrModale) {
+        const m = document.createElement('div');
+        m.className = 'jr-modale';
+        m.setAttribute('lang', en ? 'en' : 'fr');
+        m.innerHTML = '<div class="jr-boite" role="dialog" aria-modal="true" aria-label="' + (en ? 'The prize wheel' : 'Le jeu de la roue') + '"' + this._jrMotif() + '><div class="jr-scene"><p class="jr-kicker">' + (en ? 'Competition' : 'Jeu concours') + '</p><div data-jr-place></div></div>' +
+          '<div class="jr-corps" aria-live="polite"></div><button type="button" class="jr-fermer" data-jr-fermer aria-label="' + (en ? 'Close' : 'Fermer') + '">' + jrIc(JT_I_CROIX) + '</button></div>';
+        this._i18n(m);
+        document.body.appendChild(m);
+        this._jrModale = m;
+        m.addEventListener('click', (e) => {
+          const t = e.target;
+          if (t === m || t.closest('[data-jr-fermer]')) return this._jrFermer();
+          if (t.closest('[data-jr-tourner]')) return this._jrTourner();
+          if (t.closest('[data-jr-autres]')) { this._jrFermer(); this._jeuxOnglet = 'cours'; this._jeuxOngletChoisi = true; this._jeuxRepeindre(); this._jeuxAller('jeux'); return; }
+          const mode = t.closest('[data-jr-retrait]');
+          if (mode) { if (mode.getAttribute('data-jr-retrait') === 'envoi') this._jrPeindreRetrait('adresse'); else this._jrEnvoyerRetrait({ mode: 'village' }); return; }
+          if (t.closest('[data-jr-retrait-changer]')) { this._jrPeindreRetrait('choix'); return; }
+          const c = t.closest('[data-jr-copier]');
+          if (c) {
+            const val = c.getAttribute('data-jr-copier');
+            const fini = () => { c.innerHTML = jrIc(JT_I_OK) + (en ? 'Copied' : 'Copié'); setTimeout(() => { c.innerHTML = jrIc(JR_I_COPIER) + (en ? 'Copy' : 'Copier'); }, 1800); };
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(val).then(fini, fini); else fini();
+          }
+        });
+        m.addEventListener('change', (e) => {
+          const t = e.target.closest && e.target.closest('[data-jr-territoire]');
+          if (!t) return;
+          const champ = t.closest('form').querySelector('.jr-c-pays'), i = champ && champ.querySelector('input');
+          if (!champ) return;
+          champ.hidden = t.value !== 'Autre pays';
+          i.disabled = champ.hidden;
+          if (!champ.hidden) i.focus();
+        });
+        m.addEventListener('submit', (e) => {
+          const f = e.target.closest && e.target.closest('[data-jr-adresse]');
+          if (!f) return;
+          e.preventDefault();
+          const champs = Array.from(f.querySelectorAll('input:not([disabled]), select'));
+          let manque = null, message = en ? 'Part of the address is missing.' : 'Il manque une partie de l\'adresse.';
+          champs.forEach((i) => {
+            let ko = !i.hasAttribute('data-facultatif') && !i.value.trim();
+            if (!ko && i.name === 'telephone' && i.value.replace(/[^0-9]/g, '').length < 8) { ko = true; if (!manque) message = en ? 'This phone number looks incomplete.' : 'Ce numéro de téléphone paraît incomplet.'; }
+            i.setAttribute('aria-invalid', String(ko));
+            if (ko && !manque) manque = i;
+          });
+          if (manque) { f.querySelector('[data-jr-retrait-etat]').textContent = message; manque.focus(); return; }
+          const a = {};
+          champs.forEach((i) => { a[i.name] = i.value.trim(); });
+          this._jrEnvoyerRetrait({ mode: 'envoi', adresse: a });
+        });
+        this._jrClavier = (e) => {
+          if (!this._jrModale) return;
+          if (e.key === 'Escape' && !this._jrTourne) { e.preventDefault(); this._jrFermer(); return; }
+          if (e.key !== 'Tab') return;
+          const f = Array.from(this._jrModale.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select'));
+          if (!f.length) return;
+          const i = f.indexOf(document.activeElement);
+          if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+        };
+        document.addEventListener('keydown', this._jrClavier);
+        this._lockBodyScroll();
+        requestAnimationFrame(() => { if (this._jrModale) this._jrModale.classList.add('est-ouverte'); });
+      }
+      const lot = this._jrLot();
+      this._jrPeindre(vue === 'resultat' && lot ? 'resultat' : 'jouer', lot, false);
+    }
+
+    _jrPeindre(vue, lot, anime) {
+      const m = this._jrModale;
+      if (!m) return;
+      const r = this._jrEtat();
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const pas = 360 / r.segments.length;
+      const place = m.querySelector('[data-jr-place]'), corps = m.querySelector('.jr-corps');
+      m.querySelector('.jr-boite').classList.toggle('est-resultat', vue !== 'jouer');
+      clearInterval(this._jrEtincelles);
+      if (!anime) {
+        const gagne = lot && lot.type !== 'rien';
+        place.innerHTML = jrRoueSvg(r.segments, {
+          en, moyeu: (r.visuels || {}).moyeu, angle: lot ? -lot.index * pas + (this._jrDecalage || 0) : 0,
+          label: T('La roue : ', 'The wheel: ') + r.segments.map((s) => (en && s.libelleEn) || s.libelle).join(', '),
+          gagnant: gagne ? lot.index : -1, cls: gagne ? 'est-gagne' : ''
+        });
+      }
+      const essai = (this._jrEssai || r.essai) ? '<p class="jr-essai">' + T('Tour d\'essai (compte d\'aperçu) : aucun lot n\'est attribué pour de vrai. Le volet d\'aperçu permet de rejouer.', 'Test spin (preview account): no prize is actually awarded. The preview panel lets you play again.') + '</p>' : '';
+      if (vue === 'jouer') {
+        corps.innerHTML = '<h2 class="jr-titre"><small>' + T('Le', 'The') + '</small>' + T('Jeu de la roue', 'Prize wheel') + '</h2><p class="jr-un">' + T('Un tour, un seul', 'One spin, just one') + '</p>' +
+          '<p class="jr-texte">' + T('Tente ta chance, tu ne l\'auras qu\'une fois, prends ton temps.', 'Take your chance, you only get it once, so take your time.') + '</p>' +
+          '<div class="jr-actions"><button type="button" class="jr-cta" data-jr-tourner><span class="jr-cta-ico">' + jrIc(JR_I_ROUE) + '</span><span data-jr-lib>' + T('Tourner la roue', 'Spin the wheel') + '</span></button>' +
+          this._jrReglement('jr-lien') + '</div>';
+      } else if (lot && lot.type !== 'rien') {
+        const etincelles = '<span class="jr-etincelles" aria-hidden="true">' + Array.from({ length: 12 }, (_, k) => {
+          const a = (k * 30 + 15) * Math.PI / 180, r0 = 47 + (k % 2) * 5, d = 16 + (k % 3) * 8;
+          return '<span class="jr-etincelle" style="left:' + (50 + Math.cos(a) * r0).toFixed(1) + '%;top:' + (50 + Math.sin(a) * r0).toFixed(1) + '%;--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d) + 'px;animation-delay:' + (0.1 + (k % 4) * 0.12).toFixed(2) + 's">' + jrIc(JR_I_ETINCELLE) + '</span>';
+        }).join('') + '</span>';
+        const conditions = (en && lot.conditionsEn) || lot.conditions;
+        const code = lot.type === 'code'
+          ? '<div class="jr-res-plein jr-res-code"><div class="jr-code"><span class="jr-code-lab">' + T('Ton code, utilisable une fois', 'Your code, valid once') + '</span><span class="jr-code-val">' + escapeHtml(lot.code) +
+            '<button type="button" class="jr-copier" data-jr-copier="' + escapeHtml(lot.code) + '">' + jrIc(JR_I_COPIER) + T('Copier', 'Copy') + '</button></span></div>' +
+            (lot.codeUrl ? '<div class="jr-actions"><a class="jr-cta" href="' + escapeHtml(lot.codeUrl) + '" target="_blank" rel="noopener"><span class="jr-cta-ico">' + jrIc(JT_I_FLECHE) + '</span>' + T('J\'en profite sur armorlux.com', 'Shop now on armorlux.com') + '</a></div>' : '') +
+            (conditions ? '<p class="jr-conditions">' + escapeHtml(conditions) + '</p>' : '') + '</div>'
+          : '';
+        const visuel = lot.visuel ? '<img src="' + escapeHtml(lot.visuel) + '" alt="' + escapeHtml((en && lot.libelleEn) || lot.libelle) + '">'
+          : '<span class="jr-bon"><b>-10 %</b><small>' + T('Boutique en ligne<br>Armor Lux', 'Armor Lux<br>online shop') + '</small></span>';
+        corps.innerHTML = '<div class="jr-res' + (anime ? ' jr-fade' : '') + '"><div class="jr-res-texte"><p class="jr-sur">' + T('Le jeu de la roue', 'The prize wheel') + '</p><h2 class="jr-titre">' + T('Bravo !', 'Well done!') + '</h2><p class="jr-texte">' + escapeHtml((en && lot.messageEn) || lot.message) + '</p></div>' +
+          '<figure class="jr-lot"><span class="jr-medaillon"></span>' + visuel + etincelles + '</figure>' + code +
+          (lot.physique ? '<div class="jr-res-plein" data-jr-retrait-place></div>' : '') +
+          (lot.marque && r.marque ? '<span class="jr-marque jr-res-plein"><img src="' + escapeHtml(r.marque) + '" alt="' + T('Route du Rhum - Destination Guadeloupe et Armor Lux, partenaire officiel', 'Route du Rhum - Destination Guadeloupe and Armor Lux, official partner') + '"></span>' : '') +
+          (essai ? '<div class="jr-res-plein">' + essai + '</div>' : '') + '</div>';
+        if (lot.physique) this._jrPeindreRetrait(r.retrait ? 'fait' : 'choix', true);
+        this._jrEtinceler();
+      } else {
+        corps.innerHTML = '<div class="jr-res-texte' + (anime ? ' jr-fade' : '') + '"><p class="jr-sur">' + T('Le jeu de la roue', 'The prize wheel') + '</p><h2 class="jr-titre">' + T('Dommage !', 'So close!') + '</h2>' +
+          '<p class="jr-texte">' + T('Pas de gain cette fois-ci, mais le vent tourne !<br>Tente ta chance sur nos autres jeux concours et découvre les lots à gagner.', 'No prize this time, but the wind is turning!<br>Try your luck in our other competitions and discover the prizes to win.') + '</p>' +
+          '<div class="jr-actions"><button type="button" class="jr-cta" data-jr-autres><span class="jr-cta-ico">' + jrIc(JT_I_FLECHE) + '</span>' + T('Autres concours', 'Other competitions') + '</button></div>' + essai + '</div>';
+      }
+      this._i18n(corps);
+      const f = corps.querySelector('[data-jr-tourner], .jr-cta, [data-jr-copier], [data-jr-retrait]') || m.querySelector('[data-jr-fermer]');
+      if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+    }
+
+     
+    _jrEtinceler() {
+      const m = this._jrModale;
+      clearInterval(this._jrEtincelles);
+      if (!m || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+      const relancer = () => { const e = m.querySelector('.jr-etincelles'); if (!e) return; e.classList.remove('est-joue'); void e.offsetWidth; e.classList.add('est-joue'); };
+      relancer();
+      this._jrEtincelles = setInterval(relancer, 4500);
+    }
+
+    
+
+
+    _jrPeindreRetrait(etape, sansFocus) {
+      const m = this._jrModale;
+      const place = m && m.querySelector('[data-jr-retrait-place]');
+      if (!place) return;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const rt = this._jrEtat().retrait;
+      const res = m.querySelector('.jr-res');
+      if (res) res.classList.toggle('est-formulaire', etape === 'adresse');
+      if (etape === 'fait' && rt) {
+        place.innerHTML = rt.mode === 'village'
+          ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('À retirer sur le village', 'To collect at the village') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('Passe à l\'espace presse du village, à Saint-Malo, et montre ce numéro avec ton Espace Rhum ouvert.', 'Go to the village press area in Saint-Malo and show this number with your Espace Rhum open.') + '</p>' +
+            '<p class="jr-numero">' + T('Ton numéro de retrait', 'Your collection number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>' +
+            '<div class="jr-retrait-actions"><button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Plutôt par la poste', 'By post instead') + '</button></div></div>'
+          : '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Envoi par la poste', 'Delivery by post') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('C\'est noté, on te l\'envoie à', 'Got it, we will send it to') + ' <b>' + escapeHtml(jrAdresseEnLigne(rt.adresse || {})) + '</b>.</p>' +
+            '<div class="jr-retrait-actions"><button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Changer', 'Change') + '</button></div></div>';
+      } else if (etape === 'adresse') {
+        const a = (rt && rt.adresse) || {};
+        const moi = (this._payload && this._payload.member) || {};
+        const champ = (nom, lib, auto, cls, val, extra) => '<label class="jr-champ' + (cls ? ' ' + cls : '') + '"><span>' + lib + '</span><input name="' + nom + '" autocomplete="' + auto + '" value="' + escapeHtml(val || '') + '"' + (extra || '') + '></label>';
+        const territoire = a.territoire || 'France métropolitaine';
+        const options = JR_TERRITOIRES.map((t) => '<option value="' + escapeHtml(t) + '"' + (t === territoire ? ' selected' : '') + '>' + escapeHtml(en && t === 'France métropolitaine' ? 'Metropolitan France' : en && t === 'Autre pays' ? 'Other country' : t) + '</option>').join('');
+        place.innerHTML = '<form class="jr-retrait jr-retrait--adresse" data-jr-adresse novalidate><p class="jr-retrait-q">' + T('Où t\'envoyer ton lot ?', 'Where should we send your prize?') + '</p><div class="jr-champs">' +
+          champ('prenom', T('Prénom', 'First name'), 'given-name', 'jr-c-prenom', a.prenom || moi.prenom) + champ('nom', T('Nom', 'Last name'), 'family-name', 'jr-c-nom', a.nom || moi.nom) +
+          champ('telephone', T('Téléphone', 'Phone'), 'tel', 'jr-c-tel', a.telephone || moi.telephone, ' type="tel" inputmode="tel"') +
+          champ('adresse', T('Adresse', 'Address'), 'address-line1', 'jr-c-adresse', a.adresse) + champ('complement', T('Complément <i>(facultatif)</i>', 'Address line 2 <i>(optional)</i>'), 'address-line2', 'jr-c-complement', a.complement, ' data-facultatif') +
+          champ('codePostal', T('Code postal', 'Postcode'), 'postal-code', 'jr-c-cp', a.codePostal, ' inputmode="numeric"') + champ('ville', T('Ville', 'City'), 'address-level2', 'jr-c-ville', a.ville) +
+          '<label class="jr-champ jr-c-territoire"><span>' + T('Pays ou territoire', 'Country or territory') + '</span><select name="territoire" data-jr-territoire>' + options + '</select></label>' +
+          champ('pays', T('Lequel ?', 'Which one?'), 'country-name', 'jr-c-pays', a.pays, territoire === 'Autre pays' ? '' : ' disabled') + '</div>' +
+          '<p class="jr-retrait-note">' + T('Le téléphone sert au transporteur et à te joindre si besoin. Ces coordonnées servent à cet envoi et à rien d\'autre : elles ne rejoignent pas ton profil.',
+            'Your phone number is for the carrier and to reach you if needed. These details are used for this delivery only and are not added to your profile.') + '</p>' +
+          '<div class="jr-retrait-actions"><button type="submit" class="jr-cta jr-cta--petit">' + T('Valider l\'adresse', 'Confirm the address') + '</button><button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Retour', 'Back') + '</button></div>' +
+          '<p class="jr-retrait-etat" data-jr-retrait-etat role="alert"></p></form>';
+        this._i18n(place);
+        const pays = place.querySelector('.jr-c-pays');
+        if (pays) pays.hidden = territoire !== 'Autre pays';
+        if (!sansFocus) { const i = place.querySelector('input[value=""]') || place.querySelector('input'); if (i) i.focus(); }
+      } else {
+        place.innerHTML = '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Comment veux-tu le récupérer ?', 'How would you like to get it?') + '</p><div class="jr-retrait-choix">' +
+          '<button type="button" class="jr-choix" data-jr-retrait="village">' + jrIc(JR_I_LIEU) + '<span>' + T('Sur le village', 'At the village') + '<small>' + T('À l\'espace presse, à Saint-Malo', 'At the press area, in Saint-Malo') + '</small></span></button>' +
+          '<button type="button" class="jr-choix" data-jr-retrait="envoi">' + jrIc(JR_I_COLIS) + '<span>' + T('Par la poste', 'By post') + '<small>' + T('À l\'adresse de ton choix', 'To the address of your choice') + '</small></span></button></div></div>';
+        if (!sansFocus) { const b = place.querySelector('[data-jr-retrait]'); if (b) b.focus(); }
+      }
+    }
+
+    _jrEnvoyerRetrait(choix) {
+      const m = this._jrModale;
+      const b = m && m.querySelector('[data-jr-adresse] [type="submit"]');
+      if (b) { b.disabled = true; b.textContent = this._lang() === 'en' ? 'Sending…' : 'Envoi…'; }
+      this.dispatchEvent(new CustomEvent('er-roue-retrait', { bubbles: true, composed: true, detail: choix }));
+    }
+
+     
+    _jrRetraitResultat(res) {
+      const r = this._jrEtat();
+      if (!r) return;
+      const en = this._lang() === 'en';
+      if (!res || res.ok !== true) {
+        const e = this._jrModale && this._jrModale.querySelector('[data-jr-retrait-etat]');
+        const raison = res && res.raison;
+        if (e) e.textContent = raison === 'telephone' ? (en ? 'This phone number looks incomplete.' : 'Ce numéro de téléphone paraît incomplet.')
+          : raison === 'adresse_incomplete' ? (en ? 'Part of the address is missing.' : 'Il manque une partie de l\'adresse.')
+          : raison === 'territoire' ? (en ? 'Delivery is not possible to this destination: choose collection at the village.' : 'L\'envoi n\'est pas possible vers cette destination : choisis le retrait sur le village.')
+          : (en ? 'Your choice did not go through. Please try again in a moment.' : 'Ton choix n\'est pas passé. Réessaie dans un instant.');
+        const b = this._jrModale && this._jrModale.querySelector('[data-jr-adresse] [type="submit"]');
+        if (b) { b.disabled = false; b.textContent = en ? 'Confirm the address' : 'Valider l\'adresse'; }
+        if (!this._jrModale) console.warn('[espace-rhum] retrait refusé', raison);
+        return;
+      }
+      r.retrait = { mode: res.mode, numero: res.numero || '', adresse: res.adresse || null };
+      this._jrPeindreRetrait('fait');
+      const ok = this._jrModale && this._jrModale.querySelector('[data-jr-retrait-changer]');
+      if (ok) { try { ok.focus({ preventScroll: true }); } catch (e) { ok.focus(); } }
+    }
+
+    _jrTourner() {
+      if (this._jrTourne) return;
+      const b = this._jrModale && this._jrModale.querySelector('[data-jr-tourner]');
+      if (!b) return;
+      b.disabled = true;
+      b.querySelector('[data-jr-lib]').textContent = this._lang() === 'en' ? 'Spinning…' : 'Ça tourne…';
+      let source = '';
+      try { source = new URLSearchParams(location.search).get('src') || ''; } catch (e) {   }
+      this.dispatchEvent(new CustomEvent('er-roue-tourner', { bubbles: true, composed: true, detail: { source } }));
+    }
+
+     
+    _jrResultat(res) {
+      const r = this._jrEtat(), m = this._jrModale;
+      const en = this._lang() === 'en';
+      const b = m.querySelector('[data-jr-tourner]');
+      if (!res || res.ok !== true || !res.lot || !(res.lot.index >= 0) || !r.segments[res.lot.index]) {
+        if (b) { b.disabled = false; b.querySelector('[data-jr-lib]').textContent = en ? 'Spin the wheel' : 'Tourner la roue'; }
+        const t = m.querySelector('.jr-texte');
+        if (t) t.textContent = res && res.raison === 'pas_encore_ouvert' ? (en ? 'The wheel is not open yet.' : 'La roue n\'est pas encore ouverte.') : (en ? 'The wheel did not respond. Please try again in a moment.' : 'La roue n\'a pas répondu. Réessaie dans un instant.');
+        return;
+      }
+      const lot = r.segments[res.lot.index];
+      const pas = 360 / r.segments.length;
+      const reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+       
+      this._jrDecalage = Math.round((Math.random() - 0.5) * pas * 0.6);
+      this._jrEssai = res.essai === true;
+      const roue = m.querySelector('.jr-roue'), disque = m.querySelector('[data-jr-disque]');
+      const cible = 360 * (reduit || res.deja ? 0 : 6) - res.lot.index * pas + this._jrDecalage;
+      const halo = m.querySelector('.jr-gagnant');
+      if (halo && lot.type !== 'rien') {
+        const pt = (deg) => { const a = (deg - 90) * Math.PI / 180; return [200 + 182 * Math.cos(a), 200 + 182 * Math.sin(a)]; };
+        const [a0, b0] = pt(lot.index * pas - pas / 2), [a1, b1] = pt(lot.index * pas + pas / 2);
+        halo.setAttribute('d', 'M200 200L' + a0.toFixed(1) + ' ' + b0.toFixed(1) + 'A182 182 0 0 1 ' + a1.toFixed(1) + ' ' + b1.toFixed(1) + 'Z');
+      }
+      this._jrTourne = true;
+      disque.style.transition = (reduit || res.deja) ? 'none' : 'transform 4.6s cubic-bezier(.12,.9,.3,1)';
+      roue.classList.add('est-tourne');
+      requestAnimationFrame(() => { disque.style.transform = 'rotate(' + cible + 'deg)'; });
+       
+      r.peutTourner = false;
+      r.essai = this._jrEssai;
+      this._jrJoueIci = true;
+      r.dejaTire = { id: lot.id, libelle: lot.libelle, type: lot.type, physique: lot.physique, index: lot.index };
+      r.retrait = res.retrait || null;
+      clearTimeout(this._jrMinuteur);
+      this._jrMinuteur = setTimeout(() => {
+        this._jrTourne = false;
+        roue.classList.remove('est-tourne');
+        if (lot.type !== 'rien') roue.classList.add('est-gagne');
+        this._jrPeindre('resultat', lot, true);
+      }, (reduit || res.deja) ? 50 : 4700);
+    }
+
+    _jrFermer() {
+      const m = this._jrModale;
+      if (!m) return;
+      clearTimeout(this._jrMinuteur);
+      clearInterval(this._jrEtincelles);
+      this._jrTourne = false;
+      if (this._jrClavier) { document.removeEventListener('keydown', this._jrClavier); this._jrClavier = null; }
+      this._unlockBodyScroll();
+      this._jrModale = null;
+      m.classList.remove('est-ouverte');
+      setTimeout(() => m.remove(), 180);
+      this._jeuxRepeindre();
+      let ret = this._jrRetour;
+      this._jrRetour = null;
+      if (!ret || !document.contains(ret)) ret = this.querySelector('.jt-vue:not([hidden]) [data-jr-ouvrir], .jt-bandeau [data-jr-ouvrir], [data-jt-volet]');
+      if (ret && ret.focus) { try { ret.focus({ preventScroll: true }); } catch (e) { ret.focus(); } }
+    }
+
     _jeuxAller(vue) {
       this._jeuxVue = vue;
       try {
@@ -20084,6 +20736,8 @@ if (!customElements.get('espace-rhum')) {
         this._jeuxClic = (e) => {
           const t = e.target;
           if (!t || !t.closest) return;
+          const jr = t.closest('[data-jr-ouvrir]');
+          if (jr) { e.preventDefault(); this._jrOuvrir(jr, jr.getAttribute('data-jr-ouvrir') === 'revoir' ? 'resultat' : 'jouer'); return; }
           const o = t.closest('[data-jt-ouvrir]');
           if (o) { e.preventDefault(); this._jtOuvrir(o); return; }
           const v = t.closest('[data-jt-volet]');
@@ -21336,6 +21990,7 @@ if (!customElements.get('espace-rhum')) {
 
      
     roueResultat(res) {
+      if (this._jrModale) { this._jrResultat(res); return; }
       const w = this.querySelector('.er-widget--roue');
       if (!w) return;
       const btn = w.querySelector('[data-action="tourner-roue"]');
