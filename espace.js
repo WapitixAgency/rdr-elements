@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 5d7422d | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="5d7422d";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum b7e9e14 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="b7e9e14";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -20644,7 +20644,8 @@ if (!customElements.get('espace-rhum')) {
         if (t) t.textContent = res && res.raison === 'pas_encore_ouvert' ? (en ? 'The wheel is not open yet.' : 'La roue n\'est pas encore ouverte.') : (en ? 'The wheel did not respond. Please try again in a moment.' : 'La roue n\'a pas répondu. Réessaie dans un instant.');
         return;
       }
-      const lot = r.segments[res.lot.index];
+       
+      const lot = r.segments[res.lot.index] = Object.assign({}, r.segments[res.lot.index], res.lot);
       const pas = 360 / r.segments.length;
       const reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
        
