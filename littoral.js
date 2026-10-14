@@ -1,5 +1,5 @@
-/* rdr-elements littoral | source route-du-rhum 75a9e72 | rdr-littoral.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["littoral"]="75a9e72";performance.mark("rdr-elements:littoral")}catch(e){}
+/* rdr-elements littoral | source route-du-rhum 459fc3c | rdr-littoral.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["littoral"]="459fc3c";performance.mark("rdr-elements:littoral")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-littoral")) return;
@@ -97,6 +97,7 @@ const LU = {
   dog: '<path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"/>',
   trash2: '<path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
   leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  ban: '<circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/>',
   calendar: '<path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/>',
   x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
 };
@@ -183,17 +184,39 @@ function boutonSite(s) {
 
 
 
-function pictoPratique(texte, k) {
-  const t = String(texte || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+function sansAccents(texte) {
+  return String(texte || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+function sujetPratique(texte) {
+  const t = sansAccents(texte);
   if (/chien|\bdogs?\b|leash/.test(t)) return 'dog';
   if (/dechet|waste|litter|rubbish|trash/.test(t)) return 'trash2';
   if (/sentier|balise|\bpaths?\b|trails?/.test(t)) return 'footprints';
   if (/environnement|animaux|plante|fleur|faune|flore|wildlife|plants?\b|flowers?|environment/.test(t)) return 'leaf';
   if (/defens|interdit|prohib|restricted|forbidden|fenced/.test(t)) return 'shield';
-  return ['shield', 'footprints', 'dog', 'trash2'][k] || 'shield';
+  return '';
+}
+function pictoPratique(texte, k) {
+  const sujet = sujetPratique(texte);
+  if (sujet === 'dog' && /interdit|not allowed|forbidden|prohib|banned/.test(sansAccents(texte))) return 'ban';
+  return sujet || ['shield', 'footprints', 'dog', 'trash2'][k] || 'shield';
+}
+
+
+
+function pratiquesDe(s) {
+  const Z = PAGE.zones, communes = Z.pratiques || [], propres = (Z.pratiquesSites || {})[s.id];
+  if (!Array.isArray(propres) || !propres.length) return communes;
+  const sujets = propres.map(sujetPratique), placees = new Set(), out = [];
+  communes.forEach((p) => {
+    const j = sujets.indexOf(sujetPratique(p) || '?');
+    if (j < 0) out.push(p); else if (!placees.has(j)) { placees.add(j); out.push(propres[j]); }
+  });
+  return out.concat(propres.filter((q, j) => !placees.has(j)));
 }
 function boiteSite(s) {
-  const Z = PAGE.zones, st = statutsCarte()[s.statut];
+  const Z = PAGE.zones, st = statutsCarte()[s.statut], pr = pratiquesDe(s);
   const m = String(Z.message || ''), i = m.indexOf('. ');
   const note = i > 0 ? '<b>' + T(m.slice(0, i + 1)) + '</b> ' + T(m.slice(i + 2)) : T(m);
   return '<button type="button" class="zs-poignee" aria-label="' + esc(Z.ranger) + '"></button>' +
@@ -204,7 +227,7 @@ function boiteSite(s) {
     '<div class="zs-corps">' +
       (s.liste && s.liste.length ? '<p class="zs-h">' + T(Z.rubriques.place) + '</p><ul class="zs-liste">' + s.liste.map((p) => '<li>' + T(p) + '</li>').join('') + '</ul>' : '') +
       (s.aller ? '<p class="zs-h">' + T(Z.rubriques.aller) + '</p><p class="zs-aller">' + T(s.aller) + '</p>' : '') +
-      (Z.pratiques && Z.pratiques.length ? '<p class="zs-h">' + T(Z.rubriques.pratiques) + '</p><ul class="zs-pratiques' + (Z.pratiques.some((p) => String(p).length > 34) ? ' zs-long' : '') + '">' + Z.pratiques.map((p, k) => '<li>' + SVG(pictoPratique(p, k)) + '<span>' + T(p) + '</span></li>').join('') + '</ul>' : '') +
+      (pr.length ? '<p class="zs-h">' + T(Z.rubriques.pratiques) + '</p><ul class="zs-pratiques' + (pr.some((p) => String(p).length > 34) ? ' zs-long' : '') + '">' + pr.map((p, k) => '<li>' + SVG(pictoPratique(p, k)) + '<span>' + T(p) + '</span></li>').join('') + '</ul>' : '') +
       (m ? '<p class="zs-note">' + SVG('calendar') + '<span>' + note + '</span></p>' : '') +
     '</div>';
 }
