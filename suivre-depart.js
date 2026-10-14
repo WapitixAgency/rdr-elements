@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum 29728ad | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum a9243d7 | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="a9243d7";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -8,27 +8,31 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
 
   const SOURCE = '/_functions/dernieresInfos';
   const CADENCE = 120000;
+  const CADENCE_MAX = 900000;
   const ALEA = 20000;
   const MEMOIRE = 30000;
   const VITESSE = 52;
   const MAX = 6;
-  const PAGES = ['accueil', 'classement', 'cartographie'];
+  const TOUTES = 'toutes';
+  const PAGES = ['accueil', 'classement', 'cartographie', 'carte-village', 'suivre-depart'];
+  const RANG = { alerte: 0, vigilance: 1, info: 2 };
+  const STOCK = 'rdrDernieresInfosV2:';
 
   const T = {
     fr: {
-      region: 'Dernières infos', etiquette: 'Dernières infos', info: 'Info', alerte: 'Important',
+      region: 'Dernières infos', etiquette: 'Dernières infos', info: 'Info', vigilance: 'Attention', alerte: 'Alerte',
       suite: 'En savoir plus', onglet: 'nouvel onglet',
       pause: 'Mettre en pause le défilement des infos', reprendre: 'Reprendre le défilement des infos',
       prec: 'Info précédente', suiv: 'Info suivante', sur: (i, n) => i + ' sur ' + n,
-      nouvelle: 'Nouvelle info', nouvelleAlerte: 'Information importante',
+      nouvelle: 'Nouvelle info', nouvelleVigilance: 'Attention', nouvelleAlerte: 'Alerte',
       ranger: 'Ranger les dernières infos'
     },
     en: {
-      region: 'Latest news', etiquette: 'Latest news', info: 'Update', alerte: 'Important',
+      region: 'Latest news', etiquette: 'Latest news', info: 'Update', vigilance: 'Caution', alerte: 'Alert',
       suite: 'Read more', onglet: 'new tab',
       pause: 'Pause the news ticker', reprendre: 'Resume the news ticker',
       prec: 'Previous update', suiv: 'Next update', sur: (i, n) => i + ' of ' + n,
-      nouvelle: 'New update', nouvelleAlerte: 'Important update',
+      nouvelle: 'New update', nouvelleVigilance: 'Caution', nouvelleAlerte: 'Alert',
       ranger: 'Hide the latest news'
     }
   };
@@ -81,7 +85,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
     P + 'a.rdi-item:focus-visible{outline:2px solid currentColor;outline-offset:-5px;border-radius:4px}' +
     P + '.rdi-badge{flex:none;display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:3px 9px 3px 9px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1}' +
     P + '.rdi-badge svg{width:13px;height:13px}' +
+    
+
+
     P + '.rdi-badge--alerte{background:#fff;color:#D62839}' +
+    P + '.rdi-badge--vigilance{background:#0E111D;color:#FCF150}' +
     P + '.rdi-badge--info{background:#FCF150;color:#0E111D}' +
     P + '.rdi-texte{min-width:0}' +
     
@@ -148,6 +156,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
     return null;
   }
 
+  const niveauDe = (v) => (v === 'alerte' || v === 'rouge' ? 'alerte' : v === 'vigilance' || v === 'jaune' ? 'vigilance' : 'info');
+  const pagesDe = (v) => {
+    const l = (Array.isArray(v) ? v : []).map((p) => (p === 'partout' ? TOUTES : String(p))).filter((p) => p === TOUTES || PAGES.indexOf(p) >= 0);
+    return l.length ? l : [TOUTES];
+  };
+
    
   function normaliser(jeu) {
     const brut = Array.isArray(jeu) ? jeu : (jeu && Array.isArray(jeu.infos) ? jeu.infos : []);
@@ -162,27 +176,47 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
       vus.add(id);
       out.push({
         id, texte, rang: i,
-        niveau: x.niveau === 'alerte' ? 'alerte' : 'info',
+        niveau: niveauDe(x.niveau),
+        pages: pagesDe(x.pages),
+        langue: x.langue === 'fr' || x.langue === 'en' ? x.langue : '',
         lien: String(x.lien || ''),
         libelleLien: String(x.libelleLien == null ? '' : x.libelleLien).replace(/\s+/g, ' ').trim().slice(0, 60),
         debut: instant(x.debut), fin: instant(x.fin)
       });
     });
-    out.sort((a, b) => (a.niveau === b.niveau ? a.rang - b.rang : a.niveau === 'alerte' ? -1 : 1));
+    out.sort((a, b) => (RANG[a.niveau] - RANG[b.niveau]) || (a.rang - b.rang));
     return out;
   }
   const enCours = (x, t) => (x.debut == null || x.debut <= t) && (x.fin == null || x.fin > t);
+  const pourPage = (l, page) => l.filter((x) => x.pages.indexOf(TOUTES) >= 0 || x.pages.indexOf(page) >= 0);
+   
+  const cadenceDe = (jeu) => {
+    const s = Number(jeu && jeu.relire);
+    return isFinite(s) && s > 0 ? Math.min(CADENCE_MAX, Math.max(CADENCE, s * 1000)) : CADENCE;
+  };
+
+   
+  function stockLire(lang) {
+    try {
+      const v = JSON.parse(window.localStorage.getItem(STOCK + lang) || 'null');
+      return v && typeof v.t === 'number' && v.jeu && typeof v.jeu === 'object' ? v : null;
+    } catch (e) { return null; }
+  }
+  function stockEcrire(lang, jeu, t) {
+    try { window.localStorage.setItem(STOCK + lang, JSON.stringify({ t, jeu })); } catch (e) {   }
+  }
 
    
   const lectures = new Map();
-  function lireSource(url) {
+  function lireSource(url, lang) {
     const c = lectures.get(url);
     if (c && Date.now() - c.t < MEMOIRE) return c.p;
+    const t = Date.now();
     const p = fetch(url, { credentials: 'omit' }).then((r) => {
       if (!r.ok) throw new Error('dernieresInfos ' + r.status);
       return r.json();
-    });
-    lectures.set(url, { t: Date.now(), p });
+    }).then((jeu) => { stockEcrire(lang, jeu, t); return jeu; });
+    lectures.set(url, { t, p });
     p.catch(() => lectures.delete(url));
     return p;
   }
@@ -202,6 +236,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
       this._focus = false;
       this._indice = 0;
       this._lu = 0;
+      this._cadence = CADENCE;
       this._attente = false;
       this._etat = '';
       this._gardesMemoire = null;
@@ -223,12 +258,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
         this._hote = this.lastElementChild;
         this.addEventListener('click', (e) => this._clic(e));
         this.addEventListener('focusin', (e) => this._focusDedans(e));
+        
+
+
+        this.addEventListener('scroll', (e) => { const n = e.target; if (n && n.classList && (n.classList.contains('rdi-fenetre') || n.classList.contains('rdi')) && n.scrollLeft) n.scrollLeft = 0; }, true);
         this.addEventListener('focusout', (e) => { if (!this.contains(e.relatedTarget)) { this._focus = false; this._jouer(); } });
         this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { this._survol = true; this._jouer(); } });
         this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { this._survol = false; this._jouer(); } });
       }
       this._visibilite = () => this._surVisibilite();
       document.addEventListener('visibilitychange', this._visibilite);
+      this._stock = (e) => this._surStock(e);
+      window.addEventListener('storage', this._stock);
       this._mqReduit = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
       this._surReduit = () => { this._signature = null; this._peindre(); };
       if (this._mqReduit && this._mqReduit.addEventListener) this._mqReduit.addEventListener('change', this._surReduit);
@@ -238,6 +279,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
 
     disconnectedCallback() {
       document.removeEventListener('visibilitychange', this._visibilite);
+      window.removeEventListener('storage', this._stock);
       if (this._mqReduit && this._mqReduit.removeEventListener) this._mqReduit.removeEventListener('change', this._surReduit);
       clearTimeout(this._minuteur);
       clearTimeout(this._bascule);
@@ -253,9 +295,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
         this._lang = langueDe(this);
         this._signature = null;
         if (this.hasAttribute('infos')) this._peindre(); else { this._lu = 0; this._lire(); }
-      } else if (nom === 'page' && !this.hasAttribute('infos')) {
-        this._lu = 0;
-        this._lire();
+      } else if (nom === 'page') {
+        this._signature = null;
+        if (this.hasAttribute('infos')) this._depuisAttribut(); else { this._lu = 0; this._lire(); }
       } else if (nom === 'rangeable') {
         this._signature = null;
         this._peindre();
@@ -284,35 +326,70 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
       this._peindre();
     }
 
+     
+    _page() {
+      const p = String(this.getAttribute('page') || '').toLowerCase();
+      return PAGES.indexOf(p) >= 0 ? p : TOUTES;
+    }
+
     _depuisAttribut() {
       clearTimeout(this._minuteur);
       let jeu = null;
       try { jeu = JSON.parse(this.getAttribute('infos') || 'null'); } catch (e) { jeu = null; }
-      this._toutes = normaliser(jeu);
+      this._toutes = pourPage(normaliser(jeu), this._page());
       this._peindre();
     }
 
-    _url() {
-      const page = String(this.getAttribute('page') || '').toLowerCase();
-      return SOURCE + '?page=' + (PAGES.indexOf(page) >= 0 ? page : 'partout') + '&lang=' + this._lang;
+     
+    _url() { return SOURCE + '?page=' + TOUTES + '&lang=' + this._lang; }
+
+    _recevoir(jeu) {
+      this._cadence = cadenceDe(jeu);
+      this._toutes = pourPage(normaliser(jeu), this._page());
+      this._peindre();
     }
 
-     
+    _programmer(ms) {
+      clearTimeout(this._minuteur);
+      if (this.isConnected && !this.hasAttribute('infos')) this._minuteur = setTimeout(() => this._lire(), Math.max(5000, ms) + Math.round(Math.random() * ALEA));
+    }
+
+    
+
     _lire() {
       clearTimeout(this._minuteur);
       if (!this.isConnected || this.hasAttribute('infos')) return;
       if (document.visibilityState === 'hidden') { this._attente = true; return; }
       this._attente = false;
-      this._lu = Date.now();
-      lireSource(this._url())
-        .then((jeu) => { if (this.isConnected && !this.hasAttribute('infos')) { this._toutes = normaliser(jeu); this._peindre(); } })
+      const t = Date.now();
+      const s = stockLire(this._lang);
+      if (s && t - s.t >= 0 && t - s.t < cadenceDe(s.jeu)) {
+        this._lu = s.t;
+        this._recevoir(s.jeu);
+        this._programmer(this._cadence - (t - s.t));
+        return;
+      }
+      this._lu = t;
+      lireSource(this._url(), this._lang)
+        .then((jeu) => { if (this.isConnected && !this.hasAttribute('infos')) this._recevoir(jeu); })
         .catch(() => {})
-        .then(() => { if (this.isConnected && !this.hasAttribute('infos')) this._minuteur = setTimeout(() => this._lire(), CADENCE + Math.round(Math.random() * ALEA)); });
+        .then(() => this._programmer(this._cadence));
+    }
+
+     
+    _surStock(e) {
+      if (!e || e.key !== STOCK + this._lang || !e.newValue || this.hasAttribute('infos') || !this.isConnected) return;
+      let v = null;
+      try { v = JSON.parse(e.newValue); } catch (err) { v = null; }
+      if (!v || typeof v.t !== 'number' || !v.jeu || typeof v.jeu !== 'object') return;
+      this._lu = v.t;
+      this._recevoir(v.jeu);
+      if (document.visibilityState !== 'hidden') this._programmer(this._cadence - (Date.now() - v.t));
     }
 
     _surVisibilite() {
       if (document.visibilityState !== 'visible' || this.hasAttribute('infos')) return;
-      if (this._attente || Date.now() - this._lu >= CADENCE) this._lire();
+      if (this._attente || Date.now() - this._lu >= this._cadence) this._lire();
     }
 
      
@@ -328,7 +405,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
       const gardes = rangeable ? this._gardes() : null;
       const range = !!(rangeable && vis.length && gardes && vis.every((x) => gardes.indexOf(x.id) >= 0));
       if (rangeable && gardes && vis.length && !range) this._garder(null);
-      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.lien, x.libelleLien]));
+      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.langue, x.lien, x.libelleLien]));
       if (signature === this._signature) return;
       this._signature = signature;
       this._annoncer(vis);
@@ -336,6 +413,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
       this._focus = false;
       const L = T[this._lang];
       const rouge = vis.some((x) => x.niveau === 'alerte');
+      const niveau = vis.length ? vis.reduce((m, x) => (RANG[x.niveau] < RANG[m] ? x.niveau : m), 'info') : null;
       if (!vis.length || range) {
         this._hote.innerHTML = '';
       } else {
@@ -359,21 +437,23 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
           '</section>';
         if (mode === 'defile') this._monterDefilement();
       }
-      const etat = vis.length + '|' + range + '|' + rouge;
+      const etat = vis.length + '|' + range + '|' + niveau;
       if (etat !== this._etat) {
         this._etat = etat;
         this._nombre = vis.length;
-        this.dispatchEvent(new CustomEvent('dernieres-infos', { bubbles: true, detail: { nombre: vis.length, range, alerte: rouge } }));
+        this.dispatchEvent(new CustomEvent('dernieres-infos', { bubbles: true, detail: { nombre: vis.length, range, alerte: rouge, niveau } }));
       }
     }
 
     _itemHTML(x, L, rouge, cache) {
-      const badge = x.niveau === 'alerte'
-        ? '<span class="rdi-badge rdi-badge--alerte">' + svg(ICO.alerte) + esc(L.alerte) + '</span>'
-        : (rouge ? '<span class="rdi-badge rdi-badge--info">' + esc(L.info) + '</span>' : '');
+      const badge = x.niveau === 'info'
+        ? (rouge ? '<span class="rdi-badge rdi-badge--info">' + esc(L.info) + '</span>' : '')
+        : '<span class="rdi-badge rdi-badge--' + x.niveau + '">' + svg(ICO.alerte) + esc(L[x.niveau]) + '</span>';
       const a = adresse(x.lien, this._lang);
-      const corps = badge + '<span class="rdi-texte">' + esc(x.texte) + '</span>';
-      const li = '<li class="rdi-li" data-id="' + esc(x.id) + '"' + (cache ? ' hidden' : '') + '>';
+       
+      const autre = x.langue && x.langue !== this._lang ? ' lang="' + x.langue + '"' : '';
+      const corps = badge + '<span class="rdi-texte"' + autre + '>' + esc(x.texte) + '</span>';
+      const li = '<li class="rdi-li" data-id="' + esc(x.id) + '" data-niveau="' + x.niveau + '"' + (cache ? ' hidden' : '') + '>';
       if (!a) return li + '<span class="rdi-item"><span class="rdi-corps">' + corps + '</span></span></li>';
       const libelle = x.libelleLien || L.suite;
       return li + '<a class="rdi-item" href="' + esc(a.href) + '"' + (a.externe ? ' target="_blank" rel="noopener"' : '') + '><span class="rdi-corps">' + corps +
@@ -388,7 +468,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="29728ad";per
         const neuve = vis.find((x) => !this._connues.has(x.id));
         if (neuve && this._statut) {
           const L = T[this._lang];
-          this._statut.textContent = (neuve.niveau === 'alerte' ? L.nouvelleAlerte : L.nouvelle) + ' : ' + neuve.texte;
+          this._statut.textContent = (neuve.niveau === 'alerte' ? L.nouvelleAlerte : neuve.niveau === 'vigilance' ? L.nouvelleVigilance : L.nouvelle) + ' : ' + neuve.texte;
         }
       }
       this._connues = ids;

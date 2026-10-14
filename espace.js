@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 29728ad | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="29728ad";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum a9243d7 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="a9243d7";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -15842,14 +15842,34 @@ if (!customElements.get('espace-rhum')) {
     
 
 
+
+
+    _top50Clos() {
+      if (this._payload?.top50?.clos === true) return true;
+      const r = this._payload?.topReglages;
+      const c = r && r.cloture ? Date.parse(r.cloture) : NaN;
+      if (Number.isFinite(c) && Date.now() >= c) return true;
+      return !!(this._payload?.apercuAutorise && /[?&]top50=clos(?:&|$)/.test(location.search || ''));
+    }
+    
+
+
     _top50LigneMoi(en, classe) {
       const t = this._payload?.top50;
-      const p = (t && t.maPlace) || {};
+      const p = Object.assign({}, (t && t.maPlace) || {});
+      const clos = this._top50Clos();
+      if (clos) {
+        const moi = ((t && t.lignes) || []).find(l => l.moi);
+        p.rang = moi ? moi.rang : null;
+        p.dansTop = !!moi;
+        if (moi) p.points = moi.score;
+      }
       const badges = Number(p.nbBadges) || 0;
       const detail = [p.palier, badges + ' ' + (en ? (badges > 1 ? 'badges' : 'badge') : (badges > 1 ? 'badges' : 'badge'))].filter(Boolean).join(' · ');
+      const vide = clos ? (en ? 'Outside the top 50' : 'Hors du top 50') : (en ? 'Not ranked yet' : 'Pas encore classé');
       const rang = p.rang
         ? `${this._top50Rang(p.rang, en)}${p.dansTop ? '' : `<small class="er-top50-moi-sur">/ ${this._top50Nombre(p.membres)}</small>`}`
-        : `<span class="er-top50-moi-rang--vide">${en ? 'Not ranked yet' : 'Pas encore classé'}</span>`;
+        : `<span class="er-top50-moi-rang--vide">${vide}</span>`;
       return `<div class="er-top50-moi${classe ? ' ' + classe : ''}">
         <span class="er-top50-moi-rang">${rang}</span>
         <span class="er-top50-moi-txt"><b>${en ? 'Your place' : 'Ta place'}</b><span>${escapeHtml(detail)}</span></span>
@@ -15893,15 +15913,22 @@ if (!customElements.get('espace-rhum')) {
         </li>`).join('');
       const lots = r && (r.lots.length || r.accroche);
       const nb = r && r.nbPremiers ? r.nbPremiers : 10;
+      const clos = this._top50Clos();
+      const titreLots = clos ? (en ? `The top ${nb} prizes` : `Les lots des ${nb} premiers`) : (en ? `Up for grabs for the top ${nb}` : `À gagner pour les ${nb} premiers`);
       const coffre = !lots ? '' : `
         <button class="er-top50-lot" type="button" data-top50-fen="lots">
           <span class="er-top50-coffre">${ICON_TOP50_COFFRE}</span>
-          <span class="er-top50-lot-txt"><b>${en ? `Up for grabs for the top ${nb}` : `À gagner pour les ${nb} premiers`}</b>${r.accroche ? `<span>${escapeHtml(r.accroche)}</span>` : ''}</span>
+          <span class="er-top50-lot-txt"><b>${titreLots}</b>${r.accroche ? `<span>${escapeHtml(r.accroche)}</span>` : ''}</span>
           <span class="er-top50-lot-fleche">${ICON_TOP50_FLECHE}</span>
         </button>`;
-      const chrono = this._top50Chrono(en);
-      const pied = !chrono ? '' : `
-        <p class="er-top50-pied" role="timer" aria-label="${en ? 'Time left before the ranking closes' : 'Temps restant avant la clôture du classement'}">${ICON_TOP50_HORLOGE}<b>${en ? 'Ranking closes' : 'Clôture du classement'}</b> ${escapeHtml(r.clotureTexte || '')} <span class="er-top50-chrono">${chrono}</span></p>`;
+      const chrono = clos ? '' : this._top50Chrono(en);
+      const pied = clos
+        ? `<p class="er-top50-pied er-top50-pied--clos">${ICON_TOP50_HORLOGE}<b>${en ? 'Ranking closed' : 'Classement clos'}</b> ${escapeHtml((r && r.clotureTexte) || '')}</p>`
+        : (!chrono ? '' : `
+        <p class="er-top50-pied" role="timer" aria-label="${en ? 'Time left before the ranking closes' : 'Temps restant avant la clôture du classement'}">${ICON_TOP50_HORLOGE}<b>${en ? 'Ranking closes' : 'Clôture du classement'}</b> ${escapeHtml(r.clotureTexte || '')} <span class="er-top50-chrono">${chrono}</span></p>`);
+      const sous = clos
+        ? (en ? 'The ranking is closed. Here are the community’s 50 most active members at closing time.' : 'Le classement est clos. Voici les 50 plus actifs de la communauté à la clôture.')
+        : (en ? 'The 50 most active members of the community, recalculated every night. Read, come back, follow your skippers: every move counts.' : 'Les 50 plus actifs de la communauté, recalculés chaque nuit. Lis, reviens, suis tes skippers : chaque geste compte.');
       const reglement = r && r.reglement ? `<button class="er-top50-lien" type="button" data-top50-fen="reglement">${ICON_TOP50_REGLEMENT}${en ? 'Rules' : 'Règlement'}</button>` : '';
       return `
         <div class="er-widget er-widget--top50 er-motif-host" data-slot="leaderboard-teaser" role="region" aria-label="${en ? 'Fan ranking' : 'Classement des fans'}">
@@ -15910,7 +15937,7 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-top50-tete">
               <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Fan ranking' : 'Classement des fans'}</p>
               <h3 class="er-top50-titre">${en ? 'The <em>top 50</em> fans' : 'Le <em>top 50</em> des fans'}</h3>
-              <p class="er-top50-sous">${en ? 'The 50 most active members of the community, recalculated every night. Read, come back, follow your skippers: every move counts.' : 'Les 50 plus actifs de la communauté, recalculés chaque nuit. Lis, reviens, suis tes skippers : chaque geste compte.'}</p>
+              <p class="er-top50-sous">${sous}</p>
             </div>
             ${coffre}
             ${this._top50LigneMoi(en)}
@@ -15957,7 +15984,9 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-top50-fen-tete">
               <div>
                 <h3 class="er-top50-fen-titre" id="er-top50-fen-titre-tableau">${en ? 'The <em>top 50</em> fans' : 'Le <em>top 50</em> des fans'}</h3>
-                <p class="er-top50-fen-sous">${en ? `Ranking${dateTxt ? ' of ' + escapeHtml(dateTxt) : ''}, recalculated every night from the points of the last 60 days.` : `Classement${dateTxt ? ' du ' + escapeHtml(dateTxt) : ''}, recalculé chaque nuit à partir des points des 60 derniers jours.`}</p>
+                <p class="er-top50-fen-sous">${this._top50Clos()
+                  ? (en ? 'Final ranking, frozen when the ranking closed.' : 'Classement final, arrêté à la clôture.')
+                  : (en ? `Ranking${dateTxt ? ' of ' + escapeHtml(dateTxt) : ''}, recalculated every night from the points of the last 60 days.` : `Classement${dateTxt ? ' du ' + escapeHtml(dateTxt) : ''}, recalculé chaque nuit à partir des points des 60 derniers jours.`)}</p>
               </div>
               <button class="er-top50-fen-x" type="button" data-top50-fermer aria-label="${fermer}">${ICON_CLOSE}</button>
             </div>
@@ -16049,23 +16078,68 @@ if (!customElements.get('espace-rhum')) {
       document.addEventListener('keydown', this._top50Esc);
       
 
+      
+
+
       const chrono = brique.querySelector('.er-top50-chrono');
       if (chrono) {
         const en = this._lang() === 'en';
         this._top50Timer = setInterval(() => {
           if (!chrono.isConnected) { clearInterval(this._top50Timer); this._top50Timer = null; return; }
+          if (this._top50Clos()) {
+            if (fenetres.some(f => f.dataset.open === 'true')) return;
+            clearInterval(this._top50Timer); this._top50Timer = null;
+            this._top50Redessiner();
+            return;
+          }
           chrono.innerHTML = this._top50Chrono(en);
         }, 1000);
       }
     }
+    _top50Redessiner() {
+      const brique = this.querySelector('.er-widget--top50');
+      if (!brique) return;
+      const tmp = document.createElement('div');
+      tmp.innerHTML = this._buildTop50Widget().trim();
+      const neuve = tmp.firstElementChild;
+      if (!neuve) return;
+      brique.replaceWith(neuve);
+      const anciennes = [...this.querySelectorAll('.er-top50-fen')];
+      if (anciennes.length) {
+        anciennes[0].insertAdjacentHTML('beforebegin', this._buildTop50Fenetres());
+        anciennes.forEach(f => f.remove());
+      }
+      this._wireTop50();
+    }
 
+    
+
+
+    _top50DateOuverture(en) {
+      const t = this._payload?.topOuverture ? Date.parse(this._payload.topOuverture) : NaN;
+      if (!Number.isFinite(t) || t <= Date.now()) return '';
+      const d = new Date(t);
+      const opts = { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' };
+      let jour = '', heure = '';
+      try {
+        const parts = new Intl.DateTimeFormat(en ? 'en-GB' : 'fr-FR', opts).formatToParts(d);
+        const v = (k) => (parts.find(p => p.type === k) || {}).value || '';
+        jour = v('day') + ' ' + v('month');
+        heure = en ? v('hour') + ':' + v('minute') : (v('minute') === '00' ? Number(v('hour')) + ' h' : Number(v('hour')) + ' h ' + v('minute'));
+      } catch (e) {
+        jour = d.toLocaleDateString(en ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'long' });
+      }
+      return heure ? jour + ' · ' + heure : jour;
+    }
     _buildLeaderboardTeaserWidget() {
+      const en = this._lang() === 'en';
+      const date = this._top50DateOuverture(en);
       return `
-        <div class="er-widget er-widget--leaderboard-teaser er-motif-host" data-slot="leaderboard-teaser" role="region" aria-label="Classement à venir">
+        <div class="er-widget er-widget--leaderboard-teaser er-motif-host" data-slot="leaderboard-teaser" role="region" aria-label="${en ? 'Ranking coming soon' : 'Classement à venir'}">
           <div class="er-leaderboard-icon">${ICON_TROPHY_LARGE}</div>
-          <h3 class="er-leaderboard-teaser-title">Classement à venir</h3>
-          <p class="er-leaderboard-teaser-text">Le top 50 des fans les plus actifs sera dévoilé à l'ouverture du village.</p>
-          <div class="er-leaderboard-teaser-date">20 octobre 2026 · Saint-Malo</div>
+          <h3 class="er-leaderboard-teaser-title">${en ? 'Ranking coming soon' : 'Classement à venir'}</h3>
+          <p class="er-leaderboard-teaser-text">${en ? 'The top 50 most active fans will be revealed here.' : 'Le top 50 des fans les plus actifs sera dévoilé ici.'}</p>
+          ${date ? `<div class="er-leaderboard-teaser-date">${escapeHtml(date)}</div>` : ''}
         </div>
       `;
     }
