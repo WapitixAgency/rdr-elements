@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 4696d0f | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="4696d0f";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 72bf82d | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="72bf82d";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -819,6 +819,10 @@ if (!customElements.get('espace-rhum')) {
    
   const JT_I_CADEAU = '<path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/>';
   const JT_I_VELO = '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>';
+   
+  const JT_I_PHOTO = '<path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/>';
+  const JT_I_ETOILE = '<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>';
+  const JT_I_COEUR = '<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>';
   const JT_I_CHRONO = '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/>';
   const JT_I_FLECHE = '<path d="M5 12h14M13 6l6 6-6 6"/>';
   const JT_I_RETOUR = '<path d="M19 12H5M11 18l-6-6 6-6"/>';
@@ -1672,6 +1676,43 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-ouvert > .jt-cadre{aspect-ratio:auto;align-self:stretch;min-height:300px}
     espace-rhum .jt-ouvert--mobilite .jt-cadre-img{position:absolute;inset:0;padding:0;object-fit:cover;object-position:33% 58%;filter:none}
     espace-rhum .jt-ouvert--mobilite .jt-cadre::after{background:linear-gradient(90deg,rgba(10,26,53,0) 70%,rgba(10,26,53,.35) 100%);z-index:3}
+    
+
+
+    espace-rhum .jt-bandeaux{grid-column:1/-1;display:flex;flex-direction:column;gap:8px;min-width:0}
+    espace-rhum .jt-bandeau a.jt-jouer{text-decoration:none}
+    espace-rhum .jt-bandeau-montre.jp-bandeau-vignette img{transform:none;object-position:50% 50%}
+    espace-rhum .jt-ouvert--photo .jp-cadre{background:radial-gradient(90% 70% at 20% 0%,rgba(93,191,192,.35) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
+    espace-rhum .jt-ouvert--photo .jp-cadre .jt-cadre-img{padding:clamp(18px,11%,34px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+    espace-rhum .jp-ma{display:flex;align-items:center;gap:14px;max-width:62ch;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+    espace-rhum .jp-ma--vide{border-style:dashed;border-color:rgba(255,255,255,.18);background:transparent}
+    espace-rhum .jp-ma-img{flex:none;display:block;width:72px;height:72px;max-width:none;object-fit:cover;border-radius:3px 12px 3px 12px;border:1px solid rgba(255,255,255,.18)}
+    espace-rhum .jp-ma--refusee .jp-ma-img,espace-rhum .jp-ma--retiree .jp-ma-img{filter:grayscale(.7) brightness(.8)}
+    espace-rhum .jp-ma-ico{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:3px 12px 3px 12px;background:rgba(93,191,192,.14);border:1px solid rgba(93,191,192,.3);color:var(--er-teal)}
+    espace-rhum .jp-ma-ico svg{width:22px;height:22px}
+    espace-rhum .jp-ma-corps{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+    espace-rhum .jp-ma-statut{padding:4px 9px;border-radius:3px 10px 3px 10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+    espace-rhum .jp-ma--en_attente .jp-ma-statut{background:rgba(252,241,80,.16);color:var(--er-amber-bright)}
+    espace-rhum .jp-ma--validee .jp-ma-statut{background:var(--er-teal);color:#0A1228}
+    espace-rhum .jp-ma--refusee .jp-ma-statut{background:rgba(255,107,107,.2);color:#FFA3A3}
+    espace-rhum .jp-ma--retiree .jp-ma-statut{background:rgba(255,255,255,.14);color:#fff}
+    espace-rhum .jp-ma-leg{font-size:13px;font-style:italic;line-height:1.4;color:#fff;overflow-wrap:anywhere}
+    espace-rhum .jp-ma-txt{margin:0;font-size:13.5px;line-height:1.45;color:var(--er-text-secondary)}
+    espace-rhum .jp-chiffres{display:inline-flex;flex-wrap:wrap;gap:6px 16px;font-size:15px;font-weight:800;color:#fff}
+    espace-rhum .jp-chiffres > span{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+    espace-rhum .jp-chiffres svg{width:16px;height:16px;color:#FF8FA3}
+    espace-rhum .jp-chiffres > span + span svg{color:var(--er-amber-bright)}
+    espace-rhum .jp-ma-note{display:block;margin-top:3px;font-size:11.5px;font-weight:600;color:var(--er-text-muted)}
+    espace-rhum .jp-vote{display:flex;flex-wrap:wrap;gap:6px 20px;margin:0;font-size:13.5px;line-height:1.45;color:var(--er-text-secondary)}
+    espace-rhum .jp-vote-l{display:inline-flex;align-items:flex-start;gap:8px}
+    espace-rhum .jp-vote-l svg{flex:none;width:16px;height:16px;margin-top:1px;color:var(--er-amber-bright)}
+    espace-rhum .jp-vote-l--fait svg{fill:var(--er-amber-bright)}
+    espace-rhum .jt-etat.jp-essai{padding:4px 9px;background:transparent;border:1.5px dashed var(--er-teal);color:var(--er-teal)}
+    @media (max-width:767px){
+      espace-rhum .jt-ouvert.jt-ouvert--photo > .jt-cadre{aspect-ratio:16/7}
+      espace-rhum .jp-ma{align-items:flex-start;gap:12px}
+      espace-rhum .jp-ma-img{width:60px;height:60px}
+    }
     espace-rhum .jt-ouvert .jt-corps{justify-content:center;gap:12px;padding:24px clamp(20px,2.4vw,32px)}
     espace-rhum .jt-ouvert .jt-titre{font-size:clamp(28px,2.6vw,38px)}
     espace-rhum .jt-ouvert .jt-texte{font-size:14.5px;max-width:62ch}
@@ -15627,7 +15668,8 @@ if (!customElements.get('espace-rhum')) {
         { k: 'combativite',   n: 'Combativité' },
         { k: 'pack-fan',      n: 'Pack Fan' },
         { k: 'compteur-fans', n: 'Compteur de fans' },
-        { k: 'top-50',        n: 'Top 50 des fans' }
+        { k: 'top-50',        n: 'Top 50 des fans' },
+        { k: 'concours-photo', n: 'Challenge photo' }
       ];
       
 
@@ -19420,6 +19462,13 @@ if (!customElements.get('espace-rhum')) {
         else if (p.phase === 'avant') out.avenir.push('le-juste-temps');
         else out.fini.push('le-juste-temps');
       }
+      
+
+
+      const ph = this._jpEtat();
+      if (ph && (ph.etat === 'ouvert' || ph.etat === 'votes')) out.cours.push('challenge-photo');
+      else if (ph && ph.etat === 'avant') out.avenir.push('challenge-photo');
+      else if (ph && ph.etat === 'clos') out.fini.push('challenge-photo');
       const m = this._jmEtat();
       if (m && m.ouvert) out.cours.push('challenge-mobilite');
       else if (m && m.termine) out.fini.push('challenge-mobilite');
@@ -19472,6 +19521,217 @@ if (!customElements.get('espace-rhum')) {
         '<p class="jt-texte">' + texte + '</p>' + lots + (actions ? '<div class="jt-bas">' + actions + '</div>' : '') + '</div>';
     }
 
+    
+
+
+
+
+
+
+    _jpEtat() {
+      const p = this._payload && this._payload.jeux && this._payload.jeux.photo;
+      return (p && typeof p === 'object' && ['avant', 'ouvert', 'votes', 'clos'].includes(p.etat)) ? p : null;
+    }
+
+    _jpLien() { return escapeHtml(this._cheminLangue('/concours-photo-2026')); }
+
+     
+    _jpJour(iso) {
+      const d = new Date(iso);
+      if (!iso || isNaN(d.getTime())) return '';
+      if (this._lang() === 'en') return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', timeZone: 'Europe/Paris' });
+      const n = Number(d.toLocaleDateString('fr-FR', { day: 'numeric', timeZone: 'Europe/Paris' }));
+      return (n === 1 ? '1er' : String(n)) + ' ' + d.toLocaleDateString('fr-FR', { month: 'long', timeZone: 'Europe/Paris' });
+    }
+
+     
+    _jpEcheance(p) {
+      const en = this._lang() === 'en';
+      const futur = (iso) => !!iso && Date.parse(iso) > Date.now();
+      if (p.etat === 'avant' && futur(p.ouvertureLe)) return { fin: p.ouvertureLe, lab: en ? 'Opens in' : 'Ouverture dans', court: en ? 'Opens' : 'Ouverture le' };
+      if (p.etat === 'ouvert' && futur(p.clotureDepotsLe)) return { fin: p.clotureDepotsLe, lab: en ? 'Submissions close in' : 'Fin des dépôts dans', court: en ? 'Submissions until' : 'Dépôts jusqu\'au' };
+      if (p.etat === 'votes' && futur(p.clotureVotesLe)) return { fin: p.clotureVotesLe, lab: en ? 'Voting closes in' : 'Fin des votes dans', court: en ? 'Voting until' : 'Votes jusqu\'au' };
+      return null;
+    }
+
+     
+    _jpPluriel(n, fr, en) {
+      return this._lang() === 'en' ? n + ' ' + en + (n === 1 ? '' : 's') : n + ' ' + fr + (n > 1 ? 's' : '');
+    }
+
+    
+
+    _jpMaPhoto(p) {
+      const en = this._lang() === 'en';
+      const m = p.maPhoto;
+      const ico = '<span class="jp-ma-ico" aria-hidden="true">' + jtSvg(JT_I_PHOTO) + '</span>';
+      if (!m) {
+        if (p.etat === 'avant') return '';
+        if (p.indisponible) {
+          return '<div class="jp-ma jp-ma--vide">' + ico + '<p class="jp-ma-txt">' + (en ? 'Your entry could not be read right now. Try again in a moment.'
+            : 'Ta participation n\'a pas pu être lue pour l\'instant. Réessaie dans un moment.') + '</p></div>';
+        }
+        if (!p.depotsOuverts) return '';
+        return '<div class="jp-ma jp-ma--vide">' + ico + '<p class="jp-ma-txt">' + (en ? 'You haven\'t submitted a photo yet.' : 'Tu n\'as pas encore déposé de photo.') +
+          (p.raison === 'reglement' ? (en ? ' Submissions open very soon.' : ' Le dépôt ouvre très bientôt.') : '') + '</p></div>';
+      }
+      const img = m.image ? jtImage(m.image, 240) : '';
+      const vignette = img ? '<img class="jp-ma-img" src="' + escapeHtml(img) + '" alt="' + (en ? 'Your photo' : 'Ta photo') + '" loading="lazy" decoding="async">' : ico;
+      const raison = m.motif ? (en ? 'Reason: ' : 'Raison : ') + m.motif.replace(/[.\s]+$/, '') + '.' : '';
+      let pastille = '', texte = '';
+      if (m.statut === 'en_attente') {
+        pastille = en ? 'Under review' : 'En relecture';
+        texte = en ? 'Your photo has arrived. The team reviews it before putting it online, and you\'ll be told here.'
+          : 'Ta photo est bien arrivée. L\'équipe la relit avant de la mettre en ligne, et tu en seras prévenu ici.';
+      } else if (m.statut === 'validee') {
+        pastille = en ? 'Online' : 'En ligne';
+        texte = '<span class="jp-chiffres"><span>' + jtSvg(JT_I_COEUR) + escapeHtml(this._jpPluriel(m.coeurs, 'cœur', 'heart')) + '</span>' +
+          '<span>' + jtSvg(JT_I_ETOILE) + escapeHtml(this._jpPluriel(m.etoiles, 'étoile', 'star')) + '</span></span>' +
+          '<small class="jp-ma-note">' + (en ? 'Counted every night.' : 'Comptés chaque nuit.') + '</small>';
+      } else if (m.statut === 'refusee') {
+        pastille = en ? 'Not accepted' : 'Non retenue';
+        const suite = p.peutDeposer ? (en ? 'You can submit another one, only once.' : 'Tu peux en proposer une autre, une seule fois.')
+          : p.raison === 'trop_tot' ? (en ? 'You can submit another one in a few minutes.' : 'Tu pourras en proposer une autre dans quelques minutes.')
+          : p.raison === 'refus_max' ? (en ? 'This was your second photo not accepted, you can\'t submit another one.' : 'C\'était ta deuxième photo non retenue, tu ne peux plus en proposer.')
+          : p.raison === 'depots_clos' ? (en ? 'Submissions are closed.' : 'Les dépôts sont clos.') : '';
+        texte = escapeHtml([raison, suite].filter(Boolean).join(' '));
+      } else {
+        pastille = en ? 'Removed' : 'Retirée';
+        texte = escapeHtml([en ? 'It has been removed from the wall.' : 'Elle a été retirée du mur.', raison].filter(Boolean).join(' '));
+      }
+      const legende = m.legende ? '<span class="jp-ma-leg">' + escapeHtml(en ? '“' + m.legende + '”' : '« ' + m.legende + ' »') + '</span>' : '';
+      return '<div class="jp-ma jp-ma--' + escapeHtml(m.statut) + '">' + vignette + '<div class="jp-ma-corps">' +
+        '<span class="jp-ma-statut">' + pastille + '</span>' + legende + '<p class="jp-ma-txt">' + texte + '</p></div></div>';
+    }
+
+    
+
+    _jpVote(p) {
+      const en = this._lang() === 'en';
+      if (p.etat === 'avant') return '';
+      const fin = p.clotureVotesLe && Date.parse(p.clotureVotesLe) > Date.now() ? this._jpJour(p.clotureVotesLe) : '';
+      const lignes = [];
+      if (p.aVote) {
+        lignes.push('<span class="jp-vote-l jp-vote-l--fait">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'You have voted for your favourite photo.' : 'Tu as voté pour ta photo préférée.') +
+          (p.votesOuverts ? (en ? ' You can change your mind until ' + (fin || 'voting closes') + '.' : ' Tu peux changer d\'avis jusqu\'' + (fin ? 'au ' + fin : 'à la clôture des votes') + '.') : '') + '</span></span>');
+      } else if (p.votesOuverts) {
+        lignes.push('<span class="jp-vote-l">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'You haven\'t voted yet.' : 'Tu n\'as pas encore voté.') + '</span></span>');
+      }
+      if (p.nbCoeurs > 0) {
+        lignes.push('<span class="jp-vote-l">' + jtSvg(JT_I_COEUR) + '<span>' + (en ? p.nbCoeurs + ' photo' + (p.nbCoeurs > 1 ? 's' : '') + ' saved'
+          : p.nbCoeurs + ' photo' + (p.nbCoeurs > 1 ? 's gardées' : ' gardée')) + '</span></span>');
+      }
+      return lignes.length ? '<p class="jp-vote">' + lignes.join('') + '</p>' : '';
+    }
+
+     
+    _jpActions(p) {
+      const en = this._lang() === 'en';
+      const lien = this._jpLien();
+      const autre = p.maPhoto && p.maPhoto.statut === 'refusee';
+      let principal = '';
+      if (p.peutDeposer) {
+        principal = '<a class="er-btn er-btn--primary jt-cta" href="' + lien + '">' + jtSvg(JT_I_PHOTO) + '<span>' +
+          (autre ? (en ? 'Submit another photo' : 'Déposer une autre photo') : (en ? 'Submit my photo' : 'Déposer ma photo')) + '</span></a>';
+      } else if (p.votesOuverts && !p.aVote) {
+        principal = '<a class="er-btn er-btn--primary jt-cta" href="' + lien + '">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'Vote' : 'Voter') + '</span></a>';
+      }
+      const voir = p.etat === 'avant' ? '' : principal
+        ? '<a class="jt-lien" href="' + lien + '">' + (en ? 'See the photos' : 'Voir les photos') + '</a>'
+        : '<a class="er-btn er-btn--outline jt-cta" href="' + lien + '">' + jtSvg(JT_I_PHOTO) + '<span>' + (en ? 'See the photos' : 'Voir les photos') + '</span></a>';
+      const reglement = p.reglementUrl ? '<a class="jt-lien" href="' + escapeHtml(p.reglementUrl) + '" target="_blank" rel="noopener">' + (en ? 'Game rules' : 'Règlement du jeu') + '</a>' : '';
+      const tout = principal + voir + reglement;
+      return tout ? '<div class="jt-actions">' + tout + '</div>' : '';
+    }
+
+    _jpCorps() {
+      const p = this._jpEtat();
+      const en = this._lang() === 'en';
+      const ETATS = {
+        ouvert: ['', en ? 'Open' : 'Ouvert'],
+        votes: ['', en ? 'Voting open' : 'Votes ouverts'],
+        avant: [' jt-etat--bientot', en ? 'Coming soon' : 'Bientôt'],
+        clos: [' jt-etat--ferme', en ? 'Finished' : 'Terminé']
+      };
+      const e = ETATS[p.etat];
+      const ech = this._jpEcheance(p);
+      const periode = ech ? ech.court + ' ' + this._jpJour(ech.fin) : (en ? 'With Alpina' : 'Avec Alpina');
+      const texte = p.etat === 'votes'
+        ? (en ? 'Submissions are closed. All that\'s left is to pick your favourite among the members\' photos.' : 'Les dépôts sont clos. Il reste à choisir ta photo préférée parmi celles des membres.')
+        : p.etat === 'clos'
+          ? (en ? 'The Photo Challenge is over. Its photos remain on the wall.' : 'Le Challenge photo est terminé. Ses photos restent à voir sur le mur.')
+          : (en ? 'One photo per member, the one that best tells your Route du Rhum, and a star for your favourite among the others.'
+            : 'Une photo par membre, celle qui raconte le mieux ta Route du Rhum, et une étoile pour ta préférée parmi celles des autres.');
+      const bas = (ech ? this._jtCompte(ech.fin, ech.lab) : '') + this._jpActions(p);
+       
+      const essai = p.essai ? '<span class="jt-etat jp-essai">' + (en ? 'Test' : 'Essai') + '</span>' : '';
+      return '<div class="jt-corps"><div class="jt-etiquettes"><span class="jt-etat' + e[0] + '">' + e[1] + '</span>' + essai + '<span class="jt-partenaire">' + escapeHtml(periode) + '</span></div>' +
+        '<h3 class="jt-titre"><small>' + (en ? 'The' : 'Le') + '</small>' + (en ? 'Photo Challenge' : 'Challenge photo') + '</h3>' +
+        '<p class="jt-texte">' + texte + '</p>' + this._jpMaPhoto(p) + this._jpVote(p) + (bas ? '<div class="jt-bas">' + bas + '</div>' : '') + '</div>';
+    }
+
+    
+
+
+    _jpCarte() {
+      const p = this._jpEtat();
+      if (!p) return '';
+      const v = p.visuel;
+      const img = jtImage(v, 660);
+      const cadre = img
+        ? '<div class="jt-cadre jp-cadre"><img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="Challenge Alpina"></div>'
+        : '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_PHOTO) + '</div>';
+      return '<article class="jt-ouvert jt-ouvert--photo' + (p.etat === 'avant' ? ' jt-ouvert--avenir' : '') + '">' + cadre + this._jpCorps() + '</article>';
+    }
+
+    
+
+    _buildPhotoBandeau() {
+      const p = this._jpEtat();
+      if (!p || (p.etat !== 'ouvert' && p.etat !== 'votes')) return '';
+      const en = this._lang() === 'en';
+      const m = p.maPhoto;
+      const nom = en ? 'Photo Challenge' : 'Challenge photo';
+      const img = m && m.image ? jtImage(m.image, 200) : '';
+      const vignette = '<span class="jt-bandeau-montre jp-bandeau-vignette" aria-hidden="true">' + (img ? '<img src="' + escapeHtml(img) + '" alt="" decoding="async">' : jtSvg(JT_I_PHOTO)) + '</span>';
+      const S = { en_attente: en ? 'under review' : 'en relecture', validee: en ? 'your photo is online' : 'ta photo est en ligne',
+                  refusee: en ? 'photo not accepted' : 'photo non retenue', retiree: en ? 'photo removed' : 'photo retirée' };
+      const suffixe = m && S[m.statut] ? ' <em>· ' + S[m.statut] + '</em>' : '';
+      const aVoter = p.votesOuverts && !p.aVote;
+      let ligne;
+      if (!m) {
+        if (p.peutDeposer) ligne = en ? 'Submit your best Route du Rhum photo and vote for your favourite.' : 'Dépose ta plus belle photo de la Route du Rhum et vote pour ta préférée.';
+        else if (p.etat === 'votes') ligne = p.aVote ? (en ? 'Your star is placed, you can change it until voting closes.' : 'Ton étoile est posée, tu peux la changer jusqu\'à la clôture des votes.')
+          : (en ? 'Submissions are closed, pick your favourite photo.' : 'Les dépôts sont clos, choisis ta photo préférée.');
+        else ligne = p.raison === 'reglement' ? (en ? 'Discover the members\' photos, submissions open very soon.' : 'Découvre les photos des membres, le dépôt ouvre très bientôt.')
+          : (en ? 'Discover the members\' photos and vote for your favourite.' : 'Découvre les photos des membres et vote pour ta préférée.');
+      } else if (m.statut === 'en_attente') {
+        ligne = en ? 'The team is reviewing your photo before it goes online.' : 'L\'équipe relit ta photo avant de la mettre en ligne.';
+      } else if (m.statut === 'validee') {
+        ligne = this._jpPluriel(m.coeurs, 'cœur', 'heart') + (en ? ' and ' : ' et ') + this._jpPluriel(m.etoiles, 'étoile', 'star') +
+          (en ? ', counted every night.' : ', comptés chaque nuit.') + (aVoter ? (en ? ' You still have to vote.' : ' Il te reste à voter.') : '');
+      } else if (m.statut === 'refusee') {
+        ligne = [m.motif ? m.motif.replace(/[.\s]+$/, '') + '.' : '', p.peutDeposer ? (en ? 'You can submit another one.' : 'Tu peux en proposer une autre.') : ''].filter(Boolean).join(' ') ||
+          (en ? 'Your photo was not accepted.' : 'Ta photo n\'a pas été retenue.');
+      } else {
+        ligne = en ? 'It has been removed from the wall.' : 'Elle a été retirée du mur.';
+      }
+      const ech = this._jpEcheance(p);
+      let reste = '';
+      if (ech) {
+        const r = jtReste(new Date(ech.fin));
+        reste = '<span class="jt-bandeau-reste">' + escapeHtml(ech.lab) + '<b data-jt-reste="' + escapeHtml(ech.fin) + '">' + r.j + (en ? 'd ' : ' j ') + jtDeux(r.h) + (en ? 'h' : ' h') + '</b></span>';
+      }
+      const fleche = '<svg class="jt-jouer-fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + JT_I_FLECHE + '</svg>';
+      const bouton = p.peutDeposer
+        ? '<a class="jt-jouer" href="' + this._jpLien() + '"><span class="jt-jouer-ico">' + jtSvg(JT_I_PHOTO) + '</span>' + (en ? 'Submit' : 'Déposer') + fleche + '</a>'
+        : aVoter
+          ? '<a class="jt-jouer" href="' + this._jpLien() + '"><span class="jt-jouer-ico">' + jtSvg(JT_I_ETOILE) + '</span>' + (en ? 'Vote' : 'Voter') + fleche + '</a>'
+          : '<button type="button" class="jt-voir" data-jt-volet>' + (en ? 'See the games' : 'Voir les jeux') + jtSvg(JT_I_FLECHE) + '</button>';
+      return '<div class="jt-bandeau jt-bandeau--photo' + (p.peutDeposer || aVoter ? '' : ' jt-bandeau--joue') + '" role="region" aria-label="' + nom + '">' + vignette +
+        '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + nom + suffixe + '</p><span class="jt-bandeau-ligne">' + escapeHtml(ligne) + '</span></span>' + reste + bouton + '</div>';
+    }
+
     _jtTemps(sec) {
       const v = jtDecoupe(sec);
       if (!v) return '';
@@ -19508,8 +19768,15 @@ if (!customElements.get('espace-rhum')) {
       return '<a class="jt-lien" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + (this._lang() === 'en' ? 'Game rules' : 'Règlement du jeu') + '</a>';
     }
 
-     
+    
+
+
     _buildJeuxBandeau() {
+      const b = this._jtBandeau() + this._buildPhotoBandeau();
+      return b ? '<div class="jt-bandeaux">' + b + '</div>' : '';
+    }
+
+    _jtBandeau() {
       const p = this._jtEtat();
       if (!p || p.phase !== 'ouvert') return '';
       const en = this._lang() === 'en';
@@ -19616,6 +19883,7 @@ if (!customElements.get('espace-rhum')) {
       const altM = this._lang() === 'en' ? 'TyMAL on a bike in front of Saint-Malo station' : 'TyMAL à vélo devant la gare de Saint-Malo';
       return '<div class="jt-ouverts">' + cles.map((c) => (c === 'challenge-mobilite'
         ? '<article class="jt-ouvert jt-ouvert--mobilite">' + this._jtCadre(m && m.visuel, altM, JT_I_VELO) + this._jmCorps() + '</article>'
+        : c === 'challenge-photo' ? this._jpCarte()
         : '<article class="jt-ouvert">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorps(false) + '</article>')).join('') + '</div>';
     }
 
@@ -19648,7 +19916,10 @@ if (!customElements.get('espace-rhum')) {
       }
       if (onglet === 'avenir') {
         if (!j.avenir.length) return this._jtVide(en ? 'Nothing announced yet' : 'Rien d\'annoncé pour l\'instant', en ? 'The next Espace Rhum games will appear here.' : 'Les prochains jeux de l\'Espace Rhum s\'afficheront ici.');
-        return '<div class="jt-ouverts">' + j.avenir.map(() => '<article class="jt-ouvert jt-ouvert--avenir">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorpsAvenir() + '</article>').join('') + '</div>';
+        
+
+        return '<div class="jt-ouverts">' + j.avenir.map((c) => (c === 'challenge-photo' ? this._jpCarte()
+          : '<article class="jt-ouvert jt-ouvert--avenir">' + this._jtCadre(p.visuel, this._jtAlt()) + this._jtCorpsAvenir() + '</article>')).join('') + '</div>';
       }
       return j.fini.length ? this._jtListeGrande(j.fini)
         : this._jtVide(en ? 'No results yet' : 'Pas encore de résultats', en ? 'Finished games and their winners will appear here.' : 'Les jeux terminés et leurs gagnants s\'afficheront ici.');
@@ -19724,7 +19995,7 @@ if (!customElements.get('espace-rhum')) {
         this._i18n(neuf);
         return neuf;
       };
-      remplacer('.jt-bandeau', this._buildJeuxBandeau());
+      remplacer('.jt-bandeaux', this._buildJeuxBandeau());
       remplacer('.jt-vue', this._buildJeuxVolet());
       remplacer('.er-sidebar .jt-menu-jeux', this._buildJeuxBouton(false));
       remplacer('.er-mobile-sheet-jeux', this._buildJeuxBouton(true));

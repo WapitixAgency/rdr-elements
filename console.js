@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 4696d0f | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 72bf82d | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="72bf82d";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -572,7 +572,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
     
 
 
-
     '.rdrc-manque{grid-column:1 / -1;padding:16px 18px 16px;background:#FFF6E6;border:1px solid #F0D398;',
     'border-left:4px solid var(--amber);border-radius:12px}',
     '.rdrc-manque-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}',
@@ -589,19 +588,68 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
     '.rdrc-manque-qui{font-size:12px;font-weight:800;color:var(--navy);text-align:right;line-height:1.35;padding-top:2px}',
     '.rdrc-manque-qui i{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;',
     'text-transform:uppercase;color:var(--warn);margin-bottom:2px}',
-    '.rdrc-pret-l{list-style:none;margin:0;padding:0;display:grid;gap:1px}',
-    '.rdrc-pret-i{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:10px 8px;border-radius:8px}',
-    '.rdrc-pret-i:nth-child(odd){background:var(--bg)}',
-    '.rdrc-pret-ic{width:22px;height:22px;border-radius:50%;background:var(--teal-soft);color:var(--ok);',
-    'display:flex;align-items:center;justify-content:center}',
-    '.rdrc-pret-ic svg{width:13px;height:13px;display:block}',
-    '.rdrc-pret-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
-    '.rdrc-pret-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
-    '.rdrc-pret-d a{color:var(--teal);font-weight:700}',
-    '.rdrc-pret-d code{font:inherit;font-weight:700;color:var(--navy);white-space:nowrap}',
-    '.rdrc-pret-ic.is-n{background:var(--line-2);color:var(--ink-3);font-size:11px;font-weight:800}',
     '@media(max-width:640px){.rdrc-manque{padding:14px 13px}.rdrc-manque-i{grid-template-columns:22px minmax(0,1fr)}',
     '.rdrc-manque-qui{grid-column:2;text-align:left;padding-top:0}}',
+
+    
+
+
+
+
+
+    '.rdrc-ph-l{display:grid;gap:14px;margin:0 0 16px}',
+    '.rdrc-ph{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);background:#fff;border:1px solid #DCE3ED;',
+    'border-radius:14px 3px 14px 3px;overflow:hidden;box-shadow:0 1px 2px rgba(10,26,53,.05)}',
+    '.rdrc-ph-img{display:flex;align-items:center;justify-content:center;min-height:240px;background:#0A1A35}',
+    '.rdrc-ph-img a{display:flex;align-items:center;justify-content:center;width:100%;height:100%}',
+    '.rdrc-ph-img img{display:block;max-width:100%;max-height:min(62vh,560px);width:auto;height:auto;object-fit:contain}',
+    '.rdrc-ph-info{display:flex;flex-direction:column;gap:10px;padding:16px 16px 15px;min-width:0}',
+    '.rdrc-ph-qui{margin:0;font-size:15px;font-weight:800;color:var(--navy);line-height:1.3;overflow-wrap:anywhere}',
+    '.rdrc-ph-qui small{display:block;margin-top:2px;font-size:10.5px;font-weight:700;color:var(--ink-3)}',
+    '.rdrc-ph-tags{display:flex;flex-wrap:wrap;gap:6px}',
+    '.rdrc-ph-tag{padding:3px 8px;border-radius:999px;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#E8EEF7;color:var(--ink-2)}',
+    '.rdrc-ph-tag--essai{background:#E4F0F0;color:var(--teal)}',
+    '.rdrc-ph-tag--redepot{background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-ph-meta{margin:0;font-size:11.5px;font-weight:600;color:var(--ink-3)}',
+    '.rdrc-ph-leg{margin:0;padding:9px 11px;border-left:3px solid var(--teal-lite);background:var(--bg);border-radius:0 8px 8px 0;',
+    'font-size:13px;font-style:italic;line-height:1.45;color:var(--ink);overflow-wrap:anywhere}',
+    '.rdrc-ph-leg.is-vide{font-style:normal;color:var(--ink-3);border-left-color:var(--line)}',
+    '.rdrc-ph-alerte{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;background:#FFF6E6;border:1px solid #F0D398;border-radius:9px;',
+    'font-size:12px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-ph-alerte svg{flex:0 0 auto;width:16px;height:16px;color:var(--warn);margin-top:1px}',
+    '.rdrc-ph-alerte b{color:var(--navy)}',
+    '.rdrc-ph-acts{display:flex;flex-wrap:wrap;gap:8px}',
+    '.rdrc-ph-acts .rdrc-btn{flex:1 1 auto;padding:10px 14px;font-size:12.5px;white-space:nowrap}',
+    '.rdrc-ph-form{display:grid;gap:8px;margin:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:#FBFCFE}',
+    '.rdrc-ph-form legend{padding:0 4px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}',
+    '.rdrc-ph-motif{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.4;color:var(--ink-2);cursor:pointer}',
+    '.rdrc-ph-motif input{margin:2px 0 0;flex:0 0 auto;accent-color:var(--no)}',
+    '.rdrc-ph-autre{width:100%;font:inherit;font-size:12.5px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}',
+    '.rdrc-ph-autre:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-ph-note{margin:0;font-size:11px;line-height:1.45;color:var(--ink-3)}',
+    '.rdrc-btn.rdrc-go-no{border-color:var(--no);background:var(--no);color:#fff}',
+    '.rdrc-btn.rdrc-go-no:hover{background:#A33025}',
+    '.rdrc-ph-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}',
+    '.rdrc-ph-v{display:flex;flex-direction:column;background:#fff;border:1px solid #DCE3ED;border-radius:12px 3px 12px 3px;overflow:hidden;min-width:0}',
+    '.rdrc-ph-v img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#0A1A35}',
+    '.rdrc-ph-v-c{display:flex;flex-direction:column;gap:4px;padding:10px 11px 11px;min-width:0;flex:1}',
+    '.rdrc-ph-v-c b{font-size:12.5px;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '.rdrc-ph-v-c i{font-size:11.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '.rdrc-ph-v-n{display:flex;gap:12px;font-size:11.5px;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums}',
+    '.rdrc-ph-v .rdrc-btn{margin-top:auto;padding:6px 10px;font-size:11px}',
+    '.rdrc-ph-retrait{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:start;margin:0 0 14px;padding:14px;',
+    'background:#fff;border:1px solid #F2C4BE;border-left:4px solid var(--no);border-radius:12px}',
+    '.rdrc-ph-retrait img{display:block;width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#0A1A35}',
+    '.rdrc-ph-retrait h3{margin:0 0 8px;font-size:13.5px;font-weight:800;color:var(--navy)}',
+    '.rdrc-ph-pages{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0;font-size:12px;font-weight:700;color:var(--ink-3)}',
+    '.rdrc-ph-tete{list-style:none;margin:0;padding:0;display:grid;gap:4px}',
+    '.rdrc-ph-tete li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 9px;border-radius:8px 2px 8px 2px;font-size:12.5px}',
+    '.rdrc-ph-tete li:nth-child(odd){background:var(--bg)}',
+    '.rdrc-ph-tete b{font-weight:800;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '.rdrc-ph-tete span{font-weight:800;color:var(--ink-3);text-align:center}',
+    '.rdrc-ph-tete em{font-style:normal;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}',
+    '@media(max-width:760px){.rdrc-ph{grid-template-columns:minmax(0,1fr)}.rdrc-ph-img{min-height:180px}',
+    '.rdrc-ph-retrait{grid-template-columns:minmax(0,1fr)}}',
     '@media(max-width:560px){.rdrc-body{padding:13px}.rdrc-row{align-items:flex-start}',
     '.rdrc-acts{width:100%}.rdrc-btn{flex:1}.rdrc-bar-r{width:100%;justify-content:space-between}}'
   ].join('');
@@ -634,6 +682,41 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
     var v = Number(n) || 0;
     return v.toLocaleString('fr-FR');
   }
+
+  
+
+
+
+
+
+
+  function photoListe(x) {
+    if (Array.isArray(x)) return x;
+    if (x && Array.isArray(x.photos)) return x.photos;
+    if (x && Array.isArray(x.items)) return x.items;
+    return [];
+  }
+  function photoImg(img, l, h, mode) {
+    var s = String(img || '').trim();
+    var m = s.match(/^wix:image:\/\/v1\/([^/#]+)/);
+    var base = m ? 'https://static.wixstatic.com/media/' + m[1]
+      : /^https:\/\/static\.wixstatic\.com\/media\/[^/]+$/.test(s) ? s
+      : (/^[\w-]+~mv2\.[a-z0-9]{2,5}$/i.test(s) || /^[\w-]{6,}\.[a-z0-9]{2,5}$/i.test(s)) ? 'https://static.wixstatic.com/media/' + s : '';
+    if (!base) return '';
+    return base + '/v1/' + (mode || 'fit') + '/w_' + l + ',h_' + h + ',q_85,enc_auto/photo.jpg';
+  }
+  
+
+
+
+  var PHOTO_MOTIFS_DEFAUT = [
+    'Photo floue ou de trop faible qualité',
+    'Photo sans lien avec la Route du Rhum',
+    'Contenu inapproprié',
+    'Personne reconnaissable sans son accord',
+    'Photo qui ne semble pas être la tienne',
+    'Texte, cadre ou logo ajouté sur la photo'
+  ];
    
    
    
@@ -1020,6 +1103,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
         }
       }
       this._busy = {};    
+      
+
+      var ph = this._payload && this._payload.photo;
+      if (ph) {
+        var reste = function (liste, id) { return photoListe(liste).some(function (x) { return String(x.memberId) === id; }); };
+        if (this._photoRefus && !reste(ph.attente, this._photoRefus)) { this._photoRefus = null; this._photoMotif = ''; }
+        if (this._photoRetrait && !reste(ph.enLigne, this._photoRetrait)) { this._photoRetrait = null; this._photoMotif = ''; }
+      }
       this._lireToast();
       this._render();
     }
@@ -2326,43 +2417,30 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
 
 
 
-
-
-
-
-
-    _photoHtml() {
+    _photoManqueHtml() {
       var manque = [
         ['Le règlement du Challenge photo',
-         'Un jeu doté d\'un lot en demande un. La page Règlements, en ligne depuis le 23/09, '
-         + 'lui donnera sa propre adresse et le publiera le jour de l\'annonce du concours.',
+         'Sans lui, la page n\'affiche aucun bouton de dépôt. La page Règlements lui garde sa place '
+         + '(/reglements#challenge-photo).',
          'Alexis et le juridique d\'OC Sport'],
-        ['La modération',
-         'Qui relit chaque photo avant sa mise en ligne (la stagiaire, selon le call du 27/08, '
-         + 'à confirmer), et ce qui fait refuser une image, par exemple une personne reconnaissable, '
-         + 'une marque concurrente, un mauvais cadrage ou une photo floue.',
-         'Alexis'],
-        ['Les données GPS des photos',
-         'Une photo de téléphone garde la position exacte de la prise de vue. Nous proposons '
-         + 'de l\'effacer dès la réception, avant tout stockage. Il reste à le valider.',
-         'Alexis'],
-        ['Les dates',
-         'L\'ouverture et la clôture des dépôts, puis la clôture des votes. Sans elles, '
-         + 'le concours n\'a pas d\'échéance.',
-         'Alexis'],
         ['Le lot',
-         'Ce que gagne la photo la plus étoilée. Il sera écrit dans le règlement.',
+         'Ce que gagne la photo qui a le plus d\'étoiles. Il s\'écrit dans le règlement et dans les réglages '
+         + 'du concours, au CMS.',
          'Alexis et le juridique d\'OC Sport'],
-        ['Le nom du challenge',
-         '« Challenge photo Alpina » avec le bloc de la marque, ou un autre nom. '
-         + 'L\'aperçu sait déjà s\'afficher sans le bloc.',
+        ['Les dates de clôture',
+         'La fin des dépôts, puis la fin des votes, à saisir dans les réglages du concours. Sans elles, '
+         + 'le concours reste ouvert sans échéance.',
+         'Alexis'],
+        ['La modération',
+         'Qui relit les photos chaque jour, et la liste des motifs de refus : six motifs sont proposés '
+         + 'dans les réglages, à relire et à corriger au besoin.',
          'Alexis']
       ];
-      var encart = '<section class="rdrc-manque" aria-labelledby="rdrc-manque-t">' +
+      return '<section class="rdrc-manque" aria-labelledby="rdrc-manque-t">' +
         '<div class="rdrc-manque-h">' + IC.alerte +
-          '<h3 class="rdrc-manque-t" id="rdrc-manque-t">Ce qu\'il nous manque pour finaliser le concours photo</h3></div>' +
-        '<p class="rdrc-manque-p">Le concours n\'est pas encore ouvert, et il ne peut pas l\'être sans ces six réponses. '
-          + 'Aucune n\'est technique. Dès qu\'elles arrivent, il nous faut deux à trois jours pour le construire et l\'ouvrir.</p>' +
+          '<h3 class="rdrc-manque-t" id="rdrc-manque-t">Ce qu\'il nous manque pour ouvrir le concours photo</h3></div>' +
+        '<p class="rdrc-manque-p">Le concours est construit, et il reste éteint jusqu\'à son ouverture. '
+          + 'Ces quatre réponses manquent encore, aucune n\'est technique.</p>' +
         '<ol class="rdrc-manque-l">' + manque.map(function (x, i) {
           return '<li class="rdrc-manque-i">' +
             '<span class="rdrc-manque-n" aria-hidden="true">' + (i + 1) + '</span>' +
@@ -2371,45 +2449,162 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
           '</li>';
         }).join('') + '</ol>' +
       '</section>';
+    }
 
-      var coche = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7"/></svg>';
-      var pret = [
-        ['L\'aperçu en ligne',
-         'La page <a href="/concours-photo-2026" target="_blank" rel="noopener">/concours-photo-2026</a>, masquée des menus '
-         + 'et non indexée, se montre en interne et aux partenaires. Ses 600 photos viennent de la médiathèque du site, '
-         + 'les auteurs, les cœurs et les étoiles sont inventés.'],
-        ['La fenêtre de dépôt',
-         'Dessinée et visible dans l\'aperçu, en ajoutant <code>?etat=aucune</code> à l\'adresse. L\'envoi y est encore simulé, '
-         + 'aucune photo ne part à la médiathèque.'],
-        ['Les situations à montrer',
-         'Un visiteur sans compte (<code>?etat=visiteur</code>), une photo en attente ou refusée (<code>?etat=attente</code>, '
-         + '<code>?etat=refusee</code>), la page sans le bloc Alpina (<code>?marque=sans</code>).'],
-        ['Le référencement',
-         'Le titre, la description et le texte pour les moteurs sont prêts pour le jour de l\'ouverture. '
-         + 'La page reste hors des moteurs tant que c\'est un aperçu.']
-      ].map(function (x) {
-        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic" aria-hidden="true">' + coche + '</span>' +
-          '<span><span class="rdrc-pret-q">' + esc(x[0]) + '</span><span class="rdrc-pret-d">' + x[1] + '</span></span></li>';
-      }).join('');
-
-      var suite = ['Le vrai dépôt, qui envoie la photo à la médiathèque du site sans sa position GPS',
-        'Les cœurs et l\'étoile enregistrés sur le compte du membre, et l\'encart dans son Espace Rhum',
-        'Dans cet onglet, la file des photos en attente (aperçu, auteur, date), avec Accepter ou Refuser et le motif renvoyé à l\'auteur',
-        'Le compte des dépôts par jour, pour voir si l\'animation prend',
-        'La version anglaise de la page'
-      ].map(function (t, i) {
-        return '<li class="rdrc-pret-i"><span class="rdrc-pret-ic is-n" aria-hidden="true">' + (i + 1) + '</span>' +
-          '<span class="rdrc-pret-d">' + esc(t) + '</span></li>';
-      }).join('');
-
-      return '<div class="rdrc-grid">' + encart +
-        card('Ce qui est prêt', 'pour montrer le concours', '<ul class="rdrc-pret-l">' + pret + '</ul>', false, IC.valide) +
-        card('Ce que nous construirons ensuite', 'deux à trois jours, une fois les réponses reçues',
-          '<ol class="rdrc-pret-l">' + suite + '</ol>' +
-          '<p class="rdrc-help" style="margin:12px 0 0">La file de modération fonctionnera comme celle '
-          + 'd\'Instagram, un onglet plus haut.</p>',
-          false, IC.people) +
+    _photoMethodeHtml() {
+      return '<div class="rdrc-methode">' +
+        '<p class="rdrc-methode-t">Comment relire</p>' +
+        '<ol class="rdrc-methode-l">' +
+          '<li><b>Valider</b> met la photo en ligne sous le nom indiqué, celui du mur des fans (« Fan anonyme » si le membre l\'a demandé). '
+          + 'Elle paraît sur le mur dans les cinq minutes, et son auteur est prévenu dans son Espace.</li>' +
+          '<li><b>Refuser</b> demande un motif, que le membre lit dans son Espace. Il peut proposer une autre photo une fois ; au second refus, c\'est fini.</li>' +
+          '<li><b>Ressemble à</b> signale une photo presque identique déjà déposée par un autre compte. C\'est un indice pour l\'œil, rien n\'est automatique.</li>' +
+          '<li><b>Retirer</b>, dans « En ligne », enlève une photo du mur dans les cinq minutes. Ses étoiles tombent au décompte de la nuit, et ses électeurs peuvent revoter.</li>' +
+        '</ol>' +
+        '<p class="rdrc-methode-n">Les comptes de l\'équipe participent comme les autres, mais ne gagnent rien. « Essai » marque la photo d\'un compte d\'aperçu, que le mur public ne montre jamais.</p>' +
       '</div>';
+    }
+
+    _photoMotifs(p) {
+      var st = p.photo && p.photo.stats;
+      var a = p.photo && p.photo.attente;
+      var l = (st && Array.isArray(st.motifsRefus) && st.motifsRefus) || (a && !Array.isArray(a) && Array.isArray(a.motifsRefus) && a.motifsRefus) || [];
+      l = l.map(function (x) { return String(x || '').trim(); }).filter(Boolean);
+      return l.length ? l : PHOTO_MOTIFS_DEFAUT;
+    }
+
+    _photoTags(x, enLigne) {
+      return '<span class="rdrc-ph-tags">' +
+        (x.equipe ? '<span class="rdrc-ph-tag" title="Compte de l\'équipe : il participe, mais ne gagne rien">Équipe</span>' : '') +
+        (x.essai ? '<span class="rdrc-ph-tag rdrc-ph-tag--essai" title="Photo d\'un compte d\'aperçu : le mur public ne la montre jamais">Essai</span>' : '') +
+        (!enLigne && Number(x.refus) > 0 ? '<span class="rdrc-ph-tag rdrc-ph-tag--redepot" title="Une première photo a déjà été refusée : un nouveau refus sera le dernier">Redépôt après un refus</span>' : '') +
+      '</span>';
+    }
+
+    
+
+
+    _photoMotifsHtml(p, id, retrait) {
+      var choisi = this._photoMotif || '';
+      var motifs = this._photoMotifs(p);
+      var radios = motifs.map(function (m, i) {
+        return '<label class="rdrc-ph-motif"><input type="radio" name="rdrc-motif-' + esc(id) + '" value="' + esc(m) + '" data-photo-motif' +
+          (m === choisi ? ' checked' : '') + (i === 0 ? ' data-photo-premier' : '') + '><span>' + esc(m) + '</span></label>';
+      }).join('');
+      var autre = retrait
+        ? '<label class="rdrc-ph-motif"><input type="radio" name="rdrc-motif-' + esc(id) + '" value="" data-photo-motif data-photo-autre' + (choisi === '\u0000autre' ? ' checked' : '') + '><span>Autre motif</span></label>' +
+          '<input class="rdrc-ph-autre" type="text" maxlength="200" data-photo-autre-texte placeholder="Le motif, en une phrase" aria-label="Autre motif du retrait"' + (choisi === '\u0000autre' ? '' : ' hidden') + '>'
+        : '';
+      var pret = !!choisi && choisi !== '\u0000autre';
+      return '<fieldset class="rdrc-ph-form"><legend>' + (retrait ? 'Motif du retrait' : 'Motif montré au membre') + '</legend>' + radios + autre +
+        '<div class="rdrc-ph-acts">' +
+          '<button class="rdrc-btn rdrc-go-no" type="button" ' + (retrait ? 'data-photo-confirmer-retrait' : 'data-photo-confirmer-refus') + '="' + esc(id) + '"' + (pret ? '' : ' disabled') + '>' +
+            (retrait ? 'Confirmer le retrait' : 'Confirmer le refus') + '</button>' +
+          '<button class="rdrc-btn" type="button" data-photo-annuler>Annuler</button>' +
+        '</div>' +
+        (retrait ? '' : '<p class="rdrc-ph-note">' + (this._photoMotifs(p) === PHOTO_MOTIFS_DEFAUT ? 'Les motifs par défaut du concours, tant que les réglages n\'en donnent pas d\'autres.' : 'Les motifs viennent des réglages du concours, au CMS.') + '</p>') +
+      '</fieldset>';
+    }
+
+    _photoAttenteHtml(p, liste) {
+      var self = this;
+      if (!liste.length) {
+        return '<div class="rdrc-state"><b>Rien à relire</b>Les photos déposées par les membres arriveront ici, la plus ancienne en premier.</div>';
+      }
+      return '<div class="rdrc-ph-l">' + liste.map(function (x) {
+        var id = String(x.memberId || '');
+        var busy = !!self._busy[id];
+        var nom = x.auteurPropose || x.auteur || '';
+        var grande = photoImg(x.img, 1600, 1600, 'fit');
+        var img = photoImg(x.img, 1100, 900, 'fit');
+        var quand = x.deposeLe ? since(x.deposeLe) + ' · ' + jtDateCourte(Date.parse(x.deposeLe)) : '';
+        var proches = Array.isArray(x.ressembleA) ? x.ressembleA : [];
+        var alerte = proches.length ? '<div class="rdrc-ph-alerte">' + IC.alerte + '<span>Ressemble à ' + proches.map(function (r) {
+            var d = Number(r.distance);
+            return (r.auteur ? 'la photo de <b>' + esc(r.auteur) + '</b>' : 'la photo d\'un autre membre') + ' <span title="Écart des empreintes, sur 64 : 0 pour deux photos identiques">(' +
+              (isFinite(d) && d <= 4 ? 'très proche' : 'proche') + ')</span>';
+          }).join(', ') + '. À comparer avant de valider.</span></div>' : '';
+        var refus = self._photoRefus === id;
+        var acts = refus ? self._photoMotifsHtml(p, id, false)
+          : '<div class="rdrc-ph-acts">' +
+              '<button class="rdrc-btn rdrc-ok" type="button" data-photo-valider="' + esc(id) + '"' + (busy ? ' disabled' : '') + '>Valider</button>' +
+              '<button class="rdrc-btn rdrc-no" type="button" data-photo-refuser="' + esc(id) + '"' + (busy ? ' disabled' : '') + '>Refuser</button>' +
+            '</div>';
+        return '<article class="rdrc-ph" data-photo="' + esc(id) + '">' +
+          '<div class="rdrc-ph-img">' + (img ? '<a href="' + esc(grande) + '" target="_blank" rel="noopener" title="Voir en grand dans un nouvel onglet"><img src="' + esc(img) + '" alt="' + esc('Photo proposée par ' + (nom || 'un membre')) + '" loading="lazy" decoding="async"></a>' : '') + '</div>' +
+          '<div class="rdrc-ph-info">' +
+            '<p class="rdrc-ph-qui">' + esc(nom || 'Nom introuvable') + '<small>nom affiché sur le mur s\'il est validé</small></p>' +
+            self._photoTags(x) +
+            (quand ? '<p class="rdrc-ph-meta">Déposée ' + esc(quand) + '</p>' : '') +
+            (x.legende ? '<p class="rdrc-ph-leg">« ' + esc(x.legende) + ' »</p>' : '<p class="rdrc-ph-leg is-vide">Sans légende</p>') +
+            alerte + acts +
+          '</div>' +
+        '</article>';
+      }).join('') + '</div>';
+    }
+
+    _photoEnLigneHtml(p, en, stats) {
+      var self = this;
+      var liste = photoListe(en);
+      var tete = Array.isArray(stats && stats.enTete) ? stats.enTete : [];
+      var nuit = stats && stats.calculeLe ? 'chiffres de la nuit du ' + jtDateCourte(Date.parse(stats.calculeLe)) : 'pas encore de décompte de nuit';
+      var carteTete = card('En tête des étoiles', nuit,
+        tete.length ? '<ol class="rdrc-ph-tete">' + tete.map(function (t) {
+          return '<li><span>' + esc(t.rang) + '</span><b>' + esc(t.auteur || '?') + '</b><em>★ ' + nfmt(t.etoiles) + ' · ♥ ' + nfmt(t.coeurs) + '</em></li>';
+        }).join('') + '</ol><p class="rdrc-help" style="margin:10px 0 0">Sans les comptes de l\'équipe. À égalité d\'étoiles, le rang est partagé.</p>'
+          : '<div class="rdrc-state">Aucune étoile comptée pour l\'instant.</div>', true, IC.badge);
+      var retrait = '';
+      var cible = this._photoRetrait ? liste.filter(function (x) { return String(x.memberId) === self._photoRetrait; })[0] : null;
+      if (cible) {
+        retrait = '<div class="rdrc-ph-retrait">' + (photoImg(cible.img, 400, 300, 'fill') ? '<img src="' + esc(photoImg(cible.img, 400, 300, 'fill')) + '" alt="">' : '<span></span>') +
+          '<div><h3>Retirer la photo de ' + esc(cible.auteur || 'ce membre') + ' du mur</h3>' + this._photoMotifsHtml(p, String(cible.memberId), true) + '</div></div>';
+      }
+      var grille = liste.length ? '<div class="rdrc-ph-g">' + liste.map(function (x) {
+        var id = String(x.memberId || '');
+        var busy = !!self._busy[id];
+        var img = photoImg(x.img, 400, 300, 'fill');
+        return '<div class="rdrc-ph-v" data-photo="' + esc(id) + '">' + (img ? '<img src="' + esc(img) + '" alt="' + esc('Photo de ' + (x.auteur || 'un membre')) + '" loading="lazy" decoding="async">' : '') +
+          '<div class="rdrc-ph-v-c"><b>' + esc(x.auteur || 'Fan anonyme') + '</b>' + (x.legende ? '<i>« ' + esc(x.legende) + ' »</i>' : '') +
+          '<span class="rdrc-ph-v-n"><span>♥ ' + nfmt(x.coeurs) + '</span><span>★ ' + nfmt(x.etoiles) + '</span></span>' + self._photoTags(x, true) +
+          (x.modereLe ? '<span class="rdrc-ph-meta">validée ' + esc(since(x.modereLe)) + '</span>' : '') +
+          '<button class="rdrc-btn rdrc-no" type="button" data-photo-retirer="' + esc(id) + '"' + (busy || self._photoRetrait === id ? ' disabled' : '') + '>Retirer</button></div></div>';
+      }).join('') + '</div>' : '<div class="rdrc-state"><b>Aucune photo en ligne</b>Les photos validées apparaîtront ici.</div>';
+      var page = Number(en && en.page) || 1, pages = Number(en && en.pages) || 1;
+      var nav = pages > 1 ? '<div class="rdrc-ph-pages">' +
+        '<button class="rdrc-btn" type="button" data-photo-page="' + (page - 1) + '"' + (page <= 1 ? ' disabled' : '') + '>Précédentes</button>' +
+        '<span>Page ' + page + ' sur ' + pages + '</span>' +
+        '<button class="rdrc-btn" type="button" data-photo-page="' + (page + 1) + '"' + (page >= pages ? ' disabled' : '') + '>Suivantes</button></div>' : '';
+      return '<div class="rdrc-grid" style="margin-bottom:14px">' + carteTete + '</div>' +
+        '<p class="rdrc-help"><b>' + nfmt((en && en.total) || liste.length) + ' photos sur le mur</b>, les plus récemment validées d\'abord. Les cœurs et les étoiles sont ceux du dernier décompte de nuit.</p>' +
+        retrait + grille + nav;
+    }
+
+    _photoHtml(p) {
+      p = p || {};
+      var corps;
+      if (p.photoError) corps = '<p class="rdrc-err" style="margin-bottom:16px">' + esc(p.photoError) + '</p>';
+      else if (!p.photo) corps = '<div class="rdrc-state">' + (p.loading ? 'Lecture du concours…' : 'Aucune donnée pour l\'instant.') + '</div>';
+      else {
+        var d = p.photo;
+        var attente = photoListe(d.attente);
+        var st = d.stats || {};
+        var nAttente = isFinite(Number(st.enAttente)) && st.enAttente !== undefined ? Number(st.enAttente) : attente.length;
+        var kpis = '<div class="rdrc-kpis">' +
+          kpi('À relire', nfmt(nAttente), '', nAttente ? 'la plus ancienne en premier' : 'rien en attente', 'lead') +
+          kpi('En ligne', nfmt(st.validees), '', 'sur le mur') +
+          kpi('Refusées', nfmt(st.refusees), '', nfmt(st.retirees) + ' retirée' + (Number(st.retirees) > 1 ? 's' : '') + ' après coup') +
+          kpi('Déposants', nfmt(st.deposants), '', 'membres qui ont déposé' + (Number(st.essais) ? ', dont ' + nfmt(st.essais) + ' essai' + (Number(st.essais) > 1 ? 's' : '') : '')) +
+          kpi('Votants', nfmt(st.votants), '', 'une étoile posée') +
+        '</div>';
+        var vue = this._photoVue === 'enligne' ? 'enligne' : 'attente';
+        var nEnLigne = (d.enLigne && d.enLigne.total) || st.validees || 0;
+        var sous = '<div class="rdrc-sub" role="tablist" aria-label="Vues du Challenge photo">' +
+          '<button class="rdrc-subtab" type="button" role="tab" data-photo-vue="attente" aria-selected="' + (vue === 'attente') + '">À relire<span class="rdrc-subn">' + nfmt(attente.length) + '</span></button>' +
+          '<button class="rdrc-subtab" type="button" role="tab" data-photo-vue="enligne" aria-selected="' + (vue === 'enligne') + '">En ligne<span class="rdrc-subn">' + nfmt(nEnLigne) + '</span></button>' +
+        '</div>';
+        corps = kpis + sous + (vue === 'enligne' ? this._photoEnLigneHtml(p, d.enLigne, st) : this._photoAttenteHtml(p, attente));
+      }
+      return corps + this._photoMethodeHtml() + this._photoManqueHtml();
     }
 
     _instaHtml(p) {
@@ -2714,7 +2909,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
        
        
       var perime = false;
-      if (this._view !== 'justetemps' && p.audience && p.audience.derniereNuit) {
+      
+
+      if (!jeu && p.audience && p.audience.derniereNuit) {
         var age = (Date.now() - new Date(p.audience.derniereNuit).getTime()) / 3600000;
         perime = age > 30;
       }
@@ -2726,6 +2923,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
         
 
         stamp = p.justeTemps && p.justeTemps.calculeLe ? 'Lu à ' + jtHeure(Date.parse(p.justeTemps.calculeLe)) : '';
+      } else if (this._view === 'photo') {
+         
+        stamp = p.photo && p.photo.lu ? 'Lu à ' + jtHeure(Date.parse(p.photo.lu)) : '';
       } else if (this._view !== 'insta' && p.audience && p.audience.generatedAt) {
         stamp = 'Calculé ' + since(p.audience.generatedAt);
       } else if (this._view === 'insta' && claims.length) {
@@ -2882,6 +3082,103 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4696d0f";performan
         btn.addEventListener('click', function () {
           btn.disabled = true;
           self._emit('rc-mob-statut', { id: btn.getAttribute('data-mob-statut'), champ: btn.getAttribute('data-champ'), valeur: btn.getAttribute('data-valeur') });
+        });
+      });
+
+       
+      this.querySelectorAll('[data-photo-vue]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var v = btn.getAttribute('data-photo-vue');
+          if (v === self._photoVue || (!self._photoVue && v === 'attente')) return;
+          self._photoVue = v;
+          self._photoRefus = null; self._photoRetrait = null; self._photoMotif = '';
+          self._render();
+        });
+      });
+      this.querySelectorAll('[data-photo-valider]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-photo-valider');
+          if (!id || self._busy[id]) return;
+          self._busy[id] = true;
+          var art = btn.closest('[data-photo]');
+          if (art) art.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+          self._emit('rc-photo-decider', { memberId: id, decision: 'valider' });
+        });
+      });
+      this.querySelectorAll('[data-photo-refuser]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          self._photoRefus = btn.getAttribute('data-photo-refuser');
+          self._photoRetrait = null; self._photoMotif = '';
+          self._focusApres = '[data-photo="' + self._photoRefus + '"] [data-photo-premier]';
+          self._render();
+        });
+      });
+      this.querySelectorAll('[data-photo-retirer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          self._photoRetrait = btn.getAttribute('data-photo-retirer');
+          self._photoRefus = null; self._photoMotif = '';
+          self._focusApres = '.rdrc-ph-retrait [data-photo-premier]';
+          self._render();
+          var bloc = self.querySelector('.rdrc-ph-retrait');
+          if (bloc && bloc.scrollIntoView) bloc.scrollIntoView({ block: 'nearest' });
+        });
+      });
+      this.querySelectorAll('[data-photo-annuler]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = self._photoRefus;
+          self._photoRefus = null; self._photoRetrait = null; self._photoMotif = '';
+          self._focusApres = id ? '[data-photo-refuser="' + id + '"]' : '';
+          self._render();
+        });
+      });
+       
+      var armer = function (form) {
+        var b = form && form.querySelector('[data-photo-confirmer-refus], [data-photo-confirmer-retrait]');
+        var texte = form && form.querySelector('[data-photo-autre-texte]');
+        var autre = self._photoMotif === '\u0000autre';
+        if (texte) texte.hidden = !autre;
+        if (b) b.disabled = !self._photoMotif || (autre && !(texte && texte.value.trim()));
+      };
+      this.querySelectorAll('[data-photo-motif]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          self._photoMotif = r.hasAttribute('data-photo-autre') ? '\u0000autre' : r.value;
+          var form = r.closest('.rdrc-ph-form');
+          armer(form);
+          if (r.hasAttribute('data-photo-autre')) { var t = form.querySelector('[data-photo-autre-texte]'); if (t) t.focus(); }
+        });
+      });
+      this.querySelectorAll('[data-photo-autre-texte]').forEach(function (t) {
+        t.addEventListener('input', function () { armer(t.closest('.rdrc-ph-form')); });
+      });
+      this.querySelectorAll('[data-photo-confirmer-refus]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-photo-confirmer-refus');
+          var motif = self._photoMotif;
+          if (!id || !motif || motif === '\u0000autre' || self._busy[id]) return;
+          self._busy[id] = true;
+          btn.closest('.rdrc-ph-form').querySelectorAll('button, input').forEach(function (b) { b.disabled = true; });
+          self._emit('rc-photo-decider', { memberId: id, decision: 'refuser', motif: motif });
+        });
+      });
+      this.querySelectorAll('[data-photo-confirmer-retrait]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-photo-confirmer-retrait');
+          var form = btn.closest('.rdrc-ph-form');
+          var texte = form && form.querySelector('[data-photo-autre-texte]');
+          var motif = self._photoMotif === '\u0000autre' ? (texte ? texte.value.replace(/\s+/g, ' ').trim() : '') : self._photoMotif;
+          if (!id || !motif || self._busy[id]) return;
+          self._busy[id] = true;
+          form.querySelectorAll('button, input').forEach(function (b) { b.disabled = true; });
+          self._emit('rc-photo-retirer', { memberId: id, motif: motif.slice(0, 200) });
+        });
+      });
+      this.querySelectorAll('[data-photo-page]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var n = parseInt(btn.getAttribute('data-photo-page'), 10);
+          if (!(n >= 1) || btn.disabled) return;
+          btn.disabled = true;
+          self._photoRetrait = null; self._photoMotif = '';
+          self._emit('rc-photo-page', { page: n });
         });
       });
 
