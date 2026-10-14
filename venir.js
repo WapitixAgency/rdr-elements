@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 72bf82d | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="72bf82d";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 95694b4 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="95694b4";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -44,6 +44,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="72bf82d";performance
   const BLOCS = ['hero', 'co2', 'mobilite', 'regions', 'pratique'];
   
 
+  
+
+  const ONGLETS_COURTS = { parking: 'En voiture', individuelle: 'En voiture', pmr: 'PMR / PSH', velo: 'À vélo' };
   const ANCRES = { regions: 'regions', 'd-ou-venez-vous': 'regions', co2: 'co2', 'pourquoi-ca-compte': 'co2', 'sur-place': 'pratique', pratique: 'pratique', mobilite: 'mobilite' };
   
 
@@ -95,6 +98,9 @@ const ER_EN = {
     'Pourquoi ça compte': 'Why it matters',
     'Sur place': 'On site',
     'Une fois arrivé·e sur place, on pense à vous !': 'Once you are here, we have got you covered',
+    'En voiture': 'By car',
+    'PMR / PSH': 'Accessibility',
+    'À vélo': 'By bike',
 
      
     'Le saviez-vous ?': 'Did you know?',
@@ -804,7 +810,19 @@ rdr-venir .rv-pastilles{display:flex;flex-wrap:wrap;justify-content:center;gap:1
 rdr-venir .rv-pastille{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 20px 0 14px;border-radius:100px;background:${T.blanc};border:1px solid ${T.filetClair};font-family:${POLICE_TEXTE};font-size:14px;font-weight:700;color:${T.marine};}
 rdr-venir .rv-pastille svg{width:20px;height:20px;color:${T.tealSombre};}
 rdr-venir .rv-prat{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;}
-rdr-venir .rv-prat--2{grid-template-columns:repeat(2,minmax(0,1fr));}
+rdr-venir .rv-prat__onglets{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 clamp(22px,2.6vw,32px);}
+rdr-venir .rv-prat__o{appearance:none;display:inline-flex;align-items:center;gap:10px;min-height:52px;margin:0;padding:5px 22px 5px 6px;border-radius:100px;background:${T.blanc};border:1px solid ${T.filetClair};color:${T.marine};cursor:pointer;
+  font-family:${POLICE_TEXTE};font-size:14.5px;font-weight:700;line-height:1.2;transition:background .2s,color .2s,border-color .2s;}
+rdr-venir .rv-prat__o .rv-pico{width:40px;height:40px;transition:background .2s,color .2s;}
+rdr-venir .rv-prat__o .rv-pico svg{width:20px;height:20px;}
+@media (hover:hover) and (pointer:fine){rdr-venir .rv-prat__o:hover{border-color:${T.tealSombre};color:${T.tealSombre};}}
+rdr-venir .rv-prat__o[aria-selected="true"]{background:${T.marine};border-color:${T.marine};color:${T.blanc};}
+rdr-venir .rv-prat__o[aria-selected="true"] .rv-pico{background:rgba(255,255,255,.14);color:${T.blanc};}
+rdr-venir .rv-prat__o:focus-visible,rdr-venir .rv-prat__p:focus-visible{outline:2px solid ${T.tealSombre};outline-offset:3px;}
+rdr-venir .rv-carte[hidden]{display:none;}
+rdr-venir .rv-carte__corps{display:grid;gap:14px;min-width:0;align-content:start;}
+rdr-venir .rv-carte--photo{grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:clamp(24px,3vw,40px);align-items:start;}
+rdr-venir .rv-carte--photo .rv-carte__photo{aspect-ratio:4/3;}
 rdr-venir .rv-carte{display:grid;gap:14px;padding:clamp(24px,3vw,36px);border-radius:22px;background:${T.blanc};border:1px solid rgba(22,53,93,.08);box-shadow:0 24px 50px -40px rgba(22,53,93,.35);}
 rdr-venir .rv-carte__t{display:flex;align-items:center;gap:14px;margin:0;font-family:${POLICE_TITRE};font-style:italic;font-weight:400;font-size:clamp(20px,2vw,25px);line-height:1.05;text-transform:uppercase;color:${T.marine};}
 rdr-venir .rv-carte__p{margin:0;font-family:${POLICE_TEXTE};font-size:15px;line-height:1.6;color:${T.marine2};text-wrap:pretty;}
@@ -818,8 +836,14 @@ rdr-venir .rv-carte__photo img{display:block;width:100%;height:100%;object-fit:c
 @media (max-width:900px){
   rdr-venir .rv-fiche--photo{grid-template-columns:1fr;}
   rdr-venir .rv-fiche__photo{aspect-ratio:16/9;order:-1;}
-  rdr-venir .rv-prat--2{grid-template-columns:1fr;}
+  rdr-venir .rv-carte--photo{grid-template-columns:minmax(0,1fr);row-gap:14px;}
+  rdr-venir .rv-carte--photo .rv-carte__photo{aspect-ratio:16/9;}
   rdr-venir .rv-carte .rv-liste{columns:1;}
+}
+@media (max-width:560px){
+  rdr-venir .rv-prat__onglets{flex-wrap:nowrap;gap:8px;}
+  rdr-venir .rv-prat__o{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:6px;min-height:0;padding:10px 6px 12px;border-radius:16px;font-size:13px;text-align:center;}
+  rdr-venir .rv-prat__o .rv-pico{width:36px;height:36px;}
 }
 @media (max-width:720px){
   rdr-venir .rv-co2__hero{grid-template-columns:1fr;gap:14px;}
@@ -838,7 +862,7 @@ rdr-venir .rv-carte__photo img{display:block;width:100%;height:100%;object-fit:c
   rdr-venir .rv-bloc--hero::before{display:none;}
 }
 @media (prefers-reduced-motion:reduce){
-  rdr-venir .rv-co2__chev,rdr-venir .rv-co2__tr,rdr-venir .rv-reg__r,rdr-venir .rv-btn,rdr-venir .rv-co2__jauge{transition:none;}
+  rdr-venir .rv-co2__chev,rdr-venir .rv-co2__tr,rdr-venir .rv-reg__r,rdr-venir .rv-prat__o,rdr-venir .rv-prat__o .rv-pico,rdr-venir .rv-btn,rdr-venir .rv-co2__jauge{transition:none;}
   rdr-venir [data-revele]{opacity:1;transform:none;transition:none;}
   rdr-venir .rv-btn--invite svg,rdr-venir .rv-hero__photo img[data-prete="1"],rdr-venir .rv-vague,rdr-venir .rv-bloc--hero::before{animation:none;}
 }
@@ -1099,6 +1123,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
 
         co2: { trajet: 0, ouverts: { explication: false, simulateur: false } },
         regions: { active: 0 },
+        pratique: { actif: 0 },
         
 
         reglages: null, fichier: null, envoi: null, resultat: null, ouvert: false
@@ -1141,6 +1166,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
       
 
       this.addEventListener('click', (ev) => this._auClic(ev));
+      this.addEventListener('keydown', (ev) => this._auClavier(ev));
       this._rendreTout();
       this._suivreAncre();
       if (!this._chargeRecue) {
@@ -2111,7 +2137,7 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
         '<div class="rv-fiche__corps">' +
           '<h3 class="rv-fiche__t"><span class="rv-pico">' + ico('individuelle') + '</span><span>' + esc(this._page('voitureTitre')) + '</span></h3>' +
           '<p class="rv-fiche__tag">' + esc(this._page('voitureTexte')) + '</p>' +
-          (aCible ? '<div class="rv-fiche__actions"><button type="button" class="rv-btn rv-btn--ligne" data-aller="pratique">' + esc(this._page('voitureBouton')) + ico('bas') + '</button></div>' : '') +
+          (aCible ? '<div class="rv-fiche__actions"><button type="button" class="rv-btn rv-btn--ligne" data-aller="pratique" data-vers-onglet="parking individuelle">' + esc(this._page('voitureBouton')) + ico('bas') + '</button></div>' : '') +
         '</div></section>';
     }
 
@@ -2141,17 +2167,32 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
         html += '<div class="rv-pastilles">' + pastilles.map(l =>
           '<span class="rv-pastille">' + ico(TRACES[l.picto] ? l.picto : 'info') + '<span>' + esc(texteDe(l, 'titre')) + '</span></span>').join('') + '</div>';
       }
+      
+
+
+      const onglets = cartes.length > 1;
+      if (onglets) {
+        if (!(this._etat.pratique.actif < cartes.length)) this._etat.pratique.actif = 0;
+        const courts = cartes.map(l => ONGLETS_COURTS[l.picto] || '');
+        const nom = (l, i) => courts[i] && courts.indexOf(courts[i]) === courts.lastIndexOf(courts[i]) ? courts[i] : texteDe(l, 'titre');
+        html += '<div class="rv-prat__onglets" role="tablist" aria-label="' + esc(this._page('titrePratique')) + '">' + cartes.map((l, i) => {
+          const choisi = i === this._etat.pratique.actif;
+          return '<button type="button" class="rv-prat__o" role="tab" id="rv-prat-o' + i + '" aria-controls="rv-prat-p' + i + '" aria-selected="' + choisi + '" tabindex="' + (choisi ? '0' : '-1') + '" data-onglet="' + i + '" data-picto="' + esc(l.picto || '') + '">' +
+            '<span class="rv-pico">' + ico(TRACES[l.picto] ? l.picto : 'info') + '</span><span>' + esc(nom(l, i)) + '</span></button>';
+        }).join('') + '</div>';
+      }
       if (cartes.length) {
-        html += '<div class="rv-prat' + (cartes.length > 1 ? ' rv-prat--2' : '') + '">' + cartes.map(l => {
+        html += '<div class="rv-prat' + (onglets ? ' rv-prat--onglets' : '') + '">' + cartes.map((l, i) => {
           const note = couperLien(texteDe(l, 'note'));
           const src = imageWix(l.image, 1200, 675);
-          return '<article class="rv-carte">' +
-            '<h3 class="rv-carte__t"><span class="rv-pico">' + ico(TRACES[l.picto] ? l.picto : 'info') + '</span><span>' + esc(texteDe(l, 'titre')) + '</span></h3>' +
-            (src ? '<figure class="rv-carte__photo"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async" width="1200" height="675"></figure>' : '') +
+          const corps = '<h3 class="rv-carte__t"><span class="rv-pico">' + ico(TRACES[l.picto] ? l.picto : 'info') + '</span><span>' + esc(texteDe(l, 'titre')) + '</span></h3>' +
             (texteDe(l, 'texte') ? '<p class="rv-carte__p">' + this._riche(texteDe(l, 'texte')) + '</p>' : '') +
             this._rendreLignes(texteDe(l, 'lignes')) +
-            (note.texte ? '<p class="rv-carte__note">' + ico('astuce') + '<span>' + this._riche(note.texte) + this._rendreLien(note) + '</span></p>' : '') +
-          '</article>';
+            (note.texte ? '<p class="rv-carte__note">' + ico('astuce') + '<span>' + this._riche(note.texte) + this._rendreLien(note) + '</span></p>' : '');
+          const photo = src ? '<figure class="rv-carte__photo"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async" width="1200" height="675"></figure>' : '';
+          if (!onglets) return '<article class="rv-carte">' + corps.replace('</h3>', () => '</h3>' + photo) + '</article>';
+          return '<article class="rv-carte rv-prat__p' + (src ? ' rv-carte--photo' : '') + '" role="tabpanel" id="rv-prat-p' + i + '" aria-labelledby="rv-prat-o' + i + '" tabindex="0"' + (i === this._etat.pratique.actif ? '' : ' hidden') + '>' +
+            photo + '<div class="rv-carte__corps">' + corps + '</div></article>';
         }).join('') + '</div>';
       }
       if (!pastilles.length && !cartes.length) { s.innerHTML = ''; this.querySelector('[data-bloc="pratique"]').hidden = true; return; }
@@ -2162,10 +2203,41 @@ body .rv-fen[data-open="true"] .rv-fen__panneau{transform:none;}
     }
 
      
+    _choisirOnglet(i, focus) {
+      const s = this._section('pratique');
+      const tous = s ? [...s.querySelectorAll('.rv-prat__o')] : [];
+      if (!tous[i]) return;
+      this._etat.pratique.actif = i;
+      tous.forEach((o, k) => { o.setAttribute('aria-selected', k === i ? 'true' : 'false'); o.tabIndex = k === i ? 0 : -1; });
+      s.querySelectorAll('.rv-prat__p').forEach((p, k) => { p.hidden = k !== i; });
+      if (focus) tous[i].focus();
+    }
+
+     
+    _auClavier(ev) {
+      const o = ev && ev.target && ev.target.closest ? ev.target.closest('.rv-prat__o') : null;
+      if (!o || !this.contains(o)) return;
+      const n = this.querySelectorAll('.rv-prat__o').length;
+      const i = Number(o.getAttribute('data-onglet')) || 0;
+      const vers = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: n - 1 }[ev.key];
+      if (vers === undefined) return;
+      ev.preventDefault();
+      this._choisirOnglet((vers + n) % n, true);
+    }
+
+     
     _auClic(ev) {
-      const cible = ev && ev.target && ev.target.closest ? ev.target.closest('[data-aller], .rv-co2__bt, .rv-co2__tr, .rv-reg__r, [data-ouvrir], [data-plan-voir], [data-plan]') : null;
+      const cible = ev && ev.target && ev.target.closest ? ev.target.closest('[data-aller], .rv-co2__bt, .rv-co2__tr, .rv-reg__r, .rv-prat__o, [data-ouvrir], [data-plan-voir], [data-plan]') : null;
       if (!cible || !this.contains(cible)) return;
-      if (cible.hasAttribute('data-aller')) { this._aller(cible.getAttribute('data-aller')); return; }
+      if (cible.hasAttribute('data-aller')) {
+         
+        const voulus = String(cible.getAttribute('data-vers-onglet') || '').split(' ').filter(Boolean);
+        const i = voulus.length ? [...this.querySelectorAll('.rv-prat__o')].findIndex(o => voulus.indexOf(o.getAttribute('data-picto')) !== -1) : -1;
+        if (i !== -1) this._choisirOnglet(i);
+        this._aller(cible.getAttribute('data-aller'));
+        return;
+      }
+      if (cible.classList.contains('rv-prat__o')) { this._choisirOnglet(Number(cible.getAttribute('data-onglet')) || 0); return; }
       if (cible.hasAttribute('data-plan-voir')) { this._ouvrirPlan(Number(cible.getAttribute('data-plan-voir')) || 0); return; }
       if (cible.hasAttribute('data-plan')) { this._etat.regions.carte = Number(cible.getAttribute('data-plan')) || 0; this._majPlan(); return; }
       if (cible.hasAttribute('data-ouvrir')) { this._ouvrirFenetre(); return; }
