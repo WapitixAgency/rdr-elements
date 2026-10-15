@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 2fff1d4 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum e149429 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e149429";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -590,6 +590,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performan
     '.rdrc-ro-filtre:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
     '.rdrc-ro-num{font:800 12px/1 ui-monospace,Consolas,monospace;letter-spacing:.06em}',
     '.rdrc-ro-qui small,.rdrc-ro-mode small,.rdrc-ro-quand{display:block;margin-top:2px;font-size:10.5px;color:var(--ink-3);white-space:normal}',
+    '.rdrc-ro-hist{margin-top:4px;font-size:10.5px;color:var(--ink-3)}',
+    '.rdrc-ro-hist summary{cursor:pointer;font-weight:600;color:var(--ink-2)}',
+    '.rdrc-ro-hist ol{margin:4px 0 0;padding:0 0 0 14px;white-space:normal}',
+    '.rdrc-ro-hist li{margin:1px 0}',
     '.rdrc-ro-mode small{max-width:240px}',
     '.rdrc-ro-st{display:inline-block;font:800 10px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:999px;white-space:nowrap;background:#FFF1DA;color:var(--warn)}',
     '.rdrc-ro-st[data-s="contacte"]{background:#E6F0FB;color:#1F5FA8}',
@@ -3080,7 +3084,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performan
 
       var cardLien = card('Page de retrait de l\'espace presse', 'à donner en privé',
         (reg.lienRetrait
-          ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte : les gagnants qui ont choisi le village, leur numéro de retrait, leur prénom et l\'initiale de leur nom, leur lot, et un bouton « Remis ». Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici.</p>' +
+          ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte, en deux panneaux, « À remettre » et « Remis ». On y trouve les gagnants qui ont choisi le village et ceux qui n\'ont encore rien choisi, avec leur numéro de retrait, leur prénom et l\'initiale de leur nom, et leur lot. On cherche par numéro ou par prénom, on confirme, et une erreur s\'annule. Le QR code du gagnant, scanné par un téléphone qui a ouvert ce lien, ouvre directement sa fiche. Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici, et chaque geste s\'inscrit à l\'historique de la ligne.</p>' +
             '<div class="rdrc-ro-lien"><input class="rdrc-jt-cherche" type="text" readonly value="' + esc(reg.lienRetrait) + '" aria-label="Lien de la page de retrait" data-roue-lien>' +
             '<button type="button" class="rdrc-btn" data-roue-copier>Copier</button><a class="rdrc-btn" href="' + esc(reg.lienRetrait) + '" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>' +
             '<p class="rdrc-note">Ce lien donne accès à la liste sans connexion : à ne transmettre qu\'aux personnes de l\'espace presse. Pour le couper, demande une nouvelle clé (la ligne « roue » d\'ER_ANIMATIONS, champ cleRetrait).</p>'
@@ -3114,6 +3118,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performan
           (g.statut !== 'contacte' ? bouton(g, 'contacte', 'Contacté', '') : '') +
           bouton(g, 'sans-suite', 'Sans suite', 'rdrc-no') + '</div>';
       };
+      
+
+      var gesteLib = function (e) { return e.geste === 'remise-annulee' ? 'Remise annulée' : (STATUT[e.statut] || e.statut || '?'); };
+      var historique = function (g) {
+        var j = Array.isArray(g.journal) ? g.journal : [];
+        if (!j.length) return '';
+        return '<details class="rdrc-ro-hist"><summary>Historique (' + j.length + ')</summary><ol>' + j.slice().reverse().map(function (e) {
+          return '<li>' + esc(date(e.le)) + ' · ' + esc(gesteLib(e)) + (e.par ? ' · ' + esc(e.par) : '') + '</li>';
+        }).join('') + '</ol></details>';
+      };
       var ligne = function (g) {
         var adresse = g.mode === 'envoi' ? [g.adresse, [g.codePostal, g.ville].filter(Boolean).join(' '), g.pays].filter(Boolean).join(', ') : '';
         var q = [g.numero, g.prenom, g.nom, g.email, g.telephone, g.lot, g.ville].join(' ').toLowerCase();
@@ -3126,7 +3140,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performan
           '<td class="rdrc-ro-mode"><b>' + esc(MODE[g.mode] || MODE['']) + '</b>' + (adresse ? '<small>' + esc(adresse) + '</small>' : '') + '</td>' +
           '<td><span class="rdrc-ro-st" data-s="' + esc(g.statut) + '">' + esc(STATUT[g.statut] || g.statut) + '</span>' +
             (g.statut === 'remis' && g.remisLe ? '<small class="rdrc-ro-quand">' + esc(date(g.remisLe)) + (g.traitePar ? ' · ' + esc(g.traitePar) : '') + '</small>' : '') +
-            (g.statut === 'expedie' && g.expedieLe ? '<small class="rdrc-ro-quand">' + esc(date(g.expedieLe)) + '</small>' : '') + '</td>' +
+            (g.statut === 'expedie' && g.expedieLe ? '<small class="rdrc-ro-quand">' + esc(date(g.expedieLe)) + '</small>' : '') + historique(g) + '</td>' +
           '<td>' + actions(g) + '</td></tr>';
       };
       var cardGagnants = card('Les gagnants', pl(gagnants.length, 'lot physique', 'lots physiques') + ', le plus récent en tête',
@@ -3147,10 +3161,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performan
       var v = (this._payload && this._payload.roue) || {};
       var tous = v.gagnants || [];
       var lignes = this.querySelectorAll('tr[data-roue-ligne]');
-      var rows = [['Gagné le', 'Numéro', 'Prénom', 'Nom', 'E-mail', 'Téléphone', 'Lot', 'Mode', 'Adresse', 'Code postal', 'Ville', 'Pays', 'Statut', 'Remis le', 'Envoyé le', 'Traité par', 'Source']];
+      var rows = [['Gagné le', 'Numéro', 'Prénom', 'Nom', 'E-mail', 'Téléphone', 'Lot', 'Mode', 'Adresse', 'Code postal', 'Ville', 'Pays', 'Statut', 'Remis le', 'Envoyé le', 'Traité par', 'Source', 'Historique']];
       tous.forEach(function (g, i) {
         if (lignes[i] && lignes[i].hidden) return;
-        rows.push([g.gagneLe, g.numero, g.prenom, g.nom, g.email, g.telephone, g.lot, g.mode, g.adresse, g.codePostal, g.ville, g.pays, g.statut, g.remisLe, g.expedieLe, g.traitePar, g.source]);
+        var hist = (Array.isArray(g.journal) ? g.journal : []).map(function (e) { return e.le + ' ' + (e.geste || e.statut) + (e.par ? ' (' + e.par + ')' : ''); }).join(' | ');
+        rows.push([g.gagneLe, g.numero, g.prenom, g.nom, g.email, g.telephone, g.lot, g.mode, g.adresse, g.codePostal, g.ville, g.pays, g.statut, g.remisLe, g.expedieLe, g.traitePar, g.source, hist]);
       });
       csvDownload('rdr-roue-gagnants-' + stamp() + '.csv', rows);
     }

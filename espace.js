@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 2fff1d4 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="2fff1d4";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum e149429 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e149429";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -860,6 +860,175 @@ if (!customElements.get('espace-rhum')) {
   const JR_I_ETINCELLE = '<path fill="currentColor" stroke="none" d="M12 1.5l2.2 7.4 7.3 2.1-7.3 2.1L12 22.5l-2.2-9.4L2.5 11l7.3-2.1z"/>';
   const jrIc = (c, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + c + '</svg>';
   
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function () {
+  if (window.qrVillage) return;
+
+   
+  const EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function () { let x = 1; for (let i = 0; i < 255; i++) { EXP[i] = x; LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11D; } for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255]; })();
+  const mul = (a, b) => (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]];
+
+   
+  const generateur = (n) => { let g = [1]; for (let i = 0; i < n; i++) { const s = new Array(g.length + 1).fill(0); for (let j = 0; j < g.length; j++) { s[j] ^= g[j]; s[j + 1] ^= mul(g[j], EXP[i]); } g = s; } return g; };
+  const reste = (data, g) => {
+    const r = new Array(g.length - 1).fill(0);
+    for (const d of data) {
+      const f = d ^ r.shift(); r.push(0);
+      if (f) for (let j = 0; j < r.length; j++) r[j] ^= mul(g[j + 1], f);
+    }
+    return r;
+  };
+
+   
+  const ECC_PAR_BLOC = [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28];
+  const NB_BLOCS = [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49];
+  const modulesBruts = (v) => {
+    let r = (16 * v + 128) * v + 64;
+    if (v >= 2) { const a = Math.floor(v / 7) + 2; r -= (25 * a - 10) * a - 55; if (v >= 7) r -= 36; }
+    return r;
+  };
+  const capaciteOctets = (v) => Math.floor(modulesBruts(v) / 8) - ECC_PAR_BLOC[v] * NB_BLOCS[v];
+  const positionsAlignement = (v) => {
+    if (v === 1) return [];
+    const n = Math.floor(v / 7) + 2, taille = v * 4 + 17;
+    const pas = (v === 32) ? 26 : Math.ceil((taille - 13) / (n * 2 - 2)) * 2;
+    const out = [6]; for (let p = taille - 7; out.length < n; p -= pas) out.splice(1, 0, p);
+    return out;
+  };
+
+   
+  const versionPour = (nOctets) => { for (let v = 1; v <= 40; v++) { const bitsLong = v <= 9 ? 8 : 16; if (4 + bitsLong + nOctets * 8 <= capaciteOctets(v) * 8) return v; } return null; };
+  const bitsDonnees = (octets, v) => {
+    const bits = [];
+    const pousser = (val, n) => { for (let i = n - 1; i >= 0; i--) bits.push((val >>> i) & 1); };
+    pousser(4, 4);                                   
+    pousser(octets.length, v <= 9 ? 8 : 16);
+    octets.forEach(o => pousser(o, 8));
+    const cap = capaciteOctets(v) * 8;
+    pousser(0, Math.min(4, cap - bits.length));      
+    while (bits.length % 8) bits.push(0);
+    for (let pad = 0xEC; bits.length < cap; pad ^= 0xEC ^ 0x11) pousser(pad, 8);
+    const out = []; for (let i = 0; i < bits.length; i += 8) out.push(parseInt(bits.slice(i, i + 8).join(''), 2));
+    return out;
+  };
+   
+  const motsFinaux = (data, v) => {
+    const nb = NB_BLOCS[v], ecc = ECC_PAR_BLOC[v], brut = Math.floor(modulesBruts(v) / 8);
+    const courts = nb - brut % nb, longCourt = Math.floor(brut / nb);
+    const g = generateur(ecc), blocs = [];
+    let k = 0;
+    for (let i = 0; i < nb; i++) {
+      const n = longCourt - ecc + (i < courts ? 0 : 1);
+      const d = data.slice(k, k + n); k += n;
+      const e = reste(d, g);
+      if (i < courts) d.push(-1);                     
+      blocs.push(d.concat(e));
+    }
+    const out = [];
+    for (let i = 0; i < blocs[0].length; i++) blocs.forEach(b => { if (b[i] !== -1) out.push(b[i]); });
+    return out;
+  };
+
+   
+  const encoder = (texte) => {
+    const octets = Array.from(new TextEncoder().encode(texte));
+    const v = versionPour(octets.length);
+    if (!v) throw new Error('texte trop long pour un QR');
+    const taille = v * 4 + 17;
+    const mod = Array.from({ length: taille }, () => new Uint8Array(taille));
+    const fonction = Array.from({ length: taille }, () => new Uint8Array(taille));
+    const pose = (x, y, noir) => { mod[y][x] = noir ? 1 : 0; fonction[y][x] = 1; };
+    const motif = (cx, cy) => { for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) { const x = cx + dx, y = cy + dy; if (x < 0 || y < 0 || x >= taille || y >= taille) continue; const d = Math.max(Math.abs(dx), Math.abs(dy)); pose(x, y, d !== 2 && d !== 4); } };
+    motif(3, 3); motif(taille - 4, 3); motif(3, taille - 4);
+    const al = positionsAlignement(v);
+    al.forEach((cx, i) => al.forEach((cy, j) => {
+      if ((i === 0 && j === 0) || (i === 0 && j === al.length - 1) || (i === al.length - 1 && j === 0)) return;
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) pose(cx + dx, cy + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+    }));
+    for (let i = 8; i < taille - 8; i++) { pose(6, i, i % 2 === 0); pose(i, 6, i % 2 === 0); }
+     
+    const reserveFormat = () => { for (let i = 0; i <= 8; i++) { pose(8, i, 0); pose(i, 8, 0); } for (let i = 0; i < 8; i++) { pose(taille - 1 - i, 8, 0); pose(8, taille - 1 - i, 0); } pose(8, taille - 8, 1); };
+    reserveFormat();
+    if (v >= 7) {
+      let r = v; for (let i = 0; i < 12; i++) r = (r << 1) ^ ((r >>> 11) * 0x1F25);
+      const bits = (v << 12) | r;
+      for (let i = 0; i < 18; i++) { const b = (bits >>> i) & 1, a = taille - 11 + i % 3, c = Math.floor(i / 3); pose(a, c, b); pose(c, a, b); }
+    }
+     
+    const mots = motsFinaux(bitsDonnees(octets, v), v);
+    let i = 0;
+    for (let droite = taille - 1; droite >= 1; droite -= 2) {
+      if (droite === 6) droite = 5;
+      for (let vert = 0; vert < taille; vert++) for (let j = 0; j < 2; j++) {
+        const x = droite - j, monte = ((droite + 1) & 2) === 0, y = monte ? taille - 1 - vert : vert;
+        if (fonction[y][x]) continue;
+        const bit = i < mots.length * 8 ? (mots[i >>> 3] >>> (7 - (i & 7))) & 1 : 0;
+        mod[y][x] = bit; i++;
+      }
+    }
+     
+    const MASQUES = [(x, y) => (x + y) % 2 === 0, (x, y) => y % 2 === 0, (x, y) => x % 3 === 0, (x, y) => (x + y) % 3 === 0,
+      (x, y) => (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0, (x, y) => x * y % 2 + x * y % 3 === 0,
+      (x, y) => (x * y % 2 + x * y % 3) % 2 === 0, (x, y) => ((x + y) % 2 + x * y % 3) % 2 === 0];
+    const appliquer = (m) => { for (let y = 0; y < taille; y++) for (let x = 0; x < taille; x++) if (!fonction[y][x] && MASQUES[m](x, y)) mod[y][x] ^= 1; };
+    const ecrireFormat = (m) => {
+      const data = (0 << 3) | m;                      
+      let r = data; for (let k = 0; k < 10; k++) r = (r << 1) ^ ((r >>> 9) * 0x537);
+      const bits = ((data << 10) | r) ^ 0x5412;
+      const b = (k) => (bits >>> k) & 1;
+      for (let k = 0; k <= 5; k++) pose(8, k, b(k));
+      pose(8, 7, b(6)); pose(8, 8, b(7)); pose(7, 8, b(8));
+      for (let k = 9; k < 15; k++) pose(14 - k, 8, b(k));
+      for (let k = 0; k < 8; k++) pose(taille - 1 - k, 8, b(k));
+      for (let k = 8; k < 15; k++) pose(8, taille - 15 + k, b(k));
+      pose(8, taille - 8, 1);
+    };
+    const penalite = () => {
+      let p = 0;
+      const ligne = (lire) => { for (let a = 0; a < taille; a++) { let run = 0, prev = -1; const hist = [0, 0, 0, 0, 0, 0, 0]; for (let b = 0; b < taille; b++) { const c = lire(a, b); if (c === prev) { run++; if (run === 5) p += 3; else if (run > 5) p++; } else { run = 1; prev = c; } } } };
+      ligne((a, b) => mod[a][b]); ligne((a, b) => mod[b][a]);
+      for (let y = 0; y < taille - 1; y++) for (let x = 0; x < taille - 1; x++) { const c = mod[y][x]; if (c === mod[y][x + 1] && c === mod[y + 1][x] && c === mod[y + 1][x + 1]) p += 3; }
+      const motifDoigt = (lire) => { for (let a = 0; a < taille; a++) for (let b = 0; b < taille - 10; b++) { const s = []; for (let k = 0; k < 11; k++) s.push(lire(a, b + k)); const t = s.join(''); if (t === '10111010000' || t === '00001011101') p += 40; } };
+      motifDoigt((a, b) => mod[a][b]); motifDoigt((a, b) => mod[b][a]);
+      let noirs = 0; for (let y = 0; y < taille; y++) for (let x = 0; x < taille; x++) noirs += mod[y][x];
+      const k = Math.ceil(Math.abs(noirs * 20 - taille * taille * 10) / (taille * taille)) - 1; p += k * 10;
+      return p;
+    };
+    let meilleur = 0, min = Infinity;
+    for (let m = 0; m < 8; m++) { appliquer(m); ecrireFormat(m); const p = penalite(); if (p < min) { min = p; meilleur = m; } appliquer(m); }
+    appliquer(meilleur); ecrireFormat(meilleur);
+    return { taille, version: v, modules: mod };
+  };
+
+   
+  const svg = (texte, o) => {
+    const q = encoder(texte);
+    const marge = (o && o.marge != null) ? o.marge : 2, px = (o && o.taille) || 128;
+    const n = q.taille + marge * 2;
+    let d = '';
+    for (let y = 0; y < q.taille; y++) for (let x = 0; x < q.taille; x++) if (q.modules[y][x]) d += 'M' + (x + marge) + ' ' + (y + marge) + 'h1v1h-1z';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" width="' + px + '" height="' + px + '" shape-rendering="crispEdges" role="img" aria-label="QR">' +
+      '<rect width="' + n + '" height="' + n + '" fill="#fff"/><path d="' + d + '" fill="' + ((o && o.couleur) || '#0A1A35') + '"/></svg>';
+  };
+
+  window.qrVillage = { encoder, svg };
+})();
+ 
 
   const JR_TERRITOIRES = ['France métropolitaine', 'Guadeloupe', 'Martinique', 'Guyane', 'La Réunion', 'Mayotte', 'Saint-Martin', 'Saint-Barthélemy', 'Autre pays'];
   const jrAdresseEnLigne = (a) => [[a.prenom, a.nom].filter(Boolean).join(' '), a.adresse, a.complement, [a.codePostal, a.ville].filter(Boolean).join(' '), a.territoire === 'Autre pays' ? a.pays : a.territoire].filter(Boolean).join(', ');
@@ -2018,7 +2187,10 @@ if (!customElements.get('espace-rhum')) {
   .jr-retrait-txt b{color:#fff}
   .jr-numero{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0;font:600 13px/1.3 Montserrat,sans-serif;color:rgba(255,255,255,.8)}
   .jr-numero b{padding:7px 12px;border:2px dashed rgba(252,241,80,.75);border-radius:3px 10px 3px 10px;font:800 19px/1 'Courier New',ui-monospace,monospace;letter-spacing:.12em;color:#FCF150}
-  .jr-champs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+  .jr-qr{display:flex;align-items:center;gap:14px;margin:0}
+  .jr-qr-img{flex:none;display:block;width:132px;height:132px;padding:5px;border-radius:3px 12px 3px 12px;background:#fff}
+  .jr-qr-img svg{display:block;width:100%;height:100%}
+  .jr-qr figcaption{font:500 13px/1.45 Montserrat,sans-serif;color:rgba(255,255,255,.85)}  .jr-champs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
   .jr-c-prenom,.jr-c-nom,.jr-c-tel{grid-column:span 2}
   .jr-c-adresse{grid-column:span 4}.jr-c-complement{grid-column:span 2}
   .jr-c-cp{grid-column:span 2}.jr-c-ville{grid-column:span 2}.jr-c-territoire{grid-column:span 2}
@@ -2054,6 +2226,7 @@ if (!customElements.get('espace-rhum')) {
     .jr-lot{width:clamp(160px,14vw,200px)}
     .jr-marque img{height:86px}
     .jr-retrait{padding:13px 16px;gap:10px}
+    .jr-qr-img{width:112px;height:112px}
   }
   @media (max-width:1060px) and (min-width:761px){
     .jr-res{grid-template-columns:minmax(0,1fr)}
@@ -2084,6 +2257,8 @@ if (!customElements.get('espace-rhum')) {
     .jr-retrait{align-self:stretch;text-align:left}
     .jr-retrait-q{text-align:center}
     .jr-retrait-choix{grid-template-columns:1fr}
+    .jr-qr{flex-direction:column;text-align:center}
+    .jr-qr-img{width:min(180px,52vw);height:min(180px,52vw)}
     .jr-champs{grid-template-columns:repeat(2,minmax(0,1fr))}
     .jr-c-prenom,.jr-c-nom,.jr-c-cp{grid-column:span 1}
     .jr-c-tel,.jr-c-adresse,.jr-c-complement,.jr-c-territoire{grid-column:1/-1}
@@ -20554,12 +20729,43 @@ if (!customElements.get('espace-rhum')) {
       const rt = this._jrEtat().retrait;
       const res = m.querySelector('.jr-res');
       if (res) res.classList.toggle('est-formulaire', etape === 'adresse');
-      if (etape === 'fait' && rt) {
+       
+      const quand = (v) => {
+        const d = new Date(v);
+        if (isNaN(d)) return '';
+        try {
+          const j = new Intl.DateTimeFormat(en ? 'en-GB' : 'fr-FR', { timeZone: 'Europe/Paris', day: 'numeric', month: 'long' }).format(d);
+          const h = new Intl.DateTimeFormat(en ? 'en-GB' : 'fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' }).format(d);
+          return en ? 'on ' + j + ' at ' + h : 'le ' + j.replace(/^1 /, '1er ') + ' à ' + h.replace(':', ' h ');
+        } catch (e) { return ''; }
+      };
+      if (etape === 'fait' && rt && (rt.remisLe || rt.expedieLe)) {
+        
+
+        place.innerHTML = rt.remisLe
+          ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Lot remis', 'Prize collected') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('Ton lot t\'a été remis à l\'espace presse du village', 'Your prize was handed to you at the village press area') + ' ' + escapeHtml(quand(rt.remisLe)) + T('. Bonne Route du Rhum !', '. Enjoy the Route du Rhum!') + '</p></div>'
+          : '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Lot envoyé', 'Prize sent') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('Ton lot est parti par la poste', 'Your prize was posted') + ' ' + escapeHtml(quand(rt.expedieLe)) + (rt.adresse ? T(', à', ', to') + ' <b>' + escapeHtml(jrAdresseEnLigne(rt.adresse)) + '</b>' : '') + '.</p></div>';
+      } else if (etape === 'fait' && rt) {
+        
+
+
+
+        let qr = '';
+        if (rt.mode === 'village' && rt.lienQr && window.qrVillage) {
+          try { qr = window.qrVillage.svg(rt.lienQr, { taille: 180, marge: 3, couleur: '#0A1228' }); } catch (e) { qr = ''; }
+        }
+        const lieu = this._jrEtat().lieuRetrait;
+        const carte = rt.mode === 'village' && lieu
+          ? '<a class="jr-cta jr-cta--petit" data-jr-carte href="' + escapeHtml(this._cheminLangue('/carte-village-saint-malo?poi=' + encodeURIComponent(lieu))) + '"><span class="jr-cta-ico">' + jrIc(JR_I_LIEU) + '</span>' + T('Voir où retirer mon lot', 'See where to collect my prize') + '</a>'
+          : '';
         place.innerHTML = rt.mode === 'village'
           ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('À retirer sur le village', 'To collect at the village') + '</p>' +
-            '<p class="jr-retrait-txt">' + T('Passe à l\'espace presse du village, à Saint-Malo, et montre ce numéro avec ton Espace Rhum ouvert.', 'Go to the village press area in Saint-Malo and show this number with your Espace Rhum open.') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('Passe à l\'espace presse du village, à Saint-Malo, avec ce numéro, c\'est avec lui que l\'équipe retrouve ton lot.', 'Go to the village press area in Saint-Malo with this number, it is how the team finds your prize.') + '</p>' +
             '<p class="jr-numero">' + T('Ton numéro de retrait', 'Your collection number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>' +
-            '<div class="jr-retrait-actions"><button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Plutôt par la poste', 'By post instead') + '</button></div></div>'
+            (qr ? '<figure class="jr-qr"><span class="jr-qr-img">' + qr + '</span><figcaption>' + T('Tu peux aussi montrer ce QR code, il ouvre directement ta fiche à l\'espace presse.', 'You can also show this QR code, it opens your record directly at the press area.') + '</figcaption></figure>' : '') +
+            '<div class="jr-retrait-actions">' + carte + '<button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Plutôt par la poste', 'By post instead') + '</button></div></div>'
           : '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Envoi par la poste', 'Delivery by post') + '</p>' +
             '<p class="jr-retrait-txt">' + T('C\'est noté, on te l\'envoie à', 'Got it, we will send it to') + ' <b>' + escapeHtml(jrAdresseEnLigne(rt.adresse || {})) + '</b>.</p>' +
             '<div class="jr-retrait-actions"><button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Changer', 'Change') + '</button></div></div>';
@@ -20604,6 +20810,12 @@ if (!customElements.get('espace-rhum')) {
       const r = this._jrEtat();
       if (!r) return;
       const en = this._lang() === 'en';
+      if (res && res.raison === 'deja_remis' && res.retrait) {
+         
+        r.retrait = res.retrait;
+        this._jrPeindreRetrait('fait');
+        return;
+      }
       if (!res || res.ok !== true) {
         const e = this._jrModale && this._jrModale.querySelector('[data-jr-retrait-etat]');
         const raison = res && res.raison;
@@ -20616,7 +20828,8 @@ if (!customElements.get('espace-rhum')) {
         if (!this._jrModale) console.warn('[espace-rhum] retrait refusé', raison);
         return;
       }
-      r.retrait = { mode: res.mode, numero: res.numero || '', adresse: res.adresse || null };
+      r.retrait = { mode: res.mode, numero: res.numero || '', adresse: res.adresse || null, lienQr: res.lienQr || '' };
+      if (typeof res.lieuRetrait === 'string' && res.lieuRetrait) r.lieuRetrait = res.lieuRetrait;
       this._jrPeindreRetrait('fait');
       const ok = this._jrModale && this._jrModale.querySelector('[data-jr-retrait-changer]');
       if (ok) { try { ok.focus({ preventScroll: true }); } catch (e) { ok.focus(); } }
