@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum d622447 | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="d622447";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum 8233235 | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="8233235";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1138,6 +1138,7 @@ function carte() {
 }
 function dispositif() {
   const D = PAGE.dispositif;
+  if (D.masque) return '';
   return '<section class="dispositif" id="dispositif" aria-labelledby="dispositif-titre"><div class="trame"><div class="encart">' +
     emp(D.emp) +
     '<div class="encart-tete"><div><p class="surtitre">' + esc(D.surtitre) + '</p><h2 class="titre" id="dispositif-titre" tabindex="-1">' + esc(D.titre) + '</h2><p class="encart-sous">' + esc(D.sous) + '</p></div></div>' +
