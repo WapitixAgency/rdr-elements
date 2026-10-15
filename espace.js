@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum e272178 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e272178";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 53b7335 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="53b7335";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -2190,19 +2190,38 @@ if (!customElements.get('espace-rhum')) {
   .jr-qr{display:flex;align-items:center;gap:14px;margin:0}
   .jr-qr-img{flex:none;display:block;width:132px;height:132px;padding:5px;border-radius:3px 12px 3px 12px;background:#fff}
   .jr-qr-img svg{display:block;width:100%;height:100%}
-  .jr-qr figcaption{font:500 13px/1.45 Montserrat,sans-serif;color:rgba(255,255,255,.85)}  .jr-champs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+  .jr-qr figcaption{font:500 13px/1.45 Montserrat,sans-serif;color:rgba(255,255,255,.85)}
+  .jr-retrait-q + .jr-retrait-choix,.jr-retrait-q + .jr-champs{margin-top:6px}
+  .jr-retrait .jr-cta{white-space:nowrap}
+  .jr-boite:focus{outline:none}
+  
+
+  .jr-pays{position:relative}
+  .jr-pays-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid rgba(255,255,255,.26);border-radius:3px 10px 3px 10px;background:rgba(255,255,255,.07);color:#fff;font:500 15px/1.2 Montserrat,sans-serif;text-align:left;cursor:pointer}
+  .jr-pays-btn svg{flex:none;width:18px;height:18px;color:#FCF150;transition:transform .15s ease}
+  .jr-pays-btn:hover,.jr-pays-btn[aria-expanded="true"]{border-color:#FCF150;background:rgba(255,255,255,.1)}
+  .jr-pays-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .jr-pays-btn:focus-visible{outline:none;border-color:#FCF150;box-shadow:0 0 0 3px rgba(252,241,80,.25)}
+  .jr-pays-val{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .jr-pays-liste{position:absolute;z-index:5;left:auto;right:0;min-width:max(100%,250px);top:calc(100% + 6px);max-height:min(310px,48vh);overflow-y:auto;padding:6px;border:1px solid rgba(252,241,80,.35);border-radius:4px 14px 4px 14px;background:#132650;box-shadow:0 18px 40px rgba(3,10,26,.6);scrollbar-width:thin;scrollbar-color:rgba(252,241,80,.4) transparent}
+  .jr-pays-liste[hidden]{display:none}
+  .jr-pays-liste.est-haut{top:auto;bottom:calc(100% + 6px)}
+  .jr-pays-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;white-space:nowrap;padding:10px 12px;border:0;border-radius:3px 10px 3px 10px;background:none;color:rgba(255,255,255,.88);font:500 14.5px/1.25 Montserrat,sans-serif;text-align:left;cursor:pointer}
+  .jr-pays-opt + .jr-pays-opt--groupe{margin-top:5px;box-shadow:0 -5px 0 -4px rgba(255,255,255,.14)}
+  .jr-pays-opt:hover,.jr-pays-opt:focus-visible{outline:none;background:rgba(255,255,255,.09);color:#fff}
+  .jr-pays-opt[aria-selected="true"]{background:rgba(252,241,80,.14);color:#FCF150;font-weight:700}
+  .jr-pays-opt svg{flex:none;width:16px;height:16px;visibility:hidden}
+  .jr-pays-opt[aria-selected="true"] svg{visibility:visible}
+  .jr-champs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
   .jr-c-prenom,.jr-c-nom,.jr-c-tel{grid-column:span 2}
   .jr-c-adresse{grid-column:span 4}.jr-c-complement{grid-column:span 2}
-  .jr-c-cp{grid-column:span 2}.jr-c-ville{grid-column:span 2}.jr-c-territoire{grid-column:span 2}
+  .jr-c-cp{grid-column:span 1}.jr-c-ville{grid-column:span 2}.jr-c-territoire{grid-column:span 3}
   .jr-c-pays{grid-column:1/-1}.jr-c-pays[hidden]{display:none}
   .jr-champ i{font-style:normal;font-weight:500;color:rgba(255,255,255,.55)}
   .jr-champ{display:flex;flex-direction:column;gap:5px;min-width:0;font:600 12px/1.2 Montserrat,sans-serif;color:rgba(255,255,255,.75)}
   .jr-champ--large{grid-column:1/-1}
-  .jr-champ input,.jr-champ select{width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid rgba(255,255,255,.26);border-radius:3px 10px 3px 10px;background:rgba(255,255,255,.07);color:#fff;font:500 15px/1.2 Montserrat,sans-serif}
-  .jr-champ input:focus,.jr-champ select:focus{outline:none;border-color:#FCF150;background:rgba(255,255,255,.1)}
-  .jr-champ select{appearance:none;padding-right:30px;background:rgba(255,255,255,.07) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FCF150' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 9px center/16px no-repeat;cursor:pointer}
-  .jr-champ select option{background:#0E1B3A;color:#fff}
-  .jr-champ select[aria-invalid="true"]{border-color:#FF8A80}
+  .jr-champ input{width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid rgba(255,255,255,.26);border-radius:3px 10px 3px 10px;background:rgba(255,255,255,.07);color:#fff;font:500 15px/1.2 Montserrat,sans-serif}
+  .jr-champ input:focus{outline:none;border-color:#FCF150;background:rgba(255,255,255,.1)}
   .jr-champ input[aria-invalid="true"]{border-color:#FF8A80}
   .jr-retrait-note{margin:0;font:500 12px/1.4 Montserrat,sans-serif;color:rgba(255,255,255,.6)}
   .jr-retrait-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
@@ -2238,7 +2257,8 @@ if (!customElements.get('espace-rhum')) {
     .jr-boite{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-content:start;height:100%;border-radius:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
     .jr-boite::before{inset:0 0 40% 20%;background-size:auto 100%;background-position:left center}
     .jr-scene{padding:30px 18px 6px;gap:30px}
-    .jr-kicker{align-self:center;font-size:28px;text-align:center}
+    .jr-kicker{align-self:center;font-size:28px;text-align:center;padding:0 48px}
+    .jr-fermer{top:12px;right:12px;width:40px;height:40px}
     .jr-scene .jr-roue{width:min(290px,76vw,max(200px,calc(100vh - 440px)));transition:width .7s cubic-bezier(.2,.8,.2,1)}
     .jr-boite.est-resultat .jr-scene{gap:24px}
     .jr-boite.est-resultat .jr-scene .jr-roue{width:min(180px,48vw)}
@@ -2249,7 +2269,7 @@ if (!customElements.get('espace-rhum')) {
     .jr-res{grid-template-columns:minmax(0,1fr);justify-items:center;gap:22px}
     .jr-res-texte{align-items:center}
     .jr-lot{grid-row:1;width:min(230px,62vw,max(180px,calc(100vh - 480px)))}
-    .jr-champ input,.jr-champ select{font-size:16px}
+    .jr-champ input,.jr-pays-btn{font-size:16px}
     .jr-res-code{align-items:center;text-align:center}
     .jr-marque{justify-self:center}
     .jr-marque img{height:72px}
@@ -2265,6 +2285,9 @@ if (!customElements.get('espace-rhum')) {
     .jr-c-ville{grid-column:span 1}
     .jr-retrait-actions{justify-content:center}
     .jr-cta{width:100%;justify-content:center;letter-spacing:.07em;font-size:13px}
+    .jr-retrait{padding:18px 16px;gap:14px}
+    .jr-retrait-actions{flex-direction:column;gap:16px}
+    .jr-retrait .jr-cta{gap:10px;padding:12px 16px 12px 12px;letter-spacing:.035em;font-size:clamp(11.5px,3.4vw,13px)}
   }
   @media (max-width:760px) and (max-height:700px){
     .jr-scene{padding-top:22px;gap:22px}
@@ -20593,13 +20616,18 @@ if (!customElements.get('espace-rhum')) {
         const m = document.createElement('div');
         m.className = 'jr-modale';
         m.setAttribute('lang', en ? 'en' : 'fr');
-        m.innerHTML = '<div class="jr-boite" role="dialog" aria-modal="true" aria-label="' + (en ? 'The prize wheel' : 'Le jeu de la roue') + '"' + this._jrMotif() + '><div class="jr-scene"><p class="jr-kicker">' + (en ? 'Competition' : 'Jeu concours') + '</p><div data-jr-place></div></div>' +
+        m.innerHTML = '<div class="jr-boite" tabindex="-1" role="dialog" aria-modal="true" aria-label="' + (en ? 'The prize wheel' : 'Le jeu de la roue') + '"' + this._jrMotif() + '><div class="jr-scene"><p class="jr-kicker">' + (en ? 'Competition' : 'Jeu concours') + '</p><div data-jr-place></div></div>' +
           '<div class="jr-corps" aria-live="polite"></div><button type="button" class="jr-fermer" data-jr-fermer aria-label="' + (en ? 'Close' : 'Fermer') + '">' + jrIc(JT_I_CROIX) + '</button></div>';
         this._i18n(m);
         document.body.appendChild(m);
         this._jrModale = m;
         m.addEventListener('click', (e) => {
           const t = e.target;
+          const pb = t.closest('[data-jr-pays-btn]');
+          if (pb) { this._jrPays(pb.closest('[data-jr-pays]'), pb.getAttribute('aria-expanded') !== 'true'); return; }
+          const po = t.closest('[data-jr-pays-opt]');
+          if (po) { this._jrPaysChoisir(po); return; }
+          if (!t.closest('[data-jr-pays]')) this._jrPays(m.querySelector('[data-jr-pays]'), false);
           if (t === m || t.closest('[data-jr-fermer]')) return this._jrFermer();
           if (t.closest('[data-jr-tourner]')) return this._jrTourner();
           if (t.closest('[data-jr-autres]')) { this._jrFermer(); this._jeuxOnglet = 'cours'; this._jeuxOngletChoisi = true; this._jeuxRepeindre(); this._jeuxAller('jeux'); return; }
@@ -20613,20 +20641,11 @@ if (!customElements.get('espace-rhum')) {
             if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(val).then(fini, fini); else fini();
           }
         });
-        m.addEventListener('change', (e) => {
-          const t = e.target.closest && e.target.closest('[data-jr-territoire]');
-          if (!t) return;
-          const champ = t.closest('form').querySelector('.jr-c-pays'), i = champ && champ.querySelector('input');
-          if (!champ) return;
-          champ.hidden = t.value !== 'Autre pays';
-          i.disabled = champ.hidden;
-          if (!champ.hidden) i.focus();
-        });
         m.addEventListener('submit', (e) => {
           const f = e.target.closest && e.target.closest('[data-jr-adresse]');
           if (!f) return;
           e.preventDefault();
-          const champs = Array.from(f.querySelectorAll('input:not([disabled]), select'));
+          const champs = Array.from(f.querySelectorAll('input:not([disabled])'));
           let manque = null, message = en ? 'Part of the address is missing.' : 'Il manque une partie de l\'adresse.';
           champs.forEach((i) => {
             let ko = !i.hasAttribute('data-facultatif') && !i.value.trim();
@@ -20641,9 +20660,25 @@ if (!customElements.get('espace-rhum')) {
         });
         this._jrClavier = (e) => {
           if (!this._jrModale) return;
+          const liste = this._jrModale.querySelector('.jr-pays-liste:not([hidden])');
+          if (liste) {
+            const bloc = liste.closest('[data-jr-pays]');
+            if (e.key === 'Escape') { e.preventDefault(); this._jrPays(bloc, false, true); return; }
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+              e.preventDefault();
+              const o = Array.from(liste.querySelectorAll('[data-jr-pays-opt]'));
+              let i = o.indexOf(document.activeElement);
+              i = e.key === 'ArrowDown' ? Math.min(o.length - 1, i + 1) : Math.max(0, i - 1);
+              o[i].focus();
+              return;
+            }
+            if (e.key === 'Tab') this._jrPays(bloc, false);
+          } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && document.activeElement && document.activeElement.matches('[data-jr-pays-btn]')) {
+            e.preventDefault(); this._jrPays(document.activeElement.closest('[data-jr-pays]'), true); return;
+          }
           if (e.key === 'Escape' && !this._jrTourne) { e.preventDefault(); this._jrFermer(); return; }
           if (e.key !== 'Tab') return;
-          const f = Array.from(this._jrModale.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select'));
+          const f = Array.from(this._jrModale.querySelectorAll('button:not([disabled]), a[href], input:not([disabled])')).filter((x) => x.type !== 'hidden' && x.getClientRects().length);
           if (!f.length) return;
           const i = f.indexOf(document.activeElement);
           if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
@@ -20706,8 +20741,11 @@ if (!customElements.get('espace-rhum')) {
           '<div class="jr-actions"><button type="button" class="jr-cta" data-jr-autres><span class="jr-cta-ico">' + jrIc(JT_I_FLECHE) + '</span>' + T('Autres concours', 'Other competitions') + '</button></div>' + essai + '</div>';
       }
       this._i18n(corps);
-      const f = corps.querySelector('[data-jr-tourner], .jr-cta, [data-jr-copier], [data-jr-retrait]') || m.querySelector('[data-jr-fermer]');
-      if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+      
+
+
+      const f = m.querySelector('.jr-boite');
+      if (f && document.activeElement !== f && !f.contains(document.activeElement)) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
     }
 
      
@@ -20776,13 +20814,16 @@ if (!customElements.get('espace-rhum')) {
         const moi = (this._payload && this._payload.member) || {};
         const champ = (nom, lib, auto, cls, val, extra) => '<label class="jr-champ' + (cls ? ' ' + cls : '') + '"><span>' + lib + '</span><input name="' + nom + '" autocomplete="' + auto + '" value="' + escapeHtml(val || '') + '"' + (extra || '') + '></label>';
         const territoire = a.territoire || 'France métropolitaine';
-        const options = JR_TERRITOIRES.map((t) => '<option value="' + escapeHtml(t) + '"' + (t === territoire ? ' selected' : '') + '>' + escapeHtml(en && t === 'France métropolitaine' ? 'Metropolitan France' : en && t === 'Autre pays' ? 'Other country' : t) + '</option>').join('');
+        const nomTerr = (x) => (en && x === 'France métropolitaine' ? 'Metropolitan France' : en && x === 'Autre pays' ? 'Other country' : x);
+        const options = JR_TERRITOIRES.map((x, i) => '<button type="button" class="jr-pays-opt' + (i === 1 || x === 'Autre pays' ? ' jr-pays-opt--groupe' : '') + '" role="option" aria-selected="' + (x === territoire) + '" data-jr-pays-opt="' + escapeHtml(x) + '"><span>' + escapeHtml(nomTerr(x)) + '</span>' + jrIc(JT_I_OK) + '</button>').join('');
         place.innerHTML = '<form class="jr-retrait jr-retrait--adresse" data-jr-adresse novalidate><p class="jr-retrait-q">' + T('Où t\'envoyer ton lot ?', 'Where should we send your prize?') + '</p><div class="jr-champs">' +
           champ('prenom', T('Prénom', 'First name'), 'given-name', 'jr-c-prenom', a.prenom || moi.prenom) + champ('nom', T('Nom', 'Last name'), 'family-name', 'jr-c-nom', a.nom || moi.nom) +
           champ('telephone', T('Téléphone', 'Phone'), 'tel', 'jr-c-tel', a.telephone || moi.telephone, ' type="tel" inputmode="tel"') +
           champ('adresse', T('Adresse', 'Address'), 'address-line1', 'jr-c-adresse', a.adresse) + champ('complement', T('Complément <i>(facultatif)</i>', 'Address line 2 <i>(optional)</i>'), 'address-line2', 'jr-c-complement', a.complement, ' data-facultatif') +
           champ('codePostal', T('Code postal', 'Postcode'), 'postal-code', 'jr-c-cp', a.codePostal, ' inputmode="numeric"') + champ('ville', T('Ville', 'City'), 'address-level2', 'jr-c-ville', a.ville) +
-          '<label class="jr-champ jr-c-territoire"><span>' + T('Pays ou territoire', 'Country or territory') + '</span><select name="territoire" data-jr-territoire>' + options + '</select></label>' +
+          '<div class="jr-champ jr-c-territoire"><span id="jr-pays-lib">' + T('Pays ou territoire', 'Country or territory') + '</span><div class="jr-pays" data-jr-pays><input type="hidden" name="territoire" value="' + escapeHtml(territoire) + '">' +
+          '<button type="button" class="jr-pays-btn" data-jr-pays-btn aria-haspopup="listbox" aria-expanded="false" aria-labelledby="jr-pays-lib jr-pays-val"><span class="jr-pays-val" id="jr-pays-val">' + escapeHtml(nomTerr(territoire)) + '</span>' + jrIc('<path d="m6 9 6 6 6-6"/>') + '</button>' +
+          '<div class="jr-pays-liste" role="listbox" aria-labelledby="jr-pays-lib" hidden>' + options + '</div></div></div>' +
           champ('pays', T('Lequel ?', 'Which one?'), 'country-name', 'jr-c-pays', a.pays, territoire === 'Autre pays' ? '' : ' disabled') + '</div>' +
           '<p class="jr-retrait-note">' + T('Le téléphone sert au transporteur et à te joindre si besoin. Ces coordonnées servent à cet envoi et à rien d\'autre : elles ne rejoignent pas ton profil.',
             'Your phone number is for the carrier and to reach you if needed. These details are used for this delivery only and are not added to your profile.') + '</p>' +
@@ -20798,6 +20839,45 @@ if (!customElements.get('espace-rhum')) {
           '<button type="button" class="jr-choix" data-jr-retrait="envoi">' + jrIc(JR_I_COLIS) + '<span>' + T('Par la poste', 'By post') + '<small>' + T('À l\'adresse de ton choix', 'To the address of your choice') + '</small></span></button></div></div>';
         if (!sansFocus) { const b = place.querySelector('[data-jr-retrait]'); if (b) b.focus(); }
       }
+    }
+
+    
+
+
+    _jrPays(bloc, ouvrir, rendreFocus) {
+      if (!bloc) return;
+      const btn = bloc.querySelector('[data-jr-pays-btn]'), liste = bloc.querySelector('.jr-pays-liste');
+      if (!btn || !liste) return;
+      btn.setAttribute('aria-expanded', String(!!ouvrir));
+      liste.hidden = !ouvrir;
+      liste.classList.remove('est-haut');
+      if (!ouvrir) { if (rendreFocus) btn.focus(); return; }
+      liste.style.maxHeight = '';
+      const rb = btn.getBoundingClientRect(), h = liste.getBoundingClientRect().height;
+      const vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+      const cadre = (bloc.closest('.jr-boite') || document.documentElement).getBoundingClientRect();
+      const placeBas = Math.min(vh, cadre.bottom) - rb.bottom - 14, placeHaut = rb.top - Math.max(0, cadre.top) - 14;
+      const versHaut = h > placeBas && placeHaut > placeBas;
+      if (versHaut) liste.classList.add('est-haut');
+      liste.style.maxHeight = Math.round(Math.max(150, Math.min(h, versHaut ? placeHaut : placeBas))) + 'px';
+      const sel = liste.querySelector('[aria-selected="true"]') || liste.querySelector('[data-jr-pays-opt]');
+      if (sel) { try { sel.focus({ preventScroll: true }); sel.scrollIntoView({ block: 'nearest' }); } catch (e) { sel.focus(); } }
+    }
+
+    _jrPaysChoisir(opt) {
+      const bloc = opt.closest('[data-jr-pays]');
+      if (!bloc) return;
+      const v = opt.getAttribute('data-jr-pays-opt');
+      bloc.querySelectorAll('[data-jr-pays-opt]').forEach((o) => o.setAttribute('aria-selected', String(o === opt)));
+      bloc.querySelector('input[name="territoire"]').value = v;
+      bloc.querySelector('.jr-pays-val').textContent = opt.textContent;
+      this._jrPays(bloc, false, true);
+      const form = bloc.closest('form');
+      const champ = form && form.querySelector('.jr-c-pays'), i = champ && champ.querySelector('input');
+      if (!champ || !i) return;
+      champ.hidden = v !== 'Autre pays';
+      i.disabled = champ.hidden;
+      if (!champ.hidden) i.focus();
     }
 
     _jrEnvoyerRetrait(choix) {
