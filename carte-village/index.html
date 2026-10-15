@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' data: blob: https:; worker-src 'self' blob:; child-src 'self' blob:; media-src 'self' blob: https:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Carte interactive du village de Saint-Malo · Route du Rhum – Destination Guadeloupe</title>
+<link rel="canonical" href="https://www.routedurhum.com/carte-village-saint-malo">
+<link rel="preconnect" href="https://www.routedurhum.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js">
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_vx3rCs.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:400;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTUQjIg1_i6t8kCHKm459WxRyS7m0dR9pA.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:700;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTUPjIg1_i6t8kCHKm459WxZcgvz_PZwjimrqw.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gfD_vx3rCubqg.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Varien';font-style:italic;font-weight:normal;font-display:swap;src:url('https://static.wixstatic.com/ufonts/5fefd8_1e5b9ef92f5440db968e5ef2f46acb27/woff2/file.woff2') format('woff2')}
+html,body{margin:0;height:100%;overflow:hidden;background:#EDF3F7}
+village-map{display:block;min-height:100vh;min-height:100svh;background:radial-gradient(120% 80% at 50% 40%,#F7FAFC 0%,#EDF3F7 70%,#E6EEF3 100%)}
+village-map[hidden]{display:none}
+.vm-sobre{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:#EDF3F7;color:#0A1A35;font:600 15px/1.45 Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;text-align:center}
+.vm-sobre[hidden]{display:none}
+.vm-sobre div{max-width:440px}
+.vm-sobre p{margin:0 0 16px}
+.vm-sobre a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:9px 3px 9px 3px;background:#0A1A35;color:#fff;font-weight:700;text-decoration:none}
+.vm-sobre a:focus-visible{outline:3px solid #0A1A35;outline-offset:3px}
+</style>
+</head>
+<body>
+<village-map externe mesure="0"></village-map>
+<div class="vm-sobre" id="vm-sobre" role="status" hidden><div><p id="vm-sobre-texte"></p><a id="vm-sobre-lien" href="https://www.routedurhum.com/carte-village-saint-malo" target="_blank" rel="noopener">Ouvrir la carte du village</a></div></div>
+<noscript><div class="vm-sobre"><div><p>La carte interactive du village est à retrouver sur routedurhum.com</p><a href="https://www.routedurhum.com/carte-village-saint-malo" target="_blank" rel="noopener">Ouvrir la carte du village</a></div></div></noscript>
+<script>
+/* Carte du village intégrée chez un média : source dans route-du-rhum, pages-statiques/carte-village/, doc docs/carte-integree-2026-10-15.md. */
+(function () {
+  var d = document, q;
+  try { q = new URLSearchParams(location.search); } catch (e) { q = { get: function () { return null; } }; }
+  var lang = String(q.get('lang') || '').slice(0, 2).toLowerCase() === 'en' ? 'en' : 'fr';
+  var T = {
+    fr: { titre: 'Carte interactive du village de Saint-Malo · Route du Rhum – Destination Guadeloupe', coupee: 'La carte interactive du village est à retrouver sur routedurhum.com', panne: 'La carte interactive est momentanément indisponible.', panneSuite: 'Retrouvez-la sur routedurhum.com.', attente: 'La carte ne s’est pas affichée.', bouton: 'Ouvrir la carte du village' },
+    en: { titre: 'Saint-Malo race village interactive map · Route du Rhum – Destination Guadeloupe', coupee: 'The interactive village map is available on routedurhum.com', panne: 'The interactive map is temporarily unavailable.', panneSuite: 'Find it on routedurhum.com.', attente: 'The map did not load.', bouton: 'Open the village map' }
+  }[lang];
+  var SITE = 'https://www.routedurhum.com';
+  var publique = SITE + (lang === 'en' ? '/en' : '') + '/carte-village-saint-malo';
+  var SOURCE = SITE + '/_functions/carteVillage?lang=' + lang;
+  var PAQUET = /^https:\/\/cdn\.jsdelivr\.net\/gh\/WapitixAgency\/rdr-elements@(?:[0-9a-f]{7,40}|main)\/carte\.js$/;
+  d.documentElement.lang = lang;
+  d.title = T.titre;
+  var canon = d.querySelector('link[rel="canonical"]');
+  if (canon) canon.href = publique;
+  var lien = d.getElementById('vm-sobre-lien');
+  lien.href = publique;
+  lien.textContent = T.bouton;
+  var carte = d.querySelector('village-map');
+  carte.setAttribute('lang', lang);
+  var fini = false;
+  function sobre(lignes) {
+    if (fini) return;
+    fini = true;
+    carte.hidden = true;
+    d.getElementById('vm-sobre-texte').textContent = lignes.join(' ');
+    d.getElementById('vm-sobre').hidden = false;
+  }
+  var attente = setTimeout(function () { if (!(window.customElements && customElements.get('village-map'))) sobre([T.attente]); }, 15000);
+  function charger(urls, i) {
+    var s = d.createElement('script');
+    s.src = urls[i];
+    s.async = true;
+    s.onerror = function () { if (i + 1 < urls.length) charger(urls, i + 1); };
+    d.head.appendChild(s);
+  }
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var delai = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+  fetch(SOURCE, { credentials: 'omit', mode: 'cors', signal: ctrl ? ctrl.signal : undefined })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (j) {
+      clearTimeout(delai);
+      if (typeof j === 'string') j = JSON.parse(j);
+      if (j && j.ok === true && j.coupee === true) { clearTimeout(attente); sobre([T.coupee]); return; }
+      if (!j || j.ok !== true || !j.charge || typeof j.charge !== 'object' || !PAQUET.test(String(j.paquet || ''))) throw new Error('réponse illisible');
+      carte.setAttribute('payload', JSON.stringify(j.charge));
+      var urls = [j.paquet];
+      if (j.secours && PAQUET.test(String(j.secours)) && j.secours !== j.paquet) urls.push(j.secours);
+      charger(urls, 0);
+    })
+    .catch(function () { clearTimeout(delai); clearTimeout(attente); sobre([T.panne, T.panneSuite]); });
+})();
+</script>
+</body>
+</html>

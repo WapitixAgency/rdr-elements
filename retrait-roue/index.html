@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer"><meta name="format-detection" content="telephone=no"><link rel="icon" href="data:,"><title>Retrait des lots · Jeu de la roue</title><style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#EEF2F7;color:#0E1B3A;font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+[hidden]{display:none!important}
+.t{background:#0E1B3A;color:#fff;padding:18px 18px 16px}
+.t-in,.m{max-width:760px;margin:0 auto}
+.k{margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FCF150}
+h1{margin:0;font-size:24px;line-height:1.1;font-style:italic;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+h1 small{display:block;margin-top:6px;font-size:13px;font-style:normal;font-weight:600;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.75)}
+.m{padding:12px 14px 40px}
+.msg{margin:22px 0;padding:22px 18px;border-radius:16px;background:#fff;text-align:center;box-shadow:0 6px 18px rgba(14,27,58,.06)}
+.msg h2{margin:0 0 8px;font-size:19px;line-height:1.25}
+.msg p{margin:0 0 10px;color:#3B4A63}
+.msg .num-grand{margin:6px 0 14px}
+.num{display:inline-block;padding:4px 9px;border:2px dashed #0E1B3A;border-radius:8px;font:800 18px/1 "Courier New",Courier,monospace;letter-spacing:.1em}
+.num-grand .num{padding:10px 16px;font-size:30px;border-width:3px}
+.onglets{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:4px 0 0;padding:4px;border-radius:14px;background:#DCE3EE}
+.onglet{min-height:46px;border:0;border-radius:11px;background:none;color:#3B4A63;font-family:inherit;font-size:15px;font-weight:800;line-height:1.1;cursor:pointer}
+.onglet b{display:inline-block;min-width:26px;margin-left:6px;padding:3px 7px;border-radius:99px;background:rgba(14,27,58,.1);font-size:13px}
+.onglet[aria-selected="true"]{background:#fff;color:#0E1B3A;box-shadow:0 1px 4px rgba(14,27,58,.12)}
+.onglet[aria-selected="true"] b{background:#FCF150}
+.barre{position:sticky;top:0;z-index:2;display:flex;gap:10px;align-items:center;padding:10px 0;background:#EEF2F7}
+.cherche{flex:1;min-width:0;display:flex;align-items:center;gap:8px;min-height:50px;padding:0 14px;border:2px solid #C9D3E1;border-radius:12px;background:#fff}
+.cherche:focus-within{border-color:#0E1B3A}
+.cherche svg{flex:none;width:20px;height:20px;color:#5B6B85}
+.cherche input{flex:1;min-width:0;border:0;outline:none;background:none;font-family:inherit;font-size:17px;font-weight:600;line-height:1.2;color:#0E1B3A}
+.actu{flex:none;min-height:50px;padding:0 14px;border:2px solid #0E1B3A;border-radius:12px;background:#fff;color:#0E1B3A;font-family:inherit;font-size:14px;font-weight:700;line-height:1;cursor:pointer}
+.lu{margin:0 2px 10px;font-size:12px;color:#6B7A93}
+.ailleurs{margin:0 0 10px}
+.ailleurs button{padding:0;border:0;background:none;color:#0E1B3A;font-family:inherit;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.liste{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.c{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px 14px;padding:14px 14px 14px 16px;border-radius:14px;background:#fff;box-shadow:0 1px 0 rgba(14,27,58,.06),0 6px 18px rgba(14,27,58,.06);border-left:6px solid #FCF150}
+.c.est-remis{border-left-color:#6CC3C4;background:#F6FAFA}
+.c.est-vu{outline:3px solid #0E1B3A;outline-offset:2px}
+.qui{margin:8px 0 0;font-size:17px;font-weight:700}
+.lot{margin:2px 0 0;font-size:15px;color:#3B4A63}
+.etat{margin:6px 0 0;font-size:13px;font-weight:600;color:#1F6F70}
+.note{margin:6px 0 0;font-size:13px;font-weight:600;color:#8A5A00}
+.b{min-height:48px;padding:0 18px;border:0;border-radius:12px;font-family:inherit;font-size:15px;font-weight:800;line-height:1.1;letter-spacing:.02em;cursor:pointer}
+.b-remettre{background:#FCF150;color:#0E1B3A}
+.b-oui{background:#0E1B3A;color:#fff}
+.b-non{background:#E3E8F0;color:#0E1B3A}
+.b-annuler{min-height:44px;padding:0 6px;background:none;color:#5B6B85;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.b:disabled{opacity:.55;cursor:progress}
+.vide{margin:28px 4px;text-align:center;color:#5B6B85}
+.fiche{margin:6px 0 16px;padding:18px 16px 16px;border-radius:16px;background:#fff;box-shadow:0 8px 26px rgba(14,27,58,.12);border-top:6px solid #FCF150}
+.fiche.est-remis{border-top-color:#6CC3C4}
+.fiche .k{color:#1F6F70}
+.fiche .qui{margin-top:12px;font-size:22px}
+.fiche .lot{font-size:17px}
+.fiche-etat{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:#E5F4F4;font-weight:700;color:#14595A}
+.fiche-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.fiche-act .b-remettre{flex:1 1 220px;min-height:56px;font-size:17px}
+.voile{position:fixed;inset:0;z-index:10;display:flex;align-items:flex-end;justify-content:center;padding:12px;background:rgba(14,27,58,.55)}
+.boite{width:100%;max-width:460px;padding:22px 18px 18px;border-radius:18px;background:#fff;box-shadow:0 20px 60px rgba(14,27,58,.35)}
+.boite .k{color:#1F6F70}
+.boite h2{margin:0 0 6px;font-size:20px;line-height:1.3}
+.boite p{margin:0 0 12px;color:#3B4A63}
+.boite-act{display:grid;gap:10px;margin-top:16px}
+.boite-act .b{min-height:54px;font-size:16px}
+.err{margin:10px 0 0;font-size:14px;font-weight:700;color:#B3261E}
+.toast{position:fixed;left:50%;bottom:18px;z-index:11;max-width:min(92vw,460px);padding:12px 16px;border-radius:12px;background:#0E1B3A;color:#fff;font-weight:700;transform:translateX(-50%);box-shadow:0 10px 30px rgba(14,27,58,.3)}
+.pied{margin:26px 4px 0;font-size:12.5px;color:#6B7A93}
+.pied p{margin:0 0 8px}
+.pied button{padding:0;border:0;background:none;color:#5B6B85;font-family:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer}
+:focus-visible{outline:3px solid #0E1B3A;outline-offset:2px}
+.b-scan{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;margin:4px 0 12px;background:#0E1B3A;color:#fff;font-size:16px}
+.b-scan svg{width:22px;height:22px}
+.scan{position:fixed;inset:0;z-index:12;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(6,12,28,.92)}
+.scan-boite{width:100%;max-width:460px;text-align:center;color:#fff}
+.scan-boite .k{color:#FCF150}
+.scan-vue{position:relative;width:min(100%,62vh);aspect-ratio:1;margin:8px auto 12px;border-radius:18px;overflow:hidden;background:#000}
+.scan-vue video{width:100%;height:100%;object-fit:cover;display:block}
+.scan-cadre{position:absolute;inset:16%;border:3px solid #FCF150;border-radius:16px;box-shadow:0 0 0 999px rgba(0,0,0,.25)}
+.scan-aide{margin:0 0 12px;font-size:15px;font-weight:600}
+.scan .err{color:#FF8A80}
+.scan .b-non{width:100%;min-height:52px}
+@media (min-width:640px){.voile{align-items:center}}
+@media (max-width:420px){.c{grid-template-columns:minmax(0,1fr)}.c .b{width:100%}}
+</style>
+</head>
+<body>
+<header class="t"><div class="t-in"><p class="k">Route du Rhum · Destination Guadeloupe</p><h1>Retrait des lots<small>Jeu de la roue · espace presse du village</small></h1></div></header>
+<main class="m"><div class="msg" role="status"><h2>Chargement…</h2></div><div class="outil" hidden><section class="fiche" hidden aria-live="polite"></section><button class="b b-scan" type="button" data-scanner><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>Scanner un QR code</button><div class="onglets" role="tablist"><button class="onglet" type="button" role="tab" data-onglet="a-remettre" aria-selected="true">À remettre<b>0</b></button><button class="onglet" type="button" role="tab" data-onglet="remis" aria-selected="false">Remis<b>0</b></button></div><div class="barre"><label class="cherche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="Numéro ou prénom" aria-label="Chercher un numéro de retrait ou un prénom" autocomplete="off" autocapitalize="characters" spellcheck="false"></label><button class="actu" type="button" data-actu>Actualiser</button></div><p class="lu"></p><p class="ailleurs" hidden></p><ul class="liste"></ul><p class="vide" hidden></p><div class="pied"><p>Demande au gagnant son numéro de retrait (dans son e-mail ou son Espace Rhum) ou cherche son prénom, vérifie, remets le lot, puis touche « Remettre ». Son QR code se lit avec « Scanner un QR code », en haut de cette page : il ouvre directement sa fiche. Une erreur se corrige depuis « Remis » avec « Annuler la remise ».</p><p>Garde cette page en favori, dans Safari ou Chrome : son adresse contient la clé de l’espace presse. Ne la transmets qu’à l’équipe.</p></div></div></main>
+
+<div class="scan" hidden role="dialog" aria-modal="true" aria-label="Scanner un QR code"><div class="scan-boite"><p class="k">Scanner un QR code</p><div class="scan-vue"><video playsinline muted autoplay></video><span class="scan-cadre" aria-hidden="true"></span></div><p class="scan-aide"></p><p class="err" role="alert" hidden></p><button class="b b-non" type="button" data-scan-fermer>Fermer</button></div></div>
+<div class="voile" hidden></div><div class="toast" role="status" aria-live="polite" hidden></div>
+<script>
+(function () {
+  var API = 'https://www.routedurhum.com/_functions/retraitRoue';
+  var JSQR = { src: 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js', sri: 'sha256-vEDIoVGWI2sjFNsIVvcsoLSZgM1UE7jIUqc0n1/uCFk=' };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function norme(s) { return String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/^R(?=[A-Z0-9]{6}$)/, ''); }
+  function quand(iso) {
+    var d = new Date(iso); if (isNaN(d)) return '';
+    try {
+      var j = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', day: 'numeric', month: 'short' }).format(d);
+      var h = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' }).format(d).replace(':', ' h ');
+      return 'le ' + j.replace(/^1 /, '1er ') + ' à ' + h;
+    } catch (e) { return 'le ' + d.toLocaleString('fr-FR'); }
+  }
+  function qui(l) { return [l.prenom, l.initiale].filter(Boolean).join(' ') || 'ce gagnant'; }
+
+  /* La clé : dans l'adresse du lien privé, puis dans le fragment (jamais envoyé au serveur). */
+  var q = new URLSearchParams(location.search);
+  var cle = q.get('cle') || '';
+  if (!cle) { try { cle = new URLSearchParams(location.hash.slice(1)).get('cle') || ''; } catch (e) { cle = ''; } }
+  var numeroScan = (q.get('n') || '').toUpperCase();
+  if (q.get('cle')) { try { history.replaceState(null, '', location.pathname + '?presse#cle=' + encodeURIComponent(cle)); } catch (e) { /* adresse laissée telle quelle */ } }
+
+  var $ = function (s) { return document.querySelector(s); };
+  var msg = $('.msg'), outil = $('.outil'), ficheEl = $('.fiche'), ul = $('.liste'), champ = $('.cherche input');
+  var vide = $('.vide'), lu = $('.lu'), ailleurs = $('.ailleurs'), voile = $('.voile'), toastEl = $('.toast');
+  var scanEl = $('.scan'), video = $('.scan video'), scanAide = $('.scan-aide'), scanErr = $('.scan .err');
+  var lignes = [], luLe = '', onglet = 'a-remettre', vu = '', fiche = null, enCours = false, demande = null, minuteur = null;
+  var scan = { actif: false, flux: null, lire: null };
+
+  function message(titre, texte, numero) {
+    outil.hidden = true; ficheEl.hidden = true;
+    msg.hidden = false;
+    msg.innerHTML = '<h2>' + esc(titre) + '</h2>' + (numero ? '<p class="num-grand"><span class="num">' + esc(numero) + '</span></p>' : '') + texte;
+  }
+  function toast(t) {
+    toastEl.textContent = t; toastEl.hidden = false;
+    clearTimeout(toast.m); toast.m = setTimeout(function () { toastEl.hidden = true; }, 4200);
+  }
+  function nonReconnu(raison) {
+    clearInterval(minuteur); fermerScanner();
+    if (raison === 'cle') {
+      cle = '';
+      try { history.replaceState(null, '', location.pathname + '?presse'); } catch (e) { /* sans importance */ }
+      message('Ce lien n’est plus valable', '<p>Le lien privé de l’espace presse a changé. Ouvre le nouveau lien, donné par l’équipe, et remplace ton favori.</p>');
+    } else if (numeroScan) {
+      message('Présentez ce code à l’espace presse du village', '<p>C’est le numéro de retrait de votre lot du jeu de la roue. L’équipe de l’espace presse, à Saint-Malo, le retrouve avec lui.</p><p class="pied">Équipe de l’espace presse : scanne ce code avec le bouton « Scanner un QR code » de ta page de retrait.</p>', numeroScan);
+    } else {
+      message('Page réservée à l’espace presse', '<p>Ouvre le lien privé de l’espace presse, donné par l’équipe, puis garde la page en favori.</p>');
+    }
+  }
+
+  function filtre(liste) {
+    var t = champ.value.trim(), n = norme(t), p = t.toLowerCase();
+    if (!t) return liste;
+    return liste.filter(function (l) { return (n && norme(l.numero).indexOf(n) >= 0) || String(l.prenom).toLowerCase().indexOf(p) === 0; });
+  }
+  function carte(l) {
+    var act = l.remis
+      ? '<button class="b b-annuler" data-annuler="' + esc(l.id) + '">Annuler la remise</button>'
+      : '<button class="b b-remettre" data-remettre="' + esc(l.id) + '">Remettre</button>';
+    return '<li class="c' + (l.remis ? ' est-remis' : '') + (l.id === vu ? ' est-vu' : '') + '"><div><span class="num">' + esc(l.numero) + '</span>' +
+      '<p class="qui">' + esc(qui(l)) + '</p><p class="lot">' + esc(l.lot) + '</p>' +
+      (l.remis ? '<p class="etat">Remis ' + esc(quand(l.remisLe)) + '</p>' : (l.choisi === false ? '<p class="note">N’a pas encore choisi son mode de retrait</p>' : '')) +
+      '</div>' + act + '</li>';
+  }
+  function peindre() {
+    var aRemettre = lignes.filter(function (l) { return !l.remis; }), remis = lignes.filter(function (l) { return l.remis; });
+    remis.sort(function (a, b) { return String(b.remisLe).localeCompare(String(a.remisLe)); });
+    document.querySelector('[data-onglet="a-remettre"] b').textContent = aRemettre.length;
+    document.querySelector('[data-onglet="remis"] b').textContent = remis.length;
+    Array.prototype.forEach.call(document.querySelectorAll('.onglet'), function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-onglet') === onglet)); });
+    var ici = onglet === 'remis' ? remis : aRemettre, la = onglet === 'remis' ? aRemettre : remis;
+    var vus = filtre(ici), autres = champ.value.trim() ? filtre(la) : [];
+    ul.innerHTML = vus.map(carte).join('');
+    ailleurs.hidden = !autres.length;
+    ailleurs.innerHTML = autres.length ? '<button type="button" data-aller="' + (onglet === 'remis' ? 'a-remettre' : 'remis') + '">' + autres.length + ' dans « ' + (onglet === 'remis' ? 'À remettre' : 'Remis') + ' »</button>' : '';
+    vide.hidden = vus.length > 0;
+    vide.textContent = champ.value.trim() ? 'Aucun lot ne correspond à cette recherche ici.' : onglet === 'remis' ? 'Aucun lot remis pour l’instant.' : 'Aucun lot à remettre pour l’instant.';
+    lu.textContent = luLe ? 'Liste à jour ' + quand(luLe) + ', relue chaque minute' : '';
+    peindreFiche();
+  }
+  function peindreFiche() {
+    var l = fiche && lignes.find(function (x) { return x.id === fiche.id; });
+    if (fiche && fiche.introuvable) {
+      ficheEl.hidden = false; ficheEl.className = 'fiche';
+      ficheEl.innerHTML = '<p class="k">QR code scanné</p><span class="num">' + esc(fiche.numero) + '</span>' +
+        '<p class="qui">Pas dans les lots à remettre au village</p><p class="lot">Ce gagnant a peut-être choisi l’envoi par la poste. En cas de doute, cherche son prénom dans la liste.</p>' +
+        '<div class="fiche-act"><button class="b b-non" data-fermer-fiche>Voir la liste</button></div>';
+      return;
+    }
+    if (!l) { ficheEl.hidden = true; return; }
+    ficheEl.hidden = false; ficheEl.className = 'fiche' + (l.remis ? ' est-remis' : '');
+    ficheEl.innerHTML = '<p class="k">QR code scanné</p><span class="num">' + esc(l.numero) + '</span>' +
+      '<p class="qui">' + esc(qui(l)) + '</p><p class="lot">' + esc(l.lot) + '</p>' +
+      (l.remis ? '<p class="fiche-etat">Déjà remis ' + esc(quand(l.remisLe)) + '</p>' : (l.choisi === false ? '<p class="note">N’a pas encore choisi son mode de retrait</p>' : '')) +
+      '<div class="fiche-act">' + (l.remis ? '<button class="b b-annuler" data-annuler="' + esc(l.id) + '">Annuler la remise</button>' : '<button class="b b-remettre" data-remettre="' + esc(l.id) + '">Remettre le lot</button>') +
+      '<button class="b b-non" data-fermer-fiche>Voir la liste</button></div>';
+  }
+  /* Un numéro lu (scan ou adresse) : la fiche du gagnant en tête, puis la liste relue. */
+  function ouvrirNumero(n) {
+    var l = lignes.find(function (x) { return norme(x.numero) === norme(n); });
+    fiche = l ? { id: l.id } : { introuvable: true, numero: n };
+    vu = l ? l.id : '';
+    if (l) onglet = l.remis ? 'remis' : 'a-remettre';
+    champ.value = '';
+    peindre();
+    try { window.scrollTo(0, 0); } catch (e) { /* sans importance */ }
+    charger(true);
+  }
+
+  function appeler(corps) {
+    return fetch(API, { method: 'POST', mode: 'cors', credentials: 'omit', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: JSON.stringify(Object.assign({ cle: cle }, corps)) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.statutHttp = r.status; return j; }); });
+  }
+  function charger(silencieux) {
+    if (enCours) return;
+    enCours = true;
+    appeler({ action: 'liste' }).then(function (res) {
+      enCours = false;
+      if (res.statutHttp === 403) { nonReconnu(res.raison); return; }
+      if (!res.ok) { if (!silencieux) toast('La liste ne répond pas. Réessaie dans un instant.'); return; }
+      lignes = res.lignes || []; luLe = res.lu || new Date().toISOString();
+      msg.hidden = true; outil.hidden = false;
+      if (numeroScan && !fiche) { var n = numeroScan; numeroScan = ''; ouvrirNumero(n); return; }
+      peindre();
+    }).catch(function () { enCours = false; if (!silencieux) toast('Pas de connexion. Réessaie dans un instant.'); });
+  }
+
+  /* ── Le scan depuis la page ── */
+  function chargerJsQR() {
+    if (window.jsQR) return Promise.resolve(window.jsQR);
+    if (chargerJsQR.p) return chargerJsQR.p;
+    chargerJsQR.p = new Promise(function (ok, ko) {
+      var s = document.createElement('script');
+      s.src = JSQR.src; s.integrity = JSQR.sri; s.crossOrigin = 'anonymous';
+      s.onload = function () { if (window.jsQR) ok(window.jsQR); else { chargerJsQR.p = null; ko(new Error('jsQR')); } };
+      s.onerror = function () { chargerJsQR.p = null; ko(new Error('jsQR')); };
+      document.head.appendChild(s);
+    });
+    return chargerJsQR.p;
+  }
+  function lecteurJsQR() {
+    return chargerJsQR().then(function (jsQR) {
+      var toile = document.createElement('canvas'), ctx = toile.getContext('2d', { willReadFrequently: true });
+      return function (v) {
+        var w = v.videoWidth, h = v.videoHeight;
+        if (!w || !h) return Promise.resolve('');
+        var k = Math.min(1, 720 / Math.max(w, h));
+        toile.width = Math.round(w * k); toile.height = Math.round(h * k);
+        ctx.drawImage(v, 0, 0, toile.width, toile.height);
+        var img = ctx.getImageData(0, 0, toile.width, toile.height);
+        var r = jsQR(img.data, img.width, img.height, { inversionAttempts: 'dontInvert' });
+        return Promise.resolve(r ? r.data : '');
+      };
+    });
+  }
+  function lecteur() {
+    if (!('BarcodeDetector' in window)) return lecteurJsQR();
+    var formats = window.BarcodeDetector.getSupportedFormats ? window.BarcodeDetector.getSupportedFormats() : Promise.resolve(['qr_code']);
+    return Promise.resolve(formats).then(function (f) {
+      if (f.indexOf('qr_code') < 0) return lecteurJsQR();
+      var d = new window.BarcodeDetector({ formats: ['qr_code'] });
+      return function (v) { return d.detect(v).then(function (r) { return (r && r[0] && r[0].rawValue) || ''; }); };
+    }).catch(function () { return lecteurJsQR(); });
+  }
+  function numeroDans(texte) {
+    var t = String(texte || '');
+    try { var n = (new URL(t).searchParams.get('n') || '').toUpperCase(); if (n) return n; } catch (e) { /* pas une adresse */ }
+    var m = t.toUpperCase().match(/R-[A-Z0-9]{6}/);
+    return m ? m[0] : '';
+  }
+  function erreurScan(texte) { scanErr.hidden = false; scanErr.textContent = texte; scanAide.hidden = true; }
+  function ouvrirScanner() {
+    scanEl.hidden = false; scanErr.hidden = true; scanAide.hidden = false;
+    scanAide.textContent = 'Vise le QR code du gagnant, dans son Espace Rhum.';
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { erreurScan('Ce navigateur ne donne pas accès à la caméra. Ouvre cette page dans Safari ou Chrome, ou cherche le numéro dans la liste.'); return; }
+    scan.actif = true;
+    Promise.all([navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }), lecteur()]).then(function (r) {
+      if (!scan.actif) { r[0].getTracks().forEach(function (p) { p.stop(); }); return; }
+      scan.flux = r[0]; scan.lire = r[1];
+      video.srcObject = scan.flux;
+      var lecture = video.play(); if (lecture && lecture.catch) lecture.catch(function () { /* la vidéo démarre au premier rendu */ });
+      boucle();
+    }).catch(function (e) {
+      scan.actif = false;
+      erreurScan(e && e.name === 'NotAllowedError'
+        ? 'La caméra est refusée. Autorise-la pour ce site dans les réglages du navigateur, ou cherche le numéro dans la liste.'
+        : e && e.message === 'jsQR' ? 'Le lecteur de QR code ne se charge pas. Vérifie la connexion, ou cherche le numéro dans la liste.'
+        : 'La caméra ne démarre pas. Cherche le numéro dans la liste.');
+    });
+    var f = scanEl.querySelector('[data-scan-fermer]'); if (f) f.focus();
+  }
+  function boucle() {
+    if (!scan.actif) return;
+    scan.lire(video).then(function (texte) {
+      if (!scan.actif) return;
+      if (texte) {
+        var n = numeroDans(texte);
+        if (n) { fermerScanner(); ouvrirNumero(n); return; }
+        scanAide.textContent = 'Ce QR code n’est pas un numéro de retrait du jeu de la roue.';
+      }
+      setTimeout(boucle, 180);
+    }).catch(function () { setTimeout(boucle, 300); });
+  }
+  function fermerScanner() {
+    scan.actif = false;
+    if (scan.flux) scan.flux.getTracks().forEach(function (p) { p.stop(); });
+    scan.flux = null;
+    if (video) video.srcObject = null;
+    if (scanEl) scanEl.hidden = true;
+  }
+
+  function ouvrir(id, action) {
+    var l = lignes.find(function (x) { return x.id === id; }); if (!l) return;
+    demande = { id: id, action: action };
+    voile.hidden = false;
+    voile.innerHTML = '<div class="boite" role="dialog" aria-modal="true" aria-labelledby="bq"><p class="k">' + (action === 'annuler' ? 'Annuler une remise' : 'Remettre un lot') + '</p>' +
+      '<h2 id="bq">' + (action === 'annuler'
+        ? 'Annuler la remise du lot « ' + esc(l.lot) + ' » à ' + esc(qui(l)) + ' ?'
+        : 'Remettre le lot « ' + esc(l.lot) + ' » à ' + esc(qui(l)) + ' ?') + '</h2>' +
+      '<p><span class="num">' + esc(l.numero) + '</span></p>' +
+      (action === 'annuler' ? '<p>Le lot repassera dans « À remettre ».</p>' : '<p>Vérifie le prénom avant de remettre le lot.</p>') +
+      '<div class="boite-act"><button class="b b-oui" data-oui>' + (action === 'annuler' ? 'Oui, annuler la remise' : 'Oui, c’est remis') + '</button>' +
+      '<button class="b b-non" data-non>' + (action === 'annuler' ? 'Non, garder' : 'Non') + '</button></div><p class="err" role="alert" hidden></p></div>';
+    voile.querySelector('[data-oui]').focus();
+  }
+  function fermer() { demande = null; voile.hidden = true; voile.innerHTML = ''; }
+  function confirmer() {
+    if (!demande) return;
+    var d = demande, oui = voile.querySelector('[data-oui]'), non = voile.querySelector('[data-non]'), err = voile.querySelector('.err');
+    oui.disabled = true; non.disabled = true; err.hidden = true;
+    appeler({ id: d.id, action: d.action }).then(function (res) {
+      if (res.statutHttp === 403) { fermer(); nonReconnu(res.raison); return; }
+      var l = lignes.find(function (x) { return x.id === d.id; });
+      if (res.ligne && l) Object.assign(l, res.ligne);
+      if (res.ok) { fermer(); toast(d.action === 'annuler' ? 'Remise annulée pour ' + qui(l) + ' (' + l.lot + ')' : 'Lot remis à ' + qui(l) + ' (' + l.lot + ')'); peindre(); return; }
+      if (res.raison === 'deja_remis') { fermer(); toast('Déjà remis ' + quand(l.remisLe) + ', sur un autre téléphone.'); peindre(); return; }
+      if (res.raison === 'pas_remis') { fermer(); toast('Cette remise était déjà annulée.'); peindre(); return; }
+      oui.disabled = false; non.disabled = false; err.hidden = false;
+      err.textContent = res.raison === 'ligne_introuvable' ? 'Ce lot n’est plus à remettre au village. Actualise la liste.' : 'Pas enregistré. Vérifie la connexion, puis réessaie.';
+    }).catch(function () { oui.disabled = false; non.disabled = false; err.hidden = false; err.textContent = 'Pas enregistré. Vérifie la connexion, puis réessaie.'; });
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) { if (e.target === voile) fermer(); return; }
+    if (b.hasAttribute('data-scanner')) return ouvrirScanner();
+    if (b.hasAttribute('data-scan-fermer')) return fermerScanner();
+    if (b.hasAttribute('data-remettre')) return ouvrir(b.getAttribute('data-remettre'), 'remettre');
+    if (b.hasAttribute('data-annuler')) return ouvrir(b.getAttribute('data-annuler'), 'annuler');
+    if (b.hasAttribute('data-oui')) return confirmer();
+    if (b.hasAttribute('data-non')) return fermer();
+    if (b.hasAttribute('data-onglet')) { onglet = b.getAttribute('data-onglet'); peindre(); return; }
+    if (b.hasAttribute('data-aller')) { onglet = b.getAttribute('data-aller'); peindre(); return; }
+    if (b.hasAttribute('data-fermer-fiche')) { fiche = null; vu = ''; peindre(); champ.focus(); return; }
+    if (b.hasAttribute('data-actu')) return charger();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (demande) fermer(); else if (scan.actif) fermerScanner(); } });
+  champ.addEventListener('input', function () { vu = ''; peindre(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { fermerScanner(); return; }
+    if (cle && !outil.hidden) charger(true);
+  });
+
+  if (!cle) { nonReconnu('absente'); return; }
+  message('Chargement de la liste…', '');
+  charger();
+  minuteur = setInterval(function () { if (!document.hidden && !demande && !scan.actif && !outil.hidden) charger(true); }, 60000);
+})();
+</script>
+</body>
+</html>
