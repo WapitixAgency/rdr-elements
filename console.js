@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 4ff6e1f | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 2fff1d4 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="2fff1d4";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -35,7 +35,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
   var JEUX = [
     { id: 'justetemps', nom: 'Le Juste Temps', panneau: '_justeTempsHtml' },
     { id: 'mobilite',   nom: 'Challenge Mobilité', panneau: '_mobiliteHtml' },
-    { id: 'photo',      nom: 'Challenge photo', panneau: '_photoHtml' }
+    { id: 'photo',      nom: 'Challenge photo', panneau: '_photoHtml' },
+    { id: 'roue',       nom: 'Jeu de la roue', panneau: '_roueHtml' }
   ];
   function jeuDe(id) {
     for (var i = 0; i < JEUX.length; i++) if (JEUX[i].id === id) return JEUX[i];
@@ -45,7 +46,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
 
   var ALIAS_VUES = {
     'le-juste-temps': 'justetemps', 'juste-temps': 'justetemps',
-    'challenge-mobilite': 'mobilite', 'concours-photo': 'photo', 'challenge-photo': 'photo'
+    'challenge-mobilite': 'mobilite', 'concours-photo': 'photo', 'challenge-photo': 'photo', 'jeu-de-la-roue': 'roue'
   };
   function vueCanonique(v, dernierJeu) {
     var x = String(v || '');
@@ -577,6 +578,25 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
     '.rdrc-jt-outils{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px}',
     '.rdrc-jt-cherche{flex:1 1 260px;max-width:380px;font:inherit;font-size:12.5px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}',
     '.rdrc-jt-cherche:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-ro-p{margin:0 0 10px;font-size:12.5px;line-height:1.5;color:var(--ink-2)}',
+    '.rdrc-ro-lien{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px}',
+    '.rdrc-ro-lien .rdrc-jt-cherche{max-width:none;font-family:ui-monospace,Consolas,monospace;font-size:11.5px}',
+    '.rdrc-ro-lien .rdrc-btn{text-decoration:none;padding:8px 12px}',
+    '.rdrc-ro-filtres{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}',
+    '.rdrc-ro-filtre{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:11.5px;font-weight:700;color:var(--ink-2);cursor:pointer}',
+    '.rdrc-ro-filtre span{font-size:10.5px;color:var(--ink-3)}',
+    '.rdrc-ro-filtre[aria-pressed="true"]{background:#0E1B3A;border-color:#0E1B3A;color:#fff}',
+    '.rdrc-ro-filtre[aria-pressed="true"] span{color:#FCF150}',
+    '.rdrc-ro-filtre:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-ro-num{font:800 12px/1 ui-monospace,Consolas,monospace;letter-spacing:.06em}',
+    '.rdrc-ro-qui small,.rdrc-ro-mode small,.rdrc-ro-quand{display:block;margin-top:2px;font-size:10.5px;color:var(--ink-3);white-space:normal}',
+    '.rdrc-ro-mode small{max-width:240px}',
+    '.rdrc-ro-st{display:inline-block;font:800 10px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:999px;white-space:nowrap;background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-ro-st[data-s="contacte"]{background:#E6F0FB;color:#1F5FA8}',
+    '.rdrc-ro-st[data-s="remis"],.rdrc-ro-st[data-s="expedie"]{background:#E1F5EA;color:var(--ok)}',
+    '.rdrc-ro-st[data-s="sans-suite"]{background:#EEF2F7;color:var(--ink-3)}',
+    '.rdrc-ro-t td{vertical-align:top}',
+    '.rdrc-ro-vide{margin:12px 0 0;font-size:12px;color:var(--ink-3)}',
     '.rdrc-jt-compte{font-size:11.5px;font-weight:700;color:var(--ink-3)}',
     '.rdrc-jt-sous{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:18px 0 8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}',
     '.rdrc-jt-sous span{font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-3)}',
@@ -1069,6 +1089,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
       this._periode = 30;
       this._instaView = 'todo';    
       this._jtCherche = '';        
+      this._roueCherche = '';      
+      this._roueFiltre = 'tous';
       this._busy = {};    
       
 
@@ -3014,6 +3036,125 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
       csvDownload('rdr-audience-' + stamp() + '.csv', rows2);
     }
 
+    
+
+
+
+
+
+
+
+    _roueHtml(p) {
+      if (p.roueError) return '<p class="rdrc-err">' + esc(p.roueError) + '</p>';
+      var v = p.roue;
+      if (!v) return '<div class="rdrc-state">' + (p.loading ? 'Lecture des gagnants…' : 'Aucune donnée pour l\'instant.') + '</div>';
+      var c = v.chiffres || {}, reg = v.reglages || {}, lots = v.lots || [], gagnants = v.gagnants || [];
+      var pl = function (n, un, plusieurs) { return nfmt(n) + ' ' + (n > 1 ? (plusieurs || un + 's') : un); };
+      var date = function (iso) {
+        var d = new Date(iso);
+        if (!iso || isNaN(d.getTime())) return '';
+        try { return new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(d).replace(':', ' h '); }
+        catch (e) { return d.toISOString().slice(0, 16); }
+      };
+      var STATUT = { 'a-contacter': 'À traiter', contacte: 'Contacté', expedie: 'Envoyé', remis: 'Remis', 'sans-suite': 'Sans suite' };
+      var MODE = { village: 'Au village', envoi: 'Par la poste', '': 'À choisir' };
+
+      var tete = '<div class="rdrc-jt-tete"><span class="rdrc-jt-statut" data-s="' + (reg.actif ? 'ouvert' : 'alerte') + '">' + (reg.actif ? 'Ouverte aux membres' : 'Éteinte : aperçu de l\'équipe seulement') + '</span>' +
+        '<small>' + pl(gagnants.length, 'gagnant') + ' de lot · lu à ' + esc(date(v.lu).slice(-7)) + '</small></div>';
+      var kpis = '<div class="rdrc-kpis">' +
+        kpi('Tours joués', nfmt(c.tours), '', '<b>' + nfmt(c.toursAujourdhui) + '</b> aujourd\'hui, hors essais de l\'équipe', 'lead') +
+        kpi('Lots gagnés', nfmt(c.gagnants), '', 'lots physiques · <b>' + nfmt(c.codes) + '</b> code' + (c.codes > 1 ? 's' : '') + ' -10 %') +
+        kpi('À remettre au village', nfmt(c.aRemettre), '', '<b>' + nfmt(c.remis) + '</b> déjà remis', c.aRemettre ? 'alert' : '') +
+        kpi('À envoyer', nfmt(c.aEnvoyer), '', '<b>' + nfmt(c.expedies) + '</b> déjà envoyé' + (c.expedies > 1 ? 's' : '')) +
+        kpi('Mode à choisir', nfmt(c.aChoisir), '', 'le gagnant n\'a pas encore dit comment il le récupère') +
+      '</div>';
+
+      var lignesLots = lots.map(function (l) {
+        return '<tr><td class="rdrc-jt-nom">' + esc(l.libelle) + '</td><td class="rdrc-jt-num">' + nfmt(l.tires) + '</td>' +
+          '<td class="rdrc-jt-num">' + (l.physique ? nfmt(l.gagnants) : '') + '</td>' +
+          '<td class="rdrc-jt-num">' + (l.physique && l.stockMax ? nfmt(Math.max(0, l.stockMax - l.gagnants)) + ' sur ' + nfmt(l.stockMax) : (l.physique ? 'non fixé' : '')) + '</td></tr>';
+      }).join('');
+      var cardLots = card('Les lots', 'tirés depuis l\'ouverture, hors essais',
+        lots.length ? '<div class="rdrc-jt-defil rdrc-jt-defil--libre"><table class="rdrc-jt-t"><thead><tr><th>Case</th><th class="rdrc-jt-num">Tirée</th><th class="rdrc-jt-num">Gagnants</th><th class="rdrc-jt-num">Restant</th></tr></thead><tbody>' + lignesLots + '</tbody></table></div>'
+          : '<div class="rdrc-state">Aucun lot actif dans ROUE_LOTS.</div>', false, IC.trend);
+
+      var cardLien = card('Page de retrait de l\'espace presse', 'à donner en privé',
+        (reg.lienRetrait
+          ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte : les gagnants qui ont choisi le village, leur numéro de retrait, leur prénom et l\'initiale de leur nom, leur lot, et un bouton « Remis ». Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici.</p>' +
+            '<div class="rdrc-ro-lien"><input class="rdrc-jt-cherche" type="text" readonly value="' + esc(reg.lienRetrait) + '" aria-label="Lien de la page de retrait" data-roue-lien>' +
+            '<button type="button" class="rdrc-btn" data-roue-copier>Copier</button><a class="rdrc-btn" href="' + esc(reg.lienRetrait) + '" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>' +
+            '<p class="rdrc-note">Ce lien donne accès à la liste sans connexion : à ne transmettre qu\'aux personnes de l\'espace presse. Pour le couper, demande une nouvelle clé (la ligne « roue » d\'ER_ANIMATIONS, champ cleRetrait).</p>'
+          : '<div class="rdrc-state"><b>Pas encore de lien</b>Aucune clé n\'est posée sur la ligne « roue » d\'ER_ANIMATIONS (champ cleRetrait).</div>'), false, IC.people);
+
+      var filtre = this._roueFiltre || 'tous';
+      var compteFiltre = {
+        tous: gagnants.length,
+        traiter: gagnants.filter(function (g) { return g.statut === 'a-contacter' || g.statut === 'contacte'; }).length,
+        village: gagnants.filter(function (g) { return g.mode === 'village'; }).length,
+        envoi: gagnants.filter(function (g) { return g.mode === 'envoi'; }).length,
+        choisir: gagnants.filter(function (g) { return !g.mode; }).length,
+        remis: c.remis || 0, expedie: c.expedies || 0, 'sans-suite': c.sansSuite || 0
+      };
+      var FILTRES = [['tous', 'Tous'], ['traiter', 'À traiter'], ['village', 'Au village'], ['envoi', 'Par la poste'], ['choisir', 'Mode à choisir'], ['remis', 'Remis'], ['expedie', 'Envoyés'], ['sans-suite', 'Sans suite']];
+      var puces = '<div class="rdrc-ro-filtres" role="group" aria-label="Filtrer les gagnants">' + FILTRES.map(function (f) {
+        return '<button type="button" class="rdrc-ro-filtre" data-roue-filtre="' + f[0] + '" aria-pressed="' + (filtre === f[0]) + '">' + esc(f[1]) + '<span>' + nfmt(compteFiltre[f[0]]) + '</span></button>';
+      }).join('') + '</div>';
+      var etats = function (g) {
+        var e = ['tous', g.statut === 'a-contacter' || g.statut === 'contacte' ? 'traiter' : '', g.mode === 'village' ? 'village' : g.mode === 'envoi' ? 'envoi' : 'choisir', g.statut];
+        return e.filter(Boolean).join(' ');
+      };
+      var bouton = function (g, statut, libelle, ton) {
+        return '<button type="button" class="rdrc-btn' + (ton ? ' ' + ton : '') + '" data-roue-statut="' + esc(g.id) + '" data-valeur="' + statut + '">' + esc(libelle) + '</button>';
+      };
+      var actions = function (g) {
+        if (g.statut === 'remis' || g.statut === 'expedie' || g.statut === 'sans-suite') return '<div class="rdrc-mob-acts">' + bouton(g, 'a-contacter', 'Rouvrir', '') + '</div>';
+        return '<div class="rdrc-mob-acts">' +
+          (g.mode !== 'envoi' ? bouton(g, 'remis', 'Remis', 'rdrc-ok') : '') +
+          (g.mode !== 'village' ? bouton(g, 'expedie', 'Envoyé', 'rdrc-ok') : '') +
+          (g.statut !== 'contacte' ? bouton(g, 'contacte', 'Contacté', '') : '') +
+          bouton(g, 'sans-suite', 'Sans suite', 'rdrc-no') + '</div>';
+      };
+      var ligne = function (g) {
+        var adresse = g.mode === 'envoi' ? [g.adresse, [g.codePostal, g.ville].filter(Boolean).join(' '), g.pays].filter(Boolean).join(', ') : '';
+        var q = [g.numero, g.prenom, g.nom, g.email, g.telephone, g.lot, g.ville].join(' ').toLowerCase();
+        return '<tr data-roue-ligne data-roue-q="' + esc(q) + '" data-roue-etats="' + esc(etats(g)) + '">' +
+          '<td>' + esc(date(g.gagneLe)) + '</td>' +
+          '<td><span class="rdrc-ro-num">' + esc(g.numero || '') + '</span></td>' +
+          '<td class="rdrc-ro-qui"><b>' + esc([g.prenom, g.nom].filter(Boolean).join(' ') || '(sans nom)') + '</b>' +
+            (g.email ? '<small>' + esc(g.email) + '</small>' : '') + (g.telephone ? '<small>' + esc(g.telephone) + '</small>' : '') + '</td>' +
+          '<td>' + esc(g.lot) + '</td>' +
+          '<td class="rdrc-ro-mode"><b>' + esc(MODE[g.mode] || MODE['']) + '</b>' + (adresse ? '<small>' + esc(adresse) + '</small>' : '') + '</td>' +
+          '<td><span class="rdrc-ro-st" data-s="' + esc(g.statut) + '">' + esc(STATUT[g.statut] || g.statut) + '</span>' +
+            (g.statut === 'remis' && g.remisLe ? '<small class="rdrc-ro-quand">' + esc(date(g.remisLe)) + (g.traitePar ? ' · ' + esc(g.traitePar) : '') + '</small>' : '') +
+            (g.statut === 'expedie' && g.expedieLe ? '<small class="rdrc-ro-quand">' + esc(date(g.expedieLe)) + '</small>' : '') + '</td>' +
+          '<td>' + actions(g) + '</td></tr>';
+      };
+      var cardGagnants = card('Les gagnants', pl(gagnants.length, 'lot physique', 'lots physiques') + ', le plus récent en tête',
+        '<div class="rdrc-jt-outils"><input class="rdrc-jt-cherche" type="search" data-roue-cherche placeholder="Numéro, nom, e-mail ou lot" aria-label="Chercher un gagnant" value="' + esc(this._roueCherche || '') + '">' +
+          '<span class="rdrc-jt-compte" data-roue-compte></span>' +
+          '<button type="button" class="rdrc-btn" data-roue-export' + (gagnants.length ? '' : ' disabled') + '>Exporter</button></div>' + puces +
+        (gagnants.length
+          ? '<div class="rdrc-jt-defil"><table class="rdrc-jt-t rdrc-ro-t"><thead><tr><th>Gagné le</th><th>Numéro</th><th>Gagnant</th><th>Lot</th><th>Récupération</th><th>Statut</th><th></th></tr></thead><tbody>' + gagnants.map(ligne).join('') + '</tbody></table></div>' +
+            '<p class="rdrc-ro-vide" data-roue-vide hidden>Aucun gagnant pour ce filtre.</p>'
+          : '<div class="rdrc-state">' + (reg.actif ? 'Aucun lot physique gagné pour l\'instant.' : 'Aucun gagnant : la roue est éteinte, et les essais de l\'équipe ne comptent pas.') + '</div>') +
+        '<p class="rdrc-note"><b>D\'où viennent ces lignes.</b> De ROUE_GAGNANTS : un lot physique tiré par un instant gagnant, avec les coordonnées copiées au moment du gain et, pour la poste, l\'adresse donnée par le gagnant. Les codes -10 % n\'y sont pas (un code commun, sans suivi). ' +
+          '« Exporter » télécharge les lignes affichées en CSV : elles contiennent des adresses, à garder dans l\'équipe.</p>', true, IC.people);
+
+      return tete + kpis + '<div class="rdrc-grid">' + cardLots + cardLien + cardGagnants + '</div>';
+    }
+
+    _roueExport() {
+      var v = (this._payload && this._payload.roue) || {};
+      var tous = v.gagnants || [];
+      var lignes = this.querySelectorAll('tr[data-roue-ligne]');
+      var rows = [['Gagné le', 'Numéro', 'Prénom', 'Nom', 'E-mail', 'Téléphone', 'Lot', 'Mode', 'Adresse', 'Code postal', 'Ville', 'Pays', 'Statut', 'Remis le', 'Envoyé le', 'Traité par', 'Source']];
+      tous.forEach(function (g, i) {
+        if (lignes[i] && lignes[i].hidden) return;
+        rows.push([g.gagneLe, g.numero, g.prenom, g.nom, g.email, g.telephone, g.lot, g.mode, g.adresse, g.codePostal, g.ville, g.pays, g.statut, g.remisLe, g.expedieLe, g.traitePar, g.source]);
+      });
+      csvDownload('rdr-roue-gagnants-' + stamp() + '.csv', rows);
+    }
+
      
      
     _copieDeSecours(txt, fait) {
@@ -3392,6 +3533,54 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4ff6e1f";performan
         };
         cherche.addEventListener('input', function () { self._jtCherche = cherche.value; filtrer(); });
         if (this._jtCherche) filtrer();
+      }
+
+      
+
+      var roueCherche = this.querySelector('[data-roue-cherche]');
+      if (this.querySelector('[data-roue-filtre]')) {
+        var roueFiltrer = function () {
+          var q = String(self._roueCherche || '').trim().toLowerCase();
+          var f = self._roueFiltre || 'tous';
+          var lignes = self.querySelectorAll('tr[data-roue-ligne]');
+          var n = 0;
+          lignes.forEach(function (tr) {
+            var vu = (!q || tr.getAttribute('data-roue-q').indexOf(q) >= 0) && (' ' + tr.getAttribute('data-roue-etats') + ' ').indexOf(' ' + f + ' ') >= 0;
+            tr.hidden = !vu;
+            if (vu) n++;
+          });
+          var compte = self.querySelector('[data-roue-compte]');
+          if (compte) compte.textContent = n + ' affiché' + (n > 1 ? 's' : '') + (n < lignes.length ? ' sur ' + lignes.length : '');
+          var vide = self.querySelector('[data-roue-vide]');
+          if (vide) vide.hidden = n > 0 || !lignes.length;
+        };
+        if (roueCherche) roueCherche.addEventListener('input', function () { self._roueCherche = roueCherche.value; roueFiltrer(); });
+        this.querySelectorAll('[data-roue-filtre]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            self._roueFiltre = b.getAttribute('data-roue-filtre');
+            self.querySelectorAll('[data-roue-filtre]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+            roueFiltrer();
+          });
+        });
+        roueFiltrer();
+      }
+      this.querySelectorAll('[data-roue-statut]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.disabled = true;
+          self._emit('rc-roue-statut', { id: btn.getAttribute('data-roue-statut'), statut: btn.getAttribute('data-valeur') });
+        });
+      });
+      var roueExport = this.querySelector('[data-roue-export]');
+      if (roueExport) roueExport.addEventListener('click', function () { self._roueExport(); });
+      var roueCopier = this.querySelector('[data-roue-copier]');
+      if (roueCopier) {
+        roueCopier.addEventListener('click', function () {
+          var champ = self.querySelector('[data-roue-lien]');
+          if (!champ) return;
+          var fait = function () { roueCopier.textContent = 'Copié'; setTimeout(function () { roueCopier.textContent = 'Copier'; }, 1800); };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(champ.value).then(fait, function () { self._copieDeSecours(champ.value, fait); });
+          else self._copieDeSecours(champ.value, fait);
+        });
       }
 
       var refresh = this.querySelector('[data-refresh]');
