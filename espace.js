@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum e149429 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e149429";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum e272178 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e272178";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -20543,6 +20543,8 @@ if (!customElements.get('espace-rhum')) {
         const rt = r.retrait;
         const physique = gagne && lot.physique;
         const retrait = !physique ? ''
+          : rt && rt.remisLe ? '<p class="jr-carte-retrait">' + T('Lot remis à l\'espace presse du village.', 'Prize collected at the village press area.') + '</p>'
+          : rt && rt.expedieLe ? '<p class="jr-carte-retrait">' + T('Lot envoyé par la poste.', 'Prize sent by post.') + '</p>'
           : rt && rt.mode === 'village' ? '<p class="jr-carte-retrait">' + T('À retirer à l\'espace presse du village, numéro', 'To collect at the village press area, number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>'
           : rt && rt.mode === 'envoi' ? '<p class="jr-carte-retrait">' + T('Envoi par la poste demandé.', 'Delivery by post requested.') + '</p>'
           : '<p class="jr-carte-retrait jr-carte-retrait--attente">' + T('Dis-nous comment récupérer ton lot.', 'Tell us how you would like to get your prize.') + '</p>';

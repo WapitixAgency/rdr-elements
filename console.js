@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum e149429 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e149429";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum e272178 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e272178";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3084,7 +3084,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e149429";performan
 
       var cardLien = card('Page de retrait de l\'espace presse', 'à donner en privé',
         (reg.lienRetrait
-          ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte, en deux panneaux, « À remettre » et « Remis ». On y trouve les gagnants qui ont choisi le village et ceux qui n\'ont encore rien choisi, avec leur numéro de retrait, leur prénom et l\'initiale de leur nom, et leur lot. On cherche par numéro ou par prénom, on confirme, et une erreur s\'annule. Le QR code du gagnant, scanné par un téléphone qui a ouvert ce lien, ouvre directement sa fiche. Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici, et chaque geste s\'inscrit à l\'historique de la ligne.</p>' +
+          ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte, en deux panneaux, « À remettre » et « Remis ». On y trouve les gagnants qui ont choisi le village et ceux qui n\'ont encore rien choisi, avec leur numéro de retrait, leur prénom et l\'initiale de leur nom, et leur lot. On cherche par numéro ou par prénom, on confirme, et une erreur s\'annule. Le QR code du gagnant se lit depuis la page, bouton « Scanner un QR code », et ouvre directement sa fiche. L\'équipe garde la page en favori : son adresse contient la clé, rien n\'est gardé dans le téléphone. Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici, et chaque geste s\'inscrit à l\'historique de la ligne.</p>' +
             '<div class="rdrc-ro-lien"><input class="rdrc-jt-cherche" type="text" readonly value="' + esc(reg.lienRetrait) + '" aria-label="Lien de la page de retrait" data-roue-lien>' +
             '<button type="button" class="rdrc-btn" data-roue-copier>Copier</button><a class="rdrc-btn" href="' + esc(reg.lienRetrait) + '" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>' +
             '<p class="rdrc-note">Ce lien donne accès à la liste sans connexion : à ne transmettre qu\'aux personnes de l\'espace presse. Pour le couper, demande une nouvelle clé (la ligne « roue » d\'ER_ANIMATIONS, champ cleRetrait).</p>'
