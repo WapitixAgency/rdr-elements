@@ -11,10 +11,10 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | Paquet | Contenu | Poids |
 | --- | --- | --- |
 | `socle.js` | le haut du pied de page et les notifications (rdr-notify, posé sur toutes les pages, défini tôt, il est prêt quand la page lui passe la liste), sur toutes les pages ; depuis le 26/09 au soir, plus les anciens méga menus ni les horloges : l'en-tête en module (paquet entete) porte les siens, et l'horloge Alpina a rejoint le paquet du concours photo, seul à la poser : rdr-pied-haut, rdr-notify | 117.9 Ko, 25.2 Ko brotli |
-| `carte.js` | la carte du village ; ses données sont déjà dans le HTML servi, et MapLibre est préchargé avec elle :  | 726.4 Ko, 158.4 Ko brotli |
-| `atelier.js` | l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte :  | 1048.8 Ko, 235.4 Ko brotli |
-| `espace.js` | l'Espace Rhum ; le module arrive en parallèle du runtime, en priorité réseau basse (il ne peut rien dessiner avant la vérification du membre), et le dernier état connu du membre s'affiche à l'instant : espace-rhum | 1035.0 Ko, 171.6 Ko brotli |
-| `skipper.js` | la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi : skipper-gallery, skipper-outro, skippers-carousel, rdr-espace-promo, rdr-skipper, skippers-list | 452.9 Ko, 85.2 Ko brotli |
+| `carte.js` | la carte du village ; ses données sont déjà dans le HTML servi, et MapLibre est préchargé avec elle :  | 727.0 Ko, 158.6 Ko brotli |
+| `atelier.js` | l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte :  | 1049.4 Ko, 235.5 Ko brotli |
+| `espace.js` | l'Espace Rhum ; le module arrive en parallèle du runtime, en priorité réseau basse (il ne peut rien dessiner avant la vérification du membre), et le dernier état connu du membre s'affiche à l'instant : espace-rhum | 1035.0 Ko, 171.5 Ko brotli |
+| `skipper.js` | la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi : skipper-gallery, skipper-outro, skippers-carousel, rdr-espace-promo, rdr-skipper, skippers-list | 452.9 Ko, 85.1 Ko brotli |
 | `entete.js` | l'en-tête « mode village » (rdr-entete, 22/09), chargé sur toute page qui porte la balise : aujourd'hui la page test de Jules, demain toutes : rdr-entete | 315.4 Ko, 64.9 Ko brotli |
 | `apercu.js` | le nouvel accueil (rdr-accueil-apercu), chargé dès l'en-tête sur / et /en, et sur toute autre page qui porte la balise ; la photo du hero y est annoncée tout de suite (photoHero) : rdr-accueil-apercu | 185.8 Ko, 39.3 Ko brotli |
 | `actus.js` | le hub des actualités, ses pages de tag (/medias-actualites/tags/<tag>) et chaque page de post (en-tête et suite de lecture) ; un seul paquet parce qu'on va de l'un à l'autre, leurs charges utiles sont déjà dans le HTML servi : rdr-news, rdr-post-head, rdr-post-more | 285.1 Ko, 53.0 Ko brotli |
@@ -32,14 +32,14 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `la-course.js` | la page La course (Qu'est-ce que la Route du Rhum, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur :  | 107.3 Ko, 25.3 Ko brotli |
 | `heritage.js` | la page Héritage (rdr-heritage, 24/09) : son jeu, les douze éditions lues au CMS, arrive en attribut jeu, posé par la page maître au rendu serveur :  | 57.1 Ko, 14.5 Ko brotli |
 | `edition2022.js` | la page Édition 2022 (rdr-edition-2022, 24/09), page d'archive : son jeu figé arrive en attribut jeu, posé par la page maître au rendu serveur :  | 76.0 Ko, 17.6 Ko brotli |
-| `terres.js` | la page Terres d'engagements (25/09) : ses données arrivent en attribut jeu, posé par la page maître au rendu serveur ; les pactes sont lus au CMS :  | 64.1 Ko, 15.3 Ko brotli |
-| `littoral.js` | la page Protéger le littoral (rdr-littoral, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; ?go=benevolat tenu par le module :  | 76.5 Ko, 18.2 Ko brotli |
+| `terres.js` | la page Terres d'engagements (25/09) : ses données arrivent en attribut jeu, posé par la page maître au rendu serveur ; les pactes sont lus au CMS :  | 64.1 Ko, 15.2 Ko brotli |
+| `littoral.js` | la page Protéger le littoral (rdr-littoral, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; ?go=benevolat tenu par le module :  | 76.5 Ko, 18.1 Ko brotli |
 | `kit.js` | la page Kit pédagogique (rdr-kit-pedagogique, 24/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur :  | 50.7 Ko, 11.9 Ko brotli |
 | `parcours.js` | la page Parcours (rdr-parcours, 25/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; la carte charge d3 et le fond des terres au premier dessin :  | 83.7 Ko, 20.6 Ko brotli |
 | `partenaire.js` | la page Devenir partenaire (rdr-devenir-partenaire, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; le formulaire HubSpot ne se charge qu'à l'approche de son bloc :  | 42.5 Ko, 10.9 Ko brotli |
 | `exposants.js` | la page Offres exposants (rdr-offres-exposants, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur :  | 35.3 Ko, 9.0 Ko brotli |
 | `licence.js` | la page Licence de marque (rdr-licence-marque, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; le formulaire part par la page maître (envoyerLicence) :  | 48.3 Ko, 11.9 Ko brotli |
-| `contact.js` | la page Contact (rdr-contact, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; le formulaire part par la page maître (envoyerContact) dans le formulaire Wix Forms « Contact » d'avant :  | 46.7 Ko, 12.6 Ko brotli |
+| `contact.js` | la page Contact (rdr-contact, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; le formulaire part par la page maître (envoyerContact) dans le formulaire Wix Forms « Contact » d'avant :  | 46.7 Ko, 12.5 Ko brotli |
 | `partenaires.js` | le hall Nos partenaires (rdr-partenaires, 26/09) : son jeu, lu en direct au CMS, arrive en attribut jeu, posé par la page maître au rendu serveur :  | 55.3 Ko, 12.9 Ko brotli |
 | `fiche-partenaire.js` | la fiche partenaire (rdr-partenaire, 26/09), page dynamique /nos-partenaires/<partenaire> : son jeu (la fiche lue au CMS et les partenaires de son rang) arrive en attribut jeu, posé par la page maître au rendu serveur :  | 37.6 Ko, 10.0 Ko brotli |
 | `esk.js` | l'Espace skippers (rdr-espace-skippers, 26/09) : son jeu, lu en direct au CMS (ESPACESKIPPER), arrive en attribut jeu, posé par la page maître au rendu serveur :  | 45.6 Ko, 11.5 Ko brotli |
@@ -53,4 +53,4 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `recherche/fr.json`, `recherche/en.json` | l'index de la recherche de l'en-tête (skippers dévoilés, articles), relu sur le site toutes les 30 min par le workflow index-recherche de route-du-rhum | |
 | `test-entete.js` | prototype de l'en-tête en module sur TEST RDR26 (rdr-entete, 21/09), déposé par `test-rdr/atelier/entete/assembler.mjs --paquet`, chargé à une adresse figée sur son commit | |
 
-Source : `WapitixAgency/route-du-rhum 8233235`.
+Source : `WapitixAgency/route-du-rhum ea65c5c`.
