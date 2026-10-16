@@ -1,5 +1,5 @@
-/* rdr-elements tags | source route-du-rhum ea65c5c | rdr-tags.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="ea65c5c";performance.mark("rdr-elements:tags")}catch(e){}
+/* rdr-elements tags | source route-du-rhum 3d6a938 | rdr-tags.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tags"]="3d6a938";performance.mark("rdr-elements:tags")}catch(e){}
 ;(function(){
 (() => {
   'use strict';

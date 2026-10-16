@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum ea65c5c | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="ea65c5c";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 3d6a938 | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="3d6a938";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';

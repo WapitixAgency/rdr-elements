@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ea65c5c | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ea65c5c";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 3d6a938 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3d6a938";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1362,7 +1362,7 @@ if (!customElements.get('espace-rhum')) {
     'Ton pays de résidence': 'Your country of residence',
 
      
-    'Ton profil': 'Your profile', 'Fais-nous mieux te connaître': 'Help us get to know you',
+    'Ton profil': 'Your profile', 'Parle-nous un peu de toi ?': 'Tell us a bit about yourself?',
     'Renseigne tes infos pour débloquer le badge': 'Fill in your details to unlock the badge',
     'Profil complet': 'Complete profile',
     'Pseudo': 'Nickname', 'Ton nom de fan': 'Your fan name',
@@ -18232,7 +18232,7 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-profile-panel">
             <button class="er-profile-close" type="button" data-action="close-profile" aria-label="Fermer">${ICON_CLOSE}</button>
             <div class="er-profile-eyebrow">Ton profil</div>
-            <h2 class="er-profile-title" id="er-profile-title">Fais-nous mieux te connaître</h2>
+            <h2 class="er-profile-title" id="er-profile-title">Parle-nous un peu de toi ?</h2>
             <p class="er-profile-sub">Renseigne tes infos pour débloquer le badge <strong>Profil complet</strong>, et nous aider à mieux te connaître.</p>
             <div class="er-profile-prog" data-profile-prog data-complete="false" role="group" aria-label="Progression de ton profil">
               <div class="er-profile-prog-line">
