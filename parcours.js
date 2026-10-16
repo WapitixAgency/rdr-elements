@@ -1,5 +1,5 @@
-/* rdr-elements parcours | source route-du-rhum 35c064f | rdr-parcours.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="35c064f";performance.mark("rdr-elements:parcours")}catch(e){}
+/* rdr-elements parcours | source route-du-rhum dd03f2b7 | rdr-parcours.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="dd03f2b7";performance.mark("rdr-elements:parcours")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-parcours")) return;

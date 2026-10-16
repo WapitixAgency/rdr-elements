@@ -1,5 +1,5 @@
-/* rdr-elements exposants | source route-du-rhum 35c064f | rdr-offres-exposants.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["exposants"]="35c064f";performance.mark("rdr-elements:exposants")}catch(e){}
+/* rdr-elements exposants | source route-du-rhum dd03f2b7 | rdr-offres-exposants.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["exposants"]="dd03f2b7";performance.mark("rdr-elements:exposants")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-offres-exposants")) return;
