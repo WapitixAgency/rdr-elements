@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 3d6a938 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3d6a938";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 7b8ce1f | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="7b8ce1f";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1141,10 +1141,6 @@ if (!customElements.get('espace-rhum')) {
 
     'Il grimpe surtout avec tes jours de visite, puis tes lectures, tes skippers suivis et tes badges. Un palier atteint reste acquis.': 'It climbs mostly with the days you visit, then your reading, the skippers you follow and your badges. A tier once reached is yours to keep.',
     'Voir tous les paliers': 'See all tiers',
-    
-
-    'Le top 50 des fans les plus actifs sera dévoilé à l\'ouverture du village.': 'The top 50 most active fans will be revealed when the village opens.',
-    '20 octobre 2026 · Saint-Malo': 'October 20, 2026 · Saint-Malo',
     'Tes favoris apparaissent ici. Ajoute-en depuis la recherche.': 'Your favourites appear here. Add some from the search.',
     'Tu ne suis encore personne': 'You\'re not following anyone yet',
 
