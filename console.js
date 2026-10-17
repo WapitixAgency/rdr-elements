@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 81cec12 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 643a3e8d | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="643a3e8d";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -536,6 +536,77 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
     '.rdrc-place-r{grid-column:2/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px}.rdrc-place-r .rdrc-btn{padding:6px 10px;font-size:11px}',
     '.rdrc-place-r .rdrc-btn.rdrc-go{border-color:var(--navy);background:var(--navy);color:#fff}',
     '@media(max-width:760px){.rdrc-place{grid-template-columns:22px minmax(0,1fr)}.rdrc-place .rdrc-mob-acts{grid-column:2/-1;justify-content:flex-start}}',
+    
+
+    '.rdrc-mob-outils{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}',
+    '.rdrc-mob-outils select,.rdrc-mob-outils input{font:600 12.5px/1.2 var(--body);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;min-height:36px;max-width:100%}',
+    '.rdrc-mob-outils input{flex:1 1 240px;min-width:0}',
+    '.rdrc-mob-outils select:focus-visible,.rdrc-mob-outils input:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-mob-compte{font-size:12px;color:var(--ink-3);margin:0 0 8px}',
+    '.rdrc-mob-jourv{display:block;font:800 10.5px/1.2 var(--body);color:var(--teal);letter-spacing:.02em;margin:0 0 2px}',
+    '.rdrc-mob-chaine{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 16px;margin:0 0 14px;border-radius:12px;background:var(--navy);color:#fff}',
+    '.rdrc-mob-chaine p{margin:0;flex:1 1 260px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.82)}.rdrc-mob-chaine p b{color:#fff}',
+    '.rdrc-mob-chaine .rdrc-btn{background:var(--amber);border-color:var(--amber);color:var(--navy);padding:11px 18px;font-size:13px}',
+    '.rdrc-mob-chaine .rdrc-btn:hover{background:#FFB65C;color:var(--navy)}',
+    '.rdrc-mob-plus{display:flex;justify-content:center;margin:10px 0 0}',
+    '.rdrc-ch{--navy:#0A1A35;--teal:#00676E;--teal-soft:#E4F0F0;--line:#E1E6EE;--line-2:#EEF2F7;--ink:#16233A;--ink-2:#45536E;--ink-3:#7B8AA0;',
+    '--ok:#1E8E5A;--no:#C0392B;--warn:#B3541E;--amber:#F19F39;--teal-lite:#5DBFC0;' + "--body:'Montserrat',system-ui,-apple-system,sans-serif;",
+    'position:fixed;inset:0;z-index:2147483100;display:flex;flex-direction:column;background:var(--navy);font-family:var(--body);color:var(--ink);font-size:13px}',
+    '.rdrc-ch *{box-sizing:border-box}',
+    '.rdrc-ch-h{flex:0 0 auto;display:flex;align-items:center;gap:10px 16px;padding:10px clamp(12px,2vw,24px);color:#fff}',
+    '.rdrc-ch-t{font:800 10.5px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--teal-lite);white-space:nowrap}',
+    '.rdrc-ch-n{font:800 15px/1.2 var(--body);white-space:nowrap}.rdrc-ch-n small{font-weight:600;font-size:12px;color:rgba(255,255,255,.65);margin-left:6px}',
+    '.rdrc-ch-barre{flex:1 1 120px;height:6px;border-radius:99px;background:rgba(255,255,255,.16);overflow:hidden}',
+    '.rdrc-ch-barre i{display:block;height:100%;background:var(--amber);transition:width .2s}',
+    '.rdrc-ch-x{appearance:none;border:1px solid rgba(255,255,255,.35);background:none;color:#fff;border-radius:9px;padding:8px 12px;font:700 12px/1 var(--body);cursor:pointer;white-space:nowrap}',
+    '.rdrc-ch-x:hover{background:rgba(255,255,255,.1)}.rdrc-ch-x:focus-visible{outline:2px solid var(--amber);outline-offset:2px}',
+    '.rdrc-ch-c{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,27vw,400px)}',
+    '.rdrc-ch-vue{position:relative;min-height:0;background:#18263F;overflow:hidden}',
+    '.rdrc-ch-f{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px}',
+    '.rdrc-ch-f[data-etat="cache"]{visibility:hidden;pointer-events:none}',
+    '.rdrc-ch-f img{display:block;max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;transition:transform .15s;background:#fff}',
+    '.rdrc-ch-f.is-zoom{overflow:auto;align-items:flex-start;justify-content:flex-start}',
+    '.rdrc-ch-f.is-zoom img{max-width:none;max-height:none;cursor:zoom-out}',
+    '.rdrc-ch-f iframe{display:block;width:100%;height:100%;border:0;border-radius:6px;background:#fff}',
+    '.rdrc-ch-f-vide{color:rgba(255,255,255,.75);font-size:14px;text-align:center;max-width:340px;line-height:1.5}',
+    '.rdrc-ch-out{position:absolute;left:12px;bottom:12px;z-index:2;display:flex;flex-wrap:wrap;gap:6px}',
+    '.rdrc-ch-out button,.rdrc-ch-out a{appearance:none;border:0;border-radius:8px;background:rgba(10,26,53,.82);color:#fff;font:700 11.5px/1 var(--body);padding:8px 10px;cursor:pointer;text-decoration:none}',
+    '.rdrc-ch-out button:hover,.rdrc-ch-out a:hover{background:var(--navy)}',
+    '.rdrc-ch-p{min-height:0;overflow:auto;background:#fff;display:flex;flex-direction:column;padding:18px clamp(14px,1.4vw,20px)}',
+    '.rdrc-ch-id{font:800 11px/1.2 var(--body);color:var(--ink-3);letter-spacing:.05em;display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
+    '.rdrc-ch-nom{font:800 clamp(17px,1.5vw,21px)/1.2 var(--body);color:var(--ink);margin:6px 0 0;overflow-wrap:anywhere}',
+    '.rdrc-ch-dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;margin:14px 0;font-size:13px}',
+    '.rdrc-ch-dl dt{color:var(--ink-3);font-weight:600}.rdrc-ch-dl dd{margin:0;font-weight:700;color:var(--ink);overflow-wrap:anywhere}',
+    '.rdrc-ch-dl dd small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;margin-top:1px}',
+    '.rdrc-ch-regle{background:var(--teal-soft);border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.45;color:var(--ink-2)}',
+    '.rdrc-ch-regle b{display:block;color:var(--teal);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 4px}',
+    '.rdrc-ch-avis{margin:0 0 10px;padding:9px 11px;border-radius:9px;background:#FBE3E0;color:var(--no);font-size:12.5px;line-height:1.4;font-weight:600}',
+    '.rdrc-ch-acts{margin-top:auto;padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}',
+    '.rdrc-ch-b{appearance:none;border:2px solid transparent;border-radius:12px;padding:13px 8px;font:800 15px/1.1 var(--body);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px}',
+    '.rdrc-ch-b kbd{font:700 10.5px/1 var(--body);opacity:.72}',
+    '.rdrc-ch-b:focus-visible{outline:3px solid var(--amber);outline-offset:2px}',
+    '.rdrc-ch-b[data-v="Validé"]{grid-column:1/-1;background:var(--ok);color:#fff;padding:18px 8px;font-size:17px}',
+    '.rdrc-ch-b[data-v="Validé"]:hover{background:#17784B}',
+    '.rdrc-ch-b[data-v="Refusé"]{background:#FBE3E0;color:var(--no);border-color:#F2C2BC}',
+    '.rdrc-ch-b[data-v="Exclue"]{background:var(--line-2);color:var(--ink-2);border-color:var(--line)}',
+    '.rdrc-ch-b[data-v="Refusé"][data-arme="1"]{background:var(--no);color:#fff;border-color:var(--no)}',
+    '.rdrc-ch-b[data-v="Exclue"][data-arme="1"]{background:var(--ink-2);color:#fff;border-color:var(--ink-2)}',
+    '.rdrc-ch-b[data-v="passer"]{grid-column:1/-1;flex-direction:row;justify-content:center;gap:8px;background:#fff;border-color:var(--line);color:var(--ink-2);padding:10px 8px;font-size:13px}',
+    '.rdrc-ch-q{grid-column:1/-1;margin:0;font-size:12.5px;font-weight:700;color:var(--no)}',
+    '.rdrc-ch-pied{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin-top:2px}',
+    '.rdrc-ch-annul{appearance:none;background:none;border:0;padding:6px 0;font:700 12px/1.2 var(--body);color:var(--teal);text-decoration:underline;text-underline-offset:2px;cursor:pointer}',
+    '.rdrc-ch-annul:disabled{color:var(--ink-3);text-decoration:none;cursor:default}',
+    '.rdrc-ch-touches{font-size:11px;color:var(--ink-3)}',
+    '.rdrc-ch-fin{grid-column:1/-1;display:flex;align-items:center;justify-content:center;background:var(--line-2);padding:24px;min-height:0;overflow:auto}',
+    '.rdrc-ch-fin-c{background:#fff;border-radius:16px;padding:28px;max-width:520px;width:100%;text-align:center}',
+    '.rdrc-ch-fin-c h2{font:800 22px/1.2 var(--body);color:var(--ink);margin:0 0 10px}.rdrc-ch-fin-c p{margin:0 0 16px;color:var(--ink-2);font-size:14px;line-height:1.5}',
+    '.rdrc-ch-fin-a{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}',
+    '.rdrc-ch-fin-a .rdrc-ch-b{padding:12px 18px;font-size:14px}',
+    '.rdrc-ch-fin-a .rdrc-ch-b[data-v="fermer"]{background:var(--navy);color:#fff}',
+    '.rdrc-ch-fin-a .rdrc-ch-b[data-v="revoir"]{background:#fff;border-color:var(--line);color:var(--ink)}',
+    '@media(max-height:780px){.rdrc-ch-h{padding-top:7px;padding-bottom:7px}.rdrc-ch-p{padding-top:12px;padding-bottom:12px}.rdrc-ch-dl{margin:10px 0;gap:4px 10px;font-size:12.5px}',
+    '.rdrc-ch-b{padding:10px 8px}.rdrc-ch-b[data-v="Validé"]{padding:13px 8px}.rdrc-ch-regle{padding:8px 10px;font-size:12px}}',
+    '@media(max-width:860px){.rdrc-ch-c{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(220px,1fr) auto}.rdrc-ch-p{max-height:58vh}.rdrc-ch-touches{display:none}}',
 
     
 
@@ -905,6 +976,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
       '</svg>' +
       '<div class="rdrc-ring-t">' + esc(sub) + '</div>' +
     '</div>';
+  }
+
+   
+  function mobJourLibelle(jour) {
+    var d = new Date(jour + 'T12:00:00Z');
+    if (isNaN(d.getTime())) return String(jour || '');
+    var s = new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(d);
+    return d.getUTCDate() === 1 ? s.replace(/(^|\s)1(?=\s)/, '$11er') : s;
   }
 
   function card(title, sub, body, wide, icon) {
@@ -2140,8 +2219,15 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
       if (p.mobiliteError) return '<div class="rdrc-state">' + esc(p.mobiliteError) + '</div>';
       if (!m) return '<div class="rdrc-state">' + (p.loading ? 'Lecture des participations…' : 'Aucune donnée pour l\'instant.') + '</div>';
       var jours = m.jours || [];
+      
+
+
+      var tous = this._mobJour === 'tous' || (!this._mobJour && m.jour === 'tous');
+      var enRoute = tous ? m.jour !== 'tous' : (m.jour === 'tous' && this._mobJour !== 'final');
+      if (p.mobiliteEchec && p.mobiliteEchec.n !== this._chEchecVu) { this._chEchecVu = p.mobiliteEchec.n; this._chaineEchec(p.mobiliteEchec); }
       var jourVu = this._mobJour && this._mobJour !== 'final' ? this._mobJour : (m.jour || (jours[0] && jours[0].jour) || '');
-      if (this._mobJour && this._mobJour !== 'final' && m.jour && m.jour !== this._mobJour) jourVu = m.jour;
+      if (this._mobJour && this._mobJour !== 'final' && m.jour && m.jour !== this._mobJour && m.jour !== 'tous') jourVu = m.jour;
+      if (tous) jourVu = 'tous';
       var final = this._mobJour === 'final';
       this._mobJourVu = jourVu;
       var enCours = jours.find(function (j) { return j.jour === jourVu; }) || {};
@@ -2170,11 +2256,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
       var quandParis = function (iso) { return isNaN(Date.parse(iso)) ? '' : libelle(jourParis(iso)) + ' à ' + heureParis(iso); };
       var pluriel = function (n, un, plusieurs) { return n + ' ' + (n > 1 ? (plusieurs || un + 's') : un); };
 
-      var chips = jours.map(function (j) {
-        return '<button type="button" class="rdrc-jour" data-mob-jour="' + esc(j.jour) + '" aria-pressed="' + (!final && j.jour === jourVu ? 'true' : 'false') + '"' +
+      var aVerifierTous = jours.reduce(function (n, j) { return n + (j.aVerifier || 0); }, 0);
+      var chips = '<button type="button" class="rdrc-jour" data-mob-jour="tous" aria-pressed="' + (tous ? 'true' : 'false') + '">Tous les jours<small>' + (aVerifierTous ? aVerifierTous + ' à vérifier' : pluriel(m.total || 0, 'inscrit')) + '</small></button>' +
+        jours.map(function (j) {
+        return '<button type="button" class="rdrc-jour" data-mob-jour="' + esc(j.jour) + '" aria-pressed="' + (!final && !tous && j.jour === jourVu ? 'true' : 'false') + '"' +
           (j.tire ? ' data-tire="1"' : '') + '>' + esc(libelle(j.jour)) + '<small>' + pluriel(j.total || 0, 'inscrit') + (j.tire ? ' · tiré' : '') + '</small></button>';
       }).join('') +
         '<button type="button" class="rdrc-jour" data-mob-jour="final" aria-pressed="' + (final ? 'true' : 'false') + '"' + (m.final ? ' data-tire="1"' : '') + '>Grand tirage<small>' + (m.eligiblesFinal || 0) + ' éligibles' + (m.final ? ' · tiré' : '') + '</small></button>';
+
+      if (enRoute) return '<div class="rdrc-jours">' + chips + '</div><div class="rdrc-state">' + (tous ? 'Lecture de toutes les participations…' : 'Lecture des participations du jour…') + '</div>';
+      if (tous) return '<div class="rdrc-jours">' + chips + '</div>' + this._mobTousHtml(m);
 
       var kpis = '<div class="rdrc-kpis">' +
         kpi('Participations', nfmt(m.total || 0), '', 'sur les 13 jours', 'lead') +
@@ -2322,26 +2413,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
         if (places.some(function (x) { return x.titulaire; })) tirageBloc += '<p class="rdrc-note">« Exporter », en haut à droite, télécharge les gagnants de ce jour en CSV : le fichier contient leurs coordonnées, à garder dans l’équipe.</p>';
       }
 
-      var lignesParticipations = (m.participations || []).map(function (x) {
-        var inscrit = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
-        var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
-        return '<div class="rdrc-mob"' + (x.gagnant || x.grandGagnant ? ' data-gagnant="1"' : '') + '>' +
-          '<span class="rdrc-mob-id">' + esc(x.id) + '</span>' +
-          '<span class="rdrc-mob-nom">' + esc(x.prenom + ' ' + x.nom) + (x.gagnant ? ' <span class="rdrc-mob-trophee">🏆</span>' : '') +
-            (x.grandGagnant ? ' <span class="rdrc-mob-trophee">🏆 grand tirage</span>' : '') +
-            (x.equipe ? ' <span class="rdrc-mob-equipe" title="Adresse de l’équipe (règlement, article 3.4) : jamais tirée">équipe</span>' : '') +
-            '<small>' + esc(x.email) + ' · ' + esc(x.telephone) + ' · inscrit le ' + esc(inscrit) + '</small></span>' +
-          '<span class="rdrc-mob-mode">' + esc(x.mode) + (x.precision ? ' (' + esc(x.precision) + ')' : '') +
-            (x.justificatifUrl ? '<a href="' + esc(x.justificatifUrl) + '" target="_blank" rel="noopener">Voir le justificatif' + (x.justificatifNom ? ' · ' + esc(x.justificatifNom) : '') + '</a>' : '<a>aucun fichier</a>') + '</span>' +
-          '<span class="rdrc-mob-st" data-s="' + esc(statut) + '">' + esc(statut) + '</span>' +
-          '<span class="rdrc-mob-acts">' +
-            (x.statutJustificatif !== 'Validé' ? '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(x.id) + '" data-champ="statutJustificatif" data-valeur="Validé">Valider</button>' : '') +
-            (x.statutJustificatif !== 'Refusé' ? '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(x.id) + '" data-champ="statutJustificatif" data-valeur="Refusé">Refuser</button>' : '') +
-            (x.statutParticipation !== 'Exclue' ? '<button type="button" class="rdrc-btn" data-mob-statut="' + esc(x.id) + '" data-champ="statutParticipation" data-valeur="Exclue" title="Écarter des tirages">Exclure</button>'
-                                                : '<button type="button" class="rdrc-btn" data-mob-statut="' + esc(x.id) + '" data-champ="statutParticipation" data-valeur="Éligible">Réintégrer</button>') +
-          '</span>' +
-        '</div>';
-      }).join('');
+      var lignesParticipations = (m.participations || []).map(function (x) { return self._mobLigne(x, false); }).join('');
+      var restentJour = this._chaineFile(m.participations).length;
 
       var modes = Object.keys(m.modes || {}).map(function (k) { return { label: k, count: m.modes[k] }; }).sort(function (a, b) { return b.count - a.count; });
        
@@ -2350,6 +2423,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
                     : (reg.ouvertCoche ? 'challenge terminé (article 2)' : 'challenge fermé au public');
 
       return '<div class="rdrc-jours">' + chips + '</div>' + kpis +
+        (restentJour && !final ? this._mobChaineBandeau(restentJour, 'de ce jour') : '') +
         '<div class="rdrc-grid">' +
           card(final ? 'Le grand tirage final' : 'Le tirage du ' + libelle(jourVu), sousTitre, tirageBloc, true) +
           (final ? '' : card('Les participations du ' + libelle(jourVu), pluriel(enCours.total || 0, 'inscrit'),
@@ -2362,6 +2436,439 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
               ? barsH(jours.map(function (j) { return { label: libelle(j.jour), count: j.total || 0 }; }), { whole: m.total || 1 })
               : '<div class="rdrc-state">Rien encore.</div>', false) +
         '</div>';
+    }
+
+    
+
+    _mobLigne(x, avecJour) {
+        var inscrit = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+        var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
+        return '<div class="rdrc-mob" data-mob-id="' + esc(x.id) + '"' + (x.gagnant || x.grandGagnant ? ' data-gagnant="1"' : '') + '>' +
+          '<span class="rdrc-mob-id">' + esc(x.id) + '</span>' +
+          '<span class="rdrc-mob-nom">' + esc(x.prenom + ' ' + x.nom) + (x.gagnant ? ' <span class="rdrc-mob-trophee">🏆</span>' : '') +
+            (x.grandGagnant ? ' <span class="rdrc-mob-trophee">🏆 grand tirage</span>' : '') +
+            (x.equipe ? ' <span class="rdrc-mob-equipe" title="Adresse de l’équipe (règlement, article 3.4) : jamais tirée">équipe</span>' : '') +
+            '<small>' + esc(x.email) + ' · ' + esc(x.telephone) + ' · inscrit le ' + esc(inscrit) + '</small></span>' +
+          '<span class="rdrc-mob-mode">' + (avecJour ? '<span class="rdrc-mob-jourv">' + esc(mobJourLibelle(x.jour)) + '</span>' : '') + esc(x.mode) + (x.precision ? ' (' + esc(x.precision) + ')' : '') +
+            (x.justificatifUrl ? '<a href="' + esc(x.justificatifUrl) + '" target="_blank" rel="noopener">Voir le justificatif' + (x.justificatifNom ? ' · ' + esc(x.justificatifNom) : '') + '</a>' : '<a>aucun fichier</a>') + '</span>' +
+          '<span class="rdrc-mob-st" data-s="' + esc(statut) + '">' + esc(statut) + '</span>' +
+          '<span class="rdrc-mob-acts">' +
+            (x.statutJustificatif !== 'Validé' ? '<button type="button" class="rdrc-btn rdrc-ok" data-mob-statut="' + esc(x.id) + '" data-champ="statutJustificatif" data-valeur="Validé">Valider</button>' : '') +
+            (x.statutJustificatif !== 'Refusé' ? '<button type="button" class="rdrc-btn rdrc-no" data-mob-statut="' + esc(x.id) + '" data-champ="statutJustificatif" data-valeur="Refusé">Refuser</button>' : '') +
+            (x.statutParticipation !== 'Exclue' ? '<button type="button" class="rdrc-btn" data-mob-statut="' + esc(x.id) + '" data-champ="statutParticipation" data-valeur="Exclue" title="Écarter des tirages">Exclure</button>'
+                                                : '<button type="button" class="rdrc-btn" data-mob-statut="' + esc(x.id) + '" data-champ="statutParticipation" data-valeur="Éligible">Réintégrer</button>') +
+          '</span>' +
+        '</div>';
+    }
+
+    
+
+
+
+
+
+
+
+    _mobTousHtml(m) {
+      var liste = m.participations || [];
+      var n = { total: liste.length, aVerifier: 0, valides: 0, refuses: 0, exclues: 0 };
+      liste.forEach(function (x) {
+        if (x.statutParticipation === 'Exclue') n.exclues++;
+        if (x.statutJustificatif === 'Validé') n.valides++;
+        else if (x.statutJustificatif === 'Refusé') n.refuses++;
+        else if (x.statutParticipation !== 'Exclue') n.aVerifier++;
+      });
+      var restent = this._chaineFile(liste).length;
+      var f = this._mobFiltreTous();
+      var modes = {};
+      liste.forEach(function (x) { if (x.mode) modes[x.mode] = (modes[x.mode] || 0) + 1; });
+      var opt = function (val, txt, actuel) { return '<option value="' + esc(val) + '"' + (val === actuel ? ' selected' : '') + '>' + esc(txt) + '</option>'; };
+      var kpis = '<div class="rdrc-kpis">' +
+        kpi('Participations', nfmt(n.total), '', 'sur les 13 jours', 'lead') +
+        kpi('À vérifier', nfmt(n.aVerifier), '', n.aVerifier ? 'seuls les validés entrent au tirage' : 'tout est vérifié', n.aVerifier ? 'alert' : '') +
+        kpi('Validées', nfmt(n.valides), '', 'dans le tirage de leur jour') +
+        kpi('Refusées', nfmt(n.refuses), '', n.exclues ? n.exclues + ' exclue' + (n.exclues > 1 ? 's' : '') + ' des tirages' : 'aucune exclue') +
+      '</div>';
+      var outils = '<div class="rdrc-mob-outils" role="search">' +
+        '<select data-mob-filtre="statut" aria-label="Statut du justificatif">' +
+          opt('À vérifier', 'À vérifier', f.statut) + opt('Validé', 'Validés', f.statut) + opt('Refusé', 'Refusés', f.statut) +
+          opt('Exclue', 'Exclus', f.statut) + opt('', 'Tous les statuts', f.statut) + '</select>' +
+        '<select data-mob-filtre="jour" aria-label="Jour de venue">' + opt('', 'Tous les jours', f.jour) +
+          (m.jours || []).map(function (j) { return opt(j.jour, mobJourLibelle(j.jour), f.jour); }).join('') + '</select>' +
+        '<select data-mob-filtre="mode" aria-label="Mode de transport">' + opt('', 'Tous les modes', f.mode) +
+          Object.keys(modes).sort().map(function (k) { return opt(k, k, f.mode); }).join('') + '</select>' +
+        '<input type="search" data-mob-filtre="q" value="' + esc(f.q) + '" placeholder="Nom, e-mail, téléphone ou MOB-…" aria-label="Rechercher une participation" autocomplete="off" spellcheck="false">' +
+      '</div>';
+      return kpis + (restent ? this._mobChaineBandeau(restent, 'sur les 13 jours') : '') +
+        '<div class="rdrc-grid">' +
+          card('Toutes les participations', 'les 13 jours du village',
+            outils + '<div data-mob-liste>' + this._mobListeTousHtml(m) + '</div>' +
+            '<p class="rdrc-note">Le jour le plus proche du tirage d’abord, puis l’ordre d’arrivée. Le justificatif s’ouvre dans un nouvel onglet ; pour les vérifier l’un après l’autre sans quitter la console, « Vérifier à la chaîne ». Une adresse de l’équipe est listée mais jamais tirée.</p>', true) +
+        '</div>';
+    }
+
+    _mobFiltreTous() {
+      if (!this._mobFiltre) this._mobFiltre = { statut: 'À vérifier', jour: '', mode: '', q: '' };
+      return this._mobFiltre;
+    }
+
+    
+
+    _mobOrdre(a, b) {
+      return String(a.jour || '').localeCompare(String(b.jour || '')) || String(a.inscritLe || '').localeCompare(String(b.inscritLe || '')) || String(a.id).localeCompare(String(b.id));
+    }
+
+    _mobFiltrer(liste, f) {
+      var sansAccent = function (v) { return String(v || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+      var chiffres = function (v) { var d = String(v || '').replace(/\D/g, ''); return d.indexOf('33') === 0 && d.length > 9 ? '0' + d.slice(2) : d; };
+      var q = sansAccent(f.q).trim().replace(/\s+/g, ' ');
+      var qChiffres = /\d/.test(q) && !/[a-z]/.test(q) ? chiffres(q) : '';
+      return (liste || []).filter(function (x) {
+        if (f.statut === 'Exclue') { if (x.statutParticipation !== 'Exclue') return false; }
+        else if (f.statut && (x.statutParticipation === 'Exclue' || x.statutJustificatif !== f.statut)) return false;
+        if (f.jour && x.jour !== f.jour) return false;
+        if (f.mode && x.mode !== f.mode) return false;
+        if (q) {
+          if (qChiffres) return chiffres(x.telephone).indexOf(qChiffres) >= 0 || sansAccent(x.id).indexOf(q) >= 0;
+          var foin = sansAccent([x.prenom, x.nom, x.prenom, x.email, x.id].join(' '));
+          return foin.indexOf(q) >= 0;
+        }
+        return true;
+      }).sort(this._mobOrdre);
+    }
+
+    _mobListeTousHtml(m) {
+      var self = this;
+      var tri = this._mobFiltrer(m.participations || [], this._mobFiltreTous());
+      var max = this._mobMax || 100;
+      var html = tri.slice(0, max).map(function (x) { return self._mobLigne(x, true); }).join('');
+      var reste = tri.length - max;
+      return '<p class="rdrc-mob-compte" aria-live="polite">' + tri.length + ' participation' + (tri.length > 1 ? 's' : '') +
+          (reste > 0 ? ', les ' + max + ' premières affichées' : '') + '</p>' +
+        (html || '<div class="rdrc-state">Aucune participation ne correspond.</div>') +
+        (reste > 0 ? '<div class="rdrc-mob-plus"><button type="button" class="rdrc-btn" data-mob-plus>Afficher ' + Math.min(100, reste) + ' de plus (' + reste + ' restantes)</button></div>' : '');
+    }
+
+    _mobChaineBandeau(n, ou) {
+      return '<div class="rdrc-mob-chaine"><p><b>' + n + ' justificatif' + (n > 1 ? 's' : '') + ' à vérifier</b> ' + esc(ou) +
+        '. Un à la fois, en grand, le jour le plus proche du tirage d’abord.</p>' +
+        '<button type="button" class="rdrc-btn" data-mob-chaine>Vérifier à la chaîne</button></div>';
+    }
+
+    
+
+    _chaineFile(liste) {
+      return (liste || []).filter(function (x) { return x.statutJustificatif === 'À vérifier' && x.statutParticipation !== 'Exclue'; }).sort(this._mobOrdre);
+    }
+
+    _mobBrancherStatuts(racine) {
+      var self = this;
+      racine.querySelectorAll('[data-mob-statut]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.disabled = true;
+          self._emit('rc-mob-statut', { id: btn.getAttribute('data-mob-statut'), champ: btn.getAttribute('data-champ'), valeur: btn.getAttribute('data-valeur') });
+        });
+      });
+    }
+
+    _mobBrancherTous() {
+      var self = this;
+      this.querySelectorAll('[data-mob-chaine]').forEach(function (b) { b.addEventListener('click', function () { self._chaineOuvrir(b); }); });
+      var liste = this.querySelector('[data-mob-liste]');
+      var m = this._payload && this._payload.mobilite;
+      if (!liste || !m) return;
+      var brancherPlus = function () {
+        var b = liste.querySelector('[data-mob-plus]');
+        if (b) b.addEventListener('click', function () { self._mobMax = (self._mobMax || 100) + 100; redessiner(); });
+      };
+      var redessiner = function () { liste.innerHTML = self._mobListeTousHtml(m); self._mobBrancherStatuts(liste); brancherPlus(); };
+      brancherPlus();
+      this.querySelectorAll('[data-mob-filtre]').forEach(function (c) {
+        var cle = c.getAttribute('data-mob-filtre');
+        c.addEventListener(c.tagName === 'INPUT' ? 'input' : 'change', function () { self._mobFiltreTous()[cle] = c.value; self._mobMax = 100; redessiner(); });
+        if (cle === 'q') {
+          c.addEventListener('focus', function () { self._mobQActif = true; });
+          c.addEventListener('blur', function () { self._mobQActif = false; });
+          
+
+          if (self._mobQActif) { c.focus({ preventScroll: true }); try { c.setSelectionRange(c.value.length, c.value.length); } catch (e) {} }
+        }
+      });
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    _chaineOuvrir(depuis) {
+      var m = this._payload && this._payload.mobilite;
+      if (!m || this._ch) return;
+      var file = this._chaineFile(m.participations).map(function (x) { return Object.assign({}, x); });
+      if (!file.length) return;
+      var self = this;
+      this._ch = { file: file, i: 0, hist: [], arme: '', avis: '', echecs: [], jours: m.jours || [], vu: m.jour, cadres: {}, depuis: 0, retour: depuis || null };
+      var o = document.createElement('div');
+      o.className = 'rdrc-ch';
+      o.setAttribute('role', 'dialog');
+      o.setAttribute('aria-modal', 'true');
+      o.setAttribute('aria-label', 'Vérifier les justificatifs à la chaîne');
+      o.innerHTML = '<div class="rdrc-ch-h"><span class="rdrc-ch-t">Vérifier à la chaîne</span><span class="rdrc-ch-n" data-ch-n aria-live="polite"></span>' +
+        '<span class="rdrc-ch-barre" aria-hidden="true"><i data-ch-barre></i></span>' +
+        '<button type="button" class="rdrc-ch-x" data-ch-quitter>Quitter <span aria-hidden="true">(Échap)</span></button></div>' +
+        '<div class="rdrc-ch-c" data-ch-c></div>';
+      o.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('[data-ch-dec],[data-ch-annuler],[data-ch-quitter],[data-ch-fin],[data-ch-zoom],[data-ch-pivot]');
+        if (!b || b.disabled) {
+          var img = e.target.closest && e.target.closest('.rdrc-ch-f img');
+          if (img) img.parentNode.classList.toggle('is-zoom');
+          return;
+        }
+        if (b.hasAttribute('data-ch-dec')) self._chaineDecider(b.getAttribute('data-ch-dec'), e.detail === 0);
+        else if (b.hasAttribute('data-ch-annuler')) self._chaineAnnuler();
+        else if (b.hasAttribute('data-ch-quitter')) self._chaineFermer();
+        else if (b.hasAttribute('data-ch-zoom')) b.closest('.rdrc-ch-f').classList.toggle('is-zoom');
+        else if (b.hasAttribute('data-ch-pivot')) {
+          var im = b.closest('.rdrc-ch-f').querySelector('img');
+          if (im) { var r = ((+im.getAttribute('data-r') || 0) + 90) % 360; im.setAttribute('data-r', r); im.style.transform = r ? 'rotate(' + r + 'deg)' : ''; }
+        } else if (b.getAttribute('data-ch-fin') === 'revoir') self._chaineRevoir();
+        else self._chaineFermer();
+      });
+      this._chTouche = function (e) {
+        var ch = self._ch;
+        if (!ch) return;
+        if (!self.isConnected) { self._chaineFermer(); return; }
+        if (e.repeat) { if (/^[vreVRE]$|^Arrow|^Enter$/.test(e.key)) e.preventDefault(); return; }
+        var t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); self._chaineAnnuler(); return; }
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        var k = e.key;
+        if (k === 'Escape') { e.preventDefault(); if (ch.arme) { ch.arme = ''; self._chaineDessiner(); } else self._chaineFermer(); return; }
+        if (k === 'ArrowLeft' || k === 'Backspace') { e.preventDefault(); self._chaineAnnuler(); return; }
+        if (ch.i >= ch.file.length) return;
+        var v = k === 'v' || k === 'V' ? 'Validé' : k === 'r' || k === 'R' ? 'Refusé' : k === 'e' || k === 'E' ? 'Exclue'
+              : k === 'ArrowRight' ? 'passer' : k === 'Enter' && ch.arme ? ch.arme : '';
+        if (!v) return;
+        e.preventDefault();
+        self._chaineDecider(v, true);
+      };
+      document.addEventListener('keydown', this._chTouche, true);
+      this._chDebordement = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.appendChild(o);
+      this._chEl = o;
+      this._chaineDessiner();
+    }
+
+    _chaineDecider(v, clavier) {
+      var ch = this._ch;
+      if (!ch || ch.i >= ch.file.length) return;
+      
+
+      if (!clavier && Date.now() - ch.depuis < 350) return;
+      var x = ch.file[ch.i];
+      if ((v === 'Refusé' || v === 'Exclue') && ch.arme !== v) { ch.arme = v; ch.avis = ''; this._chaineDessiner(); return; }
+      ch.arme = '';
+      ch.avis = '';
+      if (v === 'passer') ch.hist.push({ i: ch.i, id: x.id, passe: true });
+      else {
+        var champ = v === 'Exclue' ? 'statutParticipation' : 'statutJustificatif';
+        ch.hist.push({ i: ch.i, id: x.id, champ: champ, ancien: x[champ], valeur: v });
+        x[champ] = v;
+        this._emit('rc-mob-chaine', { id: x.id, champ: champ, valeur: v });
+      }
+      ch.i++;
+      ch.depuis = Date.now();
+      this._chaineDessiner();
+    }
+
+    _chaineAnnuler() {
+      var ch = this._ch;
+      if (!ch) return;
+      var h = ch.hist.pop();
+      if (!h) return;
+      ch.arme = '';
+      ch.i = h.i;
+      var x = ch.file[h.i];
+      if (h.passe) ch.avis = '';
+      else {
+        x[h.champ] = h.ancien;
+        this._emit('rc-mob-chaine', { id: h.id, champ: h.champ, valeur: h.ancien });
+        ch.avis = 'Décision annulée : « ' + (h.valeur === 'Exclue' ? 'Exclure' : h.valeur) + ' » est retirée, la participation est de nouveau ' + (h.champ === 'statutParticipation' ? 'éligible' : 'à vérifier') + '.';
+      }
+      ch.depuis = Date.now();
+      this._chaineDessiner();
+    }
+
+    
+
+    _chaineEchec(e) {
+      var ch = this._ch;
+      if (!ch || !e) return;
+      if (ch.echecs.indexOf(e.id) < 0) ch.echecs.push(e.id);
+      for (var k = ch.hist.length - 1; k >= 0; k--) { if (ch.hist[k].id === e.id && !ch.hist[k].passe) { ch.hist[k].echec = true; break; } }
+      var x = ch.file.filter(function (y) { return y.id === e.id; })[0];
+      if (x) { x.statutJustificatif = 'À vérifier'; x.statutParticipation = 'Éligible'; }
+      ch.avis = 'La décision « ' + e.valeur + ' » sur ' + e.id + ' n’a pas été enregistrée : la participation reste à vérifier. Elle vous sera reproposée à la fin de la file.';
+      this._chaineDessiner();
+    }
+
+    
+
+    _chaineRevoir() {
+      var ch = this._ch;
+      if (!ch) return;
+      var vues = {};
+      var file = [];
+      ch.hist.forEach(function (h) { if (h.passe || ch.echecs.indexOf(h.id) >= 0) vues[h.id] = true; });
+      ch.file.forEach(function (x) { if (vues[x.id] && x.statutJustificatif === 'À vérifier' && x.statutParticipation !== 'Exclue') file.push(x); });
+      if (!file.length) return;
+      Object.keys(ch.cadres).forEach(function (k) { ch.cadres[k].remove(); });
+      Object.assign(ch, { file: file, i: 0, hist: [], arme: '', avis: '', echecs: [], cadres: {}, depuis: Date.now() });
+      this._chaineDessiner();
+    }
+
+    _chaineFermer() {
+      var ch = this._ch;
+      if (!ch) return;
+      this._ch = null;
+      document.removeEventListener('keydown', this._chTouche, true);
+      document.documentElement.style.overflow = this._chDebordement || '';
+      if (this._chEl) this._chEl.remove();
+      this._chEl = null;
+       
+      if (this.isConnected && ch.vu) this._emit('rc-mob-jour', { jour: ch.vu });
+      var b = this.querySelector('[data-mob-chaine]');
+      if (b) b.focus({ preventScroll: true });
+       
+      this._focusApres = '[data-mob-chaine]';
+    }
+
+    _chaineCadreHtml(x) {
+      var url = x.justificatifUrl || '';
+      if (!url) return '<p class="rdrc-ch-f-vide">Aucun fichier joint à cette participation.</p>';
+      var lien = '<a href="' + esc(url) + '" target="_blank" rel="noopener">Ouvrir dans un onglet</a>';
+      if (x.justificatifImage) {
+        return '<img src="' + esc(url) + '" alt="Justificatif de ' + esc(x.prenom + ' ' + x.nom) + '" decoding="async">' +
+          '<div class="rdrc-ch-out"><button type="button" data-ch-zoom>Agrandir</button><button type="button" data-ch-pivot>Pivoter</button>' + lien + '</div>';
+      }
+      
+
+      return '<iframe src="' + esc(url) + '#navpanes=0&amp;view=FitH" title="Justificatif de ' + esc(x.prenom + ' ' + x.nom) + '"></iframe>' +
+        '<div class="rdrc-ch-out">' + lien.replace('Ouvrir dans un onglet', 'PDF vide ? L’ouvrir dans un onglet') + '</div>';
+    }
+
+    _chaineDessiner() {
+      var ch = this._ch, o = this._chEl;
+      if (!ch || !o) return;
+      var self = this;
+      var total = ch.file.length;
+      var compte = { 'Validé': 0, 'Refusé': 0, 'Exclue': 0, passe: 0, echec: 0 };
+      ch.hist.forEach(function (h) { compte[h.passe ? 'passe' : h.echec ? 'echec' : h.valeur]++; });
+      var resume = [compte['Validé'] ? compte['Validé'] + ' validé' + (compte['Validé'] > 1 ? 's' : '') : '',
+        compte['Refusé'] ? compte['Refusé'] + ' refusé' + (compte['Refusé'] > 1 ? 's' : '') : '',
+        compte.Exclue ? compte.Exclue + ' exclu' + (compte.Exclue > 1 ? 's' : '') : '',
+        compte.passe ? compte.passe + ' passé' + (compte.passe > 1 ? 's' : '') : '',
+        compte.echec ? compte.echec + ' non enregistré' + (compte.echec > 1 ? 's' : '') : ''].filter(Boolean).join(' · ');
+      var fin = ch.i >= total;
+      o.querySelector('[data-ch-n]').innerHTML = (fin ? 'Terminé' : (ch.i + 1) + ' sur ' + total) + (resume ? '<small>' + resume + '</small>' : '');
+      o.querySelector('[data-ch-barre]').style.width = Math.round(100 * Math.min(ch.i, total) / total) + '%';
+      var c = o.querySelector('[data-ch-c]');
+
+      if (fin) {
+        Object.keys(ch.cadres).forEach(function (k) { ch.cadres[k].remove(); });
+        ch.cadres = {};
+        var aRevoir = {};
+        ch.hist.forEach(function (h) { if (h.passe || ch.echecs.indexOf(h.id) >= 0) aRevoir[h.id] = true; });
+        var nRevoir = ch.file.filter(function (x) { return aRevoir[x.id] && x.statutJustificatif === 'À vérifier' && x.statutParticipation !== 'Exclue'; }).length;
+        c.innerHTML = '<div class="rdrc-ch-fin"><div class="rdrc-ch-fin-c">' +
+          (ch.avis ? '<p class="rdrc-ch-avis" role="alert">' + esc(ch.avis) + '</p>' : '') +
+          '<h2>File terminée</h2><p>' + (resume ? esc(resume) + '.' : 'Aucune décision.') + (nRevoir ? ' ' + nRevoir + ' participation' + (nRevoir > 1 ? 's restent' : ' reste') + ' à vérifier.' : '') + '</p>' +
+          '<div class="rdrc-ch-fin-a">' + (nRevoir ? '<button type="button" class="rdrc-ch-b" data-v="revoir" data-ch-fin="revoir">Revoir ' + (nRevoir > 1 ? 'les ' + nRevoir + ' restantes' : 'la restante') + '</button>' : '') +
+          '<button type="button" class="rdrc-ch-b" data-v="fermer" data-ch-fin="fermer">Revenir à la console</button></div>' +
+          '<div class="rdrc-ch-pied" style="justify-content:center;margin-top:14px"><button type="button" class="rdrc-ch-annul" data-ch-annuler' + (ch.hist.length ? '' : ' disabled') + '>Annuler la dernière décision</button></div>' +
+          '</div></div>';
+        var bf = c.querySelector('[data-ch-fin]');
+        if (bf) bf.focus({ preventScroll: true });
+        return;
+      }
+
+      var vue = c.querySelector('[data-ch-vue]');
+      if (!vue) {
+        c.innerHTML = '<div class="rdrc-ch-vue" data-ch-vue></div><aside class="rdrc-ch-p" data-ch-p aria-label="La participation"></aside>';
+        vue = c.querySelector('[data-ch-vue]');
+      }
+      var x = ch.file[ch.i];
+      var garder = {};
+      [ch.i - 1, ch.i, ch.i + 1].forEach(function (k) { if (ch.file[k]) garder[ch.file[k].id] = true; });
+      Object.keys(ch.cadres).forEach(function (k) { if (!garder[k]) { ch.cadres[k].remove(); delete ch.cadres[k]; } });
+      var cadre = function (y) {
+        var el = ch.cadres[y.id];
+        if (!el) {
+          el = document.createElement('div');
+          el.className = 'rdrc-ch-f';
+          el.setAttribute('data-etat', 'cache');
+          el.innerHTML = self._chaineCadreHtml(y);
+          vue.appendChild(el);
+          ch.cadres[y.id] = el;
+        }
+        return el;
+      };
+      Object.keys(ch.cadres).forEach(function (k) { ch.cadres[k].setAttribute('data-etat', 'cache'); });
+      cadre(x).setAttribute('data-etat', 'vu');
+      
+
+      if (ch.file[ch.i + 1]) cadre(ch.file[ch.i + 1]);
+      var apres = ch.file[ch.i + 2];
+      if (apres && apres.justificatifImage && apres.justificatifUrl) { var pre = new Image(); pre.decoding = 'async'; pre.src = apres.justificatifUrl; }
+
+      var j = ch.jours.filter(function (d) { return d.jour === x.jour; })[0] || {};
+      var heure = j.heure ? String(j.heure).replace(/^(\d\d):00$/, '$1 h').replace(':', ' h ') : '';
+      var envoi = x.inscritLe ? new Date(x.inscritLe).toLocaleString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+      var statut = x.statutParticipation === 'Exclue' ? 'Exclue' : x.statutJustificatif;
+      
+
+      var EXIGE = {
+        'Train': 'Un billet de train nominatif (TGV, TER…).',
+        'Bus': 'Autocar ou car : un billet nominatif, ou une photo dans ou devant le véhicule. Bus urbain : un ticket de bus, et idéalement une photo dans le bus.',
+        'Covoiturage': 'Au moins 4 personnes dans le véhicule : des photos dans la voiture, ou idéalement sur le parking officiel avec les 4 personnes.',
+        'Vélo': 'Une photographie.',
+        'À pied': 'Une photographie.'
+      };
+      var a = ch.arme;
+      c.querySelector('[data-ch-p]').innerHTML =
+        (ch.avis ? '<p class="rdrc-ch-avis" role="alert">' + esc(ch.avis) + '</p>' : '') +
+        '<div class="rdrc-ch-id"><span>' + esc(x.id) + '</span><span class="rdrc-mob-st" data-s="' + esc(statut) + '">' + esc(statut) + '</span>' +
+          (x.equipe ? '<span class="rdrc-mob-equipe" title="Adresse de l’équipe (règlement, article 3.4) : jamais tirée">équipe</span>' : '') + '</div>' +
+        '<h2 class="rdrc-ch-nom">' + esc(x.prenom + ' ' + x.nom) + '</h2>' +
+        '<dl class="rdrc-ch-dl">' +
+          '<dt>Vient le</dt><dd>' + esc(mobJourLibelle(x.jour)) + (heure ? '<small>tirage ce jour-là à ' + esc(heure) + '</small>' : '') + '</dd>' +
+          '<dt>Mode</dt><dd>' + esc(x.mode || '—') + (x.precision ? '<small>' + esc(x.precision) + '</small>' : '') + '</dd>' +
+          '<dt>Envoyé le</dt><dd>' + esc(envoi || '—') + '</dd>' +
+          '<dt>Fichier</dt><dd>' + esc(x.justificatifNom || '—') + '</dd>' +
+          '<dt>Contact</dt><dd>' + esc(x.email || '') + '<small>' + esc(x.telephone || '') + '</small></dd>' +
+        '</dl>' +
+        '<div class="rdrc-ch-regle"><b>Le règlement demande (article 3.6)</b>' +
+          esc(EXIGE[x.mode] || 'Un mode que le règlement ne prévoit pas : la participation n’entre jamais au tirage.') + '</div>' +
+        '<div class="rdrc-ch-acts">' +
+          '<button type="button" class="rdrc-ch-b" data-v="Validé" data-ch-dec="Validé">Valider<kbd>V</kbd></button>' +
+          '<button type="button" class="rdrc-ch-b" data-v="Refusé" data-ch-dec="Refusé"' + (a === 'Refusé' ? ' data-arme="1"' : '') + '>' + (a === 'Refusé' ? 'Confirmer le refus' : 'Refuser') + '<kbd>' + (a === 'Refusé' ? 'R ou Entrée' : 'R') + '</kbd></button>' +
+          '<button type="button" class="rdrc-ch-b" data-v="Exclue" data-ch-dec="Exclue"' + (a === 'Exclue' ? ' data-arme="1"' : '') + '>' + (a === 'Exclue' ? 'Confirmer l’exclusion' : 'Exclure') + '<kbd>' + (a === 'Exclue' ? 'E ou Entrée' : 'E') + '</kbd></button>' +
+          (a ? '<p class="rdrc-ch-q">' + (a === 'Refusé' ? 'Refuser ce justificatif : la participation sort du tirage de son jour.' : 'Exclure cette participation de tous les tirages (fraude, doublon).') + ' Échap pour revenir.</p>' : '') +
+          '<button type="button" class="rdrc-ch-b" data-v="passer" data-ch-dec="passer">Passer<kbd>→</kbd></button>' +
+          '<div class="rdrc-ch-pied"><button type="button" class="rdrc-ch-annul" data-ch-annuler' + (ch.hist.length ? '' : ' disabled') + '>Annuler la dernière décision</button>' +
+            '<span class="rdrc-ch-touches">V valider · R refuser · E exclure · → passer · ← annuler · Échap quitter</span></div>' +
+        '</div>';
+      var focus = c.querySelector(a ? '[data-ch-dec="' + a + '"]' : '[data-ch-dec="Validé"]');
+      if (focus) focus.focus({ preventScroll: true });
     }
 
     
@@ -3426,12 +3933,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="81cec12";performan
           self._emit('rc-mob-tirage', { jour: btn.getAttribute('data-mob-reparer'), reparer: true });
         });
       });
-      this.querySelectorAll('[data-mob-statut]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          btn.disabled = true;
-          self._emit('rc-mob-statut', { id: btn.getAttribute('data-mob-statut'), champ: btn.getAttribute('data-champ'), valeur: btn.getAttribute('data-valeur') });
-        });
-      });
+      this._mobBrancherStatuts(this);
+      this._mobBrancherTous();
 
        
       this.querySelectorAll('[data-photo-vue]').forEach(function (btn) {
