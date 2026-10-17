@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 04727c81 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 0b742d3c | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="0b742d3c";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -503,7 +503,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";perfo
 
 
 
-
       id: 'jeu-de-la-roue',
       actif: true,
       icone: 'shipWheel',
@@ -522,7 +521,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";perfo
           blocs: [
             'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00 €, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Le jeu de la roue » (ci-après le « {b}Jeu{/b} »), accessible sur la plateforme « Mon espace Rhum » via l’url suivante : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}',
             'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
-            'Le Règlement est disponible : {a:/}https://www.routedurhum.com/{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
+            'Le Règlement est disponible : {a:/reglements#jeu-de-la-roue}https://www.routedurhum.com/reglements#jeu-de-la-roue{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
           ]
         },
         {
@@ -539,7 +538,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";perfo
             '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant en France métropolitaine ou Guadeloupe (ci-après dénommé le « {b}Participant{/b} »), disposant d’un accès internet et d’un compte « Mon Espace Rhum ».',
             '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
             '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
-            '{b}3.5.{/b} La participation est limitée à une seule participation par foyer (même nom, même adresse).'
+            '{b}3.5.{/b} Une seule participation par compte « Mon Espace Rhum ».'
           ]
         },
         {
@@ -554,7 +553,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";perfo
           blocs: [
             'Pour participer, le Participant doit, pour valider sa participation au Jeu :',
             { ul: [
-              'Se connecter sur le site de la Route du Rhum Destination Guadeloupe sur « Mon Espace Rhum » et cliquer sur le « jeu de la rue »'
+              'Se connecter sur le site de la Route du Rhum Destination Guadeloupe sur « Mon Espace Rhum » et cliquer sur le « jeu de la roue »'
             ] },
             'Toute participation incomplète, erronée ou réalisée après la date limite sera considérée comme nulle.'
           ]
@@ -580,10 +579,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="04727c81";perfo
             ] },
             'Les frais de livraison de la dotation sont pris en charge par l’Organisateur.',
             'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
-            '{b}7.3.{/b} Une fois que le gagnant est informé de son lot il devra choisir la manière dont il le recevra.',
+            '{b}7.2.{/b} Une fois que le gagnant est informé de son lot il devra choisir la manière dont il le recevra.',
             '{b}Remise en main propre{/b} : le lot pourra être retiré sur le village départ de la Route du Rhum - Destination Guadeloupe, à Saint-Malo, jusqu’au 1er novembre 2026 inclus sur présentation d’un code ou d’un QR code destiné au retrait du lot. Pour cela rendez vous à l’office de tourisme tous les jours de 10h à 10h15 et de 18h à 18h15.',
             '{b}Envoi par voie postale{/b} : le gagnant devra communiquer à l’Organisateur l’ensemble des informations nécessaires à l’expédition de son lot, à savoir : ses nom, prénom, adresse postale complète, code postal, ville et numéro de téléphone.',
-            'En outre, en cas d’impossibilité pour l’Organisateur de : délivrer aux Gagnants la Dotations remportée, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent,'
+            'En outre, en cas d’impossibilité pour l’Organisateur de : délivrer aux Gagnants la Dotations remportée, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent.'
           ]
         },
         {
