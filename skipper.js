@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 643a3e8d | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="643a3e8d";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum dfdebdc | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="dfdebdc";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5002,7 +5002,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         this._verifierApresInit = false;
         if (!this._p) this.dispatchEvent(new CustomEvent('sk-sans-charge', { bubbles: true }));
       }
-      this._armerPanne(10000);
+      this._armerPanne(this._delaiPanne());
     }
 
     
@@ -5011,19 +5011,32 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
 
+
+
+
+
+
+
+
+    _delaiPanne() {
+      let depuis = 0;
+      try { depuis = performance.now(); } catch (e) { depuis = 0; }
+      return depuis < 15000 ? Math.max(500, 9000 - depuis) : 9000;
+    }
     _armerPanne(ms) {
       clearTimeout(this._panneMinuteur);
       this._panneMinuteur = setTimeout(() => {
         this._panneMinuteur = null;
-        if (this._p || !this.isConnected || typeof rdrPanne !== 'function') return;
-        rdrPanne(this, this._lang === 'en', () => {
-          if (this._p) return;
-          this.innerHTML = '';
-          this._rendre();
-          this.dispatchEvent(new CustomEvent('sk-sans-charge', { bubbles: true }));
-          this._armerPanne(9000);
-        });
+        this._poserPanne();
       }, ms);
+    }
+    _poserPanne() {
+      if (this._p || !this.isConnected || typeof rdrPanne !== 'function') return;
+      rdrPanne(this, this._lang === 'en', () => {
+        if (this._p) return;
+        this.dispatchEvent(new CustomEvent('sk-sans-charge', { bubbles: true }));
+        this._poserPanne();
+      });
     }
 
     attributeChangedCallback(nom, avant, apres) {

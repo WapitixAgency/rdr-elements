@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 643a3e8d | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="643a3e8d";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum dfdebdc | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="dfdebdc";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1041,7 +1041,7 @@ class RdrNews extends HTMLElement {
       }
 
       this._render();
-      this._armerPanne(10000);
+      this._armerPanne(this._delaiPanne());
     }
 
     
@@ -1051,19 +1051,30 @@ class RdrNews extends HTMLElement {
 
 
 
+
+
+
+
+
+    _delaiPanne() {
+      let depuis = 0;
+      try { depuis = performance.now(); } catch (e) { depuis = 0; }
+      return depuis < 15000 ? Math.max(500, 9000 - depuis) : 9000;
+    }
     _armerPanne(ms) {
       clearTimeout(this._panneTimer);
       this._panneTimer = setTimeout(() => {
         this._panneTimer = null;
-        if (this._state.payload || !this._content || !this.isConnected || typeof rdrPanne !== 'function') return;
-        rdrPanne(this._content, this._state.lang === 'en', () => {
-          if (this._state.payload) return;
-          this._content.innerHTML = '';
-          this._render();
-          this.dispatchEvent(new CustomEvent('rn-relire', { bubbles: true, composed: true }));
-          this._armerPanne(9000);
-        });
+        this._poserPanne();
       }, ms);
+    }
+    _poserPanne() {
+      if (this._state.payload || !this._content || !this.isConnected || typeof rdrPanne !== 'function') return;
+      rdrPanne(this._content, this._state.lang === 'en', () => {
+        if (this._state.payload) return;
+        this.dispatchEvent(new CustomEvent('rn-relire', { bubbles: true, composed: true }));
+        this._poserPanne();
+      });
     }
 
     disconnectedCallback() {
