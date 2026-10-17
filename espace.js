@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 3bbcb14 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3bbcb14";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 300ab23 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="300ab23";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1125,7 +1125,7 @@ if (!customElements.get('espace-rhum')) {
      
     'Actus': 'News', 'Skippers': 'Skippers', 'Badges': 'Badges', 'Suivis': 'Followed',
     'Profils vus': 'Profiles viewed', 'Articles lus': 'Articles read',
-    'Jours de suite': 'Day streak', 'Top des fans': 'Top fans', 'Classement à venir': 'Leaderboard coming soon',
+    'Jours de visite': 'Days visited', 'Top des fans': 'Top fans', 'Classement à venir': 'Leaderboard coming soon',
     'Pas encore classé': 'Not ranked yet',
     'Nouveau badge': 'New badge', 'Ceux que tu suis de près': 'The ones you follow closely',
     'On pense qu\'ils vont te plaire': 'We think you\'ll like them',
@@ -1320,7 +1320,8 @@ if (!customElements.get('espace-rhum')) {
     'Un seul par compte, et les plus hauts paliers le remarquent.': 'One per account, and the highest tiers notice it.',
     'Jouer aux animations': 'Play the activities',
     'La roue, les pronostics et les votes ne durent qu\'un temps, et il y a souvent des cadeaux à la clé.': 'The wheel, predictions and votes only last for a while, and there are often gifts to be won.',
-    'Débloquer des badges': 'Unlock badges',
+    'Débloquer des badges': 'Unlock badges', 'Débloquer': 'Unlock',
+    'Configure ton espace : on met en avant les skippers et les classes qui t’intéressent, le reste passe en second.': 'Set up your space: we put the skippers and classes you care about first, the rest comes second.',
     'Ils racontent ton parcours, et ton palier les compte.': 'They tell your story, and your tier counts them.',
     'Suivre la course en direct': 'Follow the race live',
     'Chaque jour passé à suivre les bateaux rapproche du sommet.': 'Every day spent following the boats brings you closer to the top.',
@@ -12925,7 +12926,7 @@ if (!customElements.get('espace-rhum')) {
             </div>
             <div class="er-mobile-rank-item">
               <div class="er-mobile-rank-item-value">${joursDisplay}</div>
-              <div class="er-mobile-rank-item-label">Jours de suite</div>
+              <div class="er-mobile-rank-item-label">Jours de visite</div>
             </div>
           </div>
 
@@ -16080,7 +16081,7 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-stats-grid" style="--er-stats-n: ${classeAuTop ? 4 : 3}">
             <div class="er-stat-block">
               <div class="er-stat-block-num">${display(daysStreak)}</div>
-              <div class="er-stat-block-label">Jours de suite</div>
+              <div class="er-stat-block-label">Jours de visite</div>
               <div class="er-stat-block-sub">${escapeHtml(factDays)}</div>
             </div>
             <div class="er-stat-block">

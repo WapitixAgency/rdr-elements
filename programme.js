@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 3bbcb14 | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="3bbcb14";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 300ab23 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="300ab23";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -519,8 +519,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="3bbcb14";perform
     'Voir la carte complète': 'See the full map',
     'Revenir à la programmation': 'Back to the programme',
     'Écouter sur Spotify': 'Listen on Spotify',
-    'Le détail de cette animation n’est pas encore publié.': 'The details of this event are not published yet.',
-    'Il le sera au fil des semaines.': 'They will be, over the coming weeks.',
+     
+    'Le détail de cette animation sera précisé sur place.': 'Details of this event will be given on site.',
      
     'Annulé': 'Cancelled',
     'Complet': 'Full',
@@ -549,7 +549,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="3bbcb14";perform
 
 
 
-    'Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.': 'This day has no published programme yet. It fills up over the coming weeks.',
+    'Ce jour n’a pas encore de programmation publiée.': 'This day has no published programme yet.',
      
     'Programmation indisponible': 'Programme unavailable',
     'La programmation n’a pas pu être chargée.': 'The programme could not be loaded.',
@@ -7699,8 +7699,7 @@ rdr-programme{display:block;width:100%;}
           : '') +
         (a.desc ? '<p class="rp-desc">' + esc(a.desc) + '</p>' : '') +
         (vide ? '<p class="rp-desc rp-desc--attente">' +
-          'Le détail de cette animation n’est pas encore publié. ' +
-          'Il le sera au fil des semaines.</p>' : '') +
+          'Le détail de cette animation sera précisé sur place.</p>' : '') +
         (photo && !a.vedette
           
 
@@ -7821,7 +7820,7 @@ rdr-programme{display:block;width:100%;}
       return '<div class="rp-vide">' +
         '<span class="rp-vide-ic" aria-hidden="true">' + svg(IC.horloge) + '</span>' +
         '<h3>Rien à cette date</h3>' +
-        '<p>Ce jour n’a pas encore de programmation publiée. Elle se remplit au fil des semaines.</p>' +
+        '<p>Ce jour n’a pas encore de programmation publiée.</p>' +
         '<div class="rp-vide-actions">' +
           (proche
             ? '<button type="button" class="rp-cta" data-aller-jour="' + esc(proche.date) + '">' +
