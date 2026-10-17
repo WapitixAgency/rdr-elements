@@ -154,6 +154,7 @@
   var q = new URLSearchParams(location.search);
   var cle = q.get('cle') || '';
   if (!cle) { try { cle = new URLSearchParams(location.hash.slice(1)).get('cle') || ''; } catch (e) { cle = ''; } }
+  cle = cle.replace(/[^A-Za-z0-9]/g, '');
   if (q.get('cle')) { try { history.replaceState(null, '', location.pathname + '#cle=' + encodeURIComponent(cle)); } catch (e) { /* adresse laissée telle quelle */ } }
 
   var etat = null, refuse = false, occupe = false;
