@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 0b742d3c | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="0b742d3c";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 3bbcb14 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="3bbcb14";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -3168,6 +3168,23 @@ const NOTIFS_GUET_MS = 15000;
 const NOTIFS_EVENEMENTS = ['notify-seen', 'notify-dismiss', 'notify-refresh', 'notify-aller', 'notify-espace'];
 const DONNEES = ['reglages', 'menus', 'posts', 'skippers'];
 
+const REPLI_MS = 6000;
+ 
+const REPLI_ENTETE = {"fr":{"logo":{"src":"https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg","alt":"Route du Rhum - Destination Guadeloupe, accueil","lien":"/"},"tymal":{"src":"https://static.wixstatic.com/media/df962b_cf41fe2686eb41ec932e3e5d61f0d24b~mv2.png/v1/fit/w_144,h_144,q_90,enc_auto/tymal-drapeau.png","alt":"Où est TyMAL ?","lien":"/carte-tournee"},"decor":"https://static.wixstatic.com/shapes/7bb303_c1b3d51fab384b809f90afc6ace55017.svg","reseaux":[{"nom":"Instagram","lien":"https://www.instagram.com/route_du_rhum/","icone":"https://static.wixstatic.com/media/11062b_603340b7bcb14e7785c7b65b233cd9f9~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/instagram.png"},{"nom":"TikTok","lien":"https://www.tiktok.com/@routedurhum2026.officiel","icone":"https://static.wixstatic.com/media/11062b_7edd292d29b34c309100535a26dc5033~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/tiktok.png"},{"nom":"YouTube","lien":"https://www.youtube.com/channel/UC0h7XNXNzA8D7RlobIRa-3A","icone":"https://static.wixstatic.com/media/11062b_c67939a99eaf442d95d3f851857ceedf~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/youtube.png"},{"nom":"Facebook","lien":"https://www.facebook.com/routedurhum.officiel/","icone":"https://static.wixstatic.com/media/11062b_f4e3e7f537ff4762a1914aa14e3e36b9~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/facebook.png"},{"nom":"LinkedIn","lien":"https://www.linkedin.com/company/route-du-rhum-destination-guadeloupe/posts/?feedView=all","icone":"https://static.wixstatic.com/media/11062b_7dcffe5daf2944b7be0a46ac6d472634~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/linkedin.png"},{"nom":"WhatsApp","lien":"https://whatsapp.com/channel/0029Vb7OFTzFMqrWW5ygvS3Y","icone":"https://static.wixstatic.com/media/11062b_dc9641e157b2422b9f6a74d9b2b07f84~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/whatsapp.png"}],"liensHaut":[{"libelle":"Boutique officielle","lien":"https://www.armorlux.com/collections/evenements-route-du-rhum-893","horsBarre":true},{"libelle":"Plateforme hospitalités","lien":"https://hospitalites.routedurhum.com/","logo":"https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg"}],"espace":{"libelle":"MON ESPACE RHUM","lien":"/mon-espace-rhum","icone":"https://static.wixstatic.com/media/df962b_9899a4ded6d847fa85b36d59cbc4970d~mv2.png/v1/fit/w_52,h_60,q_90,enc_auto/tymal-espace.png"},"langues":[{"code":"fr","libelle":"FR"},{"code":"en","libelle":"EN"}],"partenaires":[{"alt":"Région Guadeloupe","src":"https://static.wixstatic.com/shapes/7bb303_111278f6c3d04aba8928603603e98dd3.svg","lien":"/nos-partenaires/région-guadeloupe"},{"alt":"Ville de Saint-Malo","src":"https://static.wixstatic.com/shapes/7bb303_19873fa1fb0b4c38b46fba7fc42bd65c.svg","lien":"/nos-partenaires/ville-de-saint-malo"},{"alt":"Région Bretagne","src":"https://static.wixstatic.com/shapes/7bb303_1deca51fd5b24e8caf66f08299c80596.svg","lien":"/nos-partenaires/région-bretagne"}],"boutique":[{"libelle":"La boutique officielle","alt":"Armor-lux","image":"https://static.wixstatic.com/shapes/7bb303_21ae0cc60b7a437aa94c34869c6f7249.svg","lien":"https://www.armorlux.com/collections/evenements-route-du-rhum-893"},{"libelle":"Jouer","libelleTiroir":"Jouer au jeu officiel","alt":"Virtual Regatta","image":"https://static.wixstatic.com/shapes/7bb303_64349a3f1ecc401fa8e35ff86d41fec3.svg","lien":"https://click.virtualregatta.com/?li=5811","lienTiroir":"https://vroffshore-rdr.onelink.me/VErI/imrxcign"}],"bandeau":{"texte":"*Village* à partir du 20 octobre à Saint-Malo *|* du 6 novembre en Guadeloupe","autres":["*Départ* le dimanche 1er novembre à 13 h 02"],"tourneMs":12000,"cible":"2026-11-01T12:02:00Z"},"alpina":{"lien":"https://alpinawatches.com/fr-fr","logo":"https://static.wixstatic.com/media/547c0f_cbdfe343eff64cfbb1c0730dfc2cd96e~mv2.webp/v1/fit/w_180,h_44,q_90,enc_auto/alpina.webp","logoSombre":"https://static.wixstatic.com/shapes/df962b_d14e86b1c01c4c4dba7401e7d15a8d1a.svg","alt":"Alpina Watches"},"textes":{"menu":"Menu","fermer":"Fermer le menu","langue":"Langue","plus":"Plus de pages","principal":"Menu principal","services":"Boutique et hospitalités","reseaux":"Réseaux sociaux","compte":"Compte à rebours jusqu'au départ"}},"en":{"logo":{"src":"https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg","alt":"Route du Rhum - Destination Guadeloupe, home","lien":"/"},"tymal":{"src":"https://static.wixstatic.com/media/df962b_cf41fe2686eb41ec932e3e5d61f0d24b~mv2.png/v1/fit/w_144,h_144,q_90,enc_auto/tymal-drapeau.png","alt":"Where is TyMAL?","lien":"/carte-tournee"},"decor":"https://static.wixstatic.com/shapes/7bb303_c1b3d51fab384b809f90afc6ace55017.svg","reseaux":[{"nom":"Instagram","lien":"https://www.instagram.com/route_du_rhum/","icone":"https://static.wixstatic.com/media/11062b_603340b7bcb14e7785c7b65b233cd9f9~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/instagram.png"},{"nom":"TikTok","lien":"https://www.tiktok.com/@routedurhum2026.officiel","icone":"https://static.wixstatic.com/media/11062b_7edd292d29b34c309100535a26dc5033~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/tiktok.png"},{"nom":"YouTube","lien":"https://www.youtube.com/channel/UC0h7XNXNzA8D7RlobIRa-3A","icone":"https://static.wixstatic.com/media/11062b_c67939a99eaf442d95d3f851857ceedf~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/youtube.png"},{"nom":"Facebook","lien":"https://www.facebook.com/routedurhum.officiel/","icone":"https://static.wixstatic.com/media/11062b_f4e3e7f537ff4762a1914aa14e3e36b9~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/facebook.png"},{"nom":"LinkedIn","lien":"https://www.linkedin.com/company/route-du-rhum-destination-guadeloupe/posts/?feedView=all","icone":"https://static.wixstatic.com/media/11062b_7dcffe5daf2944b7be0a46ac6d472634~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/linkedin.png"},{"nom":"WhatsApp","lien":"https://whatsapp.com/channel/0029Vb7OFTzFMqrWW5ygvS3Y","icone":"https://static.wixstatic.com/media/11062b_dc9641e157b2422b9f6a74d9b2b07f84~mv2.png/v1/fill/w_36,h_36,al_c,q_90,enc_auto/whatsapp.png"}],"liensHaut":[{"libelle":"Official store","lien":"https://www.armorlux.com/en/collections/en-events-route-du-rhum","horsBarre":true},{"libelle":"Hospitalities platform","lien":"https://hospitalites.routedurhum.com/","logo":"https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg"}],"espace":{"libelle":"MY ESPACE RHUM","lien":"/mon-espace-rhum","icone":"https://static.wixstatic.com/media/df962b_9899a4ded6d847fa85b36d59cbc4970d~mv2.png/v1/fit/w_52,h_60,q_90,enc_auto/tymal-espace.png"},"langues":[{"code":"fr","libelle":"FR"},{"code":"en","libelle":"EN"}],"partenaires":[{"alt":"Région Guadeloupe","src":"https://static.wixstatic.com/shapes/7bb303_111278f6c3d04aba8928603603e98dd3.svg","lien":"/nos-partenaires/région-guadeloupe"},{"alt":"Ville de Saint-Malo","src":"https://static.wixstatic.com/shapes/7bb303_19873fa1fb0b4c38b46fba7fc42bd65c.svg","lien":"/nos-partenaires/ville-de-saint-malo"},{"alt":"Région Bretagne","src":"https://static.wixstatic.com/shapes/7bb303_1deca51fd5b24e8caf66f08299c80596.svg","lien":"/nos-partenaires/région-bretagne"}],"boutique":[{"libelle":"The official store","alt":"Armor-lux","image":"https://static.wixstatic.com/shapes/7bb303_21ae0cc60b7a437aa94c34869c6f7249.svg","lien":"https://www.armorlux.com/en/collections/en-events-route-du-rhum"},{"libelle":"Play","libelleTiroir":"Play the official game","alt":"Virtual Regatta","image":"https://static.wixstatic.com/shapes/7bb303_64349a3f1ecc401fa8e35ff86d41fec3.svg","lien":"https://click.virtualregatta.com/?li=5811","lienTiroir":"https://vroffshore-rdr.onelink.me/VErI/imrxcign"}],"bandeau":{"texte":"*Village* from October 20 in Saint-Malo *|* from November 6 in Guadeloupe","autres":["*Race start* on Sunday 1 November at 1:02 pm"],"tourneMs":12000,"cible":"2026-11-01T12:02:00Z"},"alpina":{"lien":"https://alpinawatches.com/en-gb","logo":"https://static.wixstatic.com/media/547c0f_cbdfe343eff64cfbb1c0730dfc2cd96e~mv2.webp/v1/fit/w_180,h_44,q_90,enc_auto/alpina.webp","logoSombre":"https://static.wixstatic.com/shapes/df962b_d14e86b1c01c4c4dba7401e7d15a8d1a.svg","alt":"Alpina Watches"},"textes":{"menu":"Menu","fermer":"Close the menu","langue":"Language","plus":"More pages","principal":"Main menu","services":"Store and hospitalities","reseaux":"Social media","compte":"Countdown to the start"}}};
+ 
+let repliActif = false;
+
+let reglagesApp = null;
+
+const estObjet = (x) => !!x && typeof x === 'object' && !Array.isArray(x);
+function remplacerEnPlace(cible, source) {
+  Object.keys(cible).forEach((k) => { if (!(k in source)) delete cible[k]; });
+  Object.keys(source).forEach((k) => {
+    if (estObjet(cible[k]) && estObjet(source[k])) remplacerEnPlace(cible[k], source[k]);
+    else cible[k] = source[k];
+  });
+}
+
 const lireJSON = (v, repli) => { if (!v) return repli; try { return JSON.parse(v); } catch (e) { return repli; } };
 function navigateurCourt() {
   const ua = String(navigator.userAgent || '');
@@ -3329,6 +3346,7 @@ class RdrEntete extends HTMLElement {
     if (val === brut[nom]) return;
     brut[nom] = val;
     memEcrire(lang, nom, val);
+    if (nom === 'reglages' && repliActif) { this._quitterRepli(val); return; }
     if (!this.isConnected) return;
     if (!app) this._demarrer();
     else if (nom !== 'reglages') app.donnees();
@@ -3368,6 +3386,7 @@ class RdrEntete extends HTMLElement {
     }
     this._racine = racine;
     this._demarrer();
+    this._armerRepli();
     demarrerChasse();
     this._brancherRelaisNotifications();
     const temoin = this.getAttribute('temoin'); if (temoin) this._temoin(temoin);
@@ -3377,15 +3396,53 @@ class RdrEntete extends HTMLElement {
   disconnectedCallback() {
     this._debrancherRelaisNotifications();
     clearTimeout(this._temoinMinuteur); this._temoinMinuteur = null;
+    clearTimeout(this._tRepli); this._tRepli = null;
     if (courant === this) courant = null;
     
 
   }
 
-  _demarrer() {
-    const r = lireJSON(brut.reglages, null);
-    if (!r || !this._racine) return;
+  
+
+  _armerRepli() {
+    if (app || lireJSON(brut.reglages, null) || this._tRepli) return;
+    let depuis = 0;
+    try { depuis = performance.now(); } catch (e) { depuis = 0; }
+    const ms = depuis < 15000 ? Math.max(500, REPLI_MS - depuis) : REPLI_MS;
+    this._tRepli = setTimeout(() => {
+      this._tRepli = null;
+      if (app || lireJSON(brut.reglages, null) || !this.isConnected || courant !== this) return;
+      const r = REPLI_ENTETE[lang] || REPLI_ENTETE.fr;
+      if (!r) return;
+      repliActif = true;
+      this._demarrer(JSON.parse(JSON.stringify(r)));
+    }, ms);
+  }
+  
+
+  _quitterRepli(val) {
+    repliActif = false;
+    const neuf = lireJSON(val, null);
+    if (!app || !reglagesApp || !neuf || JSON.stringify(neuf) === JSON.stringify(reglagesApp)) return;
+    remplacerEnPlace(reglagesApp, neuf);
+    const ancienne = this._racine;
+    if (!ancienne || !ancienne.parentNode) return;
+    const neuve = document.createElement('div');
+    neuve.className = ancienne.className;
+    if (ancienne.id) neuve.id = ancienne.id;
+    ancienne.parentNode.replaceChild(neuve, ancienne);
+    this._racine = neuve;
+    app.attacher(neuve);
+  }
+
+  _demarrer(repli) {
+    if (!this._racine) return;
+    
+
     if (app) { app.attacher(this._racine); return; }
+    const r = repli || lireJSON(brut.reglages, null);
+    if (!r) return;
+    reglagesApp = r;
     app = creerEnteteD({
       lang, base, hero, reglages: r,
       racine: this._racine,
