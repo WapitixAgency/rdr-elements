@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum dd03f2b7 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="dd03f2b7";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum d77955b | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="d77955b";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1030,7 +1030,9 @@ if (!customElements.get('espace-rhum')) {
 })();
  
 
-  const JR_TERRITOIRES = ['France métropolitaine', 'Guadeloupe', 'Martinique', 'Guyane', 'La Réunion', 'Mayotte', 'Saint-Martin', 'Saint-Barthélemy', 'Autre pays'];
+  
+
+  const JR_TERRITOIRES = ['France métropolitaine', 'Guadeloupe'];
   const jrAdresseEnLigne = (a) => [[a.prenom, a.nom].filter(Boolean).join(' '), a.adresse, a.complement, [a.codePostal, a.ville].filter(Boolean).join(' '), a.territoire === 'Autre pays' ? a.pays : a.territoire].filter(Boolean).join(', ');
 
   
@@ -20562,9 +20564,9 @@ if (!customElements.get('espace-rhum')) {
         const rt = r.retrait;
         const physique = gagne && lot.physique;
         const retrait = !physique ? ''
-          : rt && rt.remisLe ? '<p class="jr-carte-retrait">' + T('Lot remis à l\'espace presse du village.', 'Prize collected at the village press area.') + '</p>'
+          : rt && rt.remisLe ? '<p class="jr-carte-retrait">' + T('Lot remis à l\'office de tourisme du village.', 'Prize collected at the village tourist office.') + '</p>'
           : rt && rt.expedieLe ? '<p class="jr-carte-retrait">' + T('Lot envoyé par la poste.', 'Prize sent by post.') + '</p>'
-          : rt && rt.mode === 'village' ? '<p class="jr-carte-retrait">' + T('À retirer à l\'espace presse du village, numéro', 'To collect at the village press area, number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>'
+          : rt && rt.mode === 'village' ? '<p class="jr-carte-retrait">' + T('À retirer à l\'office de tourisme du village, numéro', 'To collect at the village tourist office, number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>'
           : rt && rt.mode === 'envoi' ? '<p class="jr-carte-retrait">' + T('Envoi par la poste demandé.', 'Delivery by post requested.') + '</p>'
           : '<p class="jr-carte-retrait jr-carte-retrait--attente">' + T('Dis-nous comment récupérer ton lot.', 'Tell us how you would like to get your prize.') + '</p>';
         corps = '<div class="jr-resultat">' + (gagne && lot.visuel ? '<span class="jr-resultat-lot"><img src="' + escapeHtml(lot.visuel) + '" alt=""></span>' : '') +
@@ -20591,7 +20593,7 @@ if (!customElements.get('espace-rhum')) {
       if (r.peutTourner) {
         return '<div class="jt-bandeau jr-bandeau" role="region" aria-label="' + zone + '"><span class="jt-bandeau-montre" aria-hidden="true">' + jrRoueSvg(r.segments, { sansTexte: true, sansAiguille: true, moyeu: (r.visuels || {}).moyeu }) + '</span>' +
           '<span class="jt-bandeau-texte"><p class="jt-bandeau-titre">' + zone + ' <em>· ' + T('ton tour t\'attend', 'your spin is waiting') + '</em></p><span class="jt-bandeau-ligne">' +
-          T('Un tour, un seul : casquette, gourde, tote bag, peluche TyMAL ou -10 % chez Armor Lux.', 'One spin, just one: cap, water bottle, tote bag, TyMAL plush or 10% off at Armor Lux.') + '</span></span>' +
+          T('Un tour, un seul : casquette, gourde, tote bag, chaussettes, peluche TyMAL ou -10 % chez Armor Lux.', 'One spin, just one: cap, water bottle, tote bag, socks, TyMAL plush or 10% off at Armor Lux.') + '</span></span>' +
           '<button type="button" class="jt-jouer" data-jr-ouvrir><span class="jt-jouer-ico">' + jrIc(JR_I_ROUE) + '</span>' + T('Tourner', 'Spin') + jrIc(JT_I_FLECHE, 'jt-jouer-fl') + '</button></div>';
       }
       if (lot && lot.physique && !r.retrait) {
@@ -20780,7 +20782,7 @@ if (!customElements.get('espace-rhum')) {
 
         place.innerHTML = rt.remisLe
           ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Lot remis', 'Prize collected') + '</p>' +
-            '<p class="jr-retrait-txt">' + T('Ton lot t\'a été remis à l\'espace presse du village', 'Your prize was handed to you at the village press area') + ' ' + escapeHtml(quand(rt.remisLe)) + T('. Bonne Route du Rhum !', '. Enjoy the Route du Rhum!') + '</p></div>'
+            '<p class="jr-retrait-txt">' + T('Ton lot t\'a été remis à l\'office de tourisme du village', 'Your prize was handed to you at the village tourist office') + ' ' + escapeHtml(quand(rt.remisLe)) + T('. Bonne Route du Rhum !', '. Enjoy the Route du Rhum!') + '</p></div>'
           : '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Lot envoyé', 'Prize sent') + '</p>' +
             '<p class="jr-retrait-txt">' + T('Ton lot est parti par la poste', 'Your prize was posted') + ' ' + escapeHtml(quand(rt.expedieLe)) + (rt.adresse ? T(', à', ', to') + ' <b>' + escapeHtml(jrAdresseEnLigne(rt.adresse)) + '</b>' : '') + '.</p></div>';
       } else if (etape === 'fait' && rt) {
@@ -20798,9 +20800,10 @@ if (!customElements.get('espace-rhum')) {
           : '';
         place.innerHTML = rt.mode === 'village'
           ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('À retirer sur le village', 'To collect at the village') + '</p>' +
-            '<p class="jr-retrait-txt">' + T('Passe à l\'espace presse du village, à Saint-Malo, avec ce numéro, c\'est avec lui que l\'équipe retrouve ton lot.', 'Go to the village press area in Saint-Malo with this number, it is how the team finds your prize.') + '</p>' +
+            '<p class="jr-retrait-txt">' + T('Passe à l\'office de tourisme du village, à Saint-Malo, avec ce numéro, c\'est avec lui que l\'équipe retrouve ton lot.', 'Go to the tourist office in the Saint-Malo village with this number, it is how the team finds your prize.') + '</p>' +
+            '<p class="jr-retrait-txt jr-retrait-horaires">' + T('Tous les jours de 10 h à 10 h 15 et de 18 h à 18 h 15, jusqu\'au 1er novembre inclus.', 'Every day from 10:00 to 10:15 am and from 6:00 to 6:15 pm, until 1 November inclusive.') + '</p>' +
             '<p class="jr-numero">' + T('Ton numéro de retrait', 'Your collection number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>' +
-            (qr ? '<figure class="jr-qr"><span class="jr-qr-img">' + qr + '</span><figcaption>' + T('Tu peux aussi montrer ce QR code, il ouvre directement ta fiche à l\'espace presse.', 'You can also show this QR code, it opens your record directly at the press area.') + '</figcaption></figure>' : '') +
+            (qr ? '<figure class="jr-qr"><span class="jr-qr-img">' + qr + '</span><figcaption>' + T('Tu peux aussi montrer ce QR code, il ouvre directement ta fiche à l\'office de tourisme.', 'You can also show this QR code, it opens your record directly at the tourist office.') + '</figcaption></figure>' : '') +
             '<div class="jr-retrait-actions">' + carte + '<button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Plutôt par la poste', 'By post instead') + '</button></div></div>'
           : '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Envoi par la poste', 'Delivery by post') + '</p>' +
             '<p class="jr-retrait-txt">' + T('C\'est noté, on te l\'envoie à', 'Got it, we will send it to') + ' <b>' + escapeHtml(jrAdresseEnLigne(rt.adresse || {})) + '</b>.</p>' +
@@ -20810,7 +20813,7 @@ if (!customElements.get('espace-rhum')) {
         const moi = (this._payload && this._payload.member) || {};
         const champ = (nom, lib, auto, cls, val, extra) => '<label class="jr-champ' + (cls ? ' ' + cls : '') + '"><span>' + lib + '</span><input name="' + nom + '" autocomplete="' + auto + '" value="' + escapeHtml(val || '') + '"' + (extra || '') + '></label>';
         const territoire = a.territoire || 'France métropolitaine';
-        const nomTerr = (x) => (en && x === 'France métropolitaine' ? 'Metropolitan France' : en && x === 'Autre pays' ? 'Other country' : x);
+        const nomTerr = (x) => (en && x === 'France métropolitaine' ? 'Mainland France' : en && x === 'Autre pays' ? 'Other country' : x);
         const options = JR_TERRITOIRES.map((x, i) => '<button type="button" class="jr-pays-opt' + (i === 1 || x === 'Autre pays' ? ' jr-pays-opt--groupe' : '') + '" role="option" aria-selected="' + (x === territoire) + '" data-jr-pays-opt="' + escapeHtml(x) + '"><span>' + escapeHtml(nomTerr(x)) + '</span>' + jrIc(JT_I_OK) + '</button>').join('');
         place.innerHTML = '<form class="jr-retrait jr-retrait--adresse" data-jr-adresse novalidate><p class="jr-retrait-q">' + T('Où t\'envoyer ton lot ?', 'Where should we send your prize?') + '</p><div class="jr-champs">' +
           champ('prenom', T('Prénom', 'First name'), 'given-name', 'jr-c-prenom', a.prenom || moi.prenom) + champ('nom', T('Nom', 'Last name'), 'family-name', 'jr-c-nom', a.nom || moi.nom) +
@@ -20830,9 +20833,11 @@ if (!customElements.get('espace-rhum')) {
         if (pays) pays.hidden = territoire !== 'Autre pays';
         if (!sansFocus) { const i = place.querySelector('input[value=""]') || place.querySelector('input'); if (i) i.focus(); }
       } else {
+         
+        const village = this._jrEtat().villageOuvert !== false;
         place.innerHTML = '<div class="jr-retrait"><p class="jr-retrait-q">' + T('Comment veux-tu le récupérer ?', 'How would you like to get it?') + '</p><div class="jr-retrait-choix">' +
-          '<button type="button" class="jr-choix" data-jr-retrait="village">' + jrIc(JR_I_LIEU) + '<span>' + T('Sur le village', 'At the village') + '<small>' + T('À l\'espace presse, à Saint-Malo', 'At the press area, in Saint-Malo') + '</small></span></button>' +
-          '<button type="button" class="jr-choix" data-jr-retrait="envoi">' + jrIc(JR_I_COLIS) + '<span>' + T('Par la poste', 'By post') + '<small>' + T('À l\'adresse de ton choix', 'To the address of your choice') + '</small></span></button></div></div>';
+          (village ? '<button type="button" class="jr-choix" data-jr-retrait="village">' + jrIc(JR_I_LIEU) + '<span>' + T('Sur le village', 'At the village') + '<small>' + T('À l\'office de tourisme de Saint-Malo, jusqu\'au 1er novembre', 'At the Saint-Malo tourist office, until 1 November') + '</small></span></button>' : '') +
+          '<button type="button" class="jr-choix" data-jr-retrait="envoi">' + jrIc(JR_I_COLIS) + '<span>' + T('Par la poste', 'By post') + '<small>' + T('En France métropolitaine ou en Guadeloupe', 'In mainland France or Guadeloupe') + '</small></span></button></div></div>';
         if (!sansFocus) { const b = place.querySelector('[data-jr-retrait]'); if (b) b.focus(); }
       }
     }
@@ -20894,12 +20899,18 @@ if (!customElements.get('espace-rhum')) {
         this._jrPeindreRetrait('fait');
         return;
       }
+      if (res && res.raison === 'village_ferme') {
+         
+        r.villageOuvert = false;
+        this._jrPeindreRetrait('choix');
+        return;
+      }
       if (!res || res.ok !== true) {
         const e = this._jrModale && this._jrModale.querySelector('[data-jr-retrait-etat]');
         const raison = res && res.raison;
         if (e) e.textContent = raison === 'telephone' ? (en ? 'This phone number looks incomplete.' : 'Ce numéro de téléphone paraît incomplet.')
           : raison === 'adresse_incomplete' ? (en ? 'Part of the address is missing.' : 'Il manque une partie de l\'adresse.')
-          : raison === 'territoire' ? (en ? 'Delivery is not possible to this destination: choose collection at the village.' : 'L\'envoi n\'est pas possible vers cette destination : choisis le retrait sur le village.')
+          : raison === 'territoire' ? (en ? 'Delivery is only possible in mainland France or Guadeloupe.' : 'L\'envoi n\'est possible qu\'en France métropolitaine ou en Guadeloupe.')
           : (en ? 'Your choice did not go through. Please try again in a moment.' : 'Ton choix n\'est pas passé. Réessaie dans un instant.');
         const b = this._jrModale && this._jrModale.querySelector('[data-jr-adresse] [type="submit"]');
         if (b) { b.disabled = false; b.textContent = en ? 'Confirm the address' : 'Valider l\'adresse'; }
