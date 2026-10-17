@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 300ab23 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="300ab23";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 50d69fd | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="50d69fd";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -565,7 +565,6 @@ rdr-accueil-apercu .pv-badge small{display:block;font-size:11px;color:var(--t2);
 rdr-accueil-apercu .pv-badge > i{color:var(--t3);margin-left:4px}
 rdr-accueil-apercu .pv-badge > i svg{width:16px;height:16px}
 rdr-accueil-apercu .pv-top{position:absolute;right:26px;top:24px;width:174px;padding:12px 14px;border-radius:16px;background:#fff;color:#0E111D;box-shadow:0 24px 50px rgba(14,17,29,.3);animation-delay:-3s}
-rdr-accueil-apercu .pv-top[hidden]{display:none}
 rdr-accueil-apercu .pv-top .pv-micro{color:#5b6477}
 rdr-accueil-apercu .pv-podium{display:flex;align-items:flex-end;gap:5px;height:56px;margin-top:10px}
 rdr-accueil-apercu .pv-podium i{position:relative;flex:1;height:var(--h);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-style:normal}
@@ -807,7 +806,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
           <div><span class="pv-micro">Badges et rangs</span><b>Débloquez des badges</b><small>et montez dans les rangs</small></div>
           <i id="pv-ico-verrou"></i>
         </div>
-        <div class="pv-top pv-flotte" hidden><span class="pv-micro">Top 50 des fans</span><div class="pv-podium" aria-hidden="true"><i style="--h:72%"><b>2</b></i><i style="--h:100%"><b>1</b></i><i style="--h:54%"><b>3</b></i></div><small>Entrez dans le classement</small></div>
+        <div class="pv-top pv-flotte"><span class="pv-micro">Top 50 des fans</span><div class="pv-podium" aria-hidden="true"><i style="--h:72%"><b>2</b></i><i style="--h:100%"><b>1</b></i><i style="--h:54%"><b>3</b></i></div><small>Entrez dans le classement</small></div>
         <div class="pv-skipper" id="pv-skipper"></div>
       </div>
     </div>
@@ -1928,11 +1927,6 @@ function monter(racine, portail, D) {
 
 
 
-  
-
-
-  const tuileTop = un('.pv-top');
-  if (tuileTop) tuileTop.hidden = D.top50 !== true;
   const BADGES = (Array.isArray(D.badges) ? D.badges : []).filter((b) => b && b.image && b.fr);
   const icoBadge = $('pv-ico-badge'), pastilleBadge = un('.pv-badge');
   const poserBadge = (b) => {
