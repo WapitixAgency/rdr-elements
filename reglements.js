@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum d77955b | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d77955b";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 57e7719 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="57e7719";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -504,8 +504,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d77955b";perfor
 
 
 
-
-
       id: 'jeu-de-la-roue',
       actif: true,
       icone: 'shipWheel',
@@ -513,7 +511,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d77955b";perfor
       nature: { fr: 'Jeu-concours', en: 'Prize competition' },
       debut: '2026-10-18',
       fin: '2026-11-01',
-      publieLe: '',
+      publieLe: '2026-10-17',
       version: '2026-10-17',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/mon-espace-rhum?go=roue', fr: 'Mon Espace Rhum, « Jeux concours »', en: 'My Espace Rhum, “Competitions”' },
