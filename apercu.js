@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 57e7719 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="57e7719";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 81cec12 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="81cec12";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1088,7 +1088,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
     async _charger() {
       try {
-        const r = await fetch(this.getAttribute('source') || SOURCE + '?lang=' + langueDe(this), { credentials: 'omit' });
+        const r = await rdrLire(this.getAttribute('source') || SOURCE + '?lang=' + langueDe(this), { credentials: 'omit' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const D = await r.json();
         if (!this._monte || this._dessine) return;
@@ -2370,6 +2370,40 @@ function monter(racine, portail, D) {
   window.addEventListener('online', enLigne);
   sec.querySelector('.rdrp-btn').addEventListener('click', partir);
   peindre();
+}
+  function rdrLire(u, o) {
+  var RDRL_MS = 9000, cle = 'rdrRepli:' + u, minuteur = 0;
+  var Ctl = window.AbortController, ctl = Ctl ? new Ctl() : null;
+  var reponse = function (status, texte) {
+    return { ok: status >= 200 && status < 300, status: status, json: function () { return Promise.resolve().then(function () { return JSON.parse(texte); }); } };
+  };
+  var gardee = function () {
+    try { var t = window.localStorage.getItem(cle); if (t) return reponse(200, t); } catch (e) {   }
+    return null;
+  };
+  var opts = {};
+  if (o) for (var k in o) opts[k] = o[k];
+  if (ctl) opts.signal = ctl.signal;
+  var delai = new Promise(function (_, non) {
+    minuteur = setTimeout(function () { try { if (ctl) ctl.abort(); } catch (e) {   } non(new Error('rdrLire : pas de réponse en ' + RDRL_MS + ' ms')); }, RDRL_MS);
+  });
+  var lecture = fetch(u, opts).then(function (r) {
+    return r.text().then(function (t) { return { status: r.status, texte: t }; });
+  });
+  return Promise.race([lecture, delai]).then(function (x) {
+    clearTimeout(minuteur);
+    if (x.status >= 200 && x.status < 300) {
+      if (x.texte && x.texte.length > 200) { try { window.localStorage.setItem(cle, x.texte); } catch (e) {   } }
+      return reponse(x.status, x.texte);
+    }
+    if (x.status >= 500) { var g = gardee(); if (g) return g; }
+    return reponse(x.status, x.texte);
+  }, function (e) {
+    clearTimeout(minuteur);
+    var g = gardee();
+    if (g) return g;
+    throw e;
+  });
 }
   customElements.define('rdr-accueil-apercu', RdrAccueilApercu);
 })();

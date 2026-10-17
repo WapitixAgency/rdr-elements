@@ -1,5 +1,5 @@
-/* rdr-elements fiche-partenaire | source route-du-rhum 57e7719 | rdr-partenaire.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["fiche-partenaire"]="57e7719";performance.mark("rdr-elements:fiche-partenaire")}catch(e){}
+/* rdr-elements fiche-partenaire | source route-du-rhum 81cec12 | rdr-partenaire.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["fiche-partenaire"]="81cec12";performance.mark("rdr-elements:fiche-partenaire")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-partenaire")) return;
@@ -190,7 +190,7 @@ function monter(lang, p) {
       const slug = this._slug();
       if (!slug) { this._introuvable(); return; }
       const u = (this.getAttribute('source') || SOURCE) + '?slug=' + encodeURIComponent(slug) + '&lang=' + this._lang();
-      fetch(u).then((r) => (r.status === 404 ? 404 : r.ok ? r.json() : null)).then((j) => {
+      rdrLire(u).then((r) => (r.status === 404 ? 404 : r.ok ? r.json() : null)).then((j) => {
         if (j === 404) return this._introuvable();
         if (this._valide(j)) return this._tenter(j);
         this._panne();
@@ -303,6 +303,40 @@ function monter(lang, p) {
   window.addEventListener('online', enLigne);
   sec.querySelector('.rdrp-btn').addEventListener('click', partir);
   peindre();
+}
+  function rdrLire(u, o) {
+  var RDRL_MS = 9000, cle = 'rdrRepli:' + u, minuteur = 0;
+  var Ctl = window.AbortController, ctl = Ctl ? new Ctl() : null;
+  var reponse = function (status, texte) {
+    return { ok: status >= 200 && status < 300, status: status, json: function () { return Promise.resolve().then(function () { return JSON.parse(texte); }); } };
+  };
+  var gardee = function () {
+    try { var t = window.localStorage.getItem(cle); if (t) return reponse(200, t); } catch (e) {   }
+    return null;
+  };
+  var opts = {};
+  if (o) for (var k in o) opts[k] = o[k];
+  if (ctl) opts.signal = ctl.signal;
+  var delai = new Promise(function (_, non) {
+    minuteur = setTimeout(function () { try { if (ctl) ctl.abort(); } catch (e) {   } non(new Error('rdrLire : pas de réponse en ' + RDRL_MS + ' ms')); }, RDRL_MS);
+  });
+  var lecture = fetch(u, opts).then(function (r) {
+    return r.text().then(function (t) { return { status: r.status, texte: t }; });
+  });
+  return Promise.race([lecture, delai]).then(function (x) {
+    clearTimeout(minuteur);
+    if (x.status >= 200 && x.status < 300) {
+      if (x.texte && x.texte.length > 200) { try { window.localStorage.setItem(cle, x.texte); } catch (e) {   } }
+      return reponse(x.status, x.texte);
+    }
+    if (x.status >= 500) { var g = gardee(); if (g) return g; }
+    return reponse(x.status, x.texte);
+  }, function (e) {
+    clearTimeout(minuteur);
+    var g = gardee();
+    if (g) return g;
+    throw e;
+  });
 }
   customElements.define("rdr-partenaire", RdrPartenaire);
 })();
