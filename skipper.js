@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum dfdebdc | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="dfdebdc";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 1e4c63b0 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="1e4c63b0";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -7212,7 +7212,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

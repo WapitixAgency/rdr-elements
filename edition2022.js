@@ -1,5 +1,5 @@
-/* rdr-elements edition2022 | source route-du-rhum dfdebdc | rdr-edition-2022.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="dfdebdc";performance.mark("rdr-elements:edition2022")}catch(e){}
+/* rdr-elements edition2022 | source route-du-rhum 1e4c63b0 | rdr-edition-2022.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["edition2022"]="1e4c63b0";performance.mark("rdr-elements:edition2022")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-edition-2022")) return;
@@ -395,7 +395,7 @@ window.addEventListener('resize', () => { charger($('mosaique')); charger($('tou
     }
     _panne() {
       if (this._monte) return;
-      rdrPanne(this, this._lang() === 'en', () => { this.innerHTML = SQUELETTE; this._chercher(); });
+      rdrPanne(this, this._lang() === 'en', () => { this._chercher(); });
     }
   }
   function rdrPanne(hote, en, relancer) {
@@ -483,7 +483,7 @@ window.addEventListener('resize', () => { charger($('mosaique')); charger($('tou
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

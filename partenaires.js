@@ -1,5 +1,5 @@
-/* rdr-elements partenaires | source route-du-rhum dfdebdc | rdr-partenaires.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["partenaires"]="dfdebdc";performance.mark("rdr-elements:partenaires")}catch(e){}
+/* rdr-elements partenaires | source route-du-rhum 1e4c63b0 | rdr-partenaires.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["partenaires"]="1e4c63b0";performance.mark("rdr-elements:partenaires")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-partenaires")) return;
@@ -276,7 +276,7 @@ function monter(lang) {
     }
     _panne() {
       if (this._monte) return;
-      rdrPanne(this, this._lang() === 'en', () => { this.innerHTML = ATTENTE; this._chercher(); });
+      rdrPanne(this, this._lang() === 'en', () => { this._chercher(); });
     }
   }
   function rdrPanne(hote, en, relancer) {
@@ -364,7 +364,7 @@ function monter(lang) {
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

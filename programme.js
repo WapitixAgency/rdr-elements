@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum dfdebdc | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="dfdebdc";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 1e4c63b0 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="1e4c63b0";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (() => {
   'use strict';
@@ -6418,18 +6418,18 @@ rdr-programme{display:block;width:100%;}
 
 
     _surPage() { return this.getAttribute('url') === '1' || /\/programmation(\/|$)/.test(location.pathname); }
-    _panneProgramme() {
+    
+
+
+    _panneProgramme(essai) {
       if (this._p || !this.isConnected || typeof rdrPanne !== 'function') return false;
       
 
-      if (this.querySelector(':scope > .rdrp')) return true;
+      if (!essai && this.querySelector(':scope > .rdrp')) return true;
       rdrPanne(this, this._lang() === 'en', () => {
         if (this._p) return;
-        this._attente = true;
-        this._rendre();
         this.dispatchEvent(new CustomEvent('rp-relire', { bubbles: true, composed: true }));
-        clearTimeout(this._minuteur);
-        this._minuteur = setTimeout(() => { this._minuteur = null; if (!this._p) { this._attente = false; this._rendre(); } }, DELAI_ATTENTE);
+        this._panneProgramme(true);
       });
       return true;
     }
@@ -9176,7 +9176,7 @@ rdr-programme{display:block;width:100%;}
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

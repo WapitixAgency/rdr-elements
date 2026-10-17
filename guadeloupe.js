@@ -1,5 +1,5 @@
-/* rdr-elements guadeloupe | source route-du-rhum dfdebdc | rdr-guadeloupe.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["guadeloupe"]="dfdebdc";performance.mark("rdr-elements:guadeloupe")}catch(e){}
+/* rdr-elements guadeloupe | source route-du-rhum 1e4c63b0 | rdr-guadeloupe.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["guadeloupe"]="1e4c63b0";performance.mark("rdr-elements:guadeloupe")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-guadeloupe")) return;
@@ -464,7 +464,7 @@ function monter(cle) {
     }
     _panne() {
       if (this._monte) return;
-      rdrPanne(this, this._lang() === 'en', () => { this.innerHTML = "<div class=\"rgd-attente\" aria-hidden=\"true\"><div class=\"rgd-sq-haut\"><div class=\"rgd-sq-trame\"><i class=\"rgd-sq-l rgd-sq-k\"></i><i class=\"rgd-sq-l rgd-sq-t\"></i><i class=\"rgd-sq-l rgd-sq-t rgd-sq-t2\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p1\"></i><i class=\"rgd-sq-l rgd-sq-p\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p3\"></i></div></div><div class=\"rgd-sq-trame rgd-sq-sec\"><i class=\"rgd-sq-l rgd-sq-k\"></i><i class=\"rgd-sq-l rgd-sq-t\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p1\"></i><i class=\"rgd-sq-l rgd-sq-p\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p3\"></i></div><div class=\"rgd-sq-trame rgd-sq-cartes\"><i class=\"rgd-sq-c\"></i><i class=\"rgd-sq-c\"></i><i class=\"rgd-sq-c\"></i></div><div class=\"rgd-sq-trame rgd-sq-sec\"><i class=\"rgd-sq-l rgd-sq-k\"></i><i class=\"rgd-sq-l rgd-sq-t\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p1\"></i><i class=\"rgd-sq-l rgd-sq-p\"></i><i class=\"rgd-sq-l rgd-sq-p rgd-sq-p3\"></i></div></div>"; this._chercher(); });
+      rdrPanne(this, this._lang() === 'en', () => { this._chercher(); });
     }
   }
   function rdrPanne(hote, en, relancer) {
@@ -552,7 +552,7 @@ function monter(cle) {
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

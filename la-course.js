@@ -1,5 +1,5 @@
-/* rdr-elements la-course | source route-du-rhum dfdebdc | rdr-course.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="dfdebdc";performance.mark("rdr-elements:la-course")}catch(e){}
+/* rdr-elements la-course | source route-du-rhum 1e4c63b0 | rdr-course.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="1e4c63b0";performance.mark("rdr-elements:la-course")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-course")) return;
@@ -663,7 +663,7 @@ new ResizeObserver(() => { clearTimeout(attenteFil); attenteFil = setTimeout(tra
     }
     _panne() {
       if (this._monte) return;
-      rdrPanne(this, this._lang() === 'en', () => { this.innerHTML = "<div class=\"rco-attente\" aria-hidden=\"true\"><div class=\"rco-sq-haut\"><div class=\"rco-sq-trame\"><i class=\"rco-sq-l rco-sq-k\"></i><i class=\"rco-sq-l rco-sq-t\"></i><i class=\"rco-sq-l rco-sq-t rco-sq-t2\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p1\"></i><i class=\"rco-sq-l rco-sq-p\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p3\"></i></div></div><div class=\"rco-sq-trame rco-sq-sec\"><i class=\"rco-sq-l rco-sq-k\"></i><i class=\"rco-sq-l rco-sq-t\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p1\"></i><i class=\"rco-sq-l rco-sq-p\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p3\"></i></div><div class=\"rco-sq-trame rco-sq-cartes\"><i class=\"rco-sq-c\"></i><i class=\"rco-sq-c\"></i><i class=\"rco-sq-c\"></i></div><div class=\"rco-sq-trame rco-sq-sec\"><i class=\"rco-sq-l rco-sq-k\"></i><i class=\"rco-sq-l rco-sq-t\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p1\"></i><i class=\"rco-sq-l rco-sq-p\"></i><i class=\"rco-sq-l rco-sq-p rco-sq-p3\"></i></div></div>"; this._chercher(); });
+      rdrPanne(this, this._lang() === 'en', () => { this._chercher(); });
     }
   }
   function rdrPanne(hote, en, relancer) {
@@ -751,7 +751,7 @@ new ResizeObserver(() => { clearTimeout(attenteFil); attenteFil = setTimeout(tra
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }

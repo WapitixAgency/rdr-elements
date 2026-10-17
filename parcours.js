@@ -1,5 +1,5 @@
-/* rdr-elements parcours | source route-du-rhum dfdebdc | rdr-parcours.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="dfdebdc";performance.mark("rdr-elements:parcours")}catch(e){}
+/* rdr-elements parcours | source route-du-rhum 1e4c63b0 | rdr-parcours.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["parcours"]="1e4c63b0";performance.mark("rdr-elements:parcours")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-parcours")) return;
@@ -438,7 +438,7 @@ addEventListener('scroll', () => {
     }
     _panne() {
       if (this._monte) return;
-      rdrPanne(this, this._lang() === 'en', () => { this.innerHTML = "<div class=\"rpa-attente\" aria-hidden=\"true\"><div class=\"rpa-sq-haut\"><div class=\"rpa-sq-trame\"><i class=\"rpa-sq-l rpa-sq-k\"></i><i class=\"rpa-sq-l rpa-sq-t\"></i><i class=\"rpa-sq-l rpa-sq-t rpa-sq-t2\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p1\"></i><i class=\"rpa-sq-l rpa-sq-p\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p3\"></i></div></div><div class=\"rpa-sq-trame rpa-sq-sec\"><i class=\"rpa-sq-l rpa-sq-k\"></i><i class=\"rpa-sq-l rpa-sq-t\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p1\"></i><i class=\"rpa-sq-l rpa-sq-p\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p3\"></i></div><div class=\"rpa-sq-trame rpa-sq-cartes\"><i class=\"rpa-sq-c\"></i><i class=\"rpa-sq-c\"></i><i class=\"rpa-sq-c\"></i></div><div class=\"rpa-sq-trame rpa-sq-sec\"><i class=\"rpa-sq-l rpa-sq-k\"></i><i class=\"rpa-sq-l rpa-sq-t\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p1\"></i><i class=\"rpa-sq-l rpa-sq-p\"></i><i class=\"rpa-sq-l rpa-sq-p rpa-sq-p3\"></i></div></div>"; this._chercher(); });
+      rdrPanne(this, this._lang() === 'en', () => { this._chercher(); });
     }
   }
   function rdrPanne(hote, en, relancer) {
@@ -526,7 +526,7 @@ addEventListener('scroll', () => {
     anneau.style.strokeDashoffset = String(88 * (1 - reste / total));
   };
   var arreter = function () { fini = true; clearInterval(minuteur); window.removeEventListener('online', enLigne); };
-  var partir = function () { if (fini) return; arreter(); try { relancer(); } catch (e) {   } };
+  var partir = function () { if (fini) return; arreter(); texte.textContent = T.encours; anneau.style.strokeDashoffset = '0'; try { relancer(); } catch (e) {   } };
   var enLigne = function () { if (hote.isConnected && hote.contains(sec)) partir(); else arreter(); };
   minuteur = setInterval(function () {
     if (!hote.isConnected || !hote.contains(sec)) { arreter(); return; }
