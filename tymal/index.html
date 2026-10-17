@@ -65,6 +65,16 @@
   .lieux .c-entrees i{background:#C9E8E8}
   .lieux .c-restauration i{background:#FFD9C9}
   .bloc-lieux{margin-bottom:20px}
+  .cherche{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:9px;min-height:56px;margin:0 0 4px;padding:0 6px 0 14px;
+    border:1.5px solid var(--teal-deep);border-radius:14px 0 14px 0;background:var(--surface);box-shadow:0 4px 14px rgba(10,26,53,.08)}
+  .cherche>svg{flex:none;width:20px;height:20px;color:var(--teal-deep)}
+  .cherche input{flex:1;min-width:0;height:52px;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;font-weight:600}
+  .cherche input::placeholder{color:var(--ink3);font-weight:500}
+  .cherche input::-webkit-search-cancel-button{display:none}
+  .cherche button{flex:none;width:44px;height:44px;border:0;border-radius:10px;background:#EEF2F6;color:var(--ink2);font:inherit;font-size:22px;line-height:1;cursor:pointer}
+  .rien{margin:12px 2px 0;font-size:13px;color:var(--ink2)}
+  .lieux .cat{display:block;margin-top:1px;font-weight:500;font-size:11.5px;color:var(--ink3)}
+  .lieux .c-autre i{background:#E6ECF2}
   .note{margin:0;font-size:11.5px;line-height:1.5;color:var(--ink3)}
   .note b{color:var(--ink2)}
   .flash{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));
@@ -116,6 +126,13 @@
 
     <div class="bloc-lieux">
       <h2>Ou choisir un lieu</h2>
+      <div class="cherche">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <input id="cherche" type="search" inputmode="search" autocomplete="off" autocorrect="off" spellcheck="false"
+          placeholder="Chercher un lieu, un stand…" aria-label="Chercher un lieu du village">
+        <button type="button" id="efface" aria-label="Effacer la recherche" hidden>&times;</button>
+      </div>
+      <div id="resultats" hidden></div>
       <div id="lieux"></div>
     </div>
 
@@ -200,31 +217,58 @@
     restauration: '<path d="M6 3v8a3 3 0 006 0V3M9 11v10"/><path d="M17 3c-1.5 1.5-2 3.5-2 5.5 0 1.6 1 2.5 2 2.5V3z"/><path d="M17 11v10"/>',
     entrees: '<path d="M14 3H6v18h8"/><path d="M18 12H10M15 9l3 3-3 3"/>'
   };
+  PICTOS.autre = '<path d="M12 21c4-4.4 6.2-7.6 6.2-10.4A6.2 6.2 0 005.8 10.6C5.8 13.4 8 16.6 12 21z"/><circle cx="12" cy="10.4" r="2.2"/>';
   var TITRES = { animations: 'Scènes et animations', entrees: 'Entrées', restauration: 'Restauration' };
-  function peindreLieux(lieux) {
-    var box = $('#lieux');
-    if (!lieux || !lieux.length) {
-      box.innerHTML = '<p class="note">Liste des lieux indisponible. Le bouton « Je suis ici » fonctionne quand même.</p>';
-      return;
-    }
-    var html = '', cat = '';
-    lieux.forEach(function (o) {
-      if (o.cat !== cat) {
-        if (cat) html += '</ul>';
-        cat = o.cat;
-        html += '<h3>' + esc(TITRES[cat] || cat) + '</h3><ul class="lieux">';
-      }
-      html += '<li class="c-' + esc(o.cat) + '"><button type="button" data-id="' + esc(o.id) + '" data-nom="' + esc(o.nom) + '">' +
-        '<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-        (PICTOS[o.cat] || '') + '</svg></i><span>' + esc(o.nom) + '</span></button></li>';
-    });
-    box.innerHTML = html + '</ul>';
+  var CATS = { animations: 'Animation', entrees: 'Entrée', restauration: 'Restauration', boutiques: 'Stand', 'boutique-officielle': 'Boutique officielle',
+    services: 'Service', bateaux: 'Bateau', secours: 'Secours', mobilite: 'Mobilité', off: 'Off du Rhum' };
+  var tous = [];
+  var plat = function (t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); };
+  function ligne(o, avecCat) {
+    var c = PICTOS[o.cat] ? o.cat : 'autre';
+    return '<li class="c-' + esc(c) + '"><button type="button" data-id="' + esc(o.id) + '" data-nom="' + esc(o.nom) + '">' +
+      '<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      PICTOS[c] + '</svg></i><span>' + esc(o.nom) + (avecCat ? '<span class="cat">' + esc(CATS[o.cat] || 'Lieu') + '</span>' : '') + '</span></button></li>';
+  }
+  function brancher(box) {
     box.querySelectorAll('button').forEach(function (b) {
       b.addEventListener('click', function () {
         envoyer({ action: 'lieu', lieuId: b.getAttribute('data-id') }, 'TyMal placée : ' + b.getAttribute('data-nom'));
       });
     });
   }
+  function peindreLieux(lieux) {
+    var box = $('#lieux');
+    tous = (lieux || []).map(function (o) { o.k = plat(o.nom + ' ' + (CATS[o.cat] || '')); return o; });
+    var reperes = tous.filter(function (o) { return o.repere || !('repere' in o) && TITRES[o.cat]; });
+    if (!tous.length) {
+      box.innerHTML = '<p class="note">Liste des lieux indisponible. Le bouton « Je suis ici » fonctionne quand même.</p>';
+      return;
+    }
+    var html = '', cat = '';
+    reperes.forEach(function (o) {
+      if (o.cat !== cat) { if (cat) html += '</ul>'; cat = o.cat; html += '<h3>' + esc(TITRES[cat] || cat) + '</h3><ul class="lieux">'; }
+      html += ligne(o, false);
+    });
+    box.innerHTML = html + (cat ? '</ul>' : '');
+    brancher(box);
+    chercher();
+  }
+  function chercher() {
+    var champ = $('#cherche'), res = $('#resultats'), q = plat(champ.value);
+    $('#efface').hidden = !champ.value;
+    if (!q) { res.hidden = true; res.innerHTML = ''; $('#lieux').hidden = false; return; }
+    var mots = q.split(' ');
+    var trouves = tous.filter(function (o) { return mots.every(function (m) { return o.k.indexOf(m) >= 0; }); });
+    trouves.sort(function (a, b) { return (b.k.indexOf(mots[0]) === 0) - (a.k.indexOf(mots[0]) === 0); });
+    $('#lieux').hidden = true;
+    res.hidden = false;
+    res.innerHTML = trouves.length
+      ? '<ul class="lieux">' + trouves.slice(0, 30).map(function (o) { return ligne(o, true); }).join('') + '</ul>'
+      : '<p class="rien">Aucun lieu ne correspond. Essayez un autre mot, ou « Je suis ici ».</p>';
+    brancher(res);
+  }
+  $('#cherche').addEventListener('input', chercher);
+  $('#efface').addEventListener('click', function () { var c = $('#cherche'); c.value = ''; chercher(); c.focus(); });
 
   var RAISONS = {
     hors_village: 'Vous semblez hors du village : choisissez un lieu dans la liste',
@@ -240,6 +284,7 @@
       if (res.etat) { etat = res.etat; majEtat(); }
       if (res.ok) {
         flash(confirmation);
+        if (corps.action === 'lieu' && $('#cherche').value) { $('#cherche').value = ''; chercher(); }
         if (window.scrollY > 0) { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } }
         return;
       }
