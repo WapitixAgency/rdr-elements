@@ -1,5 +1,5 @@
-/* rdr-elements confidentialite | source route-du-rhum c1d5c7b | rdr-confidentialite.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="c1d5c7b";performance.mark("rdr-elements:confidentialite")}catch(e){}
+/* rdr-elements confidentialite | source route-du-rhum 4f6c1ea | rdr-confidentialite.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["confidentialite"]="4f6c1ea";performance.mark("rdr-elements:confidentialite")}catch(e){}
 ;(function(){
 (function () {
   'use strict';

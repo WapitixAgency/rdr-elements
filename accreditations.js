@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum c1d5c7b | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="c1d5c7b";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum 4f6c1ea | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="4f6c1ea";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -77,7 +77,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="c1d5c7b";pe
     badgeDosMention: 'Ce badge est personnel. Il doit rester visible sur toutes les zones accréditées et ne peut être cédé.',
     badgeDosBandeau: 'Là où les rêves prennent le large',
     sangle: 'ROUTE DU RHUM · DESTINATION GUADELOUPE · ',
-    bandeau: 'Pré-demandes médias ouvertes, à déposer avant le 15 octobre 2026',
+    
+
+    bandeau: '',
     formTitre: 'Formulaire d’inscription',
     formTexte: 'Demandez votre accréditation et rejoignez-nous pour vivre la Route du Rhum au plus près de l’action.',
     boutonAttente: 'Le formulaire arrive très prochainement',
@@ -135,7 +137,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="c1d5c7b";pe
     'Ce badge est personnel. Il doit rester visible sur toutes les zones accréditées et ne peut être cédé.': 'This badge is personal. It must remain visible in all accredited areas and cannot be transferred.',
     'Là où les rêves prennent le large': 'Where dreams set sail',
     'Accès presse': 'Press access',
-    'Pré-demandes médias ouvertes, à déposer avant le 15 octobre 2026': 'Media pre-applications are open, to be submitted before 15 October 2026',
      
     'Qui est concerné': 'Who it is for',
     'Demande d’accréditations médias et créateurs de contenu': 'Media and content creator accreditation requests',
@@ -337,6 +338,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="c1d5c7b";pe
     R + ' .rac-bande{padding:clamp(58px,9vh,112px) 0;}',
     R + ' .rac-bande--form{background:radial-gradient(90% 60% at 50% 0%, rgba(14,154,170,.20), rgba(14,154,170,0) 60%),' +
       'linear-gradient(180deg,#081826,#061321 70%);}',
+    
+
+    R + ' .rac-scene + .rac-bande--form{border-top:1px solid var(--rac-filet);}',
     R + ' .rac-blocs{width:100%;margin-top:clamp(26px,5vh,54px);display:flex;flex-direction:column;gap:clamp(14px,1.8vw,22px);}',
     R + ' .rac-bloc{--acc:93,191,192;position:relative;display:grid;' +
       'grid-template-columns:clamp(98px,12vw,164px) minmax(0,1fr);' +
@@ -737,12 +741,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="c1d5c7b";pe
     
 
 
+
+
     _bandeau() {
-      const unite = esc(this._c('bandeau')) + svg('ancre');
+      const texte = String(this._c('bandeau') || '').trim();
+      if (!texte) return '';
+      const unite = esc(texte) + svg('ancre');
       let piste = '';
       for (let i = 0; i < 4; i++) piste += unite;
       return '<div class="rac-bandeau">' +
-        '<span class="rac-lu">' + esc(this._c('bandeau')) + '</span>' +
+        '<span class="rac-lu">' + esc(texte) + '</span>' +
         '<div class="rac-bandeau-piste" aria-hidden="true">' +
           '<span>' + piste + '</span><span aria-hidden="true">' + piste + '</span>' +
         '</div></div>';

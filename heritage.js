@@ -1,5 +1,5 @@
-/* rdr-elements heritage | source route-du-rhum c1d5c7b | rdr-heritage.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="c1d5c7b";performance.mark("rdr-elements:heritage")}catch(e){}
+/* rdr-elements heritage | source route-du-rhum 4f6c1ea | rdr-heritage.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["heritage"]="4f6c1ea";performance.mark("rdr-elements:heritage")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-heritage")) return;

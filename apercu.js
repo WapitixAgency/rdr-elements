@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum c1d5c7b | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="c1d5c7b";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 4f6c1ea | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4f6c1ea";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
