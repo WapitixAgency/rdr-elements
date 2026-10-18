@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 4f6c1ea | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4f6c1ea";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum f1a9abf | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f1a9abf";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -819,9 +819,9 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <div class="trame">
     <div>
       <span class="kicker kicker--sombre">La mascotte officielle</span>
-      <h2 class="titre">TyMAL, en tournée avant le village</h2>
-      <p>Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.</p>
-      <div class="btns"><a class="btn btn--marine" href="/carte-tournee">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="/post/tymal-la-mascotte-de-l-édition-2026" data-en="/en/post/tymal-the-mascot-of-the-2026-edition">En savoir plus</a></div>
+      <h2 class="titre" id="tymal-titre">TyMAL, en tournée avant le village</h2>
+      <p id="tymal-txt">Macareux moine, natif des côtes bretonnes, TyMAL sillonne la Bretagne et la Guadeloupe avant de vous retrouver sur les bassins. Suivez sa tournée jusqu'aux bassins, et repartez avec lui dans votre Espace Rhum.</p>
+      <div class="btns"><a class="btn btn--marine" id="tymal-ou" href="/carte-tournee">Où est TyMAL ? <svg viewBox="0 0 200 200"><path d="M100 20c-44.184 0-80 35.817-80 80.001C20 144.183 55.817 180 100 180s80-35.817 80-79.999S144.183 20 100 20zm-9.999 126.345l-10.997-10.998 35.346-35.346-35.346-35.347 10.997-10.998L136.345 100l-46.344 46.345z"/></svg></a><a class="btn btn--sombre" href="/post/tymal-la-mascotte-de-l-édition-2026" data-en="/en/post/tymal-the-mascot-of-the-2026-edition">En savoir plus</a></div>
     </div>
     <div class="video">
       <div class="video-cadre" id="video">
@@ -1616,6 +1616,28 @@ function monter(racine, portail, D) {
 
 
 
+
+
+  const TYMAL_MAQUETTE = (() => { const t = $('tymal-titre'), p = $('tymal-txt'), a = $('tymal-ou'); return { titre: t ? t.textContent : '', txt: p ? p.textContent : '', lien: a ? a.getAttribute('href') : '' }; })();
+  function rendreTymal() {
+    const t = $('tymal-titre'), p = $('tymal-txt'), a = $('tymal-ou');
+    if (!t || !p || !a) return;
+    const y = PHASES[phase] && PHASES[phase].tymal;
+    const titre = y && y.titre ? y.titre : TYMAL_MAQUETTE.titre;
+    const txt = y && y.txt ? y.txt : TYMAL_MAQUETTE.txt;
+    const cible = y && y.lien ? lien(y.lien) : TYMAL_MAQUETTE.lien;
+    if (t.textContent !== titre) t.textContent = titre;
+    if (p.textContent !== txt) p.textContent = txt;
+    if (cible && a.getAttribute('href') !== cible) a.setAttribute('href', cible);
+  }
+  
+
+
+
+
+
+
+
   function changerPhase(nouvelle) {
     if (nouvelle === phase || !Object.prototype.hasOwnProperty.call(PHASES, nouvelle)) return;
     const h = $('hero'); if (!h) return;
@@ -1632,7 +1654,7 @@ function monter(racine, portail, D) {
       heroTimer = setTimeout(() => {
         if (gen !== heroGen) return;
         phase = nouvelle; racine.dataset.phase = phase;
-        rendreHero(); rendreCtas(); if (majHorloge) majHorloge();
+        rendreHero(); rendreCtas(); rendreTymal(); if (majHorloge) majHorloge();
         requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); compter(); }));
         try { racine.dispatchEvent(new CustomEvent('raa-phase', { detail: { phase } })); } catch (e) {   }
       }, 1000);
@@ -2260,7 +2282,7 @@ function monter(racine, portail, D) {
 
 
 
-  rendreFaq(); rendreHero(); rendreCtas(); entree(); montrerHorloge();
+  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge();
   {
     const ph = $('hero-photo');
     const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
