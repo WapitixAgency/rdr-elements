@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 0287439 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0287439";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum c1d5c7b | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="c1d5c7b";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1833,9 +1833,11 @@ if (!customElements.get('espace-rhum')) {
 
     espace-rhum main.er-dashboard.jt-vue{display:flex;flex-direction:column;gap:22px;min-width:0;font-family:var(--er-font-body);color:#fff;animation:er-fadeup .45s var(--er-ease-entry,ease) both}
     espace-rhum main.er-dashboard.jt-vue[hidden],espace-rhum main.er-dashboard[hidden]{display:none}
-    espace-rhum .jt-retour{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:0;border:0;background:none;color:var(--er-text-muted);font:700 11px/1 var(--er-font-body);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
-    espace-rhum .jt-retour svg{width:14px;height:14px}
-    @media (hover:hover){espace-rhum .jt-retour:hover{color:#fff}}
+    espace-rhum .jt-retour{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:10px 16px 10px 12px;border:1px solid rgba(255,255,255,.32);border-radius:3px 12px 3px 12px;background:rgba(255,255,255,.1);color:#fff;font:800 12px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+    espace-rhum .jt-retour svg{width:16px;height:16px;color:var(--er-amber-bright)}
+    espace-rhum .jt-retour:focus-visible{outline:2px solid #fff;outline-offset:2px}
+    @media (hover:hover){espace-rhum .jt-retour:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5)}}
+    @media (max-width:767px){espace-rhum .jt-retour{min-height:44px;padding:12px 18px 12px 14px;font-size:12.5px}}
     espace-rhum .jt-vue-tete{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px}
     espace-rhum .jt-kicker{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--er-amber-bright)}
     espace-rhum .jt-kicker::before{content:"";width:22px;height:2px;background:var(--er-amber-bright)}
