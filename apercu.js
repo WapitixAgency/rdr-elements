@@ -1,6 +1,579 @@
-/* rdr-elements apercu | source route-du-rhum f1a9abf | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f1a9abf";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum e116eea | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e116eea";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
+(function () {
+  'use strict';
+  if (typeof window === 'undefined' || !window.customElements) return;
+  if (customElements.get('rdr-dernieres-infos')) return;
+
+  const SOURCE = '/_functions/dernieresInfos';
+  const CADENCE = 120000;
+  const CADENCE_MAX = 900000;
+  const ALEA = 20000;
+  const MEMOIRE = 30000;
+  const VITESSE = 52;
+  const MAX = 6;
+  const TOUTES = 'toutes';
+  const PAGES = ['accueil', 'classement', 'cartographie', 'carte-village', 'suivre-depart'];
+  const RANG = { alerte: 0, vigilance: 1, info: 2 };
+  const STOCK = 'rdrDernieresInfosV2:';
+
+  const T = {
+    fr: {
+      region: 'Dernières infos', etiquette: 'Dernières infos', info: 'Info', vigilance: 'Attention', alerte: 'Alerte',
+      suite: 'En savoir plus', onglet: 'nouvel onglet',
+      pause: 'Mettre en pause le défilement des infos', reprendre: 'Reprendre le défilement des infos',
+      prec: 'Info précédente', suiv: 'Info suivante', sur: (i, n) => i + ' sur ' + n,
+      nouvelle: 'Nouvelle info', nouvelleVigilance: 'Attention', nouvelleAlerte: 'Alerte',
+      ranger: 'Ranger les dernières infos'
+    },
+    en: {
+      region: 'Latest news', etiquette: 'Latest news', info: 'Update', vigilance: 'Caution', alerte: 'Alert',
+      suite: 'Read more', onglet: 'new tab',
+      pause: 'Pause the news ticker', reprendre: 'Resume the news ticker',
+      prec: 'Previous update', suiv: 'Next update', sur: (i, n) => i + ' of ' + n,
+      nouvelle: 'New update', nouvelleVigilance: 'Caution', nouvelleAlerte: 'Alert',
+      ranger: 'Hide the latest news'
+    }
+  };
+
+  const svg = (corps, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + corps + '</svg>';
+   
+  const ICO = {
+    megaphone: '<path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"/><path d="M8 6v8"/>',
+    alerte: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+    fleche: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+    pause: '<rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/>',
+    lecture: '<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>',
+    gauche: '<path d="m15 18-6-6 6-6"/>',
+    droite: '<path d="m9 18 6-6-6-6"/>',
+    ranger: '<path d="m18 15-6-6-6 6"/>'
+  };
+
+  const P = 'rdr-dernieres-infos ';
+  const CSS =
+    'rdr-dernieres-infos{display:block;position:relative;width:100%;line-height:normal;text-align:left}' +
+    P + '.rdi-vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}' +
+    P + '.rdi{--rdi-fond:#FCF150;--rdi-texte:#0E111D;--rdi-h:42px;--rdi-voile:rgba(14,17,29,.09);position:relative;display:flex;align-items:stretch;min-height:var(--rdi-h);background:transparent;color:var(--rdi-texte);font-family:"Montserrat",montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;font-weight:600;-webkit-font-smoothing:antialiased;overflow:hidden;box-sizing:border-box}' +
+    P + '.rdi *,' + P + '.rdi *::before,' + P + '.rdi *::after{box-sizing:border-box}' +
+    P + '.rdi--alerte{--rdi-fond:#D62839;--rdi-texte:#fff;--rdi-voile:rgba(255,255,255,.16)}' +
+    P + '.rdi ul{list-style:none;margin:0;padding:0}' +
+    P + '.rdi a{color:inherit;text-decoration:none}' +
+    P + '.rdi button{font:inherit;color:inherit;background:none;border:0;margin:0;padding:0;cursor:pointer}' +
+    P + '.rdi svg{display:block;flex:none}' +
+     
+    P + '.rdi-etiq{position:relative;z-index:2;flex:none;display:flex;align-items:center;gap:9px;padding:0 30px 0 clamp(14px,2.2vw,30px);background:linear-gradient(to bottom right,#0E111D 50%,var(--rdi-fond) calc(50% + .5px)) right/14px 100% no-repeat,linear-gradient(#0E111D,#0E111D) left/calc(100% - 13.5px) 100% no-repeat;color:#FCF150;white-space:nowrap}' +
+    P + '.rdi-etiq svg{width:18px;height:18px}' +
+    P + '.rdi-etiq-txt{font-family:"Varien","Archivo Black",Impact,sans-serif;font-style:italic;font-weight:400;font-size:15px;line-height:1;text-transform:uppercase;letter-spacing:.01em;padding-top:2px}' +
+    P + '.rdi-nb{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#FCF150;color:#0E111D;font-size:11px;font-weight:800;font-style:normal;line-height:1}' +
+    P + '.rdi--alerte .rdi-etiq{color:#fff}' +
+    P + '.rdi--alerte .rdi-nb{background:#D62839;color:#fff}' +
+     
+    P + '.rdi-fenetre{position:relative;flex:1 1 auto;min-width:0;display:flex;align-items:center;overflow:hidden;background:var(--rdi-fond)}' +
+    P + '.rdi--defile .rdi-fenetre::before,' + P + '.rdi--defile .rdi-fenetre::after{content:"";position:absolute;z-index:1;top:0;bottom:0;pointer-events:none}' +
+    P + '.rdi--defile .rdi-fenetre::before{left:0;width:16px;background:linear-gradient(90deg,var(--rdi-fond),transparent)}' +
+    P + '.rdi--defile .rdi-fenetre::after{right:0;width:32px;background:linear-gradient(270deg,var(--rdi-fond),transparent)}' +
+    P + '.rdi-piste{display:flex;flex:none;align-items:center;min-width:100%;padding-left:22px}' +
+    P + '.rdi--defile .rdi-piste{will-change:transform}' +
+    P + '.rdi-liste{display:flex;flex:none;align-items:center}' +
+    P + '.rdi-li{display:flex;flex:none;align-items:center}' +
+    P + '.rdi-li::after{content:"";flex:none;width:5px;height:15px;margin:0 24px;border-radius:1px;background:currentColor;opacity:.32;transform:skewX(-20deg)}' +
+    P + '.rdi--seule .rdi-li::after,' + P + '.rdi--pas .rdi-li::after,' + P + '.rdi--fixe .rdi-li:last-child::after{display:none}' +
+    P + '.rdi-item{display:flex;align-items:center;min-height:var(--rdi-h);padding:0 4px 0 0;white-space:nowrap;line-height:1.3}' +
+    P + '.rdi-corps{display:flex;align-items:center;gap:10px;min-width:0}' +
+    P + 'a.rdi-item:focus{outline:none}' +
+    P + 'a.rdi-item:focus-visible{outline:2px solid currentColor;outline-offset:-5px;border-radius:4px}' +
+    P + '.rdi-badge{flex:none;display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:3px 9px 3px 9px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1}' +
+    P + '.rdi-badge svg{width:13px;height:13px}' +
+    
+
+
+    P + '.rdi-badge--alerte{background:#fff;color:#D62839}' +
+    P + '.rdi-badge--vigilance{background:#0E111D;color:#FCF150}' +
+    P + '.rdi-badge--info{background:#FCF150;color:#0E111D}' +
+    P + '.rdi-texte{min-width:0}' +
+    
+
+
+
+
+    P + '.rdi-suite{flex:none;display:inline-block;font-weight:800;white-space:nowrap}' +
+    P + '.rdi-suite-txt{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}' +
+    P + '.rdi .rdi-suite svg{display:inline-block;width:1.05em;height:1.05em;margin-left:5px;vertical-align:-.17em;transition:transform .2s ease}' +
+    '@media (hover:hover){' + P + 'a.rdi-item:hover .rdi-suite-txt{text-decoration-thickness:2px}' + P + 'a.rdi-item:hover .rdi-suite svg{transform:translateX(2px)}}' +
+    '@media (prefers-reduced-motion:reduce){' + P + '.rdi .rdi-suite svg{transition:none}}' +
+     
+    P + '.rdi--seule .rdi-li{flex:1 1 auto;min-width:0}' +
+    P + '.rdi--seule .rdi-liste,' + P + '.rdi--seule .rdi-piste{flex:1 1 auto;min-width:0}' +
+    P + '.rdi--seule .rdi-item,' + P + '.rdi--pas .rdi-item{display:block;flex:1 1 auto;min-width:0;min-height:0;white-space:normal;padding-top:6px;padding-bottom:6px}' +
+    P + '.rdi--seule .rdi-corps,' + P + '.rdi--pas .rdi-corps{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.35}' +
+    P + '.rdi--seule .rdi-item{padding-right:clamp(14px,2.2vw,30px)}' +
+    P + '.rdi--seule .rdi-badge,' + P + '.rdi--pas .rdi-badge{display:inline-flex;vertical-align:-1.5px;margin-right:9px}' +
+    P + '.rdi--seule .rdi-texte,' + P + '.rdi--pas .rdi-texte{display:inline}' +
+    P + '.rdi--seule .rdi-suite,' + P + '.rdi--pas .rdi-suite{display:inline;margin-left:9px}' +
+     
+    P + '.rdi--pas .rdi-liste,' + P + '.rdi--pas .rdi-piste{flex:1 1 auto;min-width:0}' +
+    P + '.rdi--pas .rdi-li{flex:1 1 auto;min-width:0}' +
+    P + '.rdi--pas .rdi-li[hidden]{display:none}' +
+     
+    P + '.rdi-cmd{position:relative;z-index:2;flex:none;display:flex;align-items:center;gap:2px;padding:0 clamp(8px,1.4vw,18px) 0 6px;background:var(--rdi-fond)}' +
+    P + '.rdi--fixe .rdi-btn[data-rdi-pause]{display:none}' +
+    P + '.rdi-btn{display:grid;place-items:center;width:32px;height:32px;border-radius:3px 12px 3px 12px;background:var(--rdi-voile)}' +
+    P + '.rdi-btn svg{width:15px;height:15px}' +
+    P + '.rdi-btn[data-rdi-pause] svg{fill:currentColor;stroke:none}' +
+    P + '.rdi-btn:focus{outline:none}' +
+    P + '.rdi-btn:focus-visible{outline:2px solid currentColor;outline-offset:2px}' +
+    '@media (hover:hover){' + P + '.rdi-btn:hover{background:var(--rdi-texte);color:var(--rdi-fond)}}' +
+    P + '.rdi-compte{min-width:46px;text-align:center;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}' +
+     
+    '@media (min-width:761px) and (max-height:820px){' + P + '.rdi{--rdi-h:38px;font-size:13.5px}' + P + '.rdi-etiq-txt{font-size:14px}}' +
+     
+    '@media (max-width:760px){' + P + '.rdi{--rdi-h:40px;font-size:13px}' + P + '.rdi-etiq{gap:7px;padding:0 24px 0 14px}' + P + '.rdi-etiq-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}' + P + '.rdi-corps{gap:8px}' + P + '.rdi-piste{padding-left:18px}' + P + '.rdi--seule .rdi-item{padding-right:12px}' + P + '.rdi-suite-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}' + P + '.rdi-badge{height:20px;padding:0 6px;font-size:9.5px;letter-spacing:.1em}' + P + '.rdi-li::after{margin:0 18px}' + P + '.rdi-cmd{padding-right:8px}' + P + '.rdi-compte{min-width:38px;font-size:11px}}' +
+     
+    '@media (orientation:landscape) and (max-height:500px){' + P + '.rdi{--rdi-h:34px;font-size:12.5px}' + P + '.rdi-etiq-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}' + P + '.rdi--seule .rdi-item,' + P + '.rdi--pas .rdi-item{padding-top:0;padding-bottom:0}' + P + '.rdi--seule .rdi-corps,' + P + '.rdi--pas .rdi-corps{-webkit-line-clamp:1}' + P + '.rdi-btn{width:28px;height:28px}}';
+
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const instant = (v) => { if (v == null || v === '') return null; const t = new Date(v).getTime(); return isNaN(t) ? null : t; };
+
+  function langueDe(el) {
+    const a = String(el.getAttribute('lang') || '').toLowerCase();
+    if (a === 'fr' || a === 'en') return a;
+    const l = String(document.documentElement.getAttribute('lang') || '').toLowerCase();
+    return l.indexOf('en') === 0 || /^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr';
+  }
+
+   
+  function adresse(lien, lang) {
+    const l = String(lien || '').trim();
+    if (/^https:\/\/[^\s"'<>]+$/i.test(l)) {
+      return { href: l, externe: !/^https:\/\/(www\.)?routedurhum\.com([/?#]|$)/i.test(l) };
+    }
+    if (/^\/(?!\/)[^\s"'<>\\]*$/.test(l)) {
+      let p = l;
+      if (lang === 'en' && !/^\/en([/?#]|$)/.test(p)) p = '/en' + (p === '/' ? '' : p);
+      return { href: p, externe: false };
+    }
+    return null;
+  }
+
+  const niveauDe = (v) => (v === 'alerte' || v === 'rouge' ? 'alerte' : v === 'vigilance' || v === 'jaune' ? 'vigilance' : 'info');
+  const pagesDe = (v) => {
+    const l = (Array.isArray(v) ? v : []).map((p) => (p === 'partout' ? TOUTES : String(p))).filter((p) => p === TOUTES || PAGES.indexOf(p) >= 0);
+    return l.length ? l : [TOUTES];
+  };
+
+   
+  function normaliser(jeu) {
+    const brut = Array.isArray(jeu) ? jeu : (jeu && Array.isArray(jeu.infos) ? jeu.infos : []);
+    const vus = new Set();
+    const out = [];
+    brut.forEach((x, i) => {
+      if (!x || typeof x !== 'object') return;
+      const texte = String(x.texte == null ? '' : x.texte).replace(/\s+/g, ' ').trim().slice(0, 280);
+      if (!texte) return;
+      const id = String(x.id == null || x.id === '' ? 'info-' + i : x.id).slice(0, 80);
+      if (vus.has(id)) return;
+      vus.add(id);
+      out.push({
+        id, texte, rang: i,
+        niveau: niveauDe(x.niveau),
+        pages: pagesDe(x.pages),
+        langue: x.langue === 'fr' || x.langue === 'en' ? x.langue : '',
+        lien: String(x.lien || ''),
+        libelleLien: String(x.libelleLien == null ? '' : x.libelleLien).replace(/\s+/g, ' ').trim().slice(0, 60),
+        debut: instant(x.debut), fin: instant(x.fin)
+      });
+    });
+    out.sort((a, b) => (RANG[a.niveau] - RANG[b.niveau]) || (a.rang - b.rang));
+    return out;
+  }
+  const enCours = (x, t) => (x.debut == null || x.debut <= t) && (x.fin == null || x.fin > t);
+  const pourPage = (l, page) => l.filter((x) => x.pages.indexOf(TOUTES) >= 0 || x.pages.indexOf(page) >= 0);
+   
+  const cadenceDe = (jeu) => {
+    const s = Number(jeu && jeu.relire);
+    return isFinite(s) && s > 0 ? Math.min(CADENCE_MAX, Math.max(CADENCE, s * 1000)) : CADENCE;
+  };
+
+   
+  function stockLire(lang) {
+    try {
+      const v = JSON.parse(window.localStorage.getItem(STOCK + lang) || 'null');
+      return v && typeof v.t === 'number' && v.jeu && typeof v.jeu === 'object' ? v : null;
+    } catch (e) { return null; }
+  }
+  function stockEcrire(lang, jeu, t) {
+    try { window.localStorage.setItem(STOCK + lang, JSON.stringify({ t, jeu })); } catch (e) {   }
+  }
+
+   
+  const lectures = new Map();
+  function lireSource(url, lang) {
+    const c = lectures.get(url);
+    if (c && Date.now() - c.t < MEMOIRE) return c.p;
+    const t = Date.now();
+    const p = fetch(url, { credentials: 'omit' }).then((r) => {
+      if (!r.ok) throw new Error('dernieresInfos ' + r.status);
+      return r.json();
+    }).then((jeu) => { stockEcrire(lang, jeu, t); return jeu; });
+    lectures.set(url, { t, p });
+    p.catch(() => lectures.delete(url));
+    return p;
+  }
+
+  class RdrDernieresInfos extends HTMLElement {
+    static get observedAttributes() { return ['infos', 'page', 'lang', 'rangeable']; }
+
+    constructor() {
+      super();
+      this._pret = false;
+      this._toutes = [];
+      this._signature = null;
+      this._nombre = 0;
+      this._connues = null;
+      this._pause = false;
+      this._survol = false;
+      this._focus = false;
+      this._indice = 0;
+      this._lu = 0;
+      this._cadence = CADENCE;
+      this._attente = false;
+      this._etat = '';
+      this._gardesMemoire = null;
+    }
+
+    connectedCallback() {
+      if (!document.getElementById('rdr-dernieres-infos-css')) {
+        const st = document.createElement('style');
+        st.id = 'rdr-dernieres-infos-css';
+        st.textContent = CSS;
+        document.head.appendChild(st);
+      }
+      this._lang = langueDe(this);
+      this._signature = null;
+      if (!this._pret) {
+        this._pret = true;
+        this.innerHTML = '<p class="rdi-vh" role="status" aria-live="polite"></p><div class="rdi-hote"></div>';
+        this._statut = this.firstElementChild;
+        this._hote = this.lastElementChild;
+        this.addEventListener('click', (e) => this._clic(e));
+        this.addEventListener('focusin', (e) => this._focusDedans(e));
+        
+
+
+        this.addEventListener('scroll', (e) => { const n = e.target; if (n && n.classList && (n.classList.contains('rdi-fenetre') || n.classList.contains('rdi')) && n.scrollLeft) n.scrollLeft = 0; }, true);
+        this.addEventListener('focusout', (e) => { if (!this.contains(e.relatedTarget)) { this._focus = false; this._jouer(); } });
+        this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { this._survol = true; this._jouer(); } });
+        this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { this._survol = false; this._jouer(); } });
+      }
+      this._visibilite = () => this._surVisibilite();
+      document.addEventListener('visibilitychange', this._visibilite);
+      this._stock = (e) => this._surStock(e);
+      window.addEventListener('storage', this._stock);
+      this._mqReduit = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+      this._surReduit = () => { this._signature = null; this._peindre(); };
+      if (this._mqReduit && this._mqReduit.addEventListener) this._mqReduit.addEventListener('change', this._surReduit);
+      if (this.hasAttribute('infos')) this._depuisAttribut();
+      else this._lire();
+    }
+
+    disconnectedCallback() {
+      document.removeEventListener('visibilitychange', this._visibilite);
+      window.removeEventListener('storage', this._stock);
+      if (this._mqReduit && this._mqReduit.removeEventListener) this._mqReduit.removeEventListener('change', this._surReduit);
+      clearTimeout(this._minuteur);
+      clearTimeout(this._bascule);
+      this._arreterDefilement();
+    }
+
+    attributeChangedCallback(nom, avant, apres) {
+      if (avant === apres || !this._pret || !this.isConnected) return;
+      if (nom === 'infos') {
+        if (apres == null) { this._toutes = []; this._signature = null; this._peindre(); this._lire(); }
+        else this._depuisAttribut();
+      } else if (nom === 'lang') {
+        this._lang = langueDe(this);
+        this._signature = null;
+        if (this.hasAttribute('infos')) this._peindre(); else { this._lu = 0; this._lire(); }
+      } else if (nom === 'page') {
+        this._signature = null;
+        if (this.hasAttribute('infos')) this._depuisAttribut(); else { this._lu = 0; this._lire(); }
+      } else if (nom === 'rangeable') {
+        this._signature = null;
+        this._peindre();
+      }
+    }
+
+     
+    _cleRange() { return 'rdrInfosRangees:' + String(this.getAttribute('page') || 'partout'); }
+    _gardes() {
+      if (this._gardesMemoire) return this._gardesMemoire;
+      try { const v = JSON.parse(window.sessionStorage.getItem(this._cleRange()) || 'null'); return Array.isArray(v) ? v : null; } catch (e) { return null; }
+    }
+    _garder(ids) {
+      this._gardesMemoire = ids;
+      try { if (ids) window.sessionStorage.setItem(this._cleRange(), JSON.stringify(ids)); else window.sessionStorage.removeItem(this._cleRange()); } catch (e) {   }
+    }
+    ranger() {
+      const t = Date.now();
+      this._garder(this._toutes.filter((x) => enCours(x, t)).map((x) => x.id));
+      this._signature = null;
+      this._peindre();
+    }
+    deplier() {
+      this._garder(null);
+      this._signature = null;
+      this._peindre();
+    }
+
+     
+    _page() {
+      const p = String(this.getAttribute('page') || '').toLowerCase();
+      return PAGES.indexOf(p) >= 0 ? p : TOUTES;
+    }
+
+    _depuisAttribut() {
+      clearTimeout(this._minuteur);
+      let jeu = null;
+      try { jeu = JSON.parse(this.getAttribute('infos') || 'null'); } catch (e) { jeu = null; }
+      this._toutes = pourPage(normaliser(jeu), this._page());
+      this._peindre();
+    }
+
+     
+    _url() { return SOURCE + '?page=' + TOUTES + '&lang=' + this._lang; }
+
+    _recevoir(jeu) {
+      this._cadence = cadenceDe(jeu);
+      this._toutes = pourPage(normaliser(jeu), this._page());
+      this._peindre();
+    }
+
+    _programmer(ms) {
+      clearTimeout(this._minuteur);
+      if (this.isConnected && !this.hasAttribute('infos')) this._minuteur = setTimeout(() => this._lire(), Math.max(5000, ms) + Math.round(Math.random() * ALEA));
+    }
+
+    
+
+    _lire() {
+      clearTimeout(this._minuteur);
+      if (!this.isConnected || this.hasAttribute('infos')) return;
+      if (document.visibilityState === 'hidden') { this._attente = true; return; }
+      this._attente = false;
+      const t = Date.now();
+      const s = stockLire(this._lang);
+      if (s && t - s.t >= 0 && t - s.t < cadenceDe(s.jeu)) {
+        this._lu = s.t;
+        this._recevoir(s.jeu);
+        this._programmer(this._cadence - (t - s.t));
+        return;
+      }
+      this._lu = t;
+      lireSource(this._url(), this._lang)
+        .then((jeu) => { if (this.isConnected && !this.hasAttribute('infos')) this._recevoir(jeu); })
+        .catch(() => {})
+        .then(() => this._programmer(this._cadence));
+    }
+
+     
+    _surStock(e) {
+      if (!e || e.key !== STOCK + this._lang || !e.newValue || this.hasAttribute('infos') || !this.isConnected) return;
+      let v = null;
+      try { v = JSON.parse(e.newValue); } catch (err) { v = null; }
+      if (!v || typeof v.t !== 'number' || !v.jeu || typeof v.jeu !== 'object') return;
+      this._lu = v.t;
+      this._recevoir(v.jeu);
+      if (document.visibilityState !== 'hidden') this._programmer(this._cadence - (Date.now() - v.t));
+    }
+
+    _surVisibilite() {
+      if (document.visibilityState !== 'visible' || this.hasAttribute('infos')) return;
+      if (this._attente || Date.now() - this._lu >= this._cadence) this._lire();
+    }
+
+     
+    _peindre() {
+      if (!this._hote) return;
+      clearTimeout(this._bascule);
+      const t = Date.now();
+      const vis = this._toutes.filter((x) => enCours(x, t)).slice(0, MAX);
+      const prochaine = this._toutes.reduce((m, x) => [x.debut, x.fin].reduce((mm, v) => (v != null && v > t && v < mm ? v : mm), m), Infinity);
+      if (prochaine !== Infinity) this._bascule = setTimeout(() => this._peindre(), Math.min(prochaine - t + 50, 86400000));
+      const reduit = !!(this._mqReduit && this._mqReduit.matches);
+      const rangeable = this.hasAttribute('rangeable');
+      const gardes = rangeable ? this._gardes() : null;
+      const range = !!(rangeable && vis.length && gardes && vis.every((x) => gardes.indexOf(x.id) >= 0));
+      if (rangeable && gardes && vis.length && !range) this._garder(null);
+      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.langue, x.lien, x.libelleLien]));
+      if (signature === this._signature) return;
+      this._signature = signature;
+      this._annoncer(vis);
+      this._arreterDefilement();
+      this._focus = false;
+      const L = T[this._lang];
+      const rouge = vis.some((x) => x.niveau === 'alerte');
+      const niveau = vis.length ? vis.reduce((m, x) => (RANG[x.niveau] < RANG[m] ? x.niveau : m), 'info') : null;
+      if (!vis.length || range) {
+        this._hote.innerHTML = '';
+      } else {
+        const mode = vis.length === 1 ? 'seule' : reduit ? 'pas' : 'defile';
+        if (this._indice >= vis.length) this._indice = 0;
+        const items = vis.map((x, i) => this._itemHTML(x, L, rouge, mode === 'pas' && i !== this._indice)).join('');
+        let cmd = '';
+        if (mode === 'defile') {
+          cmd = '<button type="button" class="rdi-btn" data-rdi-pause aria-label="' + esc(this._pause ? L.reprendre : L.pause) + '">' + svg(this._pause ? ICO.lecture : ICO.pause) + '</button>';
+        } else if (mode === 'pas') {
+          cmd = '<button type="button" class="rdi-btn" data-rdi-prec aria-label="' + esc(L.prec) + '">' + svg(ICO.gauche) + '</button>' +
+            '<span class="rdi-compte" aria-live="polite"><span aria-hidden="true">' + (this._indice + 1) + ' / ' + vis.length + '</span><span class="rdi-vh">' + esc(L.sur(this._indice + 1, vis.length)) + '</span></span>' +
+            '<button type="button" class="rdi-btn" data-rdi-suiv aria-label="' + esc(L.suiv) + '">' + svg(ICO.droite) + '</button>';
+        }
+        if (rangeable) cmd += '<button type="button" class="rdi-btn rdi-ranger" data-rdi-ranger aria-label="' + esc(L.ranger) + '">' + svg(ICO.ranger) + '</button>';
+        if (cmd) cmd = '<div class="rdi-cmd">' + cmd + '</div>';
+        this._hote.innerHTML =
+          '<section class="rdi rdi--' + (rouge ? 'alerte' : 'info') + ' rdi--' + mode + '" aria-label="' + esc(L.region) + '" data-nombre="' + vis.length + '">' +
+            '<div class="rdi-etiq">' + svg(ICO.megaphone) + '<span class="rdi-etiq-txt">' + esc(L.etiquette) + '</span>' + (vis.length > 1 ? '<span class="rdi-nb" aria-hidden="true">' + vis.length + '</span>' : '') + '</div>' +
+            '<div class="rdi-fenetre"><div class="rdi-piste"><ul class="rdi-liste">' + items + '</ul></div></div>' + cmd +
+          '</section>';
+        if (mode === 'defile') this._monterDefilement();
+      }
+      const etat = vis.length + '|' + range + '|' + niveau;
+      if (etat !== this._etat) {
+        this._etat = etat;
+        this._nombre = vis.length;
+        this.dispatchEvent(new CustomEvent('dernieres-infos', { bubbles: true, detail: { nombre: vis.length, range, alerte: rouge, niveau } }));
+      }
+    }
+
+    _itemHTML(x, L, rouge, cache) {
+      const badge = x.niveau === 'info'
+        ? (rouge ? '<span class="rdi-badge rdi-badge--info">' + esc(L.info) + '</span>' : '')
+        : '<span class="rdi-badge rdi-badge--' + x.niveau + '">' + svg(ICO.alerte) + esc(L[x.niveau]) + '</span>';
+      const a = adresse(x.lien, this._lang);
+       
+      const autre = x.langue && x.langue !== this._lang ? ' lang="' + x.langue + '"' : '';
+      const corps = badge + '<span class="rdi-texte"' + autre + '>' + esc(x.texte) + '</span>';
+      const li = '<li class="rdi-li" data-id="' + esc(x.id) + '" data-niveau="' + x.niveau + '"' + (cache ? ' hidden' : '') + '>';
+      if (!a) return li + '<span class="rdi-item"><span class="rdi-corps">' + corps + '</span></span></li>';
+      const libelle = x.libelleLien || L.suite;
+      return li + '<a class="rdi-item" href="' + esc(a.href) + '"' + (a.externe ? ' target="_blank" rel="noopener"' : '') + '><span class="rdi-corps">' + corps +
+        '<span class="rdi-suite"><span class="rdi-suite-txt">' + esc(libelle) + '</span>' + svg(ICO.fleche) + '</span></span>' +
+        (a.externe ? '<span class="rdi-vh"> (' + esc(L.onglet) + ')</span>' : '') + '</a></li>';
+    }
+
+     
+    _annoncer(vis) {
+      const ids = new Set(vis.map((x) => x.id));
+      if (this._connues) {
+        const neuve = vis.find((x) => !this._connues.has(x.id));
+        if (neuve && this._statut) {
+          const L = T[this._lang];
+          this._statut.textContent = (neuve.niveau === 'alerte' ? L.nouvelleAlerte : neuve.niveau === 'vigilance' ? L.nouvelleVigilance : L.nouvelle) + ' : ' + neuve.texte;
+        }
+      }
+      this._connues = ids;
+    }
+
+    
+
+    _monterDefilement() {
+      const bande = this._hote.querySelector('.rdi');
+      const fenetre = this._hote.querySelector('.rdi-fenetre');
+      const piste = this._hote.querySelector('.rdi-piste');
+      const liste = piste && piste.querySelector('.rdi-liste');
+      if (!bande || !fenetre || !liste) return;
+      const mesurer = () => {
+        const largeur = liste.getBoundingClientRect().width;
+        const deborde = largeur > fenetre.clientWidth + 1;
+        let copie = piste.querySelector('.rdi-liste--copie');
+        if (!deborde) {
+          bande.classList.remove('rdi--defile');
+          bande.classList.add('rdi--fixe');
+          if (copie) copie.remove();
+          if (this._anim) { this._anim.cancel(); this._anim = null; }
+          this._distance = 0;
+          return;
+        }
+        bande.classList.add('rdi--defile');
+        bande.classList.remove('rdi--fixe');
+        if (!copie) {
+          copie = liste.cloneNode(true);
+          copie.classList.add('rdi-liste--copie');
+          copie.setAttribute('aria-hidden', 'true');
+          copie.querySelectorAll('a,button').forEach((n) => n.setAttribute('tabindex', '-1'));
+          piste.appendChild(copie);
+        }
+        if (Math.abs(largeur - (this._distance || 0)) < 1 && this._anim) return;
+        const avancee = this._anim && this._distance ? ((this._anim.currentTime || 0) % (this._distance / VITESSE * 1000)) / (this._distance / VITESSE * 1000) : 0;
+        if (this._anim) this._anim.cancel();
+        this._distance = largeur;
+        const duree = largeur / VITESSE * 1000;
+        this._anim = piste.animate([{ transform: 'translate3d(0,0,0)' }, { transform: 'translate3d(' + (-largeur) + 'px,0,0)' }], { duration: duree, iterations: Infinity, easing: 'linear' });
+        this._anim.currentTime = avancee * duree;
+        this._jouer();
+      };
+      mesurer();
+      if (window.ResizeObserver) {
+        this._ro = new window.ResizeObserver(() => mesurer());
+        this._ro.observe(fenetre);
+      }
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (this._hote.contains(liste)) mesurer(); });
+    }
+
+    _arreterDefilement() {
+      if (this._ro) { this._ro.disconnect(); this._ro = null; }
+      if (this._anim) { this._anim.cancel(); this._anim = null; }
+      this._distance = 0;
+    }
+
+     
+    _jouer() {
+      if (!this._anim) return;
+      if (this._pause || this._survol || this._focus) this._anim.pause();
+      else this._anim.play();
+    }
+
+     
+    _focusDedans(e) {
+      const item = e.target && e.target.closest ? e.target.closest('.rdi-item') : null;
+      let clavier = true;
+      try { clavier = e.target.matches(':focus-visible'); } catch (err) { clavier = true; }
+      this._focus = !!item;
+      if (item && clavier && this._anim && this._distance) {
+        const li = item.closest('.rdi-li');
+        const decalage = Math.max(0, li.offsetLeft - 22);
+        const duree = this._distance / VITESSE * 1000;
+        this._anim.pause();
+        this._anim.currentTime = Math.min(decalage, this._distance - 1) / this._distance * duree;
+      }
+      this._jouer();
+    }
+
+    _clic(e) {
+      const b = e.target && e.target.closest ? e.target.closest('.rdi-btn') : null;
+      if (!b) return;
+      const L = T[this._lang];
+      if (b.hasAttribute('data-rdi-ranger')) {
+        this.ranger();
+      } else if (b.hasAttribute('data-rdi-pause')) {
+        this._pause = !this._pause;
+        b.setAttribute('aria-label', this._pause ? L.reprendre : L.pause);
+        b.innerHTML = svg(this._pause ? ICO.lecture : ICO.pause);
+        this._jouer();
+      } else if (b.hasAttribute('data-rdi-prec') || b.hasAttribute('data-rdi-suiv')) {
+        const lis = [...this._hote.querySelectorAll('.rdi-li')];
+        if (!lis.length) return;
+        this._indice = (this._indice + (b.hasAttribute('data-rdi-suiv') ? 1 : lis.length - 1)) % lis.length;
+        lis.forEach((li, i) => { li.hidden = i !== this._indice; });
+        const compte = this._hote.querySelector('.rdi-compte');
+        if (compte) compte.innerHTML = '<span aria-hidden="true">' + (this._indice + 1) + ' / ' + lis.length + '</span><span class="rdi-vh">' + esc(L.sur(this._indice + 1, lis.length)) + '</span>';
+      }
+    }
+  }
+
+  customElements.define('rdr-dernieres-infos', RdrDernieresInfos);
+})();
+ 
 (function () {
   'use strict';
   if (typeof customElements === 'undefined' || customElements.get('rdr-accueil-apercu')) return;
@@ -221,11 +794,11 @@ rdr-accueil-apercu .hero.est-photo .hv-fait{opacity:1;transform:none;transition:
 rdr-accueil-apercu .hv-defiler{display:none}
 @keyframes raa-hv-descend{0%,100%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(3px);opacity:1}}
 rdr-accueil-apercu .hv-acces-sous{background:#0E111D;padding:clamp(16px,2.6vh,28px) 0 44px}
-rdr-accueil-apercu .hero + .hv-acces-sous .cta{transition:flex .6s cubic-bezier(.22,.8,.3,1),box-shadow .3s,opacity .6s ease var(--d,0s),transform .8s cubic-bezier(.22,.8,.3,1) var(--d,0s)}
-rdr-accueil-apercu .hero:not(.est-photo) + .hv-acces-sous .cta{opacity:0;transform:translateY(28px)}
-rdr-accueil-apercu .hero.est-photo + .hv-acces-sous .cta{--d:.45s}
-rdr-accueil-apercu .hero.est-photo + .hv-acces-sous .cta:nth-child(2){--d:.57s}
-rdr-accueil-apercu .hero.est-photo + .hv-acces-sous .cta:nth-child(3){--d:.69s}
+rdr-accueil-apercu .hero ~ .hv-acces-sous .cta{transition:flex .6s cubic-bezier(.22,.8,.3,1),box-shadow .3s,opacity .6s ease var(--d,0s),transform .8s cubic-bezier(.22,.8,.3,1) var(--d,0s)}
+rdr-accueil-apercu .hero:not(.est-photo) ~ .hv-acces-sous .cta{opacity:0;transform:translateY(28px)}
+rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta{--d:.45s}
+rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(2){--d:.57s}
+rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(3){--d:.69s}
 rdr-accueil-apercu .cta-liste{display:flex;gap:16px;height:var(--haut-acces)}
 rdr-accueil-apercu .cta{position:relative;flex:1;border-radius:18px;overflow:hidden;background:var(--panneau);color:#fff;transition:flex .6s cubic-bezier(.22,.8,.3,1),box-shadow .3s;display:flex;align-items:flex-end;min-width:0;border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 30px 60px rgba(0,0,0,.45)}
 rdr-accueil-apercu .cta:hover,rdr-accueil-apercu .cta:focus-within{flex:2.1}
@@ -762,6 +1335,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <div class="hv-contenu"><div class="trame hv-ligne"><div class="hv-titre" id="hv-titre"></div></div></div>
   <span class="hv-defiler" id="hv-defiler" aria-hidden="true"></span>
 </section>
+<rdr-dernieres-infos page="accueil"></rdr-dernieres-infos>
 <section class="hv-acces-sous"><div class="trame"><div class="cta-liste" id="ctas"></div></div></section>
 <section class="affiche"><div class="trame">
   <div class="affiche-tete"><h2 class="titre">À l'affiche<small>Les prochains temps forts, jour par jour</small></h2><a class="affiche-lien" href="/programmation">Toute la programmation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>

@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum f1a9abf | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="f1a9abf";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum e116eea | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="e116eea";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -7454,6 +7454,13 @@ class SkippersList extends HTMLElement {
   connectedCallback() {
     this.style.display = 'block';
     this.style.width = '100%';
+    
+
+
+
+
+
+    try { const sec = this.closest('section'); if (sec && sec.style.overflowX !== 'clip') sec.style.overflowX = 'clip'; } catch (e) {   }
     if (!this._adresseLue) { this._adresseLue = true; this._lireAdresse(); }
      
      
