@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum 468fa38 | skipper-media-uploader.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="468fa38";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum 7e085f1 | rdr-inscription-fiche-skipper.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="7e085f1";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 (function () {
 const BALISE_MEDIAS = 'rdr-envoi-medias';
@@ -152,7 +152,7 @@ class SkipperMediaUploader extends HTMLElement {
   async _loadInitialState() {
     const token = this._resolveToken();
     if (!token) {
-      console.warn('[skipper-media-uploader] Token introuvable, impossible de charger l\'état initial');
+      console.warn('[envoi-medias] Token introuvable, impossible de charger l\'état initial');
       return;
     }
     const gen = ++this._loadGen;
@@ -160,7 +160,7 @@ class SkipperMediaUploader extends HTMLElement {
       const res = await fetch(`${CONFIG.STATE_ENDPOINT}?token=${encodeURIComponent(token)}`);
       if (gen !== this._loadGen) return;
       if (!res.ok) {
-        console.warn('[skipper-media-uploader] Chargement état initial : réponse non-OK', res.status);
+        console.warn('[envoi-medias] Chargement état initial : réponse non-OK', res.status);
         return;
       }
       const data = await this._safeJson(res);
@@ -168,7 +168,7 @@ class SkipperMediaUploader extends HTMLElement {
       if (data?.state) this._applyState(data.state);
     } catch (e) {
       if (gen !== this._loadGen) return;
-      console.warn('[skipper-media-uploader] Chargement état initial échoué', e);
+      console.warn('[envoi-medias] Chargement état initial échoué', e);
     }
   }
 
@@ -508,7 +508,7 @@ class SkipperMediaUploader extends HTMLElement {
       }
       this._toast('Image enregistrée', 'info');
     } catch (e) {
-      console.error('[skipper-media-uploader] tile upload failed', {
+      console.error('[envoi-medias] tile upload failed', {
         error: e?.message,
         kind,
         fileName: file?.name,
@@ -582,7 +582,7 @@ class SkipperMediaUploader extends HTMLElement {
         if (localUrl) { try { URL.revokeObjectURL(localUrl); } catch {} }
         if (result?.state) this._applyState(result.state);
       } catch (e) {
-        console.error('[skipper-media-uploader] galerie upload failed', {
+        console.error('[envoi-medias] galerie upload failed', {
           error: e?.message,
           fileName: file?.name,
           fileSize: file?.size,
@@ -624,7 +624,7 @@ class SkipperMediaUploader extends HTMLElement {
         const data = await this._safeJson(res);
         if (data?.state) this._applyState(data.state);
       } catch (e) {
-        console.error('[skipper-media-uploader] remove failed', e);
+        console.error('[envoi-medias] remove failed', e);
         this._toast(e.message || 'Suppression échouée', 'error');
       }
     });
@@ -675,7 +675,7 @@ class SkipperMediaUploader extends HTMLElement {
       this._dossierEnvoi = null;
       this._refreshDossier();
       if (e?.message !== 'Upload annulé') {
-        console.error('[skipper-media-uploader] dossier de presse', { error: e?.message, fileName: file?.name, fileSize: file?.size });
+        console.error('[envoi-medias] dossier de presse', { error: e?.message, fileName: file?.name, fileSize: file?.size });
         this._toast(e?.message || 'Envoi du PDF échoué', 'error');
       }
     } finally {
@@ -850,7 +850,7 @@ class SkipperMediaUploader extends HTMLElement {
     const mimeOk = /^image\/(jpeg|jpg|png|webp)$/i.test(type);
     const extOk = /\.(jpe?g|png|webp)$/i.test(name);
     if (!mimeOk && !extOk) {
-      console.warn('[skipper-media-uploader] Fichier refusé', { type, name, size: file.size });
+      console.warn('[envoi-medias] Fichier refusé', { type, name, size: file.size });
       return 'Format non supporté (JPEG, PNG, WebP uniquement)';
     }
     if (file.size > CONFIG.MAX_FILE_SIZE) return `Fichier trop lourd (max ${Math.round(CONFIG.MAX_FILE_SIZE / 1024 / 1024)} Mo)`;
@@ -892,7 +892,7 @@ class SkipperMediaUploader extends HTMLElement {
           const bmp = await createImageBitmap(file);
           return { type: 'bitmap', source: bmp };
         } catch (e2) {
-          console.warn('[skipper-media-uploader] createImageBitmap a échoué, fallback Image()', e2);
+          console.warn('[envoi-medias] createImageBitmap a échoué, fallback Image()', e2);
         }
       }
     }
@@ -970,7 +970,7 @@ class SkipperMediaUploader extends HTMLElement {
       const timer = setTimeout(() => {
         if (settled) return;
         settled = true;
-        console.warn('[skipper-media-uploader] canvas.toBlob timeout', { type, quality });
+        console.warn('[envoi-medias] canvas.toBlob timeout', { type, quality });
         resolve(null);
       }, CANVAS_TOBLOB_TIMEOUT);
 
@@ -985,7 +985,7 @@ class SkipperMediaUploader extends HTMLElement {
         if (settled) return;
         settled = true;
         clearTimeout(timer);
-        console.warn('[skipper-media-uploader] canvas.toBlob throw', e);
+        console.warn('[envoi-medias] canvas.toBlob throw', e);
         resolve(null);
       }
     });
@@ -1113,7 +1113,7 @@ class SkipperMediaUploader extends HTMLElement {
           msg.includes('délai') ||
           /\b(502|503|504)\b/.test(msg);
         if (!retriable || attempt === CONFIG.UPLOAD_RETRIES) throw e;
-        console.warn(`[skipper-media-uploader] upload retry ${attempt + 1}/${CONFIG.UPLOAD_RETRIES} dans ${CONFIG.UPLOAD_RETRY_DELAY}ms`, e);
+        console.warn(`[envoi-medias] upload retry ${attempt + 1}/${CONFIG.UPLOAD_RETRIES} dans ${CONFIG.UPLOAD_RETRY_DELAY}ms`, e);
         await new Promise((r) => setTimeout(r, CONFIG.UPLOAD_RETRY_DELAY));
       }
     }
@@ -1769,7 +1769,7 @@ if (!customElements.get(BALISE_MEDIAS)) {
 
 (function () {
   'use strict';
-  const BALISE = 'skipper-media-uploader';
+  const BALISE = 'rdr-inscription-fiche-skipper';
   if (customElements.get(BALISE)) return;
 
   
@@ -2197,7 +2197,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 @media (max-height:820px) and (min-width:641px){.logo{width:64px}.titre{font-size:clamp(28px,3.6vw,46px)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 `;
-  const CSS_MEDIAS = ':host{display:block}';
    
   const ICONES = {
     lien: '<path d="M9 17H7A5 5 0 0 1 7 7"/><path d="M15 7h2a5 5 0 0 1 4 8"/><line x1="8" x2="12" y1="12" y2="12"/><line x1="2" x2="22" y1="2" y2="22"/>',
@@ -2213,7 +2212,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
   const DOMAINE = /^(www\.)?[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}(\/\S*)?$/i;
 
   class FicheSkipper extends HTMLElement {
-    static get observedAttributes() { return ['mode', 'lang', 'etat', 'jeu', 'reponse']; }
+    static get observedAttributes() { return ['lang', 'etat', 'jeu', 'reponse']; }
 
     constructor() {
       super();
@@ -2232,8 +2231,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 
     get _l() { return this.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
     get _t() { return TXT[this._l]; }
-     
-    get _medias() { return this.getAttribute('mode') === 'medias'; }
 
     connectedCallback() {
       if (!this.shadowRoot) {
@@ -2254,7 +2251,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 
     attributeChangedCallback(nom, avant, apres) {
       if (!this.shadowRoot || avant === apres) return;
-      if (nom === 'lang' || nom === 'mode') { this._dessiner(); this._jeu = null; this._jeuBrut = null; this._appliquerEtat(); this._lireJeu(); }
+      if (nom === 'lang') { this._dessiner(); this._jeu = null; this._jeuBrut = null; this._appliquerEtat(); this._lireJeu(); }
       else if (nom === 'etat') this._appliquerEtat();
       else if (nom === 'jeu') this._lireJeu();
       else if (nom === 'reponse') this._lireReponse(apres);
@@ -2266,11 +2263,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
      
     _dessiner() {
       if (this._observateur) { this._observateur.disconnect(); this._observateur = null; }
-      if (this._medias) {
-        this.shadowRoot.innerHTML = '<style>' + CSS_MEDIAS + '</style>';
-        this.shadowRoot.appendChild(document.createElement(BALISE_MEDIAS));
-        return;
-      }
       const t = this._t;
       const champ = (c) => {
         const [lib, ex] = t.champs[c.cle];
@@ -2457,7 +2449,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 
      
     _appliquerEtat() {
-      if (!this.shadowRoot || this._medias) return;
+      if (!this.shadowRoot) return;
       const t = this._t;
       let etat = this.getAttribute('etat') || 'chargement';
       if (etat === 'ok' && !this._jeu) etat = 'chargement';
@@ -2523,7 +2515,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 
      
     _lireJeu() {
-      if (this._medias) return;
       const brut = this.getAttribute('jeu');
       if (!brut || brut === this._jeuBrut) return;
       const jeu = lireJson(brut);
@@ -2565,7 +2556,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
       return champs;
     }
 
-    _sale() { return !this._medias && !!this._jeu && Object.keys(this._changes()).length > 0; }
+    _sale() { return !!this._jeu && Object.keys(this._changes()).length > 0; }
 
     _montrerSale() {
       const st = this._$('.statut');
