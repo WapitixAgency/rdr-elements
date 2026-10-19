@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum 7709b4b | rdr-inscription-fiche-skipper.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="7709b4b";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum d58223d | rdr-inscription-fiche-skipper.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="d58223d";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 (function () {
 const BALISE_MEDIAS = 'rdr-envoi-medias';
@@ -2034,7 +2034,7 @@ if (!customElements.get(BALISE_MEDIAS)) {
 :host{display:block;position:relative;color:#fff;font-family:Montserrat,montserrat,system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;--jaune:#FCDD00;--marine:#191D31;--vert:#00676E;--vert2:#419992;--teinte:#E2EFEE;--champ:#F5F9F9;--bord:#C5D8D7;--filet:#E1EBEB;--texte:#191D31;--gris:#545B6B;--erreur:#C8322E;--doux:rgba(255,255,255,.76);--rayon-carte:28px 3px 16px 3px;--rayon-btn:3px 15px 3px 15px;--rayon-petit:3px 10px 3px 10px;--marge:clamp(18px,3.6vw,48px);--toucher:40px}
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-.page{--cote:clamp(16px,4vw,48px);width:100%;max-width:calc(1120px + 2 * var(--cote));margin:0 auto;padding:clamp(16px,4vw,51px) var(--cote) clamp(48px,8vw,120px)}
+.page{--cote:clamp(16px,4vw,48px);width:100%;max-width:calc(1120px + 2 * var(--cote));margin:0 auto;padding:clamp(24px,5vw,72px) var(--cote) clamp(56px,8vw,128px)}
 .tete{padding:0 0 clamp(26px,4.6vh,44px)}
 .marque{display:flex;flex-wrap:wrap;align-items:center;gap:10px clamp(12px,1.6vw,20px)}
 .logo{display:block;flex:0 0 auto;width:clamp(60px,9vh,84px);height:auto;aspect-ratio:121/122}
@@ -2050,8 +2050,8 @@ if (!customElements.get(BALISE_MEDIAS)) {
 .accueil{margin-top:clamp(18px,3vh,28px)}
 .accueil-haut{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px}
 .identite{display:flex;align-items:center;gap:16px;min-width:0}
-.avatar{position:relative;flex:0 0 auto;width:72px;height:72px;border-radius:22px 3px 14px 3px;overflow:hidden;background:var(--vert);border:2px solid rgba(255,255,255,.9);box-shadow:0 10px 24px -12px rgba(0,0,0,.6)}
-.avatar img{display:block;width:100%;height:100%;object-fit:cover}
+.avatar{position:relative;flex:0 0 auto;width:72px;height:88px;border-radius:22px 3px 14px 3px;overflow:hidden;background:var(--vert);border:2px solid rgba(255,255,255,.9);box-shadow:0 10px 24px -12px rgba(0,0,0,.6)}
+.avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 15%}
 .initiales{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Varien','Archivo Black',Impact,sans-serif;font-style:italic;font-size:26px;color:#fff;text-transform:uppercase}
 .avatar.photo .initiales{display:none}
 .bonjour{margin:0;font-size:clamp(18px,1.6vw,21px);font-weight:700;line-height:1.35}
@@ -2067,10 +2067,11 @@ if (!customElements.get(BALISE_MEDIAS)) {
 .lire{max-width:74ch}
 .intro p{margin:12px 0 0;color:var(--doux)}
 .lire{display:none}
-.sommaire{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,3vh,26px)}
-.sommaire a{display:inline-flex;align-items:center;min-height:var(--toucher);padding:8px 14px;border:1px solid rgba(255,255,255,.26);border-radius:var(--rayon-petit);color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:border-color .15s ease,color .15s ease}
+.sommaire{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(18px,3vh,26px)}
+.sommaire a{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 18px 10px 14px;border:1px solid rgba(255,255,255,.4);border-radius:var(--rayon-petit);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:border-color .15s ease,background-color .15s ease,color .15s ease}
+.sommaire svg{width:20px;height:20px;flex:0 0 auto;stroke:var(--jaune);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sommaire a:focus-visible,.lire:focus-visible{outline:3px solid var(--jaune);outline-offset:2px}
-@media (hover:hover) and (pointer:fine){.sommaire a:hover{border-color:var(--jaune);color:var(--jaune)}}
+@media (hover:hover) and (pointer:fine){.sommaire a:hover{border-color:var(--jaune);background:rgba(252,221,0,.12);color:var(--jaune)}}
 .feuille{container:feuille / inline-size;background:#fff;color:var(--texte);border-radius:var(--rayon-carte);overflow:hidden;box-shadow:0 34px 70px -38px rgba(0,0,0,.7)}
 .squelette .feuille{padding:clamp(26px,4vw,48px) var(--marge)}
 .sq{display:block;height:14px;margin-top:14px;border-radius:var(--rayon-petit);background:linear-gradient(90deg,#EDF3F3 0%,#F7FAFA 50%,#EDF3F3 100%);background-size:200% 100%;animation:sq 1.4s ease-in-out infinite}
@@ -2180,7 +2181,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
 .intro:not(.ouverte)::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3.2em;background:linear-gradient(rgba(14,17,29,0),#0E111D)}
 .voir{max-width:none;width:100%}
 .voir-fiche{width:100%;justify-content:center;min-height:48px}
-.avatar{width:60px;height:60px;border-radius:18px 3px 12px 3px}
+.avatar{width:60px;height:74px;border-radius:18px 3px 12px 3px}
 .initiales{font-size:22px}
 .lire{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;padding:0;border:0;background:none;color:var(--jaune);font:700 14px/1.2 Montserrat,montserrat,system-ui,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .ligne{grid-template-columns:52px minmax(0,1fr);row-gap:10px}
@@ -2202,10 +2203,15 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
     lien: '<path d="M9 17H7A5 5 0 0 1 7 7"/><path d="M15 7h2a5 5 0 0 1 4 8"/><line x1="8" x2="12" y1="12" y2="12"/><line x1="2" x2="22" y1="2" y2="22"/>',
     verrou: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
     alerte: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
-    ouvrir: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
+    ouvrir: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+    infos: '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+    bateau: '<path d="M10 2v15"/><path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z"/><path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z"/>',
+    reseaux: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>',
+    medias: '<path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16"/><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2"/><circle cx="13" cy="7" r="1" fill="currentColor"/><rect x="8" y="2" width="14" height="14" rx="2"/>',
+    palmares: '<path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/>'
   };
    
-  const vignette = (src) => (/^https:\/\/static\.wixstatic\.com\/media\/[^/]+$/.test(src) ? src + '/v1/fill/w_144,h_144,al_c,q_80,enc_auto/photo.jpg' : src);
+  const vignette = (src) => (/^https:\/\/static\.wixstatic\.com\/media\/[^/]+$/.test(src) ? src + '/v1/fill/w_144,h_176,al_t,q_80,enc_auto/photo.jpg' : src);
   const icone = (nom) => '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + ICONES[nom] + '</svg>';
   
 
@@ -2290,7 +2296,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--vert);background-colo
       const pal = (cle, contenu, lib, classe, compteur) => '<div class="champ' + (classe ? ' ' + classe : '') + '"' + (cle === 'courseAutre' ? ' data-autre hidden' : '') + '><label for="p-' + cle + '">' + esc(lib) + '</label>' + contenu +
         (compteur ? '<div class="pied-champ"><span class="compteur" data-compteur-p="' + cle + '"></span></div>' : '') + '</div>';
       const sommaire = [['infos', t.sommaire.infos], ['bateau', t.sommaire.bateau], ['reseaux', t.sommaire.reseaux], ['medias', t.sommaire.medias], ['palmares', t.sommaire.palmares]]
-        .map(([cible, lib]) => '<a href="#' + cible + '" data-cible="' + cible + '">' + esc(lib) + '</a>').join('');
+        .map(([cible, lib]) => '<a href="#' + cible + '" data-cible="' + cible + '">' + icone(cible) + '<span>' + esc(lib) + '</span></a>').join('');
        
       const edition = t.edition.split(' - ').map((m, i, l) => '<span class="nw">' + esc(m) + (i < l.length - 1 ? ' -' : '') + '</span>').join(' ');
       const sq = (n) => { let h = ''; for (let i = 0; i < n; i++) h += '<span class="sq l"></span><span class="sq c"></span>'; return h; };
