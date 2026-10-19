@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum 7e085f1 | rdr-inscription-fiche-skipper.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="7e085f1";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum 4aec12c | rdr-inscription-fiche-skipper.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="4aec12c";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 (function () {
 const BALISE_MEDIAS = 'rdr-envoi-medias';
@@ -2034,7 +2034,7 @@ if (!customElements.get(BALISE_MEDIAS)) {
 :host{display:block;position:relative;color:#fff;font-family:Montserrat,montserrat,system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;--jaune:#FCDD00;--marine:#191D31;--vert:#00676E;--vert2:#419992;--teinte:#E2EFEE;--champ:#F5F9F9;--bord:#C5D8D7;--filet:#E1EBEB;--texte:#191D31;--gris:#545B6B;--erreur:#C8322E;--doux:rgba(255,255,255,.76);--rayon-carte:28px 3px 16px 3px;--rayon-btn:3px 15px 3px 15px;--rayon-petit:3px 10px 3px 10px;--marge:clamp(18px,3.6vw,48px);--toucher:40px}
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-.page{width:100%;max-width:1120px;margin:0 auto}
+.page{--cote:clamp(16px,4vw,48px);width:100%;max-width:calc(1120px + 2 * var(--cote));margin:0 auto;padding:clamp(16px,4vw,51px) var(--cote) clamp(48px,8vw,120px)}
 .tete{padding:0 0 clamp(26px,4.6vh,44px)}
 .marque{display:flex;flex-wrap:wrap;align-items:center;gap:10px clamp(12px,1.6vw,20px)}
 .logo{display:block;flex:0 0 auto;width:clamp(60px,9vh,84px);height:auto;aspect-ratio:121/122}
