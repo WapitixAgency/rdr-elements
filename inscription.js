@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum d58223d | rdr-inscription-fiche-skipper.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="d58223d";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum bdb1b7e | rdr-inscription-fiche-skipper.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="bdb1b7e";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 (function () {
 const BALISE_MEDIAS = 'rdr-envoi-medias';
@@ -1840,8 +1840,8 @@ if (!customElements.get(BALISE_MEDIAS)) {
       bonjour: 'Bonjour {n} 👋',
       complete: 'Complétez votre fiche ci-dessous.',
       intro: [
-        'Bienvenue sur votre espace de renseignement personnel. Les informations que vous remplissez ici sont directement connectées à votre fiche publique sur le site officiel de la Route du Rhum - Destination Guadeloupe 2026. Merci de prendre le temps de compléter chaque champ avec soin — une information incorrecte ou manquante sera visible sur le site à partir du 15 mai 2026. En cas de doute ou de difficulté, n\'hésitez pas à contacter notre équipe.',
-        'Pensez également à nous transmettre vos photos et éléments médias dans les meilleurs délais afin de garantir la qualité d\'affichage de votre fiche. Pour cela, prenez contact avec votre référent.'
+        'Les informations que vous remplissez ici alimentent directement votre fiche publique sur le site officiel de la Route du Rhum - Destination Guadeloupe 2026, visible de tous. Merci de compléter chaque champ avec soin.',
+        'Vos photos, votre galerie et votre dossier de presse s\'envoient plus bas, dans « Photos & médias ». En cas de doute ou de difficulté, contactez notre équipe.'
       ],
       sections: { infos: 'Informations personnelles', bateau: 'Bateau & technique', reseaux: 'Réseaux sociaux & web' },
       aideReseaux: 'Remplissez uniquement les champs que vous souhaitez partager',
@@ -1932,8 +1932,8 @@ if (!customElements.get(BALISE_MEDIAS)) {
       bonjour: 'Hello {n} 👋',
       complete: 'Complete your form below.',
       intro: [
-        'Welcome to your personal information space. The information you enter here is directly linked to your public profile on the official Route du Rhum - Destination Guadeloupe 2026 website. Please take the time to complete each field carefully — incorrect or missing information will be visible on the website from April 14, 2026. If you have any questions or difficulties, please do not hesitate to contact our team.',
-        'Please remember to send us your photos and media as soon as possible to ensure your listing is displayed correctly. Contact your assigned contact person to arrange this.'
+        'The information you enter here feeds directly into your public profile on the official Route du Rhum - Destination Guadeloupe 2026 website, visible to everyone. Please complete each field carefully.',
+        'Your photos, gallery and press kit are uploaded further down, under “Photos & media”. If you have any questions or difficulties, please contact our team.'
       ],
       sections: { infos: 'Personal information', bateau: 'Boat & technical', reseaux: 'Social networks & web' },
       aideReseaux: 'Only fill in the fields you wish to share.',
