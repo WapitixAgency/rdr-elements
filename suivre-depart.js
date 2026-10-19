@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum 4aec12c | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="4aec12c";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum 7709b4b | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="7709b4b";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1122,7 +1122,7 @@ function carte() {
   const leg = { plais: 'leg-zone leg-zone--plais', course: 'leg-zone leg-zone--course', limite: 'leg-limite', bouee: 'leg-bouee', card: 'leg-card', neutre: 'leg-neutre' };
   return '<section class="carte" id="carte" aria-labelledby="carte-titre">' +
     '<div class="trame carte-tete"><div><p class="surtitre">' + esc(S.surtitre) + '</p><h2 class="titre" id="carte-titre" tabindex="-1">' + esc(S.titre) + '</h2><p class="note">' + esc(S.note) + '</p></div>' +
-      '<div class="puces" role="group" aria-label="' + esc(S.surtitre) + '">' + S.puces.map(([id, p, t]) => '<button type="button" data-cadre="' + id + '" aria-pressed="false"' + (PICTO[id] ? ' style="--c:var(--c-' + id + ');--cf:var(--f-' + id + ')"' : '') + '>' + ico(PICTO[id] || p) + esc(t) + '</button>').join('') + '</div></div>' +
+      '</div>' +
     '<div class="cadre-boite"><div class="cadre" id="cadre"><p class="cadre-attente">' + esc(S.attente) + '</p></div>' +
     '<span class="filet filet--haut" aria-hidden="true"></span><span class="filet filet--bas" aria-hidden="true"></span></div>' +
     '<div class="trame">' +
@@ -1132,7 +1132,7 @@ function carte() {
           '<p class="leg-source">' + esc(S.source) + '</p></div>' +
       '</div>' +
       '<details class="sites" id="sites"><summary><span>' + esc(S.sites) + ' <span id="sitesN"></span></span>' + ico('chevron-down') + '</summary><div class="sites-grille" id="sitesGrille"></div></details>' +
-      '<div class="carte-pied"><a class="btn btn--ligne" href="' + S.ouvrirLien + '">' + esc(S.ouvrir) + ico('arrow-up-right') + '</a><p>' + esc(S.pied) + '</p></div>' +
+      '<div class="carte-pied"><p>' + esc(S.pied) + '</p></div>' +
     '</div>' +
   '</section>';
 }
