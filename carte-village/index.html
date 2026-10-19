@@ -74,21 +74,52 @@ village-map[hidden]{display:none}
     s.onerror = function () { if (i + 1 < urls.length) charger(urls, i + 1); };
     d.head.appendChild(s);
   }
+  /* Secours (19/10) : un serveur Wix qui démarre met parfois plus de 10 s à répondre. Passé 5 s, ou
+     sur une réponse en échec, la carte se dessine depuis l'instantané que jsDelivr sert (le même que
+     la carte du site en dernier recours, outils/instantane-carte-cdn.mjs). La page sobre seulement
+     si l'instantané manque aussi. */
+  var INSTANTANE = 'https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/carte/' + lang + '.json';
+  var PAQUET_MAIN = 'https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/carte.js';
+  var servie = false, secoursLance = false;
+  function servir(charge, urls) {
+    if (servie || fini) return;
+    servie = true;
+    carte.setAttribute('payload', JSON.stringify(charge));
+    charger(urls, 0);
+  }
   var ctrl = window.AbortController ? new AbortController() : null;
   var delai = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+  function secours() {
+    if (secoursLance || servie || fini) return;
+    secoursLance = true;
+    clearTimeout(lent);
+    clearTimeout(delai);
+    if (ctrl) ctrl.abort();
+    fetch(INSTANTANE, { credentials: 'omit', mode: 'cors' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (j) {
+        var c = j && j.charge;
+        if (!c || typeof c !== 'object' || !c.config || typeof c.config !== 'object' || !Array.isArray(c.poi) || !c.poi.length) throw new Error('instantané illisible');
+        var config = Object.assign({}, c.config, { mesure: { url: '' }, meteoUrl: 'data:application/json,%7B%7D' });
+        servir(Object.assign({}, c, { config: config }), [PAQUET_MAIN]);
+      })
+      .catch(function () { clearTimeout(attente); sobre([T.panne, T.panneSuite]); });
+  }
+  var lent = setTimeout(secours, 5000);
   fetch(SOURCE, { credentials: 'omit', mode: 'cors', signal: ctrl ? ctrl.signal : undefined })
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (j) {
+      if (servie || secoursLance || fini) return;
       clearTimeout(delai);
+      clearTimeout(lent);
       if (typeof j === 'string') j = JSON.parse(j);
       if (j && j.ok === true && j.coupee === true) { clearTimeout(attente); sobre([T.coupee]); return; }
       if (!j || j.ok !== true || !j.charge || typeof j.charge !== 'object' || !PAQUET.test(String(j.paquet || ''))) throw new Error('réponse illisible');
-      carte.setAttribute('payload', JSON.stringify(j.charge));
       var urls = [j.paquet];
       if (j.secours && PAQUET.test(String(j.secours)) && j.secours !== j.paquet) urls.push(j.secours);
-      charger(urls, 0);
+      servir(j.charge, urls);
     })
-    .catch(function () { clearTimeout(delai); clearTimeout(attente); sobre([T.panne, T.panneSuite]); });
+    .catch(function () { secours(); });
 })();
 </script>
 </body>
