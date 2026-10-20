@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 7a07d2e | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="7a07d2e";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum fd216c5 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="fd216c5";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -202,6 +202,8 @@ if (!customElements.get('espace-rhum')) {
 
 
   const ICON_CADEAU = '<svg class="er-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7ZM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7Z"/></svg>';
+   
+  const ICON_TICKET = '<svg class="er-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>';
   
 
   const PACK_VR_ACTIVATION = Date.UTC(2026, 8, 30, 22, 0, 0);
@@ -1574,12 +1576,12 @@ if (!customElements.get('espace-rhum')) {
     'Profiter de la réduction': 'Get the discount',
     'En ligne uniquement sur armorlux.com, hors produits « Maison », une utilisation par client ; sans le bouton, saisis le code dans ton panier.':
       'Online only on armorlux.com, excluding “Maison” products, one use per customer; without the button, enter the code in your basket.',
-    'La livrée TyMAL': 'The TyMAL livery',
-    "La mascotte de la course sur ton bateau, pendant toute l'épreuve.":
-      "The race mascot on your boat, for the whole race.",
-    'Une surprise en plus': 'A surprise on top',
-    'Une ou deux options de performance, et le Full Pack pour quelques-uns.':
-      'One or two performance options, and the Full Pack for a lucky few.',
+    'Ton bateau aux couleurs de TyMAL': 'Your boat in TyMAL colours',
+    'Dans le jeu Virtual Regatta, ton voilier porte la livrée de la mascotte, pendant toute la course.':
+      'In the Virtual Regatta game, your boat wears the mascot’s livery for the whole race.',
+    'Des bonus dans le jeu': 'Bonuses in the game',
+    'Une ou deux options de performance sur Virtual Regatta, et même le Full Pack pour quelques joueurs.':
+      'One or two performance options on Virtual Regatta, and even the Full Pack for a few players.',
     'Ton code Virtual Regatta': 'Your Virtual Regatta code',
     'Copier le code': 'Copy the code',
     'Où le saisir': 'Where to enter it',
@@ -2695,7 +2697,7 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    espace-rhum .er-sidebar-preferences-btn { width: 100%; justify-content: center; margin-top: 8px; }
+    espace-rhum .er-sidebar-preferences-btn { width: 100%; justify-content: center; margin-top: 12px; }
 
     
 
@@ -8460,7 +8462,13 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    espace-rhum .er-sidebar-pack-btn { width: 100%; justify-content: center; margin-top: 14px; }
+    espace-rhum .er-sidebar-pack-btn { width: 100%; justify-content: center; margin-top: 12px; }
+    
+
+
+
+    espace-rhum .er-sidebar .jt-menu-jeux, espace-rhum .er-sidebar-pack-btn, espace-rhum .er-sidebar-preferences-btn { min-height: 44px; box-sizing: border-box; padding-left: 12px; padding-right: 12px; gap: 8px; }
+    espace-rhum .er-sidebar .jt-menu-jeux svg, espace-rhum .er-sidebar-pack-btn svg, espace-rhum .er-sidebar-preferences-btn svg, espace-rhum .er-sidebar-pack-mini svg { flex: none; }
 
     espace-rhum .er-pack {
       position: fixed; inset: 0; z-index: 10001;
@@ -8481,6 +8489,39 @@ if (!customElements.get('espace-rhum')) {
       transform: scale(0.94); transition: transform var(--er-dur-fast) var(--er-ease-smooth);
     }
     espace-rhum .er-pack[data-open="true"] .er-pack-panel { transform: scale(1); }
+    
+
+
+
+
+
+    espace-rhum .er-pack-panel {
+      scrollbar-width: thin; scrollbar-color: rgba(93, 191, 192, 0.5) transparent;
+    }
+    espace-rhum .er-pack-panel::-webkit-scrollbar { width: 10px; }
+    espace-rhum .er-pack-panel::-webkit-scrollbar-track { background: transparent; margin: 18px 0; }
+    espace-rhum .er-pack-panel::-webkit-scrollbar-thumb { background: rgba(93, 191, 192, 0.45); border-radius: 10px; border: 3px solid transparent; background-clip: padding-box; }
+    espace-rhum .er-pack-panel::-webkit-scrollbar-thumb:hover { background-color: rgba(93, 191, 192, 0.7); }
+    espace-rhum .er-pack-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    espace-rhum .er-pack-panel .er-pack-col > * { margin-top: 0; margin-bottom: 0; }
+    espace-rhum .er-pack-corps { display: flex; flex-direction: column; gap: 16px; }
+    espace-rhum .er-pack-logo { display: block; width: auto; height: 44px; max-width: 100%; object-fit: contain; align-self: flex-start; }
+    @media (max-width: 899px) { espace-rhum .er-pack-logo { height: 36px; } }
+     
+    espace-rhum .er-pack[data-etat="code"] .er-pack-col--vr { order: -1; }
+    espace-rhum .er-pack-panel .er-pack-dons { gap: 12px; }
+    espace-rhum .er-pack-panel .er-pack-don { padding: 16px 18px; gap: 14px; }
+    espace-rhum .er-pack-panel .er-pack-don-txt { gap: 4px; }
+    espace-rhum .er-pack-panel .er-pack-don-txt strong { font-size: 14px; }
+    espace-rhum .er-pack-panel .er-pack-don-txt span { font-size: 13px; line-height: 1.55; }
+    espace-rhum .er-pack-panel .er-pack-boutique { padding: 18px; gap: 14px; }
+    espace-rhum .er-pack-panel .er-pack-regle { padding: 14px 16px; }
+    espace-rhum .er-pack-panel .er-pack-sub { font-size: 13.5px; line-height: 1.55; }
+    @media (min-width: 900px) {
+      espace-rhum .er-pack-panel { width: 880px; padding: 34px 36px 30px; }
+      espace-rhum .er-pack-sub { max-width: 62ch; margin-bottom: 24px; }
+      espace-rhum .er-pack-corps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+    }
     espace-rhum .er-pack-close {
       position: absolute; top: 14px; right: 14px; width: 32px; height: 32px;
       border-radius: 50%; border: 1px solid var(--er-border-soft);
@@ -10061,10 +10102,10 @@ if (!customElements.get('espace-rhum')) {
         gap: 12px;
       }
       espace-rhum .er-sidebar[data-expanded="true"] .er-sidebar-preferences-btn {
-        padding: 14px 22px;
+        padding: 0 12px;
         width: 100%;
         justify-content: center;
-        margin-top: 8px;
+        margin-top: 12px;
       }
       espace-rhum .er-sidebar[data-expanded="true"] .er-sidebar-toggle svg {
         transform: rotate(90deg);
@@ -12970,7 +13011,7 @@ if (!customElements.get('espace-rhum')) {
               ${this._buildJeuxBouton(true)}
               ${this._animationActive('pack-fan') ? `
               <button class="er-btn ${this._packDejaPris() ? 'er-btn--ghost' : 'er-btn--primary'} er-mobile-sheet-pack" type="button">
-                ${ICON_CADEAU}<span>Mon Pack Fan</span>
+                ${ICON_TICKET}<span>Mon Pack Fan</span>
               </button>` : ''}
               <button class="er-btn er-btn--ghost er-mobile-sheet-prefs" type="button">
                 ${ICON_GEAR}<span>Mes préférences</span>
@@ -13143,13 +13184,13 @@ if (!customElements.get('espace-rhum')) {
 
             ? `
           <button class="er-sidebar-pack-mini" type="button" data-action="open-pack">
-            ${ICON_CADEAU}<span>Mon Pack Fan</span>
+            ${ICON_TICKET}<span>Mon Pack Fan</span>
             <span class="er-sidebar-pack-mini-ok" aria-hidden="true">${ICON_CHECK}</span>
           </button>`
             : `
           <button class="er-btn er-btn--primary er-sidebar-pack-btn"
                   type="button" data-action="open-pack">
-            ${ICON_CADEAU}<span>Mon Pack Fan</span>
+            ${ICON_TICKET}<span>Mon Pack Fan</span>
           </button>`) : ''}
 
           <button class="er-btn er-btn--ghost er-sidebar-preferences-btn"
@@ -22467,6 +22508,13 @@ if (!customElements.get('espace-rhum')) {
       return { code, lien };
     }
 
+    
+
+    _packLogo() {
+      const u = this._payload && this._payload.packFan && this._payload.packFan.logo;
+      return typeof u === 'string' && /^https:\/\/static\.wixstatic\.com\/media\/[A-Za-z0-9_~.-]+$/.test(u) ? u : '';
+    }
+
     _buildPackBoutique(b) {
       if (!b) return '';
       return `
@@ -22511,17 +22559,22 @@ if (!customElements.get('espace-rhum')) {
               </div>
             </div>
 
+            <div class="er-pack-corps">
+            <div class="er-pack-col er-pack-col--pack">
             <ul class="er-pack-dons" data-pack-dons>
               <li class="er-pack-don">
                 <span class="er-pack-don-ico" aria-hidden="true">${ICON_SPARK}</span>
-                <span class="er-pack-don-txt"><strong>La livrée TyMAL</strong><span>La mascotte de la course sur ton bateau, pendant toute l'épreuve.</span></span>
+                <span class="er-pack-don-txt"><strong>Ton bateau aux couleurs de TyMAL</strong><span>Dans le jeu Virtual Regatta, ton voilier porte la livrée de la mascotte, pendant toute la course.</span></span>
               </li>
               <li class="er-pack-don">
                 <span class="er-pack-don-ico" aria-hidden="true">${ICON_CADEAU}</span>
-                <span class="er-pack-don-txt"><strong>Une surprise en plus</strong><span>Une ou deux options de performance, et le Full Pack pour quelques-uns.</span></span>
+                <span class="er-pack-don-txt"><strong>Des bonus dans le jeu</strong><span>Une ou deux options de performance sur Virtual Regatta, et même le Full Pack pour quelques joueurs.</span></span>
               </li>
             </ul>
-
+            ${this._buildPackBoutique(boutique)}
+            </div>
+            <div class="er-pack-col er-pack-col--vr">
+            ${this._packLogo() ? `<img class="er-pack-logo" src="${escapeHtml(this._packLogo())}/v1/fit/w_240,h_120,q_90,enc_auto/virtual-regatta.png" alt="Virtual Regatta" width="122" height="60" loading="lazy" decoding="async">` : ''}
             <div class="er-pack-recu" data-pack-code hidden>
               <div class="er-pack-code">
                 <span class="er-pack-code-label">Ton code Virtual Regatta</span>
@@ -22557,7 +22610,6 @@ if (!customElements.get('espace-rhum')) {
 
               <span class="er-pack-code-hint">Ton code reste ici. Tu le retrouveras en revenant sur cette page.</span>
             </div>
-            ${this._buildPackBoutique(boutique)}
 
             <form class="er-pack-form" data-pack-form novalidate>
               <div class="er-pack-regle">
@@ -22604,6 +22656,8 @@ if (!customElements.get('espace-rhum')) {
               <button class="er-btn er-btn--primary er-pack-save" type="button" data-action="save-pack">Recevoir mon code</button>
               <button class="er-pack-later" type="button" data-action="close-pack">Plus tard</button>
             </form>
+            </div>
+            </div>
           </div>
         </div>
       `;
