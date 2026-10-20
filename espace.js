@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum ac6c5ce | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ac6c5ce";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 7a07d2e | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="7a07d2e";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -6590,7 +6590,7 @@ if (!customElements.get('espace-rhum')) {
     
 
     espace-rhum .er-top50-tymal {
-      position: absolute; top: -26px; left: calc(100% - 128px); z-index: 0; width: 164px; height: 164px; object-fit: contain;
+      position: absolute; top: 4px; left: calc(100% - 116px); z-index: 0; width: 150px; height: 150px; object-fit: contain;
       transform: rotate(-6deg); opacity: .92; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .28)); pointer-events: none;
       animation: erTop50Tymal .8s .2s cubic-bezier(.34, 1.56, .64, 1) both;
     }
@@ -6822,7 +6822,7 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-widget--top50 { grid-template-columns: 1fr; padding: 22px 20px 14px; }
       espace-rhum .er-top50-gauche { display: contents; }
       espace-rhum .er-top50-droite { padding-right: 0; }
-      espace-rhum .er-top50-tymal { left: auto; right: -10px; top: -30px; width: 120px; height: 120px; }
+      espace-rhum .er-top50-tymal { left: auto; right: -6px; top: 26px; width: 100px; height: 100px; }
       espace-rhum .er-top50-tete { order: 1; } espace-rhum .er-top50-lot { order: 2; } espace-rhum .er-top50-droite { order: 3; }
       espace-rhum .er-top50-moi { order: 4; } espace-rhum .er-top50-tout { order: 5; } espace-rhum .er-top50-liens { order: 6; } espace-rhum .er-top50-pied { order: 7; }
     }
@@ -16383,7 +16383,10 @@ if (!customElements.get('espace-rhum')) {
       const lots = r && (r.lots.length || r.accroche);
       const nb = r && r.nbPremiers ? r.nbPremiers : 10;
       const clos = this._top50Clos();
-      const titreLots = clos ? (en ? `The top ${nb} prizes` : `Les lots des ${nb} premiers`) : (en ? `Up for grabs for the top ${nb}` : `À gagner pour les ${nb} premiers`);
+      const seul = nb === 1;
+      const titreLots = clos
+        ? (en ? (seul ? 'The winner’s prizes' : `The top ${nb} prizes`) : (seul ? 'Les lots du premier' : `Les lots des ${nb} premiers`))
+        : (en ? (seul ? 'Up for grabs for the top fan' : `Up for grabs for the top ${nb}`) : (seul ? 'À gagner pour le premier' : `À gagner pour les ${nb} premiers`));
       const coffre = !lots ? '' : `
         <button class="er-top50-lot" type="button" data-top50-fen="lots">
           <span class="er-top50-coffre">${ICON_TOP50_COFFRE}</span>
@@ -16404,8 +16407,8 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-top50-gauche">
             ${tymal && tymal.src ? `<img class="er-top50-tymal" src="${escapeHtml(tymal.src)}" alt="" aria-hidden="true" loading="lazy">` : ''}
             <div class="er-top50-tete">
-              <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Fan ranking' : 'Classement des fans'}</p>
-              <h3 class="er-top50-titre">${en ? 'The <em>top 50</em> fans' : 'Le <em>top 50</em> des fans'}</h3>
+              <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Competition · Top 50 fans' : 'Jeu concours · Top 50 des fans'}</p>
+              <h3 class="er-top50-titre">La <em>légende</em> <br>du Rhum</h3>
               <p class="er-top50-sous">${sous}</p>
             </div>
             ${coffre}
@@ -16485,7 +16488,7 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-top50-fen-tete">
               <div>
                 <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Up for grabs' : 'À gagner'}</p>
-                <h3 class="er-top50-fen-titre" id="er-top50-fen-titre-lots">${en ? `The <em>top ${nb}</em> prizes` : `Les lots du <em>top ${nb}</em>`}</h3>
+                <h3 class="er-top50-fen-titre" id="er-top50-fen-titre-lots">${nb === 1 ? (en ? 'The <em>winner’s</em> prizes' : 'Les lots du <em>premier</em>') : (en ? `The <em>top ${nb}</em> prizes` : `Les lots du <em>top ${nb}</em>`)}</h3>
                 ${r.lotsIntro ? `<p class="er-top50-fen-sous">${escapeHtml(r.lotsIntro)}</p>` : ''}
               </div>
               <button class="er-top50-fen-x" type="button" data-top50-fermer aria-label="${fermer}">${ICON_CLOSE}</button>
