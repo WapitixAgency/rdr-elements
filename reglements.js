@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum 3012bad | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum f642b63 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -646,6 +646,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
 
 
 
+
       id: 'la-legende-du-rhum',
       actif: true,
       icone: 'trophy',
@@ -663,8 +664,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
           num: '1', icone: 'building', court: 'Description', titre: 'Description',
           blocs: [
             'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « La légende du rhum » (ci-après le « {b}Jeu{/b} »), accessible sur l’url suivante : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}',
-            'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
-            'Le Règlement est disponible : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
+            'Le gagnant sera désigné suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
+            'Le Règlement est disponible : {a:/reglements#la-legende-du-rhum}routedurhum.com/reglements#la-legende-du-rhum{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
           ]
         },
         {
@@ -681,7 +682,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
             '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant en France métropolitaine, disposant d’un accès internet (ci-après dénommé le « {b}Participant{/b} »).',
             '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
             '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
-            '{b}3.5.{/b} La participation est limitée à une seule participation par foyer (même nom, même adresse).'
+            '{b}3.5.{/b} La participation est limitée à une seule participation par compte Mon Espace Rhum.'
           ]
         },
         {
@@ -701,9 +702,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
         {
           num: '6', icone: 'target', court: 'Désignation des gagnants', titre: 'Désignation des gagnants',
           blocs: [
-            'Le gagnant sera le Participant inscrit à Mon Espace Rhum ayant accumulé le plus grand nombre de points, sous réserve d’avoir respecté les critères de participation énumérés aux articles 3 et 5 des présentes. Les points sont attribués en fonction des diverses actions et interactions réalisées sur la plateforme.',
-            'En cas d’égalité, un tirage au sort sera effectué parmi les participants ayant le même nombre de point.',
-            'Le gagnant sera informé directement par l’Organisateur par {b}email et/ou appel téléphonique{/b} dans un délai maximal de {b}24{/b} heures suivant le tirage.'
+            'Le gagnant sera le Participant inscrit à Mon Espace Rhum ayant accumulé le plus grand nombre de points, sous réserve d’avoir respecté les critères de participation énumérés aux articles 3 et 5 des présentes. Les points sont attribués en fonction des diverses actions et interactions réalisées sur la plateforme. En cas d’égalité, un tirage au sort sera effectué parmi les participants ayant le même nombre de point.',
+            'Le gagnant sera informé directement par l’Organisateur par {b}email et/ou appel téléphonique{/b} dans un délai maximal de {b}24{/b} heures suivant la clôture du Jeu.'
           ]
         },
         {
@@ -712,22 +712,23 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
             '{b}7.1.{/b} Le Jeu est doté des dotations suivantes :',
             { ul: [
               '{b}Une maquette d’un bateau de type Class40 aux couleurs de la Route du Rhum{/b}, d’une valeur commerciale de {b}3 000{/b}€ TTC.',
-              '{b}Une paire de chaussette de la Route du Rhum Armor Lux{/b}, d’une valeur commerciale de {b}19{/b}€ TTC.',
+              '{b}Une paire de chaussettes de la Route du Rhum Armor Lux{/b}, d’une valeur commerciale de {b}19{/b}€ TTC.',
               '{b}Une Casquette de la Route du Rhum Armor Lux{/b}, d’une valeur commerciale de {b}29{/b}€ TTC.',
               '{b}Un sweat zippé officiel Armor Lux,{/b} d’une valeur commerciale de {b}75€{/b} TTC',
               '{b}Un ToteBag de la Route du Rhum Armor Lux{/b}, d’une valeur commerciale de {b}10{/b} € TTC.',
               '{b}La peluche Tymal Armor Lux{/b}, d’une valeur commerciale de {b}29{/b}€ TTC.',
               '{b}Une affiche de la Route du Rhum - destination Guadeloupe 2026 dédicacée par le vainqueur{/b}, d’une valeur commerciale de {b}16,90{/b}€ TTC.',
-              '{b}Un tour en Océan fifty lors de la course Tour de Belle-Île 2027{/b}, d’une valeur commerciale de {b}1 200{/b}€ TTC.',
+              '{b}Un tour en Ocean fifty lors de la course Tour de Belle-Île 2027{/b}, d’une valeur commerciale de {b}1 200{/b}€ TTC.',
               '{b}Une gourde Route du Rhum - Destination Guadeloupe 2026{/b}, d’une valeur commerciale de {b}12,90{/b}€ TTC.'
             ] },
             'Les frais de livraison de la dotation sont pris en charge par l’Organisateur.',
             'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
-            '{b}7.3.{/b} Une fois que l’Organisateur aura contacté les gagnants pour les informer, ils devront communiquer à l’Organisateur les éléments suivants :',
+            '{b}7.2.{/b} Une fois que l’Organisateur aura contacté les gagnants pour les informer, ils devront communiquer à l’Organisateur les éléments suivants :',
             { ul: [
               'nom et prénom ;',
               'numéro de téléphone ;',
-              'adresse email.'
+              'adresse email.',
+              'adresse postale'
             ] },
             'En outre, en cas d’impossibilité pour l’Organisateur de :',
             { ul: [
@@ -741,7 +742,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
           num: '8', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
           blocs: [
             'La responsabilité de l’Organisateur ne pourra être engagée en cas de force majeure ou d’événements indépendants de sa volonté empêchant le bon déroulement du Jeu.',
-            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation du réseau social.',
+            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation de la plateforme « Mon Espace Rhum ».',
             'L’Organisateur pourra annuler tout ou partie du Jeu s’il apparaît que des fraudes sont intervenues. A ce titre, il se réserve, le droit de ne pas attribuer les Dotations aux fraudeurs.',
             'L’Organisateur ne saurait voir sa responsabilité engagée du fait de l’impossibilité de contacter le Gagnant. A ce titre, l’Organisateur ne pourra pas être responsable des erreurs éventuelles portant sur l’adresse postale communiquée par le Gagnant.',
             'En outre, l’Organisateur ne saurait voir sa responsabilité engagée en cas d’une quelconque complication liée à la livraison des Dotations (retard de livraison, erreur de livraison, Dotation endommagée, etc).',
@@ -757,9 +758,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
             'Dans le cadre de l’exécution du jeu concours, l’Organisateur sera amené à traiter des données à caractère personnel du Participant (ci-après dénommées les « {b}Données{/b} ») pour son propre compte et pour ses propres finalités en qualité de responsable de traitement.',
             '{b}9.2.{/b} L’Organisateur collecte et traite les données personnelles des Participants suivantes :',
             { ul: [
-              'Nom ;',
-              'Prénom ;',
-              'Date de naissance ;'
+              'nom et prénom',
+              'numéro de téléphone ;',
+              'adresse email.',
+              'adresse postale'
             ] },
             '{b}9.3.{/b} L’Organisateur collecte et traite des Données des Participants pour les finalités suivantes :',
             { ul: [
@@ -798,18 +800,149 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="3012bad";perfor
 
 
 
+
       id: 'challenge-photo',
-      actif: false,
+      actif: true,
       icone: 'camera',
       nom: 'Challenge photo Alpina',
       nature: { fr: 'Jeu-concours', en: 'Prize competition' },
-      debut: '',
-      fin: '',
-      version: '',
+      debut: '2026-10-20',
+      fin: '2026-11-11',
+      publieLe: '2026-10-20',
+      version: '2026-10-20',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/concours-photo-2026', fr: 'La page du Challenge photo, connecté à Mon Espace Rhum', en: 'The photo challenge page, signed in to My Espace Rhum' },
       pdf: '',
-      articles: []
+      articles: [
+        {
+          num: '1', icone: 'building', court: 'Description', titre: 'Description',
+          blocs: [
+            'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Challenge photo by Alpina » (ci-après le « {b}Jeu{/b} »), accessible sur le site de la Route du Rhum - Destination Guadeloupe sur « Mon Espace Rhum » et sur l’url suivante : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}.',
+            'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
+            'Le Règlement est disponible : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}. et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
+          ]
+        },
+        {
+          num: '2', icone: 'calendarDays', court: 'Durée du jeu', titre: 'Durée du jeu',
+          blocs: [
+            'Le Jeu se déroule du 20/10/2026 à 22h00 jusqu’au 11/11/2026 à 23h59.',
+            'L’Organisateur se réserve la possibilité de réduire ou de prolonger la durée du Jeu.'
+          ]
+        },
+        {
+          num: '3', icone: 'listChecks', court: 'Conditions de participation', titre: 'Conditions de participation',
+          blocs: [
+            '{b}3.1.{/b} Le Jeu est totalement gratuit.',
+            '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant en France métropolitaine, disposant d’un accès internet (ci-après dénommé le « {b}Participant{/b} »).',
+            '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
+            '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
+            '{b}3.5.{/b} La participation est limitée à une seule participation par foyer (même nom, même adresse).'
+          ]
+        },
+        {
+          num: '4', icone: 'megaphone', court: 'Créateurs de contenu', titre: 'Promotion du jeu concours par un ou plusieurs créateur(s) de contenu',
+          blocs: [
+            'Dans le cas où la promotion du Jeu est effectuée par un ou plusieurs créateurs de contenu, ces derniers ne sont en aucun cas co-organisateurs du Jeu, ils procèdent uniquement à la promotion du jeu concours.',
+            'L’Organisateur décline toute responsabilité, civile ou pénale, à l’égard de tout manquement, déclaration, acte ou omission imputable aux Influenceurs, notamment dans l’hypothèse où ces derniers outrepasseraient leur mission de promotion du Jeu.'
+          ]
+        },
+        {
+          num: '5', icone: 'fileText', court: 'Modalités de participation', titre: 'Modalités de participation',
+          blocs: [
+            'Pour participer, le Participant doit, pour valider sa participation au Jeu :',
+            { ul: [
+              'Créer son compte sur le site de la Route du Rhum sur Mon Espace Rhum puis cliquer sur {a:/concours-photo-2026}https://www.routedurhum.com/concours-photo-2026{/a}',
+              'Uploader une photo en lien avec l’univers de la Route du Rhum ;',
+              'Respecter les conditions d’utilisation du site internet.'
+            ] },
+            'Toute participation incomplète, erronée ou réalisée après la date limite sera considérée comme nulle.'
+          ]
+        },
+        {
+          num: '6', icone: 'target', court: 'Désignation du gagnant', titre: 'Désignation du gagnant',
+          blocs: [
+            'Le gagnant sera le Participant qui a eu le plus de votes pour sa photo (il ne peut évidemment pas voter pour sa propre photo) par les autres Participants ayant participé au challenge et rempli les critères de participation énumérés aux article 3 et 5 des présentes.',
+            'Le gagnant sera/seront informé directement par l’Organisateur par {b}appel téléphonique et/ou email{/b} dans un délai maximal de {b}2 jours{/b} suivant la fin du challenge.'
+          ]
+        },
+        {
+          num: '7', icone: 'trophy', court: 'Dotations', titre: 'Désignation et remise des dotations',
+          blocs: [
+            '{b}7.1.{/b} Le Jeu est doté des dotations suivantes :',
+            { ul: [
+              '{b}Un voyage en Suisse pour deux personnes pour visiter la manufacture Alpina{/b} d’une valeur commerciale maximale de {b}600{/b} € TTC (comprenant le logement + billet de train).',
+              '{b}Une impression fine art de sa photo{/b}, d’une valeur commerciale de {b}50{/b} € TTC.'
+            ] },
+            'Les frais de livraison de la dotation sont pris en charge par l’Organisateur.',
+            'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
+            '{b}7.2.{/b} Une fois que l’Organisateur aura contacté le gagnant pour l’informer il devra communiquer à l’Organisateur les éléments suivants :',
+            { ul: [
+              'nom et prénom ;',
+              'adresse postale ;',
+              'numéro de téléphone ;',
+              'adresse email.'
+            ] },
+            'En outre, en cas d’impossibilité pour l’Organisateur de :',
+            { ul: [
+              'Délivrer au Gagnant les Dotations remportées, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent,',
+              'De contacter et d’obtenir les informations susmentionnées de la part du Gagnant dans un délai maximal de 24 heures à compter de la prise de contact par appel et/ou mail, l’Organisateur se réserve le droit de remettre la Dotation en jeu.'
+            ] },
+            'Aucun message ne sera envoyé aux Participants n’ayant pas remporté les dotations, seuls le Gagnant sera contacté par l’Organisateur.'
+          ]
+        },
+        {
+          num: '8', icone: 'alert', court: 'Responsabilité', titre: 'Responsabilité',
+          blocs: [
+            'La responsabilité de l’Organisateur ne pourra être engagée en cas de force majeure ou d’événements indépendants de sa volonté empêchant le bon déroulement du Jeu.',
+            'L’Organisateur ne saurait être tenu responsable en cas de problèmes de connexion, de défaillances techniques, de perte de données ou de tout autre problème lié à l’utilisation de la plateforme.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu s’il apparaît que des fraudes sont intervenues. A ce titre, il se réserve, le droit de ne pas attribuer les Dotations aux fraudeurs.',
+            'L’Organisateur ne saurait voir sa responsabilité engagée du fait de l’impossibilité de contacter le Gagnant. A ce titre, l’Organisateur ne pourra pas être responsable des erreurs éventuelles portant sur l’adresse postale communiquée par le/les Gagnant.',
+            'En outre, l’Organisateur ne saurait voir sa responsabilité engagée en cas d’une quelconque complication liée à la livraison des Dotations (retard de livraison, erreur de livraison, Dotation endommagée, etc).',
+            'Par ailleurs, l’Organisateur décline toute responsabilité pour tous les incidents qui pourraient survenir lors de la jouissance de la Dotation attribuée et/ou du fait et/ou des conséquences de sa mauvaise utilisation.',
+            'L’Organisateur pourra annuler tout ou partie du Jeu-concours s’il apparaît que des fraudes sont intervenues sous quelque forme que ce soit, notamment de manière informatique dans le cadre de la participation au Jeu-concours.'
+          ]
+        },
+        {
+          num: '9', icone: 'lock', court: 'Données personnelles', titre: 'Protection des données à caractère personnel',
+          blocs: [
+            '{b}9.1.{/b} L’Organisateur se conforme au cadre légal ou réglementaire applicable en matière de protection des données à caractère personnel, en particulier la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée ainsi que le règlement (UE) 2016/679 (RGPD).',
+            'Les termes utilisés dans le présent article sont définis tel qu’indiqué dans le RGPD.',
+            'Dans le cadre de l’exécution du jeu concours, l’Organisateur sera amené à traiter des données à caractère personnel du/des Participants (ci-après dénommées les « {b}Données{/b} ») pour son propre compte et pour ses propres finalités en qualité de responsable de traitement.',
+            '{b}9.2.{/b} L’Organisateur collecte et traite les données personnelles du/des Participants suivantes :',
+            { ul: [
+              'nom et prénom ;',
+              'adresse postale ;',
+              'numéro de téléphone ;',
+              'adresse email.'
+            ] },
+            '{b}9.3.{/b} L’Organisateur collecte et traite des Données du Participant pour les finalités suivantes :',
+            { ul: [
+              'Enregistrement de la participation du/des Participants ;',
+              'Prise de contact avec le/les gagnants et livraison des dotations ;',
+              'Traitement des éventuelles réclamations ;'
+            ] },
+            '{b}9.4.{/b} Les données personnelles sont destinées à l’Organisateur. Dans la stricte limite des finalités énoncées, elles sont transmises aux sous-traitants suivants :',
+            { ul: [
+              'Le prestataire en charge de l’hébergement du site internet ;'
+            ] },
+            'Ces sous-traitants interviennent uniquement sur instructions de l’Organisateur et présentent les garanties requises par le RGPD.',
+            '{b}9.5.{/b} Les données collectées sont conservées pendant une durée de 1 an.',
+            '{b}9.6.{/b} Les personnes concernées par le traitement de leurs Données peuvent exercer leurs droits d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité, auprès de OC SPORT PEN DUICK aux coordonnées suivantes :',
+            '{a:mailto:rgpd@ocsport.com}rgpd@ocsport.com{/a} ;',
+            '6 rue du Sous-Marin Vénus – Zac de Keroman 56100 Lorient.',
+            'En cas de litige non résolu, le participant peut adresser une réclamation auprès de la CNIL (www.cnil.fr).'
+          ]
+        },
+        {
+          num: '10', icone: 'gavel', court: 'Litiges et loi applicable', titre: 'Règlement des litiges et loi applicable',
+          blocs: [
+            'Le présent règlement de jeu est soumis à la loi française.',
+            'La participation au Jeu implique l’acceptation sans réserve du présent règlement. En cas de difficulté d’interprétation ou d’application, les décisions de l’Organisateur seront souveraines et sans appel.',
+            'Il ne sera répondu à aucune demande ou réclamation téléphonique concernant l’application ou l’interprétation du Règlement. Toute contestation ou réclamation relative au Jeu-concours devra être formulée par écrit à l’adresse de l’Organisateur au 6 rue du Sous-Marin Vénus – Zac de Keroman 56100 Lorient.',
+            'Plus aucune contestation ne sera prise en compte huit (8) jours après la clôture du Jeu.'
+          ]
+        }
+      ]
     }
   ];
 
