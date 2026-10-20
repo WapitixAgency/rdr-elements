@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 8d39b99 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="8d39b99";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 22a6f18 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="22a6f18";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -442,6 +442,13 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-drop{display:block;border:2px dashed rgba(255,255,255,.22);border-radius:14px;padding:26px 16px;text-align:center;color:var(--t2);font-size:13px;line-height:1.5;cursor:pointer}
 :is(rdr-concours-photo,.cp-portail) .cp-drop b{display:block;color:#fff;font-size:14px;margin-bottom:4px}
 :is(rdr-concours-photo,.cp-portail) .cp-drop small{display:block;color:var(--t3);font-size:11.5px;margin-top:6px}
+:is(rdr-concours-photo,.cp-portail) .cp-guide{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+:is(rdr-concours-photo,.cp-portail) .cp-guide-col{border-radius:12px;padding:11px 12px;background:var(--panneau2);border:1px solid var(--filet);color:var(--t2);font-size:12.5px;line-height:1.45}
+:is(rdr-concours-photo,.cp-portail) .cp-guide-col b{display:flex;align-items:center;gap:6px;margin-bottom:4px;color:#fff;font-size:13.5px}
+:is(rdr-concours-photo,.cp-portail) .cp-guide-col b svg{width:15px;height:15px;flex:none}
+:is(rdr-concours-photo,.cp-portail) .cp-guide-oui b svg{color:var(--or)}
+:is(rdr-concours-photo,.cp-portail) .cp-guide-non b svg{color:var(--rouge)}
+@media (max-width:520px){:is(rdr-concours-photo,.cp-portail) .cp-guide{grid-template-columns:1fr}}
 :is(rdr-concours-photo,.cp-portail) .cp-apercu{display:none;gap:14px;align-items:flex-start}
 :is(rdr-concours-photo,.cp-portail) .cp-apercu[data-on="1"]{display:flex}
 :is(rdr-concours-photo,.cp-portail) .cp-apercu img{width:160px;height:120px;object-fit:contain;background:var(--nuit);border-radius:10px;flex:none}
@@ -519,6 +526,10 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Déposer ma photo': 'Submit my photo',
     "Une seule photo par membre. Elle est relue par l'équipe avant d'apparaître, vous serez prévenu dans votre Espace Rhum.": 'One photo per member. Our team reviews it before it appears, and you will be notified in your Espace Rhum.',
     'Choisir une photo': 'Choose a photo',
+    'Quelle photo ?': 'Which photo?',
+    "Une photo que vous avez prise et qui raconte votre Route du Rhum. Le village, les pontons, les bateaux et leurs skippers, le départ, l'ambiance, à Saint-Malo, en Guadeloupe ou ailleurs.": 'A photo you took that tells your Route du Rhum. The village, the pontoons, the boats and their skippers, the start, the atmosphere, in Saint-Malo, in Guadeloupe or anywhere else.',
+    'À éviter': 'Please avoid',
+    "Une photo floue, trouvée en ligne ou sans lien avec la Route du Rhum, une personne reconnaissable sans son accord, un texte, un cadre ou un logo ajouté.": 'A blurry photo, one found online or unrelated to the Route du Rhum, a recognisable person without their consent, added text, frames or logos.',
     'JPG, PNG ou HEIC, depuis votre téléphone ou votre ordinateur.': 'JPG, PNG or HEIC, from your phone or your computer.',
     "Elle est allégée avant l'envoi (2 400 px, moins de 2 Mo), sans ses données de localisation.": 'It is made lighter before sending (2,400 px, under 2 MB), without its location data.',
     'Une légende, si vous voulez (140 signes)': 'A caption, if you like (140 characters)',
@@ -800,6 +811,16 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     <h3>${t('Déposer ma photo')}</h3>
     <p>${t("Une seule photo par membre. Elle est relue par l'équipe avant d'apparaître, vous serez prévenu dans votre Espace Rhum.")}</p>
     <div id="cp-depot-etape1">
+      <div class="cp-guide">
+        <div class="cp-guide-col cp-guide-oui">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>${t('Quelle photo ?')}</b>
+          ${t("Une photo que vous avez prise et qui raconte votre Route du Rhum. Le village, les pontons, les bateaux et leurs skippers, le départ, l'ambiance, à Saint-Malo, en Guadeloupe ou ailleurs.")}
+        </div>
+        <div class="cp-guide-col cp-guide-non">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>${t('À éviter')}</b>
+          ${t("Une photo floue, trouvée en ligne ou sans lien avec la Route du Rhum, une personne reconnaissable sans son accord, un texte, un cadre ou un logo ajouté.")}
+        </div>
+      </div>
       <label class="cp-drop" id="cp-drop">
         <b>${t('Choisir une photo')}</b>
         ${t('JPG, PNG ou HEIC, depuis votre téléphone ou votre ordinateur.')}
