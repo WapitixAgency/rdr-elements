@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum d6fe862 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="d6fe862";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum ba3716f | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ba3716f";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -20804,7 +20804,7 @@ if (!customElements.get('espace-rhum')) {
         place.innerHTML = rt.mode === 'village'
           ? '<div class="jr-retrait"><p class="jr-retrait-q">' + T('À retirer sur le village', 'To collect at the village') + '</p>' +
             '<p class="jr-retrait-txt">' + T('Passe à l\'office de tourisme du village, à Saint-Malo, avec ce numéro, c\'est avec lui que l\'équipe retrouve ton lot.', 'Go to the tourist office in the Saint-Malo village with this number, it is how the team finds your prize.') + '</p>' +
-            '<p class="jr-retrait-txt jr-retrait-horaires">' + T('Tous les jours de 10 h à 10 h 15 et de 18 h à 18 h 15, jusqu\'au 1er novembre inclus.', 'Every day from 10:00 to 10:15 am and from 6:00 to 6:15 pm, until 1 November inclusive.') + '</p>' +
+            '<p class="jr-retrait-txt jr-retrait-horaires">' + T('Tous les jours de 14 h à 15 h, jusqu\'au 1er novembre inclus.', 'Every day from 2:00 to 3:00 pm, until 1 November inclusive.') + '</p>' +
             '<p class="jr-numero">' + T('Ton numéro de retrait', 'Your collection number') + ' <b>' + escapeHtml(rt.numero) + '</b></p>' +
             (qr ? '<figure class="jr-qr"><span class="jr-qr-img">' + qr + '</span><figcaption>' + T('Tu peux aussi montrer ce QR code, il ouvre directement ta fiche à l\'office de tourisme.', 'You can also show this QR code, it opens your record directly at the tourist office.') + '</figcaption></figure>' : '') +
             '<div class="jr-retrait-actions">' + carte + '<button type="button" class="jr-lien-petit" data-jr-retrait-changer>' + T('Plutôt par la poste', 'By post instead') + '</button></div></div>'

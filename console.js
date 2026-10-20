@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum d6fe862 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="d6fe862";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum ba3716f | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ba3716f";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3594,7 +3594,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="d6fe862";performan
           ? '<p class="rdrc-ro-p">Une page pour le téléphone, sans compte, en deux panneaux, « À remettre » et « Remis ». On y trouve les gagnants qui ont choisi le village et ceux qui n\'ont encore rien choisi, avec leur numéro de retrait, leur prénom et l\'initiale de leur nom, et leur lot. On cherche par numéro ou par prénom, on confirme, et une erreur s\'annule. Le QR code du gagnant se lit depuis la page, bouton « Scanner un QR code », et ouvre directement sa fiche. L\'équipe garde la page en favori : son adresse contient la clé, rien n\'est gardé dans le téléphone. Ni e-mail, ni téléphone, ni adresse. Le statut est le même qu\'ici, et chaque geste s\'inscrit à l\'historique de la ligne.</p>' +
             '<div class="rdrc-ro-lien"><input class="rdrc-jt-cherche" type="text" readonly value="' + esc(reg.lienRetrait) + '" aria-label="Lien de la page de retrait" data-roue-lien>' +
             '<button type="button" class="rdrc-btn" data-roue-copier>Copier</button><a class="rdrc-btn" href="' + esc(reg.lienRetrait) + '" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>' +
-            '<p class="rdrc-note">Ce lien donne accès à la liste sans connexion : à ne transmettre qu\'à l\'équipe qui remet les lots à l\'office de tourisme (tous les jours de 10 h à 10 h 15 et de 18 h à 18 h 15, jusqu\'au 1er novembre inclus). Pour le couper, demande une nouvelle clé (la ligne « roue » d\'ER_ANIMATIONS, champ cleRetrait).</p>'
+            '<p class="rdrc-note">Ce lien donne accès à la liste sans connexion : à ne transmettre qu\'à l\'équipe qui remet les lots à l\'office de tourisme (tous les jours de 14 h à 15 h, jusqu\'au 1er novembre inclus). Pour le couper, demande une nouvelle clé (la ligne « roue » d\'ER_ANIMATIONS, champ cleRetrait).</p>'
           : '<div class="rdrc-state"><b>Pas encore de lien</b>Aucune clé n\'est posée sur la ligne « roue » d\'ER_ANIMATIONS (champ cleRetrait).</div>'), false, IC.people);
 
       var filtre = this._roueFiltre || 'tous';

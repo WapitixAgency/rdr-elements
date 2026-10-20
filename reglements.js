@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum d6fe862 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d6fe862";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum ba3716f | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="ba3716f";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -580,7 +580,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="d6fe862";perfor
             'Les frais de livraison de la dotation sont pris en charge par l’Organisateur.',
             'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
             '{b}7.2.{/b} Une fois que le gagnant est informé de son lot il devra choisir la manière dont il le recevra.',
-            '{b}Remise en main propre{/b} : le lot pourra être retiré sur le village départ de la Route du Rhum - Destination Guadeloupe, à Saint-Malo, jusqu’au 1er novembre 2026 inclus sur présentation d’un code ou d’un QR code destiné au retrait du lot. Pour cela rendez vous à l’office de tourisme tous les jours de 10h à 10h15 et de 18h à 18h15.',
+            '{b}Remise en main propre{/b} : le lot pourra être retiré sur le village départ de la Route du Rhum - Destination Guadeloupe, à Saint-Malo, jusqu’au 1er novembre 2026 inclus sur présentation d’un code ou d’un QR code destiné au retrait du lot. Pour cela rendez vous à l’office de tourisme tous les jours de 14h à 15h.',
             '{b}Envoi par voie postale{/b} : le gagnant devra communiquer à l’Organisateur l’ensemble des informations nécessaires à l’expédition de son lot, à savoir : ses nom, prénom, adresse postale complète, code postal, ville et numéro de téléphone.',
             'En outre, en cas d’impossibilité pour l’Organisateur de : délivrer aux Gagnants la Dotations remportée, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent.'
           ]
