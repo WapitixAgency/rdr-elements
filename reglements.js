@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum f642b63 | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum 312bf89 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="312bf89";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -801,6 +801,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";perfor
 
 
 
+
+
       id: 'challenge-photo',
       actif: true,
       icone: 'camera',
@@ -818,8 +820,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";perfor
           num: '1', icone: 'building', court: 'Description', titre: 'Description',
           blocs: [
             'La société {b}OC SPORT PEN DUICK{/b}, au capital de 884 000,00€, enregistrée au RCS de Lorient sous le numéro 521 573 394, dont le siège social est situé 6 rue du Sous-Marin Vénus - 56100 Lorient (ci-après « {b}l’Organisateur{/b} »), organise, dans le cadre de l’édition 2026 de la Route du Rhum, un jeu-concours gratuit et sans obligation d’achat, intitulé « Challenge photo by Alpina » (ci-après le « {b}Jeu{/b} »), accessible sur le site de la Route du Rhum - Destination Guadeloupe sur « Mon Espace Rhum » et sur l’url suivante : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}.',
-            'Le gagnant sera désigné par tirage au sort en suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
-            'Le Règlement est disponible : {a:/mon-espace-rhum}https://www.routedurhum.com/mon-espace-rhum{/a}. et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
+            'Le gagnant sera désigné suivant les conditions définies ci-après par le présent règlement (ci-après le « {b}Règlement{/b} »).',
+            'Le Règlement est disponible : {a:/reglements#challenge-photo}routedurhum.com/reglements#challenge-photo{/a} et peut également être communiqué, à titre gratuit, sur simple demande formulée auprès de l’Organisateur, à l’adresse mentionnée ci-dessus.'
           ]
         },
         {
@@ -836,7 +838,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";perfor
             '{b}3.2.{/b} Le Jeu est ouvert à toute personne physique majeure résidant en France métropolitaine, disposant d’un accès internet (ci-après dénommé le « {b}Participant{/b} »).',
             '{b}3.3.{/b} La participation au Jeu-concours implique l’acceptation sans réserve du Règlement dans son intégralité par chaque Participant. L’Organisateur se réserve le droit de disqualifier tout Participant qui ne respecterait pas le Règlement.',
             '{b}3.4.{/b} Les collaborateurs de l’Organisateur ne sont pas autorisés à participer au Jeu.',
-            '{b}3.5.{/b} La participation est limitée à une seule participation par foyer (même nom, même adresse).'
+            '{b}3.5.{/b} La participation est limitée à une seule participation par compte Mon Espace Rhum.'
           ]
         },
         {
@@ -861,8 +863,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="f642b63";perfor
         {
           num: '6', icone: 'target', court: 'Désignation du gagnant', titre: 'Désignation du gagnant',
           blocs: [
-            'Le gagnant sera le Participant qui a eu le plus de votes pour sa photo (il ne peut évidemment pas voter pour sa propre photo) par les autres Participants ayant participé au challenge et rempli les critères de participation énumérés aux article 3 et 5 des présentes.',
-            'Le gagnant sera/seront informé directement par l’Organisateur par {b}appel téléphonique et/ou email{/b} dans un délai maximal de {b}2 jours{/b} suivant la fin du challenge.'
+            'Le gagnant sera le Participant dont la photo aura reçu le plus de votes de la part des membres de Mon Espace Rhum, chaque membre disposant d’un vote (une étoile) et ne pouvant évidemment pas voter pour sa propre photo, sous réserve d’avoir rempli les critères de participation énumérés aux articles 3 et 5 des présentes.',
+            'Le gagnant sera informé directement par l’Organisateur par {b}appel téléphonique et/ou email{/b} dans un délai maximal de {b}2 jours{/b} suivant la fin du challenge.'
           ]
         },
         {
