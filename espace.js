@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 312bf89 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="312bf89";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum df4c8ec | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="df4c8ec";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -6756,7 +6756,10 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-top50-fen-moi .er-top50-moi-rang { font-size: 28px; color: var(--er-teal); }
     espace-rhum .er-top50-fen-moi .er-top50-moi-txt b { color: var(--er-teal); }
     espace-rhum .er-top50-fen-moi .er-top50-pts { color: var(--er-amber-bright); }
-    espace-rhum .er-top50-fen-corps { overflow: auto; padding: 0 28px 24px; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .2) transparent; }
+    espace-rhum .er-top50-fen-corps { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 28px 24px; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .2) transparent; }
+     
+    espace-rhum .er-top50-fen-corps--lots { padding: 0 0 4px; scrollbar-color: rgba(20, 32, 63, .35) transparent; }
+    espace-rhum .er-top50-lots--seul .er-top50-lotcarte { padding-top: 16px; }
     espace-rhum .er-top50-tab { width: 100%; border-collapse: separate; border-spacing: 0; font-family: var(--er-font-body); }
     espace-rhum .er-top50-tab thead th { position: sticky; top: 0; z-index: 2; padding: 10px 10px 9px; text-align: left; font-size: 9.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--er-amber); background: #0d1b38; border-bottom: 1px solid rgba(245, 176, 65, .35); }
     espace-rhum .er-top50-tab th.num, espace-rhum .er-top50-tab td.num { text-align: right; }
@@ -16518,8 +16521,11 @@ if (!customElements.get('espace-rhum')) {
         </div>`;
       let lots = '';
       if (r && (r.lots.length || r.accroche)) {
+        
+
+        const seul = (r.nbPremiers || 10) === 1;
         const cartes = r.lots.map(l => `<div class="er-top50-lotcarte er-top50-lotcarte--${l.metal}">
-            <span class="er-top50-lotcarte-rang">${escapeHtml(l.palier)}</span>
+            ${seul ? '' : `<span class="er-top50-lotcarte-rang">${escapeHtml(l.palier)}</span>`}
             <span class="er-top50-lotcarte-visuel">${l.image ? `<img src="${escapeHtml(l.image)}" alt="" loading="lazy">` : (l.metal === 'or' ? ICON_TOP50_CADEAU : ICON_TOP50_SAC)}</span>
             <p class="er-top50-lotcarte-nom">${escapeHtml(l.titre)}</p>
             ${l.texte ? `<p class="er-top50-lotcarte-txt">${escapeHtml(l.texte)}</p>` : ''}
@@ -16532,13 +16538,15 @@ if (!customElements.get('espace-rhum')) {
             <div class="er-top50-fen-tete">
               <div>
                 <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Up for grabs' : 'À gagner'}</p>
-                <h3 class="er-top50-fen-titre" id="er-top50-fen-titre-lots">${nb === 1 ? (en ? 'The <em>winner’s</em> prizes' : 'Les lots du <em>premier</em>') : (en ? `The <em>top ${nb}</em> prizes` : `Les lots du <em>top ${nb}</em>`)}</h3>
+                <h3 class="er-top50-fen-titre" id="er-top50-fen-titre-lots">${nb === 1 ? (r.lots.length > 1 ? (en ? `The winner’s <em>${r.lots.length} prizes</em>` : `Les ${r.lots.length} lots du <em>premier</em>`) : (en ? 'The <em>winner’s</em> prizes' : 'Les lots du <em>premier</em>')) : (en ? `The <em>top ${nb}</em> prizes` : `Les lots du <em>top ${nb}</em>`)}</h3>
                 ${r.lotsIntro ? `<p class="er-top50-fen-sous">${escapeHtml(r.lotsIntro)}</p>` : ''}
               </div>
               <button class="er-top50-fen-x" type="button" data-top50-fermer aria-label="${fermer}">${ICON_CLOSE}</button>
             </div>
-            ${cartes ? `<div class="er-top50-lots er-top50-lots--${Math.min(3, r.lots.length)}">${cartes}</div>` : ''}
-            ${r.lotsNote ? `<p class="er-top50-lots-note">${escapeHtml(r.lotsNote)}</p>` : ''}
+            <div class="er-top50-fen-corps er-top50-fen-corps--lots">
+              ${cartes ? `<div class="er-top50-lots er-top50-lots--${Math.min(3, r.lots.length)}${seul ? ' er-top50-lots--seul' : ''}">${cartes}</div>` : ''}
+              ${r.lotsNote ? `<p class="er-top50-lots-note">${escapeHtml(r.lotsNote)}</p>` : ''}
+            </div>
           </div>
         </div>`;
       }
