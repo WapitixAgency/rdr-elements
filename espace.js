@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum db27389 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="db27389";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 8d39b99 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="8d39b99";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1793,6 +1793,75 @@ if (!customElements.get('espace-rhum')) {
 
 
 
+  
+
+
+  const EJ_CSS = `
+    espace-rhum .jt-bandeaux.ej{display:block;gap:0}
+    espace-rhum .ej-tete{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:14px}
+    espace-rhum .ej-titre{margin:0;font:italic 400 clamp(26px,2.6vw,38px)/.95 var(--er-font-display);text-transform:uppercase;color:#fff}
+    espace-rhum .ej-titre em{font-style:inherit;color:var(--er-teal)}
+    espace-rhum .ej-sous{margin:6px 0 0;font-family:var(--er-font-body);font-size:13px;line-height:1.4;color:var(--er-text-secondary);font-weight:500}
+    espace-rhum .ej-sous b{color:#fff}
+    espace-rhum .ej-droite{display:flex;align-items:center;gap:10px}
+    espace-rhum .ej-tous{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1.5px solid rgba(93,191,192,.45);border-radius:3px 15px 3px 15px;background:var(--er-teal-soft);color:var(--er-teal);font:800 11px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+    espace-rhum .ej-tous svg{width:14px;height:14px}
+    espace-rhum .ej-fleche{width:42px;height:42px;display:grid;place-items:center;border:1.5px solid var(--er-border-hover);background:rgba(10,26,53,.5);color:#fff;border-radius:3px 12px 3px 12px;cursor:pointer}
+    espace-rhum .ej-fleche:disabled{opacity:.3;cursor:default}
+    espace-rhum .ej-fleche svg{width:18px;height:18px}
+    espace-rhum .ej-fleche:focus-visible,espace-rhum .ej-tous:focus-visible,espace-rhum .ej-jouer:focus-visible{outline:3px solid #fff;outline-offset:2px}
+    espace-rhum .ej-piste{--gap:16px;--cartes:3.3;display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 16px;margin:0 -2px;list-style:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    espace-rhum .ej-piste::-webkit-scrollbar{display:none}
+    espace-rhum .ej-carte{flex:0 0 calc((100% - (var(--cartes) - 1) * var(--gap)) / var(--cartes));scroll-snap-align:start;display:flex;flex-direction:column;background:linear-gradient(160deg,#13284A 0%,#0A1A35 100%);border:1px solid var(--er-border-soft);border-radius:28px 3px 16px 3px;overflow:hidden;min-width:0;box-shadow:0 18px 36px -22px rgba(0,0,0,.6);transition:transform .2s ease,border-color .2s ease,opacity .2s ease}
+    @media (hover:hover){espace-rhum .ej-carte:hover{transform:translateY(-3px);border-color:var(--er-border-hover)}}
+    espace-rhum .ej-carte--joue{filter:grayscale(1);opacity:.55}
+    @media (hover:hover){espace-rhum .ej-carte--joue:hover{opacity:.8}}
+    espace-rhum .ej-vis{position:relative;height:clamp(118px,15vh,140px);overflow:hidden;background:var(--er-bg-base);flex:none}
+    espace-rhum .ej-vis img.ej-fond{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+    espace-rhum .ej-vis::after{content:'';position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(0deg,rgba(10,26,53,.85),rgba(10,26,53,0));pointer-events:none}
+    espace-rhum .ej-etiq{position:absolute;z-index:3;left:12px;top:12px;padding:5px 8px;border-radius:3px 9px 3px 9px;background:var(--er-amber-bright);color:#0A1228;font:800 10px/1 var(--er-font-body);letter-spacing:.1em;text-transform:uppercase}
+    espace-rhum .ej-reste{position:absolute;z-index:3;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:9px 3px 9px 3px;background:rgba(10,18,40,.75);color:#fff;font:700 11px/1 var(--er-font-body)}
+    espace-rhum .ej-reste svg{width:12px;height:12px;color:var(--er-amber-bright)}
+    espace-rhum .ej-vis--photo{background:radial-gradient(90% 80% at 15% 0%,rgba(93,191,192,.45) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
+    espace-rhum .ej-vis--photo .ej-logo{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:min(62%,240px);max-width:none}
+    espace-rhum .ej-vis--roue{background:radial-gradient(80% 90% at 85% 100%,rgba(252,241,80,.28) 0%,rgba(252,241,80,0) 60%),linear-gradient(150deg,#1E4478 0%,#0F2747 100%)}
+    espace-rhum .ej-vis--roue::after{display:none}
+    espace-rhum .ej-vis--roue .ej-roue{position:absolute;right:-56px;top:50%;width:200px;height:200px;transform:translateY(-50%) rotate(-12deg)}
+    espace-rhum .ej-vis--roue .ej-roue svg{display:block;width:100%;height:100%}
+    espace-rhum .ej-vis--roue .ej-lots{position:absolute;z-index:2;left:12px;right:38%;top:34px;bottom:8px;display:flex;align-items:flex-end;justify-content:center;gap:2px}
+    espace-rhum .ej-vis--roue .ej-lots img{height:62%;max-width:46%;width:auto;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.4))}
+    espace-rhum .ej-vis--roue .ej-lots img:nth-child(2){height:88%}
+    espace-rhum .ej-vis--top50{background:radial-gradient(55% 80% at 0% 0%,rgba(255,246,222,.75) 0%,rgba(255,246,222,0) 62%),linear-gradient(135deg,#F4CD82 0%,#EFB85E 50%,#E8A54B 100%)}
+    espace-rhum .ej-vis--top50::after{display:none}
+    espace-rhum .ej-vis--top50 .ej-tymal{position:absolute;right:6px;bottom:-6px;height:118%;width:auto;max-width:none;filter:drop-shadow(0 8px 12px rgba(80,40,0,.35))}
+    espace-rhum .ej-vis--top50 .ej-top{position:absolute;left:14px;bottom:12px;font:italic 400 34px/.9 var(--er-font-display);text-transform:uppercase;color:#14203F}
+    espace-rhum .ej-vis--top50 .ej-top em{font-style:inherit;color:#fff}
+    espace-rhum .ej-vis--jt img.ej-fond{object-position:50% 77%;transform:scale(1.9);transform-origin:80% 58%}
+    espace-rhum .ej-vis--mob img.ej-fond{object-position:30% 50%}
+    espace-rhum .ej-corps{display:flex;flex-direction:column;gap:9px;padding:14px 16px 16px;flex:1;font-family:var(--er-font-body)}
+    espace-rhum .ej-nom{margin:0;font:italic 400 19px/1 var(--er-font-display);text-transform:uppercase;color:#fff}
+    espace-rhum .ej-lot{margin:0;font-size:12px;line-height:1.4;color:var(--er-text-secondary)}
+    espace-rhum .ej-lot b{color:var(--er-amber);font-weight:800}
+    espace-rhum .ej-etat{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:3px 12px 3px 12px;font-size:12px;font-weight:700;line-height:1.3}
+    espace-rhum .ej-etat svg{flex:none;width:16px;height:16px}
+    espace-rhum .ej-etat--a-faire{background:rgba(252,241,80,.12);color:var(--er-amber-bright);box-shadow:inset 0 0 0 1px rgba(252,241,80,.35)}
+    espace-rhum .ej-etat--fait{background:var(--er-teal-soft);color:var(--er-teal);box-shadow:inset 0 0 0 1px rgba(93,191,192,.4)}
+    espace-rhum .ej-etat--info{background:rgba(255,255,255,.06);color:var(--er-text-secondary);box-shadow:inset 0 0 0 1px var(--er-border-soft)}
+    espace-rhum .ej-etat small{display:block;font-size:10.5px;font-weight:600;color:var(--er-text-muted);margin-top:1px}
+    espace-rhum .ej-actions{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-top:2px}
+    espace-rhum .ej-jouer{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border:0;border-radius:3px 15px 3px 15px;background:linear-gradient(180deg,#FFF57A 0%,#FCF150 55%,#F1E33A 100%);color:#0A1228;font:800 12px/1 var(--er-font-body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;cursor:pointer}
+    espace-rhum .ej-jouer--voir{background:var(--er-teal-soft);color:var(--er-teal);box-shadow:inset 0 0 0 1.5px rgba(93,191,192,.45)}
+    espace-rhum .ej-jouer svg{width:14px;height:14px}
+    espace-rhum .ej-lien{font-size:11px;font-weight:700;color:var(--er-text-muted);text-decoration:underline;text-underline-offset:3px}
+    espace-rhum .ej-pied{display:flex;align-items:center;gap:14px}
+    espace-rhum .ej-avance{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+    espace-rhum .ej-avance i{display:block;height:100%;width:30%;border-radius:3px;background:var(--er-teal)}
+    espace-rhum .ej-compte{font:700 11px/1 var(--er-font-body);color:var(--er-text-muted);white-space:nowrap}
+    @media (max-width:1180px){espace-rhum .ej-piste{--cartes:2.4}}
+    @media (max-width:767px){espace-rhum .ej-piste{--cartes:1.18;--gap:12px}espace-rhum .ej-fleche,espace-rhum .ej-tous{display:none}espace-rhum .ej-titre{font-size:28px}}
+    @media (max-height:760px) and (min-width:768px){espace-rhum .ej-vis{height:112px}espace-rhum .ej-corps{gap:8px;padding:12px 14px 14px}}
+    @media (prefers-reduced-motion:reduce){espace-rhum .ej-carte{transition:none}}
+  `;
   const JEUX_CSS = `
     espace-rhum .jt-bandeau{grid-column:1/-1;position:relative;display:flex;align-items:center;gap:16px;min-height:60px;margin:0;padding:8px 10px 8px 8px;overflow:hidden;border-radius:var(--er-radius-md,14px);background:radial-gradient(120% 180% at 0% 50%,rgba(93,191,192,.28) 0%,rgba(93,191,192,0) 46%),linear-gradient(100deg,#0D4250 0%,#0B2C4A 52%,#0A1A35 100%);border:1px solid rgba(252,241,80,.3);color:#fff;font-family:var(--er-font-body)}
     espace-rhum .jt-bandeau-montre{flex:none;display:block;width:50px;height:50px;border-radius:3px 12px 3px 12px;overflow:hidden;background:#0B2C3D;border:1px solid rgba(255,255,255,.14);color:var(--er-amber-bright)}
@@ -11689,7 +11758,7 @@ if (!customElements.get('espace-rhum')) {
       const suiviRejoue = this.getAttribute('suivi-rejoue');
       if (suiviRejoue) this._suiviRejoue = suiviRejoue;
       injectGlobalStyle('er-memoire-style', MEMOIRE_CSS);
-      injectGlobalStyle('er-jeux-style', JEUX_CSS);
+      injectGlobalStyle('er-jeux-style', JEUX_CSS + EJ_CSS);
       injectGlobalStyle('er-roue-style', ROUE_CSS);
       const membre = this.getAttribute('membre');
       if (membre) this._membre = membre;
@@ -12794,10 +12863,10 @@ if (!customElements.get('espace-rhum')) {
           <div class="er-sidebar-backdrop" data-action="toggle-sidebar" aria-hidden="true"></div>
           ${this._buildSidebar()}
           <main class="er-dashboard${this._payload?.top50 && this._payload.top50.lignes?.length ? ' er-dashboard--top50' : ''}">
-            ${this._buildJeuxBandeau()}
             ${this._buildHeroWidget()}
             ${this._buildFlashNewsWidget()}
             ${this._buildBadgesMiniWidget()}
+            ${this._buildJeuxBandeau()}
             <div class="er-chasse-place" id="chasse-tymal"></div>
             ${this._buildPronosWidget()}
             ${this._buildCombatWidget()}
@@ -20374,9 +20443,173 @@ if (!customElements.get('espace-rhum')) {
     
 
 
+
+
+
+
+
     _buildJeuxBandeau() {
-      const b = this._jrBandeau() + this._jtBandeau() + this._buildPhotoBandeau();
-      return b ? '<div class="jt-bandeaux">' + b + '</div>' : '';
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const cartes = [this._ejRoue(), this._ejPhoto(), this._ejTop50(), this._ejJusteTemps(), this._ejMobilite()].filter(Boolean);
+      if (!cartes.length) return '';
+      const ouvertes = cartes.filter((c) => !c.joue), jouees = cartes.filter((c) => c.joue);
+      const n = ouvertes.length;
+      const roue = this._jrEtat();
+      const appel = roue && roue.peutTourner ? T('ton tour de roue t’attend', 'your wheel spin is waiting')
+        : (this._jpEtat() && this._jpEtat().peutDeposer ? T('poste ta photo', 'post your photo') : T('à toi de jouer', 'your move'));
+      const fl = (d) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+      return '<section class="jt-bandeaux ej" role="region" aria-labelledby="ej-titre">' +
+        '<div class="ej-tete"><div><h2 class="ej-titre" id="ej-titre">' + T('Les jeux <em>du moment</em>', 'Games <em>of the moment</em>') + '</h2>' +
+          '<p class="ej-sous">' + (n ? '<b>' + n + ' ' + T(n > 1 ? 'jeux ouverts' : 'jeu ouvert', n > 1 ? 'open games' : 'open game') + '</b> · ' + escapeHtml(appel) : escapeHtml(T('Tu as joué à tout : reviens voir les prochains jeux.', 'You have played everything: check back for the next games.'))) + '</p></div>' +
+          '<div class="ej-droite"><button type="button" class="ej-tous" data-jt-volet>' + T('Tous les jeux', 'All games') + jtSvg(JT_I_FLECHE) + '</button>' +
+            '<button type="button" class="ej-fleche" data-ej-sens="-1" aria-label="' + T('Jeu précédent', 'Previous game') + '">' + fl('m15 18-6-6 6-6') + '</button>' +
+            '<button type="button" class="ej-fleche" data-ej-sens="1" aria-label="' + T('Jeu suivant', 'Next game') + '">' + fl('m9 18 6-6-6-6') + '</button></div></div>' +
+        '<ul class="ej-piste" aria-label="' + T('Jeux-concours en cours', 'Open competitions') + '">' + ouvertes.concat(jouees).map((c) => this._ejCarte(c)).join('') + '</ul>' +
+        '<div class="ej-pied" aria-hidden="true"><div class="ej-avance"><i></i></div><span class="ej-compte"></span></div></section>';
+    }
+
+    _ejCarte(c) {
+      const en = this._lang() === 'en';
+      let reste = '';
+      if (c.fin) {
+        const jour = (t) => new Date(t).toLocaleDateString('en-CA', { timeZone: 'Europe/Paris' });
+        const n = Math.round((Date.parse(jour(new Date(c.fin).getTime())) - Date.parse(jour(Date.now()))) / 864e5);
+        if (Number.isFinite(n) && n >= 0) reste = '<span class="ej-reste">' + jtSvg('<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>') +
+          (n === 0 ? (en ? 'Last day' : 'Dernier jour') : n === 1 ? (en ? '1 day left' : 'Plus qu’un jour') : (en ? n + ' days left' : 'Plus que ' + n + ' jours')) + '</span>';
+      }
+      const ico = { 'a-faire': '<path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/>', fait: JT_I_OK, info: JT_I_CHRONO }[c.etat[0]] || JT_I_CHRONO;
+      return '<li class="ej-carte' + (c.joue ? ' ej-carte--joue' : '') + '" data-ej-jeu="' + c.id + '">' +
+        '<div class="ej-vis ej-vis--' + c.genre + '">' + c.vis + '<span class="ej-etiq">' + escapeHtml(c.etiquette) + '</span>' + reste + '</div>' +
+        '<div class="ej-corps"><h3 class="ej-nom">' + escapeHtml(c.nom) + '</h3>' + (c.lot ? '<p class="ej-lot">' + c.lot + '</p>' : '') +
+        '<div class="ej-etat ej-etat--' + c.etat[0] + '">' + jtSvg(ico) + '<div>' + escapeHtml(c.etat[1]) + (c.etat[2] ? '<small>' + escapeHtml(c.etat[2]) + '</small>' : '') + '</div></div>' +
+        '<div class="ej-actions">' + c.bouton + (c.reglement || '') + '</div></div></li>';
+    }
+
+    _ejReglement(url) {
+      if (!url || !/^https?:\/\/|^\//.test(String(url))) return '';
+      return '<a class="ej-lien" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + (this._lang() === 'en' ? 'Rules' : 'Règlement') + '</a>';
+    }
+
+    _ejGagner(texte) {
+      return (this._lang() === 'en' ? 'To win: ' : 'À gagner : ') + '<b>' + escapeHtml(texte) + '</b>';
+    }
+
+     
+    _ejRoue() {
+      const r = this._jrEtat();
+      if (!r) return null;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const lot = this._jrLot();
+      const vus = new Set();
+      const lots = r.segments.filter((s) => s.visuel && s.physique && !vus.has(s.visuel) && vus.add(s.visuel)).slice(0, 3);
+      const vis = '<span class="ej-roue" aria-hidden="true">' + jrRoueSvg(r.segments, { sansTexte: true, sansAiguille: true, moyeu: (r.visuels || {}).moyeu }) + '</span>' +
+        (lots.length ? '<span class="ej-lots" aria-hidden="true">' + lots.map((s) => '<img src="' + escapeHtml(s.visuel) + '" alt="" loading="lazy" decoding="async">').join('') + '</span>' : '');
+      const base = { id: 'jeu-de-la-roue', genre: 'roue', vis, nom: T('Le jeu de la roue', 'The prize wheel'), etiquette: T('Gagnant instantané', 'Instant win'),
+        lot: escapeHtml(T('Casquette, gourde, tote bag, chaussettes, peluche TyMAL ou -10 % chez Armor Lux', 'Cap, water bottle, tote bag, socks, TyMAL plush or 10% off at Armor Lux')),
+        reglement: this._ejReglement(this._payload && this._payload.reglements && this._payload.reglements.roue) };
+      const fl = jrIc(JT_I_FLECHE);
+      if (r.peutTourner) return Object.assign(base, { etat: ['a-faire', T('Ton tour t’attend', 'Your spin is waiting'), T('Un seul tour par compte', 'One spin per account')],
+        bouton: '<button type="button" class="ej-jouer" data-jr-ouvrir>' + T('Tourner la roue', 'Spin the wheel') + fl + '</button>' });
+      if (lot && lot.physique && !r.retrait) return Object.assign(base, { etat: ['a-faire', T('Ton lot t’attend', 'Your prize is waiting'), T('Dis-nous comment le récupérer', 'Tell us how to get it')],
+        bouton: '<button type="button" class="ej-jouer" data-jr-ouvrir="revoir">' + T('Choisir', 'Choose') + fl + '</button>' });
+      const gagne = lot && lot.type !== 'rien';
+      return Object.assign(base, { joue: true, lot: '', etat: ['info', T('Tu as déjà joué', 'You have already played'),
+        gagne ? T('Gagné : ', 'Won: ') + ((en && lot.libelleEn) || lot.libelle) : T('Pas de gain cette fois-ci', 'No prize this time')],
+        bouton: '<button type="button" class="ej-jouer ej-jouer--voir" data-jr-ouvrir="revoir">' + T('Revoir mon tour', 'See my spin') + fl + '</button>' });
+    }
+
+     
+    _ejPhoto() {
+      const p = this._jpEtat();
+      if (!p || (p.etat !== 'ouvert' && p.etat !== 'votes')) return null;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const m = p.maPhoto;
+      const img = jtImage(p.visuel, 520);
+      const aVoter = p.votesOuverts && !p.aVote;
+      let etat;
+      if (!m) etat = p.peutDeposer ? ['a-faire', T('Poste ta photo', 'Post your photo'), T('Une photo par membre, la plus étoilée gagne', 'One photo per member, the most starred wins')]
+        : aVoter ? ['a-faire', T('Pose ton étoile', 'Give your star'), T('Une étoile par membre', 'One star per member')]
+        : ['fait', T('Ton étoile est posée', 'Your star is placed'), T('Tu peux la changer jusqu’à la clôture', 'You can change it until closing')];
+      else if (m.statut === 'en_attente') etat = ['info', T('Ta photo est en attente', 'Your photo is under review'), T('Relue par l’équipe avant d’entrer sur le mur', 'Reviewed by the team before going on the wall')];
+      else if (m.statut === 'validee') etat = ['fait', T('Ta photo est en ligne', 'Your photo is online'), this._jpPluriel(m.coeurs, 'cœur', 'heart') + (en ? ' and ' : ' et ') + this._jpPluriel(m.etoiles, 'étoile', 'star') + (aVoter ? T(' · il te reste à voter', ' · you still have to vote') : '')];
+      else if (m.statut === 'refusee') etat = ['info', T('Photo non retenue', 'Photo not accepted'), p.peutDeposer ? T('Tu peux en proposer une autre', 'You can submit another one') : (m.motif || '')];
+      else etat = ['info', T('Photo retirée du mur', 'Photo removed from the wall'), ''];
+      const ech = this._jpEcheance(p);
+      const fl = jrIc(JT_I_FLECHE);
+      const bouton = p.peutDeposer ? '<a class="ej-jouer" href="' + this._jpLien() + '">' + T('Poster ma photo', 'Post my photo') + fl + '</a>'
+        : aVoter ? '<a class="ej-jouer" href="' + this._jpLien() + '">' + T('Voter', 'Vote') + fl + '</a>'
+        : '<a class="ej-jouer ej-jouer--voir" href="' + this._jpLien() + '">' + T('Voir le mur', 'See the wall') + fl + '</a>';
+      return { id: 'challenge-photo', genre: 'photo', vis: img ? '<img class="ej-logo" src="' + escapeHtml(img) + '" alt="Challenge Alpina" decoding="async">' : '',
+        nom: T('Challenge photo Alpina', 'Alpina photo challenge'), etiquette: T('Nouveau', 'New'), fin: ech ? ech.fin : null,
+        lot: this._ejGagner(p.lot || T('un voyage en Suisse pour deux chez Alpina', 'a trip for two to Switzerland with Alpina')), etat, bouton, reglement: this._ejReglement(p.reglementUrl) };
+    }
+
+     
+    _ejTop50() {
+      const t = this._payload && this._payload.top50;
+      if (!t || !Array.isArray(t.lignes) || !t.lignes.length || this._top50Clos()) return null;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const r = this._payload.topReglages || {};
+      const p = t.maPlace || {};
+      const tymal = tymalPalier(this._payload, 'Légende', 288);
+      const vis = (tymal && tymal.src ? '<img class="ej-tymal" src="' + escapeHtml(tymal.src) + '" alt="" aria-hidden="true" loading="lazy">' : '') + '<span class="ej-top" aria-hidden="true">Top <em>50</em></span>';
+      const etat = p.rang ? ['info', T('Ta place : ', 'Your place: ') + this._top50Nombre(p.rang) + (en ? '' : (p.rang === 1 ? 're' : 'e')), this._top50Nombre(p.points) + T(' points · le classement bouge chaque nuit', ' points · the ranking moves every night')]
+        : ['a-faire', T('Pas encore classé', 'Not ranked yet'), T('Chaque action dans ton Espace rapporte des points', 'Every action in your Espace earns points')];
+      return { id: 'la-legende-du-rhum', genre: 'top50', vis, nom: T('La légende du Rhum', 'The Rhum legend'), etiquette: T('Top 50 des fans', 'Top 50 fans'), fin: r.cloture || null,
+        lot: r.accroche ? escapeHtml(r.accroche) : '', etat,
+        bouton: '<button type="button" class="ej-jouer ej-jouer--voir" data-ej-aller="leaderboard-teaser">' + T('Voir le classement', 'See the ranking') + jrIc(JT_I_FLECHE) + '</button>',
+        reglement: this._ejReglement(this._cheminLangue('/reglements') + '#la-legende-du-rhum') };
+    }
+
+     
+    _ejJusteTemps() {
+      const p = this._jtEtat();
+      if (!p || p.phase !== 'ouvert') return null;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const img = jtImage(p.visuel, 640);
+      const fl = jrIc(JT_I_FLECHE);
+      return { id: 'le-juste-temps', genre: 'jt', vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
+        nom: p.libelle || 'Le Juste Temps', etiquette: T('Pronostics', 'Predictions'), fin: p.fermetureLe || null,
+        lot: this._ejGagner(T('la montre officielle Route du Rhum x Alpina', 'the official Route du Rhum x Alpina watch')),
+        etat: p.joue ? ['fait', T('Tes pronostics sont posés', 'Your predictions are in'), T('Modifiables jusqu’au ', 'You can change them until ') + this._jtQuand(p.fermetureLe, true)]
+          : ['a-faire', T('À toi de pronostiquer', 'Make your predictions'), T('Le temps de course de chaque classe', 'The race time of each class')],
+        bouton: '<button type="button" class="ej-jouer' + (p.joue ? ' ej-jouer--voir' : '') + '" data-jt-ouvrir>' + (p.joue ? T('Voir mes pronos', 'See my picks') : T('Faire mes pronos', 'Make my picks')) + fl + '</button>',
+        reglement: this._ejReglement(this._payload && this._payload.reglements && this._payload.reglements.pronostics) };
+    }
+
+     
+    _ejMobilite() {
+      const m = this._jmEtat();
+      if (!m || !m.ouvert) return null;
+      const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
+      const img = jtImage(m.visuel, 640);
+      const grandLot = (en ? m.grandLotEn : m.grandLot) || '';
+      return { id: 'challenge-mobilite', genre: 'mob', vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
+        nom: (en ? m.titreEn : m.titre) || T('Challenge Mobilité', 'Mobility Challenge'), etiquette: T('Au village', 'At the village'), fin: m.dateFin ? m.dateFin + 'T21:59:00Z' : null,
+        lot: grandLot ? this._ejGagner(grandLot) : '',
+        etat: ['a-faire', T('Viens au village sans voiture', 'Come to the village without a car'), T('Un justificatif par jour de visite', 'One proof per day of visit')],
+        bouton: '<a class="ej-jouer" href="' + escapeHtml(this._cheminLangue('/se-rendre-au-village') + '#challenge-mobilite') + '">' + T('Participer', 'Take part') + jrIc(JT_I_FLECHE) + '</a>',
+        reglement: this._ejReglement(m.lienReglement) };
+    }
+
+     
+    _ejMaj() {
+      const bloc = this.querySelector('.ej');
+      const piste = bloc && bloc.querySelector('.ej-piste');
+      if (!piste) return;
+      const barre = bloc.querySelector('.ej-avance i'), compte = bloc.querySelector('.ej-compte');
+      const [prec, suiv] = bloc.querySelectorAll('.ej-fleche');
+      const max = piste.scrollWidth - piste.clientWidth;
+      const part = Math.min(1, piste.clientWidth / Math.max(1, piste.scrollWidth));
+      const x = max > 0 ? piste.scrollLeft / max : 0;
+      if (barre) { barre.style.width = (part * 100) + '%'; barre.style.transform = 'translateX(' + (part < 1 ? x * (1 / part - 1) * 100 : 0) + '%)'; }
+      if (prec) prec.disabled = piste.scrollLeft <= 4;
+      if (suiv) suiv.disabled = piste.scrollLeft >= max - 4;
+      const liste = [...piste.children];
+      const g = piste.getBoundingClientRect().left;
+      const premiere = Math.max(0, liste.findIndex((c) => c.getBoundingClientRect().right > g + 40));
+      const vues = liste.filter((c) => { const b = c.getBoundingClientRect(); return b.width && b.left >= g - 4 && b.right <= g + piste.clientWidth + 4; }).length || 1;
+      if (compte) compte.textContent = (premiere + 1) + (vues > 1 ? '–' + Math.min(liste.length, premiere + vues) : '') + (this._lang() === 'en' ? ' of ' : ' sur ') + liste.length;
     }
 
     _jtBandeau() {
@@ -21052,7 +21285,7 @@ if (!customElements.get('espace-rhum')) {
       this._jeuxRepeindre();
       let ret = this._jrRetour;
       this._jrRetour = null;
-      if (!ret || !document.contains(ret)) ret = this.querySelector('.jt-vue:not([hidden]) [data-jr-ouvrir], .jt-bandeau [data-jr-ouvrir], [data-jt-volet]');
+      if (!ret || !document.contains(ret)) ret = this.querySelector('.jt-vue:not([hidden]) [data-jr-ouvrir], .ej [data-jr-ouvrir], .jt-bandeau [data-jr-ouvrir], [data-jt-volet]');
       if (ret && ret.focus) { try { ret.focus({ preventScroll: true }); } catch (e) { ret.focus(); } }
     }
 
@@ -21087,6 +21320,7 @@ if (!customElements.get('espace-rhum')) {
       remplacer('.er-sidebar .jt-menu-jeux', this._buildJeuxBouton(false));
       remplacer('.er-mobile-sheet-jeux', this._buildJeuxBouton(true));
       this._jeuxMontrer(false);
+      this._ejMaj();
     }
 
     _wireJeux() {
@@ -21109,6 +21343,23 @@ if (!customElements.get('espace-rhum')) {
             return;
           }
           if (t.closest('[data-jt-bord]')) { e.preventDefault(); this._jeuxAller('bord'); return; }
+          
+
+          const sens = t.closest('[data-ej-sens]');
+          if (sens) {
+            e.preventDefault();
+            const piste = this.querySelector('.ej-piste');
+            const c = piste && piste.children[0];
+            if (piste) piste.scrollBy({ left: Number(sens.getAttribute('data-ej-sens')) * (c ? c.getBoundingClientRect().width + 16 : 300), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            return;
+          }
+          const aller = t.closest('[data-ej-aller]');
+          if (aller) {
+            e.preventDefault();
+            const cible = this.querySelector('[data-slot="' + aller.getAttribute('data-ej-aller') + '"]');
+            if (cible) cible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
           const og = t.closest('[data-jt-onglet]');
           if (og) {
             this._jeuxOnglet = og.getAttribute('data-jt-onglet');
@@ -21128,12 +21379,17 @@ if (!customElements.get('espace-rhum')) {
           if (this._jeuxVue === 'jeux' && t.closest('.er-sidebar-nav-link, [data-sheet-nav]')) this._jeuxAller('bord');
         };
         this.addEventListener('click', this._jeuxClic, true);
+         
+        this.addEventListener('scroll', (e) => { if (e.target && e.target.classList && e.target.classList.contains('ej-piste')) this._ejMaj(); }, true);
+        window.addEventListener('resize', () => this._ejMaj(), { passive: true });
       }
       if (this._jeuxVue === undefined) this._jeuxVue = (location.hash === '#jeux') ? 'jeux' : 'bord';
       this._jeuxMontrer(false);
+      this._ejMaj();
+      requestAnimationFrame(() => this._ejMaj());
       clearInterval(this._jeuxMinuteur);
       this._jeuxMinuteur = null;
-      if (!this.querySelector('.jt-vue, .jt-bandeau')) return;
+      if (!this.querySelector('.jt-vue, .jt-bandeau, .ej')) return;
       const en = this._lang() === 'en';
       this._jeuxMinuteur = setInterval(() => {
         if (!this.isConnected) { clearInterval(this._jeuxMinuteur); this._jeuxMinuteur = null; return; }
@@ -21310,7 +21566,7 @@ if (!customElements.get('espace-rhum')) {
       let r = this._jtRetour;
       this._jtRetour = null;
       if (!r || !document.contains(r)) {
-        r = ['.jt-vue:not([hidden]) [data-jt-ouvrir]', '.jt-bandeau [data-jt-ouvrir]', '.jt-bandeau [data-jt-volet]']
+        r = ['.jt-vue:not([hidden]) [data-jt-ouvrir]', '.ej [data-jt-ouvrir]', '.jt-bandeau [data-jt-ouvrir]', '.ej [data-jt-volet]', '.jt-bandeau [data-jt-volet]']
           .map((q) => this.querySelector(q)).find((x) => x && x.offsetParent);
       }
       if (r && r.focus) { try { r.focus({ preventScroll: true }); } catch (e) { r.focus(); } }
