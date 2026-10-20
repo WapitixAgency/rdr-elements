@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum df4c8ec | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="df4c8ec";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum db27389 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="db27389";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5664,8 +5664,9 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         const url = /^\/[^\s"'<>]*$/.test(String(a.url || '')) ? a.url : '';
         const [teinte, fond, vif, icone] = categorieActu(a.categorie);
         const t0 = a.date ? Date.parse(a.date) : NaN;
-         
-        const neuf = t0 > 0 && maintenant - t0 < 48 * 3600e3;
+        
+
+        const neuf = t0 > 0 && maintenant - t0 < 12 * 3600e3;
         
 
 

@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum df4c8ec | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="df4c8ec";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum db27389 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="db27389";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1369,7 +1369,7 @@ class RdrNews extends HTMLElement {
     _isNew(p) {
       if (!p.publishedDate) return false;
       const payload = this._state.payload || {};
-      const hours = Number(payload.newWindowH) > 0 ? Number(payload.newWindowH) : 48;
+      const hours = Number(payload.newWindowH) > 0 ? Number(payload.newWindowH) : 12;
       return (Date.now() - new Date(p.publishedDate).getTime()) < hours * 3600 * 1000;
     }
 
@@ -4604,7 +4604,7 @@ class RdrNews extends HTMLElement {
   var LANGUE = 'fr';
   
 
-  var FENETRE_NOUVEAU_H = 48;
+  var FENETRE_NOUVEAU_H = 12;
   
 
 
@@ -5016,7 +5016,7 @@ class RdrNews extends HTMLElement {
     _render() {
       this._lang();
       var d = this._data();
-      FENETRE_NOUVEAU_H = Number(d.newWindowH) > 0 ? Number(d.newWindowH) : 48;
+      FENETRE_NOUVEAU_H = Number(d.newWindowH) > 0 ? Number(d.newWindowH) : 12;
       var r = this._rows(d);
       var attente = this._enAttente();
       this._garder(attente);

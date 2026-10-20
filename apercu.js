@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum df4c8ec | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="df4c8ec";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum db27389 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="db27389";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -976,6 +976,104 @@ rdr-accueil-apercu .pub-encart a,rdr-accueil-apercu .pub-encart picture{display:
 rdr-accueil-apercu .pub-encart img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,.8,.3,1)}
 rdr-accueil-apercu .pub-encart a:hover img{transform:scale(1.02)}
 rdr-accueil-apercu .pub-encart a:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
+rdr-accueil-apercu .jx{position:relative;z-index:1;margin-top:clamp(88px,12vh,120px)}
+rdr-accueil-apercu .jx[hidden]{display:none}
+rdr-accueil-apercu .jx + .pub-encart{margin-top:clamp(64px,9vh,96px)}
+rdr-accueil-apercu .jx-tete{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 40px;align-items:end;margin-bottom:clamp(22px,3.4vh,32px)}
+rdr-accueil-apercu .jx-tete .kicker svg{width:13px;height:13px}
+rdr-accueil-apercu .jx-titre{font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;line-height:.92;margin:0;font-size:clamp(34px,3.6vw,54px);color:var(--marine2)}
+rdr-accueil-apercu .jx-titre em{font-style:inherit;color:#E86C20}
+rdr-accueil-apercu .jx-tete p{margin:12px 0 0;max-width:620px;font-size:15px;line-height:1.55;font-weight:500;color:#3A4256}
+rdr-accueil-apercu .jx-tete p b{color:#0E111D;font-weight:800}
+rdr-accueil-apercu .jx-fleches{display:flex;gap:10px}
+rdr-accueil-apercu .jx-fleche{width:48px;height:48px;display:grid;place-items:center;border:2px solid var(--marine2);background:transparent;color:var(--marine2);border-radius:3px 12px 3px 12px;cursor:pointer;transition:background .2s,color .2s,opacity .2s}
+rdr-accueil-apercu .jx-fleche:hover:not(:disabled){background:var(--marine2);color:#fff}
+rdr-accueil-apercu .jx-fleche:disabled{opacity:.3;cursor:default}
+rdr-accueil-apercu .jx-fleche svg{width:20px;height:20px}
+rdr-accueil-apercu .jx-fleche:focus-visible{outline:3px solid var(--teal2);outline-offset:3px}
+rdr-accueil-apercu .jx-piste{--gap:22px;--cartes:3.15;display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--marge);padding:6px var(--marge) 26px;margin:0 calc(var(--marge) * -1);list-style:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+rdr-accueil-apercu .jx-piste::-webkit-scrollbar{display:none}
+rdr-accueil-apercu .jx-carte{flex:0 0 calc((100% - (var(--cartes) - 1) * var(--gap) - var(--marge)) / var(--cartes));scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border-radius:28px 3px 16px 3px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(14,17,29,.45),0 2px 0 rgba(14,17,29,.04);min-width:0;transition:transform .25s ease,box-shadow .25s ease}
+rdr-accueil-apercu .jx-carte:hover{transform:translateY(-4px);box-shadow:0 26px 50px -24px rgba(14,17,29,.5)}
+rdr-accueil-apercu .jx-vis{position:relative;height:clamp(168px,24vh,214px);overflow:hidden;background:var(--marine2);flex:none}
+rdr-accueil-apercu .jx-vis img.jx-fond{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+rdr-accueil-apercu .jx-vis::after{content:'';position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(0deg,rgba(10,18,40,.55),rgba(10,18,40,0));pointer-events:none}
+rdr-accueil-apercu .jx-etiq{position:absolute;z-index:3;left:16px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:3px 9px 3px 9px;background:var(--jaune);color:#0E111D;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1}
+rdr-accueil-apercu .jx-etiq svg{width:12px;height:12px}
+rdr-accueil-apercu .jx-reste{position:absolute;z-index:3;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:9px 3px 9px 3px;background:rgba(10,18,40,.72);backdrop-filter:blur(6px);color:#fff;font-size:11.5px;font-weight:700;line-height:1}
+rdr-accueil-apercu .jx-reste svg{width:13px;height:13px;color:var(--jaune)}
+rdr-accueil-apercu .jx-vis--photo{background:radial-gradient(90% 80% at 15% 0%,rgba(93,191,192,.45) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
+rdr-accueil-apercu .jx-vis--photo .jx-logo{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:min(64%,300px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+rdr-accueil-apercu .jx-vis--roue{background:radial-gradient(80% 90% at 85% 100%,rgba(252,241,80,.28) 0%,rgba(252,241,80,0) 60%),linear-gradient(150deg,#16355D 0%,#0F2747 100%)}
+rdr-accueil-apercu .jx-vis--roue .jx-roue{position:absolute;right:-90px;top:50%;width:300px;height:300px;transform:translateY(-50%) rotate(-12deg);border-radius:50%;background:conic-gradient(var(--teal) 0 45deg,var(--jaune) 45deg 90deg,var(--orange) 90deg 135deg,#7894F7 135deg 180deg,var(--teal) 180deg 225deg,var(--jaune) 225deg 270deg,var(--orange) 270deg 315deg,#7894F7 315deg 360deg);box-shadow:0 0 0 8px #fff,0 0 0 12px rgba(255,255,255,.2);opacity:.95}
+rdr-accueil-apercu .jx-vis--roue .jx-roue::after{content:'';position:absolute;inset:38%;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 6px var(--marine2)}
+rdr-accueil-apercu .jx-vis--roue .jx-marque{position:absolute;z-index:2;left:16px;bottom:16px;width:104px}
+rdr-accueil-apercu .jx-vis--roue .jx-lots{position:absolute;z-index:2;left:36%;right:16%;top:22px;bottom:10px;display:flex;align-items:flex-end;justify-content:center;gap:2px}
+rdr-accueil-apercu .jx-vis--roue .jx-lots img{height:62%;max-width:44%;width:auto;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(0,0,0,.35))}
+rdr-accueil-apercu .jx-vis--roue .jx-lots img:nth-child(2){height:92%}
+rdr-accueil-apercu .jx-vis--roue::after{display:none}
+rdr-accueil-apercu .jx-vis--jt img.jx-fond{object-position:50% 77%;transform:scale(1.9);transform-origin:80% 58%}
+rdr-accueil-apercu .jx-vis--mob img.jx-fond{object-position:30% 50%}
+rdr-accueil-apercu .jx-corps{display:flex;flex-direction:column;gap:12px;padding:20px 22px 22px;flex:1}
+rdr-accueil-apercu .jx-nom{margin:0;font:italic 400 clamp(21px,1.7vw,25px)/1 var(--titre);text-transform:uppercase;color:var(--marine2)}
+rdr-accueil-apercu .jx-accroche{margin:0;font-size:13.5px;line-height:1.5;color:#3A4256;font-weight:500}
+rdr-accueil-apercu .jx-gain{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:3px 12px 3px 12px;background:#FFF9D6;border:1px solid #F6E58A}
+rdr-accueil-apercu .jx-gain svg{flex:none;width:18px;height:18px;color:#C9871B;margin-top:1px}
+rdr-accueil-apercu .jx-gain div{font-size:12.5px;line-height:1.4;color:#3A4256}
+rdr-accueil-apercu .jx-gain small{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#A86A0C;margin-bottom:2px}
+rdr-accueil-apercu .jx-gain b{font-weight:800;color:#0E111D}
+rdr-accueil-apercu .jx-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;font-weight:600;color:#6B7287}
+rdr-accueil-apercu .jx-meta span{display:inline-flex;align-items:center;gap:5px}
+rdr-accueil-apercu .jx-meta svg{width:14px;height:14px}
+rdr-accueil-apercu .jx-meta .jx-chiffre{color:var(--vert)}
+rdr-accueil-apercu .jx-actions{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-top:4px}
+rdr-accueil-apercu .jx-carte .cta-rhum{min-height:46px;padding:0 18px;font-size:17px;gap:9px;box-shadow:0 10px 20px -12px rgba(80,60,0,.55)}
+rdr-accueil-apercu .jx-carte .cta-rhum svg{width:16px;height:16px}
+rdr-accueil-apercu .jx-lien{font-size:12px;font-weight:700;color:#6B7287;text-decoration:underline;text-underline-offset:3px}
+rdr-accueil-apercu .jx-lien:hover{color:var(--marine2)}
+rdr-accueil-apercu .jx-lien:focus-visible{outline:3px solid #13204A;outline-offset:3px}
+rdr-accueil-apercu .jx-carte--inscr{background:linear-gradient(160deg,#16355D 0%,#0F2747 100%);color:#fff;position:relative}
+rdr-accueil-apercu .jx-carte--inscr .jx-haut{position:relative;height:clamp(168px,24vh,214px);flex:none;overflow:hidden;background:radial-gradient(70% 80% at 50% 100%,rgba(93,191,192,.35),rgba(93,191,192,0) 70%)}
+rdr-accueil-apercu .jx-carte--inscr .jx-haut::before{content:'';position:absolute;left:46%;top:54%;width:min(100%,330px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(133,216,213,.42) 0%,rgba(93,191,192,.24) 30%,rgba(93,191,192,.1) 52%,rgba(93,191,192,0) 70%);filter:blur(10px);pointer-events:none}
+rdr-accueil-apercu .jx-carte--inscr .jx-haut img{position:absolute;left:50%;bottom:6px;height:88%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+rdr-accueil-apercu .jx-carte--inscr .jx-nom{color:#fff}
+rdr-accueil-apercu .jx-carte--inscr .jx-nom em{font-style:inherit;color:var(--jaune)}
+rdr-accueil-apercu .jx-carte--inscr ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.88)}
+rdr-accueil-apercu .jx-carte--inscr li{display:flex;align-items:center;gap:9px}
+rdr-accueil-apercu .jx-carte--inscr li svg{flex:none;width:16px;height:16px;color:var(--teal)}
+rdr-accueil-apercu .jx-deja{font-size:12px;font-weight:600;color:rgba(255,255,255,.75)}
+rdr-accueil-apercu .jx-deja a{color:#fff;font-weight:800;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+rdr-accueil-apercu .jx-pied{display:flex;align-items:center;gap:18px;margin-top:2px}
+rdr-accueil-apercu .jx-avance{flex:1;height:4px;border-radius:4px;background:rgba(22,53,93,.12);overflow:hidden}
+rdr-accueil-apercu .jx-avance i{display:block;height:100%;width:30%;border-radius:4px;background:var(--marine2);transition:transform .15s linear,width .2s}
+rdr-accueil-apercu .jx-compte{font-size:12px;font-weight:700;color:#6B7287;white-space:nowrap}
+@media (max-width:1180px){
+rdr-accueil-apercu .jx-piste{--cartes:2.35}
+}
+@media (max-width:900px){
+rdr-accueil-apercu .jx-tete{grid-template-columns:1fr}
+rdr-accueil-apercu .jx-fleches{display:none}
+rdr-accueil-apercu .jx-piste{--cartes:1.6}
+}
+@media (max-width:760px){
+rdr-accueil-apercu .jx{margin-top:72px}
+rdr-accueil-apercu .jx-piste{--cartes:1.12;--gap:14px}
+rdr-accueil-apercu .jx-titre{font-size:34px}
+rdr-accueil-apercu .jx-tete p{font-size:14px}
+rdr-accueil-apercu .jx-corps{padding:18px 18px 20px}
+rdr-accueil-apercu .jx-carte .cta-rhum{font-size:16px;padding:0 16px}
+}
+@media (max-height:760px) and (min-width:901px){
+rdr-accueil-apercu .jx{margin-top:78px}
+rdr-accueil-apercu .jx-tete{margin-bottom:18px}
+rdr-accueil-apercu .jx-titre{font-size:clamp(32px,3.2vw,44px)}
+rdr-accueil-apercu .jx-tete p{margin-top:8px;font-size:14px}
+rdr-accueil-apercu .jx-vis,rdr-accueil-apercu .jx-carte--inscr .jx-haut{height:140px}
+rdr-accueil-apercu .jx-corps{gap:9px;padding:15px 20px 16px}
+rdr-accueil-apercu .jx-accroche{font-size:13px}
+rdr-accueil-apercu .jx-gain{padding:9px 11px}
+rdr-accueil-apercu .jx-carte .cta-rhum{min-height:42px;font-size:16px}
+}
 @keyframes raa-flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 rdr-accueil-apercu .tymal{position:relative;background:var(--jaune);color:#0E111D;padding:clamp(100px,12vh,130px) 0 clamp(104px,13vh,136px);overflow:hidden;clip-path:inset(0)}
 rdr-accueil-apercu .tymal .elem{position:absolute;left:-160px;bottom:-140px;width:640px;height:440px;object-fit:contain;opacity:.55;pointer-events:none;transform:rotate(12deg)}
@@ -1385,6 +1483,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
       </div>
     </div>
   </div>
+  <div class="jx" id="jx" role="region" aria-labelledby="jx-titre" hidden></div>
   <div class="pub-encart" id="pub-encart" hidden></div>
 </div></section>
 <div class="vague-sep" style="--avant:#F4F1E8;--apres:#FCF150"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>
@@ -1447,7 +1546,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   const jeuValide = (D) => !!(D && D.phases && D.medias && Array.isArray(D.actus) && Array.isArray(D.skippers));
 
   class RdrAccueilApercu extends HTMLElement {
-    static get observedAttributes() { return ['jeu', 'skippers', 'effectifs', 'promos', 'actus', 'connexion']; }
+    static get observedAttributes() { return ['jeu', 'skippers', 'effectifs', 'promos', 'actus', 'connexion', 'jeux', 'membre']; }
 
     connectedCallback() {
       if (this._monte) return;
@@ -1590,6 +1689,11 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
 
 
       if (nom === 'promos') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-promos')); return; }
+      
+
+
+      if (nom === 'jeux') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-jeux')); return; }
+      if (nom === 'membre') { if (this._dessine) this.dispatchEvent(new CustomEvent('raa-membre')); return; }
       
 
 
@@ -2509,6 +2613,159 @@ function monter(racine, portail, D) {
   }
   rendrePub();
   ecoute(racine, 'raa-promos', rendrePub);
+
+  
+
+
+
+
+
+
+
+
+
+  const JX = LANGUE_PUB === 'en' ? {
+    kicker: 'Espace Rhum competitions', titre: 'Games <em>of the moment</em>',
+    ouverts: (n) => n + ' open game' + (n > 1 ? 's' : ''),
+    visiteur: ', free with no purchase necessary. One My Espace Rhum account is all you need to play them all.',
+    membre: ' right now: your move.',
+    gagner: 'To win', jusqua: (d) => 'Until ' + d, membres: 'Members only', reglement: 'Rules',
+    reste: (n) => (n <= 0 ? 'Last day' : n === 1 ? '1 day left' : n + ' days left'),
+    chiffre: (c) => (c.type === 'classes' ? c.n.toLocaleString('en-GB') + ' fans ranked' : c.n.toLocaleString('en-GB') + ' members have played'),
+    precedent: 'Previous game', suivant: 'Next game', sur: (a, b) => a + ' of ' + b, liste: 'Open competitions',
+    inscrTitre: 'Not a <em>member yet?</em>', inscr: ['Free, in one minute', 'Every game with one account', 'Your skippers, your badges, your ranking'],
+    creer: 'Create my Espace', deja: 'Already a member?', connecter: 'Log in',
+    mois: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], date: (j, m) => j + ' ' + m
+  } : {
+    kicker: 'Jeux-concours de l’Espace', titre: 'Les jeux <em>du moment</em>',
+    ouverts: (n) => n + ' jeu' + (n > 1 ? 'x ouverts' : ' ouvert'),
+    visiteur: ', gratuits et sans obligation d’achat. Un seul compte Mon Espace Rhum suffit pour tous les jouer.',
+    membre: ' en ce moment : à vous de jouer.',
+    gagner: 'À gagner', jusqua: (d) => 'Jusqu’au ' + d, membres: 'Réservé aux membres', reglement: 'Règlement',
+    reste: (n) => (n <= 0 ? 'Dernier jour' : n === 1 ? 'Plus qu’un jour' : 'Plus que ' + n + ' jours'),
+    chiffre: (c) => (c.type === 'classes' ? c.n.toLocaleString('fr-FR') + ' fans déjà classés' : c.n.toLocaleString('fr-FR') + ' membres ont déjà joué'),
+    precedent: 'Jeu précédent', suivant: 'Jeu suivant', sur: (a, b) => a + ' sur ' + b, liste: 'Jeux-concours en cours',
+    inscrTitre: 'Pas encore <em>membre&nbsp;?</em>', inscr: ['Gratuit, en une minute', 'Tous les jeux avec un seul compte', 'Vos skippers, vos badges, votre classement'],
+    creer: 'Créer mon Espace', deja: 'Déjà membre&nbsp;?', connecter: 'Me connecter',
+    mois: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'], date: (j, m) => (j === 1 ? '1er' : j) + ' ' + m
+  };
+  const JX_ICO = {
+    cadeau: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>',
+    fleche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+    horloge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+    calendrier: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>',
+    verrou: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    gens: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    etoile: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>',
+    coche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+    gauche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
+    droite: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>'
+  };
+  const jeuxAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('jeux')) || 'null'); return Array.isArray(a) ? a : null; } catch (e) { return null; } };
+  if (!jeuxAttribut() && Array.isArray(D.jeuxDemo) && racine.setAttribute) racine.setAttribute('jeux', JSON.stringify(D.jeuxDemo));
+  const estMembre = () => !!(racine.getAttribute && racine.getAttribute('membre') === 'oui');
+  const idJx = (v) => (/^[\w~.-]+$/.test(String(v || '')) ? String(v) : '');
+  const urlJx = (id, mode, l, h) => 'https://static.wixstatic.com/media/' + id + '/v1/' + mode + '/w_' + l + ',h_' + h + ',q_85,enc_auto/' + id;
+  const jourParisJx = (t) => new Date(t).toLocaleDateString('en-CA', { timeZone: 'Europe/Paris' });
+  const joursJx = (fin) => Math.round((Date.parse(jourParisJx(fin)) - Date.parse(jourParisJx(horloge.maintenant()))) / 864e5);
+  const dateJx = (fin) => { const p = jourParisJx(fin).split('-').map(Number); return JX.date(p[2], JX.mois[p[1] - 1]); };
+  function visuelJx(c) {
+    const v = c.visuel || {};
+    const pastilles = '<span class="jx-etiq">' + (c.id === 'challenge-photo' ? JX_ICO.etoile : '') + esc(c.etiquette) + '</span>' +
+      (typeof c.fin === 'number' ? '<span class="jx-reste">' + JX_ICO.horloge + esc(JX.reste(joursJx(c.fin))) + '</span>' : '');
+    if (v.genre === 'photo' && idJx(v.logo)) return '<div class="jx-vis jx-vis--photo"><img class="jx-logo" src="' + urlJx(idJx(v.logo), 'fit', 620, 240) + '" alt="' + esc(c.nom) + '" loading="lazy" decoding="async">' + pastilles + '</div>';
+    if (v.genre === 'roue' && idJx(v.marque)) return '<div class="jx-vis jx-vis--roue"><span class="jx-roue" aria-hidden="true"></span><div class="jx-lots">' + (v.lots || []).map(idJx).filter(Boolean).slice(0, 3).map((id) => '<img src="' + urlJx(id, 'fit', 200, 240) + '" alt="" loading="lazy" decoding="async">').join('') + '</div><img class="jx-marque" src="' + urlJx(idJx(v.marque), 'fit', 260, 120) + '" alt="Route du Rhum x Armor Lux" loading="lazy" decoding="async">' + pastilles + '</div>';
+    if (v.genre === 'image' && idJx(v.image)) return '<div class="jx-vis jx-vis--' + esc(v.classe || '') + '"><img class="jx-fond" src="' + urlJx(idJx(v.image), 'fill', 800, 520) + '" alt="" loading="lazy" decoding="async">' + pastilles + '</div>';
+    return '';
+  }
+  function carteJx(c) {
+    const vis = visuelJx(c);
+    const lien = lienPub(c.lien), reglement = lienPub(c.reglement);
+    if (!vis || !lien) return '';
+    const chiffre = c.chiffre && Number(c.chiffre.n) > 0 ? '<span class="jx-chiffre">' + JX_ICO.gens + esc(JX.chiffre({ type: c.chiffre.type, n: Number(c.chiffre.n) })) + '</span>' : '';
+    return '<li class="jx-carte">' + vis + '<div class="jx-corps">' +
+      '<h4 class="jx-nom">' + esc(c.nom) + '</h4>' +
+      '<p class="jx-accroche">' + esc(c.accroche) + '</p>' +
+      (c.lot ? '<div class="jx-gain">' + JX_ICO.cadeau + '<div><small>' + esc(JX.gagner) + '</small><b>' + esc(c.lot) + '</b></div></div>' : '') +
+      '<div class="jx-meta">' + (typeof c.fin === 'number' ? '<span>' + JX_ICO.calendrier + esc(JX.jusqua(dateJx(c.fin))) + '</span>' : '') + chiffre +
+        (c.sansCompte || estMembre() ? '' : '<span>' + JX_ICO.verrou + esc(JX.membres) + '</span>') + '</div>' +
+      '<div class="jx-actions"><a class="cta-rhum" href="' + esc(lien) + '">' + esc(c.bouton) + JX_ICO.fleche + '</a>' + (reglement ? '<a class="jx-lien" href="' + esc(reglement) + '">' + esc(JX.reglement) + '</a>' : '') + '</div>' +
+      '</div></li>';
+  }
+  function carteInscrJx() {
+    const tymal = M.tymalDrapeau ? '<img src="' + esc(M.tymalDrapeau) + '/v1/fit/w_320,h_320,q_90,enc_auto/tymal.png" alt="" loading="lazy" decoding="async">' : '';
+    const espace = LANGUE_PUB === 'en' ? '/en/mon-espace-rhum' : '/mon-espace-rhum';
+    return '<li class="jx-carte jx-carte--inscr"><div class="jx-haut">' + tymal + '</div><div class="jx-corps">' +
+      '<h4 class="jx-nom">' + JX.inscrTitre + '</h4>' +
+      '<ul>' + JX.inscr.map((t) => '<li>' + JX_ICO.coche + esc(t) + '</li>').join('') + '</ul>' +
+      '<div class="jx-actions"><a class="cta-rhum" href="' + espace + '">' + esc(JX.creer) + JX_ICO.fleche + '</a></div>' +
+      '<span class="jx-deja">' + JX.deja + ' <a class="jx-connexion" href="' + espace + '">' + esc(JX.connecter) + '</a></span>' +
+      '</div></li>';
+  }
+  let jxRecalage = 0, jxDessine = '';
+  function rendreJeux() {
+    const boite = $('jx');
+    if (!boite) return;
+    if (jxRecalage) { clearTimeout(jxRecalage); jxRecalage = 0; }
+    const maintenant = horloge.maintenant();
+    const jeux = (jeuxAttribut() || []).filter((c) => c && c.id && (typeof c.fin !== 'number' || c.fin > maintenant));
+    const cartes = jeux.map(carteJx).filter(Boolean);
+    if (!cartes.length) { boite.hidden = true; boite.innerHTML = ''; jxDessine = ''; return; }
+    const membre = estMembre();
+    const html = '<div class="jx-tete"><div>' +
+        '<span class="kicker">' + JX_ICO.cadeau + esc(JX.kicker) + '</span>' +
+        '<h3 class="jx-titre" id="jx-titre">' + JX.titre + '</h3>' +
+        '<p><b>' + esc(JX.ouverts(cartes.length)) + '</b>' + esc(membre ? JX.membre : JX.visiteur) + '</p>' +
+      '</div><div class="jx-fleches">' +
+        '<button class="jx-fleche" type="button" data-sens="-1" aria-label="' + esc(JX.precedent) + '">' + JX_ICO.gauche + '</button>' +
+        '<button class="jx-fleche" type="button" data-sens="1" aria-label="' + esc(JX.suivant) + '">' + JX_ICO.droite + '</button>' +
+      '</div></div>' +
+      '<ul class="jx-piste" aria-label="' + esc(JX.liste) + '">' + cartes.join('') + (membre ? '' : carteInscrJx()) + '</ul>' +
+      '<div class="jx-pied" aria-hidden="true"><div class="jx-avance"><i></i></div><span class="jx-compte"></span></div>';
+    boite.hidden = false;
+    if (html !== jxDessine) {
+      jxDessine = html;
+      boite.innerHTML = html;
+      const piste = boite.querySelector('.jx-piste');
+      const barre = boite.querySelector('.jx-avance i');
+      const compte = boite.querySelector('.jx-compte');
+      const [prec, suiv] = boite.querySelectorAll('.jx-fleche');
+      const maj = () => {
+        const max = piste.scrollWidth - piste.clientWidth;
+        const part = Math.min(1, piste.clientWidth / Math.max(1, piste.scrollWidth));
+        const x = max > 0 ? piste.scrollLeft / max : 0;
+        barre.style.width = (part * 100) + '%';
+        barre.style.transform = 'translateX(' + (part < 1 ? x * (1 / part - 1) * 100 : 0) + '%)';
+        prec.disabled = piste.scrollLeft <= 4;
+        suiv.disabled = piste.scrollLeft >= max - 4;
+        const liste = [...piste.children];
+        const g = piste.getBoundingClientRect().left;
+        const premiere = Math.max(0, liste.findIndex((c) => c.getBoundingClientRect().right > g + 40));
+        const vues = liste.filter((c) => { const b = c.getBoundingClientRect(); return b.left >= g - 4 && b.right <= g + piste.clientWidth + 4; }).length || 1;
+        compte.textContent = JX.sur((premiere + 1) + (vues > 1 ? '–' + Math.min(liste.length, premiere + vues) : ''), liste.length);
+      };
+      [prec, suiv].forEach((b) => ecoute(b, 'click', () => {
+        const c = piste.children[0];
+        piste.scrollBy({ left: Number(b.dataset.sens) * (c ? c.getBoundingClientRect().width + 22 : 300), behavior: mouvementReduit() ? 'auto' : 'smooth' });
+      }));
+      ecoute(piste, 'scroll', maj);
+      ecoute(window, 'resize', maj);
+      const connexionJx = boite.querySelector('.jx-connexion');
+      if (connexionJx) ecoute(connexionJx, 'click', (ev) => {
+        if (!(racine.getAttribute && racine.getAttribute('connexion') === 'velo')) return;
+        ev.preventDefault();
+        racine.dispatchEvent(new CustomEvent('raa-connexion', { bubbles: true, composed: true }));
+      });
+      maj();
+      requestAnimationFrame(maj);
+    }
+    let suivant = Infinity;
+    jeux.forEach((c) => { if (typeof c.fin === 'number' && c.fin > maintenant && c.fin < suivant) suivant = c.fin; });
+    if (suivant - maintenant <= 6 * 60 * 60 * 1000) { jxRecalage = setTimeout(() => { jxRecalage = 0; rendreJeux(); }, horloge.delai(suivant - maintenant) + 500); minuteurs.push(jxRecalage); }
+  }
+  rendreJeux();
+  ecoute(racine, 'raa-jeux', rendreJeux);
+  ecoute(racine, 'raa-membre', rendreJeux);
    
   { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) aLApproche(sectionEspace, () => sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")')); }
 
@@ -2577,7 +2834,7 @@ function monter(racine, portail, D) {
   };
   const sujetsDe = (p) => (p._tags || p.tags || []).map((t) => String((t && typeof t === 'object' ? t.label : t) || '').trim()).filter((t) => t && !TAGS_TUS_ACC.test(t));
   const lienPost = (p) => p.lien || p.postPageUrl || (p.slug ? '/post/' + p.slug : '/medias-actualites');
-  const recent = (p) => Date.now() - new Date(p.publishedDate).getTime() < 48 * 3600000;
+  const recent = (p) => Date.now() - new Date(p.publishedDate).getTime() < 12 * 3600000;
   const lecture = (p) => (Number(p.timeToRead) > 0 ? ' · ' + Number(p.timeToRead) + ' min' : '');
   const DIRECT = String(racine.tagName || '').toLowerCase() === 'rdr-accueil-apercu';
   const actusAttribut = () => { try { const a = JSON.parse((racine.getAttribute && racine.getAttribute('actus')) || 'null'); return Array.isArray(a) && a.length ? a : null; } catch (e) { return null; } };
