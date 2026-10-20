@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum fd216c5 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="fd216c5";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 3012bad | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="3012bad";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -8507,6 +8507,9 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-pack-corps { display: flex; flex-direction: column; gap: 16px; }
     espace-rhum .er-pack-logo { display: block; width: auto; height: 44px; max-width: 100%; object-fit: contain; align-self: flex-start; }
     @media (max-width: 899px) { espace-rhum .er-pack-logo { height: 36px; } }
+     
+    espace-rhum .er-pack-boutique-tete--logo { flex-direction: column; gap: 10px; }
+    espace-rhum .er-pack-panel .er-pack-logo--code { height: 26px; }
      
     espace-rhum .er-pack[data-etat="code"] .er-pack-col--vr { order: -1; }
     espace-rhum .er-pack-panel .er-pack-dons { gap: 12px; }
@@ -22505,7 +22508,8 @@ if (!customElements.get('espace-rhum')) {
       const code = typeof b.code === 'string' ? b.code.trim() : '';
       const lien = typeof b.lien === 'string' ? b.lien.trim() : '';
       if (!/^[A-Za-z0-9][A-Za-z0-9_-]{2,39}$/.test(code) || !/^https:\/\/\S+$/.test(lien)) return null;
-      return { code, lien };
+      const logo = typeof b.logo === 'string' && /^https:\/\/static\.wixstatic\.com\/media\/[A-Za-z0-9_~.-]+$/.test(b.logo) ? b.logo : '';
+      return { code, lien, logo };
     }
 
     
@@ -22519,8 +22523,10 @@ if (!customElements.get('espace-rhum')) {
       if (!b) return '';
       return `
             <section class="er-pack-boutique" data-pack-boutique aria-labelledby="er-pack-boutique-titre">
-              <div class="er-pack-boutique-tete">
-                <span class="er-pack-don-ico" aria-hidden="true">${ICON_SAC}</span>
+              <div class="er-pack-boutique-tete${b.logo ? ' er-pack-boutique-tete--logo' : ''}">
+                ${b.logo
+                  ? `<img class="er-pack-logo er-pack-logo--code" src="${escapeHtml(b.logo)}/v1/fit/w_400,h_100,q_90,enc_auto/armor-lux.png" alt="Armor Lux" width="124" height="28" loading="lazy" decoding="async">`
+                  : `<span class="er-pack-don-ico" aria-hidden="true">${ICON_SAC}</span>`}
                 <span class="er-pack-don-txt"><strong id="er-pack-boutique-titre">5&nbsp;% de réduction chez Armor Lux</strong><span>Sur la collection textile Route du Rhum – Destination Guadeloupe.</span></span>
               </div>
               <div class="er-pack-code er-pack-code--boutique">
