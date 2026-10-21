@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 0651845 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="0651845";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 7f8e7d7 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="7f8e7d7";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3763,8 +3763,11 @@ class RdrNews extends HTMLElement {
      
     '.rph-meta{margin-top:4px;margin-bottom:6px}',
     '.rph-media{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,26px);min-width:0}',
-    '.rph-media .card{border-radius:12px 4px 12px 4px;overflow:hidden;box-shadow:0 18px 44px rgba(4,10,24,.5);max-height:100%;aspect-ratio:4/3;width:100%;background:linear-gradient(140deg,var(--navy-2),var(--navy-3))}',
+    '.rph-media .card{position:relative;border-radius:12px 4px 12px 4px;overflow:hidden;box-shadow:0 18px 44px rgba(4,10,24,.5);max-height:100%;aspect-ratio:4/3;width:100%;background:linear-gradient(140deg,var(--navy-2),var(--navy-3))}',
     '.rph-media img,.rph-media .ph{width:100%;height:100%;object-fit:cover;display:block}',
+     
+    '.rph-credit{position:absolute;right:8px;bottom:8px;z-index:2;max-width:calc(100% - 16px);box-sizing:border-box;padding:3px 8px;border-radius:7px 2px 7px 2px;background:rgba(10,26,53,.64);-webkit-backdrop-filter:blur(6px) saturate(1.1);backdrop-filter:blur(6px) saturate(1.1);color:rgba(255,255,255,.95);font:600 10.5px/1.35 var(--body);letter-spacing:.015em;text-align:right;text-shadow:0 1px 1px rgba(0,0,0,.25);overflow-wrap:anywhere;pointer-events:none}',
+    '@media(max-width:620px){.rph-credit{right:6px;bottom:6px;padding:2px 7px;font-size:10px}}',
     '.rph-waves{position:absolute;inset:auto 0 -10px 0;height:36%;opacity:.09;color:#fff;z-index:1;pointer-events:none}',
 
     
@@ -4315,6 +4318,14 @@ class RdrNews extends HTMLElement {
        
       var crumbDouble = /^(actualit|news$)/i.test(String(crumbCat).normalize('NFD').replace(/[̀-ͯ]/g, '').trim());
       var coverInner = d.cover ? '<img src="' + esc(d.cover) + '" alt="" fetchpriority="high" decoding="async">' : coverPlaceholder();
+      
+
+
+      var credit = d.cover && d.coverCredit ? String(d.coverCredit).replace(/^\s*©\s*/, '').trim() : '';
+      if (credit) {
+        coverInner += '<span class="rph-credit" role="note" aria-label="' +
+          esc((this._lang() === 'en' ? 'Photo credit: ' : 'Crédit photo : ') + credit) + '">© ' + esc(credit) + '</span>';
+      }
       
 
       var fmt = d.formatLabel || d.format;
