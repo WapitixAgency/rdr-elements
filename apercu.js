@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d0565e2 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d0565e2";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum d6af5c5 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d6af5c5";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2855,11 +2855,16 @@ function monter(racine, portail, D) {
     $('breves').innerHTML = '<div class="breve actu-squel est-la"></div>'.repeat(4);
   }
   let actusDessines = '';
+  const trierActus = (liste) => (Array.isArray(liste) ? liste : []).filter((p) => p && p.title && p.publishedDate)
+    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+  
+
+
+  const cleActus = (posts) => JSON.stringify(posts.map((p) => [p._id || '', p.title, p.excerpt || '', p.coverImage || '', p.publishedDate, p.postPageUrl || '', Number(p.timeToRead) || 0, (p.categorie && p.categorie.slug) || '', p.tags || []]));
   function rendreActus(liste) {
-    const posts = (Array.isArray(liste) ? liste : []).filter((p) => p && p.title && p.publishedDate)
-      .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+    const posts = trierActus(liste);
     if (!posts.length) return;
-    const cle = posts.map((p) => p._id || p.title).join('|');
+    const cle = cleActus(posts);
     if (cle === actusDessines) return;
     actusDessines = cle;
     const pris = new Set();
@@ -2888,10 +2893,44 @@ function monter(racine, portail, D) {
     $('breves').innerHTML = breves.map((p) => '<a class="breve"' + href(lienPost(p)) + '><img src="' + wixImg(p.coverImage, 240, 200) + '" alt="" loading="lazy"><div>' + cat(typeDe(p)) + '<h3>' + esc(String(p.title).trim()) + '</h3><span class="quand">' + ilYa(p.publishedDate) + lecture(p) + '</span></div></a>').join('');
     reveler('.actus .carte', 120); reveler('.breve', 90);
   }
+  
+
+
+
+
+
+
+
+
+
+
+  const sectionActus = racine.querySelector('.actus');
+  let actusEnAttente = null, guetActus = null;
+  const actusSousLesYeux = () => {
+    if (!sectionActus || document.hidden) return false;
+    const r = sectionActus.getBoundingClientRect();
+    return r.height > 0 && r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight || 0);
+  };
+  const poserActusEnAttente = () => {
+    if (guetActus) { guetActus.disconnect(); guetActus = null; }
+    const l = actusEnAttente;
+    actusEnAttente = null;
+    if (l) rendreActus(l);
+  };
+  function actusFraiches(liste) {
+    const posts = trierActus(liste);
+    if (!posts.length || cleActus(posts) === actusDessines) { actusEnAttente = null; return; }
+    if (!actusDessines || !actusSousLesYeux() || typeof IntersectionObserver !== 'function') { actusEnAttente = null; rendreActus(posts); return; }
+    actusEnAttente = posts;
+    if (guetActus) return;
+    guetActus = new IntersectionObserver((ents) => { if (ents.some((e) => !e.isIntersecting)) poserActusEnAttente(); });
+    observateurs.push(guetActus);
+    guetActus.observe(sectionActus);
+  }
   if (DIRECT) {
     const a = actusAttribut();
     if (a) rendreActus(a); else squelettesActus();
-    ecoute(racine, 'raa-actus', () => { const a2 = actusAttribut(); if (a2) rendreActus(a2); });
+    ecoute(racine, 'raa-actus', () => { const a2 = actusAttribut(); if (a2) actusFraiches(a2); });
   } else Promise.resolve(D.actus).then((a) => rendreActus(Array.isArray(a) ? a : a.posts));
 
   
