@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 40ad638 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="40ad638";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 0651845 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="0651845";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1013,7 +1013,7 @@ rdr-accueil-apercu .jx-reste{position:absolute;z-index:3;right:14px;bottom:14px;
 rdr-accueil-apercu .jx-reste svg{width:13px;height:13px;color:var(--jaune)}
 rdr-accueil-apercu .jx-vis--photo{background:radial-gradient(90% 80% at 15% 0%,rgba(93,191,192,.45) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
 rdr-accueil-apercu .jx-vis--photo .jx-logo{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:min(64%,300px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
-rdr-accueil-apercu .jx-vis--plein .jx-etiq,rdr-accueil-apercu .jx-vis--plein .jx-reste{display:none}
+rdr-accueil-apercu .jx-vis--plein .jx-etiq{display:none}
 rdr-accueil-apercu .jx-vis--roue{background:radial-gradient(80% 90% at 85% 100%,rgba(252,241,80,.28) 0%,rgba(252,241,80,0) 60%),linear-gradient(150deg,#16355D 0%,#0F2747 100%)}
 rdr-accueil-apercu .jx-vis--roue .jx-roue{position:absolute;right:-90px;top:50%;width:300px;height:300px;transform:translateY(-50%) rotate(-12deg);border-radius:50%;background:conic-gradient(var(--teal) 0 45deg,var(--jaune) 45deg 90deg,var(--orange) 90deg 135deg,#7894F7 135deg 180deg,var(--teal) 180deg 225deg,var(--jaune) 225deg 270deg,var(--orange) 270deg 315deg,#7894F7 315deg 360deg);box-shadow:0 0 0 8px #fff,0 0 0 12px rgba(255,255,255,.2);opacity:.95}
 rdr-accueil-apercu .jx-vis--roue .jx-roue::after{content:'';position:absolute;inset:38%;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 6px var(--marine2)}
