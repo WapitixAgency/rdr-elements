@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 22a6f18 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="22a6f18";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum a561dc3 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="a561dc3";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 if (!customElements.get('espace-rhum')) {
 
@@ -1288,20 +1288,20 @@ if (!customElements.get('espace-rhum')) {
      
     'Mon rang': 'My rank',
     'Où tu en es': 'Where you stand',
-    "Tu viens d'arriver. Tout est encore devant toi.":
-      'You have just arrived. Everything is still ahead of you.',
-    "Tu passes de temps en temps, et tu lis ce qui t'attire.":
-      'You drop by now and then, and read what draws you in.',
-    'Tu as choisi ton camp : des skippers, des sujets, des habitudes.':
-      'You have picked your side: skippers, topics, habits.',
-    'Tu portes les couleurs. Tu reviens voir ce qui bouge, souvent.':
-      'You fly the colours. You come back often to see what is happening.',
-    'Tu ne manques presque rien, et plusieurs classes à la fois.':
-      'You miss almost nothing, across several classes at once.',
-    'La course fait partie de tes journées. Peu de monde en est là.':
-      'The race is part of your days. Few people get this far.',
-    'Le sommet. Tu connais la course mieux que ceux qui la commentent.':
-      'The summit. You know the race better than those who commentate on it.',
+    "Tu poses un premier pied sur le pont. Bienvenue dans l'aventure !":
+      'You set foot on deck for the first time. Welcome to the adventure!',
+    'Tu prends tes marques à bord. La course commence à te passionner.':
+      'You are finding your feet on board. The race is starting to grip you.',
+    'Tu as tes skippers favoris. Tu vibres à chaque mille parcouru.':
+      'You have your favourite skippers. Every mile sailed gives you a thrill.',
+    'Tu suis la course au rythme des marées, jour après jour.':
+      'You follow the race to the rhythm of the tides, day after day.',
+    'Tu ne lâches pas la barre. Chaque classement, chaque rebondissement compte.':
+      'You never let go of the helm. Every ranking, every twist counts.',
+    "Les trajectoires, les stratégies et les classements n'ont presque plus de secrets pour toi.":
+      'Routes, strategies and rankings hold almost no secrets for you any more.',
+    "Tu maîtrises le routage, tu connais chaque skipper. La Route du Rhum, c'est ton terrain de jeu.":
+      'You have mastered routing and you know every skipper. The Route du Rhum is your playground.',
     '· ton palier actuel': '· your current tier',
      
      
@@ -11184,19 +11184,19 @@ if (!customElements.get('espace-rhum')) {
 
   const RANG_FRISE = [
     { label: 'Curieux',        pose: '83ec85561f9a491a821ec98cefcf2dac',
-      texte: "Tu viens d'arriver. Tout est encore devant toi." },
+      texte: "Tu poses un premier pied sur le pont. Bienvenue dans l'aventure !" },
     { label: 'Suiveur',        pose: '343a0ef9efd048bca6fdc22cffca14ed',
-      texte: "Tu passes de temps en temps, et tu lis ce qui t'attire." },
+      texte: 'Tu prends tes marques à bord. La course commence à te passionner.' },
     { label: 'Supporter',      pose: 'b5fd53d83d734fb495151da65ae33e62',
-      texte: 'Tu as choisi ton camp : des skippers, des sujets, des habitudes.' },
+      texte: 'Tu as tes skippers favoris. Tu vibres à chaque mille parcouru.' },
     { label: 'Fan',            pose: 'f988a7dcb4b84d7da9025f998a5cb6a2',
-      texte: 'Tu portes les couleurs. Tu reviens voir ce qui bouge, souvent.' },
+      texte: 'Tu suis la course au rythme des marées, jour après jour.' },
     { label: 'Inconditionnel', pose: 'd99ba7b1de9d420aa49cd55bfa7bc716',
-      texte: 'Tu ne manques presque rien, et plusieurs classes à la fois.' },
+      texte: 'Tu ne lâches pas la barre. Chaque classement, chaque rebondissement compte.' },
     { label: 'Passionné',      pose: '6af3efd96c624815b2c19c7935ff36c5',
-      texte: 'La course fait partie de tes journées. Peu de monde en est là.' },
+      texte: "Les trajectoires, les stratégies et les classements n'ont presque plus de secrets pour toi." },
     { label: 'Légende',        pose: '18789740b75547869e150140259392d6',
-      texte: 'Le sommet. Tu connais la course mieux que ceux qui la commentent.' }
+      texte: "Tu maîtrises le routage, tu connais chaque skipper. La Route du Rhum, c'est ton terrain de jeu." }
   ];
   const RANG_POSE_BASE = 'https://static.wixstatic.com/shapes/7bb303_';
 
