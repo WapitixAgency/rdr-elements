@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 24820f9 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="24820f9";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 7e7cbfc | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="7e7cbfc";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -109,6 +109,32 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-pill--attente{background:rgba(245,190,65,.18);color:var(--or)}
 :is(rdr-concours-photo,.cp-portail) .cp-pill--ligne{background:rgba(93,191,192,.18);color:var(--teal)}
 :is(rdr-concours-photo,.cp-portail) .cp-pill--refus{background:rgba(230,57,70,.18);color:#ff8a93}
+:is(rdr-concours-photo,.cp-portail) .cp-btn--sel{background:rgba(230,57,70,.22);border-color:rgba(255,107,119,.8);color:#fff}
+:is(rdr-concours-photo,.cp-portail) .cp-btn--sel svg{color:#ff6b77}
+:is(rdr-concours-photo,.cp-portail) .cp-btn--sel .cp-pastille{background:#fff;color:var(--rouge)}
+@media (hover:hover) and (pointer:fine){:is(rdr-concours-photo,.cp-portail) .cp-btn--sel:hover{background:rgba(230,57,70,.34);border-color:#ff6b77}}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel{display:flex;flex-direction:column;gap:8px;padding:12px 14px 14px;border-radius:14px;background:linear-gradient(160deg,rgba(252,241,80,.2),rgba(252,241,80,.07));border:1.5px solid rgba(252,241,80,.62);text-align:left}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel-t{display:flex;align-items:center;gap:10px;margin:0;font-size:14px;font-weight:800;line-height:1.25;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel-t i{flex:none;width:30px;height:30px;border-radius:999px;background:var(--jaune);color:var(--marine);display:inline-flex;align-items:center;justify-content:center;font-style:normal}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel-t i svg{width:17px;height:17px}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel p{margin:0;font-size:12.5px;line-height:1.45;color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-rappel .cp-btn{padding:10px 16px;font-size:12px}
+:is(rdr-concours-photo,.cp-portail) .cp-pref{display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px;border-radius:14px;background:rgba(252,241,80,.08);border:1.5px solid rgba(252,241,80,.45);text-align:left}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-tete{display:flex;align-items:center;gap:12px}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-vignette{position:relative;flex:none;width:64px;height:64px;padding:0;border:0;border-radius:10px;background:var(--nuit);cursor:zoom-in}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-vignette img{width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 0 0 2px var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-vignette i{position:absolute;right:-7px;top:-7px;width:24px;height:24px;border-radius:999px;background:var(--jaune);color:var(--marine);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.45)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-vignette i svg{width:14px;height:14px}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-txt{font-size:12.5px;line-height:1.4;color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-txt b{display:block;font-size:14px;font-weight:800;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-txt small{display:block;font-size:12px;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref p{margin:0;font-size:12.5px;line-height:1.45;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref p strong{color:var(--t1);font-weight:700;white-space:nowrap}
+:is(rdr-concours-photo,.cp-portail) .cp-maintenance{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:14px;background:rgba(245,190,65,.15);border:1.5px solid rgba(245,190,65,.7);text-align:left}
+:is(rdr-concours-photo,.cp-portail) .cp-maintenance i{flex:none;width:28px;height:28px;border-radius:999px;background:var(--or);color:var(--marine);display:inline-flex;align-items:center;justify-content:center;font-style:normal}
+:is(rdr-concours-photo,.cp-portail) .cp-maintenance i svg{width:15px;height:15px}
+:is(rdr-concours-photo,.cp-portail) .cp-maintenance p{margin:0;font-size:12.5px;line-height:1.45;color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-pref-changer{align-self:flex-start;padding:0;border:0;background:none;color:var(--jaune);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media (min-width:901px) and (max-height:820px){
   :is(rdr-concours-photo,.cp-portail) .cp-titre{font-size:clamp(36px,4.6vw,62px)}
   :is(rdr-concours-photo,.cp-portail) .cp-accroche{font-size:14.5px;line-height:1.5}
@@ -372,6 +398,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-tiroir-pied{padding:12px 18px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--filet);font-size:12px;color:var(--t3);line-height:1.45}
 :is(rdr-concours-photo,.cp-portail) .cp-tiroir-x{width:40px;height:40px;border-radius:999px;border:0;background:var(--voile);color:#fff;flex:none;display:inline-flex;align-items:center;justify-content:center}
 :is(rdr-concours-photo,.cp-portail) .cp-tiroir-x svg{width:18px;height:18px}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir-rappel{padding:12px 12px 0}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir-rappel:empty{display:none}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir-rappel .cp-rappel{padding:11px 12px 12px}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir-deplacer{margin:0;padding:10px 12px;border-radius:12px;background:rgba(252,241,80,.08);border:1px solid rgba(252,241,80,.35);font-size:12.5px;line-height:1.45;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir-deplacer strong{color:var(--t1);white-space:nowrap}
+:is(rdr-concours-photo,.cp-portail) .cp-tiroir[data-invite="1"] .cp-ico--etoile{color:var(--jaune);box-shadow:0 0 0 2px var(--jaune)}
 :is(rdr-concours-photo,.cp-portail) .cp-ombre{position:fixed;inset:0;z-index:10025;background:rgba(0,0,0,.45);display:none}
 :is(rdr-concours-photo,.cp-portail) .cp-ombre[data-on="1"]{display:block}
 :is(rdr-concours-photo,.cp-portail) .cp-gl{position:fixed;inset:0;z-index:10010;display:none;flex-direction:column;background:radial-gradient(700px 420px at 50% 0,rgba(93,191,192,.12),transparent 70%),var(--marine)}
@@ -406,7 +438,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-gl-signe b{font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;font-size:30px;line-height:1;padding:8px 18px 7px;border-radius:999px;box-shadow:0 10px 26px rgba(0,0,0,.3)}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-teinte--oui .cp-gl-signe b{background:var(--oui);color:var(--oui-encre)}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-teinte--non .cp-gl-signe b{background:var(--non);color:var(--non-encre)}
-:is(rdr-concours-photo,.cp-portail) .cp-gl-acts{display:flex;justify-content:center;align-items:center;gap:22px;padding:4px 16px calc(16px + env(safe-area-inset-bottom))}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-acts{display:flex;justify-content:center;align-items:center;gap:clamp(12px,4vw,22px);padding:4px 16px calc(16px + env(safe-area-inset-bottom))}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-rond{position:relative;width:64px;height:64px;border-radius:999px;border:2px solid var(--filet);background:var(--panneau);color:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .12s ease}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-rond svg{position:relative;width:28px;height:28px}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-rond::before{content:"";position:absolute;inset:-2px;border-radius:inherit;opacity:0}
@@ -421,6 +453,11 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-gl[style*="--p-non"] .cp-gl-rond--passe{transform:scale(calc(1 + .1 * var(--p-non,0)))}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-rond--petit{width:48px;height:48px}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-rond--petit svg{width:20px;height:20px}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-rond--etoile{color:var(--jaune);border-color:rgba(252,241,80,.55)}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-rond--etoile[data-on="1"]{background:var(--jaune);border-color:var(--jaune);color:var(--marine)}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-carte .cp-gl-pose{position:absolute;z-index:2;top:12px;left:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 12px 6px 8px;border-radius:999px;background:var(--jaune);color:var(--marine);font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.35);pointer-events:none}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-carte .cp-gl-pose svg{width:16px;height:16px}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-carte:not([data-etoile="1"]) .cp-gl-pose{display:none}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-fin{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:10px}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-fin[data-on="1"]{display:flex}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-fin h3{margin:0;font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;font-size:30px;line-height:1}
@@ -429,6 +466,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-gl-aide b{font-weight:700}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-aide .oui{color:var(--oui)}
 :is(rdr-concours-photo,.cp-portail) .cp-gl-aide .non{color:var(--non)}
+:is(rdr-concours-photo,.cp-portail) .cp-gl-aide .etoile{color:var(--jaune)}
 @media (max-height:700px){
   :is(rdr-concours-photo,.cp-portail) .cp-gl-rond{width:54px;height:54px}
   :is(rdr-concours-photo,.cp-portail) .cp-gl-rond--garde{width:64px;height:64px}
@@ -439,6 +477,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-modal-boite{width:min(560px,100%);max-height:calc(100vh - 32px);max-height:calc(100svh - 32px);overflow:auto;background:var(--panneau);border:1px solid var(--filet);border-radius:18px;padding:22px}
 :is(rdr-concours-photo,.cp-portail) .cp-modal-boite h3{margin:0 0 6px;font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;font-size:26px;line-height:1}
 :is(rdr-concours-photo,.cp-portail) .cp-modal-boite p{margin:0 0 12px;color:var(--t2);font-size:13.5px;line-height:1.5}
+:is(rdr-concours-photo,.cp-portail) .cp-modal-boite--petite{width:min(520px,100%)}
+:is(rdr-concours-photo,.cp-portail) .cp-modal-boite p strong{color:var(--t1);white-space:nowrap}
 :is(rdr-concours-photo,.cp-portail) .cp-drop{display:block;border:2px dashed rgba(255,255,255,.22);border-radius:14px;padding:26px 16px;text-align:center;color:var(--t2);font-size:13px;line-height:1.5;cursor:pointer}
 :is(rdr-concours-photo,.cp-portail) .cp-drop b{display:block;color:#fff;font-size:14px;margin-bottom:4px}
 :is(rdr-concours-photo,.cp-portail) .cp-drop small{display:block;color:var(--t3);font-size:11.5px;margin-top:6px}
@@ -467,7 +507,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-ok[data-on="1"]{display:block}
 :is(rdr-concours-photo,.cp-portail) .cp-ok .cp-rond-ok{width:56px;height:56px;border-radius:999px;background:rgba(93,191,192,.18);color:var(--teal);display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
 :is(rdr-concours-photo,.cp-portail) .cp-ok .cp-rond-ok svg{width:28px;height:28px}
-:is(rdr-concours-photo,.cp-portail) .cp-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(10px);z-index:10050;background:#fff;color:var(--marine);padding:10px 16px;border-radius:999px;font-size:13px;font-weight:700;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+:is(rdr-concours-photo,.cp-portail) .cp-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(10px);z-index:10050;background:#fff;color:var(--marine);padding:10px 16px;border-radius:20px;font-size:13px;font-weight:700;line-height:1.35;text-align:center;width:max-content;max-width:min(440px,calc(100vw - 32px));opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+:is(rdr-concours-photo,.cp-portail) .cp-toast small{display:block;margin-top:2px;font-size:12px;font-weight:600;color:#3a4256}
+:is(rdr-concours-photo,.cp-portail) .cp-gl[data-ouvert="1"] ~ .cp-toast{bottom:calc(128px + env(safe-area-inset-bottom))}
 :is(rdr-concours-photo,.cp-portail) .cp-toast[data-on="1"]{opacity:1;transform:translateX(-50%)}
 :is(rdr-concours-photo,.cp-portail)[data-vue="attente"] .cp-barre,:is(rdr-concours-photo,.cp-portail)[data-vue="attente"] .cp-gp,:is(rdr-concours-photo,.cp-portail)[data-vue="attente"] .cp-jour,:is(rdr-concours-photo,.cp-portail)[data-vue="attente"] .cp-flottant{display:none}
 :is(rdr-concours-photo,.cp-portail)[data-glisser="non"] .cp-gp,:is(rdr-concours-photo,.cp-portail)[data-glisser="non"] .cp-gpc,:is(rdr-concours-photo,.cp-portail)[data-glisser="non"] .cp-flottant{display:none}
@@ -497,7 +539,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     "Jusqu'à 40, ils forment votre sélection": 'Up to 40, they make up your selection',
     "Photos relues par l'équipe, cœurs et étoiles comptés chaque nuit.": 'Photos reviewed by our team, hearts and stars counted every night.',
     'Posez votre étoile': 'Give your star',
-    'Une par membre, la plus étoilée gagne': 'One per member, most stars wins',
+    'Une par membre, elle seule fait gagner': 'One per member, only stars count',
     '<b>Alpina</b>, chronométreur officiel de la Route du Rhum.': '<b>Alpina</b>, official timekeeper of the Route du Rhum.',
     'Aperçu du challenge, avec les photos du site, des noms et des votes fictifs.': 'Preview of the challenge, with photos from the site and made-up names and votes.',
     'Mode glisser': 'Swipe mode',
@@ -519,7 +561,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Ma sélection': 'My selection',
     "Vos cœurs suivent votre compte, sur votre téléphone comme sur votre ordinateur. Votre étoile peut changer de photo jusqu'à la clôture des votes.": 'Your hearts follow your account, on your phone as on your computer. Your star can move to another photo until voting closes.',
     'Quitter': 'Exit',
-    'Vers la droite, <b class="oui">je garde</b>. Vers la gauche, <b class="non">je passe</b>. Touchez la photo pour la voir en grand.': 'Swipe right, <b class="oui">I keep it</b>. Swipe left, <b class="non">I pass</b>. Tap the photo to see it full size.',
+    'À droite, <b class="oui">je garde</b>. À gauche, <b class="non">je passe</b>. <b class="etoile">L\'étoile</b> pose votre vote. Touchez la photo pour l\'agrandir.': 'Right, <b class="oui">I keep it</b>. Left, <b class="non">I pass</b>. <b class="etoile">The star</b> gives your vote. Tap the photo to enlarge it.',
     'Revenir': 'Back',
     'Passer': 'Pass',
     'Garder': 'Keep',
@@ -637,7 +679,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Mon étoile est ici': 'My star is here',
     'Poser mon étoile': 'Give my star',
     'Retirer mon vote': 'Remove my vote',
-    "Une seule, déplaçable jusqu'à la clôture": 'Just one, you can move it until voting closes',
+    "Votre seul vote, déplaçable jusqu'au {date}": 'Your only vote, you can move it until {date}',
+    "Votre seul vote, déplaçable jusqu'à la clôture": 'Your only vote, you can move it until voting closes',
     'Partager': 'Share',
     'Le lien de cette photo': 'The link to this photo',
     'Masquer': 'Hide',
@@ -645,7 +688,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     '{n} photo gardée.': '{n} photo kept.',
     '{n} photos gardées.': '{n} photos kept.',
     'Votre étoile est sur celle de <b>{a}</b>{p}': 'Your star is on the one by <b>{a}</b>{p}',
-    '<b>Posez votre étoile</b> sur celle que vous préférez.': '<b>Give your star</b> to the one you prefer.',
+    'Il reste à poser votre étoile': 'One last step, give your star',
+    "Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, une par membre, et la photo la plus étoilée gagne.": 'Pick your favourite with the star at the top of its thumbnail. It is your only vote, one per member, and the photo with the most stars wins.',
     'Vos cœurs se rangent ici. Gardez celles que vous aimez, puis choisissez.': 'Your hearts gather here. Keep the ones you love, then choose.',
     "Aucune photo gardée pour l'instant.<br>Un cœur sur une photo, et elle arrive ici.": 'No photo kept yet.<br>Put a heart on a photo and it lands here.',
     '<b>{i}</b> / {n} · {k}': '<b>{i}</b> / {n} · {k}',
@@ -697,7 +741,28 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Cochez les deux cases pour envoyer votre photo.': 'Tick both boxes to send your photo.',
     'Votre photo est encore en traitement. Réessayez dans une minute.': 'Your photo is still being processed. Please try again in a minute.',
     "Cette photo n'est plus en ligne.": 'This photo is no longer online.',
-    'Les cœurs et les votes sont clos.': 'Hearts and voting are closed.'
+    'Les cœurs et les votes sont clos.': 'Hearts and voting are closed.',
+    'Votre sélection est prête': 'Your selection is ready',
+    "N'oubliez pas de poser votre étoile sur votre préférée. Les cœurs forment votre sélection, seule l'étoile vote pour la meilleure photo.": "Don't forget to give your star to your favourite. Hearts make up your selection, only your star votes for the best photo.",
+    'Choisir ma préférée': 'Choose my favourite',
+    'Votre préférée': 'Your favourite',
+    'Photo de {a}': 'Photo by {a}',
+    "Votre étoile est votre seul vote, c'est elle qui peut faire gagner cette photo.": 'Your star is your only vote, it is what can make this photo win.',
+    "Une autre vous plaît encore plus ? Vous pouvez déplacer votre étoile jusqu'au <strong>{date}</strong>.": 'Like another one even more? You can move your star until <strong>{date}</strong>.',
+    "Une autre vous plaît encore plus ? Vous pouvez déplacer votre étoile jusqu'à la clôture des votes.": 'Like another one even more? You can move your star until voting closes.',
+    'Changer de préférée': 'Change my favourite',
+    'Voir ma préférée en grand': 'See my favourite full size',
+    "Pensez à poser votre étoile sur votre préférée, c'est elle qui vote.": 'Remember to give your star to your favourite, it is your vote.',
+    'Poser mon étoile sur cette photo': 'Give my star to this photo',
+    'Ma préférée': 'My favourite',
+    'Déplacer votre étoile sur cette photo ?': 'Move your star to this photo?',
+    "Elle est aujourd'hui sur la photo de <b>{a}</b>{p}": 'It is currently on the photo by <b>{a}</b>{p}',
+    "Elle est aujourd'hui sur une autre photo.": 'It is currently on another photo.',
+    "Vous pourrez encore la déplacer jusqu'au <strong>{date}</strong>.": 'You can still move it until <strong>{date}</strong>.',
+    "Vous pourrez encore la déplacer jusqu'à la clôture des votes.": 'You can still move it until voting closes.',
+    'Laisser mon étoile': 'Leave my star',
+    'Déplacer mon étoile': 'Move my star',
+    "Une petite maintenance du dépôt des photos est en cours. Désolé pour le dérangement. N'hésitez pas à repasser déposer votre photo un peu plus tard.": 'A quick maintenance on photo uploads is under way. Sorry for the inconvenience. Feel free to come back a little later to submit your photo.'
   };
 
   const PAGE = (t, demo) => `<div class="cp" id="cp">
@@ -718,7 +783,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       <ol class="cp-etapes">
         <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg></i><b>${t('Déposez votre photo')}</b><span>${t("Une seule par membre, relue par l'équipe")}</span></li>
         <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg></i><b>${t('Gardez vos coups de cœur')}</b><span>${t("Jusqu'à 40, ils forment votre sélection")}</span></li>
-        <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></i><b>${t('Posez votre étoile')}</b><span>${t('Une par membre, la plus étoilée gagne')}</span></li>
+        <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></i><b>${t('Posez votre étoile')}</b><span>${t('Une par membre, elle seule fait gagner')}</span></li>
       </ol>
       <p class="cp-partenaire">${t('<b>Alpina</b>, chronométreur officiel de la Route du Rhum.')}${' ' + (demo ? t('Aperçu du challenge, avec les photos du site, des noms et des votes fictifs.') : t("Photos relues par l'équipe, cœurs et étoiles comptés chaque nuit."))}</p>
     </div>
@@ -785,6 +850,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     </div>
     <button class="cp-tiroir-x" id="cp-tiroir-x" type="button" aria-label="${t('Fermer')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
+  <div class="cp-tiroir-rappel" id="cp-tiroir-rappel"></div>
   <div class="cp-tiroir-liste" id="cp-tiroir-liste"></div>
   <div class="cp-tiroir-pied">${t("Vos cœurs suivent votre compte, sur votre téléphone comme sur votre ordinateur. Votre étoile peut changer de photo jusqu'à la clôture des votes.")}</div>
 </aside>
@@ -797,10 +863,11 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
   <div class="cp-gl-scene" id="cp-gl-scene">
     <div class="cp-gl-fin" id="cp-gl-fin"></div>
   </div>
-  <p class="cp-gl-aide" id="cp-gl-aide">${t('Vers la droite, <b class="oui">je garde</b>. Vers la gauche, <b class="non">je passe</b>. Touchez la photo pour la voir en grand.')}</p>
+  <p class="cp-gl-aide" id="cp-gl-aide">${t('À droite, <b class="oui">je garde</b>. À gauche, <b class="non">je passe</b>. <b class="etoile">L\'étoile</b> pose votre vote. Touchez la photo pour l\'agrandir.')}</p>
   <div class="cp-gl-acts" id="cp-gl-acts">
     <button class="cp-gl-rond cp-gl-rond--petit" id="cp-gl-retour" type="button" aria-label="${t('Revenir')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
     <button class="cp-gl-rond cp-gl-rond--passe" id="cp-gl-passe" type="button" aria-label="${t('Passer')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="cp-gl-rond cp-gl-rond--petit cp-gl-rond--etoile" id="cp-gl-etoile" type="button" data-on="0" aria-label="${t('Poser mon étoile sur cette photo')}">${ICO.etoileLigne}</button>
     <button class="cp-gl-rond cp-gl-rond--garde" id="cp-gl-garde" type="button" aria-label="${t('Garder')}"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg></button>
     <button class="cp-gl-rond cp-gl-rond--petit" id="cp-gl-tiroir" type="button" aria-label="${t('Ma sélection')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
   </div>
@@ -858,6 +925,17 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       <button class="cp-btn cp-btn--ligne" type="button" data-fermer="cp-connexion">${t('Plus tard')}</button>
       <button class="cp-btn cp-btn--ligne" type="button" data-fermer="cp-connexion" data-mode="login">${t('Me connecter')}</button>
       <button class="cp-btn cp-btn--or" type="button" data-fermer="cp-connexion" data-mode="signup">${t('Créer mon Espace')}</button>
+    </div>
+  </div>
+</div>
+
+<div class="cp-modal" id="cp-deplacer" role="dialog" aria-modal="true" aria-label="${t('Déplacer votre étoile sur cette photo ?')}">
+  <div class="cp-modal-boite cp-modal-boite--petite">
+    <h3>${t('Déplacer votre étoile sur cette photo ?')}</h3>
+    <p id="cp-deplacer-txt"></p>
+    <div class="cp-modal-acts">
+      <button class="cp-btn cp-btn--ligne" type="button" data-fermer="cp-deplacer">${t('Laisser mon étoile')}</button>
+      <button class="cp-btn cp-btn--or" type="button" id="cp-deplacer-ok">${ICO.etoile} ${t('Déplacer mon étoile')}</button>
     </div>
   </div>
 </div>
@@ -1374,7 +1452,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     function lireCfg(d, avant) {
       const c = Object.assign({}, avant);
       if (ETATS.includes(d.etat)) c.etat = d.etat; else if (!c.etat) c.etat = 'eteint';
-      ['depotsOuverts', 'votesOuverts'].forEach((k) => { if (typeof d[k] === 'boolean') c[k] = d[k]; });
+      ['depotsOuverts', 'votesOuverts', 'depotsMaintenance'].forEach((k) => { if (typeof d[k] === 'boolean') c[k] = d[k]; });
       ['reglementUrl', 'ouvertureLe', 'clotureDepotsLe', 'clotureVotesLe', 'lot'].forEach((k) => { if (d[k] !== undefined) c[k] = d[k] == null ? '' : String(d[k]); });
       if (d.total !== undefined && d.total !== null && d.total !== '' && Number.isFinite(Number(d.total))) c.total = Number(d.total);
       return c;
@@ -1499,7 +1577,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       fichier_refuse: "Cette photo n'a pas été acceptée. Essayez-en une autre.",
       fichier_en_cours: 'Votre photo est encore en traitement. Réessayez dans une minute.',
       la_tienne: 'On ne vote pas pour sa propre photo',
-      photo: "Cette photo n'est plus en ligne."
+      photo: "Cette photo n'est plus en ligne.",
+      maintenance: "Une petite maintenance du dépôt des photos est en cours. Désolé pour le dérangement. N'hésitez pas à repasser déposer votre photo un peu plus tard."
     };
     const RAISONS_GESTE = {
       vote: { avant: 'Les votes ne sont pas encore ouverts', votes_clos: 'Les votes sont clos', repli: "Votre étoile n'a pas pu être posée. Réessayez dans un instant." },
@@ -1757,10 +1836,18 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       if (!vivant) return;
       new Set(ids.filter(Boolean)).forEach(rafraichirCase);
       dessinerTete(); dessinerTiroir(); if (etat.fen.ouverte) dessinerPanneau();
+      majGlEtoile();
     }
 
      
-    function toast(txt) { if (!txt) return; const tt = $('cp-toast'); tt.textContent = txt; tt.dataset.on = 1; clearTimeout(toast.t); toast.t = setTimeout(() => { tt.dataset.on = 0; }, 2600); }
+     
+    function toast(txt, sous) {
+      if (!txt) return;
+      const tt = $('cp-toast'); tt.textContent = txt;
+      if (sous) { const s = document.createElement('small'); s.textContent = sous; tt.appendChild(s); }
+      tt.dataset.on = 1; clearTimeout(toast.t); toast.t = setTimeout(() => { tt.dataset.on = 0; }, sous ? 3800 : Math.max(2600, Math.min(6500, txt.length * 45)));
+    }
+    const RAPPEL_ETOILE = "Pensez à poser votre étoile sur votre préférée, c'est elle qui vote.";
     function ouvrirConnexion() { $('cp-connexion').dataset.ouverte = 1; }
     function exigerCompte() {
       if (demo) { if (etat.connecte) return true; ouvrirConnexion(); return false; }
@@ -1816,7 +1903,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       else {
         if (pleine()) { toast(MSG_PLEINE()); return; }
         etat.coeurs.push(id);
-        toast(nb(etat.coeurs.length, 'Gardée, {n} photo dans votre sélection', 'Gardée, {n} photos dans votre sélection'));
+        toast(nb(etat.coeurs.length, 'Gardée, {n} photo dans votre sélection', 'Gardée, {n} photos dans votre sélection'), !etat.etoile && votesPossibles() ? t(RAPPEL_ETOILE) : '');
       }
       memoriser(); redessinerGestes([id]);
     }
@@ -1900,12 +1987,50 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       $('cp-chiffres').innerHTML = li.map(x => `<li>${x}</li>`).join('');
     }
 
-    const boutonSelection = () => `<button class="cp-btn cp-btn--ligne" type="button" data-ouvrir-tiroir>${ICO.coeurLigne} ${t('Ma sélection')} <span class="cp-pastille">${etat.coeurs.length}</span></button>`;
+    
+
+    const boutonSelection = () => { const n = etat.coeurs.length; return `<button class="cp-btn cp-btn--ligne${n ? ' cp-btn--sel' : ''}" type="button" data-ouvrir-tiroir>${n ? ICO.coeur : ICO.coeurLigne} ${t('Ma sélection')} <span class="cp-pastille">${n}</span></button>`; };
+     
+    const dateVotes = () => (cfg.clotureVotesLe ? dateCourte(cfg.clotureVotesLe) : '');
+    const phraseDeplacer = () => (dateVotes()
+      ? t("Une autre vous plaît encore plus ? Vous pouvez déplacer votre étoile jusqu'au <strong>{date}</strong>.", { date: dateVotes() })
+      : t("Une autre vous plaît encore plus ? Vous pouvez déplacer votre étoile jusqu'à la clôture des votes."));
     function ligneEtoile(clos) {
       const p = etat.etoile && etat.parId.get(etat.etoile);
       if (p) return t(clos ? 'Votre étoile était sur la photo de <b>{a}</b>{p}' : 'Votre étoile est sur la photo de <b>{a}</b>{p}', { a: p.auteur, p: pt(p.auteur) });
       if (etat.etoile && !clos) return t('Votre étoile est posée.');
       return clos ? t('Les votes sont clos.') : t("Vous n'avez pas encore posé votre étoile.");
+    }
+    
+
+
+
+
+
+    function selectionEtEtoile(clos) {
+      const e = blocEtoile(clos);
+      return /^<div class="cp-etat">/.test(e) ? boutonSelection() + e : e + boutonSelection();
+    }
+    function blocEtoile(clos) {
+      if (clos || !votesPossibles()) return `<div class="cp-etat">${ligneEtoile(true)}</div>`;
+      const p = etat.etoile && etat.parId.get(etat.etoile);
+      if (p) {
+        return `<div class="cp-pref">
+          <div class="cp-pref-tete"><button class="cp-pref-vignette" type="button" data-voir-etoile aria-label="${t('Voir ma préférée en grand')}"><img src="${src(p, 600)}" alt=""><i>${ICO.etoile}</i></button>
+          <div class="cp-pref-txt"><b>${t('Votre préférée')}</b><small>${t('Photo de {a}', { a: p.auteur })}</small>${t("Votre étoile est votre seul vote, c'est elle qui peut faire gagner cette photo.")}</div></div>
+          <p>${phraseDeplacer()}</p>
+          <button class="cp-pref-changer" type="button" data-ouvrir-tiroir>${t('Changer de préférée')}</button>
+        </div>`;
+      }
+      if (etat.etoile) return `<div class="cp-etat">${t('Votre étoile est posée.')}</div>`;
+      if (etat.coeurs.length) {
+        return `<div class="cp-rappel" role="note">
+          <p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Votre sélection est prête')}</p>
+          <p>${t("N'oubliez pas de poser votre étoile sur votre préférée. Les cœurs forment votre sélection, seule l'étoile vote pour la meilleure photo.")}</p>
+          <button class="cp-btn cp-btn--or" type="button" data-choisir-etoile>${ICO.etoile} ${t('Choisir ma préférée')}</button>
+        </div>`;
+      }
+      return `<div class="cp-etat">${t("Vous n'avez pas encore posé votre étoile.")}</div>`;
     }
 
     function actionsDemo() {
@@ -1916,7 +2041,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       else if (etat.mienne === 'attente') bloc = `<div class="cp-mienne"><img src="${src(mienne, 600)}" alt=""><div class="cp-mienne-t"><b>${t('Ma photo')}</b>${t("Relue par l'équipe, en général sous 48 h.")}<span class="cp-pill cp-pill--attente">${t('En attente')}</span></div></div>`;
       else if (etat.mienne === 'ligne') bloc = `<div class="cp-mienne"><img src="${src(mienne, 600)}" alt=""><div class="cp-mienne-t"><b>${t('Ma photo')}</b>${t('<i>{c}</i> et <i>{e}</i> cette nuit.', { c: nb(mienne.coeurs, '{n} cœur', '{n} cœurs'), e: nb(mienne.etoiles, '{n} étoile', '{n} étoiles') })}<span class="cp-pill cp-pill--ligne">${t('En ligne')}</span></div></div>`;
       else bloc = `<div class="cp-mienne"><img src="${src(mienne, 600)}" alt="" style="filter:grayscale(1);opacity:.6"><div class="cp-mienne-t"><b>${t('Ma photo')}</b>${t("Refusée pour « visage d'un tiers reconnaissable ». Vous pouvez en déposer une autre.")}<span class="cp-pill cp-pill--refus">${t('Refusée')}</span></div></div><button class="cp-btn cp-btn--or" type="button" data-deposer>${ICO.plus} ${t('Déposer une autre photo')}</button>`;
-      return `${bloc}${boutonSelection()}<div class="cp-etat">${ligneEtoile(false)}</div>`;
+      return bloc + selectionEtEtoile(false);
     }
 
     
@@ -1946,6 +2071,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       }
       return `<div class="cp-mienne">${vignette}<div class="cp-mienne-t"><b>${t('Ma photo')}</b>${texte}${pill}</div></div>`;
     }
+    
+
+
+
+    const enMaintenance = () => !demo && cfg.depotsMaintenance === true;
+    const blocMaintenance = () => `<div class="cp-maintenance" role="status"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg></i><p>${t(RAISONS.maintenance)}</p></div>`;
     function raisonDepot() {
       if (cfg.etat === 'votes' || cfg.etat === 'clos' || cfg.depotsOuverts === false) return t('Les dépôts sont clos.');
       if (!lienReglement()) return t('Le dépôt des photos ouvre avec la publication du règlement.');
@@ -1973,16 +2104,18 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         else if (depotPossible()) texte = t("Réservé aux membres de l'Espace Rhum. Tout le monde peut regarder, et pour garder et voter, il suffit de <b>créer son Espace</b>.");
         else texte = t("Le dépôt des photos ouvre avec la publication du règlement. Tout le monde peut regarder, et pour garder et voter, il suffit de <b>créer son Espace</b>.");
         if (depotPossible()) a.push(`<button class="cp-btn cp-btn--or" type="button" data-connexion="signup">${ICO.plus} ${t('Déposer ma photo')}</button>`);
+        if (depotPossible() && enMaintenance()) a.push(blocMaintenance());
         else if (cfg.etat !== 'clos') a.push(`<button class="cp-btn cp-btn--or" type="button" data-connexion="signup">${ICO.plus} ${t('Créer mon Espace')}</button>`);
         a.push(`<div class="cp-etat">${texte}</div>`);
         return a.join('') + lienR;
       }
       if (m.maPhoto) a.push(blocMaPhoto(m.maPhoto, m));
-      if (depotPossible() && m.peutDeposer) a.push(`<button class="cp-btn cp-btn--or" type="button" data-deposer>${ICO.plus} ${m.maPhoto ? t('Déposer une autre photo') : t('Déposer ma photo')}</button>`);
-      else if (!m.maPhoto) { const raison = raisonDepot(); if (raison) a.push(`<div class="cp-etat">${raison}</div>`); }
+      const maintenance = depotPossible() && m.raisonPasDeposer === 'maintenance';
+      if (depotPossible() && (m.peutDeposer || maintenance)) a.push(`<button class="cp-btn cp-btn--or" type="button" data-deposer>${ICO.plus} ${m.maPhoto ? t('Déposer une autre photo') : t('Déposer ma photo')}</button>`);
+      if (maintenance) a.push(blocMaintenance());
+      else if (!(depotPossible() && m.peutDeposer) && !m.maPhoto) { const raison = raisonDepot(); if (raison) a.push(`<div class="cp-etat">${raison}</div>`); }
       if (etat.photos.length) {
-        a.push(boutonSelection());
-        a.push(`<div class="cp-etat">${ligneEtoile(cfg.etat === 'clos' || !votesPossibles())}</div>`);
+        a.push(selectionEtEtoile(cfg.etat === 'clos' || !votesPossibles()));
       }
       return a.join('') + lienR;
     }
@@ -1996,7 +2129,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     }
     function dessinerTete() { if (vivant) { dessinerChiffres(); dessinerActions(); } }
     $('cp-actions').addEventListener('click', (e) => {
-      if (e.target.closest('[data-ouvrir-tiroir]')) { if (exigerCompte()) ouvrirTiroir(); }
+      if (e.target.closest('[data-ouvrir-tiroir], [data-choisir-etoile]')) { if (exigerCompte()) ouvrirTiroir(); }
+      else if (e.target.closest('[data-voir-etoile]')) { if (etat.etoile) ouvrirFen(etat.coeurs.includes(etat.etoile) ? etat.coeurs.slice().reverse() : [etat.etoile], etat.etoile); }
       else if (e.target.closest('[data-connexion]')) ouvrirConnexion();
       else if (e.target.closest('[data-deposer]')) ouvrirDepot();
       else if (e.target.closest('[data-reessayer-membre]')) { etat.membre = { statut: 'attente', connecte: true }; dessinerActions(); racine._redemanderMembre(); }
@@ -2074,7 +2208,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         <div class="cp-fen-acts">
           ${p.moi ? `<div class="cp-fen-note">${t("C'est votre photo. On ne vote pas pour soi, mais vous pouvez la partager.")}</div>` : `
           <button class="cp-act cp-act--coeur" type="button" data-fen="coeur" data-on="${c ? 1 : 0}">${c ? ICO.coeur : ICO.coeurLigne}<span>${c ? t('Dans ma sélection') : t('Garder')}<small>${c ? t('Retirer le cœur') : t("Jusqu'à quarante, pour choisir ensuite")}</small></span></button>
-          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Retirer mon vote') : t("Une seule, déplaçable jusqu'à la clôture")}</small></span></button>`}
+          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Retirer mon vote') : dateVotes() ? t("Votre seul vote, déplaçable jusqu'au {date}", { date: dateVotes() }) : t("Votre seul vote, déplaçable jusqu'à la clôture")}</small></span></button>`}
           <button class="cp-act cp-act--sobre" type="button" data-fen="partage">${ICO.partage}<span>${t('Partager')}<small>${t('Le lien de cette photo')}</small></span></button>
           ${p.moi ? '' : `<button class="cp-act cp-act--sobre" type="button" data-fen="masquer">${ICO.oeilBarre}<span>${t('Masquer')}<small>${t('Ne plus la voir sur cet appareil')}</small></span></button>`}
         </div>`;
@@ -2096,9 +2230,10 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       sc.addEventListener('pointerup', (e) => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 60) (dx < 0 ? fenSuiv : fenPrec)(); });
     })();
     ecoute(document, 'keydown', (e) => {
+      if ($('cp-deplacer').dataset.ouverte === '1') { if (e.key === 'Escape') $('cp-deplacer').dataset.ouverte = 0; return; }
       if (etat.fen.ouverte) { if (e.key === 'Escape') fermerFen(); else if (e.key === 'ArrowRight') fenSuiv(); else if (e.key === 'ArrowLeft') fenPrec(); else if (String(e.key).toLowerCase() === 'c') basculerCoeur(etat.fen.liste[etat.fen.i]); else if (String(e.key).toLowerCase() === 'e') poserEtoile(etat.fen.liste[etat.fen.i]); return; }
       if ($('cp-tiroir').dataset.ouvert === '1') { if (e.key === 'Escape') fermerTiroir(); return; }
-      if (etat.gl.ouvert) { if (e.key === 'ArrowRight') $('cp-gl-garde').click(); else if (e.key === 'ArrowLeft') $('cp-gl-passe').click(); else if (e.key === 'Escape') fermerGl(); return; }
+      if (etat.gl.ouvert) { if (e.key === 'ArrowRight') $('cp-gl-garde').click(); else if (e.key === 'ArrowLeft') $('cp-gl-passe').click(); else if (e.key === 'Escape') fermerGl(); else if (String(e.key).toLowerCase() === 'e') etoileGl(); return; }
       if (e.key === 'Escape') portail.querySelectorAll('.cp-modal').forEach(m => { m.dataset.ouverte = 0; });
     });
 
@@ -2111,9 +2246,18 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       const gardees = etat.coeurs.filter(id => etat.parId.has(id));
       const n = gardees.length;
       const pe = etat.etoile && etat.parId.get(etat.etoile);
+      const vp = votesPossibles();
       $('cp-tiroir-sous').innerHTML = n
-        ? nb(n, '{n} photo gardée.', '{n} photos gardées.') + ' ' + (pe ? t('Votre étoile est sur celle de <b>{a}</b>{p}', { a: pe.auteur, p: pt(pe.auteur) }) : t('<b>Posez votre étoile</b> sur celle que vous préférez.'))
+        ? nb(n, '{n} photo gardée.', '{n} photos gardées.') + (pe ? ' ' + t('Votre étoile est sur celle de <b>{a}</b>{p}', { a: pe.auteur, p: pt(pe.auteur) }) : '')
         : t('Vos cœurs se rangent ici. Gardez celles que vous aimez, puis choisissez.');
+      
+
+
+      const invite = vp && n > 0 && !etat.etoile;
+      $('cp-tiroir').dataset.invite = invite ? 1 : 0;
+      $('cp-tiroir-rappel').innerHTML = invite
+        ? `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Il reste à poser votre étoile')}</p><p>${t("Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, une par membre, et la photo la plus étoilée gagne.")}</p></div>`
+        : (vp && etat.etoile ? `<p class="cp-tiroir-deplacer">${phraseDeplacer()}</p>` : '');
       if (!n) { l.innerHTML = `<div class="cp-tiroir-vide">${t("Aucune photo gardée pour l'instant.<br>Un cœur sur une photo, et elle arrive ici.")}</div>`; return; }
       l.innerHTML = gardees.slice().reverse().map(id => { const p = etat.parId.get(id); const e = etat.etoile === id; return `
         <div class="cp-tiroir-item${e ? ' est-etoile' : ''}" data-id="${id}">
@@ -2141,7 +2285,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       if (!exigerCompte()) return;
       gl.liste = etat.fil.filter(id => { const p = etat.parId.get(id); return p && !p.moi && !etat.masquees.has(id) && !etat.coeurs.includes(id); });
       let reprise = 0; const s = lire(CLE_GLISSER); if (s && s.graine === etat.graine) reprise = Math.min(s.i, gl.liste.length);
-      gl.i = reprise; gl.historique = [];
+      gl.i = reprise; gl.historique = []; gl.rappele = false;
       if (!gl.ouvert) verrouiller();
       gl.ouvert = true; glEl.dataset.ouvert = 1;
       $('cp-gl-fin').dataset.on = 0;
@@ -2154,7 +2298,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     $('cp-gl-tiroir').onclick = () => { ouvrirTiroir(); };
     const gardees = (n) => nb(n, '{n} photo gardée', '{n} photos gardées');
     function carteGl(p, classe) {
-      return `<div class="cp-gl-carte ${classe}" data-id="${p.id}">
+      return `<div class="cp-gl-carte ${classe}" data-id="${p.id}" data-etoile="${etat.etoile === p.id ? 1 : 0}">
+        <span class="cp-gl-pose">${ICO.etoile}${t('Ma préférée')}</span>
         <div class="cp-gl-fond" style="background-image:url('${src(p, 600)}')"></div>
         <img src="${src(p, 1000)}" alt="" draggable="false">
         <div class="cp-gl-voile"><b>${p.auteur}</b><span>${p.legende || ''}</span></div>
@@ -2167,7 +2312,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       sc.querySelectorAll('.cp-gl-carte').forEach(c => c.remove());
       teinter(0);
       const reste = gl.liste.length - gl.i;
-      $('cp-gl-prog').innerHTML = t('<b>{i}</b> / {n} · {k}', { i: Math.min(gl.i + 1, gl.liste.length), n: gl.liste.length, k: gardees(etat.coeurs.length) });
+      progGl();
       $('cp-gl-acts').style.visibility = reste > 0 ? '' : 'hidden';
       $('cp-gl-aide').style.visibility = reste > 0 ? '' : 'hidden';
       if (reste <= 0) { finGl(); return; }
@@ -2175,6 +2320,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       for (let k = Math.min(2, reste - 1); k >= 0; k--) html.push(carteGl(etat.parId.get(gl.liste[gl.i + k]), k === 0 ? 'n0' : 'n' + k));
       sc.insertAdjacentHTML('afterbegin', html.join(''));
       brancherGeste(sc.querySelector('.cp-gl-carte.n0'));
+      majGlEtoile();
     }
     function finGl() {
       const f = $('cp-gl-fin'); f.dataset.on = 1;
@@ -2187,7 +2333,11 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     function decider(sens) {
       if (!vivant) return;
       const id = gl.liste[gl.i]; if (!id) return;
-      if (sens > 0 && !etat.coeurs.includes(id)) { etat.coeurs.push(id); memoriser(); rafraichirCase(id); dessinerTete(); }
+      if (sens > 0 && !etat.coeurs.includes(id)) {
+        etat.coeurs.push(id); memoriser(); rafraichirCase(id); dessinerTete();
+         
+        if (!gl.rappele && !etat.etoile && votesPossibles()) { gl.rappele = true; toast(t('Gardée'), t(RAPPEL_ETOILE)); }
+      }
       gl.historique.push({ id, sens });
       gl.i++;
       dessinerGl();
@@ -2212,6 +2362,42 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     }
     $('cp-gl-garde').onclick = () => deciderAuBouton(1);
     $('cp-gl-passe').onclick = () => deciderAuBouton(-1);
+    const progGl = () => { $('cp-gl-prog').innerHTML = t('<b>{i}</b> / {n} · {k}', { i: Math.min(gl.i + 1, gl.liste.length), n: gl.liste.length, k: gardees(etat.coeurs.length) }); };
+    
+
+
+
+
+    function majGlEtoile() {
+      if (!etat.gl.ouvert) return;
+      const id = etat.gl.liste[etat.gl.i], on = !!id && etat.etoile === id;
+      const b = $('cp-gl-etoile');
+      b.dataset.on = on ? 1 : 0;
+      b.innerHTML = on ? ICO.etoile : ICO.etoileLigne;
+      b.setAttribute('aria-label', on ? t('Mon étoile est ici') : t('Poser mon étoile sur cette photo'));
+      const c = carteDevant(); if (c) c.dataset.etoile = on ? 1 : 0;
+      progGl();
+    }
+    function etoileGl() {
+      const id = gl.liste[gl.i], c = carteDevant();
+      if (!id || !c || c.dataset.part) return;
+      if (etat.etoile && etat.etoile !== id && votesPossibles() && exigerCompte()) { ouvrirDeplacer(id); return; }
+      poserEtoile(id);
+    }
+    $('cp-gl-etoile').onclick = etoileGl;
+    let aDeplacer = null;
+    function ouvrirDeplacer(id) {
+      const avant = etat.parId.get(etat.etoile), d = dateVotes();
+      aDeplacer = id;
+      $('cp-deplacer-txt').innerHTML = (avant ? t("Elle est aujourd'hui sur la photo de <b>{a}</b>{p}", { a: avant.auteur, p: pt(avant.auteur) }) : t("Elle est aujourd'hui sur une autre photo."))
+        + ' ' + (d ? t("Vous pourrez encore la déplacer jusqu'au <strong>{date}</strong>.", { date: d }) : t("Vous pourrez encore la déplacer jusqu'à la clôture des votes."));
+      $('cp-deplacer').dataset.ouverte = 1;
+    }
+    $('cp-deplacer-ok').onclick = () => {
+      $('cp-deplacer').dataset.ouverte = 0;
+      const id = aDeplacer; aDeplacer = null;
+      if (id && gl.ouvert && gl.liste[gl.i] === id) poserEtoile(id);
+    };
     $('cp-gl-retour').onclick = () => {
       const h = gl.historique.pop(); if (!h) { toast(t('Rien à reprendre')); return; }
       gl.i = Math.max(0, gl.i - 1);
