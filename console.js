@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 6e6e1de | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum d0565e2 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="d0565e2";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -685,6 +685,60 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
     '.rdrc-jt-h{margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}',
     '.rdrc-jt-gagnants{display:grid;gap:10px;margin:0 0 14px}',
     '@media(max-width:900px){.rdrc-jt-deux{grid-template-columns:minmax(0,1fr)}}',
+    
+
+
+
+    '.rdrc-jr .rdrc-jt-t td{vertical-align:top;white-space:normal}',
+    '.rdrc-jr .rdrc-jt-t .rdrc-jt-nom{min-width:110px}',
+    '.rdrc-jr-st{display:inline-block;font:800 10px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:999px;white-space:nowrap;background:var(--line-2);color:var(--ink-3)}',
+    '.rdrc-jr-st[data-s="confirmee"]{background:#E1F5EA;color:var(--ok)}',
+    '.rdrc-jr-st[data-s="non-retenue"]{background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-jr-st[data-s="illisible"]{background:#FBE3E0;color:var(--no)}',
+    '.rdrc-jr-petit{display:block;margin-top:2px;font-size:10.5px;font-weight:600;color:var(--ink-3);overflow-wrap:anywhere}',
+    '.rdrc-jr-acts{display:flex;flex-wrap:wrap;gap:6px}',
+    '.rdrc-jr-acts .rdrc-btn{padding:6px 10px;font-size:11px;white-space:nowrap}',
+    '.rdrc-jr .rdrc-btn.rdrc-go{border-color:var(--navy);background:var(--navy);color:#fff}',
+    '.rdrc-jr .rdrc-btn.rdrc-go:hover{background:#12294A}',
+    '.rdrc-jr .rdrc-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}',
+    '.rdrc-jr-form{margin:14px 0 0;padding:14px 15px;border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:10px;background:#FAFBFD}',
+    '.rdrc-jr-form-t{margin:0 0 10px;font-size:13px;font-weight:800;color:var(--navy)}',
+    '.rdrc-jr-form-t small{display:block;margin-top:3px;font-size:11.5px;font-weight:600;color:var(--ink-3)}',
+    '.rdrc-jr-champs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px 12px;max-width:780px}',
+    '.rdrc-jr-c{display:flex;flex-direction:column;gap:4px;min-width:0;margin:0;padding:0;border:0;font-size:11px;font-weight:800;color:var(--ink-2)}',
+    '.rdrc-jr-c--large{grid-column:1/-1}',
+    '.rdrc-jr-c input,.rdrc-jr-c select{font:600 13px/1.2 var(--body);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;min-height:36px;width:100%;box-sizing:border-box}',
+    '.rdrc-jr-c input:focus-visible,.rdrc-jr-c select:focus-visible{outline:2px solid var(--teal);outline-offset:1px}',
+    '.rdrc-jr-c[data-err] input,.rdrc-jr-c[data-err] select{border-color:var(--no)}',
+    '.rdrc-jr-err{font-size:11px;font-weight:700;color:var(--no)}',
+    '.rdrc-jr-temps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;max-width:480px}',
+    '.rdrc-jr .rdrc-jt-t .rdrc-btn{padding:5px 10px;font-size:11px}',
+    '.rdrc-jr-temps label{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--ink-3)}',
+    '.rdrc-jr-temps input{min-width:0}',
+    '.rdrc-jr-boutons{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0}',
+    '.rdrc-jr-recap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:12.5px}',
+    '.rdrc-jr-recap dt{color:var(--ink-3);font-weight:700}',
+    '.rdrc-jr-recap dd{margin:0;font-weight:700;color:var(--ink);overflow-wrap:anywhere}',
+    '.rdrc-jr-recap dd small{display:block;font-weight:600;color:var(--ink-3);font-size:11px;margin-top:2px}',
+    '.rdrc-jr-avis{margin:10px 0 0;padding:9px 11px;border-radius:9px;font-size:12px;line-height:1.45;font-weight:600;background:#FFF1DA;color:var(--warn)}',
+    '.rdrc-jr-avis[data-ton="err"]{background:#FBE3E0;color:var(--no)}',
+    '.rdrc-jr-avis[data-ton="info"]{background:var(--line-2);color:var(--ink-2)}',
+    '.rdrc-jr-choix{display:grid;gap:6px;margin:0 0 10px}',
+    '.rdrc-jr-choix label{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer}',
+    '.rdrc-jr-choix label small{font-weight:600;color:var(--ink-3)}',
+    '.rdrc-jr-journal{margin:14px 0 0;font-size:12px;color:var(--ink-2)}',
+    '.rdrc-jr-journal summary{cursor:pointer;font-weight:800;color:var(--navy)}',
+    '.rdrc-jr-journal ol{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px;max-height:min(50vh,420px);overflow:auto}',
+    '.rdrc-jr-journal li{padding:8px 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;line-height:1.45}',
+    '.rdrc-jr-journal li b{color:var(--navy)}',
+    '.rdrc-jr-journal li small{display:block;color:var(--ink-3);font-size:11px}',
+    '.rdrc-jr-valide{margin:0 0 12px;padding:12px 14px;border-radius:12px;background:#E8F5EE;border:1px solid rgba(30,142,90,.45);font-size:12.5px;color:#14603D;line-height:1.5}',
+    '.rdrc-jr-valide b{color:#0E4A2F}',
+    '.rdrc-jr-valide .rdrc-jr-acts{margin-top:8px}',
+    '.rdrc-jr-bloc{margin:0 0 12px}',
+    '.rdrc-jr-ecartes{margin:12px 0 0;padding:0;display:grid;gap:6px}',
+    '.rdrc-jr-ecartes li{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;font-size:12px}',
+    '.rdrc-jr-ecartes li > span{flex:1 1 260px;min-width:0}',
 
     
 
@@ -853,7 +907,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
     swap:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 8 16 13"/><path d="M21 8H8a5 5 0 0 0-5 5"/><polyline points="8 21 3 16 8 11"/><path d="M3 16h13a5 5 0 0 0 5-5"/></svg>',
     alerte: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
     copy:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
-    valide: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></svg>'
+    valide: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></svg>',
+     
+    flag:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></svg>'
   };
 
    
@@ -1076,6 +1132,59 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
   }
 
    
+  
+
+  function jtMoment(t, tz) {
+    var o = t == null || !isFinite(t) ? null : jtParties(t, { timeZone: tz || 'Europe/Paris', weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' });
+    if (!o) return '';
+    return o.weekday + ' ' + (o.day === '1' ? '1er' : o.day) + ' ' + o.month + ' à ' + Number(o.hour) + ' h ' + o.minute + ' min ' + o.second + ' s';
+  }
+   
+  function jtChampsParis(t) {
+    var o = t == null || !isFinite(t) ? null : jtParties(t, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' });
+    return o ? { date: o.year + '-' + o.month + '-' + o.day, heure: o.hour + ':' + o.minute + ':' + o.second } : { date: '', heure: '' };
+  }
+  
+
+
+  function jtDecalageParis(t) {
+    var o = jtParties(t, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' });
+    if (!o) return 3600000;
+    var vu = Date.UTC(Number(o.year), Number(o.month) - 1, Number(o.day), Number(o.hour), Number(o.minute), Number(o.second));
+    return isFinite(vu) ? vu - Math.floor(t / 1000) * 1000 : 3600000;
+  }
+  function jtInstantParis(date, heure) {
+    var d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(date || ''));
+    var h = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(String(heure || ''));
+    if (!d || !h || Number(h[1]) > 23 || Number(h[2]) > 59 || Number(h[3] || 0) > 59) return NaN;
+    var brut = Date.UTC(Number(d[1]), Number(d[2]) - 1, Number(d[3]), Number(h[1]), Number(h[2]), Number(h[3] || 0));
+    var t = brut - jtDecalageParis(brut);
+    return brut - jtDecalageParis(t);
+  }
+  
+
+  function jtTempsSaisi(v) {
+    var x = [v.jours, v.heures, v.minutes, v.secondes === '' || v.secondes == null ? 0 : v.secondes].map(function (n) { return n === '' || n == null ? NaN : Number(n); });
+    if (!x.every(function (n) { return isFinite(n) && Math.floor(n) === n && n >= 0; })) return null;
+    if (x[1] > 23 || x[2] > 59 || x[3] > 59) return null;
+    var s = x[0] * 86400 + x[1] * 3600 + x[2] * 60 + x[3];
+    return s >= 2 * 86400 && s <= 60 * 86400 ? s : null;
+  }
+  var JR_ACTIONS = {
+    saisir: 'Saisie', corriger: 'Correction', nonRetenue: 'Classe non retenue', effacer: 'Remise en attente',
+    ecarter: 'Participant écarté', retablir: 'Participant rétabli', tirage: 'Tirage au sort enregistré',
+    annulerTirage: 'Tirage au sort annulé', valider: 'Résultat validé', devalider: 'Validation retirée'
+  };
+  
+
+  var JR_ECART_DEPART_MS = 3600000;
+  function jrDecision(d, sansMotif) {
+    if (!d) return 'en attente';
+    if (d.etat === 'non-retenue') return 'non retenue' + (d.motif && !sansMotif ? ' (' + d.motif + ')' : '');
+    return (d.bateau ? d.bateau + ', ' : '') + jtDuree(d.tempsCourseSec) + (d.arriveeLe ? ', arrivé ' + jtDateCourte(Date.parse(d.arriveeLe)) : '');
+  }
+
+   
    
   function jtBarresJours(points) {
     var n = points.length;
@@ -1153,6 +1262,14 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
       this._periode = 30;
       this._instaView = 'todo';    
       this._jtCherche = '';        
+      
+
+
+
+
+      this._jr = null;
+      this._jrRes = null;
+      this._jrRetourN = 0;
       this._roueCherche = '';      
       this._roueFiltre = 'tous';
       this._busy = {};    
@@ -1219,8 +1336,36 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
         if (this._photoRefus && !reste(ph.attente, this._photoRefus)) { this._photoRefus = null; this._photoMotif = ''; }
         if (this._photoRetrait && !reste(ph.enLigne, this._photoRetrait)) { this._photoRetrait = null; this._photoMotif = ''; }
       }
+      this._jrLireRetour();
       this._lireToast();
       this._render();
+    }
+
+    
+
+
+
+    _jrLireRetour() {
+      var r = this._payload && this._payload.jtRetour;
+      if (!r || !r.n || r.n === this._jrRetourN) return;
+      this._jrRetourN = r.n;
+      var ouvert = this._jr || this._jrRes;
+      if (!ouvert) return;
+      ouvert.envoi = false;
+      if (r.ok || r.raison === 'conflit') {
+        if (this._jr) this._focusApres = this._jr.retour || '';
+        this._jr = null;
+        this._jrRes = null;
+        return;
+      }
+      ouvert.erreur = String(r.message || 'Rien n’a été enregistré.');
+      var champs = Array.isArray(r.champs) ? r.champs : [];
+      if (this._jr && champs.length) {
+        var e = {};
+        champs.forEach(function (c) { e[c === 'arrivee' ? 'date' : c] = 'À vérifier.'; });
+        this._jr.erreurs = e;
+        this._jr.etape = 'saisie';
+      }
     }
 
     
@@ -2964,8 +3109,15 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
           '<span><i style="background:var(--navy)"></i>Médiane</span><span><i style="background:#F19F39"></i>Temps du vainqueur 2022, le repère montré au joueur</span></div>', true, IC.boat);
 
        
+      var s = v.saisie;
+      var decidees = s ? (s.classes || []).filter(function (x) { return x.etat === 'confirmee' || x.etat === 'non-retenue'; }).length : 0;
+      var cardSaisie = s ? card('Les temps officiels', !s.ouverte ? 'la saisie ouvre à la fermeture du jeu'
+        : decidees + ' classe' + (decidees > 1 ? 's' : '') + ' sur ' + classes.length + ' décidée' + (decidees > 1 ? 's' : '') + (s.journalTotal ? ' · ' + nfmt(s.journalTotal) + ' modification' + (s.journalTotal > 1 ? 's' : '') + ' au journal' : ''),
+        this._jrSaisieHtml(v, alerte), true, IC.flag) : '';
+
+       
       var cardResultat = card('Le résultat', ({ attente: 'en attente des temps officiels', provisoire: 'provisoire', complet: 'toutes les classes décidées', 'sans-classe': 'aucune classe retenue' })[r.etat] || '',
-        this._jtResultatHtml(r, classes, alerte, fiche), true, IC.target);
+        this._jtResultatHtml(r, classes, alerte, fiche, v), true, IC.target);
 
        
       var avecRang = !!(r.classement && r.classement.length);
@@ -3001,7 +3153,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
           '« Exporter » télécharge cette liste en CSV : elle contient des adresses, à garder dans l\'équipe.</p>', true, IC.people);
 
       return bandeaux + '<div class="rdrc-grid" style="margin-bottom:14px">' + card('L\'état du jeu', 'Le Juste Temps, montre Alpina', etat, true, IC.clock) + '</div>' + kpis +
-        '<div class="rdrc-grid">' + cardJours + cardClasses + cardResultat + cardListe + '</div>';
+        '<div class="rdrc-grid">' + cardJours + cardClasses + cardSaisie + cardResultat + cardListe + '</div>';
     }
 
     
@@ -3009,27 +3161,178 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
 
 
 
-    _jtResultatHtml(r, classes, alerte, fiche) {
+
+
+
+
+    _jrSaisieHtml(v, alerte) {
+      var s = v.saisie || {};
+      var jeu = v.jeu || {};
+      var self = this;
+      var pastille = function (cl) { return '<span class="rdrc-jt-pt" style="background:' + esc(CLASS_COLORS[cl] || 'var(--teal)') + '"></span>'; };
+      var ferme = !s.ouverte;
+      var busy = !!((this._jr && this._jr.envoi) || (this._jrRes && this._jrRes.envoi));
+      var bouton = function (action, classe, libelle, go) {
+        var ouvert = self._jr && self._jr.classe === classe && self._jr.mode === action;
+        return '<button type="button" class="rdrc-btn' + (go ? ' rdrc-go' : '') + '" data-jr-ouvrir="' + esc(action) + '" data-jr-classe="' + esc(classe) + '"' +
+          (ferme || busy ? ' disabled' : '') + (ouvert ? ' aria-expanded="true"' : '') + '>' + esc(libelle) + '</button>';
+      };
+      var lignes = (s.classes || []).map(function (x) {
+        var t = Date.parse(x.arriveeLe || '');
+        var par = x.par ? (x.par.nom || x.par.email || '') : '';
+        var etat = x.etat === 'confirmee' ? '<span class="rdrc-jr-st" data-s="confirmee">Confirmé</span>'
+          : x.etat === 'non-retenue' ? '<span class="rdrc-jr-st" data-s="non-retenue">Non retenue</span>'
+          : x.etat === 'illisible' ? '<span class="rdrc-jr-st" data-s="illisible">Illisible</span>'
+          : '<span class="rdrc-jr-st">En attente</span>';
+        var actions = x.etat === 'attente'
+          ? bouton('saisir', x.classe, 'Saisir', true) + bouton('nonRetenue', x.classe, 'Non retenue')
+          : x.etat === 'non-retenue'
+            ? bouton('saisir', x.classe, 'Saisir un temps') + bouton('effacer', x.classe, 'Remettre en attente')
+            : bouton('saisir', x.classe, 'Corriger') + bouton('nonRetenue', x.classe, 'Non retenue') + bouton('effacer', x.classe, 'Remettre en attente');
+        var bateau = x.etat === 'confirmee' ? esc(x.bateau) + (x.source ? '<small class="rdrc-jr-petit">' + esc(x.source) + '</small>' : '')
+          : x.etat === 'non-retenue' ? '<span class="rdrc-jt-vide">article 6.4</span>' + (x.motif ? '<small class="rdrc-jr-petit">' + esc(x.motif) + '</small>' : '')
+          : '<span class="rdrc-jt-vide">·</span>';
+        return '<tr data-jr-ligne="' + esc(x.classe) + '"><td class="rdrc-jt-nom">' + pastille(x.classe) + esc(x.classe) + '</td>' +
+          '<td>' + bateau + '</td>' +
+          '<td>' + (isFinite(t) ? esc(jtMoment(t)) + '<small class="rdrc-jr-petit">soit ' + esc(jtMoment(t, 'America/Guadeloupe')) + ' en Guadeloupe</small>' : '<span class="rdrc-jt-vide">·</span>') + '</td>' +
+          '<td>' + (x.etat === 'confirmee' ? '<b>' + esc(jtDuree(x.tempsCourseSec)) + '</b>' + (x.departDeduit ? '<small class="rdrc-jr-petit">départ déduit : ' + esc(jtDateCourte(Date.parse(x.departDeduit))) + '</small>' : '') : '<span class="rdrc-jt-vide">·</span>') + '</td>' +
+          '<td>' + etat + (par ? '<small class="rdrc-jr-petit">par ' + esc(par) + (x.le ? ', le ' + esc(jtDateCourte(Date.parse(x.le))) : '') + '</small>' : '') + '</td>' +
+          '<td><div class="rdrc-jr-acts">' + actions + '</div></td></tr>';
+      }).join('');
+      var tete = '<p class="rdrc-help">Pour chaque classe, le temps de course officiel du <b>premier bateau à franchir la ligne</b>, tel que la Direction de course le publie (article 6.2), avec la date et l’heure de son arrivée à l’heure de Paris. ' +
+        'Chaque saisie se relit avant d’être confirmée ; une correction demande son motif ; tout reste au journal. Rien de ce qui se saisit ici n’est public.</p>';
+      var avis = '';
+      if (ferme) avis += '<div class="rdrc-jr-avis" data-ton="info">La saisie ouvre à la fermeture du jeu, ' + esc(jtDateLongue(jeu.fermetureLe)) + ' (heure de Paris) : tant que les joueurs peuvent modifier, aucun résultat ne s’enregistre.</div>';
+      if (s.alerteDepart) avis += alerte('Les départs déduits ne concordent pas.', ' Arrivée moins temps de course : ' + s.alerteDepart.ecartMin + ' minutes d’écart entre deux classes. Si toutes les classes sont parties ensemble, une saisie est fausse : relis les arrivées et les temps.');
+      if (s.resultatsCmsIgnores) avis += alerte('Le champ « resultats » de PRONOSTICS_COURSE est rempli au CMS.', ' Il n’est plus lu : les temps officiels se saisissent ici, et seulement ici.');
+      var table = '<div class="rdrc-jt-defil rdrc-jt-defil--libre"><table class="rdrc-jt-t"><thead><tr><th>Classe</th><th>Premier bateau</th><th>Arrivée (heure de Paris)</th><th>Temps de course</th><th>Saisie</th><th>Gestes</th></tr></thead><tbody>' + lignes + '</tbody></table></div>';
+      return '<div class="rdrc-jr">' + tete + avis + table + this._jrFormHtml(v) + this._jrJournalHtml(s) + '</div>';
+    }
+
+     
+    _jrFormHtml(v) {
+      var f = this._jr;
+      var s = v.saisie || {};
+      if (!f) return '';
+      var ligne = (s.classes || []).filter(function (x) { return x.classe === f.classe; })[0] || { etat: 'attente' };
+      var dejaDecidee = ligne.etat !== 'attente';
+      var val = f.v || {};
+      var err = f.erreurs || {};
+      var champ = function (nom, libelle, type, extra, large) {
+        return '<label class="rdrc-jr-c' + (large ? ' rdrc-jr-c--large' : '') + '"' + (err[nom] ? ' data-err' : '') + '><span>' + esc(libelle) + '</span>' +
+          '<input type="' + type + '" data-jr-champ="' + nom + '" value="' + esc(val[nom] == null ? '' : val[nom]) + '"' + (extra || '') + '>' +
+          (err[nom] ? '<span class="rdrc-jr-err">' + esc(err[nom]) + '</span>' : '') + '</label>';
+      };
+      var serveur = f.erreur ? '<div class="rdrc-jr-avis" data-ton="err" role="alert">' + esc(f.erreur) + '</div>' : '';
+      var change = Number(s.version) !== Number(f.version)
+        ? '<div class="rdrc-jr-avis">La saisie a changé depuis l’ouverture de ce formulaire (version ' + esc(String(s.version)) + ') : la confirmation sera refusée. Annule et rouvre.</div>' : '';
+      var boutonsSaisie = '<div class="rdrc-jr-boutons"><button type="submit" class="rdrc-btn rdrc-go">Relire</button><button type="button" class="rdrc-btn" data-jr-annuler>Annuler</button></div>';
+      var boutonsRelecture = '<div class="rdrc-jr-boutons"><button type="button" class="rdrc-btn rdrc-go" data-jr-confirmer' + (f.envoi ? ' disabled' : '') + '>' + (f.envoi ? 'Enregistrement…' : 'Confirmer et enregistrer') + '</button>' +
+        '<button type="button" class="rdrc-btn" data-jr-modifier' + (f.envoi ? ' disabled' : '') + '>Modifier</button><button type="button" class="rdrc-btn" data-jr-annuler' + (f.envoi ? ' disabled' : '') + '>Annuler</button></div>';
+      var titre, corps;
+      if (f.mode === 'saisir') {
+        titre = esc(f.classe) + (dejaDecidee ? ' : corriger la saisie' : ' : saisir le temps officiel') +
+          '<small>' + (dejaDecidee ? 'Saisie actuelle : ' + esc(jrDecision(ligne.etat === 'confirmee' ? ligne : { etat: 'non-retenue', motif: ligne.motif })) + '. La correction demande son motif.' : 'Le premier bateau de la classe à franchir la ligne à Pointe-à-Pitre.') + '</small>';
+        if (f.etape !== 'relecture') {
+          corps = '<div class="rdrc-jr-champs">' +
+            champ('bateau', 'Premier bateau (et son skipper)', 'text', ' maxlength="120" autocomplete="off"', true) +
+            champ('date', 'Date d’arrivée (heure de Paris)', 'date', '') +
+            champ('heure', 'Heure d’arrivée (heure de Paris)', 'time', ' step="1"') +
+            '<div class="rdrc-jr-c rdrc-jr-c--large" role="group" aria-labelledby="rdrc-jr-temps-t"' + (err.temps ? ' data-err' : '') + '><span id="rdrc-jr-temps-t">Temps de course officiel</span><div class="rdrc-jr-temps">' +
+              ['jours', 'heures', 'minutes', 'secondes'].map(function (k) {
+                var u = { jours: 'j', heures: 'h', minutes: 'min', secondes: 's' }[k];
+                return '<label><input type="number" inputmode="numeric" min="0" step="1" data-jr-champ="' + k + '" value="' + esc(val[k] == null ? '' : val[k]) + '" aria-label="' + esc(k) + '">' + u + '</label>';
+              }).join('') +
+            '</div>' + (err.temps ? '<span class="rdrc-jr-err">' + esc(err.temps) + '</span>' : '') + '</div>' +
+            champ('source', 'Source (facultatif) : le communiqué, la page de la Direction de course', 'text', ' maxlength="300" autocomplete="off"', true) +
+            (dejaDecidee ? champ('motif', 'Motif de la correction (obligatoire)', 'text', ' maxlength="300" autocomplete="off"', true) : '') +
+          '</div>' + change + serveur + boutonsSaisie;
+        } else {
+          var t = jtInstantParis(val.date, val.heure);
+          var sec = jtTempsSaisi(val);
+          var depart = t - sec * 1000;
+          var autres = (s.classes || []).filter(function (x) { return x.classe !== f.classe && x.departDeduit; }).map(function (x) { return { classe: x.classe, t: Date.parse(x.departDeduit) }; });
+          var loin = autres.filter(function (x) { return Math.abs(x.t - depart) > JR_ECART_DEPART_MS; });
+          corps = '<dl class="rdrc-jr-recap">' +
+            '<dt>Classe</dt><dd>' + esc(f.classe) + '</dd>' +
+            '<dt>Premier bateau</dt><dd>' + esc(String(val.bateau || '').trim()) + '</dd>' +
+            '<dt>Arrivée</dt><dd>' + esc(jtMoment(t)) + ', heure de Paris<small>soit ' + esc(jtMoment(t, 'America/Guadeloupe')) + ' en Guadeloupe</small></dd>' +
+            '<dt>Temps de course</dt><dd>' + esc(jtDuree(sec)) + '<small>' + nfmt(sec) + ' secondes ; départ déduit : ' + esc(jtMoment(depart)) + '</small></dd>' +
+            (String(val.source || '').trim() ? '<dt>Source</dt><dd>' + esc(String(val.source).trim()) + '</dd>' : '') +
+            (dejaDecidee ? '<dt>Motif</dt><dd>' + esc(String(val.motif || '').trim()) + '</dd><dt>Remplace</dt><dd>' + esc(jrDecision(ligne.etat === 'confirmee' ? ligne : { etat: 'non-retenue', motif: ligne.motif })) + '</dd>' : '') +
+          '</dl>' +
+          (loin.length ? '<div class="rdrc-jr-avis">Ce départ déduit est à plus d’une heure de celui de ' + esc(loin.map(function (x) { return x.classe + ' (' + jtDateCourte(x.t) + ')'; }).join(', ')) + '. Si toutes les classes sont parties ensemble, une des saisies est fausse.</div>' : '') +
+          change + serveur + boutonsRelecture;
+        }
+      } else {
+        var nr = f.mode === 'nonRetenue';
+        titre = esc(f.classe) + (nr ? ' : déclarer la classe non retenue' : ' : remettre en attente') +
+          '<small>' + (nr ? 'Article 6.4 : aucun bateau de la classe n’a franchi la ligne dans les délais de la course. La classe ne compte pour personne, le score se calcule sur les autres.'
+            : 'La saisie actuelle (' + esc(jrDecision(ligne.etat === 'confirmee' ? ligne : { etat: 'non-retenue', motif: ligne.motif })) + ') est retirée ; elle reste au journal.') + '</small>';
+        if (f.etape !== 'relecture') {
+          corps = '<div class="rdrc-jr-champs">' + champ('motif', nr ? 'Motif (obligatoire) : temps limite, décision de la Direction de course…' : 'Motif (obligatoire)', 'text', ' maxlength="300" autocomplete="off"', true) + '</div>' + change + serveur + boutonsSaisie;
+        } else {
+          corps = '<dl class="rdrc-jr-recap"><dt>Classe</dt><dd>' + esc(f.classe) + '</dd><dt>Geste</dt><dd>' + (nr ? 'Non retenue (article 6.4)' : 'Remise en attente') + '</dd><dt>Motif</dt><dd>' + esc(String(val.motif || '').trim()) + '</dd></dl>' + change + serveur + boutonsRelecture;
+        }
+      }
+      return '<form class="rdrc-jr-form" data-jr-form novalidate aria-labelledby="rdrc-jr-form-t"><p class="rdrc-jr-form-t" id="rdrc-jr-form-t">' + titre + '</p>' + corps + '</form>';
+    }
+
+     
+    _jrJournalHtml(s) {
+      var j = s.journal || [];
+      if (!j.length) return '<p class="rdrc-note"><b>Journal des saisies.</b> Vide : rien n’a encore été saisi.</p>';
+      var nomDe = function (p) { return p ? (p.nom || '') + (p.email ? (p.nom ? ' (' + p.email + ')' : p.email) : '') : ''; };
+      var items = j.map(function (e) {
+        var quoi = JR_ACTIONS[e.action] || e.action;
+        var detail = '';
+        if (e.classe) detail += esc(e.classe) + ' : ' + esc(jrDecision(e.avant)) + ' → ' + esc(jrDecision(e.apres, e.action === 'nonRetenue'));
+        if (e.email && e.action !== 'valider' && e.action !== 'devalider') detail += esc((e.nom ? e.nom + ' ' : '') + '(' + e.email + ')') + (e.motif && (e.action === 'ecarter' || e.action === 'retablir') ? ', motif ' + esc(e.motif) : '');
+        if (e.gagnant) detail += 'gagnant ' + esc((e.gagnant.nom || '') + ' (' + (e.gagnant.email || '') + ')');
+        var texte = [e.motif && e.action !== 'ecarter' && e.action !== 'retablir' ? 'motif : ' + e.motif : '', e.note ? 'note : ' + e.note : ''].filter(Boolean).join(' · ');
+        return '<li><b>' + esc(quoi) + '</b> ' + detail +
+          (texte ? '<small>' + esc(texte) + '</small>' : '') +
+          (e.validationRetiree ? '<small>La validation du résultat a été retirée par ce geste.</small>' : '') +
+          '<small>n° ' + esc(String(e.n || '')) + ', le ' + esc(jtDateCourte(Date.parse(e.le || ''))) + ', par ' + esc(nomDe(e.par) || 'inconnu') + '</small></li>';
+      }).join('');
+      return '<details class="rdrc-jr-journal"' + (this._jrJournalOuvert ? ' open' : '') + ' data-jr-journal><summary>Journal des saisies (' + nfmt(s.journalTotal || j.length) + ')' +
+        ((s.journalTotal || 0) > j.length ? ', les ' + j.length + ' plus récentes' : '') + '</summary><ol>' + items + '</ol></details>';
+    }
+
+    
+
+
+
+
+
+    _jtResultatHtml(r, classes, alerte, fiche, v) {
+      var s = (v && v.saisie) || null;
+      var gestes = !!(s && s.ouverte);
+      var busy = !!((this._jr && this._jr.envoi) || (this._jrRes && this._jrRes.envoi));
+      var nomDe = function (p) { return p ? (p.nom || p.email || '') : ''; };
+      var bouton = function (action, libelle, attrs, go) {
+        return '<button type="button" class="rdrc-btn' + (go ? ' rdrc-go' : '') + '" data-jr-res="' + action + '"' + (attrs || '') + (busy ? ' disabled' : '') + '>' + esc(libelle) + '</button>';
+      };
       var REGLE = '<p class="rdrc-jt-h">La règle (article 6 du règlement)</p><ol class="rdrc-jt-regle">' +
         '<li>Le temps de référence d\'une classe est le temps officiel du <b>premier bateau</b> de la classe.</li>' +
         '<li>Écart d\'une classe : <b>|pronostic − référence| ÷ référence</b>. Score : la <b>moyenne des écarts</b> sur les classes retenues. Le plus faible gagne.</li>' +
         '<li>Une classe sans arrivée dans les délais n\'est <b>pas retenue</b>.</li>' +
         '<li>Score égal : la <b>dernière modification la plus ancienne</b> gagne ; si l\'égalité persiste, <b>tirage au sort</b>.</li>' +
-        '<li>Seuls les joueurs aux six classes renseignées ; l\'équipe jamais (article 3.4).</li></ol>';
-      var MANQUE = '<p class="rdrc-jt-h">Ce qui manque encore</p><ol class="rdrc-jt-regle">' +
-        '<li><b>La saisie des temps officiels</b>, dans PRONOSTICS_COURSE.resultats, une clé par classe : aucun écran ne la fait encore.</li>' +
-        '<li><b>Déclarer une classe non retenue</b> (article 6.4) : la console lit { retenue: false } dans la clé de la classe, format à confirmer avec le calcul de la passe de nuit, pas encore écrit.</li>' +
-        '<li><b>Le tirage au sort</b> en cas d\'égalité persistante : la console nomme les ex aequo, elle ne tire pas. Qui tire, et comment on en garde la trace, reste à décider.</li>' +
-        '<li><b>Avant de contacter le gagnant</b> : une participation par foyer (3.5), majeur et résidant en France ou dans les DROM (3.2). Le site ne connaît ni l\'adresse postale ni l\'âge.</li></ol>';
+        '<li>Seuls les joueurs aux six classes renseignées, qui remplissent l\'article 3 ; l\'équipe jamais (article 3.4).</li></ol>';
+      var RESTE = '<p class="rdrc-jt-h">Ce qui reste à l\'équipe</p><ol class="rdrc-jt-regle">' +
+        '<li><b>Saisir chaque classe</b> dans « Les temps officiels », au fil des arrivées ; une classe sans arrivée dans les délais se déclare <b>non retenue</b>.</li>' +
+        '<li><b>Égalité persistante</b> : le tirage au sort se fait hors de la console, qui enregistre le nom tiré et la note (qui a tiré, comment, devant qui).</li>' +
+        '<li><b>Avant de contacter le gagnant</b> : une participation par foyer (3.5), majeur et résidant en France ou dans les DROM (3.2). Le site ne connaît ni l\'adresse postale ni l\'âge. Sinon « Écarter », avec son motif : le suivant devient gagnant (6.3).</li>' +
+        '<li><b>Valider le résultat</b>, puis contacter le gagnant dans les 2 jours qui suivent l\'arrivée du premier bateau de la dernière classe (6.6). La validation ne publie rien.</li></ol>';
       var refs = (r.reference || []).map(function (x) {
         var val = x.etat === 'retenue' ? esc(jtDuree(x.sec)) : x.etat === 'non-retenue' ? 'Non retenue' : x.etat === 'illisible' ? 'Saisie illisible' : 'En attente';
-        var petit = x.etat === 'retenue' ? 'temps officiel' : x.etat === 'non-retenue' ? 'article 6.4' : x.etat === 'illisible' ? 'à corriger dans resultats' : 'pas encore arrivée';
+        var petit = x.etat === 'retenue' ? 'temps officiel' : x.etat === 'non-retenue' ? 'article 6.4' : x.etat === 'illisible' ? 'à corriger dans la saisie' : 'pas encore arrivée';
         return fiche(x.classe, val, petit, x.etat);
       }).join('');
       var grille = '<div class="rdrc-jt-etat" style="margin-bottom:14px">' + refs + '</div>';
       if (r.etat === 'attente' || !r.etat) {
-        return '<p class="rdrc-help">Cette carte se remplit seule dès qu\'un temps officiel est saisi : temps de référence, écart de chaque joueur, gagnant selon le règlement et son départage. Rien à faire avant les arrivées.</p>' +
-          grille + '<div class="rdrc-jt-deux"><div>' + REGLE + '</div><div>' + MANQUE + '</div></div>';
+        return '<p class="rdrc-help">Cette carte se remplit seule dès qu\'un temps officiel est confirmé dans « Les temps officiels » : temps de référence, écart de chaque joueur, gagnant selon le règlement et son départage. Rien à faire avant les arrivées.</p>' +
+          grille + '<div class="rdrc-jt-deux"><div>' + REGLE + '</div><div>' + RESTE + '</div></div>';
       }
       var tete = '';
       if (r.etat === 'provisoire') {
@@ -3037,34 +3340,298 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
       } else if (r.etat === 'sans-classe') {
         tete += alerte('Aucune classe retenue.', ' Le règlement ne prévoit pas ce cas : à trancher par l\'organisateur.');
       }
+
+      
+
+      var val = r.validation || null;
+      var valide = !!(val && !val.perimee);
+      if (val && val.perimee) {
+        tete += alerte('La validation du ' + jtDateCourte(Date.parse(val.le || '')) + ' ne vaut plus.', ' Ce qui fait le résultat a changé depuis : le résultat est à revalider.');
+      }
+      var blocValide = valide
+        ? '<div class="rdrc-jr-valide" data-jr-valide><b>Résultat validé</b> par ' + esc(nomDe(val.par) || 'inconnu') + ', le ' + esc(jtDateCourte(Date.parse(val.le || ''))) +
+            '. Gagnant : <b>' + esc((val.gagnant && val.gagnant.nom) || 'Sans nom') + '</b> (' + esc((val.gagnant && val.gagnant.email) || '') + ').' +
+            (val.note ? ' Note : ' + esc(val.note) + '.' : '') + ' Rien n\'est publié : le gagnant peut être contacté.' +
+            (gestes ? '<div class="rdrc-jr-acts">' + bouton('devalider', 'Retirer la validation') + '</div>' : '') + '</div>'
+        : '';
+
       var g = r.gagnant;
+      var t = r.tirage || null;
       var gagnants = '';
       if (g) {
         gagnants = '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">' + (r.etat === 'complet' ? 'Gagnant selon le règlement' : 'En tête pour l\'instant') + '</span><br>' +
           '<b>' + esc(g.nom || 'Sans nom') + '</b>' +
           '<p>' + esc(g.email || '') + ' · score ' + esc(jtPct(g.score, 3)) + ' · dernière modification le ' + esc(jtDateCourte(g.dernier)) +
-          (g.par === 'modification' ? ' · départagé de ' + (g.exAequo - 1) + ' ex aequo au score par sa modification la plus ancienne (article 6.5)' : '') + '</p></div>';
+          (g.par === 'modification' ? ' · départagé de ' + (g.exAequo - 1) + ' ex aequo au score par sa modification la plus ancienne (article 6.5)' : '') +
+          (g.par === 'tirage' && t ? ' · désigné par tirage au sort parmi ' + g.exAequo + ' ex aequo (article 6.5), enregistré le ' + esc(jtDateCourte(Date.parse(t.le || ''))) + ' par ' + esc(nomDe(t.par) || 'inconnu') + (t.note ? ' : ' + esc(t.note) : '') : '') + '</p>' +
+          (gestes && (r.etat === 'complet' && !valide || g.par === 'tirage') ? '<div class="rdrc-jr-acts" style="margin-top:10px">' +
+            (r.etat === 'complet' && !valide ? bouton('valider', 'Valider le résultat', '', true) : '') +
+            (g.par === 'tirage' ? bouton('annulerTirage', 'Annuler le tirage') : '') + '</div>' : '') +
+          (r.etat !== 'complet' && gestes ? '<p>La validation s\'ouvre quand les six classes sont décidées.</p>' : '') + '</div>';
       } else if (r.aTirer && r.aTirer.length) {
         gagnants = '<div class="rdrc-gagnant"><span class="rdrc-mob-trophee">Égalité persistante : tirage au sort à faire (article 6.5)</span>' +
-          '<p>Même score et même dernière modification : ' + r.aTirer.map(function (x) { return '<b>' + esc(x.nom || 'Sans nom') + '</b> (' + esc(x.email || '') + ')'; }).join(', ') + '.</p></div>';
+          '<p>Même score et même dernière modification : ' + r.aTirer.map(function (x) { return '<b>' + esc(x.nom || 'Sans nom') + '</b> (' + esc(x.email || '') + ')'; }).join(', ') + '.</p>' +
+          (gestes ? '<p>Le tirage se fait hors de la console ; elle enregistre le nom tiré et la note.</p><div class="rdrc-jr-acts" style="margin-top:10px">' + bouton('tirage', 'Enregistrer le tirage', '', true) + '</div>' : '') + '</div>';
       }
+      if (t && t.perime) {
+        tete += alerte('Le tirage enregistré le ' + jtDateCourte(Date.parse(t.le || '')) + ' (' + (t.nom || t.gagnant || '') + ') ne vaut plus.', ' La liste des ex aequo a changé depuis : il ne désigne plus personne.' +
+          (gestes ? '<span class="rdrc-jr-acts" style="margin-top:8px">' + bouton('annulerTirage', 'Annuler ce tirage') + '</span>' : ''));
+      }
+
       var retenues = (r.reference || []).map(function (x) { return x.etat === 'retenue'; });
+      var tire = !!(t && t.applique);
       var lignes = (r.classement || []).map(function (x) {
+        var tag = x.egalite === 'tirage'
+          ? (tire ? (g && g.email === x.email ? '<span class="rdrc-jt-tag rdrc-jt-tag--mod">tiré au sort</span>' : '<span class="rdrc-jt-tag">ex aequo, non tiré</span>') : '<span class="rdrc-jt-tag rdrc-jt-tag--ex">à tirer au sort</span>')
+          : x.egalite === 'score' ? '<span class="rdrc-jt-tag rdrc-jt-tag--mod">ex aequo au score</span>' : '';
         return '<tr><td class="rdrc-jt-num"><b>' + x.rang + '</b></td>' +
-          '<td class="rdrc-jt-nom">' + esc(x.nom || 'Sans nom') + (x.egalite === 'tirage' ? '<span class="rdrc-jt-tag rdrc-jt-tag--ex">à tirer au sort</span>' : x.egalite === 'score' ? '<span class="rdrc-jt-tag rdrc-jt-tag--mod">ex aequo au score</span>' : '') +
+          '<td class="rdrc-jt-nom">' + esc(x.nom || 'Sans nom') + tag +
             '<small>' + esc(x.email || '') + '</small></td>' +
           '<td class="rdrc-jt-num"><b>' + esc(jtPct(x.score, 3)) + '</b></td>' +
           (x.ecarts || []).map(function (e, i) { return retenues[i] ? '<td class="rdrc-jt-num">' + esc(jtPct(e, 2)) + '</td>' : '<td class="rdrc-jt-num rdrc-jt-vide">·</td>'; }).join('') +
-          '<td>' + esc(jtDateCourte(x.dernier)) + '</td></tr>';
+          '<td>' + esc(jtDateCourte(x.dernier)) + '</td>' +
+          (gestes ? '<td>' + (x.email ? bouton('ecarter', 'Écarter', ' data-jr-email="' + esc(x.email) + '" data-jr-nom="' + esc(x.nom || '') + '"') : '') + '</td>' : '') + '</tr>';
       }).join('');
       var table = lignes
         ? '<div class="rdrc-jt-defil rdrc-jt-defil--libre"><table class="rdrc-jt-t"><thead><tr><th class="rdrc-jt-num">Rang</th><th>Joueur</th><th class="rdrc-jt-num">Score</th>' +
-            classes.map(function (cl) { return '<th class="rdrc-jt-num">' + esc(cl) + '</th>'; }).join('') + '<th>Dernière modif.</th></tr></thead><tbody>' + lignes + '</tbody></table></div>'
+            classes.map(function (cl) { return '<th class="rdrc-jt-num">' + esc(cl) + '</th>'; }).join('') + '<th>Dernière modif.</th>' + (gestes ? '<th>Geste</th>' : '') + '</tr></thead><tbody>' + lignes + '</tbody></table></div>'
         : '<div class="rdrc-state">Aucun joueur à classer.</div>';
-      return tete + grille + '<div class="rdrc-jt-gagnants">' + gagnants + '</div>' + table +
+      var motifs = {};
+      ((s && s.motifs) || []).forEach(function (m) { motifs[m.code] = m.libelle; });
+      var ecartes = (r.ecartes || []).length
+        ? '<p class="rdrc-jt-sous">Écartés <span>' + r.ecartes.length + ', hors du classement (articles 3 et 6.3)</span></p><ul class="rdrc-jr-ecartes">' + r.ecartes.map(function (x) {
+            return '<li><span><b>' + esc(x.nom || 'Sans nom') + '</b> (' + esc(x.email || '') + ') : ' + esc(motifs[x.motif] || ('article ' + x.motif)) +
+              (x.note ? '<small class="rdrc-jr-petit">' + esc(x.note) + (x.par ? ' · par ' + esc(nomDe(x.par)) + (x.le ? ', le ' + esc(jtDateCourte(Date.parse(x.le))) : '') : '') + '</small>' : '') + '</span>' +
+              (gestes ? bouton('retablir', 'Rétablir', ' data-jr-email="' + esc(x.email || '') + '" data-jr-nom="' + esc(x.nom || '') + '"') : '') + '</li>';
+          }).join('') + '</ul>'
+        : '';
+      var exporter = (r.classement || []).length || (r.ecartes || []).length
+        ? '<div class="rdrc-jr-boutons"><button type="button" class="rdrc-btn" data-jr-export>Exporter le résultat</button><span class="rdrc-jt-compte">le classement, les écarts et les écartés, en CSV, pour contacter le gagnant (adresses comprises : le fichier reste dans l\'équipe)</span></div>'
+        : '';
+      return '<div class="rdrc-jr">' + tete + grille + blocValide + '<div class="rdrc-jt-gagnants">' + gagnants + '</div>' + this._jrResHtml(r, s) + table + ecartes + exporter +
         '<p class="rdrc-note"><b>' + nfmt(r.eligibles) + ' joueurs classés</b>' + (r.incompletsEcartes ? ', ' + nfmt(r.incompletsEcartes) + ' incomplet' + (r.incompletsEcartes > 1 ? 's' : '') + ' écarté' + (r.incompletsEcartes > 1 ? 's' : '') : '') +
           ', l\'équipe jamais. Les écarts sont relatifs (écart ÷ temps officiel) ; le classement entier est dans la liste des participants et dans l\'export (colonnes Rang et Score).</p>' +
-        '<div class="rdrc-jt-deux" style="margin-top:14px"><div>' + REGLE + '</div><div>' + MANQUE + '</div></div>';
+        '<div class="rdrc-jt-deux" style="margin-top:14px"><div>' + REGLE + '</div><div>' + RESTE + '</div></div></div>';
+    }
+
+    
+
+
+    _jrResHtml(r, s) {
+      var f = this._jrRes;
+      if (!f || !s) return '';
+      var g = r.gagnant || {};
+      var err = f.erreur ? '<div class="rdrc-jr-avis" data-ton="err" role="alert">' + esc(f.erreur) + '</div>' : '';
+      var champ = function (nom, libelle, aide) {
+        return '<label class="rdrc-jr-c rdrc-jr-c--large"><span>' + esc(libelle) + '</span><input type="text" maxlength="300" autocomplete="off" data-jr-res-champ="' + nom + '" value="' + esc(f[nom] || '') + '">' +
+          (aide ? '<span class="rdrc-jr-petit">' + esc(aide) + '</span>' : '') + '</label>';
+      };
+      var boutons = function (libelle) {
+        return '<div class="rdrc-jr-boutons"><button type="button" class="rdrc-btn rdrc-go" data-jr-res-confirmer' + (f.envoi ? ' disabled' : '') + '>' + (f.envoi ? 'Enregistrement…' : esc(libelle)) + '</button>' +
+          '<button type="button" class="rdrc-btn" data-jr-res-annuler' + (f.envoi ? ' disabled' : '') + '>Annuler</button></div>';
+      };
+      var titre = '', corps = '';
+      if (f.action === 'valider') {
+        titre = 'Valider le résultat';
+        corps = '<dl class="rdrc-jr-recap"><dt>Gagnant</dt><dd>' + esc(g.nom || 'Sans nom') + '<small>' + esc(g.email || '') + '</small></dd>' +
+          '<dt>Score</dt><dd>' + esc(jtPct(g.score, 3)) + '<small>' + ({ score: 'le plus faible', modification: 'départagé par la modification la plus ancienne (6.5)', tirage: 'désigné par le tirage enregistré (6.5)' }[g.par] || '') + '</small></dd>' +
+          '<dt>Classes</dt><dd>' + esc(String(r.retenues)) + ' retenue' + (r.retenues > 1 ? 's' : '') + ' sur ' + esc(String((r.reference || []).length)) + '</dd></dl>' +
+          '<div class="rdrc-jr-avis" data-ton="info">Valider ne publie rien et n\'écrit à personne : c\'est le feu vert de l\'équipe pour contacter le gagnant. Toute correction ultérieure retire la validation.</div>' +
+          '<div class="rdrc-jr-champs" style="margin-top:10px">' + champ('note', 'Note (facultatif) : qui a relu, vérifications faites') + '</div>' + err + boutons('Confirmer la validation');
+      } else if (f.action === 'devalider') {
+        titre = 'Retirer la validation';
+        corps = '<div class="rdrc-jr-champs">' + champ('motif', 'Motif (obligatoire)', 'Il reste au journal.') + '</div>' + err + boutons('Retirer la validation');
+      } else if (f.action === 'tirage') {
+        titre = 'Enregistrer le tirage au sort (article 6.5)';
+        corps = '<p class="rdrc-help">Le tirage s\'est fait hors de la console. Choisir la personne tirée, et dire dans la note qui a tiré, comment et devant qui.</p>' +
+          '<div class="rdrc-jr-choix" role="radiogroup" aria-label="Personne tirée au sort">' + (r.aTirer || []).map(function (x) {
+            return '<label><input type="radio" name="rdrc-jr-tire" value="' + esc(x.email || '') + '" data-jr-res-champ="email"' + (f.email === x.email ? ' checked' : '') + '>' + esc(x.nom || 'Sans nom') + ' <small>' + esc(x.email || '') + '</small></label>';
+          }).join('') + '</div>' +
+          '<div class="rdrc-jr-champs">' + champ('note', 'Note (obligatoire)') + '</div>' + err + boutons('Enregistrer le tirage');
+      } else if (f.action === 'annulerTirage') {
+        titre = 'Annuler le tirage au sort';
+        corps = '<div class="rdrc-jr-champs">' + champ('note', 'Pourquoi (obligatoire)', 'Le tirage reste au journal.') + '</div>' + err + boutons('Annuler le tirage');
+      } else if (f.action === 'ecarter') {
+        titre = 'Écarter ' + (f.nom || f.email);
+        corps = '<p class="rdrc-help">' + esc(f.email || '') + ' ne compte plus au classement, et le suivant prend sa place (article 6.3). Le geste reste au journal et se défait par « Rétablir ».</p>' +
+          '<div class="rdrc-jr-champs"><label class="rdrc-jr-c rdrc-jr-c--large"><span>Motif (articles du règlement)</span><select data-jr-res-champ="motif"><option value="">Choisir…</option>' +
+            (s.motifs || []).map(function (m) { return '<option value="' + esc(m.code) + '"' + (f.motif === m.code ? ' selected' : '') + '>' + esc(m.libelle) + '</option>'; }).join('') + '</select></label>' +
+            champ('note', 'Note (obligatoire) : ce qui a été vérifié, comment') + '</div>' +
+          (s.remiseAuSuivant ? '' : '<p class="rdrc-jr-petit" style="margin-top:8px">Un gagnant injoignable sous 48 heures (7.2) n\'est pas un motif proposé : le règlement dit « remettre la dotation en jeu » sans dire comment, c\'est à trancher.</p>') +
+          err + boutons('Écarter ce participant');
+      } else if (f.action === 'retablir') {
+        titre = 'Rétablir ' + (f.nom || f.email);
+        corps = '<div class="rdrc-jr-champs">' + champ('note', 'Pourquoi (obligatoire)') + '</div>' + err + boutons('Rétablir');
+      }
+      return '<div class="rdrc-jr-form" data-jr-res-form role="group" aria-labelledby="rdrc-jr-res-t"><p class="rdrc-jr-form-t" id="rdrc-jr-res-t">' + esc(titre) + '</p>' + corps + '</div>';
+    }
+
+    
+
+    _jrOuvrir(mode, classe) {
+      var v = (this._payload || {}).justeTemps || {};
+      var s = v.saisie || {};
+      var ligne = (s.classes || []).filter(function (x) { return x.classe === classe; })[0] || {};
+      var val = { bateau: '', date: '', heure: '', jours: '', heures: '', minutes: '', secondes: '', source: '', motif: '' };
+      if (mode === 'saisir' && ligne.etat === 'confirmee') {
+        var champs = jtChampsParis(Date.parse(ligne.arriveeLe || ''));
+        var sec = Number(ligne.tempsCourseSec) || 0;
+        val = { bateau: ligne.bateau || '', date: champs.date, heure: champs.heure,
+          jours: String(Math.floor(sec / 86400)), heures: String(Math.floor((sec % 86400) / 3600)), minutes: String(Math.floor((sec % 3600) / 60)), secondes: String(sec % 60),
+          source: ligne.source || '', motif: '' };
+      }
+      this._jrRes = null;
+      this._jr = { mode: mode, classe: classe, etape: 'saisie', v: val, erreurs: {}, version: Number(s.version) || 0, envoi: false, erreur: '',
+                   retour: '[data-jr-ouvrir="' + mode + '"][data-jr-classe="' + classe.replace(/"/g, '') + '"]' };
+      this._render();
+      var premier = this.querySelector('[data-jr-form] input');
+      if (premier) premier.focus();
+    }
+
+    
+
+    _jrRelire() {
+      var f = this._jr;
+      var v = f.v;
+      var e = {};
+      var corrige = (((((this._payload || {}).justeTemps || {}).saisie || {}).classes || []).filter(function (x) { return x.classe === f.classe; })[0] || {}).etat;
+      var correction = corrige && corrige !== 'attente';
+      if (f.mode === 'saisir') {
+        if (String(v.bateau || '').trim().length < 2) e.bateau = 'Le nom du bateau, deux caractères au moins.';
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(v.date || ''))) e.date = 'La date d’arrivée.';
+        if (!/^\d{2}:\d{2}(:\d{2})?$/.test(String(v.heure || ''))) e.heure = 'L’heure d’arrivée, à la seconde (heure de Paris).';
+        var t = jtInstantParis(v.date, v.heure);
+        if (!e.date && !e.heure && !isFinite(t)) e.heure = 'Cette heure n’existe pas.';
+        else if (!e.date && !e.heure && t > Date.now() + 10 * 60000) e.date = 'Cette arrivée est dans le futur.';
+        if (jtTempsSaisi(v) == null) e.temps = 'Entre 2 et 60 jours ; heures de 0 à 23, minutes et secondes de 0 à 59, en nombres entiers.';
+        if (correction && String(v.motif || '').trim().length < 5) e.motif = 'Le motif de la correction, cinq caractères au moins.';
+      } else if (String(v.motif || '').trim().length < 5) {
+        e.motif = 'Le motif, cinq caractères au moins.';
+      }
+      f.erreurs = e;
+      f.erreur = '';
+      var cles = Object.keys(e);
+      f.etape = cles.length ? 'saisie' : 'relecture';
+      this._render();
+      var cible = cles.length ? this.querySelector('[data-jr-champ="' + (cles[0] === 'temps' ? 'jours' : cles[0]) + '"]') : this.querySelector('[data-jr-confirmer]');
+      if (cible) cible.focus();
+    }
+
+    _jrEnvoyer() {
+      var f = this._jr;
+      if (!f || f.envoi) return;
+      var v = f.v;
+      var d = { action: f.mode, version: f.version, classe: f.classe, motif: String(v.motif || '').trim() };
+      if (f.mode === 'saisir') {
+        d.bateau = String(v.bateau || '').trim();
+        d.arrivee = { date: String(v.date || ''), heure: String(v.heure || '') };
+        d.tempsCourse = { jours: Number(v.jours), heures: Number(v.heures), minutes: Number(v.minutes), secondes: Number(v.secondes || 0) };
+        d.source = String(v.source || '').trim();
+      }
+      f.envoi = true;
+      f.erreur = '';
+      this._render();
+      this._emit('rc-jt-resultat', d);
+    }
+
+    _jrResEnvoyer() {
+      var f = this._jrRes;
+      if (!f || f.envoi) return;
+      var note = String(f.note || '').trim(), motif = String(f.motif || '').trim();
+      var manque = f.action === 'devalider' && motif.length < 5 ? 'Le motif, cinq caractères au moins.'
+        : f.action === 'tirage' && !f.email ? 'Choisir la personne tirée au sort.'
+        : f.action === 'ecarter' && !motif ? 'Choisir le motif.'
+        : f.action !== 'valider' && f.action !== 'devalider' && note.length < 5 ? 'La note, cinq caractères au moins.' : '';
+      if (manque) { f.erreur = manque; this._render(); return; }
+      var d = { action: f.action, version: f.version };
+      if (f.email) d.email = f.email;
+      if (motif) d.motif = motif;
+      if (note) d.note = note;
+      f.envoi = true;
+      f.erreur = '';
+      this._render();
+      this._emit('rc-jt-resultat', d);
+    }
+
+    _jrWire() {
+      var self = this;
+      this.querySelectorAll('[data-jr-ouvrir]').forEach(function (b) {
+        b.addEventListener('click', function () { if (!b.disabled) self._jrOuvrir(b.getAttribute('data-jr-ouvrir'), b.getAttribute('data-jr-classe')); });
+      });
+      var form = this.querySelector('[data-jr-form]');
+      if (form && this._jr) {
+        form.addEventListener('submit', function (e) { e.preventDefault(); self._jrRelire(); });
+        form.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !self._jr.envoi) { e.preventDefault(); var retour = self._jr.retour; self._jr = null; self._render(); var b = retour && self.querySelector(retour); if (b) b.focus(); } });
+        form.querySelectorAll('[data-jr-champ]').forEach(function (i) {
+          i.addEventListener('input', function () { self._jr.v[i.getAttribute('data-jr-champ')] = i.value; });
+        });
+        form.querySelectorAll('[data-jr-annuler]').forEach(function (b) {
+          b.addEventListener('click', function () { var retour = self._jr.retour; self._jr = null; self._render(); var x = retour && self.querySelector(retour); if (x) x.focus(); });
+        });
+        var modifier = form.querySelector('[data-jr-modifier]');
+        if (modifier) modifier.addEventListener('click', function () { self._jr.etape = 'saisie'; self._render(); var i = self.querySelector('[data-jr-form] input'); if (i) i.focus(); });
+        var confirmer = form.querySelector('[data-jr-confirmer]');
+        if (confirmer) confirmer.addEventListener('click', function () { self._jrEnvoyer(); });
+      }
+      this.querySelectorAll('[data-jr-res]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (b.disabled) return;
+          var s = ((self._payload || {}).justeTemps || {}).saisie || {};
+          self._jr = null;
+          self._jrRes = { action: b.getAttribute('data-jr-res'), email: b.getAttribute('data-jr-email') || '', nom: b.getAttribute('data-jr-nom') || '',
+                          motif: '', note: '', envoi: false, erreur: '', version: Number(s.version) || 0 };
+          if (self._jrRes.action === 'tirage') self._jrRes.email = '';
+          self._render();
+          var zone = self.querySelector('[data-jr-res-form]');
+          var premier = zone && zone.querySelector('input, select, button');
+          if (zone) zone.scrollIntoView({ block: 'nearest' });
+          if (premier) premier.focus();
+        });
+      });
+      var zone = this.querySelector('[data-jr-res-form]');
+      if (zone && this._jrRes) {
+        zone.querySelectorAll('[data-jr-res-champ]').forEach(function (i) {
+          var garder = function () { if (i.type !== 'radio' || i.checked) self._jrRes[i.getAttribute('data-jr-res-champ')] = i.value; };
+          i.addEventListener('input', garder);
+          i.addEventListener('change', garder);
+        });
+        zone.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !self._jrRes.envoi) { e.preventDefault(); self._jrRes = null; self._render(); }
+          else if (e.key === 'Enter' && e.target && e.target.tagName === 'INPUT' && e.target.type === 'text') { e.preventDefault(); self._jrResEnvoyer(); }
+        });
+        var ok = zone.querySelector('[data-jr-res-confirmer]');
+        if (ok) ok.addEventListener('click', function () { self._jrResEnvoyer(); });
+        var non = zone.querySelector('[data-jr-res-annuler]');
+        if (non) non.addEventListener('click', function () { self._jrRes = null; self._render(); });
+      }
+      var journal = this.querySelector('[data-jr-journal]');
+      if (journal) journal.addEventListener('toggle', function () { self._jrJournalOuvert = journal.open; });
+      var exp = this.querySelector('[data-jr-export]');
+      if (exp) exp.addEventListener('click', function () { self._jrExport(); });
+    }
+
+    
+
+
+
+    _jrExport() {
+      var v = (this._payload || {}).justeTemps || {};
+      var r = v.resultat || {};
+      var cls = (v.jeu || {}).classes || [];
+      var val = r.validation;
+      var statut = val && !val.perimee ? 'validé le ' + jtDateCourte(Date.parse(val.le || '')) + ' par ' + ((val.par && (val.par.nom || val.par.email)) || 'inconnu')
+        : r.etat === 'complet' ? 'non validé' : 'provisoire';
+      var pct = function (x) { return x == null || !isFinite(x) ? '' : (x * 100).toFixed(4).replace('.', ','); };
+      var rows = [['Résultat', 'Rang', 'Nom', 'E-mail', 'Score (%)'].concat(cls.map(function (cl) { return 'Écart ' + cl + ' (%)'; }), ['Dernière modification', 'Égalité', 'Écarté (motif)', 'Note'])];
+      var g = r.gagnant;
+      (r.classement || []).forEach(function (x) {
+        rows.push([statut, x.rang, x.nom || '', x.email || '', pct(x.score)].concat(cls.map(function (cl, i) { return pct((x.ecarts || [])[i]); }),
+          [jtDateCourte(x.dernier), (g && g.email === x.email ? 'gagnant' : '') + (x.egalite === 'tirage' ? (g && g.email === x.email ? ', ' : '') + 'ex aequo à tirer au sort' : x.egalite === 'score' ? (g && g.email === x.email ? ', ' : '') + 'ex aequo au score' : ''), '', '']));
+      });
+      (r.ecartes || []).forEach(function (x) {
+        rows.push([statut, '', x.nom || '', x.email || '', ''].concat(cls.map(function () { return ''; }), ['', '', 'article ' + (x.motif || ''), x.note || '']));
+      });
+      csvDownload('rdr-juste-temps-resultat-' + stamp() + '.csv', rows);
     }
 
     
@@ -3647,10 +4214,15 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
       
 
 
-      var actif = document.activeElement, focusGarde = '';
+      var actif = document.activeElement, focusGarde = '', curseur = null;
       if (actif && actif !== this && this.contains(actif)) {
         if (actif.hasAttribute('data-jeu-sub')) focusGarde = '[data-jeu-sub="' + actif.getAttribute('data-jeu-sub') + '"]';
         else if (actif.hasAttribute('data-jeux-tab')) focusGarde = '[data-jeux-tab]';
+        
+
+        else if (actif.hasAttribute('data-jr-champ')) focusGarde = '[data-jr-champ="' + actif.getAttribute('data-jr-champ') + '"]';
+        else if (actif.hasAttribute('data-jr-res-champ')) focusGarde = '[data-jr-res-champ="' + actif.getAttribute('data-jr-res-champ') + '"]' + (actif.type === 'radio' ? '[value="' + String(actif.value).replace(/"/g, '') + '"]' : '');
+        if (focusGarde && actif.type === 'text') { try { curseur = [actif.selectionStart, actif.selectionEnd]; } catch (e) { curseur = null; } }
       }
 
       var jeu = jeuDe(this._view);
@@ -3773,6 +4345,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
       } else if (focusGarde && !this._menuJeux) {
         var garde = this.querySelector(focusGarde);
         if (garde) garde.focus();
+        if (garde && curseur) { try { garde.setSelectionRange(curseur[0], curseur[1]); } catch (e) {   } }
       }
     }
 
@@ -3998,6 +4571,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="6e6e1de";performan
         cherche.addEventListener('input', function () { self._jtCherche = cherche.value; filtrer(); });
         if (this._jtCherche) filtrer();
       }
+      this._jrWire();
 
       
 
