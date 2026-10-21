@@ -1,5 +1,5 @@
-/* rdr-elements la-course | source route-du-rhum d6af5c5 | rdr-course.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="d6af5c5";performance.mark("rdr-elements:la-course")}catch(e){}
+/* rdr-elements la-course | source route-du-rhum e29c436 | rdr-course.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="e29c436";performance.mark("rdr-elements:la-course")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-course")) return;
@@ -61,26 +61,115 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["la-course"]="d6af5c5";perform
 
 
 
+  const GEO_CDN = {"d3Array":{"sri":"sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja","urls":["https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js","https://unpkg.com/d3-array@3.2.4/dist/d3-array.min.js"]},"d3Geo":{"sri":"sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD","urls":["https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js","https://unpkg.com/d3-geo@3.1.1/dist/d3-geo.min.js"]},"topojson":{"sri":"sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67","urls":["https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js","https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"]},"terre":{"sri":"sha384-c0VeCJd1wVbV5WQZNjf1hcMqPr9QXweEArnbdgS1k75TBNjta2M/NddyAulA/Glb","urls":["https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json","https://unpkg.com/world-atlas@2.0.2/land-50m.json"]}};
+  const GEO_HOTES = "#carte-parcours";
+  const GEO_DELAI = 6000;
+  const geoEnPanne = new Set();
+  const geoMemo = {};
   let geo = null;
-  function script(src, empreinte) {
-    return new Promise((ok, ko) => {
-      const s = document.createElement('script');
-      s.src = src; s.async = true; s.integrity = empreinte; s.crossOrigin = 'anonymous';
-      s.onload = () => ok(); s.onerror = () => ko(new Error('chargement impossible : ' + src));
-      document.head.appendChild(s);
-    });
+  function geoHote(u) { try { return new URL(u).host; } catch (e) { return u; } }
+  function geoB64(buf) {
+    const o = new Uint8Array(buf);
+    let s = '';
+    for (let i = 0; i < o.length; i += 8192) s += String.fromCharCode.apply(null, o.subarray(i, i + 8192));
+    return btoa(s);
   }
+  async function geoLire(url) {
+    const ctrl = new AbortController();
+    let minuteur = 0;
+    const armer = () => { clearTimeout(minuteur); minuteur = setTimeout(() => ctrl.abort(), GEO_DELAI); };
+    armer();
+    try {
+      const r = await fetch(url, { signal: ctrl.signal, credentials: 'omit' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      if (!r.body || !r.body.getReader) { armer(); return await r.arrayBuffer(); }
+      const lecteur = r.body.getReader(), morceaux = [];
+      let n = 0;
+      for (;;) {
+        armer();
+        const { done, value } = await lecteur.read();
+        if (done) break;
+        morceaux.push(value);
+        n += value.length;
+      }
+      const tout = new Uint8Array(n);
+      let k = 0;
+      for (const m of morceaux) { tout.set(m, k); k += m.length; }
+      return tout.buffer;
+    } finally { clearTimeout(minuteur); }
+  }
+  async function geoVerifier(buf, sri, url) {
+    const c = window.crypto && window.crypto.subtle;
+    if (c && c.digest) return 'sha384-' + geoB64(await c.digest('SHA-384', buf)) === sri;
+    const r = await fetch(url, { integrity: sri, credentials: 'omit' });
+    await r.arrayBuffer();
+    return r.ok;
+  }
+  async function geoCascade(cle) {
+    const g = GEO_CDN[cle];
+    const urls = g.urls.slice().sort((a, b) => geoEnPanne.has(geoHote(a)) - geoEnPanne.has(geoHote(b)));
+    let derniere = null;
+    for (const url of urls) {
+      try {
+        const buf = await geoLire(url);
+        if (!(await geoVerifier(buf, g.sri, url))) throw new Error('empreinte différente');
+        return buf;
+      } catch (e) {
+        derniere = e;
+        geoEnPanne.add(geoHote(url));
+        console.warn('[rdr-course] carte : ' + url + ' en échec (' + (e && e.name === 'AbortError' ? 'délai dépassé' : (e && e.message) || e) + ')');
+      }
+    }
+    throw new Error('géographie injoignable (' + cle + ') : ' + ((derniere && derniere.message) || derniere));
+  }
+  function geoOctets(cle) {
+    if (!geoMemo[cle]) {
+      geoMemo[cle] = geoCascade(cle);
+      geoMemo[cle].catch(() => { geoMemo[cle] = null; });
+    }
+    return geoMemo[cle];
+  }
+  function geoEvaluer(buf) {
+    const s = document.createElement('script');
+    s.text = '(function (define, module, exports, require) {' + new TextDecoder().decode(buf) + '\n}).call(window);';
+    (document.head || document.documentElement).appendChild(s);
+    s.remove();
+  }
+  const geoD3 = () => !!(window.d3 && window.d3.geoMercator && window.d3.geoPath);
+  const geoTopo = () => !!(window.topojson && window.topojson.feature);
   function chargerGeo() {
-    if (window.d3 && window.d3.geoMercator && window.topojson && window.topojson.feature) return Promise.resolve();
+    if (geoD3() && geoTopo()) return Promise.resolve();
     if (!geo) {
-      geo = Promise.all([
-        (window.d3 && window.d3.geoMercator ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js", "sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja").then(() => script("https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js", "sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD"))),
-        (window.topojson && window.topojson.feature ? Promise.resolve() : script("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js", "sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67"))
-      ]);
+      geoOctets('terre').catch(() => null);
+      const avecD3 = !geoD3(), avecTopo = !geoTopo();
+      geo = Promise.all([avecD3 ? geoOctets('d3Array') : null, avecD3 ? geoOctets('d3Geo') : null, avecTopo ? geoOctets('topojson') : null]).then(([a, g, t]) => {
+        if (a) geoEvaluer(a);
+        if (g) geoEvaluer(g);
+        if (t) geoEvaluer(t);
+        geoMemo.d3Array = geoMemo.d3Geo = geoMemo.topojson = null;
+        if (!geoD3() || !geoTopo()) throw new Error('géographie absente après évaluation');
+      });
       geo.catch(() => { geo = null; });
     }
     return geo;
   }
+  function geoIndispo(hote) {
+    if (!hote || !hote.isConnected) return;
+    const l = hote.getAttribute('lang') || document.documentElement.getAttribute('lang') || (/^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr');
+    const texte = String(l).slice(0, 2).toLowerCase() === 'en' ? 'The map could not be loaded.' : 'La carte n’a pas pu se charger.';
+    hote.querySelectorAll(GEO_HOTES).forEach((c) => {
+      let m = c.querySelector('.geo-indispo') || c.querySelector('.chargement');
+      if (!m) { m = document.createElement('div'); c.appendChild(m); }
+      m.classList.add('geo-indispo');
+      m.setAttribute('role', 'status');
+      m.textContent = texte;
+    });
+  }
+  function geoPret(hote) { return chargerGeo().catch((e) => { geoIndispo(hote); throw e; }); }
+  function geoFetch(cle, hote) {
+    return geoOctets(cle).then((b) => { geoMemo[cle] = null; return new Response(b); }, (e) => { geoIndispo(hote); throw e; });
+  }
+
   function quandProche(el, f) {
     if (!el || !('IntersectionObserver' in window)) { f(); return; }
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); f(); } }, { rootMargin: '1200px 0px' });
@@ -475,8 +564,8 @@ const APPROCHE = [[-60.98, 16.62], [-61.4, 16.58], [-61.72, 16.47], [-61.86, 16.
 const FRANCE = { type: 'MultiPolygon', coordinates: GEO.france || [] };
 const GWADA = { type: 'MultiPolygon', coordinates: GEO.guadeloupe || [] };
 let TERRE = null;
-async function terre() { await chargerGeo(); d3 = window.d3; topojson = window.topojson;
-  if (!TERRE) { const t = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json', { integrity: 'sha384-c0VeCJd1wVbV5WQZNjf1hcMqPr9QXweEArnbdgS1k75TBNjta2M/NddyAulA/Glb' })).json(); TERRE = topojson.feature(t, t.objects.land); }
+async function terre() { await geoPret(__hote); d3 = window.d3; topojson = window.topojson;
+  if (!TERRE) { const t = await (await geoFetch('terre', __hote)).json(); TERRE = topojson.feature(t, t.objects.land); }
   return TERRE;
 }
 const f1 = (v) => v.toFixed(1);
