@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 0c5e8f9 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="0c5e8f9";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 24820f9 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="24820f9";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -989,6 +989,7 @@ rdr-accueil-apercu .jx[hidden]{display:none}
 rdr-accueil-apercu .jx + .pub-encart{margin-top:clamp(64px,9vh,96px)}
 rdr-accueil-apercu .jx-tete{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 40px;align-items:end;margin-bottom:clamp(22px,3.4vh,32px)}
 rdr-accueil-apercu .jx-tete .kicker svg{width:13px;height:13px}
+rdr-accueil-apercu .jx-tete .kicker{margin-bottom:clamp(10px,1.8vh,16px)}
 rdr-accueil-apercu .jx-titre{font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;line-height:.92;margin:0;font-size:clamp(34px,3.6vw,54px);color:var(--marine2)}
 rdr-accueil-apercu .jx-titre em{font-style:inherit;color:#E86C20}
 rdr-accueil-apercu .jx-tete p{margin:12px 0 0;max-width:620px;font-size:15px;line-height:1.55;font-weight:500;color:#3A4256}
@@ -2645,7 +2646,7 @@ function monter(racine, portail, D) {
     creer: 'Create my Espace', deja: 'Already a member?', connecter: 'Log in',
     mois: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], date: (j, m) => j + ' ' + m
   } : {
-    kicker: 'Jeux-concours de l’Espace', titre: 'Les jeux <em>du moment</em>',
+    kicker: 'Jeux-concours de l’Espace Rhum', titre: 'Les jeux <em>du moment</em>',
     ouverts: (n) => n + ' jeu' + (n > 1 ? 'x ouverts' : ' ouvert'),
     visiteur: ', gratuits et sans obligation d’achat. Un seul compte Mon Espace Rhum suffit pour tous les jouer.',
     membre: ' en ce moment : à vous de jouer.',

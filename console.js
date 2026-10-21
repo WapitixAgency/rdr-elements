@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 0c5e8f9 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0c5e8f9";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 24820f9 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="24820f9";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -688,25 +688,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0c5e8f9";performan
 
     
 
-
-    '.rdrc-manque{grid-column:1 / -1;padding:16px 18px 16px;background:#FFF6E6;border:1px solid #F0D398;',
-    'border-left:4px solid var(--amber);border-radius:12px}',
-    '.rdrc-manque-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}',
-    '.rdrc-manque-h svg{width:20px;height:20px;color:var(--warn);flex:0 0 auto;display:block}',
-    '.rdrc-manque-t{font-size:15px;font-weight:800;color:var(--navy);margin:0;line-height:1.3}',
-    '.rdrc-manque-p{margin:0 0 12px;font-size:12px;line-height:1.55;color:var(--ink-2)}',
-    '.rdrc-manque-l{list-style:none;margin:0;padding:0;display:grid;gap:8px}',
-    '.rdrc-manque-i{display:grid;grid-template-columns:24px minmax(0,1fr) 150px;gap:12px;align-items:start;',
-    'background:#fff;border:1px solid #F0E0BC;border-radius:10px;padding:11px 13px}',
-    '.rdrc-manque-n{width:24px;height:24px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:800;',
-    'display:flex;align-items:center;justify-content:center}',
-    '.rdrc-manque-q{display:block;font-size:12.5px;font-weight:800;color:var(--navy);margin:2px 0 3px}',
-    '.rdrc-manque-d{display:block;font-size:11.5px;line-height:1.5;color:var(--ink-2)}',
-    '.rdrc-manque-qui{font-size:12px;font-weight:800;color:var(--navy);text-align:right;line-height:1.35;padding-top:2px}',
-    '.rdrc-manque-qui i{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;',
-    'text-transform:uppercase;color:var(--warn);margin-bottom:2px}',
-    '@media(max-width:640px){.rdrc-manque{padding:14px 13px}.rdrc-manque-i{grid-template-columns:22px minmax(0,1fr)}',
-    '.rdrc-manque-qui{grid-column:2;text-align:left;padding-top:0}}',
 
     
 
@@ -3101,41 +3082,6 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0c5e8f9";performan
 
 
 
-
-    _photoManqueHtml() {
-      var manque = [
-        ['Le règlement du Challenge photo',
-         'Sans lui, la page n\'affiche aucun bouton de dépôt. La page Règlements lui garde sa place '
-         + '(/reglements#challenge-photo).',
-         'Alexis et le juridique d\'OC Sport'],
-        ['Le lot',
-         'Ce que gagne la photo qui a le plus d\'étoiles. Il s\'écrit dans le règlement et dans les réglages '
-         + 'du concours, au CMS.',
-         'Alexis et le juridique d\'OC Sport'],
-        ['Les dates de clôture',
-         'La fin des dépôts, puis la fin des votes, à saisir dans les réglages du concours. Sans elles, '
-         + 'le concours reste ouvert sans échéance.',
-         'Alexis'],
-        ['La modération',
-         'Qui relit les photos chaque jour, et la liste des motifs de refus : six motifs sont proposés '
-         + 'dans les réglages, à relire et à corriger au besoin.',
-         'Alexis']
-      ];
-      return '<section class="rdrc-manque" aria-labelledby="rdrc-manque-t">' +
-        '<div class="rdrc-manque-h">' + IC.alerte +
-          '<h3 class="rdrc-manque-t" id="rdrc-manque-t">Ce qu\'il nous manque pour ouvrir le concours photo</h3></div>' +
-        '<p class="rdrc-manque-p">Le concours est construit, et il reste éteint jusqu\'à son ouverture. '
-          + 'Ces quatre réponses manquent encore, aucune n\'est technique.</p>' +
-        '<ol class="rdrc-manque-l">' + manque.map(function (x, i) {
-          return '<li class="rdrc-manque-i">' +
-            '<span class="rdrc-manque-n" aria-hidden="true">' + (i + 1) + '</span>' +
-            '<span><span class="rdrc-manque-q">' + esc(x[0]) + '</span><span class="rdrc-manque-d">' + esc(x[1]) + '</span></span>' +
-            '<span class="rdrc-manque-qui"><i>À fournir par</i>' + esc(x[2]) + '</span>' +
-          '</li>';
-        }).join('') + '</ol>' +
-      '</section>';
-    }
-
     _photoMethodeHtml() {
       return '<div class="rdrc-methode">' +
         '<p class="rdrc-methode-t">Comment relire</p>' +
@@ -3289,7 +3235,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="0c5e8f9";performan
         '</div>';
         corps = kpis + sous + (vue === 'enligne' ? this._photoEnLigneHtml(p, d.enLigne, st) : this._photoAttenteHtml(p, attente));
       }
-      return corps + this._photoMethodeHtml() + this._photoManqueHtml();
+      return corps + this._photoMethodeHtml();
     }
 
     _instaHtml(p) {
