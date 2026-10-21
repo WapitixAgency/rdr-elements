@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 5ccadfb | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="5ccadfb";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 563b727 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="563b727";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3109,7 +3109,7 @@ if (!customElements.get('espace-rhum')) {
 
 
     espace-rhum > rdr-dernieres-infos { display: flow-root; position: relative; z-index: 1; }
-    espace-rhum > rdr-dernieres-infos .rdi { margin-top: clamp(14px, 2.6vh, 26px); }
+    espace-rhum > rdr-dernieres-infos .rdi { margin-top: 0; }
     espace-rhum:has(> rdr-dernieres-infos .rdi) .er-cockpit { padding-top: clamp(22px, 3.6vh, 38px); }
     
 

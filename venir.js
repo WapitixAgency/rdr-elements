@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum 5ccadfb | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="5ccadfb";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 563b727 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="563b727";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1117,7 +1117,7 @@ rdr-venir .rv-sombre .rv-bloc--hero{padding-top:clamp(40px,5vw,72px);}
 
 
 rdr-venir .rv-sombre > rdr-dernieres-infos{display:flow-root;}
-rdr-venir .rv-sombre > rdr-dernieres-infos .rdi{margin-top:clamp(14px,2.6vh,26px);}
+rdr-venir .rv-sombre > rdr-dernieres-infos .rdi{margin-top:0;}
 rdr-venir .rv-sombre:has(> rdr-dernieres-infos .rdi) > .rv-bloc--hero{padding-top:clamp(22px,3.6vh,38px);}
 rdr-venir .rv-sombre .rv-bloc:last-of-type{padding-bottom:clamp(56px,7vw,96px);}
 rdr-venir .rv-vague-cadre{overflow:hidden;line-height:0;margin-bottom:-1px;}

@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum 5ccadfb | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="5ccadfb";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 563b727 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="563b727";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1846,7 +1846,7 @@ rdr-programme{display:block;width:100%;}
 
 
 rdr-programme > rdr-dernieres-infos{display:flow-root;background:#0E111D;}
-rdr-programme > rdr-dernieres-infos .rdi{margin:clamp(14px,2.6vh,26px) 0;}
+rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
 .rp-root{
   --rp-encre:#FFFFFF;
   --rp-encre-2:rgba(255,255,255,.72);

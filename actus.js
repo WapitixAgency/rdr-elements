@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 5ccadfb | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="5ccadfb";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 563b727 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="563b727";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -888,7 +888,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="5ccadfb";performance
 
 
 .rn-root > rdr-dernieres-infos{display:flow-root}
-.rn-root > rdr-dernieres-infos .rdi{margin-top:clamp(14px,2.6vh,26px)}
+.rn-root > rdr-dernieres-infos .rdi{margin-top:0}
 .rn-root:has(> rdr-dernieres-infos .rdi) .rn__head{padding-top:clamp(20px,3.4vh,34px)}
 .rn__kicker{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--rn-ink);margin-bottom:18px}
 .rn__kicker-ic{width:28px;height:28px;border-radius:8px 3px 8px 3px;background:var(--rn-navy-1);color:var(--rn-amber);display:grid;place-items:center;flex:0 0 auto;overflow:hidden}
