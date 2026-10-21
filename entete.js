@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum da52ea1 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="da52ea1";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 1f53328 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="1f53328";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -3261,6 +3261,13 @@ function memEcrire(lang, champ, val) {
     });
   });
 }
+
+function accueilIci() {
+  try { return !!document.querySelector('rdr-accueil-apercu'); } catch (e) { return false; }
+}
+function heroIci(el) {
+  return el.getAttribute('hero') === 'dessus' || accueilIci();
+}
 function injecterStyle() {
   if (document.getElementById('rdr-entete-css')) return;
   const s = document.createElement('style');
@@ -3369,7 +3376,17 @@ class RdrEntete extends HTMLElement {
     if (avant === val || val === null) return;    
     if (nom === 'programme') { programmeArrive(val); return; }
     if (nom === 'lang') { lang = val === 'en' ? 'en' : 'fr'; return; }
-    if (nom === 'hero') { hero = hero || val === 'dessus'; return; }
+    if (nom === 'hero') {
+      if (val !== 'dessus') return;
+      hero = true;
+      
+
+      if (this._racine && courant === this && this._racine.id !== 'rdr-entete-dessus' && accueilIci()) {
+        this._racine = this._placer(true);
+        if (app) app.attacher(this._racine);
+      }
+      return;
+    }
     if (nom === 'base') { base = val.replace(/\/+$/, ''); return; }
     if (val === brut[nom]) return;
     brut[nom] = val;
@@ -3392,10 +3409,22 @@ class RdrEntete extends HTMLElement {
       if (v) { brut[k] = v; memEcrire(lang, k, v); } else if (!brut[k] && m[k]) brut[k] = m[k];
     });
     const prog = this.getAttribute('programme'); if (prog) programmeArrive(prog);
-    hero = hero || this.getAttribute('hero') === 'dessus';
+    hero = heroIci(this);
+    this._racine = this._placer(hero);
+    this._demarrer();
+    this._armerRepli();
+    demarrerChasse();
+    this._brancherRelaisNotifications();
+    const temoin = this.getAttribute('temoin'); if (temoin) this._temoin(temoin);
+    const notifs = this.getAttribute('notifications'); if (notifs) this._remettreNotifications(notifs);
+  }
+
+  
+
+  _placer(dessus) {
+    const html = document.documentElement;
     let racine = null;
-    if (hero) {
-       
+    if (dessus) {
       racine = document.getElementById('rdr-entete-dessus');
       if (!racine) {
         racine = document.createElement('div');
@@ -3403,22 +3432,22 @@ class RdrEntete extends HTMLElement {
         racine.className = 'gl gl--dessus';
         document.body.insertBefore(racine, document.body.firstChild);
       }
+      const dedans = this.querySelector(':scope > .gl');
+      if (dedans) dedans.remove();
       this.classList.add('est-dessus');
-      document.documentElement.setAttribute('data-rdr-entete', 'dessus');
-    } else {
-      racine = this.querySelector(':scope > .gl');
-      if (!racine) {
-        this.innerHTML = '<div class="gl" id="gl-entete"></div>';
-        racine = this.firstElementChild;
-      }
+      html.setAttribute('data-rdr-entete', 'dessus');
+      return racine;
     }
-    this._racine = racine;
-    this._demarrer();
-    this._armerRepli();
-    demarrerChasse();
-    this._brancherRelaisNotifications();
-    const temoin = this.getAttribute('temoin'); if (temoin) this._temoin(temoin);
-    const notifs = this.getAttribute('notifications'); if (notifs) this._remettreNotifications(notifs);
+    const dessusAvant = document.getElementById('rdr-entete-dessus');
+    if (dessusAvant) dessusAvant.remove();
+    if (html.getAttribute('data-rdr-entete') === 'dessus') html.removeAttribute('data-rdr-entete');
+    this.classList.remove('est-dessus');
+    racine = this.querySelector(':scope > .gl');
+    if (!racine) {
+      this.innerHTML = '<div class="gl" id="gl-entete"></div>';
+      racine = this.firstElementChild;
+    }
+    return racine;
   }
 
   disconnectedCallback() {
