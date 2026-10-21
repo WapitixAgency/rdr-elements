@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum a561dc3 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a561dc3";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum da52ea1 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="da52ea1";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -799,6 +799,11 @@ rdr-accueil-apercu .hero:not(.est-photo) ~ .hv-acces-sous .cta{opacity:0;transfo
 rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta{--d:.45s}
 rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(2){--d:.57s}
 rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(3){--d:.69s}
+rdr-accueil-apercu .hero ~ rdr-dernieres-infos{background:#0E111D}
+rdr-accueil-apercu .hero ~ rdr-dernieres-infos .rdi{margin:clamp(14px,2.6vh,26px) 0 clamp(4px,1vh,10px)}
+rdr-accueil-apercu .hero:not(.est-photo) ~ rdr-dernieres-infos .rdi{opacity:0}
+rdr-accueil-apercu .hero.est-photo ~ rdr-dernieres-infos .rdi{animation:raa-rdi-monte .7s cubic-bezier(.22,.8,.3,1) .3s both}
+@keyframes raa-rdi-monte{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 rdr-accueil-apercu .cta-liste{display:flex;gap:16px;height:var(--haut-acces)}
 rdr-accueil-apercu .cta{position:relative;flex:1;border-radius:18px;overflow:hidden;background:var(--panneau);color:#fff;transition:flex .6s cubic-bezier(.22,.8,.3,1),box-shadow .3s;display:flex;align-items:flex-end;min-width:0;border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 30px 60px rgba(0,0,0,.45)}
 rdr-accueil-apercu .cta:hover,rdr-accueil-apercu .cta:focus-within{flex:2.1}
