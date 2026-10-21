@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum 1f53328 | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="1f53328";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum a0e3455 | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="a0e3455";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -14,7 +14,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="1f53328";per
   const VITESSE = 52;
   const MAX = 6;
   const TOUTES = 'toutes';
-  const PAGES = ['accueil', 'classement', 'cartographie', 'carte-village', 'suivre-depart'];
+  const PAGES = ['accueil', 'classement', 'cartographie', 'carte-village', 'suivre-depart', 'programmation', 'venir', 'faq', 'espace-rhum', 'actualites'];
   const RANG = { alerte: 0, vigilance: 1, info: 2 };
   const STOCK = 'rdrDernieresInfosV2:';
 
@@ -157,8 +157,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="1f53328";per
   }
 
   const niveauDe = (v) => (v === 'alerte' || v === 'rouge' ? 'alerte' : v === 'vigilance' || v === 'jaune' ? 'vigilance' : 'info');
+  
+
+
   const pagesDe = (v) => {
-    const l = (Array.isArray(v) ? v : []).map((p) => (p === 'partout' ? TOUTES : String(p))).filter((p) => p === TOUTES || PAGES.indexOf(p) >= 0);
+    const l = (Array.isArray(v) ? v : []).map((p) => (p === 'partout' ? TOUTES : String(p == null ? '' : p).trim())).filter(Boolean);
     return l.length ? l : [TOUTES];
   };
 
