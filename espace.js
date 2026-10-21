@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 7e7cbfc | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="7e7cbfc";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum dfc29e2 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="dfc29e2";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1420,6 +1420,8 @@ if (!customElements.get('espace-rhum')) {
     return [Math.floor(sec / 86400), Math.floor((sec % 86400) / 3600), Math.floor((sec % 3600) / 60), sec % 60];
   }
    
+   
+  function jtPhotoPleine(v) { return !!(v && v.src && !/\.png$/i.test(v.src)); }
   function jtImage(v, largeur) {
     if (!v || !v.src) return '';
     if (!(v.l > 0 && v.h > 0)) return v.src;
@@ -2401,6 +2403,7 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .ej-reste svg{width:12px;height:12px;color:var(--er-amber-bright)}
     espace-rhum .ej-vis--photo{background:radial-gradient(90% 80% at 15% 0%,rgba(93,191,192,.45) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
     espace-rhum .ej-vis--photo .ej-logo{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:min(62%,240px);max-width:none}
+    espace-rhum .ej-vis--plein .ej-reste{bottom:auto;top:10px}
     espace-rhum .ej-vis--roue{background:radial-gradient(80% 90% at 85% 100%,rgba(252,241,80,.28) 0%,rgba(252,241,80,0) 60%),linear-gradient(150deg,#1E4478 0%,#0F2747 100%)}
     espace-rhum .ej-vis--roue::after{display:none}
     espace-rhum .ej-vis--roue .ej-roue{position:absolute;right:-56px;top:50%;width:200px;height:200px;transform:translateY(-50%) rotate(-12deg)}
@@ -2556,6 +2559,7 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-bandeau-montre.jp-bandeau-vignette img{transform:none;object-position:50% 50%}
     espace-rhum .jt-ouvert--photo .jp-cadre{background:radial-gradient(90% 70% at 20% 0%,rgba(93,191,192,.35) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
     espace-rhum .jt-ouvert--photo .jp-cadre .jt-cadre-img{padding:clamp(18px,11%,34px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+    espace-rhum .jt-ouvert--photo .jp-cadre--plein .jt-cadre-img{position:absolute;inset:0;padding:0;object-fit:cover;filter:none}
     espace-rhum .jp-ma{display:flex;align-items:center;gap:14px;max-width:62ch;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
     espace-rhum .jp-ma--vide{border-style:dashed;border-color:rgba(255,255,255,.18);background:transparent}
     espace-rhum .jp-ma-img{flex:none;display:block;width:72px;height:72px;max-width:none;object-fit:cover;border-radius:3px 12px 3px 12px;border:1px solid rgba(255,255,255,.18)}
@@ -20957,7 +20961,7 @@ if (!customElements.get('espace-rhum')) {
       const v = p.visuel;
       const img = jtImage(v, 660);
       const cadre = img
-        ? '<div class="jt-cadre jp-cadre"><img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="Challenge Alpina"></div>'
+        ? '<div class="jt-cadre jp-cadre' + (jtPhotoPleine(v) ? ' jp-cadre--plein' : '') + '"><img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="Challenge Alpina"></div>'
         : '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_PHOTO) + '</div>';
       return '<article class="jt-ouvert jt-ouvert--photo' + (p.etat === 'avant' ? ' jt-ouvert--avenir' : '') + '">' + cadre + this._jpCorps() + '</article>';
     }
@@ -21145,7 +21149,8 @@ if (!customElements.get('espace-rhum')) {
       const bouton = p.peutDeposer ? '<a class="ej-jouer" href="' + this._jpLien() + '">' + T('Poster ma photo', 'Post my photo') + fl + '</a>'
         : aVoter ? '<a class="ej-jouer" href="' + this._jpLien() + '">' + T('Voter', 'Vote') + fl + '</a>'
         : '<a class="ej-jouer ej-jouer--voir" href="' + this._jpLien() + '">' + T('Voir le mur', 'See the wall') + fl + '</a>';
-      return { id: 'challenge-photo', genre: 'photo', vis: img ? '<img class="ej-logo" src="' + escapeHtml(img) + '" alt="Challenge Alpina" decoding="async">' : '',
+      const plein = jtPhotoPleine(p.visuel);
+      return { id: 'challenge-photo', genre: plein ? 'photo ej-vis--plein' : 'photo', vis: img ? '<img class="' + (plein ? 'ej-fond' : 'ej-logo') + '" src="' + escapeHtml(img) + '" alt="Challenge Alpina" decoding="async">' : '',
         nom: T('Challenge photo Alpina', 'Alpina photo challenge'), etiquette: T('Nouveau', 'New'), fin: ech ? ech.fin : null,
         lot: this._ejGagner(p.lot || T('un voyage en Suisse pour deux chez Alpina', 'a trip for two to Switzerland with Alpina')), etat, bouton, reglement: this._ejReglement(p.reglementUrl) };
     }
