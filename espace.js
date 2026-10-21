@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum dfc29e2 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="dfc29e2";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 40ad638 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="40ad638";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2403,7 +2403,7 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .ej-reste svg{width:12px;height:12px;color:var(--er-amber-bright)}
     espace-rhum .ej-vis--photo{background:radial-gradient(90% 80% at 15% 0%,rgba(93,191,192,.45) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
     espace-rhum .ej-vis--photo .ej-logo{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:min(62%,240px);max-width:none}
-    espace-rhum .ej-vis--plein .ej-reste{bottom:auto;top:10px}
+    espace-rhum .ej-vis--plein .ej-etiq,espace-rhum .ej-vis--plein .ej-reste{display:none}
     espace-rhum .ej-vis--roue{background:radial-gradient(80% 90% at 85% 100%,rgba(252,241,80,.28) 0%,rgba(252,241,80,0) 60%),linear-gradient(150deg,#1E4478 0%,#0F2747 100%)}
     espace-rhum .ej-vis--roue::after{display:none}
     espace-rhum .ej-vis--roue .ej-roue{position:absolute;right:-56px;top:50%;width:200px;height:200px;transform:translateY(-50%) rotate(-12deg)}
