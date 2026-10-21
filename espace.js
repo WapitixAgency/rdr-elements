@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum bac9104 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="bac9104";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 6e6e1de | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="6e6e1de";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -20042,12 +20042,21 @@ if (!customElements.get('espace-rhum')) {
      
      
     _isPlausiblePhone(raw) {
-      let d = String(raw || '').replace(/\D/g, '');
        
-      if (!String(raw || '').trim().startsWith('+')) {
+       
+       
+      const s = String(raw || '').trim().replace(/\(\s*0\s*\)/g, '');
+      let d = s.replace(/\D/g, '');
+      if (!s.startsWith('+')) {
         if (d.startsWith('00')) d = d.slice(2);
-        else if (d.length === 10 && d.startsWith('0')) d = '33' + d.slice(1);
+        else if (d.length === 10 && d.startsWith('0')) {
+          const om = [[/^0(590|690|691)/, '590'], [/^0(596|696|697)/, '596'], [/^0(594|694)/, '594'],
+            [/^0(262|263|692|693|269|639)/, '262']].find(([re]) => re.test(d));
+          d = (om ? om[1] : '33') + d.slice(1);
+        }
       }
+      if (/^330\d{9}$/.test(d)) d = '33' + d.slice(3);
+      if (!/^[1-9]\d{7,14}$/.test(d)) return false;
       if (d.length < 8 || d.length > 15) return false;
       if (/^(\d)\1+$/.test(d)) return false;
       if (new Set(d).size < 4) return false;
@@ -24507,9 +24516,11 @@ if (!customElements.get('espace-rhum')) {
                'Your profile could not be saved. Try again in a moment.');
           return;
         }
+        
+
         if (r.phoneRejected) {
-          dire('Ton profil est enregistré, mais pas ton numéro de téléphone. Vérifie-le et réessaie.',
-               'Your profile is saved, but not your phone number. Check it and try again.');
+          dire('Ton profil est enregistré, mais ton numéro de téléphone n’a pas été accepté. Écris-le avec l’indicatif du pays (+33 6…) et réessaie.',
+               'Your profile is saved, but your phone number was not accepted. Write it with the country code (+33 6…) and try again.');
         }
         return;
       }
