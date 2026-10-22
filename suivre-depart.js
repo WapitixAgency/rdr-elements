@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum 53d34cf | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="53d34cf";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum 1fedbe6 | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="1fedbe6";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -584,7 +584,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="53d34cf";per
   const SQUELETTE = "<div class=\"rsd-attente\" aria-hidden=\"true\"><div class=\"rsd-sq-haut\"><div class=\"rsd-sq-trame\"><i class=\"rsd-sq-l rsd-sq-k\"></i><i class=\"rsd-sq-l rsd-sq-t\"></i><i class=\"rsd-sq-l rsd-sq-t rsd-sq-t2\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p1\"></i><i class=\"rsd-sq-l rsd-sq-p\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p3\"></i></div></div><div class=\"rsd-sq-trame rsd-sq-sec\"><i class=\"rsd-sq-l rsd-sq-k\"></i><i class=\"rsd-sq-l rsd-sq-t\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p1\"></i><i class=\"rsd-sq-l rsd-sq-p\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p3\"></i></div><div class=\"rsd-sq-trame rsd-sq-cartes\"><i class=\"rsd-sq-c\"></i><i class=\"rsd-sq-c\"></i><i class=\"rsd-sq-c\"></i></div><div class=\"rsd-sq-trame rsd-sq-sec\"><i class=\"rsd-sq-l rsd-sq-k\"></i><i class=\"rsd-sq-l rsd-sq-t\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p1\"></i><i class=\"rsd-sq-l rsd-sq-p\"></i><i class=\"rsd-sq-l rsd-sq-p rsd-sq-p3\"></i></div></div>";
   const SOURCE = 'https://www.routedurhum.com/_functions/suivreDepart';
   const SOURCE_CARTE = 'https://www.routedurhum.com/_functions/suivreDepartCarte';
-  const CARTE_SECOURS = 'https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/carte.js';
+  const CARTE_CDN = "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@";
+  const CARTE_PAGES = "https://wapitixagency.github.io/rdr-elements/p/";
+  const CARTE_SECOURS = "https://cdn.jsdelivr.net/gh/WapitixAgency/rdr-elements@main/carte.js";
 
   function poserStyle() {
     if (document.getElementById('rdr-suivre-depart-css')) return;
@@ -937,8 +939,10 @@ const ext = (l) => /^https?:/.test(l) ? ' target="_blank" rel="noopener"' : '';
 
 
 
+
+
 const CAL = rdrInstants(D.calendrier);
-const I = { ouverture: CAL['ouverture-suivre-depart'], direct: CAL['direct-youtube'], depart: CAL.depart, rediffusion: CAL['rediffusion-depart'], fin: CAL['fin-suivre-depart'] };
+const I = { ouverture: CAL['ouverture-suivre-depart'], direct: CAL['direct-youtube'], depart: CAL.depart, rediffusion: CAL['rediffusion-depart'], fin: CAL['fin-suivre-depart'], cartographie: CAL['ouverture-cartographie'], classement: CAL['ouverture-classement'] };
 const HORL = rdrHorloge(location.search, D.calendrier);
 const maintenant = HORL.maintenant;
 const APERCU = { passe: D.apercu === true, pastille: D.apercu === true || HORL.simulee, simulee: HORL.simulee };
@@ -952,7 +956,14 @@ const momentDe = (t) => {
 };
 
 
-const directEtat = (t) => (I.fin <= t ? 'replay' : (I.direct <= t && t < (I.rediffusion || (I.depart ? I.depart + 7200000 : Infinity)) ? 'live' : 'avant'));
+
+const directEtat = (t) => {
+  if (I.fin <= t) return 'replay';
+  const debut = Math.min(I.direct >= 0 ? I.direct : Infinity, I.depart >= 0 ? I.depart : Infinity);
+  if (!(debut <= t)) return 'avant';
+  const finDirect = I.rediffusion >= 0 ? I.rediffusion : I.depart >= 0 ? I.depart + 7200000 : Infinity;
+  return t < finDirect ? 'live' : 'replay';
+};
  
 function dateEnLettres(t) {
   const U = PAGE.interface, d = new Date(t + rdrDecalageParis(t)), h = d.getUTCHours(), mm = String(d.getUTCMinutes()).padStart(2, '0');
@@ -1017,7 +1028,11 @@ function compte() {
   majPastille(t);
   const avant = etat === 'avant' || etat === 'attente', enCourse = etat === 'parti' || etat === 'rediffusion';
   const parts = !Number.isFinite(I.depart) ? null : avant ? decouper(I.depart - t) : enCourse ? decouper(t - I.depart) : null;
-  const cle = etat + (parts ? ':' + parts[0].length : '');
+  
+
+  const de = directEtat(t), revoir = etat === 'rediffusion' || (enCourse && de === 'replay'), enDirect = enCourse && !revoir && de === 'live';
+  const ouverts = enCourse ? C.liens.filter(([, , k]) => !k || I[k] <= t) : [];
+  const cle = etat + ':' + de + ':' + ouverts.map((l) => l[1]).join(',') + (parts ? ':' + parts[0].length : '');
   if (el.dataset.cle === cle) {
     if (parts) el.querySelectorAll('.compte-chiffres b').forEach((b, i) => { if (b.textContent !== parts[i]) b.innerHTML = cases(parts[i]); });
     return;
@@ -1032,11 +1047,14 @@ function compte() {
       '<p class="compte-quand">' + riche(C.directTexte) + '</p>' +
       '<div class="compte-liens"><a class="btn btn--jaune" href="#canape" data-aller="canape">' + esc(C.directBtn) + ico('arrow-right') + '</a></div>';
   } else {
-     
-    const liens = (etat === 'rediffusion' ? [[C.rediffusionBtn, LIENS.rediffusion || LIENS.youtube]] : []).concat(C.liens);
+    
+
+    const liens = (revoir ? [[C.rediffusionBtn, LIENS.rediffusion || LIENS.youtube]] : enDirect ? [[C.directBtn, '#canape']] : []).concat(ouverts);
+    const tous = ouverts.length === C.liens.length;
+    const texte = revoir ? (tous ? C.rediffusionTexte : C.rediffusionTexteSeul) : (tous ? C.partiTexte : C.partiTexteDirect);
     html = '<p class="compte-tete">' + esc(C.ecoule) + '</p>' + (parts ? chiffres(parts, C.ecoule) : '') +
-      '<p class="compte-quand"><b>' + esc(C.parti) + '</b> ' + esc(etat === 'rediffusion' ? C.rediffusionTexte : C.partiTexte) + '</p>' +
-      '<div class="compte-liens">' + liens.map(([x, l], i) => '<a class="btn ' + (i ? 'btn--clair' : 'btn--jaune') + '" href="' + l + '"' + ext(l) + '>' + esc(x) + ico(/^https?:/.test(l) ? 'arrow-up-right' : 'arrow-right') + '</a>').join('') + '</div>';
+      '<p class="compte-quand"><b>' + esc(C.parti) + '</b> ' + esc(texte) + '</p>' +
+      (liens.length ? '<div class="compte-liens">' + liens.map(([x, l], i) => '<a class="btn ' + (i ? 'btn--clair' : 'btn--jaune') + '" href="' + l + '"' + ext(l) + (l.charAt(0) === '#' ? ' data-aller="' + l.slice(1) + '"' : '') + '>' + esc(x) + ico(/^https?:/.test(l) ? 'arrow-up-right' : 'arrow-right') + '</a>').join('') + '</div>' : '');
   }
   el.innerHTML = html;
   el.dataset.cle = cle;
@@ -1109,8 +1127,11 @@ function arrete() {
 function chezSoi() {
   const C = PAGE.canape, D = C.direct;
   const de = directEtat(maintenant()), live = de === 'live', replay = de === 'replay';
+  
+
+  const lien = live ? LIENS.direct || LIENS.youtube.replace(/\/+$/, '') + '/live' : replay ? LIENS.rediffusion || LIENS.youtube : LIENS.youtube;
   return '<div class="chez">' +
-    '<a class="direct" href="' + (replay ? LIENS.rediffusion || LIENS.youtube : LIENS.youtube) + '" target="_blank" rel="noopener"><img src="' + img(MEDIAS.direct, 1100, 760) + '" alt="' + esc(D.alt) + '" loading="lazy">' +
+    '<a class="direct" href="' + lien + '" target="_blank" rel="noopener"><img src="' + img(MEDIAS.direct, 1100, 760) + '" alt="' + esc(D.alt) + '" loading="lazy">' +
       '<span class="direct-jeu" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>' +
       '<span class="direct-texte"><span class="direct-badge' + (live ? ' live' : '') + '">' + esc(live ? D.badgeLive : replay ? D.badgeReplay : D.badge) + '</span><h4>' + esc(D.titre) + '</h4><span class="direct-p">' + esc(replay ? D.texteReplay : D.texte) + '</span>' +
       '<span class="emp"><span class="emp-tag">' + esc(PAGE.interface.emplacement) + '</span> ' + esc(D.emp) + '</span></span></a>' +
@@ -1284,31 +1305,56 @@ function monterCarteQuandProche() {
 }
 
 const cleApercu = () => { try { return String(new URLSearchParams(location.search).get('apercu') || '').slice(0, 80); } catch (e) { return ''; } };
-function lireCarte() {
-  const cle = cleApercu();
-  return fetch(__sources.carte + '?lang=' + LANG + (cle ? '&apercu=' + encodeURIComponent(cle) : '')).then((r) => (r.ok ? r.json() : null)).then((j) => (j && j.carte && Array.isArray(j.carte.poi) && j.carte.config ? j.carte : null)).catch(() => null);
+const CARTE_DELAI_SOURCE = 8000, CARTE_DELAI_CHARGE = 15000, CARTE_DELAI_TOTAL = 30000;
+function bornee(ms) {
+  const C = window.AbortController ? new window.AbortController() : null;
+  let minuteur = 0;
+  return { signal: C ? C.signal : undefined, armer: () => { clearTimeout(minuteur); minuteur = setTimeout(() => { if (C) C.abort(); }, ms); }, fin: () => clearTimeout(minuteur) };
 }
-function chargerCarte() {
-  if (window.customElements.get('village-map')) return Promise.resolve(true);
-  const s = window.document.querySelector('script[data-rdr-paquet][src]');
-  const sources = [__sources.moduleCarte, s ? s.src.replace(/[^/]*$/, 'carte.js') : '', __sources.carteSecours].filter(Boolean);
-  const essayer = (i) => new Promise((ok) => {
-    if (window.customElements.get('village-map')) return ok(true);
-    if (i >= sources.length) return ok(false);
-    const sc = window.document.createElement('script');
-    sc.src = sources[i]; sc.async = true;
-    sc.onload = () => { Promise.race([window.customElements.whenDefined('village-map').then(() => true), dodo(15000).then(() => false)]).then((v) => (v ? ok(true) : essayer(i + 1).then(ok))); };
-    sc.onerror = () => essayer(i + 1).then(ok);
-    window.document.head.appendChild(sc);
-  });
-  return essayer(0);
+function lireCarte() {
+  const cle = cleApercu(), b = bornee(CARTE_DELAI_CHARGE);
+  b.armer();
+  return fetch(__sources.carte + '?lang=' + LANG + (cle ? '&apercu=' + encodeURIComponent(cle) : ''), { signal: b.signal }).then((r) => (r.ok ? r.json() : null)).then((j) => (j && j.carte && Array.isArray(j.carte.poi) && j.carte.config ? j.carte : null)).catch(() => null).finally(b.fin);
+}
+function sourcesCarte() {
+  const s = window.document.querySelector('script[data-rdr-paquet][src]'), src = s ? s.src : '';
+  const v = (src.match(/rdr-elements@([0-9a-f]{7,40})\//) || src.match(/\/rdr-elements\/p\/([0-9a-f]{7,40})\//) || [])[1] || '';
+  return [__sources.moduleCarte, v ? __sources.carteCdn + v + '/carte.js' : '', v ? __sources.cartePages + v + '/carte.js' : '', __sources.carteSecours].filter((u, i, l) => u && l.indexOf(u) === i);
+}
+async function lireTexte(u) {
+  const b = bornee(CARTE_DELAI_SOURCE);
+  b.armer();
+  try {
+    const r = await fetch(u, { signal: b.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    if (!r.body || !r.body.getReader || !window.TextDecoder) { b.armer(); return await r.text(); }
+    const lecteur = r.body.getReader(), dec = new window.TextDecoder();
+    let texte = '';
+    for (;;) { b.armer(); const p = await lecteur.read(); if (p.done) break; texte += dec.decode(p.value, { stream: true }); }
+    return texte + dec.decode();
+  } finally { b.fin(); }
+}
+function evaluer(code) {
+  const sc = window.document.createElement('script');
+  sc.text = '(function (define, module, exports, require) {' + code + '\n}).call(window);';
+  (window.document.head || window.document.documentElement).appendChild(sc);
+  sc.remove();
+}
+async function chargerCarte() {
+  const defini = () => !!window.customElements.get('village-map');
+  if (defini()) return true;
+  for (const u of sourcesCarte()) {
+    try { evaluer(await lireTexte(u)); } catch (e) { console.warn('[rdr-suivre-depart] carte : ' + u + ' en échec (' + (e && e.name === 'AbortError' ? 'délai dépassé' : (e && e.message) || e) + ')'); }
+    if (defini()) return true;
+  }
+  return false;
 }
 async function monterCarte() {
   if (CARTE.el) return;
   const el = window.document.createElement('village-map');
   el.setAttribute('lang', LANG); el.setAttribute('vue', 'depart'); el.setAttribute('integree', ''); el.setAttribute('mesure', '0');
   CARTE.el = el;
-  const [charge, pret] = await Promise.all([lireCarte(), chargerCarte()]);
+  const [charge, pret] = await Promise.race([Promise.all([lireCarte(), chargerCarte()]), dodo(CARTE_DELAI_TOTAL).then(() => [null, false])]);
   const cadre = document.getElementById('cadre');
   if (!cadre) { CARTE.el = null; return; }
   if (!charge || !pret) { const at = cadre.querySelector('.cadre-attente'); if (at) at.textContent = PAGE.carte.indispo; CARTE.el = null; return; }
@@ -1403,7 +1449,7 @@ if (location.hash) setTimeout(() => { let id = ''; try { id = decodeURIComponent
       return true;
     }
     _sources() {
-      return { carte: this.getAttribute('source-carte') || SOURCE_CARTE, moduleCarte: this.getAttribute('carte-module') || '', carteSecours: CARTE_SECOURS, infos: this.getAttribute('infos') || '' };
+      return { carte: this.getAttribute('source-carte') || SOURCE_CARTE, moduleCarte: this.getAttribute('carte-module') || '', carteCdn: CARTE_CDN, cartePages: CARTE_PAGES, carteSecours: CARTE_SECOURS, infos: this.getAttribute('infos') || '' };
     }
     _chercher() {
       if (this._enCours) return;
