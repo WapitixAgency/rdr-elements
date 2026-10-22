@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 43e486e | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="43e486e";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 0e161d4 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="0e161d4";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2815,8 +2815,13 @@ customElements.define('skippers-carousel', SkippersCarousel);
    
   const TYMAL_PANCARTE = SHAPES + '7bb303_b5fd53d83d734fb495151da65ae33e62.svg';
   const MYSTERE = MEDIA + '7bb303_fc14c1d1fa984ca5aac30753d24e22cb~mv2.avif';
-   
+  
+
+
+
+
   const DEPART = Date.parse('2026-11-01T12:02:00Z');
+  const departDe = (p) => { const t = p && typeof p.depart === 'string' ? Date.parse(p.depart) : NaN; return isFinite(t) ? t : DEPART; };
    
   const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
   const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
@@ -5381,10 +5386,10 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
     _decompte(T) {
       if (this._phase !== 'avant') return '';
-      const maintenant = Date.now();
-      const [fort, texte] = maintenant >= DEPART
-        ? T.jourCourse(Math.floor((maintenant - DEPART) / 86400000) + 1)
-        : T.decompte(Math.round((jourParis(DEPART) - jourParis(maintenant)) / 86400000));
+      const maintenant = Date.now(), depart = departDe(this._p);
+      const [fort, texte] = maintenant >= depart
+        ? T.jourCourse(Math.floor((maintenant - depart) / 86400000) + 1)
+        : T.decompte(Math.round((jourParis(depart) - jourParis(maintenant)) / 86400000));
       return '<p class="sk-decompte"><b>' + esc(fort) + '</b>' + esc(texte) + '</p>';
     }
 
@@ -5432,7 +5437,8 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
     _badgeCourse(T) {
       const L = this._p.live;
-      const jour = L && L.jour ? L.jour : (Date.now() > DEPART ? Math.floor((Date.now() - DEPART) / 86400000) + 1 : 0);
+      const depart = departDe(this._p);
+      const jour = L && L.jour ? L.jour : (Date.now() > depart ? Math.floor((Date.now() - depart) / 86400000) + 1 : 0);
       
 
 
