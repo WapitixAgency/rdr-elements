@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 0e161d4 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="0e161d4";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 389173d | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="389173d";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3314,6 +3314,37 @@ customElements.define('skippers-carousel', SkippersCarousel);
   };
   const idSur = (v) => String(v || '').replace(/[^\w-]/g, '');
   const lienSur = (u) => (/^https:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : '');
+  
+
+
+
+
+
+
+
+
+
+
+
+  const DOMAINES_RESEAUX = {
+    instagram: ['instagram.com', 'instagr.am'],
+    facebook: ['facebook.com', 'fb.com', 'fb.me'],
+    x: ['x.com', 'twitter.com'],
+    linkedin: ['linkedin.com', 'lnkd.in']
+  };
+  const hoteDe = (u) => {
+    const m = /^https:\/\/([^\/?#\s"'<>\\]+)/i.exec(String(u || ''));
+    if (!m || m[1].indexOf('@') >= 0) return '';
+    const h = m[1].toLowerCase().replace(/:\d{1,5}$/, '').replace(/\.$/, '');
+    return /^(?:[a-z0-9¡-￿](?:[a-z0-9¡-￿-]{0,61}[a-z0-9¡-￿])?\.)+(?:[a-z¡-￿]{2,63}|xn--[a-z0-9-]{1,59})$/.test(h) ? h : '';
+  };
+  const reseauSur = (cle, u) => {
+    const lien = lienSur(u);
+    const h = lien ? hoteDe(lien) : '';
+    if (!h) return '';
+    if (cle === 'site') return lien;
+    return (DOMAINES_RESEAUX[cle] || []).some((d) => h === d || h.slice(-d.length - 1) === '.' + d) ? lien : '';
+  };
   const casse = (s) => String(s || '').toLowerCase().replace(/(^|[\s'’-])([a-zà-ÿ])/g, (m, a, b) => a + b.toUpperCase());
 
   
@@ -5854,7 +5885,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         : this._enAttente('bio', T);
       const R = s.reseaux || {};
       const reseaux = [['instagram', 'Instagram'], ['facebook', 'Facebook'], ['x', 'X'], ['linkedin', 'LinkedIn'], ['site', T.site]]
-        .filter(([k]) => lienSur(R[k]))
+        .filter(([k]) => reseauSur(k, R[k]))
         .map(([k, nom]) => '<li><a class="sk-reseau" href="' + esc(R[k]) + '" target="_blank" rel="noopener" aria-label="' + esc(T.reseauAria(nom, this._nomAffiche)) + '">' + svg(k) + '<span>' + esc(nom) + '</span></a></li>')
         .join('');
       const porte = s.porteBonheur
