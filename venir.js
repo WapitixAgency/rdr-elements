@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum e29c436 | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e29c436";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 43e486e | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="43e486e";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -734,6 +734,10 @@ const ER_EN = {
     'Date de naissance': 'Date of birth',
     'Adresse e-mail': 'Email address',
     'Numéro de téléphone': 'Phone number',
+     
+    'JJ': 'DD', 'AAAA': 'YYYY',
+    '06 12 34 56 78': '+44 7700 900123',
+    'prenom@exemple.fr': 'firstname@example.com',
     'Pour vous appeler si vous gagnez.': 'So we can call you if you win.',
     'Votre venue': 'Your visit',
     'Quel jour venez-vous au village ?': 'Which day are you coming to the village?',

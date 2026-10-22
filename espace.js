@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum e29c436 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e29c436";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 43e486e | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="43e486e";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2253,6 +2253,12 @@ if (!customElements.get('espace-rhum')) {
     'Progression de ton profil': 'Your profile progress',
     'Infos renseignées': 'Details filled in',
     'Ex. Française': 'e.g. French',
+     
+    'Ex. Camille': 'e.g. Camille',
+    'Ex. Dupont': 'e.g. Smith',
+    'Ex. 35400': 'e.g. 35400',
+    'Ex. 06 12 34 56 78': 'e.g. +44 7700 900123',
+    'JJ/MM/AAAA': 'DD/MM/YYYY',
     'Ajouter un skipper : nom ou prénom…': 'Add a skipper: name or first name…',
     'Mes paramètres': 'My settings',
     'Confidentialité et compte': 'Privacy and account',
@@ -17841,7 +17847,10 @@ if (!customElements.get('espace-rhum')) {
             if (this._lus) this._lus.add(slugOuvert);
             carteOuverte.classList.add('est-lue');
           }
-          this._navExternal(this._resolveArticleUrl(articleId), 'er-go-article', { articleId });
+          
+
+
+          this._navExternal(this._cheminLangue(this._resolveArticleUrl(articleId)), 'er-go-article', { articleId });
         };
         card.addEventListener('click', fire);
         card.addEventListener('keydown', (e) => {

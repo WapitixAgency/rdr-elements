@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum e29c436 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="e29c436";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 43e486e | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="43e486e";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -601,6 +601,25 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="e29c436";performance
     const relative = /^(\/|#|\?|\.\/|\.\.\/)/.test(s) || !/^[a-z][a-z0-9+.\-]*:/i.test(s);
     if (!okScheme && !relative) return fallback;
     return s.replace(/"/g, '%22').replace(/'/g, '%27');
+  }
+  
+
+
+
+
+
+
+  function adresseDansLangue(u, lang) {
+    const s = String(u == null ? '' : u).trim();
+    if (lang !== 'en' || !s) return s;
+    if (/^\/(?!\/)/.test(s)) return /^\/en(\/|$|[?#])/.test(s) ? s : '/en' + s;
+    const m = s.match(/^(https?:\/\/(?:www\.)?routedurhum\.com)(\/.*)?$/i);
+    if (m && !/^\/en(\/|$|[?#])/.test(m[2] || '/')) return m[1] + '/en' + (m[2] && m[2] !== '/' ? m[2] : '');
+    return s;
+  }
+  function routageSansLangue(u) {
+    const s = String(u == null ? '' : u);
+    return /^\/en(\/|[?#])/.test(s) ? s.slice(3) : (s === '/en' ? '/' : s);
   }
   function isSafeColor(c, fallback) {
     fallback = arguments.length > 1 ? fallback : '#000000';
@@ -1746,6 +1765,8 @@ class RdrNews extends HTMLElement {
     setResults(r) { this._onResults(r); }
 
     _t(key) { return (DICT[this._state.lang] || DICT.fr)[key] || key; }
+     
+    _adresse(u) { return adresseDansLangue(u, this._state && this._state.lang); }
     _emit(name, detail) {
       this.dispatchEvent(new CustomEvent(name, { detail: detail || {}, bubbles: true, composed: true }));
     }
@@ -2155,7 +2176,7 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__card' + (pick ? ' rn__card--pick' : '') + '">' +
         this._thumb(p, 640, 360) +
         '<div class="rn__body">' + this._metaLine(p, false, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         (p.excerpt ? '<p class="rn__excerpt">' + escapeHTML(p.excerpt) + '</p>' : '') +
         this._classTags(p) + '</div></article>';
     }
@@ -2166,7 +2187,7 @@ class RdrNews extends HTMLElement {
         '<span class="rn__itweyebrow">' + IC.mic + ' ' + escapeHTML(eyebrow) + '</span>' +
         '<div class="rn__meta">' + this._catBadge(p, true) + '<span>' + escapeHTML(this._relDate(p.publishedDate)) + '</span>' +
         (p.timeToRead ? '<span class="rn__clock">' + IC.clock + ' ' + escapeHTML(String(p.timeToRead)) + ' ' + this._t('min_read') + '</span>' : '') + '</div></div>' +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         '<div style="display:flex;flex-direction:column;gap:12px">' +
         (p.excerpt ? '<p class="rn__excerpt">« ' + escapeHTML(p.excerpt) + ' »</p>' : '') +
         this._classTags(p) + '</div></div></article>';
@@ -2175,7 +2196,7 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__card rn__card--video">' +
         this._thumb(p, 640, 360, { noFmt: true, extra: '<span class="rn__playdisc" aria-hidden="true">' + IC.play + '</span>' }) +
         '<div class="rn__body">' + this._metaLine(p, true, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         (p.excerpt ? '<p class="rn__excerpt">' + escapeHTML(p.excerpt) + '</p>' : '') +
         this._classTags(p) + '</div></article>';
     }
@@ -2185,12 +2206,12 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__card rn__card--audio">' +
         this._thumb(p, 320, 320, { noFmt: true, sizes: '126px', extra: '<span class="rn__adisc" aria-hidden="true">' + IC.play + '</span>' }) +
         '<div class="rn__body">' + this._metaLine(p, true, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         '<div class="rn__eq" aria-hidden="true">' + bars + '</div></div></article>';
     }
     _topItem(p, rank) {
       return '<div class="rn__topitem"><span class="rn__rank" aria-hidden="true">' + rank + '</span><div class="rn__tbody">' +
-        '<h3><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         '<div class="rn__tmeta">' + escapeHTML(p.catLabel || '') + ' · ' + escapeHTML(this._relDate(p.publishedDate)) + '</div></div></div>';
     }
     _wideCard(p, boxArIn, extraCls) {
@@ -2205,16 +2226,16 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__card rn__card--wide' + (extraCls || '') + '">' +
         this._thumb(p, 980, Math.round(980 / boxAr), { boxAr: boxAr, sizes: '(max-width:640px) 100vw, (max-width:1023px) 90vw, 66vw' }) +
         '<div class="rn__body">' + this._metaLine(p, false, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         (p.excerpt ? '<p class="rn__excerpt">' + escapeHTML(p.excerpt) + '</p>' : '') +
         this._classTags(p) + '</div></article>';
     }
     _coverCard(p, photo) {
       return '<article class="rn__card rn__card--cover' + (photo ? ' rn__card--photo' : '') + '">' +
         this._thumb(p, 640, 800, { sizes: '(max-width:640px) 100vw, 33vw' }) +
-        '<span class="rn__cardhit" data-rn-link data-url="' + escAttr(isSafeUrl(p.url, '#')) + '" aria-hidden="true"></span>' +
+        '<span class="rn__cardhit" data-rn-link data-url="' + escAttr(isSafeUrl(this._adresse(p.url), '#')) + '" aria-hidden="true"></span>' +
         '<div class="rn__body">' + this._metaLine(p, true, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         this._classTags(p) + '</div></article>';
     }
      
@@ -2226,7 +2247,7 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__card rn__card--mini">' +
         this._thumb(p, 640, 360, { sizes: '(max-width:640px) 100vw, 33vw' }) +
         '<div class="rn__body">' + this._metaLine(p, false, true) +
-        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+        '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         (p.excerpt ? '<p class="rn__excerpt">' + escapeHTML(p.excerpt) + '</p>' : '') +
         this._classTags(p) + '</div></article>';
     }
@@ -2289,9 +2310,9 @@ class RdrNews extends HTMLElement {
             (i === 0 ? ' loading="eager"' : ' loading="lazy"') + ' decoding="async">'
           : WAVE('rn__wavem');
         return '<article class="rn__psl-slide' + (i === 0 ? ' is-on' : '') + '" data-rn-psl-slide="' + i + '">' + img +
-          '<span class="rn__psl-hit" data-rn-link data-url="' + escAttr(isSafeUrl(p.url, '#')) + '" aria-hidden="true"></span>' +
+          '<span class="rn__psl-hit" data-rn-link data-url="' + escAttr(isSafeUrl(this._adresse(p.url), '#')) + '" aria-hidden="true"></span>' +
           '<div class="rn__psl-body">' + this._metaLine(p, true) +
-          '<h3 class="rn__psl-title rn-display"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
+          '<h3 class="rn__psl-title rn-display"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
           (p.excerpt ? '<p class="rn__psl-ex">' + escapeHTML(p.excerpt) + '</p>' : '') +
           '</div></article>';
       }).join('');
@@ -2327,7 +2348,7 @@ class RdrNews extends HTMLElement {
       return '<article class="rn__hero' + (media ? ' rn__hero--contain' : '') + '">' + img + WAVE('rn__hero-waves') +
         '<div class="rn__hero-main"><span class="rn__unebadge">' + IC.anchor + ' ' + this._t('seg_une') + '</span>' +
         this._metaLine(p, true) +
-        '<h2 class="rn__hero-title rn-display"><a href="' + isSafeUrl(p.url, '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h2>' +
+        '<h2 class="rn__hero-title rn-display"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h2>' +
         (p.excerpt ? '<p class="rn__hero-ex">' + escapeHTML(p.excerpt) + '</p>' : '') +
         '<div class="rn__heroroute" aria-hidden="true"><b>' + this._t('route_from') + '</b><span class="rn__leg"></span>' +
         this._t('route_nm') + '<span class="rn__leg"></span><b>' + this._t('route_to') + '</b></div>' +
@@ -2823,7 +2844,7 @@ class RdrNews extends HTMLElement {
           ? '<span class="rn__sgava"><img src="' + rnImg(p.cover, 76, 76) + '" alt="" loading="lazy" decoding="async"></span>'
           : '<span class="rn__sgava" style="background:#DCF2EF;color:#0B6E6B">' + IC.news + '</span>';
         const meta = [p.catLabel, this._relDate(p.publishedDate)].filter(Boolean).join(' · ');
-        return '<button type="button" class="rn__sgitem" data-rn-sg-url="' + escAttr(isSafeUrl(p.url, '')) + '">' + av +
+        return '<button type="button" class="rn__sgitem" data-rn-sg-url="' + escAttr(isSafeUrl(this._adresse(p.url), '')) + '">' + av +
           '<span class="rn__sgtxt"><span class="rn__sgtitle">' + escapeHTML(p.title || '') + '</span>' +
           '<span class="rn__sgmeta">' + escapeHTML(meta) + '</span></span></button>';
       };
@@ -2957,7 +2978,7 @@ class RdrNews extends HTMLElement {
           this._markNavLoading(link.closest('.rn__card, .rn__hero, .rn__topitem, .rn__psl-slide'));
           marquerLu(slugDeUrl(url));   
           this._saveRestorePoint(url);  
-          this._emit('rn-navigate', { url });
+          this._emit('rn-navigate', { url: routageSansLangue(url) });
           return;
         }
         const partner = e.target.closest('[data-rn-partner]');
@@ -3049,7 +3070,7 @@ class RdrNews extends HTMLElement {
         else if (d.rnCloseSheet !== undefined) { this._dismissDialog(sheetDlg); }
         else if (d.rnSgQ !== undefined) { this._state.q = d.rnSgQ; this._dismissDialog(searchDlg); this._filterChange(); }
         else if (d.rnSgTheme !== undefined) { this._state.themes.add(d.rnSgTheme); this._dismissDialog(searchDlg); this._filterChange(); }
-        else if (d.rnSgUrl !== undefined) { this._dismissDialog(searchDlg); this._saveRestorePoint(d.rnSgUrl); this._emit('rn-navigate', { url: d.rnSgUrl }); }
+        else if (d.rnSgUrl !== undefined) { this._dismissDialog(searchDlg); this._saveRestorePoint(d.rnSgUrl); this._emit('rn-navigate', { url: routageSansLangue(d.rnSgUrl) }); }
       });
 
       const searchInput = root.querySelector('[data-rn-search-input]');
@@ -5170,6 +5191,20 @@ class RdrNews extends HTMLElement {
     var s = String(u == null ? '' : u).trim();
     return /^(https?:|\/)/i.test(s) ? esc(s) : '#';
   }
+  
+
+
+
+
+
+  function adresseArticle(u) {
+    var s = String(u == null ? '' : u).trim();
+    if (LANGUE !== 'en' || !s) return s;
+    if (/^\/(?!\/)/.test(s)) return /^\/en(\/|$|[?#])/.test(s) ? s : '/en' + s;
+    var m = s.match(/^(https?:\/\/(?:www\.)?routedurhum\.com)(\/.*)?$/i);
+    if (m && !/^\/en(\/|$|[?#])/.test(m[2] || '/')) return m[1] + '/en' + (m[2] && m[2] !== '/' ? m[2] : '');
+    return s;
+  }
   function safeColor(c) {
     return /^#[0-9a-f]{3,8}$/i.test(String(c || '')) ? c : '#0A1A35';
   }
@@ -5477,14 +5512,14 @@ class RdrNews extends HTMLElement {
       var thumb = kind === 'video'
         ? this._thumb(p, { noFmt: true, extra: '<span class="rpm-playdisc" aria-hidden="true">' + IC.play + '</span>' })
         : this._thumb(p, {});
-      return '<article class="rpm-card' + variant + '" data-rpm-open="' + safeUrl(p.url) + '">' +
+      return '<article class="rpm-card' + variant + '" data-rpm-open="' + safeUrl(adresseArticle(p.url)) + '">' +
         thumb +
         '<div class="rpm-body">' +
           '<div class="rpm-meta">' + this._catBadge(p) +
             '<span>' + esc(relDate(p.publishedDate)) + '</span>' +
             (p.timeToRead ? '<span class="clock">' + IC.clock + ' ' + esc(p.timeToRead) + ' min</span>' : '') +
           '</div>' +
-          '<h3 class="rpm-title"><a href="' + safeUrl(p.url) + '" data-rpm-link>' + esc(p.title || '') + '</a></h3>' +
+          '<h3 class="rpm-title"><a href="' + safeUrl(adresseArticle(p.url)) + '" data-rpm-link>' + esc(p.title || '') + '</a></h3>' +
           (p.excerpt ? '<p class="rpm-excerpt">' + esc(p.excerpt) + '</p>' : '') +
           this._classTags(p) +
         '</div>' +
@@ -5506,7 +5541,7 @@ class RdrNews extends HTMLElement {
 
 
 
-        '<a class="rpm-hit" href="' + safeUrl(p.url) + '" tabindex="-1" aria-hidden="true"></a>' +
+        '<a class="rpm-hit" href="' + safeUrl(adresseArticle(p.url)) + '" tabindex="-1" aria-hidden="true"></a>' +
         '</article>';
     }
 
