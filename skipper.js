@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 389173d | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="389173d";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 53d34cf | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="53d34cf";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5698,7 +5698,11 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       const maintenant = Date.now();
       const cartes = liste.map((a, i) => {
         const une = i === 0;
-        const url = /^\/[^\s"'<>]*$/.test(String(a.url || '')) ? a.url : '';
+        
+
+
+        const brut = /^\/[^\s"'<>]*$/.test(String(a.url || '')) ? a.url : '';
+        const url = brut && this._lang === 'en' && !/^\/en(\/|$)/.test(brut) ? '/en' + brut : brut;
         const [teinte, fond, vif, icone] = categorieActu(a.categorie);
         const t0 = a.date ? Date.parse(a.date) : NaN;
         
