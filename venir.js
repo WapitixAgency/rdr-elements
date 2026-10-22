@@ -1,5 +1,5 @@
-/* rdr-elements venir | source route-du-rhum e36662e | rdr-venir.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e36662e";performance.mark("rdr-elements:venir")}catch(e){}
+/* rdr-elements venir | source route-du-rhum 2f6e902 | rdr-venir.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="2f6e902";performance.mark("rdr-elements:venir")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -92,6 +92,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e36662e";performance
     P + '.rdi-badge--vigilance{background:#0E111D;color:#FCF150}' +
     P + '.rdi-badge--info{background:#FCF150;color:#0E111D}' +
     P + '.rdi-texte{min-width:0}' +
+    P + '.rdi-titre{font-weight:800}' +
     
 
 
@@ -177,8 +178,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e36662e";performance
       const id = String(x.id == null || x.id === '' ? 'info-' + i : x.id).slice(0, 80);
       if (vus.has(id)) return;
       vus.add(id);
+      
+
+      const titre = String(x.titre == null ? '' : x.titre).replace(/\s+/g, ' ').trim();
       out.push({
         id, texte, rang: i,
+        titre: titre && texte.indexOf(titre) === 0 ? titre : '',
         niveau: niveauDe(x.niveau),
         pages: pagesDe(x.pages),
         langue: x.langue === 'fr' || x.langue === 'en' ? x.langue : '',
@@ -408,7 +413,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e36662e";performance
       const gardes = rangeable ? this._gardes() : null;
       const range = !!(rangeable && vis.length && gardes && vis.every((x) => gardes.indexOf(x.id) >= 0));
       if (rangeable && gardes && vis.length && !range) this._garder(null);
-      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.langue, x.lien, x.libelleLien]));
+      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.titre, x.langue, x.lien, x.libelleLien]));
       if (signature === this._signature) return;
       this._signature = signature;
       this._annoncer(vis);
@@ -455,7 +460,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["venir"]="e36662e";performance
       const a = adresse(x.lien, this._lang);
        
       const autre = x.langue && x.langue !== this._lang ? ' lang="' + x.langue + '"' : '';
-      const corps = badge + '<span class="rdi-texte"' + autre + '>' + esc(x.texte) + '</span>';
+      const texte = x.titre ? '<b class="rdi-titre">' + esc(x.titre) + '</b>' + esc(x.texte.slice(x.titre.length)) : esc(x.texte);
+      const corps = badge + '<span class="rdi-texte"' + autre + '>' + texte + '</span>';
       const li = '<li class="rdi-li" data-id="' + esc(x.id) + '" data-niveau="' + x.niveau + '"' + (cache ? ' hidden' : '') + '>';
       if (!a) return li + '<span class="rdi-item"><span class="rdi-corps">' + corps + '</span></span></li>';
       const libelle = x.libelleLien || L.suite;

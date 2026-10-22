@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum e36662e | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e36662e";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 2f6e902 | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="2f6e902";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -92,6 +92,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e36662e";perform
     P + '.rdi-badge--vigilance{background:#0E111D;color:#FCF150}' +
     P + '.rdi-badge--info{background:#FCF150;color:#0E111D}' +
     P + '.rdi-texte{min-width:0}' +
+    P + '.rdi-titre{font-weight:800}' +
     
 
 
@@ -177,8 +178,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e36662e";perform
       const id = String(x.id == null || x.id === '' ? 'info-' + i : x.id).slice(0, 80);
       if (vus.has(id)) return;
       vus.add(id);
+      
+
+      const titre = String(x.titre == null ? '' : x.titre).replace(/\s+/g, ' ').trim();
       out.push({
         id, texte, rang: i,
+        titre: titre && texte.indexOf(titre) === 0 ? titre : '',
         niveau: niveauDe(x.niveau),
         pages: pagesDe(x.pages),
         langue: x.langue === 'fr' || x.langue === 'en' ? x.langue : '',
@@ -408,7 +413,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e36662e";perform
       const gardes = rangeable ? this._gardes() : null;
       const range = !!(rangeable && vis.length && gardes && vis.every((x) => gardes.indexOf(x.id) >= 0));
       if (rangeable && gardes && vis.length && !range) this._garder(null);
-      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.langue, x.lien, x.libelleLien]));
+      const signature = this._lang + '|' + reduit + '|' + rangeable + '|' + range + '|' + JSON.stringify(vis.map((x) => [x.id, x.niveau, x.texte, x.titre, x.langue, x.lien, x.libelleLien]));
       if (signature === this._signature) return;
       this._signature = signature;
       this._annoncer(vis);
@@ -455,7 +460,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="e36662e";perform
       const a = adresse(x.lien, this._lang);
        
       const autre = x.langue && x.langue !== this._lang ? ' lang="' + x.langue + '"' : '';
-      const corps = badge + '<span class="rdi-texte"' + autre + '>' + esc(x.texte) + '</span>';
+      const texte = x.titre ? '<b class="rdi-titre">' + esc(x.titre) + '</b>' + esc(x.texte.slice(x.titre.length)) : esc(x.texte);
+      const corps = badge + '<span class="rdi-texte"' + autre + '>' + texte + '</span>';
       const li = '<li class="rdi-li" data-id="' + esc(x.id) + '" data-niveau="' + x.niveau + '"' + (cache ? ' hidden' : '') + '>';
       if (!a) return li + '<span class="rdi-item"><span class="rdi-corps">' + corps + '</span></span></li>';
       const libelle = x.libelleLien || L.suite;
@@ -2684,6 +2690,79 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
   border-radius:2px 7px 2px 7px;background:var(--rp-teinte);color:#0A1630;
   font-size:10px;font-weight:800;line-height:14px;font-style:normal;
 }
+
+
+
+
+
+.rp-jour.a-info{position:relative;}
+.rp-jour-alerte{
+  position:absolute;top:-5px;right:-4px;width:19px;height:19px;pointer-events:none;
+  filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5));
+}
+.rp-jour-alerte svg{display:block;width:100%;height:100%;overflow:visible;}
+.rp-ja-fond{fill:var(--ja-c);stroke:#FFFFFF;stroke-width:1.7;stroke-linejoin:round;}
+.rp-ja-signe{fill:none;stroke:var(--ja-e);stroke-width:2.5;stroke-linecap:round;}
+.rp-ja--rouge{--ja-c:#D62839;--ja-e:#FFFFFF;}
+.rp-ja--jaune{--ja-c:#FCF150;--ja-e:#0B1B33;}
+.rp-ja--nuit{--ja-c:#16355D;--ja-e:#FFFFFF;}
+.rp-ja--blanc{--ja-c:#FFFFFF;--ja-e:#0B1B33;}
+.rp-ja--vert{--ja-c:#157347;--ja-e:#FFFFFF;}
+.rp-ja--blanc .rp-ja-fond{stroke:#0B1B33;}
+.rp-root.sous-720 .rp-jour-alerte{top:-4px;right:-3px;width:17px;height:17px;}
+
+
+
+
+
+.rp-ij-cadre{
+  position:relative;z-index:2;width:min(100%,1180px);margin:var(--e-5) auto 0;padding:0 20px;
+  display:grid;gap:var(--e-3);
+}
+.rp-ij{
+  --ij-fond:#D62839;--ij-encre:#FFFFFF;--ij-bord:transparent;
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;justify-items:start;gap:10px;
+  padding:clamp(18px,2.2vw,26px) clamp(20px,2.8vw,34px) clamp(20px,2.4vw,28px);
+  border-radius:var(--rp-r-bloc);border:1px solid var(--ij-bord);
+  background:var(--ij-fond);color:var(--ij-encre);box-shadow:var(--o-leve);
+}
+.rp-ij--jaune{--ij-fond:#FCF150;--ij-encre:#0B1B33;}
+.rp-ij--nuit{--ij-fond:#16355D;--ij-encre:#FFFFFF;--ij-bord:rgba(255,255,255,.4);}
+.rp-ij--blanc{--ij-fond:#FFFFFF;--ij-encre:#0B1B33;}
+.rp-ij--vert{--ij-fond:#157347;--ij-encre:#FFFFFF;}
+.rp-ij-sur{
+  margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;
+  font:800 var(--t-2)/1.2 Montserrat,sans-serif;letter-spacing:.13em;text-transform:uppercase;
+}
+.rp-ij-quoi{
+  display:inline-flex;align-items:center;gap:7px;min-height:26px;padding:3px 11px 3px 8px;
+  border-radius:var(--rp-r-tag);background:var(--ij-encre);color:var(--ij-fond);
+}
+.rp-ij-ic{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.rp-ij-date,.rp-ij-nw{white-space:nowrap;}
+.rp-ij-t{
+  margin:2px 0 0;max-width:100%;font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(23px,calc(var(--rp-l,1180) * .03 * 1px),38px);line-height:1.04;
+  text-transform:uppercase;color:var(--ij-encre);text-wrap:balance;overflow-wrap:break-word;
+}
+.rp-ij-txt{
+  margin:0;max-width:74ch;font:600 var(--t-4)/1.5 Montserrat,sans-serif;color:var(--ij-encre);
+  text-wrap:pretty;overflow-wrap:break-word;
+}
+.rp-ij-txt.est-seul{font-size:var(--t-5);font-weight:700;line-height:1.35;}
+.rp-ij-lien{
+  display:inline-flex;align-items:center;gap:8px;min-height:42px;margin-top:4px;padding:0 18px;
+  border-radius:var(--rp-r-btn);background:var(--ij-encre);color:var(--ij-fond);
+  font:800 var(--t-2)/1.1 Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+}
+.rp-ij-lien .rp-ic{width:16px;height:16px;}
+.rp-ij-lien:focus-visible{outline:3px solid var(--ij-encre);outline-offset:3px;}
+@media (hover:hover) and (pointer:fine){ .rp-ij-lien:hover{filter:brightness(1.08);} }
+.rp-root.sous-720 .rp-ij-cadre{margin-top:var(--e-4);padding:0 var(--rp-marge-mob);}
+.rp-root.sous-720 .rp-ij{gap:8px;}
+.rp-root.sous-720 .rp-ij-txt{font-size:15px;}
+@media print{ .rp-ij{box-shadow:none;border:2px solid #000;} }
 
  
 
@@ -6067,6 +6146,131 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
 
   const estRegistre = (t) => REGISTRES.indexOf(t) !== -1;
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const INFOS_SOURCE = '/_functions/dernieresInfos';
+  const INFOS_STOCK = 'rdrDernieresInfosV2:';
+  const INFOS_CADENCE = 120000;
+  const INFOS_CADENCE_MAX = 900000;
+  const INFOS_ALEA = 20000;
+  const INFOS_MAX_JOUR = 3;
+  const infosCadence = (jeu) => {
+    const s = Number(jeu && jeu.relire);
+    return isFinite(s) && s > 0 ? Math.min(INFOS_CADENCE_MAX, Math.max(INFOS_CADENCE, s * 1000)) : INFOS_CADENCE;
+  };
+  const infosStock = (lang) => {
+    try {
+      const v = JSON.parse(window.localStorage.getItem(INFOS_STOCK + lang) || 'null');
+      return v && typeof v.t === 'number' && v.jeu && typeof v.jeu === 'object' ? v : null;
+    } catch (e) { return null; }
+  };
+  const infosStockEcrire = (lang, jeu, t) => {
+    try { window.localStorage.setItem(INFOS_STOCK + lang, JSON.stringify({ t, jeu })); } catch (e) {   }
+  };
+  
+
+
+  const jourInfo = (v) => {
+    const m = typeof v === 'string' && v.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return '';
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    return d.getUTCFullYear() === +m[1] && d.getUTCMonth() === +m[2] - 1 && d.getUTCDate() === +m[3] ? v : '';
+  };
+  const instantInfo = (v) => { if (v == null || v === '') return null; const t = new Date(v).getTime(); return isNaN(t) ? null : t; };
+  const RANG_INFO = { alerte: 0, vigilance: 1, info: 2 };
+  const ligneInfo = (v, max) => String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, max);
+   
+  
+
+
+
+  const COULEURS_INFO = ['rouge', 'jaune', 'nuit', 'blanc', 'vert'];
+  const COULEUR_NIVEAU = { alerte: 'rouge', vigilance: 'jaune', info: 'nuit' };
+  
+
+  const ETIQUETTE_COULEUR = {
+    rouge: ['Important', 'Important'], jaune: ['À noter', 'Note'], nuit: ['Info', 'Info'],
+    blanc: ['À savoir', 'Good to know'], vert: ['Bonne nouvelle', 'Good news']
+  };
+  const infoDuJour = (x) => {
+    if (!x || typeof x !== 'object') return null;
+    let du = jourInfo(x.jourDu), au = jourInfo(x.jourAu);
+    if (!du) du = au;
+    if (!au) au = du;
+    if (au < du) { const z = du; du = au; au = z; }
+    const texte = ligneInfo(x.texte, 400);
+    if (!du || !texte) return null;
+    const titre = ligneInfo(x.titre, 120);
+    const niveau = x.niveau === 'alerte' || x.niveau === 'vigilance' ? x.niveau : 'info';
+    const fermeture = x.fermeture === true;
+    return {
+      id: ligneInfo(x.id, 80) || du + '-' + texte.slice(0, 20),
+      du, au,
+      niveau,
+      fermeture,
+      couleur: COULEURS_INFO.indexOf(x.couleur) >= 0 ? x.couleur : COULEUR_NIVEAU[niveau],
+      etiquette: ligneInfo(x.etiquette, 40),
+      titre,
+      corps: titre ? (ligneInfo(x.corps, 400) || texte) : texte,
+      langue: x.langue === 'fr' || x.langue === 'en' ? x.langue : '',
+      langueTitre: x.langueTitre === 'fr' || x.langueTitre === 'en' ? x.langueTitre : '',
+      lien: ligneInfo(x.lien, 500),
+      libelleLien: ligneInfo(x.libelleLien, 60),
+      debut: instantInfo(x.debut), fin: instantInfo(x.fin)
+    };
+  };
+  const infoEnCours = (x, t) => (x.debut == null || x.debut <= t) && (x.fin == null || x.fin > t);
+  
+
+  const lienInfo = (lien, en) => {
+    const l = String(lien || '').trim();
+    if (/^https:\/\/[^\s"'<>]+$/i.test(l)) return { href: l, externe: !/^https:\/\/(www\.)?routedurhum\.com([/?#]|$)/i.test(l) };
+    if (/^\/(?!\/)[^\s"'<>\\]*$/.test(l)) return { href: en && !/^\/en([/?#]|$)/.test(l) ? '/en' + (l === '/' ? '' : l) : l, externe: false };
+    return null;
+  };
+  
+
+
+
+
+
+
+  const insecablesHTML = (t) => {
+    const m = String(t || '').split(' ').filter(Boolean);
+    const colle = (i) => /^[:;!?»·]/.test(m[i + 1]) || m[i] === '«' || (i === m.length - 2 && m[i + 1].length <= 12);
+    
+
+    let out = '', groupe = [], compose = false;
+    for (let i = 0; i < m.length; i++) {
+      groupe.push(esc(m[i]));
+      if (/\S-\S/.test(m[i])) compose = true;
+      if (i < m.length - 1 && colle(i)) continue;
+      out += (out ? ' ' : '') + (groupe.length > 1 || compose ? '<span class="rp-ij-nw">' + groupe.join(' ') + '</span>' : groupe[0]);
+      groupe = [];
+      compose = false;
+    }
+    return out;
+  };
+
    
 
   class RdrProgramme extends HTMLElement {
@@ -6091,7 +6295,9 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
 
 
     static get observedAttributes() {
-      return ['payload', 'jour', 'lang', 'type', 'heure', 'lieu', 'cat', 'url', 'q', 'vue'];
+      
+
+      return ['payload', 'jour', 'lang', 'type', 'heure', 'lieu', 'cat', 'url', 'q', 'vue', 'infos'];
     }
 
     constructor() {
@@ -6299,6 +6505,7 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       this._horloge = setInterval(() => this._tic(), 30000);
       document.addEventListener('visibilitychange', this._surVisible);
       addEventListener('pageshow', this._surVisible);
+      this._armerInfos();
     }
 
     _couperHorloge() {
@@ -6308,13 +6515,185 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
         removeEventListener('pageshow', this._surVisible);
         this._surVisible = null;
       }
+      this._couperInfos();
+    }
+
+    
+
+
+
+    _armerInfos() {
+      this._couperInfos();
+      if (!this.isConnected) return;
+      if (this.hasAttribute('infos')) {
+        let jeu = null;
+        try { jeu = JSON.parse(this.getAttribute('infos') || 'null'); } catch (e) { jeu = null; }
+        this._recevoirInfos(jeu || { infos: [] });
+        return;
+      }
+      this._infosVisible = () => {
+        if (document.visibilityState !== 'visible' || this.hasAttribute('infos')) return;
+        if (this._infosAttente || Date.now() - (this._infosLu || 0) >= (this._infosCad || INFOS_CADENCE)) this._lireInfos();
+      };
+      this._infosStock = (e) => {
+        if (!e || e.key !== INFOS_STOCK + this._infosLang() || !e.newValue || this.hasAttribute('infos') || !this.isConnected) return;
+        let v = null;
+        try { v = JSON.parse(e.newValue); } catch (err) { v = null; }
+        if (!v || typeof v.t !== 'number' || !v.jeu || typeof v.jeu !== 'object') return;
+        this._infosLu = v.t;
+        this._recevoirInfos(v.jeu);
+        if (document.visibilityState !== 'hidden') this._programmerInfos(this._infosCad - (Date.now() - v.t));
+      };
+      document.addEventListener('visibilitychange', this._infosVisible);
+      addEventListener('storage', this._infosStock);
+      this._lireInfos();
+    }
+
+    _couperInfos() {
+      clearTimeout(this._infosMin);
+      this._infosMin = null;
+      if (this._infosVisible) { document.removeEventListener('visibilitychange', this._infosVisible); this._infosVisible = null; }
+      if (this._infosStock) { removeEventListener('storage', this._infosStock); this._infosStock = null; }
+    }
+
+    
+
+    _infosLang() {
+      if (this.hasAttribute('lang')) return this._lang();
+      const l = String(document.documentElement.getAttribute('lang') || '').toLowerCase();
+      return l.indexOf('en') === 0 || /^\/en(\/|$)/.test(location.pathname) ? 'en' : 'fr';
+    }
+
+    _programmerInfos(ms) {
+      clearTimeout(this._infosMin);
+      if (this.isConnected && !this.hasAttribute('infos')) this._infosMin = setTimeout(() => this._lireInfos(), Math.max(5000, ms) + Math.round(Math.random() * INFOS_ALEA));
+    }
+
+    
+
+    _lireInfos() {
+      clearTimeout(this._infosMin);
+      if (!this.isConnected || this.hasAttribute('infos')) return;
+      if (document.visibilityState === 'hidden') { this._infosAttente = true; return; }
+      this._infosAttente = false;
+      const lang = this._infosLang();
+      const t = Date.now();
+      const s = infosStock(lang);
+      if (s && t - s.t >= 0 && t - s.t < infosCadence(s.jeu)) {
+        this._infosLu = s.t;
+        this._recevoirInfos(s.jeu);
+        this._programmerInfos(this._infosCad - (t - s.t));
+        return;
+      }
+      this._infosLu = t;
+      let p;
+      try { p = fetch(INFOS_SOURCE + '?page=toutes&lang=' + lang, { credentials: 'omit' }); } catch (e) { p = Promise.reject(e); }
+      p.then((r) => { if (!r.ok) throw new Error('dernieresInfos ' + r.status); return r.json(); })
+        .then((jeu) => { infosStockEcrire(lang, jeu, t); if (this.isConnected && !this.hasAttribute('infos')) this._recevoirInfos(jeu); })
+        .catch(() => {})
+        .then(() => this._programmerInfos(this._infosCad || INFOS_CADENCE));
+    }
+
+    
+
+
+    _recevoirInfos(jeu) {
+      this._infosCad = infosCadence(jeu);
+      const brut = Array.isArray(jeu) ? jeu : (jeu && Array.isArray(jeu.infos) ? jeu.infos : []);
+      const autres = [], cartes = [];
+      brut.forEach((x) => { const c = infoDuJour(x); if (c) cartes.push(c); else autres.push(x); });
+      const attr = JSON.stringify({ relire: jeu && jeu.relire, infos: autres });
+      this._infosBandeau = attr;
+      if (this._infos && this._infos.getAttribute('infos') !== attr) this._infos.setAttribute('infos', attr);
+      cartes.sort((a, b) => ((b.fermeture ? 1 : 0) - (a.fermeture ? 1 : 0)) || (RANG_INFO[a.niveau] - RANG_INFO[b.niveau]));
+      const sig = JSON.stringify(cartes);
+      if (sig === this._infosSig) return;
+      this._infosSig = sig;
+      this._infosJour = cartes;
+      this._rendreInfos();
+    }
+
+    
+
+
+    _rendreInfos() {
+      if (!this._p || !this.isConnected) return;
+      if (this.querySelector('.rp-champ.est-ouvert, .rp-partage.est-dit') || document.querySelector('.rp-modale')) { this._infosEnRetard = true; return; }
+      this._infosEnRetard = false;
+      const barre = this.querySelector('#rpJours');
+      this._garderRail = barre ? barre.scrollLeft : null;
+      this._rendre();
+    }
+
+    
+
+
+    _infosDu(iso) {
+      if (!iso || !this._infosJour || !this._infosJour.length) return [];
+      const t = Date.now();
+      return this._infosJour.filter((x) => x.du <= iso && iso <= x.au && infoEnCours(x, t)).slice(0, INFOS_MAX_JOUR);
+    }
+
+    _infosVisiblesSig() {
+      if (!this._infosJour || !this._infosJour.length) return '';
+      const t = Date.now();
+      return this._infosJour.filter((x) => infoEnCours(x, t)).map((x) => x.id).join(',');
+    }
+
+    
+
+
+
+    _signeJour(iso) {
+      const l = this._infosDu(iso);
+      if (!l.length) return null;
+      const x = l[0];
+      const en = this._en();
+      return {
+        couleur: x.couleur,
+        dit: x.etiquette || ETIQUETTE_COULEUR[x.couleur][en ? 1 : 0],
+        html: '<span class="rp-jour-alerte rp-ja--' + x.couleur + '" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" focusable="false"><path class="rp-ja-fond" d="M10.27 3.5a2 2 0 0 1 3.46 0l8.5 14.7A2 2 0 0 1 20.5 21.2h-17a2 2 0 0 1-1.73-3z"/>' +
+          '<path class="rp-ja-signe" d="M12 9.2v4.6M12 17.2h.01"/></svg></span>'
+      };
+    }
+
+     
+    _cartesJour() {
+      if (this._rch()) return '';
+      const l = this._infosDu(this._jour);
+      if (!l.length) return '';
+      const en = this._en();
+      const date = this._jourLong(this._jour);
+      const cartes = l.map((x) => {
+        const a = lienInfo(x.lien, en);
+        const lib = x.libelleLien || (en ? 'Read more' : 'En savoir plus');
+        const autre = (lg) => (lg && lg !== (en ? 'en' : 'fr') ? ' lang="' + lg + '"' : '');
+        const quoi = x.etiquette || ETIQUETTE_COULEUR[x.couleur][en ? 1 : 0];
+        return '<section class="rp-ij rp-ij--' + x.couleur + (x.fermeture ? ' est-fermeture' : '') + '" data-info="' + esc(x.id) + '"' +
+            ' aria-label="' + esc(quoi + ', ' + date) + '">' +
+          '<p class="rp-ij-sur">' +
+            '<svg class="rp-ij-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></svg>' +
+            '<span class="rp-ij-quoi">' + esc(quoi) + '</span>' +
+            '<span class="rp-ij-date">' + esc(date) + '</span>' +
+          '</p>' +
+          (x.titre ? '<h2 class="rp-ij-t"' + autre(x.langueTitre || x.langue) + '>' + insecablesHTML(x.titre) + '</h2>' : '') +
+          '<p class="rp-ij-txt' + (x.titre ? '' : ' est-seul') + '"' + autre(x.langue) + '>' + insecablesHTML(x.corps) + '</p>' +
+          (a ? '<a class="rp-ij-lien" href="' + esc(a.href) + '"' + (a.externe ? ' target="_blank" rel="noopener"' : '') + '>' +
+              '<span' + autre(x.libelleLien ? x.langue : '') + '>' + esc(lib) + '</span>' + svg(IC.fleche, 'rp-ic') +
+              (a.externe ? '<span class="rp-sr-seul">' + (en ? ' (new tab)' : ' (nouvel onglet)') + '</span>' : '') +
+            '</a>' : '') +
+        '</section>';
+      }).join('');
+      return '<div class="rp-ij-cadre">' + cartes + '</div>';
     }
 
     
 
 
     _etatHoraire(now) {
-      let s = now.jour + '|' + (this._estNuit() ? 'n' : 'j');
+       
+      let s = now.jour + '|' + (this._estNuit() ? 'n' : 'j') + '|' + this._infosVisiblesSig() + (this._infosEnRetard ? '|r' : '');
       if (this._p && this._jour === now.jour) {
         s += '|' + this._filtrees(this._jour).map(a => {
           if (!/^\d{1,2}:\d{2}/.test(a.debut || '')) return 'x';
@@ -6400,6 +6779,7 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
     attributeChangedCallback(nom, avant, apres) {
       if (avant === apres || !this._monte) return;
       if (nom === 'url') { this._pilote = apres === '1'; return; }
+      if (nom === 'infos') { this._armerInfos(); return; }
       
 
 
@@ -6505,7 +6885,7 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       for (const n of noeuds) {
         if (n.parentNode && n.parentNode.nodeName === 'MARK') continue;
          
-        if (n.parentNode && n.parentNode.closest && n.parentNode.closest('rdr-dernieres-infos')) continue;
+        if (n.parentNode && n.parentNode.closest && n.parentNode.closest('rdr-dernieres-infos, .rp-ij')) continue;
         const brut = n.nodeValue;
         if (!brut || !/[A-Za-zÀ-ÿ0-9]/.test(brut)) continue;
         const en = this._i18nLookup(brut);
@@ -6513,7 +6893,7 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       }
       const ATTRS = ['aria-label', 'title', 'placeholder', 'alt'];
       racine.querySelectorAll('[aria-label],[title],[placeholder],[alt]').forEach(el => {
-        if (el.closest('rdr-dernieres-infos')) return;
+        if (el.closest('rdr-dernieres-infos, .rp-ij')) return;
         for (const a of ATTRS) {
           if (!el.hasAttribute(a)) continue;
           const v = el.getAttribute(a);
@@ -6949,6 +7329,9 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       if (!b) {
         b = this._infos = document.createElement('rdr-dernieres-infos');
         b.setAttribute('page', 'programmation');
+        
+
+        b.setAttribute('infos', this._infosBandeau || '{"infos":[]}');
       }
       if (this.hasAttribute('lang') && b.getAttribute('lang') !== this._lang()) b.setAttribute('lang', this._lang());
       if (this.firstChild !== b) this.insertBefore(b, this.firstChild);
@@ -7070,6 +7453,9 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
           '<div class="rp-trait-cadre" aria-hidden="true"><div class="rp-trait"></div></div>' +
           this._hero() +
           this._barreJours(jours) +
+          
+
+          this._cartesJour() +
           this._outils() +
           this._bandeauJournee(journee, rch || ded ? 0 : liste.length) +
           '<div class="rp-liste" id="rpListe">' + this._contenuListe(liste) + '</div>' +
@@ -7136,6 +7522,7 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       this._arrivee();
       this._rendreFocus(focus);
       this._annoncer(this._annonceListe(liste));
+      this._infosEnRetard = false;
       const now = this._maintenant();
       this._aujVu = now.jour;
       this._horaireVu = this._etatHoraire(now);
@@ -7413,10 +7800,12 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
           const revolu = iso < auj;
            
           const nf = filtre && !revolu ? parFiltre.get(iso) || 0 : 0;
+          const signe = this._signeJour(iso);
           const marques = (cEstAuj ? ' est-auj' : '') +
                           (finDeSemaine ? ' est-we' : '') +
                           (revolu ? ' est-revolu' : '') +
-                          (filtre ? (nf ? ' est-trouve' : ' est-sans') : '');
+                          (filtre ? (nf ? ' est-trouve' : ' est-sans') : '') +
+                          (signe ? ' a-info' : '');
           return '<button type="button" class="rp-jour' + marques + '" data-jour="' + esc(iso) + '"' +
             ' aria-pressed="' + (actif ? 'true' : 'false') + '"' +
             
@@ -7424,7 +7813,9 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
 
             ' aria-label="' + esc(this._jc(d) + ' ' + d.getDate() + ' ' +
               this._mc(d) + ', ' + this._compte(filtre ? nf : n) +
-              (iso === auj ? (this._lang() === 'en' ? ', today' : ", aujourd'hui") : '')) + '">' +
+              (iso === auj ? (this._lang() === 'en' ? ', today' : ", aujourd'hui") : '') +
+              (signe ? ', ' + signe.dit : '')) + '">' +
+            (signe ? signe.html : '') +
             '<i>' + esc(this._jc(d)) + '</i>' +
             '<b>' + String(d.getDate()).padStart(2, '0') + '</b>' +
             '<i>' + esc(this._mc(d)) + '</i>' +
@@ -7718,6 +8109,10 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       if (this._type !== 'officielle') return null;
       const j = this._jour;
       if (!j || (s.du && j < s.du) || (s.au && j > s.au)) return null;
+      
+
+
+      if (this._infosDu(j).some((x) => x.fermeture)) return null;
       return s;
     }
 
