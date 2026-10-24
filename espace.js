@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 2f6e902 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="2f6e902";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 713f043 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="713f043";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2572,6 +2572,10 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-ouvert--photo .jp-cadre{background:radial-gradient(90% 70% at 20% 0%,rgba(93,191,192,.35) 0%,rgba(93,191,192,0) 60%),linear-gradient(160deg,#0F4C5C 0%,#0B2C4A 60%,#0A1A35 100%)}
     espace-rhum .jt-ouvert--photo .jp-cadre .jt-cadre-img{padding:clamp(18px,11%,34px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
     espace-rhum .jt-ouvert--photo .jp-cadre--plein .jt-cadre-img{position:absolute;inset:0;padding:0;object-fit:cover;filter:none}
+    
+
+    espace-rhum .jp-cadre picture{display:contents}
+    @media (min-width:768px){espace-rhum .jt-ouvert--photo .jp-cadre--vertical .jt-cadre-img{object-position:50% 60%}}
     espace-rhum .jp-ma{display:flex;align-items:center;gap:14px;max-width:62ch;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
     espace-rhum .jp-ma--vide{border-style:dashed;border-color:rgba(255,255,255,.18);background:transparent}
     espace-rhum .jp-ma-img{flex:none;display:block;width:72px;height:72px;max-width:none;object-fit:cover;border-radius:3px 12px 3px 12px;border:1px solid rgba(255,255,255,.18)}
@@ -20979,13 +20983,22 @@ if (!customElements.get('espace-rhum')) {
     
 
 
+    
+
+
+
     _jpCarte() {
       const p = this._jpEtat();
       if (!p) return '';
-      const v = p.visuel;
+      const vv = p.visuelVertical && p.visuelVertical.src ? p.visuelVertical : null;
+      const v = p.visuel && p.visuel.src ? p.visuel : vv;
       const img = jtImage(v, 660);
+      const imgV = vv && vv !== v ? jtImage(vv, 600) : '';
+      const dims = (x) => (x && x.l && x.h ? ' width="' + x.l + '" height="' + x.h + '"' : '');
+      const balise = img ? '<img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + dims(v) + ' alt="Challenge Alpina">' : '';
       const cadre = img
-        ? '<div class="jt-cadre jp-cadre' + (jtPhotoPleine(v) ? ' jp-cadre--plein' : '') + '"><img class="jt-cadre-img" loading="lazy" decoding="async" src="' + escapeHtml(img) + '"' + (v.l && v.h ? ' width="' + v.l + '" height="' + v.h + '"' : '') + ' alt="Challenge Alpina"></div>'
+        ? '<div class="jt-cadre jp-cadre' + (jtPhotoPleine(v) ? ' jp-cadre--plein' : '') + (imgV ? ' jp-cadre--vertical' : '') + '">' +
+          (imgV ? '<picture><source media="(min-width:768px)" srcset="' + escapeHtml(imgV) + '"' + dims(vv) + '>' + balise + '</picture>' : balise) + '</div>'
         : '<div class="jt-cadre jt-cadre--ico">' + jtSvg(JT_I_PHOTO) + '</div>';
       return '<article class="jt-ouvert jt-ouvert--photo' + (p.etat === 'avant' ? ' jt-ouvert--avenir' : '') + '">' + cadre + this._jpCorps() + '</article>';
     }
