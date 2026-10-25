@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum bca2b88 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="bca2b88";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum dab361d | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="dab361d";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -82,6 +82,76 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-etapes i svg{width:20px;height:20px}
 :is(rdr-concours-photo,.cp-portail) .cp-etapes b{font-size:13.5px;font-weight:800;color:#fff;letter-spacing:.01em}
 :is(rdr-concours-photo,.cp-portail) .cp-etapes span{font-size:12.5px;line-height:1.4;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes .cp-jures{display:flex;align-items:center;gap:5px;margin-top:3px;font-style:normal;font-size:12px;font-weight:700;color:var(--jaune);white-space:nowrap}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes .cp-jures[hidden]{display:none}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes .cp-jures b{font-weight:800;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-jures svg{flex:none;width:12px;height:12px}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or{background:linear-gradient(160deg,rgba(252,241,80,.2),rgba(22,28,48,.82) 72%);border:1.5px solid rgba(252,241,80,.62);border-radius:12px;box-shadow:0 8px 26px rgba(252,241,80,.08)}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or i.cp-etape-badge{background:none;border-radius:999px}
+:is(rdr-concours-photo,.cp-portail) .cp-etape-badge img{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or b em{margin-left:8px;padding:2px 7px;border-radius:999px;background:var(--jaune);color:var(--marine);font-style:normal;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:2px;white-space:nowrap}
+:is(rdr-concours-photo,.cp-portail) .cp-jure{display:flex;flex-direction:column;gap:8px;padding:11px 13px 12px;border-radius:14px;background:linear-gradient(160deg,rgba(252,241,80,.2),rgba(252,241,80,.07));border:1.5px solid rgba(252,241,80,.62);text-align:left}
+:is(rdr-concours-photo,.cp-portail) .cp-jure-tete{display:flex;align-items:center;gap:12px}
+:is(rdr-concours-photo,.cp-portail) .cp-jure-badge{flex:none;width:64px;height:64px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.45))}
+:is(rdr-concours-photo,.cp-portail) .cp-jure-sur{display:block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-jure-txt b{display:block;margin-top:2px;font-family:var(--titre);font-size:24px;line-height:1;color:var(--jaune);text-transform:uppercase}
+:is(rdr-concours-photo,.cp-portail) .cp-jure p{margin:0;font-size:12.5px;line-height:1.45;color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-jure .cp-btn{padding:10px 16px;font-size:12px}
+:is(rdr-concours-photo,.cp-portail) .cp-pref .cp-jure-ok{display:flex;align-items:center;gap:5px;margin:0 -3px;font-size:11px;font-weight:700;letter-spacing:-.005em;white-space:nowrap;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-jure-ok img{flex:none;width:20px;height:20px}
+:is(rdr-concours-photo,.cp-portail) .cp-tri{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:-6px 0 16px;font-size:12.5px;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-tri[hidden]{display:none}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--filet);border-radius:3px 12px 3px 12px;background:transparent;color:var(--t1);font:700 12.5px/1 var(--police);cursor:pointer;transition:background .2s,border-color .2s}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b svg{width:14px;height:14px}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b[data-tri="coeurs"] svg{color:#FF6B77}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b[data-tri="etoiles"] svg{color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b[data-tri="coeurs"][aria-pressed="true"]{background:rgba(230,57,70,.16);border-color:rgba(255,107,119,.7)}
+:is(rdr-concours-photo,.cp-portail) .cp-tri-b[data-tri="etoiles"][aria-pressed="true"]{background:rgba(252,241,80,.14);border-color:rgba(252,241,80,.7)}
+:is(rdr-concours-photo,.cp-portail) .cp-compte-or{color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-act--etoile:not([data-on="1"]):not(:disabled){border-color:rgba(252,241,80,.6);background:rgba(252,241,80,.08)}
+:is(rdr-concours-photo,.cp-portail) .cp-act--etoile:not([data-on="1"]):not(:disabled) svg{color:var(--jaune)}
+@media (max-width:900px){:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or b em{display:table;margin:5px 0 0}:is(rdr-concours-photo,.cp-portail) .cp-etapes .cp-jures{display:block;white-space:normal;line-height:1.3}:is(rdr-concours-photo,.cp-portail) .cp-etapes .cp-jures svg{display:inline-block;vertical-align:-1px;margin-right:3px}}
+:is(rdr-concours-photo,.cp-portail) .cp-jour .cp-jour-img{overflow:hidden}
+:is(rdr-concours-photo,.cp-portail) .cp-jour .cp-jour-fond{position:absolute;inset:-28px;background-size:cover;background-position:center;filter:blur(22px) brightness(.5) saturate(1.1);transform:scale(1.08)}
+:is(rdr-concours-photo,.cp-portail) .cp-jour .cp-jour-img img{object-fit:contain;z-index:1}
+:is(rdr-concours-photo,.cp-portail) .cp-jour-txt p.cp-jour-hier{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:#FF8A94}
+:is(rdr-concours-photo,.cp-portail) .cp-jour-txt p.cp-jour-hier b{color:#fff;font-weight:800}
+:is(rdr-concours-photo,.cp-portail) .cp-jour-hier svg{width:15px;height:15px;color:#FF6B77}
+:is(rdr-concours-photo,.cp-portail) .cp-jour-acts .cp-btn--jour-etoile svg{color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-jour .cp-jour-acts{gap:7px}
+@media (min-width:901px){:is(rdr-concours-photo,.cp-portail) .cp-corps .cp-jour{grid-template-columns:minmax(0,1.4fr) minmax(320px,1fr)}:is(rdr-concours-photo,.cp-portail) .cp-jour .cp-jour-acts .cp-btn{padding:10px 13px;font-size:11.5px;letter-spacing:.06em}}
+:is(rdr-concours-photo,.cp-portail) .cp-jour-acts .cp-btn--jour-etoile[data-on="1"]{border-color:rgba(252,241,80,.7);background:rgba(252,241,80,.12);color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-chiffres .cp-recomp-b{display:inline-flex;align-items:center;gap:9px;padding:6px 12px 6px 10px;border:1.5px solid rgba(252,241,80,.55);border-radius:3px 14px 3px 14px;background:rgba(252,241,80,.08);color:#fff;font-family:var(--police);text-align:left;cursor:pointer;transition:background .2s,border-color .2s}
+:is(rdr-concours-photo,.cp-portail) .cp-chiffres .cp-recomp-b:hover{background:rgba(252,241,80,.16);border-color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-b > svg:first-child{flex:none;width:19px;height:19px;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-b > svg:last-child{flex:none;width:16px;height:16px;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-b span{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;row-gap:1px;line-height:1.25}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-b small{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-chiffres .cp-recomp-b b{margin:0;font-size:14px;font-weight:800;color:#fff}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp{position:fixed;inset:0;z-index:10030;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp[data-ouvert="1"]{opacity:1;visibility:visible}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-voile{position:absolute;inset:0;background:rgba(5,8,18,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-carte{position:relative;width:min(440px,100%);max-height:calc(100svh - 36px);overflow:auto;padding:26px 24px 22px;border-radius:6px 22px 6px 22px;background:linear-gradient(170deg,#1B2237,#0E111D 72%);border:1.5px solid rgba(252,241,80,.45);text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.55);transform:translateY(12px);transition:transform .25s}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp[data-ouvert="1"] .cp-recomp-carte{transform:none}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-x{position:absolute;top:10px;right:10px;width:36px;height:36px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-x svg{width:18px;height:18px}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-visuel{display:flex;flex-direction:column;align-items:center;gap:12px;margin:2px 0 14px}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-logo{display:block;width:min(240px,70%);height:auto}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-cadeau{display:inline-flex;width:64px;height:64px;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-cadeau svg{width:100%;height:100%}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-cadeau[hidden]{display:none}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-logo[hidden]{display:none}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp .cp-recomp-sur{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;color:var(--jaune)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-sur svg{width:16px;height:16px}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp h2{margin:8px 0 10px;font-family:var(--titre);font-style:italic;font-weight:400;font-size:26px;line-height:1.05;text-transform:uppercase;color:#fff}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-detail{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-qui{margin:0 0 18px;font-size:13px;line-height:1.45;color:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-qui svg{width:13px;height:13px;color:var(--jaune);vertical-align:-1px}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-qui b{color:var(--t1)}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-acts{display:flex;flex-direction:column;align-items:center;gap:10px}
+:is(rdr-concours-photo,.cp-portail) .cp-recomp-acts .cp-reglement[hidden]{display:none}
+@media (min-width:901px){:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or{grid-template-columns:54px minmax(0,1fr);column-gap:14px;padding:5px 18px 5px 14px}:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or i.cp-etape-badge{width:54px;height:54px}}
+@media (max-width:900px){:is(rdr-concours-photo,.cp-portail) .cp-etapes li.cp-etape-or i.cp-etape-badge{width:34px;height:34px}:is(rdr-concours-photo,.cp-portail) .cp-jures-suite{display:none}:is(rdr-concours-photo,.cp-portail) .cp-chiffres .cp-recomp-b{padding:6px 10px 6px 9px}:is(rdr-concours-photo,.cp-portail) .cp-recomp-b span{flex-direction:column;align-items:flex-start}:is(rdr-concours-photo,.cp-portail) .cp-chiffres .cp-recomp-b b{font-size:13px}:is(rdr-concours-photo,.cp-portail) .cp-recomp-b > svg:last-child{display:none}:is(rdr-concours-photo,.cp-portail) .cp-jure-badge{width:48px;height:48px}:is(rdr-concours-photo,.cp-portail) .cp-jure-txt b{font-size:21px}}
 @media (max-width:900px){
   :is(rdr-concours-photo,.cp-portail) .cp-etapes{gap:8px}
   :is(rdr-concours-photo,.cp-portail) .cp-etapes li{grid-template-columns:1fr;align-content:start;align-items:start;gap:6px;padding:10px}
@@ -554,6 +624,25 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Les dernières': 'Latest',
     "les plus récentes d'abord": 'newest first',
     'Les plus aimées': 'Most loved',
+    'Classer les plus aimées': 'Sort the most loved',
+    'Classées par': 'Sorted by',
+    'Cœurs': 'Hearts',
+    'Étoiles': 'Stars',
+    "Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, et la photo la plus étoilée gagne. Votre première étoile débloque le badge Juré.": 'Pick your favourite with the star at the top of its thumbnail. It is your only vote, and the most starred photo wins. Your first star unlocks the Juror badge.',
+    '<b>{n}</b> juré': '<b>{n}</b> juror',
+    'a donné son étoile': 'has given their star',
+    'Elle seule fait gagner.': 'Only the star decides the winner.',
+    '<b>{n}</b> jurés': '<b>{n}</b> jurors',
+    'ont donné leur étoile': 'have given their star',
+    'Badge Juré': 'Juror badge',
+    'Badge à débloquer': 'Badge to unlock',
+    'Juré': 'Juror',
+    'Votre sélection est prête. Posez votre étoile sur votre préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.': 'Your selection is ready. Give your star to your favourite. Only the star decides the winner, and it unlocks the Juror badge in your Espace Rhum.',
+    'Posez votre étoile sur votre photo préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.': 'Give your star to your favourite photo. Only the star decides the winner, and it unlocks the Juror badge in your Espace Rhum.',
+    'Trouver ma préférée': 'Find my favourite',
+    'Badge Juré débloqué dans votre Espace Rhum': 'Juror badge unlocked in your Espace Rhum',
+    "Réservé aux membres de l'Espace Rhum. Tout le monde peut regarder, et pour garder, voter et gagner le badge Juré, il suffit de <b>créer son Espace</b>.": 'For Espace Rhum members. Everyone can look, and to keep, vote and earn the Juror badge, just <b>create your Espace</b>.',
+    'Votre seul vote, et le badge Juré à la clé': 'Your only vote, with the Juror badge to earn',
     'comptées chaque nuit': 'counted every night',
     'À droite, <em class="oui">je garde</em>. À gauche, <em class="non">je passe</em>.': 'Right, <em class="oui">I keep it</em>. Left, <em class="non">I pass</em>.',
     'Vous avez tout vu. Les prochaines photos arrivent chaque jour, après validation.': 'You have seen them all. New photos arrive every day, once approved.',
@@ -585,6 +674,14 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     "C'est envoyé": 'Sent',
     "Votre photo est en attente de validation. Vous serez prévenu dans votre Espace Rhum dès qu'elle est en ligne.": 'Your photo is awaiting approval. You will be notified in your Espace Rhum as soon as it is online.',
     'Retour aux photos': 'Back to the photos',
+    "La photo que vous avez le plus aimée hier, mise en avant aujourd'hui.": 'The photo you loved most yesterday, featured today.',
+    'Chaque jour, une photo prend cette place pendant vingt-quatre heures.': 'Every day, a photo takes this spot for twenty-four hours.',
+    '<b>{n}</b> cœur reçu hier': '<b>{n}</b> heart received yesterday',
+    '<b>{n}</b> cœurs reçus hier': '<b>{n}</b> hearts received yesterday',
+    'La récompense': 'The prize',
+    'Pour visiter la manufacture Alpina, logement et billets de train compris. Et la photo gagnante imprimée en tirage fine art.': 'To visit the Alpina manufacture, accommodation and train tickets included. And the winning photo printed as a fine art print.',
+    "Elle revient à la photo qui aura reçu le plus d'étoiles à la clôture des votes, le <b>{date}</b>.": 'It goes to the photo with the most stars when voting closes, on <b>{date}</b>.',
+    "Elle revient à la photo qui aura reçu le plus d'étoiles à la clôture des votes.": 'It goes to the photo with the most stars when voting closes.',
     "Revoir celles que j'ai passées": 'See the ones I skipped again',
     'Créer son Espace Rhum': 'Create your Espace Rhum',
     'Votre Espace Rhum pour voter': 'Your Espace Rhum to vote',
@@ -786,7 +883,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       <ol class="cp-etapes">
         <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg></i><b>${t('Déposez votre photo')}</b><span>${t("Une seule par membre, relue par l'équipe")}</span></li>
         <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg></i><b>${t('Gardez vos coups de cœur')}</b><span>${t("Jusqu'à 40, ils forment votre sélection")}</span></li>
-        <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></i><b>${t('Posez votre étoile')}</b><span>${t('Elle seule fait gagner, et débloque le badge Juré')}</span></li>
+        <li class="cp-etape-or"><i class="cp-etape-badge"><img src="${BADGE_JURE}" alt="" width="60" height="60"></i><b>${t('Posez votre étoile')}<em>${t('Badge Juré')}</em></b><span>${t('Elle seule fait gagner.')}<em class="cp-jures" id="cp-jures" hidden></em></span></li>
       </ol>
       <p class="cp-partenaire">${t('<b>Alpina</b>, chronométreur officiel de la Route du Rhum.')}${' ' + (demo ? t('Aperçu du challenge, avec les photos du site, des noms et des votes fictifs.') : t("Photos relues par l'équipe, cœurs et étoiles comptés chaque nuit."))}</p>
     </div>
@@ -818,6 +915,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       </div>
     </div>
 
+    <div class="cp-tri" id="cp-tri" role="group" aria-label="${t('Classer les plus aimées')}" hidden><span>${t('Classées par')}</span><button class="cp-tri-b" type="button" data-tri="coeurs" aria-pressed="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>${t('Cœurs')}</button><button class="cp-tri-b" type="button" data-tri="etoiles" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>${t('Étoiles')}</button></div>
     <section class="cp-jour cp-jour--attente" id="cp-jour" aria-busy="true"><div class="cp-jour-img cp-att"></div><div class="cp-jour-txt"><i class="cp-att cp-att--barre" style="width:44%"></i><i class="cp-att cp-att--titre"></i><i class="cp-att cp-att--barre" style="width:52%"></i><i class="cp-att cp-att--barre"></i><i class="cp-att cp-att--barre" style="width:86%"></i><i class="cp-att cp-att--boutons"></i></div></section>
 
     <div class="cp-grille" id="cp-grille" aria-busy="true"><div class="cp-att-rangee"><i class="cp-att" style="flex-grow:1.5"></i><i class="cp-att" style="flex-grow:0.7"></i><i class="cp-att" style="flex-grow:1.33"></i><i class="cp-att" style="flex-grow:1"></i><i class="cp-att" style="flex-grow:1.5"></i></div><div class="cp-att-rangee"><i class="cp-att" style="flex-grow:1"></i><i class="cp-att" style="flex-grow:1.5"></i><i class="cp-att" style="flex-grow:0.67"></i><i class="cp-att" style="flex-grow:1.5"></i><i class="cp-att" style="flex-grow:1.2"></i></div><div class="cp-att-rangee"><i class="cp-att" style="flex-grow:1.33"></i><i class="cp-att" style="flex-grow:1.5"></i><i class="cp-att" style="flex-grow:1"></i><i class="cp-att" style="flex-grow:0.75"></i><i class="cp-att" style="flex-grow:1.5"></i></div></div>
@@ -830,6 +928,19 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><rect x="9" y="6" width="6" height="12" rx="1.5"/></svg>
   ${t('Mode glisser')}
 </button>
+
+<div class="cp-recomp" id="cp-recomp" role="dialog" aria-modal="true" aria-labelledby="cp-recomp-titre" data-ouvert="0">
+  <div class="cp-recomp-voile" data-fermer-recomp></div>
+  <div class="cp-recomp-carte">
+    <button class="cp-recomp-x" type="button" data-fermer-recomp aria-label="${t('Fermer')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="cp-recomp-visuel"><img class="cp-recomp-logo" id="cp-recomp-logo" alt="" hidden><span class="cp-recomp-cadeau" id="cp-recomp-cadeau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg></span></div>
+    <p class="cp-sur cp-recomp-sur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg>${t('La récompense')}</p>
+    <h2 id="cp-recomp-titre"></h2>
+    <p class="cp-recomp-detail">${t('Pour visiter la manufacture Alpina, logement et billets de train compris. Et la photo gagnante imprimée en tirage fine art.')}</p>
+    <p class="cp-recomp-qui" id="cp-recomp-qui"></p>
+    <div class="cp-recomp-acts"><button class="cp-btn cp-btn--or" type="button" data-recomp-etoile>${t('Choisir ma préférée')}</button><a class="cp-reglement" id="cp-recomp-reglement" target="_blank" rel="noopener" hidden>${t('Règlement du challenge')}</a></div>
+  </div>
+</div>
 
 <div class="cp-fen" id="cp-fen" role="dialog" aria-modal="true" aria-label="${t('Photo en grand')}">
   <div class="cp-fen-corps">
@@ -946,6 +1057,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 <div class="cp-toast" id="cp-toast" role="status"></div>
 `;
 
+  const BADGE_JURE = 'https://static.wixstatic.com/media/df962b_c020f2d04ed9422eb89fc0e145ff6ee7~mv2.png/v1/fill/w_120,h_120,al_c,q_90/jure.png';
+  const ICO_CADEAU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg>';
+  const ICO_FLECHE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
   const ICO = {
     coeur: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg>',
     coeurLigne: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg>',
@@ -1529,7 +1643,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       for (const x of liste || []) {
         const p = versPhoto(x);
         if (!p || etat.parId.has(p.id)) continue;
-        if (idJour && p.id === idJour) p.jour = true;
+        if (idJour && p.id === idJour) { p.jour = true; p.coeursHier = Number(donnees.photoDuJour && donnees.photoDuJour.coeursHier) || 0; }
         etat.photos.push(p); etat.parId.set(p.id, p); neuves.push(p);
       }
       return neuves;
@@ -1681,6 +1795,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     const score = (p) => p.coeurs + REGLAGES.poidsEtoile * p.etoiles;
     function ordonnerListe(photos, graine) {
       if (etat.ordre === 'dernieres') return photos.slice().sort((a, b) => b.le - a.le).map(p => p.id);
+      if (etat.ordre === 'aimees' && etat.triAimees === 'etoiles') return photos.slice().sort((a, b) => b.etoiles - a.etoiles || b.coeurs - a.coeurs || b.le - a.le).map(p => p.id);
       if (etat.ordre === 'aimees') return photos.slice().sort((a, b) => score(b) - score(a) || b.le - a.le).map(p => p.id);
       return construireFil(photos, REGLAGES, graine);
     }
@@ -1739,7 +1854,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         <img data-src="${srcPour(p, w)}" alt="" width="${w}" height="${hh}" decoding="async">
         <span class="cp-marques">${marques(p)}</span>
         ${poses(p)}
-        <span class="cp-voile"><b>${p.auteur}</b><span class="cp-compte"><span>${ICO.coeur} ${p.coeurs}</span><span>${ICO.etoile} ${p.etoiles}</span></span></span>
+        <span class="cp-voile"><b>${p.auteur}</b><span class="cp-compte"><span class="cp-compte-or">${ICO.etoile} ${p.etoiles}</span><span>${ICO.coeur} ${p.coeurs}</span></span></span>
         ${p.moi ? '' : `<span class="cp-acts">
           <button class="cp-ico cp-ico--coeur" type="button" data-act="coeur" data-on="${etat.coeurs.includes(p.id) ? 1 : 0}" aria-label="${t('Garder')}">${ICO.coeur}</button>
           <button class="cp-ico cp-ico--etoile" type="button" data-act="etoile" data-on="${etat.etoile === p.id ? 1 : 0}" aria-label="${t('Mon étoile')}">${ICO.etoile}</button>
@@ -1998,8 +2113,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         if (cfg.etat === 'clos') li.push(t('Votes clos'));
         else if (cfg.clotureVotesLe) li.push(t("Votes jusqu'au <b>{date}</b>", { date: dateCourte(cfg.clotureVotesLe) }));
       }
-      if (!demo && cfg.lot && cfg.etat !== 'eteint') li.push(t('<b>{lot}</b> à gagner', { lot: esc(cfg.lot) }));
+      if (!demo && cfg.lot && cfg.etat !== 'eteint') li.push('<button class="cp-recomp-b" type="button" data-recompense>' + ICO_CADEAU + '<span><small>' + t('La récompense') + '</small><b>' + esc(cfg.lot) + '</b></span>' + ICO_FLECHE + '</button>');
       $('cp-chiffres').innerHTML = li.map(x => `<li>${x}</li>`).join('');
+      const jures = etat.photos.reduce((s, p) => s + p.etoiles, 0), elJures = $('cp-jures');
+      elJures.hidden = !(jures > 0 && cfg.etat !== 'eteint' && cfg.etat !== 'avant');
+      const unJure = options.lang === 'en' ? jures === 1 : jures <= 1;
+      if (!elJures.hidden) elJures.innerHTML = ICO.etoile + nb(jures, '<b>{n}</b> juré', '<b>{n}</b> jurés') + '<span class="cp-jures-suite"> ' + (unJure ? t('a donné son étoile') : t('ont donné leur étoile')) + '</span>';
     }
 
     
@@ -2034,18 +2153,17 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
           <div class="cp-pref-tete"><button class="cp-pref-vignette" type="button" data-voir-etoile aria-label="${t('Voir ma préférée en grand')}"><img src="${src(p, 600)}" alt=""><i>${ICO.etoile}</i></button>
           <div class="cp-pref-txt"><b>${t('Votre préférée')}</b><small>${t('Photo de {a}', { a: p.auteur })}</small>${t("Votre étoile est votre seul vote, c'est elle qui peut faire gagner cette photo.")}</div></div>
           <p>${phraseDeplacer()}</p>
+          <p class="cp-jure-ok"><img src="${BADGE_JURE}" alt="" width="30" height="30">${t('Badge Juré débloqué dans votre Espace Rhum')}</p>
           <button class="cp-pref-changer" type="button" data-ouvrir-tiroir>${t('Changer de préférée')}</button>
         </div>`;
       }
       if (etat.etoile) return `<div class="cp-etat">${t('Votre étoile est posée.')}</div>`;
-      if (etat.coeurs.length) {
-        return `<div class="cp-rappel" role="note">
-          <p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Votre sélection est prête')}</p>
-          <p>${t("N'oubliez pas de poser votre étoile sur votre préférée. Les cœurs forment votre sélection, seule l'étoile vote pour la meilleure photo.")}</p>
-          <button class="cp-btn cp-btn--or" type="button" data-choisir-etoile>${ICO.etoile} ${t('Choisir ma préférée')}</button>
+      const pret = etat.coeurs.length > 0;
+      return `<div class="cp-jure" role="note">
+          <div class="cp-jure-tete"><img class="cp-jure-badge" src="${BADGE_JURE}" alt="" width="60" height="60"><div class="cp-jure-txt"><span class="cp-jure-sur">${t('Badge à débloquer')}</span><b>${t('Juré')}</b></div></div>
+          <p>${pret ? t('Votre sélection est prête. Posez votre étoile sur votre préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.') : t('Posez votre étoile sur votre photo préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.')}</p>
+          <button class="cp-btn cp-btn--or" type="button" ${pret ? 'data-choisir-etoile' : 'data-trier'}>${ICO.etoile} ${pret ? t('Choisir ma préférée') : t('Trouver ma préférée')}</button>
         </div>`;
-      }
-      return `<div class="cp-etat">${t("Vous n'avez pas encore posé votre étoile.")}</div>`;
     }
 
     function actionsDemo() {
@@ -2070,7 +2188,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       let texte, pill;
       if (mp.statut === 'validee') {
         texte = Number.isFinite(Number(mp.coeurs)) && mp.coeurs !== null && mp.coeurs !== ''
-          ? t('<i>{c}</i> et <i>{e}</i> cette nuit.', { c: nb(Number(mp.coeurs) || 0, '{n} cœur', '{n} cœurs'), e: nb(Number(mp.etoiles) || 0, '{n} étoile', '{n} étoiles') })
+          ? t('<i>{c}</i> et <i>{e}</i> cette nuit.', { c: nb(Number(mp.etoiles) || 0, '{n} étoile', '{n} étoiles'), e: nb(Number(mp.coeurs) || 0, '{n} cœur', '{n} cœurs') })
           : t('Comptée chaque nuit, avec ses cœurs et ses étoiles.');
         pill = `<span class="cp-pill cp-pill--ligne">${t('En ligne')}</span>`;
       } else if (mp.statut === 'refusee') {
@@ -2116,7 +2234,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         let texte;
         if (cfg.etat === 'clos') texte = t('Les votes sont clos. Merci à tous les participants.');
         else if (cfg.etat === 'votes' || cfg.depotsOuverts === false) texte = cfg.clotureVotesLe ? t("Les dépôts sont clos. Les votes continuent jusqu'au {date}, réservés aux membres de l'Espace Rhum.", { date: dateCourte(cfg.clotureVotesLe) }) : t("Les dépôts sont clos. Les votes continuent, réservés aux membres de l'Espace Rhum.");
-        else if (depotPossible()) texte = t("Réservé aux membres de l'Espace Rhum. Tout le monde peut regarder, et pour garder et voter, il suffit de <b>créer son Espace</b>.");
+        else if (depotPossible()) texte = t("Réservé aux membres de l'Espace Rhum. Tout le monde peut regarder, et pour garder, voter et gagner le badge Juré, il suffit de <b>créer son Espace</b>.");
         else texte = t("Le dépôt des photos ouvre avec la publication du règlement. Tout le monde peut regarder, et pour garder et voter, il suffit de <b>créer son Espace</b>.");
         if (depotPossible()) a.push(`<button class="cp-btn cp-btn--or" type="button" data-connexion="signup">${ICO.plus} ${t('Déposer ma photo')}</button>`);
         if (depotPossible() && enMaintenance()) a.push(blocMaintenance());
@@ -2142,11 +2260,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       }
       a.innerHTML = demo ? actionsDemo() : actionsReel();
     }
-    function dessinerTete() { if (vivant) { dessinerChiffres(); dessinerActions(); } }
+    function dessinerTete() { if (vivant) { dessinerChiffres(); dessinerActions(); if (etat.ordre === 'decouvrir') dessinerJour(); } }
     $('cp-actions').addEventListener('click', (e) => {
       if (e.target.closest('[data-ouvrir-tiroir], [data-choisir-etoile]')) { if (exigerCompte()) ouvrirTiroir(); }
       else if (e.target.closest('[data-voir-etoile]')) { if (etat.etoile) ouvrirFen(etat.coeurs.includes(etat.etoile) ? etat.coeurs.slice().reverse() : [etat.etoile], etat.etoile); }
       else if (e.target.closest('[data-connexion]')) ouvrirConnexion();
+      else if (e.target.closest('[data-trier]')) ouvrirGl();
       else if (e.target.closest('[data-deposer]')) ouvrirDepot();
       else if (e.target.closest('[data-reessayer-membre]')) { etat.membre = { statut: 'attente', connecte: true }; dessinerActions(); racine._redemanderMembre(); }
     });
@@ -2158,14 +2277,18 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       s.classList.remove('cp-jour--attente'); s.removeAttribute('aria-busy');
       if (!p || etat.ordre !== 'decouvrir') { s.hidden = true; return; }
       s.hidden = false;
-      s.innerHTML = `<div class="cp-jour-img"><img src="${src(p, 1000)}" alt=""></div>
+      const jc = etat.coeurs.includes(p.id), je = etat.etoile === p.id, jv = votesPossibles();
+      s.innerHTML = `<div class="cp-jour-img"><span class="cp-jour-fond" style="background-image:url('${src(p, 600)}')"></span><img src="${src(p, 1600)}" alt=""></div>
         <div class="cp-jour-txt"><p class="cp-sur">${ICO.soleil} ${t('La photo du jour')}</p><h2>${p.legende || t("Sans légende, et c'est très bien")}</h2>
         <p class="cp-aut">${t('par <b>{a}</b>, mise en ligne le {date}', { a: p.auteur, date: dateCourte(p.le) })}</p>
-        <p>${t('Chaque nuit, une photo jamais mise en avant prend cette place pendant vingt-quatre heures. Tout le monde y passe, quel que soit son nombre de cœurs.')}</p>
-        <div class="cp-jour-acts"><button class="cp-btn cp-btn--or" type="button" data-jour-voir>${t('Voir en grand')}</button>${p.moi ? '' : `<button class="cp-btn cp-btn--ligne" type="button" data-jour-coeur>${ICO.coeurLigne} ${t('Garder')}</button>`}</div></div>`;
+        <p>${p.coeursHier > 0 ? t("La photo que vous avez le plus aimée hier, mise en avant aujourd'hui.") : t('Chaque jour, une photo prend cette place pendant vingt-quatre heures.')}</p>
+        ${p.coeursHier > 0 ? `<p class="cp-jour-hier">${ICO.coeur} ${nb(p.coeursHier, '<b>{n}</b> cœur reçu hier', '<b>{n}</b> cœurs reçus hier')}</p>` : ''}
+        <div class="cp-jour-acts"><button class="cp-btn cp-btn--or" type="button" data-jour-voir>${t('Voir en grand')}</button>${p.moi ? '' : `<button class="cp-btn cp-btn--ligne${jc ? ' cp-btn--sel' : ''}" type="button" data-jour-coeur>${jc ? ICO.coeur : ICO.coeurLigne} ${jc ? t('Gardée') : t('Garder')}</button>${jv ? `<button class="cp-btn cp-btn--ligne cp-btn--jour-etoile" type="button" data-jour-etoile data-on="${je ? 1 : 0}">${je ? ICO.etoile : ICO.etoileLigne} ${t('Ma préférée')}</button>` : ''}`}</div></div>`;
       s.querySelector('[data-jour-voir]').onclick = () => ouvrirFen(etat.fil, p.id);
       const bc = s.querySelector('[data-jour-coeur]');
-      if (bc) bc.onclick = () => basculerCoeur(p.id);
+      if (bc) bc.onclick = () => { basculerCoeur(p.id); dessinerJour(); };
+      const be = s.querySelector('[data-jour-etoile]');
+      if (be) be.onclick = () => poserEtoile(p.id);
     }
 
      
@@ -2182,11 +2305,42 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     $('cp-onglets').addEventListener('click', (e) => {
       const b = e.target.closest('.cp-onglet'); if (!b) return;
       etat.ordre = b.dataset.ordre;
+      $('cp-tri').hidden = etat.ordre !== 'aimees';
       document.querySelectorAll('.cp-onglet').forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
       placerCurseur();
       dessinerJour(); dessinerGrille();
       window.scrollTo({ top: Math.min(window.scrollY, $('cp-onglets').getBoundingClientRect().top + window.scrollY - 8) });
     });
+
+    $('cp-tri').addEventListener('click', (e) => {
+      const b = e.target.closest('.cp-tri-b'); if (!b || b.getAttribute('aria-pressed') === 'true') return;
+      etat.triAimees = b.dataset.tri;
+      document.querySelectorAll('.cp-tri-b').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      dessinerGrille();
+    });
+
+    
+
+    function ouvrirRecomp() {
+      const r = $('cp-recomp'); if (!r) return;
+      $('cp-recomp-titre').textContent = cfg.lot || '';
+      const d = dateVotes();
+      $('cp-recomp-qui').innerHTML = ICO.etoile + ' ' + (d ? t("Elle revient à la photo qui aura reçu le plus d'étoiles à la clôture des votes, le <b>{date}</b>.", { date: d }) : t("Elle revient à la photo qui aura reçu le plus d'étoiles à la clôture des votes."));
+      const lr = lienReglement(), a = $('cp-recomp-reglement');
+      if (lr) { a.href = lr; a.hidden = false; } else a.hidden = true;
+      const logo = $('cp-recomp-logo');
+      if (vis.logoMarque && /^https:\/\//.test(vis.logoMarque)) { logo.src = vis.logoMarque; logo.alt = vis.logoMarqueAlt || ''; logo.hidden = false; } else logo.hidden = true;
+      $('cp-recomp-cadeau').hidden = !logo.hidden;
+      r.dataset.ouvert = 1; verrouiller();
+      requestAnimationFrame(() => r.querySelector('.cp-recomp-x').focus());
+    }
+    function fermerRecomp() { const r = $('cp-recomp'); if (!r || r.dataset.ouvert !== '1') return; r.dataset.ouvert = 0; deverrouiller(); }
+    $('cp-chiffres').addEventListener('click', (e) => { if (e.target.closest('[data-recompense]')) ouvrirRecomp(); });
+    $('cp-recomp').addEventListener('click', (e) => {
+      if (e.target.closest('[data-fermer-recomp]')) fermerRecomp();
+      else if (e.target.closest('[data-recomp-etoile]')) { fermerRecomp(); if (!exigerCompte()) return; if (etat.coeurs.length) ouvrirTiroir(); else ouvrirGl(); }
+    });
+    ecoute(document, 'keydown', (e) => { if (e.key === 'Escape') fermerRecomp(); });
 
      
     function ouvrirFen(liste, id) {
@@ -2218,12 +2372,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         <div class="cp-fen-aut">${t('Photo de<b>{a}</b>', { a: p.auteur })}</div>
         <p class="cp-fen-leg">${p.legende || ''}</p>
         <div class="cp-fen-date">${t('Mise en ligne le {date}', { date: dateCourte(p.le) })}${p.jours <= 2 ? ` · <span style="color:var(--teal);font-weight:700">${t('Nouvelle')}</span>` : ''}</div>
-        <div class="cp-fen-comptes"><span>${ICO.coeur} ${nb(p.coeurs, '<b>{n}</b> cœur', '<b>{n}</b> cœurs')}</span><span>${ICO.etoile} ${nb(p.etoiles, '<b>{n}</b> étoile', '<b>{n}</b> étoiles')}</span></div>
+        <div class="cp-fen-comptes"><span class="cp-compte-or">${ICO.etoile} ${nb(p.etoiles, '<b>{n}</b> étoile', '<b>{n}</b> étoiles')}</span><span>${ICO.coeur} ${nb(p.coeurs, '<b>{n}</b> cœur', '<b>{n}</b> cœurs')}</span></div>
         <div class="cp-fen-note">${t('Comptés cette nuit. Votre geste sera dans le compte de demain.')}</div>
         <div class="cp-fen-acts">
           ${p.moi ? `<div class="cp-fen-note">${t("C'est votre photo. On ne vote pas pour soi, mais vous pouvez la partager.")}</div>` : `
-          <button class="cp-act cp-act--coeur" type="button" data-fen="coeur" data-on="${c ? 1 : 0}">${c ? ICO.coeur : ICO.coeurLigne}<span>${c ? t('Dans ma sélection') : t('Garder')}<small>${c ? t('Retirer le cœur') : t("Jusqu'à quarante, pour choisir ensuite")}</small></span></button>
-          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Pour la déplacer, posez-la sur une autre') : dateVotes() ? t("Votre seul vote, déplaçable jusqu'au {date}", { date: dateVotes() }) : t("Votre seul vote, déplaçable jusqu'à la clôture")}</small></span></button>`}
+          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Pour la déplacer, posez-la sur une autre') : !etat.etoile ? t('Votre seul vote, et le badge Juré à la clé') : dateVotes() ? t("Votre seul vote, déplaçable jusqu'au {date}", { date: dateVotes() }) : t("Votre seul vote, déplaçable jusqu'à la clôture")}</small></span></button>
+          <button class="cp-act cp-act--coeur" type="button" data-fen="coeur" data-on="${c ? 1 : 0}">${c ? ICO.coeur : ICO.coeurLigne}<span>${c ? t('Dans ma sélection') : t('Garder')}<small>${c ? t('Retirer le cœur') : t("Jusqu'à quarante, pour choisir ensuite")}</small></span></button>`}
           <button class="cp-act cp-act--sobre" type="button" data-fen="partage">${ICO.partage}<span>${t('Partager')}<small>${t('Le lien de cette photo')}</small></span></button>
           ${p.moi ? '' : `<button class="cp-act cp-act--sobre" type="button" data-fen="masquer">${ICO.oeilBarre}<span>${t('Masquer')}<small>${t('Ne plus la voir sur cet appareil')}</small></span></button>`}
         </div>`;
@@ -2271,7 +2425,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       const invite = vp && n > 0 && !etat.etoile;
       $('cp-tiroir').dataset.invite = invite ? 1 : 0;
       $('cp-tiroir-rappel').innerHTML = invite
-        ? `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Il reste à poser votre étoile')}</p><p>${t("Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, une par membre, et la photo la plus étoilée gagne.")}</p></div>`
+        ? `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Il reste à poser votre étoile')}</p><p>${t("Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, et la photo la plus étoilée gagne. Votre première étoile débloque le badge Juré.")}</p></div>`
         : (vp && etat.etoile ? `<p class="cp-tiroir-deplacer">${phraseDeplacer()}</p>` : '');
       if (!n) { l.innerHTML = `<div class="cp-tiroir-vide">${t("Aucune photo gardée pour l'instant.<br>Un cœur sur une photo, et elle arrive ici.")}</div>`; return; }
       l.innerHTML = gardees.slice().reverse().map(id => { const p = etat.parId.get(id); const e = etat.etoile === id; return `
