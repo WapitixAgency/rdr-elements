@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer"><meta name="format-detection" content="telephone=no"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src https://www.routedurhum.com; base-uri 'none'; form-action 'none'"><link rel="icon" href="data:,"><title>Les e-mails de ton Espace Rhum</title><style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:#E6ECF3;color:#13214A;font:16px/1.55 Arial,Helvetica,sans-serif}
+[hidden]{display:none!important}
+.carte{max-width:560px;margin:24px auto;background:#fff;border-radius:6px 22px 6px 22px;overflow:hidden;box-shadow:0 10px 30px rgba(14,27,58,.08)}
+.tete{background:#0E1B3A;color:#fff;padding:24px 28px 22px}
+.marque{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.marque span{color:#FCF150}
+.tete h1{margin:14px 0 0;font-family:'Arial Black',Arial,Helvetica,sans-serif;font-style:italic;font-weight:900;font-size:24px;line-height:1.1;text-transform:uppercase;color:#FCF150}
+.corps{padding:26px 28px 30px}
+.corps h2{margin:0 0 10px;font-size:20px;line-height:1.25}
+.corps p{margin:0 0 14px}
+.note{font-size:14px;color:#4A5F7D}
+.btn{display:inline-block;margin:6px 10px 6px 0;padding:14px 22px;border:0;border-radius:3px 14px 3px 14px;background:#FCF150;color:#0E1B3A;font:700 14px/1.1 Arial,Helvetica,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.btn[disabled]{opacity:.6;cursor:wait}
+.btn--ligne{background:none;border:2px solid #0E1B3A;padding:12px 20px}
+.erreur{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:#FDECEC;color:#8A1C1C;font-size:14px}
+@media (max-width:600px){.carte{margin:0;border-radius:0;min-height:100vh}.tete,.corps{padding-left:18px;padding-right:18px}}
+</style></head>
+<body>
+<main class="carte">
+  <div class="tete"><div class="marque">Route du Rhum · <span>Destination Guadeloupe</span></div><h1 data-t="titre">Les e-mails de ton Espace Rhum</h1></div>
+  <div class="corps">
+    <section id="demande" hidden>
+      <h2 data-t="demandeTitre">Ne plus recevoir les e-mails de l’Espace Rhum ?</h2>
+      <p data-t="demandeTexte">Ce sont les rares e-mails liés à ton Espace : un badge à débloquer, un jeu qui ouvre. Ta newsletter Rhum Express n’est pas concernée, elle continue comme avant.</p>
+      <button class="btn" type="button" id="refuser" data-t="refuser">Ne plus les recevoir</button>
+      <a class="btn btn--ligne" href="https://www.routedurhum.com" data-t="garder" data-lien="site">Les garder</a>
+      <p class="erreur" id="erreur" hidden data-t="erreur">Le site ne répond pas pour l’instant. Réessaie dans quelques minutes.</p>
+    </section>
+    <section id="fait" hidden>
+      <h2 data-t="faitTitre">C’est noté.</h2>
+      <p data-t="faitTexte">Tu ne recevras plus les e-mails de l’Espace Rhum. Ta newsletter Rhum Express ne change pas.</p>
+      <p class="note" data-t="faitNote">Tu peux changer d’avis à tout moment dans ton Espace Rhum, fenêtre « Confidentialité et compte ».</p>
+      <button class="btn btn--ligne" type="button" id="reprendre" data-t="reprendre">Finalement, je veux les recevoir</button>
+      <p class="erreur" id="erreur2" hidden data-t="erreur">Le site ne répond pas pour l’instant. Réessaie dans quelques minutes.</p>
+    </section>
+    <section id="repris" hidden>
+      <h2 data-t="reprisTitre">C’est noté.</h2>
+      <p data-t="reprisTexte">Tu continueras à recevoir les e-mails de ton Espace Rhum.</p>
+      <a class="btn" href="https://www.routedurhum.com/mon-espace-rhum" data-t="espace" data-lien="espace">Mon Espace Rhum</a>
+    </section>
+    <section id="invalide" hidden>
+      <h2 data-t="invalideTitre">Ce lien ne fonctionne pas.</h2>
+      <p data-t="invalideTexte">Il est peut-être incomplet. Tu peux régler tes e-mails dans ton Espace Rhum, fenêtre « Confidentialité et compte ».</p>
+      <a class="btn" href="https://www.routedurhum.com/mon-espace-rhum" data-t="espace" data-lien="espace">Mon Espace Rhum</a>
+    </section>
+    <section id="panne" hidden>
+      <h2 data-t="panneTitre">Le site ne répond pas pour l’instant.</h2>
+      <p data-t="panneTexte">Rouvre le lien de ton e-mail dans quelques minutes, ou règle tes e-mails dans ton Espace Rhum, fenêtre « Confidentialité et compte ».</p>
+      <a class="btn" href="https://www.routedurhum.com/mon-espace-rhum" data-t="espace" data-lien="espace">Mon Espace Rhum</a>
+    </section>
+  </div>
+</main>
+<script>
+(function () {
+  var EN = {
+    titre: 'Your Espace Rhum emails',
+    demandeTitre: 'Stop receiving Espace Rhum emails?',
+    demandeTexte: 'These are the occasional emails about your Espace: a badge to unlock, a game opening. Your Rhum Express newsletter is not affected, it carries on as before.',
+    refuser: 'Stop receiving them', garder: 'Keep them',
+    erreur: 'The site is not responding right now. Try again in a few minutes.',
+    faitTitre: 'Done.', faitTexte: 'You will no longer receive Espace Rhum emails. Your Rhum Express newsletter does not change.',
+    faitNote: 'You can change your mind at any time in your Espace Rhum, in the “Privacy and account” window.',
+    reprendre: 'Actually, I want to receive them',
+    reprisTitre: 'Done.', reprisTexte: 'You will keep receiving your Espace Rhum emails.', espace: 'My Espace Rhum',
+    invalideTitre: 'This link does not work.', invalideTexte: 'It may be incomplete. You can set your emails in your Espace Rhum, in the “Privacy and account” window.',
+    panneTitre: 'The site is not responding right now.', panneTexte: 'Open the link in your email again in a few minutes, or set your emails in your Espace Rhum, in the “Privacy and account” window.'
+  };
+  var en = /(^|[?&])lang=en(&|$)/.test(location.search);
+  if (en) {
+    document.documentElement.lang = 'en';
+    document.title = EN.titre;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (el) { var k = el.getAttribute('data-t'); if (EN[k]) el.textContent = EN[k]; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lien]'), function (el) { el.href = el.getAttribute('data-lien') === 'espace' ? 'https://www.routedurhum.com/en/mon-espace-rhum' : 'https://www.routedurhum.com/en'; });
+  }
+  var h = location.hash.replace(/^#/, ''), m = '', s = '';
+  h.split('&').forEach(function (p) { var i = p.indexOf('='); if (i > 0) { var k = p.slice(0, i), v = decodeURIComponent(p.slice(i + 1)); if (k === 'm') m = v; if (k === 's') s = v; } });
+  /* Le lien ne reste pas dans la barre d'adresse : il ne se partage pas par erreur. */
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* rien */ }
+  function montrer(id) { ['demande', 'fait', 'repris', 'invalide', 'panne'].forEach(function (x) { document.getElementById(x).hidden = x !== id; }); }
+  if (h === 'panne') return montrer('panne');
+  if (!/^[0-9a-f-]{36}$/i.test(m) || !/^[0-9a-f]{40}$/.test(s)) return montrer('invalide');
+  montrer('demande');
+  function envoyer(refus, bouton, erreur, suite) {
+    bouton.disabled = true; erreur.hidden = true;
+    fetch('https://www.routedurhum.com/_functions/mailsEspace', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ m: m, s: s, refus: refus }) })
+      .then(function (r) { return r.json().then(function (j) { return { statut: r.status, j: j }; }); })
+      .then(function (x) {
+        bouton.disabled = false;
+        if (x.statut === 403) return montrer('invalide');
+        if (x.j && x.j.ok) return montrer(suite);
+        erreur.hidden = false;
+      })
+      .catch(function () { bouton.disabled = false; erreur.hidden = false; });
+  }
+  document.getElementById('refuser').addEventListener('click', function () { envoyer(true, this, document.getElementById('erreur'), 'fait'); });
+  document.getElementById('reprendre').addEventListener('click', function () { envoyer(false, this, document.getElementById('erreur2'), 'repris'); });
+})();
+</script>
+</body>
+</html>
