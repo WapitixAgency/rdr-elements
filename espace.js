@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 713f043 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="713f043";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum c66209f | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="c66209f";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1298,7 +1298,9 @@ if (!customElements.get('espace-rhum')) {
      
     'newsletter':        '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
      
-    'chasse-tymal':      '<path d="M12 22c4.4 0 7-3.1 7-7.5C19 9.3 15.9 2 12 2S5 9.3 5 14.5C5 18.9 7.6 22 12 22z"/>'
+    'chasse-tymal':      '<path d="M12 22c4.4 0 7-3.1 7-7.5C19 9.3 15.9 2 12 2S5 9.3 5 14.5C5 18.9 7.6 22 12 22z"/>',
+     
+    'jure':              '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
   };
    
   const BADGE_ICON_FALLBACK = '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>';
@@ -1343,7 +1345,13 @@ if (!customElements.get('espace-rhum')) {
 
 
 
-    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png'
+    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png',
+    
+
+
+
+    'jure':              'https://static.wixstatic.com/media/df962b_c020f2d04ed9422eb89fc0e145ff6ee7~mv2.png',
+    'newsletter':        'https://static.wixstatic.com/media/df962b_99296777c70d460088402bbd30d6e8e2~mv2.png'
   };
 
    
@@ -2028,6 +2036,14 @@ if (!customElements.get('espace-rhum')) {
     "Abonne-toi avec l'e-mail de ton compte.": 'Subscribe with your account email.',
     "Bienvenue dans Rhum Express ! L'actu de la course arrive dans ta boîte.": 'Welcome to Rhum Express! Race news is heading to your inbox.',
     "M'abonner": 'Subscribe',
+     
+    'Juré': 'Juror',
+    'Une étoile posée dans le Challenge photo': 'A star given in the photo Challenge',
+    'Choisis ta photo préférée du Challenge photo et pose ton étoile.': 'Pick your favourite photo in the photo Challenge and give it your star.',
+    'Ton étoile est posée.\nMerci, juré !': 'Your star is in.\nThank you, juror!',
+    'Ton étoile est posée.': 'Your star is in.',
+    'Merci, juré !': 'Thank you, juror!',
+    'Voter': 'Vote',
      
     'Chasseur de TyMAL': 'TyMAL Hunter',
     'Les quatre TyMAL cachés sur le site': 'The four TyMALs hidden on the site',
@@ -18459,6 +18475,7 @@ if (!customElements.get('espace-rhum')) {
           if (key === 'profil-complet') this._openProfilePrompt();
           else if (key === 'instagram') this._openInstaClaim();
           else if (key === 'newsletter') this.dispatchEvent(new CustomEvent('er-newsletter', { bubbles: true, composed: true }));
+          else if (key === 'jure') window.location.assign(this._cheminLangue('/concours-photo-2026'));
         };
         tile.addEventListener('click', handler);
         const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
@@ -20925,7 +20942,8 @@ if (!customElements.get('espace-rhum')) {
         lignes.push('<span class="jp-vote-l jp-vote-l--fait">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'You have voted for your favourite photo.' : 'Tu as voté pour ta photo préférée.') +
           (p.votesOuverts ? (en ? ' You can change your mind until ' + (fin || 'voting closes') + '.' : ' Tu peux changer d\'avis jusqu\'' + (fin ? 'au ' + fin : 'à la clôture des votes') + '.') : '') + '</span></span>');
       } else if (p.votesOuverts) {
-        lignes.push('<span class="jp-vote-l">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'You haven\'t voted yet.' : 'Tu n\'as pas encore voté.') + '</span></span>');
+         
+        lignes.push('<span class="jp-vote-l">' + jtSvg(JT_I_ETOILE) + '<span>' + (en ? 'You haven\'t voted yet. Give your star to unlock the <b>Juror</b> badge.' : 'Tu n\'as pas encore voté. Pose ton étoile pour débloquer le badge <b>Juré</b>.') + '</span></span>');
       }
       if (p.nbCoeurs > 0) {
         lignes.push('<span class="jp-vote-l">' + jtSvg(JT_I_COEUR) + '<span>' + (en ? p.nbCoeurs + ' photo' + (p.nbCoeurs > 1 ? 's' : '') + ' saved'

@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 713f043 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="713f043";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum c66209f | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="c66209f";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -539,7 +539,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     "Jusqu'à 40, ils forment votre sélection": 'Up to 40, they make up your selection',
     "Photos relues par l'équipe, cœurs et étoiles comptés chaque nuit.": 'Photos reviewed by our team, hearts and stars counted every night.',
     'Posez votre étoile': 'Give your star',
-    'Une par membre, elle seule fait gagner': 'One per member, only stars count',
+    'Elle seule fait gagner, et débloque le badge Juré': 'Only stars count, and it unlocks the Juror badge',
+    'Votre étoile est sur cette photo. Pour la déplacer, posez-la sur une autre.': 'Your star is on this photo. To move it, give it to another one.',
+    'Badge Juré débloqué dans votre Espace Rhum !': 'Juror badge unlocked in your Espace Rhum!',
     '<b>Alpina</b>, chronométreur officiel de la Route du Rhum.': '<b>Alpina</b>, official timekeeper of the Route du Rhum.',
     'Aperçu du challenge, avec les photos du site, des noms et des votes fictifs.': 'Preview of the challenge, with photos from the site and made-up names and votes.',
     'Mode glisser': 'Swipe mode',
@@ -605,7 +607,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Les votes sont clos': 'Voting is closed',
     "Les votes ne sont pas encore ouverts": 'Voting is not open yet',
     'Votre étoile est sur la photo de {a}': 'Your star is on the photo by {a}',
-    'Étoile retirée': 'Star removed',
     'Masquée, elle ne réapparaîtra pas sur cet appareil': 'Hidden, it will not come back on this device',
     'Lien copié': 'Link copied',
     'Lien copié (maquette)': 'Link copied (mock-up)',
@@ -783,7 +784,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       <ol class="cp-etapes">
         <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg></i><b>${t('Déposez votre photo')}</b><span>${t("Une seule par membre, relue par l'équipe")}</span></li>
         <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.4 1 4.1 2.3.7-1.3 2.1-2.3 4.1-2.3 3.7 0 5.9 3.8 4.5 7.4C19.5 16.4 12 21 12 21z"/></svg></i><b>${t('Gardez vos coups de cœur')}</b><span>${t("Jusqu'à 40, ils forment votre sélection")}</span></li>
-        <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></i><b>${t('Posez votre étoile')}</b><span>${t('Une par membre, elle seule fait gagner')}</span></li>
+        <li><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></i><b>${t('Posez votre étoile')}</b><span>${t('Elle seule fait gagner, et débloque le badge Juré')}</span></li>
       </ol>
       <p class="cp-partenaire">${t('<b>Alpina</b>, chronométreur officiel de la Route du Rhum.')}${' ' + (demo ? t('Aperçu du challenge, avec les photos du site, des noms et des votes fictifs.') : t("Photos relues par l'équipe, cœurs et étoiles comptés chaque nuit."))}</p>
     </div>
@@ -1577,6 +1578,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       fichier_refuse: "Cette photo n'a pas été acceptée. Essayez-en une autre.",
       fichier_en_cours: 'Votre photo est encore en traitement. Réessayez dans une minute.',
       la_tienne: 'On ne vote pas pour sa propre photo',
+      etoile_posee: 'Votre étoile est sur cette photo. Pour la déplacer, posez-la sur une autre.',
       photo: "Cette photo n'est plus en ligne.",
       maintenance: "Une petite maintenance du dépôt des photos est en cours. Désolé pour le dérangement. N'hésitez pas à repasser déposer votre photo un peu plus tard."
     };
@@ -1917,12 +1919,15 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       if (!p) return;
       if (p.moi) { toast(t('On ne vote pas pour sa propre photo')); return; }
       if (!votesPossibles()) { toast(!demo && (cfg.etat === 'avant' || cfg.etat === 'eteint') ? t('Les votes ne sont pas encore ouverts') : t('Les votes sont clos')); return; }
+      
+
+      if (etat.etoile === id) { toast(t('Votre étoile est sur cette photo. Pour la déplacer, posez-la sur une autre.')); return; }
       const avant = etat.etoile;
-      etat.etoile = etat.etoile === id ? null : id;
-      if (etat.etoile && !etat.coeurs.includes(id) && !pleine()) { etat.coeurs.push(id); memoriser(); }
+      etat.etoile = id;
+      if (!etat.coeurs.includes(id) && !pleine()) { etat.coeurs.push(id); memoriser(); }
       else if (demo) memoriser();
       redessinerGestes([avant, id]);
-      toast(etat.etoile ? t('Votre étoile est sur la photo de {a}', { a: p.auteur }) : t('Étoile retirée'));
+      toast(t('Votre étoile est sur la photo de {a}', { a: p.auteur }));
       if (!demo) envoyerVote();
     }
     async function envoyerVote() {
@@ -1935,6 +1940,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       if (r && r.ok) {
         etat.membre.monVote = r.monVote != null && r.monVote !== '' ? String(r.monVote) : null;
         if (etat.membre.monVote !== etat.etoile) { etat.etoile = etat.membre.monVote; redessinerGestes([avant, etat.etoile]); }
+         
+        if (r.badge === 'jure') setTimeout(() => toast(t('Badge Juré débloqué dans votre Espace Rhum !')), 2600);
       } else {
         etat.etoile = etat.membre.monVote != null ? etat.membre.monVote : null;
         redessinerGestes([avant, etat.etoile]);
