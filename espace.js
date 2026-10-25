@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum dab361d | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="dab361d";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum f13cac2 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="f13cac2";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1767,7 +1767,7 @@ if (!customElements.get('espace-rhum')) {
     'À ta portée': 'Within reach',
      
     'Débloqué': 'Unlocked',
-    'Événement | Saint-Malo': 'Event | Saint-Malo', 'Événement | Pointe-à-Pitre': 'Event | Pointe-à-Pitre',
+    'La course': 'The race',
     'Continue d\'explorer': 'Keep exploring',
      
 
@@ -7864,7 +7864,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-badges-category[data-category="exploration"] { grid-column: span 2; }
     espace-rhum .er-badges-category[data-category="fidelite"],
     espace-rhum .er-badges-category[data-category="evenement-sm"],
-    espace-rhum .er-badges-category[data-category="evenement-pap"],
     espace-rhum .er-badges-category[data-category="habitudes"] { grid-column: span 1; }
 
     espace-rhum .er-badges-category-header {
@@ -7887,7 +7886,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-badges-category[data-category="fidelite"]      .er-badges-category-title { color: var(--er-amber); }
     espace-rhum .er-badges-category[data-category="exploration"]   .er-badges-category-title { color: var(--er-teal); }
     espace-rhum .er-badges-category[data-category="evenement-sm"]  .er-badges-category-title { color: #7894F7; }
-    espace-rhum .er-badges-category[data-category="evenement-pap"] .er-badges-category-title { color: #F19F39; }
     espace-rhum .er-badges-category[data-category="habitudes"]     .er-badges-category-title { color: var(--er-teal); }
     espace-rhum .er-badges-category-count {
       font-family: var(--er-font-body);
@@ -7899,9 +7897,6 @@ if (!customElements.get('espace-rhum')) {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 14px;
-    }
-    espace-rhum .er-badges-category[data-category="evenement-pap"] .er-badges-category-grid {
-      grid-template-columns: minmax(140px, 200px);
     }
 
      
@@ -8011,13 +8006,6 @@ if (!customElements.get('espace-rhum')) {
       --tile-icon: #7894F7;
       --tile-halo: rgba(120, 148, 247, 0.45);
       --tile-shadow: rgba(120, 148, 247, 0.22);
-    }
-    espace-rhum .er-badge-tile[data-state="unlocked"][data-category="evenement-pap"] {
-      --tile-bg-from: rgba(241, 159, 57, 0.1);
-      --tile-border: rgba(241, 159, 57, 0.3);
-      --tile-icon: #F19F39;
-      --tile-halo: rgba(241, 159, 57, 0.45);
-      --tile-shadow: rgba(241, 159, 57, 0.22);
     }
     espace-rhum .er-badge-tile[data-state="unlocked"][data-category="habitudes"] {
       --tile-bg-from: rgba(93, 191, 192, 0.08);
@@ -10184,7 +10172,6 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .er-badge-modal[data-open="true"] .er-badge-modal-panel { transform: scale(1); }
     espace-rhum .er-badge-modal-panel[data-category="fidelite"]      { border-color: rgba(245, 190, 65, 0.35); }
     espace-rhum .er-badge-modal-panel[data-category="evenement-sm"]  { border-color: rgba(120, 148, 247, 0.35); }
-    espace-rhum .er-badge-modal-panel[data-category="evenement-pap"] { border-color: rgba(241, 159, 57, 0.35); }
     espace-rhum .er-badge-modal-close {
       position: absolute;
       top: 12px; right: 12px;
@@ -10219,7 +10206,6 @@ if (!customElements.get('espace-rhum')) {
     }
     espace-rhum .er-badge-modal-icon[data-category="fidelite"]      { stroke: var(--er-amber); }
     espace-rhum .er-badge-modal-icon[data-category="evenement-sm"]  { stroke: #7894F7; }
-    espace-rhum .er-badge-modal-icon[data-category="evenement-pap"] { stroke: #F19F39; }
     espace-rhum .er-badge-modal-halo {
       position: absolute;
       inset: -24px;
@@ -10529,7 +10515,6 @@ if (!customElements.get('espace-rhum')) {
     }
     espace-rhum .er-toast[data-category="fidelite"]      { --toast-accent: var(--er-amber); --toast-border: rgba(245, 190, 65, 0.4); }
     espace-rhum .er-toast[data-category="evenement-sm"]  { --toast-accent: #7894F7; --toast-border: rgba(120, 148, 247, 0.4); }
-    espace-rhum .er-toast[data-category="evenement-pap"] { --toast-accent: #F19F39; --toast-border: rgba(241, 159, 57, 0.4); }
     espace-rhum .er-toast-icon {
       width: 40px; height: 40px;
       display: grid; place-items: center;
@@ -11261,9 +11246,6 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-badges-category-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-      }
-      espace-rhum .er-badges-category[data-category="evenement-pap"] .er-badges-category-grid {
-        grid-template-columns: 1fr;
       }
       
 
@@ -18119,8 +18101,8 @@ if (!customElements.get('espace-rhum')) {
         { key: 'a-debloquer',   title: 'À ta portée' },
         { key: 'fidelite',      title: 'Fidélité' },
         { key: 'exploration',   title: 'Exploration' },
-        { key: 'evenement-sm',  title: 'Événement | Saint-Malo' },
-        { key: 'evenement-pap', title: 'Événement | Pointe-à-Pitre' },
+         
+        { key: 'evenement-sm',  title: 'La course' },
         { key: 'habitudes',     title: 'Habitudes' }
       ];
 
