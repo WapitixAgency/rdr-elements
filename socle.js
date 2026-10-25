@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum c66209f | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="c66209f";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum 49f174d | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="49f174d";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1348,6 +1348,7 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
       var r = String((n && n.refId) || '');
       if (r.indexOf('prono') === 0) return 'pronos';
       if (r.indexOf('roue') === 0) return 'roue';
+      if (r.indexOf('jure') === 0) return 'jeux';
     }
     return 'dashboard';
   }
@@ -1380,7 +1381,10 @@ rdr-pied-haut .pd-sq-col .pd-sq-l:first-child{width:62%;height:16px}
     'profil-complet':    'https://static.wixstatic.com/media/df962b_252a12cbd3d8467bbe4c21905d730aed~mv2.png',
     'instagram':         'https://static.wixstatic.com/media/df962b_dda7012dccd14ff0b438a9d03af55442~mv2.png',
      
-    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png'
+    'chasse-tymal':      'https://static.wixstatic.com/media/df962b_15170e99cb534acda7af8fff7244bdc7~mv2.png',
+     
+    'jure':              'https://static.wixstatic.com/media/df962b_c020f2d04ed9422eb89fc0e145ff6ee7~mv2.png',
+    'newsletter':        'https://static.wixstatic.com/media/df962b_99296777c70d460088402bbd30d6e8e2~mv2.png'
   };
 
   function esc(s) {

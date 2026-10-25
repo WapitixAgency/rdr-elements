@@ -1,5 +1,5 @@
-/* rdr-elements kit | source route-du-rhum c66209f | rdr-kit-pedagogique.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["kit"]="c66209f";performance.mark("rdr-elements:kit")}catch(e){}
+/* rdr-elements kit | source route-du-rhum 49f174d | rdr-kit-pedagogique.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["kit"]="49f174d";performance.mark("rdr-elements:kit")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-kit-pedagogique")) return;

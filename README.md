@@ -10,10 +10,10 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 
 | Paquet | Contenu | Poids |
 | --- | --- | --- |
-| `socle.js` | le haut du pied de page et les notifications (rdr-notify, posé sur toutes les pages, défini tôt, il est prêt quand la page lui passe la liste), sur toutes les pages ; depuis le 26/09 au soir, plus les anciens méga menus ni les horloges : l'en-tête en module (paquet entete) porte les siens, et l'horloge Alpina a rejoint le paquet du concours photo, seul à la poser : rdr-pied-haut, rdr-notify | 131.2 Ko, 27.8 Ko brotli |
-| `carte.js` | la carte du village ; ses données sont déjà dans le HTML servi, et MapLibre est préchargé avec elle :  | 789.0 Ko, 171.8 Ko brotli |
-| `atelier.js` | l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte :  | 1079.4 Ko, 241.3 Ko brotli |
-| `espace.js` | l'Espace Rhum ; le module arrive en parallèle du runtime, en priorité réseau basse (il ne peut rien dessiner avant la vérification du membre), et le dernier état connu du membre s'affiche à l'instant : rdr-dernieres-infos, espace-rhum | 1098.6 Ko, 183.6 Ko brotli |
+| `socle.js` | le haut du pied de page et les notifications (rdr-notify, posé sur toutes les pages, défini tôt, il est prêt quand la page lui passe la liste), sur toutes les pages ; depuis le 26/09 au soir, plus les anciens méga menus ni les horloges : l'en-tête en module (paquet entete) porte les siens, et l'horloge Alpina a rejoint le paquet du concours photo, seul à la poser : rdr-pied-haut, rdr-notify | 131.4 Ko, 27.8 Ko brotli |
+| `carte.js` | la carte du village ; ses données sont déjà dans le HTML servi, et MapLibre est préchargé avec elle :  | 789.0 Ko, 171.9 Ko brotli |
+| `atelier.js` | l'atelier du village (village-atelier, l'outil de l'équipe pour éditer la carte, sur ordinateur) ; le plus gros module du site après l'Espace Rhum (168 Ko brotli), MapLibre préchargé comme pour la carte :  | 1079.4 Ko, 241.2 Ko brotli |
+| `espace.js` | l'Espace Rhum ; le module arrive en parallèle du runtime, en priorité réseau basse (il ne peut rien dessiner avant la vérification du membre), et le dernier état connu du membre s'affiche à l'instant : rdr-dernieres-infos, espace-rhum | 1098.6 Ko, 183.7 Ko brotli |
 | `skipper.js` | la fiche skipper (page dynamique) et la liste de tous les skippers ; leurs charges utiles sont déjà dans le HTML servi : skipper-gallery, skipper-outro, skippers-carousel, rdr-espace-promo, rdr-skipper, skippers-list | 465.4 Ko, 88.2 Ko brotli |
 | `entete.js` | l'en-tête « mode village » (rdr-entete, 22/09), chargé sur toute page qui porte la balise : aujourd'hui la page test de Jules, demain toutes : rdr-entete | 329.8 Ko, 67.9 Ko brotli |
 | `apercu.js` | le nouvel accueil (rdr-accueil-apercu), chargé dès l'en-tête sur / et /en, et sur toute autre page qui porte la balise ; la photo du hero y est annoncée tout de suite (photoHero) : rdr-dernieres-infos, rdr-accueil-apercu | 244.2 Ko, 50.9 Ko brotli |
@@ -42,10 +42,10 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `contact.js` | la page Contact (rdr-contact, 26/09) : son jeu arrive en attribut jeu, posé par la page maître au rendu serveur ; le formulaire part par la page maître (envoyerContact) dans le formulaire Wix Forms « Contact » d'avant :  | 48.2 Ko, 13.0 Ko brotli |
 | `partenaires.js` | le hall Nos partenaires (rdr-partenaires, 26/09) : son jeu, lu en direct au CMS, arrive en attribut jeu, posé par la page maître au rendu serveur :  | 56.8 Ko, 13.4 Ko brotli |
 | `fiche-partenaire.js` | la fiche partenaire (rdr-partenaire, 26/09), page dynamique /nos-partenaires/<partenaire> : son jeu (la fiche lue au CMS et les partenaires de son rang) arrive en attribut jeu, posé par la page maître au rendu serveur :  | 39.1 Ko, 10.5 Ko brotli |
-| `esk.js` | l'Espace skippers (rdr-espace-skippers, 26/09) : son jeu, lu en direct au CMS (ESPACESKIPPER), arrive en attribut jeu, posé par la page maître au rendu serveur :  | 47.1 Ko, 11.9 Ko brotli |
+| `esk.js` | l'Espace skippers (rdr-espace-skippers, 26/09) : son jeu, lu en direct au CMS (ESPACESKIPPER), arrive en attribut jeu, posé par la page maître au rendu serveur :  | 47.1 Ko, 12.0 Ko brotli |
 | `concours.js` | le Challenge photo Alpina (le vrai concours depuis le 14/10, page masquée et non indexée jusqu'à l'ouverture) ; le module lit le mur public lui-même (get_concoursPhotos), le définir tôt avance d'autant sa lecture : rdr-concours-photo, alpina-clock | 192.5 Ko, 38.2 Ko brotli |
 | `tournee.js` | la carte des tournées (page plein écran) ; le module part tout de suite, MapLibre reste chargé par le module (sa version @5 est une redirection mise en cache 60 s : la précharger la ferait télécharger deux fois) ; les étapes arrivent avec la passe navigateur : tournee-map | 157.6 Ko, 32.7 Ko brotli |
-| `console.js` | la console de l'équipe (rdr-console, page réservée), chargée sur la présence de sa balise : rdr-console | 279.3 Ko, 57.5 Ko brotli |
+| `console.js` | la console de l'équipe (rdr-console, page réservée), chargée sur la présence de sa balise : rdr-console | 279.3 Ko, 57.4 Ko brotli |
 | `tags.js` | la page de consigne « Publier une actu » (rdr-tags, réservée à l'équipe), chargée sur la présence de sa balise : rdr-tags | 43.5 Ko, 11.7 Ko brotli |
 | `inscription.js` | la page Inscription Skipper en un seul élément (rdr-inscription-fiche-skipper : formulaire de la fiche, palmarès et envoi des médias, page ouverte par un lien à jeton), chargée sur la présence de sa balise :  | 124.5 Ko, 27.0 Ko brotli |
 | `suivre-depart.js` | la page « Comment suivre le départ ? » (rdr-suivre-depart, 14/10) : le module lit son jeu à /_functions/suivreDepart, rien dans le HTML servi ; la carte de la vue départ (paquet carte, village-map) est chargée par le module à l’approche de sa section, pas ici : rdr-dernieres-infos | 145.3 Ko, 32.0 Ko brotli |
@@ -55,4 +55,4 @@ privé, `docs/RECHERCHE-CHARGEMENT-CUSTOM-ELEMENTS.md`.
 | `carte/style.json` | le style du fond de carte figé (outils/figer-style-fond.mjs), lu par village-map quand OpenFreeMap ne répond pas | 42.4 Ko, 3.4 Ko brotli |
 | `test-entete.js` | prototype de l'en-tête en module sur TEST RDR26 (rdr-entete, 21/09), déposé par `test-rdr/atelier/entete/assembler.mjs --paquet`, chargé à une adresse figée sur son commit | |
 
-Source : `WapitixAgency/route-du-rhum c66209f`.
+Source : `WapitixAgency/route-du-rhum 49f174d`.
