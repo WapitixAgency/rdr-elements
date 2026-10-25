@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 9a75d45 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="9a75d45";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum c28fb79 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="c28fb79";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2082,6 +2082,8 @@ if (!customElements.get('espace-rhum')) {
     'Confidentialité': 'Privacy',
     'Suivre mon activité pour personnaliser mon espace et faire progresser mes badges': 'Track my activity to personalise my space and progress my badges',
     'Sans suivi, ton espace reste accessible mais tes stats et badges ne progressent plus.': 'Without tracking, your space stays accessible but your stats and badges no longer progress.',
+    'Recevoir les e-mails de mon Espace Rhum': 'Receive my Espace Rhum emails',
+    'De rares e-mails, un badge à débloquer ou un jeu qui ouvre. Sans effet sur la newsletter Rhum Express.': 'Occasional emails, a badge to unlock or a game opening. No effect on the Rhum Express newsletter.',
     'Supprimer mes données': 'Delete my data',
 
     'Tout effacer': 'Erase everything',
@@ -23935,6 +23937,14 @@ if (!customElements.get('espace-rhum')) {
                     <span class="er-prefs-switch-hint">Sans suivi, ton espace reste accessible mais tes stats et badges ne progressent plus.</span>
                   </span>
                 </label>
+                <label class="er-prefs-switch">
+                  <input type="checkbox" data-prefs="mails" aria-label="Recevoir les e-mails de mon Espace Rhum">
+                  <span class="er-prefs-switch-track" aria-hidden="true"><span class="er-prefs-switch-thumb"></span></span>
+                  <span class="er-prefs-switch-body">
+                    <span class="er-prefs-switch-text">Recevoir les e-mails de mon Espace Rhum</span>
+                    <span class="er-prefs-switch-hint">De rares e-mails, un badge à débloquer ou un jeu qui ouvre. Sans effet sur la newsletter Rhum Express.</span>
+                  </span>
+                </label>
                 <div class="er-prefs-danger">
                   <div class="er-prefs-danger-txt">
                     <span class="er-prefs-danger-title">Exporter mes données</span>
@@ -24000,6 +24010,8 @@ if (!customElements.get('espace-rhum')) {
 
       const track = modal.querySelector('[data-prefs="track"]');
       if (track) track.checked = !(this._payload?.prefs?.trackingOptOut === true);
+      const mails = modal.querySelector('[data-prefs="mails"]');
+      if (mails) mails.checked = !(this._payload?.prefs?.mailsEspaceRefus === true);
       this._lastFocusedConf = document.activeElement;
       modal.dataset.open = 'true'; modal.setAttribute('aria-hidden', 'false');
       this._lockBodyScroll();
@@ -24071,6 +24083,26 @@ if (!customElements.get('espace-rhum')) {
 
 
           if (this._prefs) this._prefs.trackingOptOut = !track.checked;
+        });
+      }
+      
+
+      const mails = modal.querySelector('[data-prefs="mails"]');
+      if (mails) {
+        mails.addEventListener('change', () => {
+          const p = this._payload?.prefs || {};
+          this.dispatchEvent(new CustomEvent('er-prefs-save', {
+            bubbles: true, composed: true,
+            detail: {
+              classes: Array.isArray(p.classes) ? p.classes : [],
+              themes: Array.isArray(p.themes) ? p.themes : [],
+              favAdd: [], favRemove: [],
+              trackingOptOut: p.trackingOptOut === true,
+              mailsEspaceRefus: !mails.checked,
+              origine: 'mails'
+            }
+          }));
+          if (this._payload && this._payload.prefs) this._payload.prefs.mailsEspaceRefus = !mails.checked;
         });
       }
     }
@@ -24521,6 +24553,19 @@ if (!customElements.get('espace-rhum')) {
       const dire = (fr, anglais) => this._annoncer(en ? anglais : fr);
 
       if (action === 'prefs') {
+        if (r.origine === 'mails') {
+          if (ok) return;
+          const demande = r.mailsEspaceRefus === true;
+          const p = this._payload && this._payload.prefs;
+          if (p && p.mailsEspaceRefus === demande) {
+            p.mailsEspaceRefus = !demande;
+            const mails = this.querySelector('.er-conf [data-prefs="mails"]');
+            if (mails) mails.checked = demande;
+          }
+          dire('Ton choix sur les e-mails n’a pas pu être enregistré. Réessaie dans un instant.',
+               'Your email choice could not be saved. Try again in a moment.');
+          return;
+        }
         if (r.origine === 'suivi') {
           if (ok) return;
           
