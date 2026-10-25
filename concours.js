@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum c28fb79 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="c28fb79";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum bca2b88 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="bca2b88";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -8,9 +8,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="c28fb79";performa
   const SOURCE = 'https://www.routedurhum.com/_functions/concoursPhotos';
   const SOURCE_DEMO = 'https://www.routedurhum.com/_functions/concoursPhotoDemo?demo=1';
   const CLE = 'rdrConcoursPhotoApercuV1';
-  const CLE_GL = 'rdrConcoursPhotoApercuGlisserV1';
+  const CLE_GL_VUES_APERCU = 'rdrConcoursPhotoApercuGlisserVuesV1';
   const CLE_MASQUEES = 'rdrConcoursPhotoMasqueesV1';
-  const CLE_GL_REEL = 'rdrConcoursPhotoGlisserV1';
+  const CLE_GL_VUES = 'rdrConcoursPhotoGlisserVuesV1';
+  const MAX_VUES = 3000;
   const CLE_GRAINE = 'rdrConcoursPhotoGraineV1';
   const JOUR = 86400000;
   const MAX_COEURS = 40;
@@ -584,6 +585,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     "C'est envoyé": 'Sent',
     "Votre photo est en attente de validation. Vous serez prévenu dans votre Espace Rhum dès qu'elle est en ligne.": 'Your photo is awaiting approval. You will be notified in your Espace Rhum as soon as it is online.',
     'Retour aux photos': 'Back to the photos',
+    "Revoir celles que j'ai passées": 'See the ones I skipped again',
     'Créer son Espace Rhum': 'Create your Espace Rhum',
     'Votre Espace Rhum pour voter': 'Your Espace Rhum to vote',
     "Les cœurs, l'étoile et le dépôt de votre photo sont réservés aux membres de l'Espace Rhum. C'est gratuit, et vous y suivez vos skippers, vos badges et vos actus.": 'Hearts, the star and submitting your photo are for Espace Rhum members. It is free, and there you follow your skippers, your badges and your news.',
@@ -1491,7 +1493,13 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       const m0 = lire(CLE_MASQUEES);
       if (Array.isArray(m0)) etat.masquees = new Set(m0.map(String));
     }
-    const CLE_GLISSER = demo ? CLE_GL : CLE_GL_REEL;
+    
+
+
+
+    const CLE_VUES = demo ? CLE_GL_VUES_APERCU : CLE_GL_VUES;
+    const vuesGl = new Set(((lire(CLE_VUES) || {}).ids || []).map(String));
+    const noterVue = (id, vue) => { vuesGl.delete(id); if (vue) vuesGl.add(id); ecrire(CLE_VUES, { ids: [...vuesGl].slice(-MAX_VUES) }); };
     const memoriser = () => { if (demo) ecrire(CLE, { coeurs: etat.coeurs, etoile: etat.etoile, masquees: [...etat.masquees] }); else planifierCoeurs(); };
 
     const src = (p, palier) => `https://static.wixstatic.com/media/${p.f}/v1/fit/w_${palier},h_${palier},q_${palier > 1000 ? 85 : 80},enc_auto/${encodeURIComponent(p.n)}`;
@@ -2290,16 +2298,15 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     }
     function ouvrirGl() {
       if (!exigerCompte()) return;
-      gl.liste = etat.fil.filter(id => { const p = etat.parId.get(id); return p && !p.moi && !etat.masquees.has(id) && !etat.coeurs.includes(id); });
-      let reprise = 0; const s = lire(CLE_GLISSER); if (s && s.graine === etat.graine) reprise = Math.min(s.i, gl.liste.length);
-      gl.i = reprise; gl.historique = []; gl.rappele = false;
+      gl.liste = etat.fil.filter(id => { const p = etat.parId.get(id); return p && !p.moi && !etat.masquees.has(id) && !etat.coeurs.includes(id) && !vuesGl.has(id); });
+      gl.i = 0; gl.historique = []; gl.rappele = false;
       if (!gl.ouvert) verrouiller();
       gl.ouvert = true; glEl.dataset.ouvert = 1;
       $('cp-gl-fin').dataset.on = 0;
       teinter(0);
       dessinerGl();
     }
-    function fermerGl() { if (!gl.ouvert) return; gl.ouvert = false; glEl.dataset.ouvert = 0; deverrouiller(); ecrire(CLE_GLISSER, { graine: etat.graine, i: gl.i }); }
+    function fermerGl() { if (!gl.ouvert) return; gl.ouvert = false; glEl.dataset.ouvert = 0; deverrouiller(); }
     $('cp-gl-x').onclick = fermerGl;
     $('cp-btn-glisser').onclick = ouvrirGl; $('cp-btn-glisser-haut').onclick = ouvrirGl; $('cp-gp-go').onclick = ouvrirGl; $('cp-gp-pile').onclick = ouvrirGl; $('cp-gpc-pile').onclick = ouvrirGl;
     $('cp-gl-tiroir').onclick = () => { ouvrirTiroir(); };
@@ -2332,10 +2339,16 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     function finGl() {
       const f = $('cp-gl-fin'); f.dataset.on = 1;
       const n = etat.coeurs.length;
+      const passees = [...vuesGl].filter(id => etat.parId.has(id) && !etat.coeurs.includes(id) && !etat.masquees.has(id)).length;
       f.innerHTML = `<h3>${n ? t('Belle sélection') : t('Tout vu')}</h3><p>${n ? `${gardees(n)}. ${etat.etoile ? t('Votre étoile est posée, vous pouvez encore la déplacer.') : t('Il reste à poser votre étoile sur une seule.')}` : t('Vous avez passé toutes les photos. Les prochaines arrivent chaque jour.')}</p>
-        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center">${n ? `<button class="cp-btn cp-btn--or" type="button" data-gl-tiroir>${t('Choisir mon étoile')}</button>` : ''}<button class="cp-btn cp-btn--ligne" type="button" data-gl-quitter>${t('Retour aux photos')}</button></div>`;
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center">${n ? `<button class="cp-btn cp-btn--or" type="button" data-gl-tiroir>${t('Choisir mon étoile')}</button>` : ''}${passees ? `<button class="cp-btn cp-btn--ligne" type="button" data-gl-revoir>${t("Revoir celles que j'ai passées")}</button>` : ''}<button class="cp-btn cp-btn--ligne" type="button" data-gl-quitter>${t('Retour aux photos')}</button></div>`;
       f.querySelector('[data-gl-tiroir]')?.addEventListener('click', () => { fermerGl(); ouvrirTiroir(); });
       f.querySelector('[data-gl-quitter]').addEventListener('click', fermerGl);
+      f.querySelector('[data-gl-revoir]')?.addEventListener('click', () => {
+        [...vuesGl].forEach(id => { if (!etat.coeurs.includes(id)) vuesGl.delete(id); });
+        ecrire(CLE_VUES, { ids: [...vuesGl] });
+        ouvrirGl();
+      });
     }
     function decider(sens) {
       if (!vivant) return;
@@ -2346,6 +2359,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         if (!gl.rappele && !etat.etoile && votesPossibles()) { gl.rappele = true; toast(t('Gardée'), t(RAPPEL_ETOILE)); }
       }
       gl.historique.push({ id, sens });
+      noterVue(id, true);
       gl.i++;
       dessinerGl();
     }
@@ -2408,6 +2422,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     $('cp-gl-retour').onclick = () => {
       const h = gl.historique.pop(); if (!h) { toast(t('Rien à reprendre')); return; }
       gl.i = Math.max(0, gl.i - 1);
+      noterVue(h.id, false);
       if (h.sens > 0) { const k = etat.coeurs.indexOf(h.id); if (k >= 0) { etat.coeurs.splice(k, 1); memoriser(); rafraichirCase(h.id); dessinerTete(); } }
       dessinerGl();
     };
@@ -2614,7 +2629,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         vivant = false;
         nettoyages.forEach(f => { try { f(); } catch (e) {   } });
         clearTimeout(toast.t); clearTimeout(tRedim); clearTimeout(coeurs.minuteur);
-        try { ecrire(CLE_GLISSER, { graine: etat.graine, i: etat.gl.i }); } catch (e) {   }
       }
     };
   }
