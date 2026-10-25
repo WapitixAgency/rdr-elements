@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 49f174d | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="49f174d";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 9a75d45 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="9a75d45";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -679,7 +679,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Jusqu\'à quarante, pour choisir ensuite': 'Up to forty, to choose from later',
     'Mon étoile est ici': 'My star is here',
     'Poser mon étoile': 'Give my star',
-    'Retirer mon vote': 'Remove my vote',
+    'Pour la déplacer, posez-la sur une autre': 'To move it, give it to another photo',
     "Votre seul vote, déplaçable jusqu'au {date}": 'Your only vote, you can move it until {date}',
     "Votre seul vote, déplaçable jusqu'à la clôture": 'Your only vote, you can move it until voting closes',
     'Partager': 'Share',
@@ -2215,7 +2215,7 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         <div class="cp-fen-acts">
           ${p.moi ? `<div class="cp-fen-note">${t("C'est votre photo. On ne vote pas pour soi, mais vous pouvez la partager.")}</div>` : `
           <button class="cp-act cp-act--coeur" type="button" data-fen="coeur" data-on="${c ? 1 : 0}">${c ? ICO.coeur : ICO.coeurLigne}<span>${c ? t('Dans ma sélection') : t('Garder')}<small>${c ? t('Retirer le cœur') : t("Jusqu'à quarante, pour choisir ensuite")}</small></span></button>
-          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Retirer mon vote') : dateVotes() ? t("Votre seul vote, déplaçable jusqu'au {date}", { date: dateVotes() }) : t("Votre seul vote, déplaçable jusqu'à la clôture")}</small></span></button>`}
+          <button class="cp-act cp-act--etoile" type="button" data-fen="etoile" data-on="${e ? 1 : 0}"${vp ? '' : ' disabled'}>${e ? ICO.etoile : ICO.etoileLigne}<span>${e ? t('Mon étoile est ici') : t('Poser mon étoile')}<small>${!vp ? t('Les votes sont clos') : e ? t('Pour la déplacer, posez-la sur une autre') : dateVotes() ? t("Votre seul vote, déplaçable jusqu'au {date}", { date: dateVotes() }) : t("Votre seul vote, déplaçable jusqu'à la clôture")}</small></span></button>`}
           <button class="cp-act cp-act--sobre" type="button" data-fen="partage">${ICO.partage}<span>${t('Partager')}<small>${t('Le lien de cette photo')}</small></span></button>
           ${p.moi ? '' : `<button class="cp-act cp-act--sobre" type="button" data-fen="masquer">${ICO.oeilBarre}<span>${t('Masquer')}<small>${t('Ne plus la voir sur cet appareil')}</small></span></button>`}
         </div>`;
