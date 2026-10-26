@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 9a6434e | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="9a6434e";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 7e4d14a | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="7e4d14a";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2746,6 +2746,30 @@ function surFiltreIci(e) {
   window.scrollTo({ top: Math.max(0, y), behavior: reduit() ? 'auto' : 'smooth' });
 }
 document.addEventListener('click', surFiltreIci, true);
+
+(() => {
+  const P = Element.prototype;
+  const natif = P.scrollIntoView;
+  if (!natif || natif.rdrVignette) return;
+  const defilable = (el) => {
+    for (let e = el.parentElement; e && e !== document.body && e !== document.documentElement; e = e.parentElement) {
+      const s = getComputedStyle(e);
+      if ((e.scrollWidth > e.clientWidth + 1 && /auto|scroll/.test(s.overflowX)) || (e.scrollHeight > e.clientHeight + 1 && /auto|scroll/.test(s.overflowY))) return e;
+    }
+    return null;
+  };
+  const vignette = function (o) {
+    if (!(this.matches && this.matches('[data-hook="gallery-thumbnail-button"]'))) return natif.apply(this, arguments);
+    const bande = defilable(this);
+    if (!bande) return;
+    const b = bande.getBoundingClientRect(), v = this.getBoundingClientRect();
+    const ecart = (debut, fin, bDebut, bFin) => (debut < bDebut ? debut - bDebut : fin > bFin ? fin - bFin : 0);
+    const left = ecart(v.left, v.right, b.left, b.right), top = ecart(v.top, v.bottom, b.top, b.bottom);
+    if (left || top) bande.scrollBy({ left, top, behavior: (o && o.behavior) === 'smooth' ? 'smooth' : 'auto' });
+  };
+  vignette.rdrVignette = true;
+  P.scrollIntoView = vignette;
+})();
 
 return {
   etat, tel, ouvrirLarge, fermerLarge, ouvrirPlein, fermerPlein, ouvrirRecherche, basculerRub,
