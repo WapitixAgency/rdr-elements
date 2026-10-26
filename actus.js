@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 4b7c55b | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="4b7c55b";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 39460f69 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="39460f69";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3515,14 +3515,18 @@ class RdrNews extends HTMLElement {
 
 
 
-    '.wixui-rich-content-viewer h2,.wixui-rich-content-viewer h4,.wixui-rich-content-viewer h5,.wixui-rich-content-viewer h6{font-family:\'Varien\',\'Archivo Black\',Impact,sans-serif !important;font-style:italic !important;font-weight:400 !important;text-transform:uppercase;color:var(--rdr-teal-deep) !important;line-height:1.14;letter-spacing:.005em;margin:38px 0 14px}',
+
+
+    '.wixui-rich-content-viewer h2,.wixui-rich-content-viewer h4,.wixui-rich-content-viewer h5,.wixui-rich-content-viewer h6{font-family:\'Varien\',\'Archivo Black\',Impact,sans-serif !important;font-style:italic !important;font-weight:400 !important;text-transform:uppercase;color:#16355D !important;line-height:1.14;letter-spacing:.005em;margin:38px 0 14px}',
     '.wixui-rich-content-viewer h2{font-size:clamp(21px,3vw,27px)}',
+    '.wixui-rich-content-viewer h2::after{content:"";display:block;width:72px;height:5px;margin-top:10px;border-radius:2px;background:#FCF150;transform:skewX(-18deg)}',
+    '.wixui-rich-content-viewer .rph-cast h2::after,.wixui-rich-content-viewer blockquote h2::after{content:none}',
     '.wixui-rich-content-viewer h4,.wixui-rich-content-viewer h5{font-size:20px}',
     '.wixui-rich-content-viewer h6{font-size:16px;letter-spacing:.04em}',
     '.wixui-rich-content-viewer h2 span,.wixui-rich-content-viewer h4 span,.wixui-rich-content-viewer h5 span,.wixui-rich-content-viewer h6 span{font-family:inherit !important}',
     '.wixui-rich-content-viewer h2 span[style*="rgb(0, 0, 0)"],.wixui-rich-content-viewer h4 span[style*="rgb(0, 0, 0)"],.wixui-rich-content-viewer h5 span[style*="rgb(0, 0, 0)"],.wixui-rich-content-viewer h6 span[style*="rgb(0, 0, 0)"],' +
     '.wixui-rich-content-viewer h2 span[style*="#0E111D"],.wixui-rich-content-viewer h4 span[style*="#0E111D"],.wixui-rich-content-viewer h5 span[style*="#0E111D"],.wixui-rich-content-viewer h6 span[style*="#0E111D"],' +
-    '.wixui-rich-content-viewer h2 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h4 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h5 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h6 span[style*="rgb(43, 43, 43)"]{color:var(--rdr-teal-deep) !important}',
+    '.wixui-rich-content-viewer h2 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h4 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h5 span[style*="rgb(43, 43, 43)"],.wixui-rich-content-viewer h6 span[style*="rgb(43, 43, 43)"]{color:#16355D !important}',
      
     '.wixui-rich-content-viewer h3{font-family:Montserrat,system-ui,sans-serif !important;font-weight:600 !important;font-size:18px !important;line-height:1.55 !important;color:var(--rdr-ink) !important;margin:0 0 20px}',
     '.wixui-rich-content-viewer h3 span{color:var(--rdr-ink) !important;font-weight:600 !important}',
