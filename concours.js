@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 8af3c46 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="8af3c46";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 9a6434e | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="9a6434e";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -237,7 +237,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 @media (min-width:901px) and (min-height:821px){
   :is(rdr-concours-photo,.cp-portail) .cp-titre{font-size:clamp(34px,4.6vw,70px)}
 }
-:is(rdr-concours-photo,.cp-portail) .cp-barre{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;margin:0 0 12px;background:linear-gradient(rgba(14,17,29,.94) 80%,rgba(14,17,29,0))}
+:is(rdr-concours-photo,.cp-portail) .cp-barre{position:sticky;top:56px;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;margin:0 0 12px;background:linear-gradient(rgba(14,17,29,.94) 80%,rgba(14,17,29,0))}
+@media (max-width:750px){:is(rdr-concours-photo,.cp-portail) .cp-barre{top:60px}}
 :is(rdr-concours-photo,.cp-portail) .cp-onglets{position:relative;display:flex;gap:2px;padding:5px;border-radius:20px;background:rgba(22,28,48,.94);border:1px solid var(--filet);box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)}
 :is(rdr-concours-photo,.cp-portail) .cp-onglets-curseur{--c:var(--teal);--c-ombre:rgba(93,191,192,.34);position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:15px;background-color:var(--c);background-image:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%,rgba(0,0,0,.1));box-shadow:0 8px 22px var(--c-ombre);transition:transform .38s cubic-bezier(.3,.9,.3,1),width .38s cubic-bezier(.3,.9,.3,1),background-color .38s ease,box-shadow .38s ease}
 :is(rdr-concours-photo,.cp-portail) .cp-onglets-curseur[data-ordre="dernieres"]{--c:var(--jaune);--c-ombre:rgba(252,241,80,.3)}

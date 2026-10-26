@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 8af3c46 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="8af3c46";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 9a6434e | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="9a6434e";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3802,7 +3802,7 @@ rdr-skipper .sk{
   --t1:11px;--t2:13px;--t3:16px;--t4:19px;--t5:clamp(22px,2.4vw,30px);--t6:clamp(44px,6.4vw,92px);--t7:clamp(64px,10.5vw,168px);
   --e1:4px;--e2:8px;--e3:12px;--e4:16px;--e5:24px;--e6:32px;--e7:48px;--e8:64px;--e9:clamp(56px,7vw,104px);
   --r-bloc:44px 4px 44px 4px;--r-carte:26px 3px 26px 3px;--r-btn:14px 2px 14px 2px;
-  --sk-nav-h:76px;
+  --sk-nav-h:76px;--sk-colle:56px;
   --ombre:0 22px 48px -26px rgba(0,0,0,.75);
   position:relative;display:block;background:var(--sk-abysse);color:var(--sk-encre);
   font-family:Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:var(--t3);line-height:1.6;
@@ -4117,7 +4117,8 @@ rdr-skipper .sk .sk-bord-attente svg{width:22px;height:22px;color:var(--sk-teal)
 
 
 
-rdr-skipper .sk .sk-nav{position:sticky;top:0;z-index:40;height:var(--sk-nav-h);margin:calc(var(--sk-nav-h) * -.5) 0;pointer-events:none;}
+rdr-skipper .sk .sk-nav{position:sticky;top:var(--sk-colle);z-index:40;height:var(--sk-nav-h);margin:calc(var(--sk-nav-h) * -.5) 0;pointer-events:none;}
+@media(max-width:750px){rdr-skipper .sk{--sk-colle:60px}}
 rdr-skipper .sk .sk-nav > .sk-cadre{display:flex;align-items:center;height:100%;}
 rdr-skipper .sk .sk-nav-in{position:relative;display:flex;align-items:center;gap:var(--e2);width:100%;height:60px;padding:0 8px 0 10px;pointer-events:auto;overflow:clip;
   border-radius:20px 4px 20px 4px;background:rgba(17,21,38,.8);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
@@ -4164,7 +4165,7 @@ rdr-skipper .sk .sk-nav-btn--suivre[aria-pressed="true"]{background:var(--sk-tea
 rdr-skipper .sk .sk-nav + .sk-sec{padding-top:calc(var(--e9) + var(--sk-nav-h) * .5);}
 
  
-rdr-skipper .sk .sk-sec{position:relative;isolation:isolate;padding:var(--e9) 0;overflow:clip;scroll-margin-top:calc(var(--sk-nav-h) - 1px);}
+rdr-skipper .sk .sk-sec{position:relative;isolation:isolate;padding:var(--e9) 0;overflow:clip;scroll-margin-top:calc(var(--sk-colle) + var(--sk-nav-h) - 1px);}
 
 
 
@@ -4208,7 +4209,7 @@ rdr-skipper .sk .sk-id-tuile--classe .sk-id-fanion{position:absolute;top:50%;rig
 rdr-skipper .sk .sk-profil-texte{display:flex;flex-direction:column;gap:var(--e6);min-width:0;}
 
 
-rdr-skipper .sk .sk-profil-cote{position:sticky;top:calc(var(--sk-nav-h) + 24px);display:flex;flex-direction:column;gap:var(--e6);min-width:0;}
+rdr-skipper .sk .sk-profil-cote{position:sticky;top:calc(var(--sk-colle) + var(--sk-nav-h) + 24px);display:flex;flex-direction:column;gap:var(--e6);min-width:0;}
 rdr-skipper .sk .sk-profil-photo{margin:0;}
  
 rdr-skipper .sk .sk-sec--attente{contain-intrinsic-size:auto 560px;}
@@ -5131,6 +5132,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
     _memCle() { return this._lang + ':' + memSlug(); }
+    _navHaut(R) { const s = getComputedStyle(R); return (parseFloat(s.getPropertyValue('--sk-nav-h')) || 76) + (parseFloat(s.getPropertyValue('--sk-colle')) || 0); }
     
 
 
@@ -6469,7 +6471,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         const visible = e[0].isIntersecting;
         R.classList.toggle('sk--hero-cache', !visible);
         R.classList.toggle('sk--colle', !visible);
-      }, { rootMargin: '-' + Math.round(parseFloat(getComputedStyle(R).getPropertyValue('--sk-nav-h')) || 76) + 'px 0px 0px 0px' });
+      }, { rootMargin: '-' + Math.round(this._navHaut(R)) + 'px 0px 0px 0px' });
       io.observe(hero);
       this._nettoyages.push(() => io.disconnect());
     }
@@ -6776,7 +6778,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         const haut = (el) => el.getBoundingClientRect().top + y;
         geo = {
           docH, debut: haut(R), hh: hero ? hero.offsetHeight : 0,
-          navH: parseFloat(getComputedStyle(R).getPropertyValue('--sk-nav-h')) || 64,
+          navH: this._navHaut(R),
           hauts: cibles.map(haut)
         };
       };
