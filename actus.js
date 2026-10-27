@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum bdc3db8 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="bdc3db8";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum c49a59d | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="c49a59d";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3757,6 +3757,35 @@ class RdrNews extends HTMLElement {
     
 
 
+
+
+
+
+
+
+    '.wixui-rich-content-viewer [data-hook="gallery-viewer"]:has([data-hook="gallery-slider"]){box-sizing:border-box;padding:12px;background:linear-gradient(150deg,#1B3E6B 0%,#16355D 40%,#0A1A35 100%);border-radius:24px 6px 22px 6px;box-shadow:0 18px 40px rgba(10,26,53,.16);height:auto !important}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-media-cell"]{border-radius:12px 3px 10px 3px;overflow:hidden}',
+     
+    '.wixui-rich-content-viewer [data-hook="gallery-media-cell"]>figure{margin:0 !important;height:100%}',
+    '.wixui-rich-content-viewer :is([data-hook="gallery-slider"],[data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-media-image"] img{border-radius:0 !important}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] :is([data-hook="gallery-navigation-previous"],[data-hook="gallery-navigation-next"]){z-index:3;top:50% !important;transform:translateY(-50%) !important;display:grid !important;place-items:center;width:48px !important;height:48px !important;padding:0 !important;border-radius:50% !important;background:#fff !important;box-shadow:0 6px 18px rgba(5,18,43,.35);opacity:.92;transition:opacity .2s}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-previous"]{left:14px !important}.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-next"]{right:14px !important}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] :is([data-hook="gallery-navigation-previous"],[data-hook="gallery-navigation-next"]) svg{width:11px !important;height:19px !important;fill:#0A1A35 !important}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-previous"] svg{margin-right:3px}.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-next"] svg{margin-left:3px}',
+    '.wixui-rich-content-viewer [data-hook="gallery-slider"] :is([data-hook="gallery-navigation-previous"],[data-hook="gallery-navigation-next"])[disabled]{opacity:0 !important;pointer-events:none}',
+    '.wixui-rich-content-viewer :is([data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-media-image"]{border-radius:12px 3px 10px 3px;overflow:hidden}',
+    '.wixui-rich-content-viewer :is([data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-media-image"] img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}',
+    '@media (hover:hover) and (pointer:fine){.wixui-rich-content-viewer :is([data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-expand"]:hover [data-hook="gallery-media-image"] img{transform:scale(1.04)}}',
+    '.wixui-rich-content-viewer :is([data-hook="gallery-slider"],[data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-expand"]>svg{z-index:3;box-sizing:content-box;width:15px !important;height:15px !important;padding:10px;border-radius:50%;background:rgba(10,26,53,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);fill:#fff !important;transition:opacity .2s,background .2s}',
+    '@media (hover:hover) and (pointer:fine){.wixui-rich-content-viewer :is([data-hook="gallery-slider"],[data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-expand"]:hover>svg{opacity:1 !important;background:rgba(10,26,53,.7)}}',
+    '@media (max-width:750px){.wixui-rich-content-viewer [data-hook="gallery-viewer"]:has([data-hook="gallery-slider"]){padding:6px;border-radius:18px 5px 16px 5px}' +
+      '.wixui-rich-content-viewer [data-hook="gallery-slider"] :is([data-hook="gallery-navigation-previous"],[data-hook="gallery-navigation-next"]){width:38px !important;height:38px !important}' +
+      '.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-previous"]{left:8px !important}.wixui-rich-content-viewer [data-hook="gallery-slider"] [data-hook="gallery-navigation-next"]{right:8px !important}}',
+    '@media (prefers-reduced-motion:reduce){.wixui-rich-content-viewer :is([data-hook="gallery-masonry"],[data-hook="gallery-grid"]) [data-hook="gallery-media-image"] img{transition:none}}',
+
+    
+
+
     '[data-hook="fullscreen-root"]{background:#05122B !important}',
     '[data-hook="fullscreen-root"] :is([data-hook="fullscreen-close-button"],[data-hook="fullscreen-toggle-button"]){border-radius:50%;background:rgba(255,255,255,.1) !important;transition:background .2s}',
     '@media (hover:hover) and (pointer:fine){[data-hook="fullscreen-root"] :is([data-hook="fullscreen-close-button"],[data-hook="fullscreen-toggle-button"]):hover{background:rgba(255,255,255,.22) !important}}',
@@ -4460,6 +4489,15 @@ class RdrNews extends HTMLElement {
       var fmt = d.formatLabel || d.format;
       var kick = (fmt ? '<span class="rph-b fmt">' + esc(fmt) + '</span>' : '') +
         (d.featured ? '<span class="rph-b une">' + IC.flame + 'À la une</span>' : '');
+      
+
+
+      var chapo = String(d.excerpt || '');
+      var coupe = chapo.split(/Photo\s*n[°o]\s*\d+\s*:/i);
+      if (coupe.length > 1) {
+        chapo = coupe[0].replace(/[\s.,;:–-]+$/, '');
+        if (chapo && !/[.!?…»]$/.test(chapo)) chapo += '.';
+      }
       var meta = (d.date ? '<span class="m">' + IC.cal + esc(d.date) + '</span>' : '') +
         (d.readingTime ? '<span class="m">' + IC.clock + esc(d.readingTime) + ' min de lecture</span>' : '') +
         (d.author ? '<span class="m">Par ' + esc(d.author) + '</span>' : '');
@@ -4483,7 +4521,7 @@ class RdrNews extends HTMLElement {
             '<div class="rph-main">' +
               (kick ? '<div class="rph-kick">' + kick + '</div>' : '') +
               '<h1>' + esc(d.title) + '</h1>' +
-              (d.excerpt ? '<p class="rph-chap">' + esc(d.excerpt) + '</p>' : '') +
+              (chapo ? '<p class="rph-chap">' + esc(chapo) + '</p>' : '') +
               (meta ? '<div class="rph-meta">' + meta + '</div>' : '') +
             '</div>' +
             '<div class="rph-media"><div class="card">' + coverInner + '</div></div>' +
@@ -4937,11 +4975,24 @@ class RdrNews extends HTMLElement {
     }
 
     _uneGalerie(gal) {
-      var scene = gal.querySelector('[data-hook="gallery-thumbnail"] [data-hook="gallery-fullsize"]');
-      if (!scene) return;
       var cellules = gal.querySelectorAll('[data-hook="gallery-media-cell"]');
       var n = cellules.length;
       if (!n) return;
+      var self = this;
+      
+
+
+
+      var credits = this._creditsGalerie(gal, n);
+      gal._rphCredits = credits;
+      if (!gal.getAttribute('data-rph-clic')) {
+        gal.setAttribute('data-rph-clic', '1');
+        gal.addEventListener('click', function (ev) {
+          if (ev.target.closest && ev.target.closest('[data-hook="gallery-expand"]')) self._pleinEcran(gal);
+        });
+      }
+      var scene = gal.querySelector('[data-hook="gallery-thumbnail"] [data-hook="gallery-fullsize"]');
+      if (!scene) return;
 
       for (var i = 0; i < n; i++) {
         var c = cellules[i];
@@ -4954,9 +5005,6 @@ class RdrNews extends HTMLElement {
         c.style.setProperty('--rph-fond', 'url("' + petit.replace(/"/g, '%22') + '")');
         c.setAttribute('data-rph-fond', '1');
       }
-
-      var credits = this._creditsGalerie(gal, n);
-      gal._rphCredits = credits;
 
       var ui = null;
       for (var k = 0; k < scene.children.length; k++) if (scene.children[k].className === 'rph-gal-ui') ui = scene.children[k];
@@ -5001,10 +5049,6 @@ class RdrNews extends HTMLElement {
       }
       var vp2 = scene.querySelector('[data-hook="gallery-horizontal-viewport"]');
       if (vp2) vp2.addEventListener('scroll', demande, { passive: true });
-      var self = this;
-      gal.addEventListener('click', function (ev) {
-        if (ev.target.closest && ev.target.closest('[data-hook="gallery-expand"]')) self._pleinEcran(gal);
-      });
     }
 
     
@@ -5027,12 +5071,25 @@ class RdrNews extends HTMLElement {
           ui.innerHTML = '<span class="rph-gal-compte"></span><span class="rph-gal-legende"></span>';
           f.appendChild(ui);
         }
-        car._rphCredits = gal._rphCredits || null;
+        
+
+
+
+        var creditDe = function (item) {
+          var id = item && item.getAttribute('data-id');
+          if (!id) return '';
+          var cellule = document.querySelector('.wixui-rich-content-viewer [data-hook="gallery-media-cell"][data-id="' + id.replace(/["\\]/g, '') + '"]');
+          var g2 = cellule && cellule.closest('[data-hook="gallery-viewer"]');
+          if (!g2 || !g2._rphCredits) return '';
+          var k = [].indexOf.call(g2.querySelectorAll('[data-hook="gallery-media-cell"]'), cellule);
+          return g2._rphCredits[k] || '';
+        };
         var maj = function () {
+          var items = car.querySelectorAll('[data-hook="fullscreen-image-item"]');
           var j = car.clientWidth ? Math.round(car.scrollLeft / car.clientWidth) : 0;
           j = Math.max(0, Math.min(n - 1, j));
           var c1 = deux(j + 1) + ' <span>/ ' + deux(n) + '</span>';
-          var l1 = car._rphCredits ? car._rphCredits[j] || '' : '';
+          var l1 = creditDe(items[j]);
           if (ui.firstChild.innerHTML !== c1) ui.firstChild.innerHTML = c1;
           if (ui.lastChild.textContent !== l1) ui.lastChild.textContent = l1;
         };
@@ -5086,13 +5143,11 @@ class RdrNews extends HTMLElement {
       for (var q = 0; q < n; q++) if (lignes[q].k !== q + 1) return null;
 
       var morceaux = lignes.map(function (x) { return x.txt.split(/\s*\/\s*/); });
-      var commun = [];
-      for (var s = 1; s < morceaux[0].length; s++) {
-        var bout = morceaux[0][morceaux[0].length - s];
-        var partout = morceaux.every(function (m) { return m.length > s && m[m.length - s] === bout; });
-        if (!partout) break;
-        commun.unshift(bout);
-      }
+       
+       
+       
+      var dernierBout = morceaux[0][morceaux[0].length - 1];
+      var commun = morceaux.every(function (m) { return m.length > 1 && m[m.length - 1] === dernierBout; }) ? [dernierBout] : [];
       var courts = morceaux.map(function (m) { return m.slice(0, m.length - commun.length).join(' / '); });
 
       var derniere = sources[sources.length - 1];
