@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 39460f69 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="39460f69";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum bdc3db8 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="bdc3db8";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5074,9 +5074,9 @@ class RdrNews extends HTMLElement {
       };
       var haut = gal;
       for (var h = 0; h < 8 && haut.parentElement && !haut.nextElementSibling; h++) haut = haut.parentElement;
-      var sources = [], lignes = [], el = haut.nextElementSibling;
+      var sources = [], lignes = [], dejaLa = null, el = haut.nextElementSibling;
       for (var pas = 0; el && pas < 12; pas++, el = el.nextElementSibling) {
-        if (el.classList.contains('rph-gal-credits')) continue;
+        if (el.classList.contains('rph-gal-credits')) { dejaLa = dejaLa || el; continue; }
         if (el.querySelector('[data-hook="gallery-viewer"]')) break;
         var l = lire(el);
         if (l === null) break;
@@ -5096,8 +5096,10 @@ class RdrNews extends HTMLElement {
       var courts = morceaux.map(function (m) { return m.slice(0, m.length - commun.length).join(' / '); });
 
       var derniere = sources[sources.length - 1];
-      var regroupe = derniere.nextElementSibling;
-      if (!regroupe || !regroupe.classList.contains('rph-gal-credits')) {
+       
+       
+      if (dejaLa && dejaLa.previousElementSibling !== derniere) derniere.parentNode.insertBefore(dejaLa, derniere.nextSibling);
+      if (!dejaLa) {
         var groupes = [];
         courts.forEach(function (c, i) {
           var gr = groupes[groupes.length - 1];
@@ -5108,7 +5110,7 @@ class RdrNews extends HTMLElement {
           if (gr.d === gr.f) return 'photo ' + gr.d;
           return (en ? 'photos ' + gr.d + ' to ' : 'photos ' + gr.d + ' à ') + gr.f;
         };
-        regroupe = document.createElement('p');
+        var regroupe = document.createElement('p');
         regroupe.className = 'rph-gal-credits';
         regroupe.innerHTML = '<b>' + (en ? 'Photo credits.' : 'Crédits photo.') + '</b> ';
         regroupe.appendChild(document.createTextNode(groupes.map(function (gr) { return gr.c + ' (' + plage(gr) + ')'; }).join(', ') + (commun.length ? '. ' + commun.join(' / ') : '') + '.'));
@@ -5121,25 +5123,40 @@ class RdrNews extends HTMLElement {
     
 
 
+
+
+
+
+
+
+
+
     _veilleGalerie() {
-      if (this._obsGalCorps || typeof MutationObserver === 'undefined') return;
-      var cible = document.querySelector('.wixui-rich-content-viewer');
-      if (!cible) return;
-      var self = this, prevu = false;
-      var aFaire = function () {
-        var gals = document.querySelectorAll('.wixui-rich-content-viewer [data-hook="gallery-viewer"]');
-        for (var i = 0; i < gals.length; i++) {
-          if (!gals[i].querySelector('[data-hook="gallery-thumbnail"]')) continue;
-          if (!gals[i].getAttribute('data-rph-g') || !gals[i].querySelector('.rph-gal-ui')) return true;
-        }
-        return false;
+      if (this._obsGalCorps || typeof MutationObserver === 'undefined' || !document.body) return;
+      var self = this, enCours = false;
+      var CORPS = '.wixui-rich-content-viewer';
+      var touche = function (n) {
+        if (n.nodeType !== 1) return false;
+        if (n.classList.contains('rph-gal-ui') || n.classList.contains('rph-gal-credits')) return true;
+        return n.matches(CORPS + ',' + CORPS + ' *') || !!n.querySelector(CORPS);
       };
-      this._obsGalCorps = new MutationObserver(function () {
-        if (prevu) return;
-        prevu = true;
-        requestAnimationFrame(function () { prevu = false; if (aFaire()) self._enhanceGallery(); });
+      this._obsGalCorps = new MutationObserver(function (recs) {
+        if (enCours) return;
+        var utile = false;
+        for (var i = 0; i < recs.length && !utile; i++) {
+          var r = recs[i];
+          for (var a = 0; a < r.addedNodes.length && !utile; a++) utile = touche(r.addedNodes[a]);
+          for (var b = 0; b < r.removedNodes.length && !utile; b++) {
+            var x = r.removedNodes[b];
+            utile = x.nodeType === 1 && (x.classList.contains('rph-gal-ui') || x.classList.contains('rph-gal-credits'));
+          }
+        }
+        if (!utile) return;
+        enCours = true;
+        try { self._enhanceGallery(); } catch (e) {   }
+        enCours = false;
       });
-      this._obsGalCorps.observe(cible, { childList: true, subtree: true });
+      this._obsGalCorps.observe(document.body, { childList: true, subtree: true });
     }
 
     _enhanceCast() {
