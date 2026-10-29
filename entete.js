@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 31c1e7e | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="31c1e7e";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 75cdc725 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="75cdc725";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -121,13 +121,13 @@ function laCourse(lang, apres) {
     liens: (apres
       ? [
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
           { libelle: en ? 'Watch the start again' : 'Revoir le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Saint-Malo, 1 November' : 'Saint-Malo, le 1er novembre' }
         ]
       : [
           { libelle: en ? 'Follow the start' : 'Suivre le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Sunday 1:02 pm, live' : 'Dimanche 13 h 02, en direct' },
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', bientotAvant: 'ouverture-cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
         ]
     ).concat([
       { libelle: en ? 'Race course' : 'Le parcours', lien: '/parcours', picto: 'parcours', image: IMG.parcours, sous: en ? 'From Saint-Malo to Pointe-à-Pitre' : 'De Saint-Malo à Pointe-à-Pitre' },
@@ -1456,7 +1456,7 @@ function modele() {
     const cartes = e.liens.map((l) => {
       const s = carteSource(l.source);
       const bientot = !!l.bientot || (!!l.bientotAvant && !momentPasse(l.bientotAvant));
-      const commun = { lien: bientot ? '' : l.lien, bientot, etiquette: bientot && l.bientotAvant ? quandCourt(l.bientotAvant) : '', groupe: l.groupe || '', picto: l.picto || '' };
+      const commun = { lien: bientot ? '' : l.lien, bientot, etiquette: bientot && l.bientotAvant ? quandCourt(l.bientotAvant) : '', groupe: l.groupe || '', picto: l.picto || '', al: l.al === 't' ? 't' : '' };
       if (s) {
         const c = s.c;
         return Object.assign(commun, {
@@ -1707,6 +1707,9 @@ function dims(c, ctx, k, r) {
       case 'actus': return k === 0 ? [400, 470] : [260, 230];
       case 'skippers': return [300, 230];
       case 'village': return k === 0 ? [400, 470] : [260, 230];
+       
+      case 'course': return k === 0 ? [400, 470] : [260, 230];
+      case 'guadeloupe': return k === 0 ? [400, 470] : k === (r.cartes || []).length - 1 ? [520, 230] : [260, 230];
       case 'a-propos': return c.format === 'grande' ? [360, 470] : [270, 230];
       default: return [240, 420];
     }
@@ -1740,7 +1743,8 @@ function nomSkipperHTML(nom) {
 }
 function carte(c, ctx, k, r) {
   const d = dims(c, ctx, k, r), w = d[0], h = d[1];
-  const al = c.type === 'skipper' ? 't' : 'c';
+   
+  const al = c.type === 'skipper' || c.al === 't' ? 't' : 'c';
   const img = c.image
     ? '<img class="gl-photo" alt="" loading="lazy" decoding="async" width="' + w + '" height="' + h + '" data-src="' + esc(wix(c.image, w, h, 80, al)) + '" data-srcset="' + esc(wix(c.image, w, h, 80, al) + ' 1x, ' + wix(c.image, w * 2, h * 2, 70, al) + ' 2x') + '" data-bd="' + esc(wix(c.image, w / 3, h / 3, 30, al)) + '">'
     : '';
