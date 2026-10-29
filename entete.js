@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum e8cb35a | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="e8cb35a";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 31c1e7e | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="31c1e7e";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -102,7 +102,7 @@ const IMG = {
   parcours: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif',
   
 
-  classement: 'wix:image://v1/df962b_2b2a3564f51645358ccfb5bdba52319b~mv2.jpg/menu-classement.jpg',
+  classement: 'wix:image://v1/df962b_6777314d1dc14868a0a1023fb4db4c5a~mv2.jpg/menu-classement-classes.jpg',
   jeu: 'wix:image://v1/df962b_230c6a519e314083903301ba0899ef39~mv2.jpg/menu-jeu-virtual-regatta.jpg'
 };
 const VR = 'https://click.virtualregatta.com/?li=5811';

@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum e8cb35a | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="e8cb35a";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum 31c1e7e | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="31c1e7e";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
