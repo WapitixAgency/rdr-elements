@@ -1,5 +1,5 @@
-/* rdr-elements programme | source route-du-rhum f88e7cd | rdr-programme.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="f88e7cd";performance.mark("rdr-elements:programme")}catch(e){}
+/* rdr-elements programme | source route-du-rhum 816a5fb | rdr-programme.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["programme"]="816a5fb";performance.mark("rdr-elements:programme")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -7078,8 +7078,15 @@ rdr-programme > rdr-dernieres-infos .rdi{margin:0;}
       return maintenantA(this._type === 'guadeloupe' ? 'America/Guadeloupe' : 'Europe/Paris');
     }
 
+    
+
+
+
     _registreParDefaut() {
-      return (this._p && this._p.phaseGuadeloupe === true) ? 'guadeloupe' : 'officielle';
+      const p = this._p || {};
+      if (p.phaseGuadeloupe === true) return 'guadeloupe';
+      const des = typeof p.phaseGuadeloupeDes === 'string' ? Date.parse(p.phaseGuadeloupeDes) : NaN;
+      return Number.isFinite(des) && Date.now() >= des ? 'guadeloupe' : 'officielle';
     }
 
     

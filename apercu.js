@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum f88e7cd | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f88e7cd";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 816a5fb | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="816a5fb";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2348,7 +2348,7 @@ function monter(racine, portail, D) {
       heroTimer = setTimeout(() => {
         if (gen !== heroGen) return;
         phase = nouvelle; racine.dataset.phase = phase;
-        rendreHero(); rendreCtas(); rendreTymal(); if (majHorloge) majHorloge();
+        rendreHero(); rendreCtas(); rendreTymal(); rendreFaq(); if (majHorloge) majHorloge();
         requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); compter(); }));
         try { racine.dispatchEvent(new CustomEvent('raa-phase', { detail: { phase } })); } catch (e) {   }
       }, 1000);
@@ -3122,7 +3122,8 @@ function monter(racine, portail, D) {
 
 
   function rendreFaq() {
-    const F = D.faq; const bloc = $('faq-bloc');
+     
+    const F = (PHASES[phase] && PHASES[phase].faq) || D.faq; const bloc = $('faq-bloc');
     if (!F) { bloc.hidden = true; return; }
     bloc.hidden = false;
     const ic = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';

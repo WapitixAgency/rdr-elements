@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum f88e7cd | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="f88e7cd";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 816a5fb | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="816a5fb";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -112,18 +112,18 @@ function laCourse(lang, apres) {
     titre: en ? 'Follow the race' : 'Suivre la course',
     sous: apres
       ? (en ? 'Follow the fleet across the Atlantic, from Saint-Malo to Pointe-à-Pitre.' : 'Suivez la flotte sur l\'Atlantique, de Saint-Malo à Pointe-à-Pitre.')
-      : (en ? 'Map and rankings open at the start, Sunday at 1:02 pm.' : 'La cartographie et le classement ouvrent au départ, dimanche à 13 h 02.'),
+      : (en ? 'The race tracker opens at the start, Sunday at 1:02 pm.' : 'La cartographie ouvre au départ, dimanche à 13 h 02.'),
     faq: apres ? null : { libelle: en ? 'How to follow the start' : 'Comment suivre le départ', lien: '/suivre-le-depart' },
     liens: (apres
       ? [
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
           { libelle: en ? 'Watch the start again' : 'Revoir le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Saint-Malo, 1 November' : 'Saint-Malo, le 1er novembre' }
         ]
       : [
           { libelle: en ? 'Follow the start' : 'Suivre le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Sunday 1:02 pm, live' : 'Dimanche 13 h 02, en direct' },
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', bientotAvant: 'depart', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'depart', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
         ]
     ).concat([
       { libelle: en ? 'Race course' : 'Le parcours', lien: '/parcours', picto: 'parcours', image: IMG.parcours, sous: en ? 'From Saint-Malo to Pointe-à-Pitre' : 'De Saint-Malo à Pointe-à-Pitre' },
@@ -1243,9 +1243,9 @@ const TAGS_TUS = /^(partenaire|partenaires|interview|actualit[eé]s?|news|d[eé]
 const NOUVEAU_H = 48;
 
 const carteOuverte = () => MENU.some((r) => (r.liens || []).some((l) => l.lien === '/carte-village-saint-malo' && !l.bientot));
- 
+
 const accesDuMoment = () => (MENU.some((r) => r.cle === 'guadeloupe')
-  ? [{ cle: 'cartographie', lien: '/cartographie' }, { cle: 'classement', lien: '/classement' }]
+  ? [{ cle: 'cartographie', lien: '/cartographie' }, { cle: 'classement', lien: '/classement' }].filter((a) => a.cle !== 'classement' || momentPasse('ouverture-classement'))
   : [{ cle: 'carte', lien: '/carte-village-saint-malo' }, { cle: 'programme', lien: '/programmation' }].filter((a) => a.cle !== 'carte' || carteOuverte()));
 let ACCES = accesDuMoment();
 
@@ -1582,7 +1582,7 @@ const messagesBandeau = (b) => {
   const p = phaseBandeau(b);
   const texte = p && p.texte ? p.texte : b.texte;
   const autres = p && Array.isArray(p.autres) ? p.autres : (Array.isArray(b.autres) ? b.autres : []);
-  return [texte].concat(autres).filter(Boolean).map((x) => (x && typeof x === 'object' ? remplirDepart(x.texte || '') + (x.lien ? '\u0001' + x.lien : '') : remplirDepart(x)));
+  return [texte].concat(autres).filter((x) => x && !(typeof x === 'object' && x.si && !momentPasse(x.si))).map((x) => (x && typeof x === 'object' ? remplirDepart(x.texte || '') + (x.lien ? '\u0001' + x.lien : '') : remplirDepart(x)));
 };
 const marquer = (t) => esc(t || '').replace(/\*([^*]+)\*/g, (m, x) => (x.trim() === '|' ? '<b class="gl-sep-txt">|</b>' : '<b>' + x + '</b>'));
 const bandeHTML = (messages) => messages.map((m, i) => { const [t, u] = String(m).split('\u0001');
@@ -1598,7 +1598,7 @@ function boutonsHautHTML(cls, avant) {
   if (!b.length) return '';
   return '<nav class="' + cls + '" aria-label="' + esc(TXT.courseLive) + '">' + (avant || '') + b.map(({ l, ouvert }) => (ouvert
     ? '<a class="' + cls + '-b ' + cls + '-b--' + l.bouton + '" href="' + esc(lien(l.lien)) + '"' + (estCourant(l.lien) ? ' aria-current="page"' : '') + '><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + (l.direct ? '<i class="' + cls + '-direct" aria-label="' + esc(TXT.direct) + '"></i>' : '') + '</span></a>'
-    : '<span class="' + cls + '-b ' + cls + '-b--' + l.bouton + ' est-bientot" role="note" tabindex="0" aria-label="' + esc(l.libelle + ', ' + TXT.ouvreA + ' ' + quandCourt(l.ouvre)) + '"><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + '<small>' + esc(quandCourt(l.ouvre)) + '</small></span></span>')).join('') + '</nav>';
+    : '<span class="' + cls + '-b ' + cls + '-b--' + l.bouton + ' est-bientot" role="note" tabindex="0" aria-label="' + esc(l.libelle + ', ' + (quandCourt(l.ouvre) ? TXT.ouvreA + ' ' + quandCourt(l.ouvre) : TXT.bientot)) + '"><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + '<small>' + esc(quandCourt(l.ouvre) || TXT.bientot) + '</small></span></span>')).join('') + '</nav>';
 }
 
 const cleBascules = () => [(phaseMenu() || {}).moment || 'village'].concat(boutonsDuMoment().map((x) => x.l.bouton + (x.ouvert ? 1 : 0)), (R.liensHaut || []).map((l) => (l.jusqua && momentPasse(l.jusqua) ? 1 : 0)), [quandCourt('depart')]).join('|');
@@ -1651,7 +1651,7 @@ function puces(r) {
     const avant = x.groupe ? '<span class="gl-vh">' + esc(x.groupe) + ', </span>' : '';
     const tard = !!x.bientotAvant && !momentPasse(x.bientotAvant);
     h += x.bientot || tard || !x.lien
-      ? '<li class="gl-puce gl-puce--bientot"><span class="gl-puce-in">' + avant + '<span>' + esc(x.libelle) + '</span><small>' + esc(tard ? quandCourt(x.bientotAvant) : TXT.bientot) + '</small></span></li>'
+      ? '<li class="gl-puce gl-puce--bientot"><span class="gl-puce-in">' + avant + '<span>' + esc(x.libelle) + '</span><small>' + esc((tard && quandCourt(x.bientotAvant)) || TXT.bientot) + '</small></span></li>'
       : '<li class="gl-puce"><a href="' + esc(lien(x.lien)) + '"' + cible(x.lien) + (estCourant(x.lien) ? ' aria-current="page"' : '') + '>' + avant + '<span>' + esc(x.libelle) + '</span>' + (externe(x.lien) ? '<i class="gl-puce-ext">' + ICO.externe + '</i>' : '') + nouvelOnglet(x.lien) + '</a></li>';
     return h;
   }).join('') + '</ul>';

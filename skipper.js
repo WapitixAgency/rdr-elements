@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum f88e7cd | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="f88e7cd";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 816a5fb | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="816a5fb";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1490,13 +1490,13 @@ const TITLE_FONT = "'Varien', serif";
 const I18N = {
   fr: {
     eyebrowBefore: 'Prochainement',
-    eyebrowDuring: 'En direct',
+    eyebrowDuring: 'En course',
     eyebrowAfter: 'Course terminée',
     titlePart1: 'Suivez',
     titlePart2: 'dans l\u2019aventure.',
-    description: 'Dès le départ, retrouvez ici la cartographie live, les actualités officielles et tout ce qu\u2019il faut pour ne rien manquer de la traversée.',
-    feature1Title: 'Cartographie live',
-    feature1Desc: 'Position du bateau en temps réel, chaque mille parcouru',
+    description: 'Dès le départ, retrouvez ici la cartographie, les actualités officielles et tout ce qu\u2019il faut pour ne rien manquer de la traversée.',
+    feature1Title: 'Cartographie',
+    feature1Desc: 'Sa position à chaque pointage, sur la carte officielle',
     feature2Title: 'Actualités officielles',
     feature3Title: 'Dossier de presse',
     feature3Desc: 'Médias et documents officiels téléchargeables',
@@ -1521,13 +1521,13 @@ const I18N = {
   },
   en: {
     eyebrowBefore: 'Coming soon',
-    eyebrowDuring: 'Live',
+    eyebrowDuring: 'Racing',
     eyebrowAfter: 'Race ended',
     titlePart1: 'Follow',
     titlePart2: 'on the adventure.',
-    description: 'From the start, you\u2019ll find here live tracking, official news and everything you need to follow the crossing.',
-    feature1Title: 'Live tracking',
-    feature1Desc: 'Real-time boat position, every mile of the race',
+    description: 'From the start, you\u2019ll find here the race tracker, official news and everything you need to follow the crossing.',
+    feature1Title: 'Race tracker',
+    feature1Desc: 'Their position at every report, on the official map',
     feature2Title: 'Official news',
     feature3Title: 'Press kit',
     feature3Desc: 'Official media and downloadable documents',
@@ -1735,7 +1735,8 @@ class SkipperOutro extends HTMLElement {
           bubbles: true, composed: true,
           detail: { url: attrs.liveUrl }
         }));
-        if (attrs.liveUrl) window.open(attrs.liveUrl, '_blank', 'noopener');
+         
+        if (attrs.liveUrl) { if (attrs.liveUrl.charAt(0) === '/') location.href = attrs.liveUrl; else window.open(attrs.liveUrl, '_blank', 'noopener'); }
       });
     }
 
@@ -3493,7 +3494,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
       enTete: 'En tête', milles: 'milles', noeuds: 'nœuds',
       evolution: (d) => d > 0 ? '+' + d + (d > 1 ? ' places' : ' place') + ' en 24 h' : d < 0 ? '−' + (-d) + (d < -1 ? ' places' : ' place') + ' en 24 h' : 'Stable sur 24 h',
       positionIlYa: (m) => 'Position d’il y a ' + m + ' min',
-      cartoLive: 'Cartographie live',
+      cartoLive: 'La cartographie', surCarto: 'Sur la cartographie',
       liveAttente: 'Les positions arrivent dès le départ, le 1er novembre.',
       demo: 'Données fictives',
       saintMalo: 'Saint-Malo', pointeAPitre: 'Pointe-à-Pitre',
@@ -3601,7 +3602,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
       enTete: 'Leading', milles: 'nm', noeuds: 'kn',
       evolution: (d) => d > 0 ? '+' + d + (d > 1 ? ' places' : ' place') + ' in 24 h' : d < 0 ? '−' + (-d) + (d < -1 ? ' places' : ' place') + ' in 24 h' : 'Steady over 24 h',
       positionIlYa: (m) => 'Position from ' + m + ' min ago',
-      cartoLive: 'Live tracking',
+      cartoLive: 'Race tracker', surCarto: 'On the race tracker',
       liveAttente: 'Positions go live at the start, on 1 November.',
       demo: 'Demo data',
       saintMalo: 'Saint-Malo', pointeAPitre: 'Pointe-à-Pitre',
@@ -4949,6 +4950,9 @@ rdr-skipper .sk.sous-600 .sk-echelle-chiffres li{padding:var(--e3) var(--e4);}
 rdr-skipper .sk.sous-400 .sk-hero-actions{grid-template-columns:minmax(0,1fr) auto;}
 rdr-skipper .sk.sous-400 .sk-hero-actions .sk-btn--ligne span{display:none;}
 rdr-skipper .sk.sous-400 .sk-hero-actions .sk-btn--ligne{width:52px;padding:0;}
+rdr-skipper .sk.sous-400 .sk-hero-actions--carto{grid-template-columns:minmax(0,1fr);}
+rdr-skipper .sk.sous-400 .sk-hero-actions--carto .sk-btn--ligne{width:auto;padding:0 var(--e4);}
+rdr-skipper .sk.sous-400 .sk-hero-actions--carto .sk-btn--ligne span{display:inline;}
 rdr-skipper .sk.sous-400 .sk-reseau span{letter-spacing:.08em;}
 rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
@@ -5404,11 +5408,22 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         (s.bateau && s.bateau.nom ? '<p class="sk-hero-bateau"><span>' + esc(s.bateau.nom) + '</span></p>' : '');
     }
 
+    
+
+
+    _departPasse() { return Date.now() >= departDe(this._p); }
+    _lienCarto() {
+      const id = this._p && this._p.skipper && this._p.skipper.idGeovoile;
+      return (this._lang === 'en' ? '/en' : '') + '/cartographie' + (id ? '?bateau=' + encodeURIComponent(id) : '');
+    }
+
     _actionsHero(T) {
-      return '<div class="sk-hero-actions">' +
+      return '<div class="sk-hero-actions' + (this._phase !== 'course' && this._departPasse() ? ' sk-hero-actions--carto' : '') + '">' +
           this._boutonSuivre('sk-btn sk-btn--suivre', true) +
           (this._phase === 'course'
             ? '<a class="sk-btn sk-btn--ligne" href="#sk-suivre" data-sk-ancre="sk-suivre">' + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>'
+            : this._departPasse()
+            ? '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '">' + svg('boussole') + '<span>' + esc(T.surCarto) + '</span></a>'
             : '<button class="sk-btn sk-btn--ligne" type="button" data-sk-partager aria-label="' + esc(T.partagerAria(this._nomAffiche)) + '">' + svg('partager') + '<span>' + esc(T.partager) + '</span></button>') +
         '</div>';
     }
@@ -6335,12 +6350,14 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         outro.setAttribute('first-name', this._prenomAffiche);
         outro.setAttribute('accent-color', couleurSure(s.classe && s.classe.couleur));
         outro.setAttribute('email-press', s.contactPresse || '');
-        outro.setAttribute('live-active', this._phase === 'course' ? 'true' : 'false');
+        const enRoute = this._phase === 'course' || this._departPasse();
+        outro.setAttribute('live-active', enRoute ? 'true' : 'false');
+        if (enRoute) outro.setAttribute('live-url', this._lienCarto()); else outro.removeAttribute('live-url');
         outro.setAttribute('follow-active', 'true');
         outro.setAttribute('is-followed', this._suivi ? 'true' : 'false');
         
 
-        outro.setAttribute('state', this._phase === 'course' ? 'during' : 'before');
+        outro.setAttribute('state', enRoute ? 'during' : 'before');
         outro.setAttribute('lang', this._lang);
         
 
