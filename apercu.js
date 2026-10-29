@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 4e8270f | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4e8270f";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum f90c3ff | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f90c3ff";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1430,12 +1430,65 @@ rdr-accueil-apercu .glyphe--grand{display:none}
 rdr-accueil-apercu .promo-btns .btn{width:100%}
 rdr-accueil-apercu .pv-sk-ov .pv-micro{letter-spacing:.05em;font-size:8.5px}
 }
+rdr-accueil-apercu .em{--em-lh:clamp(240px,calc(100svh - var(--haut-entete) - 92px),620px);position:relative;color:#0E111D;padding:clamp(18px,3.2vh,34px) 0 clamp(24px,4vh,44px);background:radial-gradient(900px 480px at 86% -12%,rgba(255,255,255,.9),transparent 64%),linear-gradient(180deg,#C6DAE7 0%,#D9E6EE 52%,#E6EDF0 100%)}
+rdr-accueil-apercu .em[hidden]{display:none}
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .em{padding-top:calc(var(--rdr-entete-h,175px) + clamp(18px,3.2vh,34px))}
+rdr-accueil-apercu .em-g{display:grid;grid-template-columns:minmax(0,calc(var(--em-lh) * 16 / 9)) minmax(280px,1fr);gap:clamp(24px,2.6vw,42px);align-items:center}
+rdr-accueil-apercu .em-ec{position:relative;width:100%;aspect-ratio:16/9;border-radius:22px 4px 22px 4px;overflow:hidden;background:#05070d;color:#fff;isolation:isolate;box-shadow:0 30px 60px -30px rgba(14,30,50,.6),0 0 0 1px rgba(14,17,29,.1)}
+rdr-accueil-apercu .em-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 55%}
+rdr-accueil-apercu .em-ec::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,29,.42) 0%,rgba(14,17,29,.12) 34%,rgba(14,17,29,.2) 58%,rgba(14,17,29,.88) 100%)}
+rdr-accueil-apercu .em-ec--lecteur::before{display:none}
+rdr-accueil-apercu .em-ec iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+rdr-accueil-apercu .em-heure{position:absolute;z-index:2;left:50%;top:47%;transform:translate(-50%,-50%);font-family:var(--titre);font-style:italic;font-size:clamp(64px,min(11vw,22vh),200px);line-height:.8;color:#fff;white-space:nowrap;text-shadow:0 10px 50px rgba(0,0,0,.4);pointer-events:none}
+rdr-accueil-apercu .em-heure i{font-style:inherit;color:var(--jaune)}
+rdr-accueil-apercu .em-pastille{position:absolute;z-index:2;left:clamp(14px,1.6vw,22px);top:clamp(14px,1.6vw,20px);display:inline-flex;align-items:center;gap:8px;padding:7px 12px 6px;border-radius:6px;background:var(--jaune);color:#0E111D;font:14px/1 var(--titre);font-style:italic;text-transform:uppercase}
+rdr-accueil-apercu .em-pastille svg,rdr-accueil-apercu .em-son svg{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+rdr-accueil-apercu .em-son{position:absolute;z-index:3;left:clamp(14px,1.6vw,20px);bottom:clamp(54px,7vh,64px);display:inline-flex;align-items:center;gap:9px;height:40px;padding:0 16px 0 12px;border:0;border-radius:12px 3px 12px 3px;background:var(--jaune);color:#0E111D;font:800 13px/1 var(--police);cursor:pointer;box-shadow:0 14px 28px -10px rgba(0,0,0,.6)}
+rdr-accueil-apercu .em-cookies{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:clamp(14px,3vw,30px);text-align:center;background:linear-gradient(rgba(14,17,29,.82),rgba(14,17,29,.93))}
+rdr-accueil-apercu .em-cookies b{font-size:clamp(14px,1.5vw,18px);font-weight:800}
+rdr-accueil-apercu .em-cookies p{max-width:44ch;margin:0;color:rgba(255,255,255,.84);font-size:clamp(12px,1.1vw,14px);line-height:1.5}
+rdr-accueil-apercu .em-cookies button{height:40px;padding:0 18px;border:0;border-radius:12px 3px 12px 3px;background:var(--jaune);color:#0E111D;font:800 13px/1 var(--police);cursor:pointer}
+rdr-accueil-apercu .em-cookies a{color:rgba(255,255,255,.86);font-size:12.5px;text-decoration:underline;text-underline-offset:3px}
+rdr-accueil-apercu .em-col{display:flex;flex-direction:column;gap:clamp(12px,2.1vh,20px);min-width:0}
+rdr-accueil-apercu .em-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font:800 10.5px/1.25 var(--police);letter-spacing:.16em;text-transform:uppercase;color:#2C3447}
+rdr-accueil-apercu .em-direct{display:inline-flex;align-items:center;gap:7px;color:#C4302B}
+rdr-accueil-apercu .em-direct i{position:relative;flex:none;display:block;width:8px;height:8px;border-radius:50%;background:currentColor}
+rdr-accueil-apercu .em-direct i::after{content:'';position:absolute;inset:0;border-radius:50%;background:currentColor;opacity:0;animation:raa-em-pouls 1.8s ease-out infinite;pointer-events:none}
+@keyframes raa-em-pouls{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+rdr-accueil-apercu .em-col h2{margin:0;padding-bottom:4px;font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;font-size:clamp(30px,2.8vw,46px);line-height:1.08;text-wrap:balance}
+rdr-accueil-apercu .em-col h2 em{font-style:inherit;padding:0 .1em;background:linear-gradient(180deg,transparent 58%,var(--jaune) 58%,var(--jaune) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+rdr-accueil-apercu .em-cpt-l{display:block;font:800 10.5px/1 var(--police);letter-spacing:.16em;text-transform:uppercase;color:#4A5266}
+rdr-accueil-apercu .em-cpt-n{display:flex;flex-wrap:nowrap;align-items:baseline;margin-top:9px;font-family:var(--titre);font-style:italic;font-size:clamp(34px,3.1vw,50px);line-height:.9;color:#16355D;white-space:nowrap}
+rdr-accueil-apercu .em-cpt-n b{font-weight:400}
+rdr-accueil-apercu .em-cpt-n b i{display:inline-block;width:.78em;text-align:center;font-style:inherit}
+rdr-accueil-apercu .em-cpt-n small{font:800 12px/1 var(--police);font-style:normal;color:#0E111D;margin:0 10px 0 4px;letter-spacing:.04em}
+rdr-accueil-apercu .em-cpt-n small:last-child{margin-right:0}
+rdr-accueil-apercu .em-p{margin:0;font-size:14px;line-height:1.55;color:#2C3447;text-wrap:pretty}
+rdr-accueil-apercu .em-p b{color:#0E111D}
+@media (max-height:820px) and (min-width:761px){
+rdr-accueil-apercu .em-col{gap:12px}
+rdr-accueil-apercu .em-col h2{font-size:clamp(28px,2.5vw,38px)}
+rdr-accueil-apercu .em-cpt-n{font-size:clamp(30px,2.7vw,40px);margin-top:7px}
+rdr-accueil-apercu .em-p{font-size:13.5px;line-height:1.5}
+}
+@media (max-width:900px){
+rdr-accueil-apercu .em-g{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+rdr-accueil-apercu .em{padding:0 0 28px}
+rdr-accueil-apercu .em .em-g{padding:0;gap:20px}
+rdr-accueil-apercu .em-ec{border-radius:0}
+rdr-accueil-apercu .em-col{padding:0 var(--marge)}
+rdr-accueil-apercu .em-heure{font-size:clamp(56px,20vw,110px)}
+rdr-accueil-apercu .em-son{bottom:14px}
+}
 @media (prefers-reduced-motion:reduce){
 rdr-accueil-apercu *,rdr-accueil-apercu *::before,rdr-accueil-apercu *::after{animation:none !important;transition:none !important}
 rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{opacity:1;transform:none}
 }`;
 
-  const PAGE = `<section class="hero" id="hero">
+  const PAGE = `<section class="em" id="em" hidden></section>
+<section class="hero" id="hero">
   <div class="hv-scene">
     <div class="hv-fond">
       <img class="hero-photo" id="hero-photo" src="" alt="" fetchpriority="high" decoding="sync">
@@ -3173,7 +3226,140 @@ function monter(racine, portail, D) {
 
 
 
-  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge();
+  
+
+
+
+
+
+
+
+
+  const EM_STOCK = 'rdrDernieresInfosV2:' + (EN ? 'en' : 'fr');
+  const EM_ICO = {
+    son: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>',
+    horloge: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
+  };
+  const EM_TXT = EN
+    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live' }
+    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct' };
+  const EM_PARIS = { timeZone: 'Europe/Paris' };
+  const emHeure = (ms) => EN
+    ? new Date(ms).toLocaleTimeString('en-US', { ...EM_PARIS, hour: 'numeric', minute: '2-digit' }).toLowerCase().replace(':00 ', ' ')
+    : new Date(ms).toLocaleTimeString('fr-FR', { ...EM_PARIS, hour: 'numeric', minute: '2-digit' }).replace(':', ' h ').replace(/ h 00$/, ' h');
+  const emJour = (ms) => new Date(ms).toLocaleDateString('en-CA', EM_PARIS);
+  const emHeureParis = (ms) => Number(new Date(ms).toLocaleTimeString('en-GB', { ...EM_PARIS, hour: '2-digit', hourCycle: 'h23' }).slice(0, 2));
+   
+  const emCases = (n) => String(n).split('').map((c) => '<i>' + c + '</i>').join('');
+  const emDecompte = (ms) => {
+    const s = Math.max(0, Math.floor(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+    const d = (n) => String(n).padStart(2, '0');
+    const p = h ? [[h, 'h'], [d(m), 'min'], [d(sec), 's']] : [[m, 'min'], [d(sec), 's']];
+    return p.map(([n, u]) => '<b>' + emCases(n) + '</b><small>' + u + '</small>').join('');
+  };
+   
+  function emAjuster(e) {
+    const forme = e.textContent.replace(/\d/g, '0'), large = e.clientWidth + 'x' + innerWidth;
+    if (!e.clientWidth || (e._forme === forme && e._large === large)) return;
+    e._forme = forme; e._large = large; e.style.fontSize = '';
+    const fin = () => { const k = e.lastElementChild; return k ? k.getBoundingClientRect().right - e.getBoundingClientRect().left : 0; };
+    let fs = parseFloat(getComputedStyle(e).fontSize), n = 0;
+    while (fin() > e.clientWidth - 2 && fs > 14 && n++ < 80) { fs -= 0.5; e.style.fontSize = fs + 'px'; }
+  }
+   
+  function emLire() {
+    try {
+      const v = JSON.parse(window.localStorage.getItem(EM_STOCK) || 'null');
+      const e = v && v.jeu && v.jeu.emission;
+      if (!e || typeof e !== 'object' || typeof v.t !== 'number' || Date.now() - v.t > 600000) return null;
+      const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
+      if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
+      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin };
+    } catch (x) { return null; }
+  }
+  let emCle = '', emGuet = null;
+  const emEn = { e: null };
+  function emColonne(e, t, ph, ici) {
+    const date = new Date(t).toLocaleDateString(EN ? 'en-GB' : 'fr-FR', { ...EM_PARIS, weekday: 'long', day: 'numeric', month: 'long' }).replace(/^./, (c) => c.toUpperCase()).replace(/^(\D+ )1 /, '$11<sup>er</sup> ');
+    const jour = emJour(t) === emJour(e.tDebut) ? (emHeureParis(e.tDebut) >= 17 ? EM_TXT.ce : EM_TXT.auj) : EM_TXT.dem;
+    const k = ph === 'direct' ? '<span class="em-direct"><i></i>' + EM_TXT.direct + '</span><span>' + date + '</span>'
+      : '<span>' + jour + EM_TXT.a + emHeure(e.tDebut) + (e.antenne ? ' · ' + esc(e.antenne) : '') + '</span>';
+    const cpt = ph === 'avant'
+      ? '<div><span class="em-cpt-l">' + EM_TXT.commence + '</span><div class="em-cpt-n" data-em-cpt="debut">' + emDecompte(e.tDebut - t) + '</div></div>'
+      : '<div><span class="em-cpt-l">' + EM_TXT.jusqua(emHeure(e.tFin)) + '</span><div class="em-cpt-n" data-em-cpt="fin">' + emDecompte(e.tFin - t) + '</div></div>';
+    const p = ph === 'avant'
+      ? esc(e.texte) + (ici ? EM_TXT.seul(emHeure(e.tDebut)) : e.antenne ? EM_TXT.rdv(esc(e.antenne), emHeure(e.tDebut)) : '')
+      : ici ? EM_TXT.lance : EM_TXT.enCours(esc(e.antenne || 'YouTube'));
+    return '<div class="em-col"><div class="em-k">' + k + '</div><h2>' + titreHtml(e.titre) + '</h2>' + cpt + '<p class="em-p">' + p.trim() + '</p></div>';
+  }
+  function emEcran(e, t, ph, consent) {
+    const large = Math.min(1100, Math.max(640, Math.round((innerWidth || 1280) / 160) * 160));
+    const photo = e.affiche || (PHASES[phase] && PHASES[phase].photo) || '';
+    const affiche = photo ? '<img class="em-img" src="' + IMG(photo, large, Math.round(large * 9 / 16), 75) + '" alt="" fetchpriority="high">' : '';
+    if (ph === 'avant' || !e.youtube) {
+      const hm = new Date(e.tDebut).toLocaleTimeString('en-GB', { ...EM_PARIS, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).split(':');
+      const pastille = ph === 'avant' ? '<span class="em-pastille">' + EM_ICO.horloge + EM_TXT.pastille(emHeure(e.tDebut)) + '</span>' : '<span class="em-pastille"><span class="em-direct" style="color:inherit"><i></i></span>' + esc(e.antenne || EM_TXT.direct) + '</span>';
+      return '<div class="em-ec">' + affiche + pastille + (ph === 'avant' ? '<span class="em-heure" aria-hidden="true">' + hm[0] + '<i>H</i>' + hm[1] + '</span>' : '') + '</div>';
+    }
+    const lien = 'https://www.youtube.com/watch?v=' + encodeURIComponent(e.youtube);
+    if (!consent) {
+      return '<div class="em-ec">' + affiche + '<div class="em-cookies"><b>' + EM_TXT.cookiesB + '</b><p>' + EM_TXT.cookiesP + '</p><button type="button" data-rdr-cookies data-em-cookies>' + EM_TXT.gerer + '</button><a href="' + esc(lien) + '" target="_blank" rel="noopener">' + EM_TXT.ouvrir + '</a></div></div>';
+    }
+    const src = 'https://www.youtube.com/embed/' + encodeURIComponent(e.youtube) + '?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+    return '<div class="em-ec em-ec--lecteur"><iframe src="' + esc(src) + '" title="' + esc(EM_TXT.lecteur(e.antenne || 'YouTube')) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>' +
+      '<button class="em-son" type="button" data-em-son>' + EM_ICO.son + EM_TXT.son + '</button></div>';
+  }
+  function emTic(e, t) {
+    const sec = $('em'); if (!sec) return;
+    sec.querySelectorAll('[data-em-cpt]').forEach((c) => {
+      c.innerHTML = emDecompte(c.dataset.emCpt === 'debut' ? e.tDebut - t : e.tFin - t);
+      emAjuster(c);
+    });
+  }
+  function emRendre() {
+    const sec = $('em'), hero = $('hero');
+    if (!sec || !hero) return;
+    const e = emLire(), t = horloge.maintenant();
+    if (!e || t >= e.tFin || t < e.tDebut - 90 * 60000) {
+      if (!sec.hidden) { sec.hidden = true; sec.innerHTML = ''; hero.hidden = false; emCle = ''; }
+      emEn.e = null;
+      return;
+    }
+    emEn.e = e;
+    const ph = t < e.tDebut ? 'avant' : 'direct';
+    const consent = politiqueMarketing();
+    const cle = [e.youtube, e.tDebut, e.tFin, e.titre, e.antenne, e.texte, e.affiche, ph, consent].join('|');
+    if (cle === emCle) { emTic(e, t); return; }
+    emCle = cle;
+    const ici = !!e.youtube && consent;
+    sec.innerHTML = '<div class="trame em-g">' + emEcran(e, t, ph, consent) + emColonne(e, t, ph, ici) + '</div>';
+    sec.hidden = false; hero.hidden = true;
+    const son = sec.querySelector('[data-em-son]');
+    if (son) son.addEventListener('click', () => {
+      const f = sec.querySelector('iframe');
+      const commande = (func, args) => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: args || [] }), '*'); } catch (x) {   } };
+      commande('unMute'); commande('setVolume', [80]); commande('playVideo');
+      son.remove();
+    });
+    const ck = sec.querySelector('[data-em-cookies]');
+    if (ck) {
+      ck.addEventListener('click', ouvrirCookies);
+      clearInterval(emGuet);
+      let tours = 0;
+      emGuet = setInterval(() => { if (++tours > 150 || politiqueMarketing()) { clearInterval(emGuet); emRendre(); } }, 600);
+      minuteurs.push(emGuet);
+    }
+    emTic(e, t);
+  }
+  
+
+  let emTour = 0;
+  minuteurs.push(setInterval(() => {
+    if (++emTour % 5 === 0 || (emEn.e && (horloge.maintenant() >= emEn.e.tFin || (horloge.maintenant() >= emEn.e.tDebut && /\|avant\|/.test(emCle))))) emRendre();
+    else if (emEn.e) emTic(emEn.e, horloge.maintenant());
+  }, 1000));
+
+  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge(); emRendre();
   {
     const ph = $('hero-photo');
     const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
