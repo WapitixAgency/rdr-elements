@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum f90c3ff | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum e170deb | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="e170deb";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -25,7 +25,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
       pause: 'Mettre en pause le défilement des infos', reprendre: 'Reprendre le défilement des infos',
       prec: 'Info précédente', suiv: 'Info suivante', sur: (i, n) => i + ' sur ' + n,
       nouvelle: 'Nouvelle info', nouvelleVigilance: 'Attention', nouvelleAlerte: 'Alerte',
-      ranger: 'Ranger les dernières infos'
+      ranger: 'Ranger les dernières infos',
+      deplier: 'Lire tout le message', replier: 'Réduire le message'
     },
     en: {
       region: 'Latest news', etiquette: 'Latest news', info: 'Update', vigilance: 'Caution', alerte: 'Alert',
@@ -33,7 +34,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
       pause: 'Pause the news ticker', reprendre: 'Resume the news ticker',
       prec: 'Previous update', suiv: 'Next update', sur: (i, n) => i + ' of ' + n,
       nouvelle: 'New update', nouvelleVigilance: 'Caution', nouvelleAlerte: 'Alert',
-      ranger: 'Hide the latest news'
+      ranger: 'Hide the latest news',
+      deplier: 'Read the full message', replier: 'Shorten the message'
     }
   };
 
@@ -47,7 +49,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
     lecture: '<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>',
     gauche: '<path d="m15 18-6-6 6-6"/>',
     droite: '<path d="m9 18 6-6-6-6"/>',
-    ranger: '<path d="m18 15-6-6-6 6"/>'
+    ranger: '<path d="m18 15-6-6-6 6"/>',
+    deplier: '<path d="m6 9 6 6 6-6"/>'
   };
 
   const P = 'rdr-dernieres-infos ';
@@ -112,6 +115,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
     P + '.rdi--seule .rdi-badge,' + P + '.rdi--pas .rdi-badge{display:inline-flex;vertical-align:-1.5px;margin-right:9px}' +
     P + '.rdi--seule .rdi-texte,' + P + '.rdi--pas .rdi-texte{display:inline}' +
     P + '.rdi--seule .rdi-suite,' + P + '.rdi--pas .rdi-suite{display:inline;margin-left:9px}' +
+     
+    P + '.rdi-btn[hidden],' + P + '.rdi-cmd[hidden]{display:none}' +
+    P + '.rdi--deplie.rdi--seule .rdi-corps,' + P + '.rdi--deplie.rdi--pas .rdi-corps{display:block;-webkit-line-clamp:none;overflow:visible}' +
+    P + '.rdi--deplie .rdi-deplier svg{transform:rotate(180deg)}' +
+    P + '.rdi--coupe span.rdi-item{cursor:pointer}' +
      
     P + '.rdi--pas .rdi-liste,' + P + '.rdi--pas .rdi-piste{flex:1 1 auto;min-width:0}' +
     P + '.rdi--pas .rdi-li{flex:1 1 auto;min-width:0}' +
@@ -292,6 +300,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
       clearTimeout(this._minuteur);
       clearTimeout(this._bascule);
       this._arreterDefilement();
+      if (this._roCoupe) { this._roCoupe.disconnect(); this._roCoupe = null; }
     }
 
     attributeChangedCallback(nom, avant, apres) {
@@ -436,14 +445,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
             '<span class="rdi-compte" aria-live="polite"><span aria-hidden="true">' + (this._indice + 1) + ' / ' + vis.length + '</span><span class="rdi-vh">' + esc(L.sur(this._indice + 1, vis.length)) + '</span></span>' +
             '<button type="button" class="rdi-btn" data-rdi-suiv aria-label="' + esc(L.suiv) + '">' + svg(ICO.droite) + '</button>';
         }
+        if (mode !== 'defile') cmd += '<button type="button" class="rdi-btn rdi-deplier" data-rdi-deplier aria-expanded="false" aria-label="' + esc(L.deplier) + '" hidden>' + svg(ICO.deplier) + '</button>';
         if (rangeable) cmd += '<button type="button" class="rdi-btn rdi-ranger" data-rdi-ranger aria-label="' + esc(L.ranger) + '">' + svg(ICO.ranger) + '</button>';
-        if (cmd) cmd = '<div class="rdi-cmd">' + cmd + '</div>';
+        if (cmd) cmd = '<div class="rdi-cmd"' + (mode === 'seule' && !rangeable ? ' hidden' : '') + '>' + cmd + '</div>';
         this._hote.innerHTML =
           '<section class="rdi rdi--' + (rouge ? 'alerte' : 'info') + ' rdi--' + mode + '" aria-label="' + esc(L.region) + '" data-nombre="' + vis.length + '">' +
             '<div class="rdi-etiq">' + svg(ICO.megaphone) + '<span class="rdi-etiq-txt">' + esc(L.etiquette) + '</span>' + (vis.length > 1 ? '<span class="rdi-nb" aria-hidden="true">' + vis.length + '</span>' : '') + '</div>' +
             '<div class="rdi-fenetre"><div class="rdi-piste"><ul class="rdi-liste">' + items + '</ul></div></div>' + cmd +
           '</section>';
         if (mode === 'defile') this._monterDefilement();
+        else this._mesurerCoupe();
       }
       const etat = vis.length + '|' + range + '|' + niveau;
       if (etat !== this._etat) {
@@ -558,11 +569,49 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
       this._jouer();
     }
 
+    
+
+    _mesurerCoupe() {
+      const mesure = () => {
+        const bande = this._hote && this._hote.querySelector('.rdi');
+        const b = bande && bande.querySelector('[data-rdi-deplier]');
+        if (!bande || !b) return;
+        if (bande.classList.contains('rdi--deplie')) { b.hidden = false; return; }
+        const corps = bande.querySelector('.rdi-li:not([hidden]) .rdi-corps');
+        const coupe = !!corps && corps.scrollHeight > corps.clientHeight + 1;
+        b.hidden = !coupe;
+        bande.classList.toggle('rdi--coupe', coupe);
+         
+        if (b.parentElement && b.parentElement.querySelectorAll('.rdi-btn').length === 1) b.parentElement.hidden = !coupe;
+      };
+      requestAnimationFrame(mesure);
+      if (window.ResizeObserver && !this._roCoupe) { this._roCoupe = new window.ResizeObserver(() => mesure()); this._roCoupe.observe(this._hote); }
+    }
+    _deplier(ouvrir) {
+      const bande = this._hote && this._hote.querySelector('.rdi');
+      const b = bande && bande.querySelector('[data-rdi-deplier]');
+      if (!bande || !b) return;
+      const L = T[this._lang];
+      const ouvert = ouvrir == null ? !bande.classList.contains('rdi--deplie') : ouvrir;
+      bande.classList.toggle('rdi--deplie', ouvert);
+      b.setAttribute('aria-expanded', String(ouvert));
+      b.setAttribute('aria-label', ouvert ? L.replier : L.deplier);
+      if (!ouvert) this._mesurerCoupe();
+    }
+
     _clic(e) {
       const b = e.target && e.target.closest ? e.target.closest('.rdi-btn') : null;
-      if (!b) return;
+      if (!b) {
+         
+        const t = e.target && e.target.closest ? e.target.closest('span.rdi-item') : null;
+        const bande = t && t.closest('.rdi');
+        if (bande && (bande.classList.contains('rdi--coupe') || bande.classList.contains('rdi--deplie'))) this._deplier();
+        return;
+      }
       const L = T[this._lang];
-      if (b.hasAttribute('data-rdi-ranger')) {
+      if (b.hasAttribute('data-rdi-deplier')) {
+        this._deplier();
+      } else if (b.hasAttribute('data-rdi-ranger')) {
         this.ranger();
       } else if (b.hasAttribute('data-rdi-pause')) {
         this._pause = !this._pause;
@@ -574,6 +623,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="f90c3ff";performance
         if (!lis.length) return;
         this._indice = (this._indice + (b.hasAttribute('data-rdi-suiv') ? 1 : lis.length - 1)) % lis.length;
         lis.forEach((li, i) => { li.hidden = i !== this._indice; });
+        this._deplier(false);
         const compte = this._hote.querySelector('.rdi-compte');
         if (compte) compte.innerHTML = '<span aria-hidden="true">' + (this._indice + 1) + ' / ' + lis.length + '</span><span class="rdi-vh">' + esc(L.sur(this._indice + 1, lis.length)) + '</span>';
       }
