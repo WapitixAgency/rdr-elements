@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum e170deb | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="e170deb";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum e8cb35a | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="e8cb35a";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -99,7 +99,11 @@ const IMG = {
   cartoJunior: 'wix:image://v1/df962b_243d4d6e385449e49f766f6d4b53ef9e~mv2.png/carto-junior.png',
   depart: 'wix:image://v1/547c0f_4595978e1a434bb6a48fa5507ad1a35c~mv2.avif/suivre-le-depart.avif',
   ultims: 'wix:image://v1/7bb303_9468348c82c44ff99b715e9a81744afb~mv2.png/ultims-couchant.png',
-  parcours: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif'
+  parcours: 'wix:image://v1/7bb303_85dbcc095ad54780a2c7454015771488~mv2.avif/parcours-officiel-2026.avif',
+  
+
+  classement: 'wix:image://v1/df962b_2b2a3564f51645358ccfb5bdba52319b~mv2.jpg/menu-classement.jpg',
+  jeu: 'wix:image://v1/df962b_230c6a519e314083903301ba0899ef39~mv2.jpg/menu-jeu-virtual-regatta.jpg'
 };
 const VR = 'https://click.virtualregatta.com/?li=5811';
 const ent = (lang, cle) => ARBORESCENCE[lang].find((e) => e.cle === cle);
@@ -117,17 +121,17 @@ function laCourse(lang, apres) {
     liens: (apres
       ? [
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
           { libelle: en ? 'Watch the start again' : 'Revoir le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Saint-Malo, 1 November' : 'Saint-Malo, le 1er novembre' }
         ]
       : [
           { libelle: en ? 'Follow the start' : 'Suivre le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Sunday 1:02 pm, live' : 'Dimanche 13 h 02, en direct' },
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', bientotAvant: 'ouverture-cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.ultims, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
         ]
     ).concat([
       { libelle: en ? 'Race course' : 'Le parcours', lien: '/parcours', picto: 'parcours', image: IMG.parcours, sous: en ? 'From Saint-Malo to Pointe-à-Pitre' : 'De Saint-Malo à Pointe-à-Pitre' },
-      { libelle: en ? 'Play the official game' : 'Jouer au jeu officiel', lien: VR, picto: 'manette', sous: 'Virtual Regatta' }
+      { libelle: en ? 'Play the official game' : 'Jouer au jeu officiel', lien: VR, picto: 'manette', image: IMG.jeu, sous: 'Virtual Regatta' }
     ])
   };
 }

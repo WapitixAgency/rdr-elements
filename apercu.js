@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum e170deb | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e170deb";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum e8cb35a | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="e8cb35a";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -862,6 +862,7 @@ rdr-accueil-apercu .hero ~ rdr-dernieres-infos{background:#0E111D}
 rdr-accueil-apercu .hero ~ rdr-dernieres-infos .rdi{margin:clamp(14px,2.6vh,26px) 0 clamp(4px,1vh,10px)}
 rdr-accueil-apercu .hero:not(.est-photo) ~ rdr-dernieres-infos .rdi{opacity:0}
 rdr-accueil-apercu .hero.est-photo ~ rdr-dernieres-infos .rdi{animation:raa-rdi-monte .7s cubic-bezier(.22,.8,.3,1) .3s both}
+rdr-accueil-apercu .em:not([hidden]) ~ rdr-dernieres-infos .rdi{margin-top:0}
 @keyframes raa-rdi-monte{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 rdr-accueil-apercu .cta-liste{display:flex;gap:16px;height:var(--haut-acces)}
 rdr-accueil-apercu .cta{position:relative;flex:1;border-radius:18px;overflow:hidden;background:var(--panneau);color:#fff;transition:flex .6s cubic-bezier(.22,.8,.3,1),box-shadow .3s;display:flex;align-items:flex-end;min-width:0;border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 30px 60px rgba(0,0,0,.45)}
@@ -1482,6 +1483,8 @@ rdr-accueil-apercu .pv-sk-ov .pv-micro{letter-spacing:.05em;font-size:8.5px}
 }
 rdr-accueil-apercu .em{--em-lh:clamp(240px,calc(100svh - var(--haut-entete) - 92px),620px);position:relative;color:#0E111D;padding:clamp(18px,3.2vh,34px) 0 clamp(24px,4vh,44px);background:radial-gradient(900px 480px at 86% -12%,rgba(255,255,255,.9),transparent 64%),linear-gradient(180deg,#C6DAE7 0%,#D9E6EE 52%,#E6EDF0 100%)}
 rdr-accueil-apercu .em[hidden]{display:none}
+rdr-accueil-apercu .em::before{content:'';position:absolute;inset:0;pointer-events:none;background:#16355D;opacity:.07;-webkit-mask:var(--topo) repeat center top/1200px auto;mask:var(--topo) repeat center top/1200px auto}
+rdr-accueil-apercu .em > .trame{position:relative;z-index:1}
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .em{padding-top:calc(var(--rdr-entete-h,175px) + clamp(18px,3.2vh,34px))}
 rdr-accueil-apercu .em-g{display:grid;grid-template-columns:minmax(0,calc(var(--em-lh) * 16 / 9)) minmax(280px,1fr);gap:clamp(24px,2.6vw,42px);align-items:center}
 rdr-accueil-apercu .em-ec{position:relative;width:100%;aspect-ratio:16/9;border-radius:22px 4px 22px 4px;overflow:hidden;background:#05070d;color:#fff;isolation:isolate;box-shadow:0 30px 60px -30px rgba(14,30,50,.6),0 0 0 1px rgba(14,17,29,.1)}
@@ -3324,7 +3327,7 @@ function monter(racine, portail, D) {
       if (!e || typeof e !== 'object' || typeof v.t !== 'number' || Date.now() - v.t > 600000) return null;
       const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
       if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
-      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin };
+      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, sansFin: e.sansFin === true };
     } catch (x) { return null; }
   }
   let emCle = '', emGuet = null;
@@ -3336,6 +3339,7 @@ function monter(racine, portail, D) {
       : '<span>' + jour + EM_TXT.a + emHeure(e.tDebut) + (e.antenne ? ' · ' + esc(e.antenne) : '') + '</span>';
     const cpt = ph === 'avant'
       ? '<div><span class="em-cpt-l">' + EM_TXT.commence + '</span><div class="em-cpt-n" data-em-cpt="debut">' + emDecompte(e.tDebut - t) + '</div></div>'
+      : e.sansFin ? ''
       : '<div><span class="em-cpt-l">' + EM_TXT.jusqua(emHeure(e.tFin)) + '</span><div class="em-cpt-n" data-em-cpt="fin">' + emDecompte(e.tFin - t) + '</div></div>';
     const p = ph === 'avant'
       ? esc(e.texte) + (ici ? EM_TXT.seul(emHeure(e.tDebut)) : e.antenne ? EM_TXT.rdv(esc(e.antenne), emHeure(e.tDebut)) : '')
@@ -3378,12 +3382,14 @@ function monter(racine, portail, D) {
     emEn.e = e;
     const ph = t < e.tDebut ? 'avant' : 'direct';
     const consent = politiqueMarketing();
-    const cle = [e.youtube, e.tDebut, e.tFin, e.titre, e.antenne, e.texte, e.affiche, ph, consent].join('|');
+     
+    const cle = [e.youtube, ph === 'avant' ? e.tDebut : '', e.sansFin ? 'sans-fin' : e.tFin, e.titre, e.antenne, e.texte, e.affiche, ph, consent].join('|');
     if (cle === emCle) { emTic(e, t); return; }
     emCle = cle;
     const ici = !!e.youtube && consent;
     sec.innerHTML = '<div class="trame em-g">' + emEcran(e, t, ph, consent) + emColonne(e, t, ph, ici) + '</div>';
     sec.hidden = false; hero.hidden = true;
+    if (M.topoFaq && !sec.style.getPropertyValue('--topo')) sec.style.setProperty('--topo', 'url("' + M.topoFaq + '")');
     const son = sec.querySelector('[data-em-son]');
     if (son) son.addEventListener('click', () => {
       const f = sec.querySelector('iframe');
