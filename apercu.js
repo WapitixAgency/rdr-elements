@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 816a5fb | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="816a5fb";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 4e8270f | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="4e8270f";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2243,7 +2243,10 @@ function monter(racine, portail, D) {
 
 
 
-  const pointage = () => { const p = $('ess-pointage'); if (!p) return; const t = horloge.maintenant(); const c = Math.ceil(t / 14400000) * 14400000 - t; p.textContent = Math.floor(c / 3600000) + ' h ' + String(Math.floor(c / 60000) % 60).padStart(2, '0'); };
+  
+
+  const jourCourse = () => { const j = $('ess-jour'); if (!j) return; const m = D.calendrier && D.calendrier.moments; const d = Date.parse((m && m.depart) || '2026-11-01T12:02:00Z'); const t = horloge.maintenant(); j.textContent = 'J' + Math.max(1, Math.floor((t - d) / 86400000) + 1); };
+  const pointage = () => { jourCourse(); const p = $('ess-pointage'); if (!p) return; const t = horloge.maintenant(); const c = Math.ceil(t / 14400000) * 14400000 - t; p.textContent = Math.floor(c / 3600000) + ' h ' + String(Math.floor(c / 60000) % 60).padStart(2, '0'); };
 
   const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const JOURS = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
