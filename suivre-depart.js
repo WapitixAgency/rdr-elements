@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum b0bff44 | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="b0bff44";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum b6f7c88 | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="b6f7c88";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -673,7 +673,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="b0bff44";per
       if (!a.matches || !a.matches('a[href^="/"]')) return;
       const h = a.getAttribute('href');
       if (h === '/en' || h.startsWith('/en/') || h.startsWith('//')) return;
-      a.setAttribute('href', '/en' + (h === '/' ? '' : h));
+      a.setAttribute('href', '/en' + (h === '/' ? '' : h.replace(/^\/classement(?=[/?#]|$)/, '/ranking')));  
     });
   }
 

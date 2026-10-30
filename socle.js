@@ -1,5 +1,5 @@
-/* rdr-elements socle | source route-du-rhum b0bff44 | rdr-pied-haut.js rdr-notify.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="b0bff44";performance.mark("rdr-elements:socle")}catch(e){}
+/* rdr-elements socle | source route-du-rhum b6f7c88 | rdr-pied-haut.js rdr-notify.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="b6f7c88";performance.mark("rdr-elements:socle")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -91,7 +91,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["socle"]="b0bff44";performance
     return 'https://static.wixstatic.com/media/' + m[1] + '/v1/fit/w_' + w + ',h_' + h + ',q_85,enc_auto/' + m[1];
   }
   function lienInterne(u, lang) {
-    const s = urlSure(u, '/'); if (lang === 'en' && /^\/(?!en(\/|$))/.test(s)) return '/en' + (s === '/' ? '' : s);
+     
+    const s = urlSure(u, '/'); if (lang === 'en' && /^\/(?!en(\/|$))/.test(s)) return '/en' + (s === '/' ? '' : s.replace(/^\/classement(?=[/?#]|$)/, '/ranking'));
     return s;
   }
 

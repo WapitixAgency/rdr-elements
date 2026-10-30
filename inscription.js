@@ -1,5 +1,5 @@
-/* rdr-elements inscription | source route-du-rhum b0bff44 | rdr-inscription-fiche-skipper.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="b0bff44";performance.mark("rdr-elements:inscription")}catch(e){}
+/* rdr-elements inscription | source route-du-rhum b6f7c88 | rdr-inscription-fiche-skipper.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["inscription"]="b6f7c88";performance.mark("rdr-elements:inscription")}catch(e){}
 ;(function(){
 (function () {
 const BALISE_MEDIAS = 'rdr-envoi-medias';

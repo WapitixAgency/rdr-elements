@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum b0bff44 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b0bff44";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum b6f7c88 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="b6f7c88";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -112,7 +112,7 @@ function laCourse(lang, apres) {
   const en = lang === 'en';
   return {
     cle: 'course', libelle: en ? 'The race' : 'La course', lien: apres ? '/cartographie' : '/suivre-le-depart', panneau: 'course', sansTout: true,
-    prefixes: ['/classement', '/cartographie', '/suivre-le-depart', '/parcours'],
+    prefixes: ['/classement', '/ranking', '/cartographie', '/suivre-le-depart', '/parcours'],
     titre: en ? 'Follow the race' : 'Suivre la course',
     sous: apres
       ? (en ? 'Follow the fleet across the Atlantic, from Saint-Malo to Pointe-à-Pitre.' : 'Suivez la flotte sur l\'Atlantique, de Saint-Malo à Pointe-à-Pitre.')
@@ -1349,7 +1349,8 @@ const adresseSure = (u) => /^\/(?!\/)|^https?:\/\//i.test(String(u || ''));
 const lien = (u) => {
   if (!u || !adresseSure(u)) return '';
   if (externe(u) || u.charAt(0) !== '/') return u;
-  const c = LANG === 'en' && !/^\/en(\/|$|\?)/.test(u) ? '/en' + (u === '/' ? '' : u) : u;
+   
+  const c = LANG === 'en' && !/^\/en(\/|$|\?)/.test(u) ? '/en' + (u === '/' ? '' : u.replace(/^\/classement(?=[/?#]|$)/, '/ranking')) : u;
   return (ctx.base || '') + (ctx.base && c === '/' ? '' : c);
 };
 const cible = (u) => (externe(u) ? ' target="_blank" rel="noopener"' : '');
