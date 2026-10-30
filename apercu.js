@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum b6f7c88 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="b6f7c88";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum d8f93cb | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d8f93cb";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3327,7 +3327,9 @@ function monter(racine, portail, D) {
       if (!e || typeof e !== 'object' || typeof v.t !== 'number' || Date.now() - v.t > 600000) return null;
       const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
       if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
-      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, sansFin: e.sansFin === true };
+       
+      const annonce = typeof e.annonce === 'number' && e.annonce >= 0 ? Math.min(e.annonce, 1440) : 90;
+      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, annonce, sansFin: e.sansFin === true };
     } catch (x) { return null; }
   }
   let emCle = '', emGuet = null;
@@ -3374,7 +3376,7 @@ function monter(racine, portail, D) {
     const sec = $('em'), hero = $('hero');
     if (!sec || !hero) return;
     const e = emLire(), t = horloge.maintenant();
-    if (!e || t >= e.tFin || t < e.tDebut - 90 * 60000) {
+    if (!e || t >= e.tFin || t < e.tDebut - e.annonce * 60000) {
       if (!sec.hidden) { sec.hidden = true; sec.innerHTML = ''; hero.hidden = false; emCle = ''; }
       emEn.e = null;
       return;
