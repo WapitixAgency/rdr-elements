@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 3af0c2c | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="3af0c2c";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum d92a0e3 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d92a0e3";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3397,7 +3397,9 @@ function monter(racine, portail, D) {
     const cpt = ph === 'avant'
       ? '<div><span class="em-cpt-l">' + EM_TXT.commence + '</span><div class="em-cpt-n" data-em-cpt="debut">' + emDecompte(e.tDebut - t) + '</div></div>'
       : e.sansFin ? ''
-      : '<div><span class="em-cpt-l">' + EM_TXT.jusqua(emHeure(e.tFin)) + '</span><div class="em-cpt-n" data-em-cpt="fin">' + emDecompte(e.tFin - t) + '</div></div>';
+      
+
+      : '<div><span class="em-cpt-l">' + EM_TXT.jusqua(emHeure(e.tFin)) + '</span></div>';
     const p = ph === 'avant'
       ? esc(e.texte) + (ici ? EM_TXT.seul(emHeure(e.tDebut)) : e.antenne ? EM_TXT.rdv(esc(e.antenne), emHeure(e.tDebut)) : '')
       : ici ? EM_TXT.lance : EM_TXT.enCours(esc(e.antenne || 'YouTube'));
