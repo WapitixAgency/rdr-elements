@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum ee93c23 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="ee93c23";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 63b40b7 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="63b40b7";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -5813,8 +5813,7 @@ class RdrNews extends HTMLElement {
     'Skippers suivis, badges, lectures — votre tableau de bord.':
       'Skippers you follow, badges, reads — your dashboard.',
     'Cartographie': 'Race tracker',
-    "Suivez la flotte en direct sur l'Atlantique.": 'Follow the fleet live across the Atlantic.',
-    'Bientôt · au départ de la course': 'Soon · at the start of the race',
+    "Suivez la flotte sur l'Atlantique, de Saint-Malo à Pointe-à-Pitre.": 'Follow the fleet across the Atlantic, from Saint-Malo to Pointe-à-Pitre.',
     'Les skippers': 'The skippers',
     'Les portraits des marins au départ.': 'Profiles of the sailors on the start line.',
     'Le palmarès': 'Roll of honour',
@@ -6029,7 +6028,8 @@ class RdrNews extends HTMLElement {
 
 
         { key: 'espace-rhum', cls: 'rpm-tool--rhum', ic: 'monitor', title: 'Mon Espace Rhum', desc: 'Skippers suivis, badges, lectures — votre tableau de bord.' },
-        { key: 'carto', cls: 'rpm-tool--carto', ic: 'compass', title: 'Cartographie', desc: 'Suivez la flotte en direct sur l\'Atlantique.', soon: 'Bientôt · au départ de la course' },
+         
+        { key: 'carto', cls: 'rpm-tool--carto', ic: 'compass', title: 'Cartographie', desc: 'Suivez la flotte sur l\'Atlantique, de Saint-Malo à Pointe-à-Pitre.' },
         { key: 'skippers', cls: 'rpm-tool--skip', ic: 'duo', title: 'Les skippers', desc: 'Les portraits des marins au départ.' },
         { key: 'palmares', cls: 'rpm-tool--pal', ic: 'trophy', title: 'Le palmarès', desc: 'Tous les vainqueurs depuis 1978.' }
       ];

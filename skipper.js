@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum ee93c23 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="ee93c23";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 63b40b7 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="63b40b7";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1494,7 +1494,7 @@ const I18N = {
     eyebrowAfter: 'Course terminée',
     titlePart1: 'Suivez',
     titlePart2: 'dans l\u2019aventure.',
-    description: 'Dès le départ, retrouvez ici la cartographie, les actualités officielles et tout ce qu\u2019il faut pour ne rien manquer de la traversée.',
+    description: 'Retrouvez ici la cartographie, les actualités officielles et tout ce qu\u2019il faut pour ne rien manquer de la traversée.',
     feature1Title: 'Cartographie',
     feature1Desc: 'Sa position à chaque pointage, sur la carte officielle',
     feature2Title: 'Actualités officielles',
@@ -1525,7 +1525,7 @@ const I18N = {
     eyebrowAfter: 'Race ended',
     titlePart1: 'Follow',
     titlePart2: 'on the adventure.',
-    description: 'From the start, you\u2019ll find here the race tracker, official news and everything you need to follow the crossing.',
+    description: 'Here you\u2019ll find the race tracker, official news and everything you need to follow the crossing.',
     feature1Title: 'Race tracker',
     feature1Desc: 'Their position at every report, on the official map',
     feature2Title: 'Official news',
@@ -2823,6 +2823,11 @@ customElements.define('skippers-carousel', SkippersCarousel);
 
   const DEPART = Date.parse('2026-11-01T12:02:00Z');
   const departDe = (p) => { const t = p && typeof p.depart === 'string' ? Date.parse(p.depart) : NaN; return isFinite(t) ? t : DEPART; };
+  
+
+
+  const OUVERTURE_CARTO = Date.parse('2026-10-29T23:30:00Z');
+  const ouvertureCartoDe = (p) => { const t = p && typeof p.ouvertureCarto === 'string' ? Date.parse(p.ouvertureCarto) : NaN; return isFinite(t) ? t : OUVERTURE_CARTO; };
    
   const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
   const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
@@ -5411,18 +5416,20 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
     
 
 
+
     _departPasse() { return Date.now() >= departDe(this._p); }
+    _cartoOuverte() { return this._departPasse() || Date.now() >= ouvertureCartoDe(this._p); }
     _lienCarto() {
       const id = this._p && this._p.skipper && this._p.skipper.idGeovoile;
       return (this._lang === 'en' ? '/en' : '') + '/cartographie' + (id ? '?bateau=' + encodeURIComponent(id) : '');
     }
 
     _actionsHero(T) {
-      return '<div class="sk-hero-actions' + (this._phase !== 'course' && this._departPasse() ? ' sk-hero-actions--carto' : '') + '">' +
+      return '<div class="sk-hero-actions' + (this._phase !== 'course' && this._cartoOuverte() ? ' sk-hero-actions--carto' : '') + '">' +
           this._boutonSuivre('sk-btn sk-btn--suivre', true) +
           (this._phase === 'course'
             ? '<a class="sk-btn sk-btn--ligne" href="#sk-suivre" data-sk-ancre="sk-suivre">' + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>'
-            : this._departPasse()
+            : this._cartoOuverte()
             ? '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '">' + svg('boussole') + '<span>' + esc(T.surCarto) + '</span></a>'
             : '<button class="sk-btn sk-btn--ligne" type="button" data-sk-partager aria-label="' + esc(T.partagerAria(this._nomAffiche)) + '">' + svg('partager') + '<span>' + esc(T.partager) + '</span></button>') +
         '</div>';
@@ -6351,8 +6358,9 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
         outro.setAttribute('accent-color', couleurSure(s.classe && s.classe.couleur));
         outro.setAttribute('email-press', s.contactPresse || '');
         const enRoute = this._phase === 'course' || this._departPasse();
-        outro.setAttribute('live-active', enRoute ? 'true' : 'false');
-        if (enRoute) outro.setAttribute('live-url', this._lienCarto()); else outro.removeAttribute('live-url');
+        const carto = enRoute || this._cartoOuverte();
+        outro.setAttribute('live-active', carto ? 'true' : 'false');
+        if (carto) outro.setAttribute('live-url', this._lienCarto()); else outro.removeAttribute('live-url');
         outro.setAttribute('follow-active', 'true');
         outro.setAttribute('is-followed', this._suivi ? 'true' : 'false');
         
