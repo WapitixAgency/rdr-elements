@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 0d63daa | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="0d63daa";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum ee1ddce | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ee1ddce";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -642,8 +642,10 @@ function monterRecherche(ctx) {
   function tirerEssais() {
     const hasard = (l) => l[Math.floor(Math.random() * l.length)];
     const sk = idx.filter((e) => e.type === 'skipper');
-    const themes = idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || '') && !/cat=animation/.test(e.lien));
-    const pages = idx.filter((e) => e.type === 'page' && e.lien && !e.bientot && /^\/(heritage|carte-village-saint-malo|kit-pedagogique|bateaux|se-rendre-au-village)$/.test(e.lien));
+     
+    const village = !ctx.themes || ctx.themes();
+    const themes = village ? idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || '') && !/cat=animation/.test(e.lien)) : [];
+    const pages = idx.filter((e) => e.type === 'page' && e.lien && !e.bientot && (village ? /^\/(heritage|carte-village-saint-malo|kit-pedagogique|bateaux|se-rendre-au-village)$/ : /^\/(heritage|kit-pedagogique|bateaux|parcours)$/).test(e.lien));
     const classes = [...new Set(sk.map((e) => (e.meta || '').split(' · ')[0]).filter((c) => CLASSES[c]))];
     const l = [];
     if (sk.length) { const s = hasard(sk); l.push({ t: s.titre, k: 'skipper' }); }
@@ -663,7 +665,7 @@ function monterRecherche(ctx) {
     let n = 0;
     const id = () => pre + '-r' + (n++);
     const racc = (ctx.raccourcis ? ctx.raccourcis() : []).map((e) => preparer(Object.assign({ type: 'page' }, e)));
-    const themes = idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || ''));
+    const themes = !ctx.themes || ctx.themes() ? idx.filter((e) => e.type === 'page' && /^\/programmation\?cat=/.test(e.lien || '')) : [];
     return (racc.length ? '<div class="gl-sg-groupe" role="group" aria-labelledby="' + pre + '-gm">' + label('calendrier', X.moment, null, pre + '-gm') + '<div class="gl-sg-grille">' + racc.map((e) => option(e, [], id())).join('') + '</div></div>' : '') +
       htmlEssais(pre) +
       (themes.length ? '<div class="gl-sg-groupe" role="group" aria-labelledby="' + pre + '-gt">' + label('programme', X.themes, null, pre + '-gt') + '<div class="gl-sg-themes">' + themes.map((e) =>
@@ -854,6 +856,7 @@ function monterRecherche(ctx) {
 
     reconstruire: () => {
       oublierDetaches();
+      essais = null;
       construireLocal();
       if (distant) fusionnerDistant(distant);
       redessiner();
@@ -2621,6 +2624,7 @@ function chargerRecherche() {
         extras: () => pagesProgramme(),
         raccourcis: () => raccourcisMoment(),
         tuiles: () => tuilesRubriques(),
+        themes: () => themesRecherche(),
         flamme: FLAMME,
         cleMemoire: 'rdrRechercheV1:' + LANG,
         surRubrique: (cle) => {
@@ -2641,8 +2645,33 @@ function chargerRecherche() {
   }
   return promRecherche;
 }
- 
+
+const phaseRecherche = () => { const p = phaseMenu(); return p ? (p.moment === 'entete-course' ? 'course' : 'depart') : ''; };
+function lienCourse(u) {
+  const c = RUBS.find((r) => r.cle === 'course');
+  const l = c && c.liens.find((x) => x.lien === u);
+  return l && !l.bientot && (!l.bientotAvant || momentPasse(l.bientotAvant)) ? { l, c } : null;
+}
+function raccourcisCourse(ph) {
+  const r = [];
+  const ajouter = (u, ico) => { const x = lienCourse(u); if (x) r.push({ titre: x.l.libelle, lien: x.l.lien, meta: x.c.libelle, ico }); };
+  if (ph === 'course') { ajouter('/cartographie', 'carte'); ajouter('/classement', 'classement'); ajouter('/suivre-le-depart', 'voile'); }
+  else { ajouter('/suivre-le-depart', 'voile'); ajouter('/cartographie', 'carte'); }
+  return r;
+}
+
 function raccourcisMoment() {
+  const ph = phaseRecherche();
+  if (ph) {
+    const l = raccourcisCourse(ph);
+    const p = resumeProg;
+    if (ph === 'depart' && p && p.etat === 'pendant' && l.length < 3) {
+      const n = p.temps.mode === 'vedettes' ? p.temps.items.filter((a) => a.vedette).length : 0;
+      l.push({ titre: n ? TXT.aujourdhuiVillage(n) : TXT.aujourdhuiProgramme, lien: lienJour(p.jour), meta: TXT.progDuJour, ico: 'calendrier' });
+    }
+    if (R.espace) l.push({ titre: R.espace.libelle, lien: R.espace.lien, meta: TXT.espaceMeta, ico: 'skipper' });
+    return l.slice(0, 4);
+  }
   const l = [];
   const p = resumeProg;
   if (p && p.etat === 'avant') l.push({ titre: TXT.ouvreDansCourt(p.joursAvant), lien: '/programmation', meta: TXT.progTitre + ' · ' + jourLong(p.ouverture), ico: 'calendrier' });
@@ -2669,17 +2698,28 @@ function tuilesRubriques() {
     const c = r.cartes.find((x) => x.image);
     return c ? c.image : null;
   };
+  const ph = phaseRecherche();
+   
+  const course = () => { const x = (ph === 'course' && lienCourse('/cartographie')) || lienCourse('/suivre-le-depart') || lienCourse('/cartographie'); return x ? x.l : null; };
   const sous = (r) => {
     if (r.cle === 'programme' && resumeProg) return resumeProg.etat === 'avant' ? TXT.ouvreDansCourt(resumeProg.joursAvant) : resumeProg.etat === 'pendant' ? TXT.ouvert(jourLong(resumeProg.fermeture)).replace(/\.$/, '') : '';
-    if (r.cle === 'village') return r.dates || '';
+    if (r.cle === 'village') return typeof r.dates === 'string' ? r.dates : '';
+    if (r.cle === 'course') { const l = course(); return (l && l.sous) || ''; }
     return '';
   };
-  const teintes = { actualites: '#1f6f7a', programme: '#8a5d12', skippers: '#2d5f86', village: '#006F7B', 'a-propos': '#1f6f7a', engagements: '#0c7a6a' };
-  const ordre = ['programme', 'village', 'actualites', 'skippers', 'a-propos', 'engagements'];
-  return ordre.map((cle) => RUBS.find((x) => x.cle === cle)).filter(Boolean).map((r) => ({
-    cle: r.cle, num: r.num, titre: r.libelle, image: image(r.cle), al: r.cle === 'skippers' ? 't' : 'c', sous: sous(r), grand: r.cle === 'programme' || r.cle === 'village', t1: teintes[r.cle]
+  const imageDe = (cle) => { if (cle === 'course') { const l = course(); return l && l.image ? idMedia(l.image) : image(cle); } return image(cle); };
+  const teintes = { actualites: '#1f6f7a', programme: '#8a5d12', skippers: '#2d5f86', village: '#006F7B', 'a-propos': '#1f6f7a', engagements: '#0c7a6a', course: '#16355D', guadeloupe: '#0c7a6a' };
+  
+
+  const ordre = ph === 'course' ? ['course', 'skippers', 'actualites', 'guadeloupe', 'a-propos', 'engagements']
+    : ph === 'depart' ? ['course', 'programme', 'actualites', 'skippers', 'village', 'engagements']
+    : ['programme', 'village', 'actualites', 'skippers', 'a-propos', 'engagements'];
+  return ordre.map((cle) => RUBS.find((x) => x.cle === cle)).filter(Boolean).map((r, i) => ({
+    cle: r.cle, num: r.num, titre: r.libelle, image: imageDe(r.cle), al: r.cle === 'skippers' ? 't' : 'c', sous: sous(r), grand: i < 2, t1: teintes[r.cle]
   }));
 }
+ 
+const themesRecherche = () => phaseRecherche() !== 'course';
  
 function ouvrirRecherche(texte) {
   if (format() === 'pc') { fermerLarge(); chargerRecherche().then((rc) => rc.ouvrirPalette(texte || '')); }
