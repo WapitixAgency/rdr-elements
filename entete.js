@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 75cdc725 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="75cdc725";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum ee93c23 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ee93c23";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -121,13 +121,13 @@ function laCourse(lang, apres) {
     liens: (apres
       ? [
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', sansHeure: true, picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' },
           { libelle: en ? 'Watch the start again' : 'Revoir le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Saint-Malo, 1 November' : 'Saint-Malo, le 1er novembre' }
         ]
       : [
           { libelle: en ? 'Follow the start' : 'Suivre le départ', lien: '/suivre-le-depart', picto: 'voile', image: IMG.depart, sous: en ? 'Sunday 1:02 pm, live' : 'Dimanche 13 h 02, en direct' },
           { libelle: en ? 'Race tracker' : 'Cartographie', lien: '/cartographie', bientotAvant: 'ouverture-cartographie', picto: 'carte', image: IMG.carto, sous: en ? 'Every boat, at every position report' : 'Toute la flotte, à chaque pointage' },
-          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
+          { libelle: en ? 'Rankings' : 'Classement', lien: '/classement', bientotAvant: 'ouverture-classement', sansHeure: true, picto: 'classement', image: IMG.classement, al: 't', sous: en ? 'Six classes, every position report' : 'Les six classes, à chaque pointage' }
         ]
     ).concat([
       { libelle: en ? 'Race course' : 'Le parcours', lien: '/parcours', picto: 'parcours', image: IMG.parcours, sous: en ? 'From Saint-Malo to Pointe-à-Pitre' : 'De Saint-Malo à Pointe-à-Pitre' },
@@ -1456,7 +1456,7 @@ function modele() {
     const cartes = e.liens.map((l) => {
       const s = carteSource(l.source);
       const bientot = !!l.bientot || (!!l.bientotAvant && !momentPasse(l.bientotAvant));
-      const commun = { lien: bientot ? '' : l.lien, bientot, etiquette: bientot && l.bientotAvant ? quandCourt(l.bientotAvant) : '', groupe: l.groupe || '', picto: l.picto || '', al: l.al === 't' ? 't' : '' };
+      const commun = { lien: bientot ? '' : l.lien, bientot, etiquette: bientot && l.bientotAvant && !l.sansHeure ? quandCourt(l.bientotAvant) : '', groupe: l.groupe || '', picto: l.picto || '', al: l.al === 't' ? 't' : '' };
       if (s) {
         const c = s.c;
         return Object.assign(commun, {
@@ -1602,7 +1602,7 @@ function boutonsHautHTML(cls, avant) {
   if (!b.length) return '';
   return '<nav class="' + cls + '" aria-label="' + esc(TXT.courseLive) + '">' + (avant || '') + b.map(({ l, ouvert }) => (ouvert
     ? '<a class="' + cls + '-b ' + cls + '-b--' + l.bouton + '" href="' + esc(lien(l.lien)) + '"' + (estCourant(l.lien) ? ' aria-current="page"' : '') + '><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + (l.direct ? '<i class="' + cls + '-direct" aria-label="' + esc(TXT.direct) + '"></i>' : '') + '</span></a>'
-    : '<span class="' + cls + '-b ' + cls + '-b--' + l.bouton + ' est-bientot" role="note" tabindex="0" aria-label="' + esc(l.libelle + ', ' + (quandCourt(l.ouvre) ? TXT.ouvreA + ' ' + quandCourt(l.ouvre) : TXT.bientot)) + '"><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + '<small>' + esc(quandCourt(l.ouvre) || TXT.bientot) + '</small></span></span>')).join('') + '</nav>';
+    : '<span class="' + cls + '-b ' + cls + '-b--' + l.bouton + ' est-bientot" role="note" tabindex="0" aria-label="' + esc(l.libelle + ', ' + ((l.sansHeure ? '' : quandCourt(l.ouvre)) ? TXT.ouvreA + ' ' + (l.sansHeure ? '' : quandCourt(l.ouvre)) : TXT.bientot)) + '"><span class="' + cls + '-in">' + (ICO[l.bouton] || '') + libs(l) + '<small>' + esc((l.sansHeure ? '' : quandCourt(l.ouvre)) || TXT.bientot) + '</small></span></span>')).join('') + '</nav>';
 }
 
 const cleBascules = () => [(phaseMenu() || {}).moment || 'village'].concat(boutonsDuMoment().map((x) => x.l.bouton + (x.ouvert ? 1 : 0)), (R.liensHaut || []).map((l) => (l.jusqua && momentPasse(l.jusqua) ? 1 : 0)), [quandCourt('depart')]).join('|');
@@ -1655,7 +1655,7 @@ function puces(r) {
     const avant = x.groupe ? '<span class="gl-vh">' + esc(x.groupe) + ', </span>' : '';
     const tard = !!x.bientotAvant && !momentPasse(x.bientotAvant);
     h += x.bientot || tard || !x.lien
-      ? '<li class="gl-puce gl-puce--bientot"><span class="gl-puce-in">' + avant + '<span>' + esc(x.libelle) + '</span><small>' + esc((tard && quandCourt(x.bientotAvant)) || TXT.bientot) + '</small></span></li>'
+      ? '<li class="gl-puce gl-puce--bientot"><span class="gl-puce-in">' + avant + '<span>' + esc(x.libelle) + '</span><small>' + esc((tard && !x.sansHeure && quandCourt(x.bientotAvant)) || TXT.bientot) + '</small></span></li>'
       : '<li class="gl-puce"><a href="' + esc(lien(x.lien)) + '"' + cible(x.lien) + (estCourant(x.lien) ? ' aria-current="page"' : '') + '>' + avant + '<span>' + esc(x.libelle) + '</span>' + (externe(x.lien) ? '<i class="gl-puce-ext">' + ICO.externe + '</i>' : '') + nouvelOnglet(x.lien) + '</a></li>';
     return h;
   }).join('') + '</ul>';
