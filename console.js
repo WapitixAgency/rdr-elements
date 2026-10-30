@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 63b40b7 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum e294ffd | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="e294ffd";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -22,6 +22,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
   var VIEWS = [
     { id: 'audience', label: 'Audience' },
     { id: 'contenu',  label: 'Contenu' },
+    { id: 'trafic',   label: 'Trafic' },
     { id: 'profils',  label: 'Profils' },
     { id: 'insta',    label: 'Instagram' },
     { id: 'village',  label: 'Village' },
@@ -802,6 +803,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
     '.rdrc-ph-tete em{font-style:normal;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}',
     '@media(max-width:760px){.rdrc-ph{grid-template-columns:minmax(0,1fr)}.rdrc-ph-img{min-height:180px}',
     '.rdrc-ph-retrait{grid-template-columns:minmax(0,1fr)}}',
+     
+    '.rdrc-tr-hote{display:block}',
+    '@media print{body *{visibility:hidden!important}rdr-console,rdr-console *{visibility:visible!important}',
+    'rdr-console{position:absolute;left:0;top:0;width:100%}rdr-console .rdrc-tabs,rdr-console .rdrc-bar-r{display:none!important}}',
     '@media(max-width:560px){.rdrc-body{padding:13px}.rdrc-row{align-items:flex-start}',
     '.rdrc-acts{width:100%}.rdrc-btn{flex:1}.rdrc-bar-r{width:100%;justify-content:space-between}}'
   ].join('');
@@ -813,6 +818,476 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
     s.textContent = CSS;
     document.head.appendChild(s);
   }
+
+   
+   
+   
+  var TRAFIC_CSS = ":host{display:block;\n--navy:#0A1A35;--teal:#00676E;--teal-soft:#E4F0F0;--line:#E1E6EE;--line-2:#EEF2F7;\n--ink:#16233A;--ink-2:#45536E;--ink-3:#7B8AA0;--bg:#EEF2F7;--jaune:#FCF150;\n--amber:#F19F39;--teal-lite:#5DBFC0;--c22:#D9822B;--c18:#8A97AB;--ok:#1E8E5A;--warn:#B3541E;\n--body:'Montserrat',system-ui,-apple-system,sans-serif;--display:'Varien',Georgia,serif;\n}\n*{box-sizing:border-box}\n.page{padding:clamp(10px,2.4vw,28px) clamp(8px,2vw,24px) 40px}\n.app{background:#fff;border:1px solid #D7DEE9;border-radius:14px;overflow:hidden;max-width:1180px;margin-inline:auto;\nbox-shadow:0 1px 2px rgba(10,26,53,.05),0 10px 30px -12px rgba(10,26,53,.22)}\n.bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:13px 18px;background:var(--navy);border-bottom:2px solid var(--amber)}\n.brand{display:flex;align-items:center;gap:12px;min-width:0;flex:1}\n.logo{flex:0 0 auto;width:52px;height:52px;border-radius:12px 3px 12px 3px;display:block;object-fit:contain}\n.kick{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-lite);margin:0 0 3px}\n.brand-t{font-family:var(--display);font-style:italic;font-weight:400;text-transform:uppercase;font-size:20px;line-height:1;color:#fff;margin:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}\n.brand-t .sep{color:rgba(255,255,255,.28);font-style:normal}\n.brand-t .dest{color:var(--amber)}\n.bar-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}\n.stamp{font-size:11px;color:rgba(255,255,255,.62);font-weight:600;margin-right:4px}\n.btn{border:1px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.9);font:inherit;font-size:12px;font-weight:700;\npadding:7px 12px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}\n.btn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.4)}\n.btn svg{width:14px;height:14px}\n.btn--clair{border-color:#C9D3E1;color:var(--navy);background:#fff}\n.btn--clair:hover{background:var(--navy);color:#fff;border-color:var(--navy)}\n.tabs{display:flex;gap:2px;padding:0 12px;border-bottom:1px solid var(--line);background:#fff;overflow-x:auto;scrollbar-width:none}\n.tab{position:relative;border:0;background:none;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink-3);padding:13px 12px 12px;cursor:pointer;white-space:nowrap}\n.tab.is-on{color:var(--navy)}\n.tab.is-on::after{content:\"\";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--teal)}\n.tab .neuf{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;background:var(--jaune);color:var(--navy);font-size:9px;font-weight:800;letter-spacing:.06em;vertical-align:1px}\n.corps{background:var(--bg);padding:22px;display:flex;flex-direction:column;gap:20px}\n.carte{background:#fff;border:1px solid #DCE3ED;border-radius:14px;padding:22px 24px 24px;min-width:0;box-shadow:0 1px 2px rgba(10,26,53,.05)}\n.grille{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}\n.sur{margin:0 0 6px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}\nh2{margin:0;font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.01em}\n.chapo{margin:8px 0 0;font-size:13px;line-height:1.65;color:var(--ink-2);max-width:82ch}\n.chapo b,.txt b{color:var(--navy)}\n.entete{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}\n.txt{font-size:13px;line-height:1.65;color:var(--ink-2);margin:0 0 12px}\n.petit{font-size:11.5px;line-height:1.55;color:var(--ink-3);margin:12px 0 0}\n.intro{background:#fff;border:1px solid #DCE3ED;border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px}\n.intro p{margin:0;font-size:13px;line-height:1.65;color:var(--ink-2);max-width:96ch}\n.intro b{color:var(--navy)}\n.carte.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0;padding:0;overflow:hidden}\n.hero-g{background:var(--navy);color:#fff;padding:26px 28px 24px;position:relative}\n.hero-g::before{content:\"\";position:absolute;inset:0 0 auto 0;height:4px;background:var(--jaune)}\n.hero-g .sur{color:var(--teal-lite)}\n.hero-n{margin:8px 0 0;font-size:clamp(40px,5vw,58px);font-weight:800;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}\n.hero-n small{font-size:.36em;font-weight:700;letter-spacing:0;color:rgba(255,255,255,.7);margin-left:8px}\n.hero-s{margin:12px 0 0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.82)}\n.hero-s b{color:var(--jaune)}\n.badge{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:5px 11px;border-radius:999px;background:rgba(252,241,80,.14);color:var(--jaune);font-size:11px;font-weight:800;letter-spacing:.04em}\n.hero-d{padding:26px 28px 24px}\n.gens{display:flex;gap:6px;margin:12px 0 16px;flex-wrap:nowrap}\n.gens svg{width:clamp(22px,3vw,34px);height:auto;flex:0 0 auto}\n.gens-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}\n.gens-l li{display:grid;grid-template-columns:14px 1fr;gap:10px;font-size:13px;line-height:1.5;color:var(--ink-2)}\n.gens-l b{color:var(--navy);font-size:15px}\n.pt{width:12px;height:12px;border-radius:3px;margin-top:4px}\n.pt-mes{background:var(--navy)} .pt-inv{background:repeating-linear-gradient(135deg,var(--teal) 0 3px,#7FC1C4 3px 6px)}\n.hero-bas{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}\n.hb{padding:18px 24px;min-width:0}\n.hb + .hb{border-left:1px solid var(--line)}\n.hero-v{margin:6px 0 0;font-size:15px;font-weight:700;color:#fff}\n.hero-v small{font-size:12px;font-weight:600;color:rgba(255,255,255,.65)}\n.def{grid-column:1 / -1;margin:0;padding:12px 24px 16px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.55;color:var(--ink-3)}\n.def b{color:var(--navy)}\n.hb b{display:block;font-size:24px;font-weight:800;color:var(--navy);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}\n.hb span{display:block;margin-top:5px;font-size:12px;line-height:1.5;color:var(--ink-3);font-weight:600}\n.hb span em{font-style:normal;color:var(--teal);font-weight:800}\n.cmp{display:flex;flex-direction:column;gap:12px}\n.cmp-g{margin:14px 0 0;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}\n.cmp-g:first-child{margin-top:0}\n.moment sup{font-size:.75em;line-height:0}\n.cmp-h,.cmp-r{display:grid;grid-template-columns:minmax(150px,1.1fr) repeat(3,minmax(0,1fr)) minmax(170px,1.15fr);gap:14px;align-items:stretch}\n.cmp-h{padding:0 16px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}\n.cmp-h .e26{color:var(--teal)} .cmp-h .e22{color:var(--c22)} .cmp-h .e18{color:var(--c18)}\n.cmp-r{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff}\n.cmp-r.is-avenir{background:#FAFBFD}\n.moment b{display:block;font-size:13.5px;font-weight:800;color:var(--navy);line-height:1.35}\n.moment span{display:block;margin-top:4px;font-size:11px;font-weight:700;color:var(--ink-3)}\n.cel{min-width:0}\n.cel .v{display:block;font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}\n.cel.e26 .v{color:var(--teal)}\n.cel .v.vide{font-size:13px;font-weight:700;color:#B4BECC;letter-spacing:0}\n.cel .d{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;font-size:11.5px;font-weight:700;color:var(--ink-2)}\n.cel .n{display:block;margin-top:5px;font-size:11px;line-height:1.45;color:var(--ink-3);font-weight:600}\n.jr{display:inline-block;padding:2px 7px;border-radius:999px;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}\n.jr-sem{background:var(--line-2);color:var(--ink-3)}\n.jr-we{background:#FFF3C4;color:#8A6A00}\n.jr-fe{background:#F3E8FF;color:#6B3FA0}\n.jr-ex{background:#FDE7DA;color:var(--warn)}\n.verdict{display:flex;flex-direction:column;justify-content:center;gap:6px;padding-left:14px;border-left:1px solid var(--line)}\n.vd{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;font-size:12px;font-weight:800;line-height:1.3}\n.vd-ok{background:#E3F4EA;color:var(--ok)} .vd-egal{background:var(--teal-soft);color:var(--teal)} .vd-bas{background:#FCEDEB;color:#C0392B}\n.vd-attente{background:var(--line-2);color:var(--ink-3)} .vd-prud{background:#FFF3C4;color:#8A6A00}\n.verdict p{margin:0;font-size:11.5px;line-height:1.5;color:var(--ink-3)}\n.effet{display:flex;gap:16px;align-items:center;margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--bg)}\n.effet-b{display:flex;align-items:flex-end;gap:6px;height:54px;flex:0 0 auto}\n.effet-b i{display:block;width:16px;border-radius:3px 3px 0 0;background:#C9D3E1}\n.effet-b i.we{background:var(--teal)}\n.effet p{margin:0;font-size:12.5px;line-height:1.6;color:var(--ink-2)}\n.effet b{color:var(--navy)}\n.seg{display:inline-flex;border:1px solid #C9D3E1;border-radius:9px;overflow:hidden}\n.seg button{border:0;background:#fff;font:inherit;font-size:12px;font-weight:700;color:var(--ink-2);padding:8px 13px;cursor:pointer;white-space:nowrap}\n.seg button + button{border-left:1px solid #C9D3E1}\n.seg button.is-on{background:var(--navy);color:#fff}\n.legende{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 10px;font-size:12px;font-weight:700;color:var(--ink-2)}\n.legende span{display:inline-flex;align-items:center;gap:8px}\n.legende i{display:inline-block;width:24px;height:10px;border-radius:2px}\n.l-est{background:linear-gradient(var(--teal),var(--teal)) center/100% 3px no-repeat,rgba(0,103,110,.16)}\n.l-mes{background:linear-gradient(90deg,var(--navy) 55%,transparent 0) 0 50%/7px 2px repeat-x}\n.l-22{background:linear-gradient(var(--c22),var(--c22)) center/100% 3px no-repeat}\n.l-18{background:linear-gradient(var(--c18),var(--c18)) center/100% 3px no-repeat}\n.l-we{width:10px!important;height:10px!important;background:var(--ink-2);transform:rotate(45deg) scale(.8)}\n.graphe{position:relative}\n.graphe svg{display:block;width:100%;overflow:visible}\n.axe{font-size:10.5px;font-weight:700;fill:var(--ink-3);font-family:var(--body)}\n.axe-d{font-size:9.5px;font-weight:600;fill:#A2AEBF;font-family:var(--body)}\n.phase{font-size:9.5px;font-weight:800;letter-spacing:.12em;fill:#9AA7B9;font-family:var(--body);text-transform:uppercase}\n.pin text{font-size:10px;font-weight:800;fill:#fff;font-family:var(--body);pointer-events:none}\n.pin{cursor:pointer}\n.bulle{position:absolute;z-index:3;pointer-events:none;background:var(--navy);color:#fff;border-radius:10px 3px 10px 3px;padding:10px 12px;\nfont-size:11.5px;line-height:1.55;box-shadow:0 8px 24px -8px rgba(10,26,53,.5);width:270px;opacity:0;transition:opacity .12s}\n.bulle.is-on{opacity:1}\n.bulle b{color:var(--jaune)}\n.bulle .r{display:flex;gap:8px;align-items:baseline;margin-top:3px}\n.bulle .r i{flex:0 0 auto;width:8px;height:8px;border-radius:50%;transform:translateY(-1px)}\n.reperes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 28px;margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--line-2);list-style:none}\n.reperes li{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:8px 10px;border-radius:9px 3px 9px 3px;font-size:12.5px;line-height:1.55;color:var(--ink-2)}\n.reperes li.is-on{background:var(--teal-soft)}\n.reperes .nn{width:22px;height:22px;border-radius:50%;color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}\n.reperes b{color:var(--navy)}\n.reperes small{display:block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}\n.chiffres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:4px 0 0}\n.chiffre{background:var(--bg);border-radius:10px 3px 10px 3px;padding:12px 14px}\n.chiffre b{display:block;font-size:22px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}\n.chiffre span{display:block;font-size:11.5px;line-height:1.5;font-weight:600;color:var(--ink-3);margin-top:3px}\n.sous-t{margin:20px 0 8px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}\n.tableau{overflow-x:auto;margin:0 -24px;padding:0 24px}\ntable{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}\nth{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:bottom}\nth:first-child,td:first-child,th.g{text-align:left}\ntd{padding:9px 10px;border-bottom:1px solid var(--line-2);text-align:right;color:var(--ink-2);white-space:nowrap}\ntd.quoi{white-space:normal;min-width:240px;text-align:left;color:var(--ink-3);font-size:11.5px;line-height:1.45}\ntr.we td{background:#FFFCEB}\ntr.is-j td{background:#FFF6B8}\ntr.avenir td{color:#B4BECC}\ntd.est{font-weight:800;color:var(--teal)}\ntd .j{display:inline-block;min-width:36px;font-weight:800;color:var(--navy)}\ntd .dd{color:#A2AEBF}\ntbody tr:hover td{background:var(--teal-soft)}\n.pays-l{display:grid;grid-template-columns:minmax(90px,1.1fr) 1fr auto auto;gap:7px 12px;align-items:center;font-size:12px}\n.pays-l .h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}\n.pays-l .h.r,.pays-l .v{text-align:right;font-variant-numeric:tabular-nums}\n.pays-l .p{font-weight:700;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.pays-l .t{height:9px;border-radius:5px;background:rgba(10,26,53,.07);overflow:hidden;display:flex}\n.pays-l .t i{display:block;height:100%;background:var(--navy)}\n.pays-l .t u{display:block;height:100%;background:repeating-linear-gradient(135deg,var(--teal) 0 4px,#7FC1C4 4px 8px)}\n.pays-l .v{color:var(--ink-3);font-weight:600}\n.pays-l .v.e{color:var(--teal);font-weight:800}\n.pages-l{display:grid;grid-template-columns:minmax(130px,1fr) minmax(0,2.4fr) auto auto auto;gap:9px 16px;align-items:center;font-size:12.5px}\n.pages-l .h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}\n.pages-l .h.r,.pages-l .v{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}\n.pages-l .p{font-weight:700;color:var(--ink-2)}\n.pages-l .p.hors{color:var(--ink-3);font-weight:600}\n.pages-l .t{position:relative;height:12px;border-radius:6px;background:rgba(10,26,53,.06);overflow:hidden}\n.pages-l .t i{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(135deg,var(--teal) 0 4px,#7FC1C4 4px 8px);border-radius:6px}\n.pages-l .t b{position:absolute;left:0;top:0;bottom:0;background:var(--navy);border-radius:6px}\n.pages-l .v{color:var(--ink-3);font-weight:600}\n.pages-l .v.o{color:var(--teal);font-weight:800}\n.pages-l .v.x{color:var(--navy);font-weight:800}\n.pages-l .v.x.hors{color:#B4BECC}\n.pages-tot{display:flex;gap:28px;flex-wrap:wrap;margin:0 0 16px;padding:14px 16px;border-radius:12px;background:var(--bg)}\n.pages-tot div b{display:block;font-size:22px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}\n.pages-tot div span{display:block;font-size:11.5px;color:var(--ink-3);font-weight:600;margin-top:2px}\n.note{margin:0;padding:14px 18px;background:#fff;border:1px solid #DCE3ED;border-radius:12px;font-size:12px;line-height:1.6;color:var(--ink-2)}\n.note b{color:var(--navy)}\n.maquette{max-width:1180px;margin:12px auto 0;font-size:11px;color:var(--ink-3);text-align:center}\n.imprime{display:none}\n@media (max-width:1060px){\n.cmp-h{display:none}\n.cmp-r{grid-template-columns:repeat(3,minmax(0,1fr))}\n.moment{grid-column:1 / -1}\n.verdict{grid-column:1 / -1;padding:12px 0 0;border-left:0;border-top:1px solid var(--line)}\n.cel::before{content:attr(data-an);display:block;font-size:10px;font-weight:800;letter-spacing:.12em;margin-bottom:4px}\n.cel.e26::before{color:var(--teal)} .cel.e22::before{color:var(--c22)} .cel.e18::before{color:var(--c18)}\n}\n@media (max-width:860px){\n.grille,.reperes{grid-template-columns:minmax(0,1fr)}\n.carte.hero{grid-template-columns:minmax(0,1fr)}\n.hero-bas{grid-template-columns:minmax(0,1fr)}\n.hb + .hb{border-left:0;border-top:1px solid var(--line)}\n}\n@media (max-width:520px){\n.corps{padding:12px 10px;gap:14px}\n.carte{padding:18px 16px 20px}\n.tableau{margin:0 -16px;padding:0 16px}\n.hero-g,.hero-d{padding:22px 18px}\n.hb{padding:14px 18px}\n.brand-t{font-size:16px}\n.bar-r{width:100%}\n.cmp-r{grid-template-columns:minmax(0,1fr)}\n.seg{width:100%} .seg button{flex:1;white-space:normal}\n.effet{flex-direction:column;align-items:flex-start}\n.pages-l{grid-template-columns:minmax(0,1fr) auto auto}\n.pages-l .t,.pages-l .rap,.pages-l .h:nth-child(2){display:none}\n}\n@media print{\nhtml,body{background:#fff}\n.page{padding:0}\n.app{box-shadow:none;border:0;max-width:none}\n.tabs,.bar-r .btn,.seg,.maquette,.no-print{display:none!important}\n.corps{background:#fff;padding:6px 0;gap:14px}\n.grille,.reperes{grid-template-columns:repeat(2,minmax(0,1fr))}\n.carte.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}\n.hero-bas{grid-template-columns:repeat(3,minmax(0,1fr))}\n.hb + .hb{border-left:1px solid var(--line);border-top:0}\n.cmp-h{display:grid}\n.cmp-r{grid-template-columns:minmax(150px,1.1fr) repeat(3,minmax(0,1fr)) minmax(170px,1.15fr)}\n.moment,.verdict{grid-column:auto} .verdict{padding:0 0 0 14px;border-left:1px solid var(--line);border-top:0}\n.cel::before{display:none}\n.carte,.intro,.note{box-shadow:none}\n.hero,.cmp-r,.graphe,.grille .carte,.reperes li,tr,.intro,.note,.effet{break-inside:avoid}\n.imprime{display:block;font-size:10px;color:var(--ink-3);margin:0}\n.tableau{overflow:visible} td.quoi{min-width:0}\n*{-webkit-print-color-adjust:exact;print-color-adjust:exact}\n}\n.corps{padding:0;background:transparent}\n.tr-outils{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 16px}\n.tr-outils span{font-size:12px;font-weight:700;color:var(--ink-3)}\n.tr-outils div{display:flex;gap:8px;flex-wrap:wrap}\n@media print{.tr-outils{display:none!important}}";
+  var TRAFIC_GABARIT = "<div class=\"tr-outils\"><span id=\"tampon\"></span><div><button class=\"btn btn--clair\" type=\"button\" id=\"exportPdf\">Rapport PDF</button><button class=\"btn btn--clair\" type=\"button\" id=\"exportCsv\">Données CSV</button></div></div><p class=\"imprime\" id=\"enteteImpression\"></p>\n<section class=\"intro\">\n<p class=\"sur\">Le trafic réel du site</p>\n<p>Le site respecte strictement les règles de la CNIL : <b>aucun visiteur n'est mesuré sans son accord</b>. Wix et Google ne comptent donc que ceux qui acceptent les cookies. Ceux qui les refusent, ne répondent pas au bandeau ou bloquent les statistiques visitent bien le site, sans laisser de trace dans les statistiques. Pour les retrouver, on croise chaque jour les statistiques avec <b>deux compteurs sans cookie</b> qui voient tout le monde : les journaux de Wix, qui notent chaque page ouverte sur tout le site, et la carte du village, qui compte chacune de ses ouvertures.</p>\n</section>\n<section class=\"carte hero\" aria-labelledby=\"heroT\">\n<div class=\"hero-g\">\n<p class=\"sur\" id=\"heroT\"></p>\n<p class=\"hero-n\" id=\"heroN\"></p>\n<p class=\"hero-v\" id=\"heroV\"></p>\n<p class=\"hero-s\" id=\"heroS\"></p>\n<span class=\"badge\" id=\"heroBadge\"></span>\n</div>\n<div class=\"hero-d\">\n<p class=\"sur\">Sur 10 visiteurs du site</p>\n<div class=\"gens\" id=\"gens\"></div>\n<ul class=\"gens-l\" id=\"gensL\"></ul>\n</div>\n<div class=\"hero-bas\" id=\"heroBas\"></div>\n</section>\n<section class=\"carte\">\n<div class=\"entete\"><div>\n<p class=\"sur\">Comparer ce qui est comparable</p>\n<h2>2026 face à 2022 et 2018, à jours comparables</h2>\n<p class=\"chapo\">Les trois villages se terminent un dimanche, le jour où le départ était prévu : <b>le 01/11/2026, le 06/11/2022 et le 04/11/2018</b>. On les aligne sur ce dimanche, ce qui fait tomber chaque jour sur le même jour de la semaine dans les trois éditions. En 2022, le départ a été reporté de ce dimanche au mercredi 09/11 : les jours de course se comparent donc à partir du départ réel. Les chiffres de 2026 sont les visiteurs réels estimés ; ceux de 2018 et 2022, des statistiques générales de fréquentation.</p>\n</div></div>\n<div class=\"cmp\" id=\"cmp\"></div>\n</section>\n<section class=\"carte\">\n<div class=\"entete\">\n<div>\n<p class=\"sur\">Jour par jour</p>\n<h2>Les trois éditions autour du départ</h2>\n<p class=\"chapo\">Le village s’aligne sur le dimanche où le départ était prévu (les jours tombent sur le même jour de la semaine dans les trois éditions) ; le départ et la course, sur le départ réel. Les losanges sont les samedis et dimanches. Survoler une journée pour le détail, un repère pour son explication.</p>\n</div>\n<div class=\"seg\" role=\"tablist\" aria-label=\"Période du graphique\">\n<button type=\"button\" data-vue=\"avant\" class=\"is-on\">Le village, jour par jour</button>\n<button type=\"button\" data-vue=\"course\">Le départ et la course</button>\n</div>\n</div>\n<div class=\"legende\">\n<span><i class=\"l-est\"></i>2026, visiteurs réels estimés</span>\n<span><i class=\"l-mes\"></i>2026, comptés par les statistiques (« cookies acceptés »)</span>\n<span><i class=\"l-22\"></i><span id=\"leg22\">2022</span></span>\n<span><i class=\"l-18\"></i>2018</span>\n<span><i class=\"l-we\"></i>samedi ou dimanche</span>\n</div>\n<div class=\"graphe\" id=\"graphe\"><div class=\"bulle\" id=\"bulle\"></div></div>\n<ol class=\"reperes\" id=\"reperes\"></ol>\n</section>\n<section class=\"carte\">\n<div class=\"entete\"><div>\n<p class=\"sur\">Les pages ouvertes</p>\n<h2>Toutes les pages ouvertes, sans cookie</h2>\n<p class=\"chapo\" id=\"pagesS\"></p>\n</div></div>\n<div class=\"pages-l\" id=\"pages\"></div>\n<p class=\"petit\">La liste des skippers, la programmation et quelques autres pages ne servent pas au calcul : les statistiques y comptent une page vue à chaque filtre choisi, et l'Espace Rhum est surtout ouvert par des membres connectés.</p>\n</section>\n<div class=\"grille\">\n<section class=\"carte\">\n<p class=\"sur\">La méthode</p>\n<h2>Comment on estime le trafic réel</h2>\n<p class=\"txt\" style=\"margin-top:12px\">Chaque jour, les deux compteurs sans cookie (les journaux de Wix et la carte du village) sont comparés aux pages vues que les statistiques comptent sur les mêmes pages. <b>Le rapport donne le nombre de vrais visiteurs pour un visiteur compté</b>, appliqué ensuite à tout le site.</p>\n<div id=\"facteurs\"></div>\n<p class=\"petit\" id=\"facteursTxt\"></p>\n<p class=\"txt\" style=\"margin:14px 0 0\">La carte est le compteur le plus <b>prudent</b> : une carte quittée avant d'avoir fini de s'afficher n'est pas comptée. Les journaux comptent toutes les pages ouvertes, y compris celles quittées aussitôt et quelques robots. Le vrai trafic se situe entre les deux.</p>\n</section>\n<section class=\"carte\">\n<p class=\"sur\">Les angles morts</p>\n<h2>Ce que les statistiques ne voient pas</h2>\n<p class=\"txt\" style=\"margin-top:12px\">La part invisible n'est pas la même partout. Sur ordinateur, les bloqueurs de publicité s'ajoutent au refus des cookies.</p>\n<div class=\"chiffres\" id=\"appareils\"></div>\n<p class=\"sous-t\">Les réponses des assistants d'IA</p>\n<p class=\"txt\" id=\"iaTxt\"></p>\n<div id=\"iaGraphe\"></div>\n<p class=\"petit\">Google (ses résumés en tête des résultats) et Gemini répondent aussi avec les informations du site, sans visite et sans trace mesurable : ces réponses ne sont pas comptées ici.</p>\n</section>\n</div>\n<section class=\"carte\">\n<div class=\"entete\">\n<div>\n<p class=\"sur\">Le détail</p>\n<h2>Chaque jour, face au même moment en 2022 et 2018</h2>\n<p class=\"chapo\">Les week-ends sont surlignés. La ligne jaune est le jour du départ.</p>\n</div>\n<button class=\"btn btn--clair no-print\" type=\"button\" id=\"exportCsv2\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v12m0 0-4-4m4 4 4-4M4 17v3h16v-3\"/></svg>Télécharger le tableau</button>\n</div>\n<div class=\"tableau\"><table id=\"table\"></table></div>\n</section>\n<div class=\"grille\">\n<section class=\"carte\">\n<p class=\"sur\">La provenance</p>\n<h2>D'où viennent les visiteurs</h2>\n<p class=\"chapo\" id=\"paysS\" style=\"margin-bottom:16px\"></p>\n<div class=\"pays-l\" id=\"pays\"></div>\n<p class=\"petit\">Un visiteur sans cookie ne laisse ni pays ni source : on le répartit comme les visiteurs comptés (partie hachurée). Ce que la mesure sans cookie sait de lui, c'est qu'il est un peu plus souvent sur ordinateur.</p>\n</section>\n<section class=\"carte\">\n<p class=\"sur\">Les éditions précédentes</p>\n<h2>Lire les chiffres de 2018 et 2022</h2>\n<p class=\"txt\" style=\"margin-top:12px\"><b>Les villages</b> : 12 jours en 2018 (du mercredi 24/10 au dimanche 04/11, départ ce dimanche) ; 13 jours en 2022 (du mardi 25/10 au dimanche 06/11, départ reporté au mercredi 09/11) ; 13 jours en 2026 (du mardi 20/10 au dimanche 01/11, départ ce dimanche, ouverture repoussée le 21/10 et village fermé le 23/10 par la tempête).</p>\n<p class=\"txt\">Ce sont les chiffres de l'ancien site, transmis par OC Sport, du dernier jeudi du village au cinquième jour de course pour 2018, et du dernier jour du village à la course pour 2022 : <b>les jours du village 2022 restent à demander</b>. <b>Ce sont des statistiques générales de fréquentation, pas les seuls visiteurs qui acceptaient les cookies</b> : sinon, 2026 serait de 20 à 40 % en dessous de 2018 et 2022, ce que dément l'affluence record du village. On les compare donc au trafic réel estimé de 2026 (OC Sport pourra le confirmer).</p>\n<p class=\"txt\">Le calendrier change tout. Le dimanche 06/11/2022, dernier jour du village, n'a fait que 58 973 visiteurs parce que la course n'est pas partie : le départ du mercredi en a fait 709 903. En 2026, le dernier jour du village est aussi le jour du départ, comme en 2018, et un dimanche de Toussaint.</p>\n<p class=\"txt\">La semaine compte aussi : sur le village 2026, <span id=\"effetTxt\"></span></p>\n<p class=\"txt\" style=\"margin:0\">La flotte aussi : 138 bateaux en 2022, 116 à 118 en 2026.</p>\n</section>\n</div>\n<p class=\"note\"><b>Ce que dit cet onglet, et ce qu'il ne dit pas.</b> Les chiffres « comptés » sont ceux de Wix, rangés chaque nuit (Google Analytics donne les mêmes à 3 % près). Le trafic réel est une estimation, avec sa fourchette. <span id=\"sources\"></span></p><p class=\"petit\" style=\"text-align:center;margin-top:16px\">Chiffres arrêtés au <span id=\"majTxt\"></span>, mis à jour chaque matin.</p>";
+  function traficRemplir(hote, D, O) {
+    var R = hote.shadowRoot || hote.attachShadow({ mode: 'open' });
+    R.innerHTML = '<style>' + TRAFIC_CSS + '</style><div class="corps">' + TRAFIC_GABARIT + '</div>';
+    var DEPART = '2026-11-01';
+    var FACTEUR_DEPUIS = '2026-10-15';    
+    var VILLAGE = '2026-10-20';
+    var HIST = {
+      2022: { depart: '2022-11-09', jours: { '2022-11-06': 58973, '2022-11-07': 40436, '2022-11-08': 75500, '2022-11-09': 709903,
+        '2022-11-10': 954300, '2022-11-11': 827795, '2022-11-12': 718650, '2022-11-13': 720803 } },
+      2018: { depart: '2018-11-04', jours: { '2018-11-01': 32348, '2018-11-02': 37518, '2018-11-03': 59448, '2018-11-04': 324125,
+        '2018-11-05': 499207, '2018-11-06': 481133, '2018-11-07': 386215, '2018-11-08': 311322, '2018-11-09': 282793 } }
+    };
+    var FERIES = { '2018-11-01': 'Toussaint', '2022-11-11': 'Armistice', '2026-11-01': 'Toussaint', '2026-11-11': 'Armistice' };
+    var COUL = { 2026: '#00676E', 2022: '#D9822B', 2018: '#8A97AB' };
+    var NOTES26 = {
+      '2026-10-20': 'Ouverture du village',
+      '2026-10-21': 'Tempête, ouverture repoussée à 14 h 30',
+      '2026-10-23': 'Village fermé toute la journée (tempête)',
+      '2026-10-25': 'Premier dimanche du village',
+      '2026-10-30': 'Menu du départ et cartographie ouverts, direct de France 3 sur l’accueil le soir',
+      '2026-10-31': 'Veille du départ',
+      '2026-11-01': 'Départ à 13 h 02'
+    };
+    var NOTES_H = {
+      '2022-11-06': 'dimanche du départ prévu, reporté de trois jours', '2022-11-08': 'veille du départ', '2022-11-09': 'départ', '2022-11-10': 'pic de l’édition',
+      '2018-11-01': 'Toussaint', '2018-11-02': 'pont de la Toussaint', '2018-11-03': 'veille du départ', '2018-11-04': 'départ', '2018-11-05': 'pic de l’édition'
+    };
+
+     
+    function t0(iso) { return Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)); }
+    function ecart(a, b) { return Math.round((t0(a) - t0(b)) / 864e5); }
+    function plus(iso, n) { return new Date(t0(iso) + n * 864e5).toISOString().slice(0, 10); }
+    var SEM = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+    var SEM_L = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    function js(iso) { return new Date(t0(iso)).getUTCDay(); }
+    function sem(iso) { return SEM[js(iso)]; }
+    function weekend(iso) { var w = js(iso); return w === 0 || w === 6; }
+    function court(iso) { return iso.slice(8, 10) + '/' + iso.slice(5, 7); }
+    function long(iso) { return SEM_L[js(iso)] + ' ' + (+iso.slice(8, 10) === 1 ? '1er' : +iso.slice(8, 10)) + ' ' + MOIS[+iso.slice(5, 7) - 1]; }
+    function lJ(J) { return J === 0 ? 'J' : 'J' + (J > 0 ? '+' : '-') + Math.abs(J); }
+    function nf(n) { return Math.round(n).toLocaleString('fr-FR'); }
+    function arr(n) { return n >= 10000 ? Math.round(n / 100) * 100 : Math.round(n); }
+    function fx(x) { return x.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function pc(x) { var v = Math.round(x * 100); return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v) + ' %'; }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function chip(iso, extra) {
+      if (extra) return '<span class="jr jr-ex">' + esc(extra) + '</span>';
+      if (FERIES[iso]) return '<span class="jr jr-fe">' + FERIES[iso] + '</span>';
+      return weekend(iso) ? '<span class="jr jr-we">week-end</span>' : '<span class="jr jr-sem">semaine</span>';
+    }
+
+     
+    
+
+    var J26 = {};
+    (D.jours || []).forEach(function (r) {
+      var f = [r.j >= FACTEUR_DEPUIS ? r.fc : null, r.fj].filter(function (x) { return x > 0; });
+      var lo = f.length ? Math.min.apply(null, f) : null, hi = f.length ? Math.max.apply(null, f) : null;
+      var x = J26[r.j] = { j: r.j, mes: r.v, sessions: r.s, vues: r.pv, fb: lo, fh: hi, fc: r.j >= FACTEUR_DEPUIS ? r.fc : null, fj: r.fj,
+        bas: lo ? r.v * lo : null, haut: hi ? r.v * hi : null, gpt: r.gpt, ia: r.ia, co: r.co, gc: r.gc, app: r.app, gaApp: r.gaApp, en: r.en,
+        po: r.po, poEn: r.poEn, pic: r.pic };
+      x.mil = lo ? (x.bas + x.haut) / 2 : null;
+    });
+    var MAJ = D.maj, L = J26[MAJ], JMAJ = ecart(MAJ, DEPART);
+    function jour26(J) { return J26[plus(DEPART, J)] || null; }
+    function hist(an, J) { var h = HIST[an], d = plus(h.depart, J); return { d: d, v: h.jours[d] == null ? null : h.jours[d] }; }
+    
+
+
+    var VILLAGES = { 2026: { debut: '2026-10-20', fin: '2026-11-01' }, 2022: { debut: '2022-10-25', fin: '2022-11-06' }, 2018: { debut: '2018-10-24', fin: '2018-11-04' } };
+    function histV(an, K) { var d = plus(VILLAGES[an].fin, K), v = HIST[an].jours[d]; return { d: d, v: v == null ? null : v, n: ecart(d, VILLAGES[an].debut) + 1 }; }
+     
+    function histT(an, J) { return J < 0 ? histV(an, J) : hist(an, J); }
+
+    R.getElementById('tampon').textContent = 'Chiffres du ' + sem(MAJ) + ' ' + court(MAJ) + ' (' + lJ(JMAJ) + ')';
+    R.getElementById('majTxt').textContent = long(MAJ) + ' 2026';
+    R.getElementById('enteteImpression').textContent = 'Route du Rhum 2026, rapport trafic. Chiffres arrêtés au ' + long(MAJ) + ' 2026 (' + lJ(JMAJ) + '), édité le ' + new Date().toLocaleDateString('fr-FR') + '.';
+
+     
+    var cumul = { mes: 0, bas: 0, haut: 0, ses: 0, vBas: 0, vHaut: 0, gpt: 0, mob: 0, bur: 0, gaMob: 0, gaBur: 0 };
+    Object.keys(J26).forEach(function (k) {
+      var r = J26[k]; if (k < VILLAGE || r.bas == null) return;
+      cumul.mes += r.mes; cumul.bas += r.bas; cumul.haut += r.haut; cumul.gpt += r.gpt;
+      cumul.ses += r.sessions; cumul.vBas += r.sessions * r.fb; cumul.vHaut += r.sessions * r.fh;
+      if (r.app) { cumul.mob += r.app.mobile; cumul.bur += r.app.bureau; }
+      if (r.gaApp) { cumul.gaMob += r.gaApp.mobile || 0; cumul.gaBur += r.gaApp.desktop || 0; }
+    });
+    var facteurMoyen = (cumul.bas + cumul.haut) / 2 / cumul.mes;
+    var gpt0 = J26['2026-10-08'] ? J26['2026-10-08'].gpt : null;
+    var record = Object.keys(J26).every(function (k) { return J26[k].mes <= L.mes; });
+
+     
+    function effet(jour) {
+      var r = [];
+      Object.keys(J26).forEach(function (d) {
+        if (d < VILLAGE || js(d) !== jour) return;
+        var av = [], ap = [];
+        for (var k = 1; k <= 6 && (av.length < 2 || ap.length < 2); k++) {
+          var a = plus(d, -k), b = plus(d, k);
+          if (av.length < 2 && !weekend(a) && J26[a] && a >= VILLAGE) av.push(J26[a].mes);
+          if (ap.length < 2 && !weekend(b) && J26[b]) ap.push(J26[b].mes);
+        }
+        if (av.length === 2 && ap.length === 2) r.push(J26[d].mes / ((av[0] + av[1] + ap[0] + ap[1]) / 4));
+      });
+      return r.length ? { r: r.reduce(function (s, x) { return s + x; }, 0) / r.length, n: r.length } : null;
+    }
+    var EDIM = effet(0), ESAM = effet(6);
+
+     
+    (function () {
+      var partMes = L.mes / L.mil, n = Math.round(partMes * 10);
+      R.getElementById('heroT').textContent = 'Le vrai trafic, ' + long(MAJ);
+      R.getElementById('heroN').innerHTML = '≈ ' + nf(arr(L.mil)) + '<small>visiteurs</small>';
+      R.getElementById('heroS').innerHTML = 'entre <b>' + nf(arr(L.bas)) + '</b> (compteur de la carte) et <b>' + nf(arr(L.haut)) + '</b> (journaux de Wix), alors que les statistiques n’en comptent que ' + nf(L.mes) + ' (« cookies acceptés »).';
+      R.getElementById('heroV').innerHTML = 'et ≈ ' + nf(arr(L.sessions * (L.fb + L.fh) / 2)) + ' visites <small>(une même personne peut venir plusieurs fois)</small>';
+      R.getElementById('heroBadge').textContent = record ? 'Le record de l’édition jusqu’ici' : lJ(JMAJ) + ' avant le départ';
+      var homme = function (vu) {
+        return '<svg viewBox="0 0 24 40" aria-hidden="true"><circle cx="12" cy="7" r="6" fill="' + (vu ? '#0A1A35' : 'url(#hg)') + '"' + (vu ? '' : ' stroke="#00676E" stroke-width="1.4"') + '/>' +
+          '<path d="M2 38V24c0-6 4.5-10 10-10s10 4 10 10v14z" fill="' + (vu ? '#0A1A35' : 'url(#hg)') + '"' + (vu ? '' : ' stroke="#00676E" stroke-width="1.4"') + '/></svg>';
+      };
+      var defs = '<svg width="0" height="0" style="position:absolute"><defs><pattern id="hg" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#E4F0F0"/><line x1="0" y1="0" x2="0" y2="5" stroke="#00676E" stroke-width="1.6"/></pattern></defs></svg>';
+      var g = defs; for (var i = 0; i < 10; i++) g += homme(i < n);
+      R.getElementById('gens').innerHTML = g;
+      R.getElementById('gensL').innerHTML =
+        '<li><i class="pt pt-mes"></i><span><b>' + n + '</b> acceptent les cookies. Wix et Google les comptent : ' + nf(L.mes) + ' ce jour-là.</span></li>' +
+        '<li><i class="pt pt-inv"></i><span><b>' + (10 - n) + '</b> refusent les cookies, ignorent le bandeau ou bloquent les statistiques. Invisibles pour les statistiques : environ ' + nf(arr(L.mil - L.mes)) + '.</span></li>';
+      var definition = '<p class="def"><b>Visiteur ou visite ?</b> Un visiteur est une personne, que les statistiques ne reconnaissent d’une page à l’autre que grâce aux cookies. Une visite est un passage sur le site : une même personne peut en faire plusieurs. Sans cookie, on compte des pages ouvertes et des visites, jamais des personnes : les visiteurs réels sont estimés, et sur plusieurs jours on additionne les visites.</p>';
+      R.getElementById('heroBas').innerHTML =
+        '<div class="hb"><b>≈ ' + nf(Math.round((cumul.vBas + cumul.vHaut) / 2 / 1000) * 1000) + '</b><span>visites depuis l’ouverture du village le 20/10, dont <em>' + nf(cumul.ses) + '</em> comptées (« cookies acceptés »)</span></div>' +
+        (L.po ? '<div class="hb"><b>' + nf(L.po) + '</b><span>pages ouvertes le ' + court(MAJ) + ', jusqu’à <em>' + nf(L.pic.pages) + ' à la minute</em> (' + L.pic.heure.replace(':', ' h ') + ')</span></div>'
+          : '<div class="hb"><b>×' + fx(L.mil / L.mes) + '</b><span>vrais visiteurs pour un visiteur compté le ' + court(MAJ) + '</span></div>') +
+        '<div class="hb"><b>' + nf(L.gpt) + '</b><span>réponses données par ChatGPT avec le site le ' + court(MAJ) + (gpt0 ? ', <em>' + (Math.round(L.gpt / gpt0 * 10) / 10).toLocaleString('fr-FR') + ' fois plus</em> que le 08/10' : '') + '</span></div>' + definition;
+    })();
+
+     
+    
+
+    (function () {
+      function verdict(r, ref, an) {
+        if (!r || r.mil == null || ref == null) return '';
+        var e = r.mil / ref - 1, eb = r.bas / ref - 1, eh = r.haut / ref - 1, cls, t;
+        if (eb >= 0) { cls = 'vd-ok'; t = 'Au-dessus de ' + an + ' (' + pc(e) + ')'; }
+        else if (eh < 0) { cls = 'vd-bas'; t = 'En dessous de ' + an + ' (' + pc(e) + ')'; }
+        else { cls = 'vd-egal'; t = 'Au niveau de ' + an + ' (' + pc(e) + ')'; }
+        return '<span class="vd ' + cls + '">' + t + '</span>';
+      }
+      function cel26(r, d, note) {
+        var tete = '<div class="cel e26" data-an="2026"><span class="d">' + sem(d) + ' ' + court(d) + ' ' + chip(d) + '</span>';
+        if (!r || r.mil == null) return tete + '<span class="v vide">à venir</span>' + (note ? '<span class="n">' + esc(note) + '</span>' : '') + '</div>';
+        return tete + '<span class="v">\u2248\u00a0' + nf(arr(r.mil)) + '</span><span class="n">de ' + nf(arr(r.bas)) + ' à ' + nf(arr(r.haut)) + ', dont ' + nf(r.mes) + ' comptés (\u00ab\u00a0cookies acceptés\u00a0\u00bb)' + (note ? ' ; ' + esc(note) : '') + '</span></div>';
+      }
+      function celH(an, d, extra, note, vide) {
+        var v = HIST[an].jours[d];
+        return '<div class="cel e' + String(an).slice(2) + '" data-an="' + an + '"><span class="d">' + sem(d) + ' ' + court(d) + ' ' + chip(d, extra) + '</span>' +
+          (v == null ? '<span class="v vide">' + (vide || 'non connu') + '</span>' : '<span class="v">' + nf(v) + '</span>') + (note ? '<span class="n">' + note + '</span>' : '') + '</div>';
+      }
+      function ligne(moment, sous, c26, c22, c18, vd, lecture, avenir) {
+        return '<div class="cmp-r' + (avenir ? ' is-avenir' : '') + '"><div class="moment"><b>' + moment + '</b><span>' + sous + '</span></div>' + c26 + c22 + c18 +
+          '<div class="verdict">' + vd + (lecture ? '<p>' + lecture + '</p>' : '') + '</div></div>';
+      }
+      var attente22 = '<span class="vd vd-attente">2022 : chiffre à demander</span>';
+      var h = '<p class="cmp-g">Les derniers jours du village, alignés sur le dimanche où le départ était prévu</p>' +
+        '<div class="cmp-h"><span>Le moment</span><span class="e26">2026</span><span class="e22">2022</span><span class="e18">2018</span><span>La lecture</span></div>';
+      var VEILLES = [
+        [-3, 'Le jeudi avant le départ', 'En 2018, c\u2019était la Toussaint, un jour férié.'],
+        [-2, 'Le vendredi avant le départ', 'En 2018, le vendredi du pont de la Toussaint.'],
+        [-1, 'Le samedi, veille du départ', 'La veille du départ en 2018 comme en 2026 ; en 2022, la veille du départ prévu.']
+      ];
+      VEILLES.forEach(function (x) {
+        var d26 = plus(VILLAGES[2026].fin, x[0]), r = J26[d26], a = histV(2022, x[0]), b = histV(2018, x[0]);
+        var vd = (r && r.mil != null) ? verdict(r, b.v, '2018') + (a.v != null ? verdict(r, a.v, '2022') : attente22) : '<span class="vd vd-attente">À venir</span>';
+        h += ligne(x[1], (ecart(d26, VILLAGES[2026].debut) + 1) + '<sup>e</sup> jour du village en 2026 et 2022, ' + b.n + '<sup>e</sup> en 2018',
+          cel26(r, d26), celH(2022, a.d, null, null, 'non transmis'), celH(2018, b.d, b.d === '2018-11-02' ? 'pont de la Toussaint' : null), vd, x[2], !(r && r.mil != null));
+      });
+      var dD = VILLAGES[2026].fin, rD = J26[dD];
+      h += '<p class="cmp-g">Le dimanche du départ prévu, dernier jour du village</p>';
+      h += ligne('Le dimanche du départ', '13<sup>e</sup> jour du village en 2026 et 2022, 12<sup>e</sup> en 2018',
+        cel26(rD, dD, 'départ à 13 h 02'),
+        celH(2022, '2022-11-06', 'départ reporté', 'le village ferme, la course ne part pas ; elle part le mer. 09/11 : <b>709\u00a0903</b>'),
+        celH(2018, '2018-11-04', 'départ', 'la course part à la fin du village'),
+        rD && rD.mil != null ? verdict(rD, 324125, '2018') : '<span class="vd vd-attente">À venir, dimanche 13 h 02</span>',
+        'Le seul jour commun aux trois éditions. 2018 et 2026 partent ce dimanche, 2022 a attendu trois jours : le repère est 2018. Le chiffre de 2022 montre ce que pèse le village seul, sans le départ.', !(rD && rD.mil != null));
+      h += '<p class="cmp-g">Les jours de course, alignés sur le départ réel</p>';
+      [[1, 'Le lendemain du départ', 'Le jour le plus fort en 2018 comme en 2022.'], [2, 'Le surlendemain', 'En 2022, le vendredi 11/11, jour férié (Armistice).']].forEach(function (x) {
+        var d = plus(DEPART, x[0]), r = J26[d], a = hist(2022, x[0]), b = hist(2018, x[0]);
+        h += ligne(x[1], lJ(x[0]), cel26(r, d), celH(2022, a.d), celH(2018, b.d),
+          r && r.mil != null ? verdict(r, b.v, '2018') + verdict(r, a.v, '2022') : '<span class="vd vd-attente">À venir</span>', x[2], !(r && r.mil != null));
+      });
+      R.getElementById('cmp').innerHTML = h;
+
+      if (EDIM && false) {
+        var barres = [1, 1, 1, 1, 1, ESAM ? ESAM.r : 1, EDIM.r].map(function (x, i) { return '<i class="' + (i >= 5 ? 'we' : '') + '" style="height:' + Math.round(40 * x) + 'px" title="' + ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'][i] + '"></i>'; }).join('');
+        R.getElementById('effet').innerHTML = '<div class="effet-b" aria-hidden="true">' + barres + '</div><p><b>L’effet du jour de la semaine, mesuré sur le village.</b> Un dimanche attire ' + pc(EDIM.r - 1) +
+          ' de visiteurs par rapport aux jours de semaine qui l’entourent' + (ESAM ? ', un samedi ' + (Math.abs(ESAM.r - 1) < 0.05 ? 'autant qu’un jour de semaine' : pc(ESAM.r - 1)) : '') +
+          '. Mesuré sur ' + (EDIM.n === 1 ? 'le seul week-end complet du village jusqu’ici (24 et 25/10)' : EDIM.n + ' week-ends') + ', à confirmer avec le suivant.</p>';
+      }
+    })();
+
+    if (EDIM) R.getElementById('effetTxt').textContent = 'un dimanche attire environ ' + pc(EDIM.r - 1).replace('+', '') + ' de visiteurs de plus qu’un jour de semaine' + (ESAM && Math.abs(ESAM.r - 1) < 0.05 ? ', un samedi autant qu’un jour de semaine' : '') + ' (mesuré sur ' + (EDIM.n === 1 ? 'un seul week-end' : EDIM.n + ' week-ends') + ').';
+
+     
+    var REPERES = [];
+    function rep(an, d, titre, texte) { REPERES.push({ an: an, d: d, J: ecart(d, an === 2026 ? DEPART : HIST[an].depart), K: ecart(d, VILLAGES[an].fin), titre: titre, texte: texte }); }
+    (function () {
+      var r;
+      if ((r = J26['2026-10-20']) && r.mil != null) rep(2026, '2026-10-20', 'Ouverture du village', 'Environ ' + nf(arr(r.mil)) + ' visiteurs réels : le site change d’échelle d’un coup.');
+      if ((r = J26['2026-10-21'])) rep(2026, '2026-10-21', 'Tempête, ouverture repoussée à 14 h 30', 'Le site monte quand même : on vient vérifier si le village ouvre.');
+      if ((r = J26['2026-10-23'])) rep(2026, '2026-10-23', 'Village fermé toute la journée', 'Tempête. Le site ne baisse pas pour autant, il dépasse même la veille.');
+      if (false) rep(2026, '2026-10-25', 'Premier dimanche du village', 'Environ ' + nf(arr(r.mil)) + ' visiteurs réels, ' + pc((EDIM ? EDIM.r : 1) - 1) + ' par rapport aux jours de semaine voisins.');
+      if (record && L.mil != null) rep(2026, MAJ, 'Record de l’édition', 'Environ ' + nf(arr(L.mil)) + ' visiteurs réels (' + nf(arr(L.bas)) + ' à ' + nf(arr(L.haut)) + ').');
+      rep(2026, '2026-11-01', 'Départ à 13 h 02', 'Un dimanche de Toussaint, comme le départ de 2018 un dimanche.');
+      rep(2022, '2022-11-06', 'Le dimanche du départ prévu', 'Dimanche 06/11/2022, le départ devait être donné ; il est reporté de trois jours. Village plein, tout le monde vient aux nouvelles.');
+      rep(2022, '2022-11-09', 'Départ de 2022', 'Un mercredi, après trois jours d’attente.');
+      rep(2018, '2018-11-01', 'Toussaint 2018', 'Jeudi 01/11/2018, jour férié, puis le pont du vendredi.');
+      rep(2018, '2018-11-04', 'Départ de 2018', 'Un dimanche, comme en 2026.');
+    })();
+    REPERES.forEach(function (p, i) { p.n = i + 1; });
+    R.getElementById('reperes').innerHTML = REPERES.map(function (p) {
+      return '<li data-n="' + p.n + '"><span class="nn" style="background:' + COUL[p.an] + '">' + p.n + '</span><span><small>' + p.an + ' · ' + lJ(p.J) + ' · ' + sem(p.d) + ' ' + court(p.d) +
+        '</small><b>' + esc(p.titre) + '.</b> ' + esc(p.texte) + '</span></li>';
+    }).join('');
+
+     
+    var VUES = { avant: { de: -12, a: -1 }, course: { de: -3, a: 5 } };
+    var vue = (O && O.vue) || 'avant';
+    R.querySelectorAll('.seg button').forEach(function (x) { x.classList.toggle('is-on', x.getAttribute('data-vue') === vue); });
+    function pas(max) {
+      var p = Math.pow(10, Math.floor(Math.log10(max / 5))), c = [1, 2, 2.5, 5, 10];
+      for (var i = 0; i < c.length; i++) if (max / (c[i] * p) <= 5) return c[i] * p;
+      return 10 * p;
+    }
+    function chemin(pts) {
+      var d = '', ouvert = false;
+      pts.forEach(function (p) { if (!p) { ouvert = false; return; } d += (ouvert ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1); ouvert = true; });
+      return d;
+    }
+    function point(x, y, couleur, we, creux, rayon) {
+      var r = rayon || (creux ? 4 : 3.6);
+      if (we) return '<rect x="' + (x - r - 1) + '" y="' + (y - r - 1) + '" width="' + (2 * r + 2) + '" height="' + (2 * r + 2) + '" transform="rotate(45 ' + x + ' ' + y + ')" fill="' + (creux ? '#fff' : couleur) + '" stroke="' + couleur + '" stroke-width="2"/>';
+      return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (creux ? '#fff' : couleur) + '" stroke="' + couleur + '" stroke-width="2"/>';
+    }
+    function dessiner() {
+      var boite = R.getElementById('graphe'), W = boite.clientWidth, petit = W < 560, H = petit ? 270 : 360;
+      if (W < 120) return;
+      var m = { g: petit ? 46 : 62, d: 16, h: 34, b: 46 };
+      var v = VUES[vue], Js = [];
+      for (var J = v.de; J <= v.a; J++) Js.push(J);
+       
+      var parVillage = vue === 'avant', H22 = function (J) { return parVillage ? histV(2022, J) : hist(2022, J); }, H18 = function (J) { return parVillage ? histV(2018, J) : hist(2018, J); };
+      var lignes = Js.map(function (J) { return { J: J, d: plus(DEPART, J), r: jour26(J), h22: H22(J), h18: H18(J) }; });
+      R.getElementById('leg22').textContent = parVillage && lignes.every(function (l) { return l.h22.v == null; }) ? '2022 (jours du village non transmis)' : '2022';
+      var max = 0;
+      lignes.forEach(function (l) { [l.r && l.r.haut, l.r && l.r.mes, l.h22.v, l.h18.v].forEach(function (x) { if (x > max) max = x; }); });
+      var st = pas(max * 1.05), haut = Math.ceil(max * 1.05 / st) * st;
+      var X = function (J) { return m.g + (J - v.de) / (v.a - v.de) * (W - m.g - m.d); };
+      var Y = function (x) { return m.h + (1 - x / haut) * (H - m.h - m.b); };
+      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" height="' + H + '" role="img" aria-label="Visiteurs par jour en 2026, 2022 et 2018">';
+      s += '<defs><pattern id="hach" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="rgba(0,103,110,.09)"/><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,103,110,.2)" stroke-width="2"/></pattern></defs>';
+      var demi = (X(v.de + 1) - X(v.de)) / 2;
+      (parVillage ? [{ de: -12, a: -1, t: 'Le village, jusqu’à la veille du dimanche du départ' }] : [{ de: -13, a: -1, t: 'Le village' }, { de: 0, a: 0, t: 'Départ' }, { de: 1, a: 5, t: 'La course' }]).forEach(function (p) {
+        var a = Math.max(p.de, v.de), b = Math.min(p.a, v.a); if (a > b) return;
+        var x1 = Math.max(m.g, X(a) - demi), x2 = Math.min(W - m.d, X(b) + demi);
+        if (p.t === 'Départ') s += '<rect x="' + x1 + '" y="' + m.h + '" width="' + (x2 - x1) + '" height="' + (H - m.h - m.b) + '" fill="#FCF150" opacity=".3"/>';
+        s += '<text class="phase" x="' + ((x1 + x2) / 2) + '" y="' + (m.h - 14) + '" text-anchor="middle">' + p.t + '</text>';
+        s += '<line x1="' + (x1 + 4) + '" x2="' + (x2 - 4) + '" y1="' + (m.h - 8) + '" y2="' + (m.h - 8) + '" stroke="#D5DCE6" stroke-width="2" stroke-linecap="round"/>';
+      });
+      for (var g = 0; g <= haut + 1; g += st) {
+        s += '<line x1="' + m.g + '" x2="' + (W - m.d) + '" y1="' + Y(g) + '" y2="' + Y(g) + '" stroke="' + (g ? '#EEF2F7' : '#C9D3E1') + '"/>';
+        s += '<text class="axe" x="' + (m.g - 8) + '" y="' + (Y(g) + 3.5) + '" text-anchor="end">' + (g >= 1e6 ? (g / 1e6).toLocaleString('fr-FR') + ' M' : nf(g)) + '</text>';
+      }
+      var pasX = petit && Js.length > 9 ? 2 : 1, compact = (W - m.g - m.d) / (Js.length - 1) * pasX < 60;
+      Js.forEach(function (J, i) {
+        if (i % pasX && J !== 0) return;
+        var d = plus(DEPART, J);
+        s += '<text class="axe" x="' + X(J) + '" y="' + (H - m.b + 17) + '" text-anchor="middle">' + (parVillage ? (compact ? '' : 'jour ') + (ecart(d, VILLAGES[2026].debut) + 1) : lJ(J)) + '</text>';
+        s += '<text class="axe-d" x="' + X(J) + '" y="' + (H - m.b + 31) + '" text-anchor="middle"' + (weekend(d) ? ' style="fill:#8A6A00;font-weight:800"' : '') + '>' + (compact ? court(d) : sem(d) + ' ' + court(d)) + '</text>';
+      });
+      var bande = lignes.filter(function (l) { return l.r && l.r.bas != null; });
+      if (bande.length) {
+        var dd = bande.map(function (l, i) { return (i ? 'L' : 'M') + X(l.J).toFixed(1) + ',' + Y(l.r.haut).toFixed(1); }).join('') +
+          bande.slice().reverse().map(function (l) { return 'L' + X(l.J).toFixed(1) + ',' + Y(l.r.bas).toFixed(1); }).join('') + 'Z';
+        s += '<path d="' + dd + '" fill="url(#hach)"/>';
+      }
+      s += '<path d="' + chemin(lignes.map(function (l) { return l.r ? [X(l.J), Y(l.r.mes)] : null; })) + '" fill="none" stroke="#0A1A35" stroke-width="1.6" stroke-dasharray="5 4"/>';
+      [[2022, 'h22'], [2018, 'h18']].forEach(function (a) {
+        s += '<path d="' + chemin(lignes.map(function (l) { return l[a[1]].v != null ? [X(l.J), Y(l[a[1]].v)] : null; })) + '" fill="none" stroke="' + COUL[a[0]] + '" stroke-width="2.6" stroke-linejoin="round"/>';
+      });
+      s += '<path d="' + chemin(lignes.map(function (l) { return l.r && l.r.mil != null ? [X(l.J), Y(l.r.mil)] : null; })) + '" fill="none" stroke="' + COUL[2026] + '" stroke-width="3.4" stroke-linejoin="round"/>';
+      lignes.forEach(function (l) {
+        if (l.r) s += point(X(l.J), Y(l.r.mes), '#0A1A35', weekend(l.d), false, 2.4);
+        if (l.h22.v != null) s += point(X(l.J), Y(l.h22.v), COUL[2022], weekend(l.h22.d), false);
+        if (l.h18.v != null) s += point(X(l.J), Y(l.h18.v), COUL[2018], weekend(l.h18.d), false);
+        if (l.r && l.r.mil != null) s += point(X(l.J), Y(l.r.mil), COUL[2026], weekend(l.d), true);
+      });
+      var decal = { 2026: -11, 2022: 0, 2018: 11 };
+      REPERES.forEach(function (p) {
+        var pJ = parVillage ? p.K : p.J;
+        if (pJ < v.de || pJ > v.a) return;
+        var y0, y, avenir = false, x = X(pJ) + decal[p.an];
+        if (p.an === 2026) { var r = jour26(pJ); if (r) y0 = r.mil != null ? Y(r.haut) : Y(r.mes); else avenir = true; }
+        else { var hv = (p.an === 2022 ? H22 : H18)(pJ).v; if (hv != null) y0 = Y(hv); else avenir = true; }
+        if (avenir) { y0 = H - m.b; y = m.h + 12; }
+        else y = p.an === 2018 ? Math.min(H - m.b - 12, y0 + 24) : Math.max(m.h + 2, y0 - 24);
+        s += '<g class="pin" data-n="' + p.n + '"><line x1="' + X(pJ) + '" y1="' + y0 + '" x2="' + x + '" y2="' + (y < y0 ? y + 9 : y - 9) + '" stroke="' + COUL[p.an] + '" stroke-width="1.2"' + (avenir ? ' stroke-dasharray="2 3"' : '') + '/>' +
+          '<circle cx="' + x + '" cy="' + y + '" r="9.5" fill="' + COUL[p.an] + '" stroke="#fff" stroke-width="1.5"/><text x="' + x + '" y="' + (y + 3.5) + '" text-anchor="middle">' + p.n + '</text></g>';
+      });
+      var larg = (W - m.g - m.d) / (Js.length - 1 || 1);
+      Js.forEach(function (J) { s += '<rect class="zone" data-j="' + J + '" x="' + (X(J) - larg / 2) + '" y="' + m.h + '" width="' + larg + '" height="' + (H - m.h - m.b) + '" fill="transparent"/>'; });
+      s += '</svg>';
+      var bulle = R.getElementById('bulle');
+      boite.innerHTML = s; boite.appendChild(bulle);
+      boite.querySelectorAll('.zone').forEach(function (z) {
+        var J = +z.getAttribute('data-j');
+        z.addEventListener('mouseenter', function () { montrer(J, X(J), W, parVillage); });
+        z.addEventListener('mouseleave', function () { bulle.classList.remove('is-on'); });
+      });
+      boite.querySelectorAll('.pin').forEach(function (g) {
+        var n = g.getAttribute('data-n');
+        g.addEventListener('mouseenter', function () { surligner(n); });
+        g.addEventListener('mouseleave', function () { surligner(null); });
+        g.addEventListener('click', function () { var li = R.querySelector('.reperes li[data-n="' + n + '"]'); if (li) li.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); surligner(n); });
+      });
+    }
+    function surligner(n) { R.querySelectorAll('.reperes li').forEach(function (li) { li.classList.toggle('is-on', li.getAttribute('data-n') === n); }); }
+    function montrer(J, x, W, parVillage) {
+      var r = jour26(J), d26 = plus(DEPART, J), a = parVillage ? histV(2022, J) : hist(2022, J), b = parVillage ? histV(2018, J) : hist(2018, J), bulle = R.getElementById('bulle');
+      var lib = function (d, n) { return sem(d) + ' ' + court(d) + (FERIES[d] ? ' (' + FERIES[d] + ')' : '') + (n ? ', jour ' + n + ' du village' : ''); };
+      var n26 = parVillage ? ecart(d26, VILLAGES[2026].debut) + 1 : null;
+      var l26 = r ? (r.mil != null ? '<b>≈ ' + nf(arr(r.mil)) + '</b> réels, dont ' + nf(r.mes) + ' « cookies acceptés »' : nf(r.mes) + ' « cookies acceptés »') : (d26 > MAJ ? 'à venir' : 'non mesuré');
+      bulle.innerHTML = '<div style="font-weight:800;margin-bottom:2px">' + (parVillage ? 'Jour ' + n26 + ' du village' : lJ(J)) + (NOTES26[d26] ? ' · ' + esc(NOTES26[d26]) : '') + '</div>' +
+        '<div class="r"><i style="background:' + COUL[2026] + '"></i><span>2026, ' + lib(d26) + ' : ' + l26 + '</span></div>' +
+        '<div class="r"><i style="background:' + COUL[2022] + '"></i><span>2022, ' + lib(a.d, a.n) + ' : ' + (a.v == null ? (parVillage ? 'non transmis' : 'non connu') : nf(a.v)) + '</span></div>' +
+        '<div class="r"><i style="background:' + COUL[2018] + '"></i><span>2018, ' + lib(b.d, b.n) + ' : ' + (b.v == null ? 'non connu' : nf(b.v)) + '</span></div>';
+      var gx = x + 16; if (gx + 270 > W) gx = x - 270 - 16;
+      bulle.style.left = Math.max(0, gx) + 'px'; bulle.style.top = '40px';
+      bulle.classList.add('is-on');
+    }
+    R.querySelectorAll('.seg button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        vue = b.getAttribute('data-vue'); if (O && O.onVue) O.onVue(vue);
+        R.querySelectorAll('.seg button').forEach(function (x) { x.classList.toggle('is-on', x === b); });
+        dessiner();
+      });
+    });
+
+     
+    function dessinerPetits() {
+      var jours = Object.keys(J26).sort().filter(function (k) { return J26[k].fb != null && k >= VILLAGE; });
+      var box = R.getElementById('facteurs'), W = box.clientWidth, H = 150, m = { g: 34, d: 6, h: 12, b: 24 };
+      if (W < 120) return;
+      var bas = 1, hautF = Math.max(2.2, Math.ceil(Math.max.apply(null, jours.map(function (k) { return J26[k].fh; })) * 5) / 5 + 0.1);
+      var X = function (i) { return m.g + (i + .5) / jours.length * (W - m.g - m.d); }, Y = function (f) { return m.h + (1 - (f - bas) / (hautF - bas)) * (H - m.h - m.b); };
+      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" height="' + H + '" style="width:100%;display:block">';
+      [1, 1.5, 2].forEach(function (f) { s += '<line x1="' + m.g + '" x2="' + (W - m.d) + '" y1="' + Y(f) + '" y2="' + Y(f) + '" stroke="' + (f === 1 ? '#C9D3E1' : '#EEF2F7') + '"' + (f === 1 ? ' stroke-dasharray="3 3"' : '') + '/><text class="axe" x="' + (m.g - 6) + '" y="' + (Y(f) + 3.5) + '" text-anchor="end">×' + String(f).replace('.', ',') + '</text>'; });
+      var bw = Math.max(6, Math.min(18, (W - m.g - m.d) / jours.length - 8));
+      jours.forEach(function (k, i) {
+        var r = J26[k];
+        s += '<rect x="' + (X(i) - bw / 2) + '" y="' + Y(r.fh) + '" width="' + bw + '" height="' + Math.max(3, Y(r.fb) - Y(r.fh)) + '" rx="3" fill="' + (weekend(k) ? '#D4A20B' : COUL[2026]) + '"><title>' + sem(k) + ' ' + court(k) + ' : carte ×' + (r.fc ? fx(r.fc) : '?') + ', journaux ×' + (r.fj ? fx(r.fj) : '?') + '</title></rect>';
+        s += '<text class="axe-d" x="' + X(i) + '" y="' + (H - 6) + '" text-anchor="middle">' + court(k) + '</text>';
+      });
+      s += '<text class="axe-d" x="' + (W - m.d) + '" y="' + (Y(1) - 5) + '" text-anchor="end">×1 : si tout le monde acceptait les cookies</text></svg>';
+      box.innerHTML = s;
+      var fv = jours.map(function (k) { return J26[k]; });
+      var fmin = Math.min.apply(null, fv.map(function (r) { return r.fb; })), fmax = Math.max.apply(null, fv.map(function (r) { return r.fh; }));
+      R.getElementById('facteursTxt').innerHTML = 'Depuis l’ouverture du village, il y a chaque jour <b>entre ' + fx(fmin) + ' et ' + fx(fmax) + ' vrais visiteurs pour un visiteur compté</b>. Chaque barre va du compteur de la carte (en bas) aux journaux de Wix (en haut) ; en jaune, les week-ends.';
+
+      var ij = Object.keys(J26).sort(), bx = R.getElementById('iaGraphe'), W2 = bx.clientWidth, H2 = 84, maxG = Math.max.apply(null, ij.map(function (k) { return J26[k].gpt; }));
+      if (W2 < 120) return;
+      var X2 = function (i) { return 4 + i / (ij.length - 1) * (W2 - 8); }, Y2 = function (n) { return 8 + (1 - n / maxG) * (H2 - 26); };
+      var p = ij.map(function (k, i) { return (i ? 'L' : 'M') + X2(i).toFixed(1) + ',' + Y2(J26[k].gpt).toFixed(1); }).join('');
+      bx.innerHTML = '<svg viewBox="0 0 ' + W2 + ' ' + H2 + '" height="' + H2 + '" style="width:100%;display:block"><path d="' + p + 'L' + X2(ij.length - 1) + ',' + (H2 - 18) + 'L' + X2(0) + ',' + (H2 - 18) + 'Z" fill="rgba(0,103,110,.10)"/><path d="' + p + '" fill="none" stroke="' + COUL[2026] + '" stroke-width="2.4"/>' +
+        '<text class="axe-d" x="4" y="' + (H2 - 3) + '">' + court(ij[0]) + ' : ' + nf(J26[ij[0]].gpt) + ' par jour</text><text class="axe-d" x="' + (W2 - 4) + '" y="' + (H2 - 3) + '" text-anchor="end">' + court(ij[ij.length - 1]) + ' : ' + nf(J26[ij[ij.length - 1]].gpt) + '</text></svg>';
+    }
+
+     
+    (function () {
+      var fMob = cumul.gaMob ? cumul.mob / cumul.gaMob : null, fBur = cumul.gaBur ? cumul.bur / cumul.gaBur : null;
+      R.getElementById('appareils').innerHTML =
+        '<div class="chiffre"><b>×' + fx(fMob) + '</b><span>au téléphone : pour un visiteur compté, ' + fx(fMob) + ' vrais visiteurs (d’après le compteur de la carte)</span></div>' +
+        '<div class="chiffre"><b>×' + fx(fBur) + '</b><span>sur ordinateur, avec les bloqueurs de publicité (village, 20/10 au ' + court(MAJ) + ')</span></div>';
+      R.getElementById('iaTxt').innerHTML = 'Quand quelqu’un demande à ChatGPT l’heure du départ ou les horaires du village, ChatGPT lit une page du site pour lui répondre, et la personne n’a plus besoin de venir. <b>' + nf(L.gpt) + ' réponses de ce genre le ' + court(MAJ) + '</b>, l’équivalent de ' +
+        (Math.round(L.gpt / L.mil * 1000) / 10).toLocaleString('fr-FR') + ' % des visiteurs réels, et ' + nf(cumul.gpt) + ' depuis l’ouverture du village. Seules ' + nf(L.ia) + ' personnes ont cliqué ce jour-là vers le site depuis une IA.';
+    })();
+
+     
+    (function () {
+      var P = D.pages || [];
+      if (!P.length || !L.po) { R.getElementById('pagesS').textContent = 'Les journaux de ce jour ne sont pas encore archivés.'; return; }
+      var max = Math.max.apply(null, P.map(function (p) { return Math.max(p[1], p[2]); }));
+      R.getElementById('pagesS').innerHTML = 'Le ' + long(MAJ) + ', les journaux de Wix ont noté <b>' + nf(L.po) + ' pages ouvertes</b>' + (L.poEn ? ', dont ' + nf(L.poEn) + ' en anglais' : '') +
+        '. Sur les pages comparables, c’est <b>' + fx(L.fj) + ' fois</b> ce que les statistiques comptent. En hachuré, les pages ouvertes ; en marine, celles que voient les statistiques (« cookies acceptés »).';
+      R.getElementById('pages').innerHTML = '<span class="h">Page</span><span class="h"></span><span class="h r">Ouvertes</span><span class="h r">Comptées</span><span class="h r rap">Rapport</span>' +
+        P.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (p) {
+          var hors = !p[3];
+          return '<span class="p' + (hors ? ' hors' : '') + '">' + esc(p[0]) + '</span><span class="t"><i style="width:' + (p[1] / max * 100) + '%"></i><b style="width:' + (Math.min(p[2], p[1]) / max * 100) + '%"></b></span>' +
+            '<span class="v o">' + nf(p[1]) + '</span><span class="v">' + nf(p[2]) + '</span><span class="v x rap' + (hors ? ' hors' : '') + '">' + (p[2] ? '×' + fx(p[1] / p[2]) : '') + '</span>';
+        }).join('');
+    })();
+
+     
+    var LIGNES = [];
+    for (var J = -13; J <= 5; J++) {
+      var d = plus(DEPART, J), r = J26[d] || null, a = histT(2022, J), b = histT(2018, J);
+      LIGNES.push({ J: J, d: d, r: r, a: a, b: b, note: [NOTES26[d], NOTES_H[a.d] ? '2022 : ' + NOTES_H[a.d] : '', NOTES_H[b.d] ? '2018 : ' + NOTES_H[b.d] : '',
+        J === 0 ? '2022 : le dimanche 06/11, dernier jour du village, départ reporté, 58 973' : ''].filter(Boolean).join(' · ') });
+    }
+    function hcel(x) { return x.v != null ? nf(x.v) + ' <span class="dd">' + sem(x.d) + ' ' + court(x.d) + '</span>' : '<span style="color:#C3CBD7">' + (x.n ? 'non transmis' : 'non connu') + ' <span class="dd">' + sem(x.d) + ' ' + court(x.d) + '</span></span>'; }
+    R.getElementById('table').innerHTML =
+      '<thead><tr><th>Jour 2026</th><th>Comptés<br>(« cookies acceptés »)</th><th>Vrais visiteurs<br>pour un compté</th><th>Réels estimés</th><th>2022<br>même jour</th><th>2018<br>même jour</th><th class="g">Ce qui s’est passé</th></tr></thead><tbody>' +
+      LIGNES.map(function (l) {
+        var r = l.r, avenir = l.d > MAJ;
+        return '<tr class="' + (l.J === 0 ? 'is-j ' : weekend(l.d) ? 'we ' : '') + (avenir ? 'avenir' : '') + '"><td><span class="j">' + lJ(l.J) + '</span>' + sem(l.d) + ' ' + court(l.d) + '</td>' +
+          '<td>' + (r ? nf(r.mes) : avenir ? 'à venir' : '') + '</td>' +
+          '<td>' + (r && r.fb ? '×' + fx(r.fb) + (r.fh !== r.fb ? ' à ' + fx(r.fh) : '') : '') + '</td>' +
+          '<td class="est">' + (r && r.bas != null ? nf(arr(r.bas)) + ' à ' + nf(arr(r.haut)) : '') + '</td>' +
+          '<td>' + hcel(l.a) + '</td><td>' + hcel(l.b) + '</td><td class="quoi">' + esc(l.note) + '</td></tr>';
+      }).join('') + '</tbody>';
+
+     
+    (function () {
+      var NOMS = { France: 'France', Belgium: 'Belgique', Germany: 'Allemagne', Switzerland: 'Suisse', Guadeloupe: 'Guadeloupe', 'United Kingdom': 'Royaume-Uni',
+        Italy: 'Italie', 'United States': 'États-Unis', Canada: 'Canada', Spain: 'Espagne', Netherlands: 'Pays-Bas', Martinique: 'Martinique', Réunion: 'La Réunion', Indonesia: 'Indonésie' };
+      var P = (D.pays || []).slice(0, 10), max = P.length ? P[0][1] * facteurMoyen : 1;
+      R.getElementById('paysS').textContent = 'Visites du 20/10 au ' + court(MAJ) + ', comptées par les statistiques (« cookies acceptés ») et estimées.';
+      R.getElementById('pays').innerHTML = '<span class="h">Pays</span><span></span><span class="h r">Comptées</span><span class="h r">Estimées</span>' +
+        P.map(function (p) {
+          var e = p[1] * facteurMoyen;
+          return '<span class="p">' + esc(NOMS[p[0]] || p[0]) + '</span><span class="t"><i style="width:' + (p[1] / max * 100) + '%"></i><u style="width:' + ((e - p[1]) / max * 100) + '%"></u></span>' +
+            '<span class="v">' + nf(p[1]) + '</span><span class="v e">' + nf(arr(e)) + '</span>';
+        }).join('');
+    })();
+
+    R.getElementById('sources').textContent = 'Sources : Wix Analytics, Google Analytics 4, journaux de Wix (pages ouvertes, archivées chaque nuit), mesure anonyme de la carte du village ; 2018 et 2022, chiffres de l’ancien site transmis par OC Sport.';
+
+     
+    function csv() {
+      var t = [['Jour', 'Jour de la semaine', 'J', 'Visiteurs comptés (cookies acceptés)', 'Sessions comptées', 'Pages vues comptées', 'Pages ouvertes sans cookie (journaux Wix)',
+        'Vrais visiteurs pour un compté, carte', 'Vrais visiteurs pour un compté, journaux',
+        'Visiteurs réels estimés (bas)', 'Visiteurs réels estimés (haut)', 'Ouvertures de la carte sans cookie', 'Pages vues de la carte comptées', 'Réponses de ChatGPT avec le site',
+        'Visites venues d’une IA', '2022 même moment (date)', '2022 jour de la semaine', '2022 visiteurs', '2018 même moment (date)', '2018 jour de la semaine', '2018 visiteurs', 'Ce qui s’est passé']];
+      Object.keys(J26).sort().forEach(function (d) {
+        var r = J26[d], J = ecart(d, DEPART), a = histT(2022, J), b = histT(2018, J);
+        t.push([d, SEM_L[js(d)], lJ(J), r.mes, r.sessions, r.vues, r.po == null ? '' : r.po, r.fc == null ? '' : fx(r.fc), r.fj == null ? '' : fx(r.fj), r.bas == null ? '' : Math.round(r.bas), r.haut == null ? '' : Math.round(r.haut),
+          r.co == null ? '' : r.co, r.gc, r.gpt, r.ia, a.d, SEM_L[js(a.d)], a.v == null ? '' : a.v, b.d, SEM_L[js(b.d)], b.v == null ? '' : b.v, NOTES26[d] || '']);
+      });
+      var texte = '﻿' + t.map(function (l) { return l.map(function (c) { c = String(c); return /[;"\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(';'); }).join('\r\n');
+      var lien = document.createElement('a');
+      lien.href = URL.createObjectURL(new Blob([texte], { type: 'text/csv;charset=utf-8' }));
+      lien.download = 'route-du-rhum-trafic-' + MAJ + '.csv';
+      document.body.appendChild(lien); lien.click(); setTimeout(function () { URL.revokeObjectURL(lien.href); lien.remove(); }, 500);
+    }
+    R.getElementById('exportCsv').addEventListener('click', csv);
+    R.getElementById('exportCsv2').addEventListener('click', csv);
+    R.getElementById('exportPdf').addEventListener('click', function () { window.print(); });
+    window.addEventListener('beforeprint', function () { dessiner(); dessinerPetits(); });
+
+    var attente, largeur = 0;
+    function redessiner() { clearTimeout(attente); attente = setTimeout(function () { dessiner(); dessinerPetits(); }, 80); }
+    if (window.ResizeObserver) new window.ResizeObserver(function (e) { var w = Math.round(e[0].contentRect.width); if (w !== largeur) { largeur = w; redessiner(); } }).observe(R.getElementById('graphe'));
+    else window.addEventListener('resize', redessiner);
+    dessiner(); dessinerPetits();
+  }
+   
 
   var ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
   function esc(v) {
@@ -1074,6 +1549,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
     a.click();
     document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 0);
+  }
+   
+  function traficPret(t) {
+    if (!t || !t.maj || !Array.isArray(t.jours)) return false;
+    for (var i = 0; i < t.jours.length; i++) if (t.jours[i].j === t.maj) return !!(t.jours[i].v && (t.jours[i].fc || t.jours[i].fj));
+    return false;
   }
   function stamp() {
     var d = new Date();
@@ -1615,6 +2096,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
       return kpis + '<div class="rdrc-grid">' +
         cardIns + cardEng + cardTaux + cardDist + cardClasses + cardBadges + cardRythme +
         '</div>' + note;
+    }
+
+     
+     
+     
+    _traficHtml(p) {
+      if (p.traficError) return '<p class="rdrc-err">' + esc(p.traficError) + '</p>';
+      if (!p.trafic) return '<div class="rdrc-state">Chargement des chiffres du trafic…</div>';
+      if (!traficPret(p.trafic)) return '<div class="rdrc-state">Les chiffres du trafic se rangent chaque matin vers 7 h : ceux d’hier ne sont pas encore là.</div>';
+      return '<div class="rdrc-tr-hote" data-tr-hote></div>';
     }
 
      
@@ -3852,6 +4343,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
       if (this._view === 'insta') return !!(p.claims || p.approved);
       if (this._view === 'village') return !!(p.audience && p.audience.village && p.audience.village.repondu);
       if (this._view === 'contenu') return !!(p.contenu && (p.contenu.jours || []).length);
+      if (this._view === 'trafic') return traficPret(p.trafic);
       if (this._view === 'profils') {
         var dd = (p.audience || {}).demographie;
         return !!(dd && (dd.agesBase || dd.geoBase || dd.civilitesBase || dd.voileBase));
@@ -3921,6 +4413,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
                     avecRang ? [x.rang || '', x.score != null ? (x.score * 100).toFixed(4).replace('.', ',') : ''] : []));
         });
         csvDownload('rdr-juste-temps-participants-' + stamp() + '.csv', rj);
+        return;
+      }
+
+       
+      if (this._view === 'trafic') {
+        var hoteTr = this.querySelector('[data-tr-hote]'), btnTr = hoteTr && hoteTr.shadowRoot && hoteTr.shadowRoot.getElementById('exportCsv');
+        if (btnTr) btnTr.click();
         return;
       }
 
@@ -4251,6 +4750,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
                : this._view === 'village' ? this._villageHtml(p)
                : this._view === 'profils' ? this._profilsHtml(p)
                : this._view === 'contenu' ? this._contenuHtml(p)
+               : this._view === 'trafic' ? this._traficHtml(p)
                : this._audienceHtml(p);
       var dernier = this._dernierJeu;
       var menu = '<div class="rdrc-menu" id="rdrc-menu-jeux" role="menu" aria-labelledby="rdrc-tab-jeux"' + (this._menuJeux ? '' : ' hidden') + '>' +
@@ -4279,6 +4779,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
       var stamp = '';
       if (this._view === 'contenu') {
         stamp = p.contenu && p.contenu.calculeLe ? 'Instantané ' + since(p.contenu.calculeLe) : '';
+      } else if (this._view === 'trafic') {
+        stamp = p.trafic && p.trafic.calculeLe ? 'Calculé ' + since(p.trafic.calculeLe) : '';
       } else if (this._view === 'justetemps') {
         
 
@@ -4651,6 +5153,13 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="63b40b7";performan
 
       var exportBtn = this.querySelector('[data-export]');
       if (exportBtn) exportBtn.addEventListener('click', function () { self._exportCsv(); });
+
+       
+      var hoteTrafic = this.querySelector('[data-tr-hote]'), donneesTrafic = (this._payload || {}).trafic;
+      if (hoteTrafic && traficPret(donneesTrafic)) {
+        try { traficRemplir(hoteTrafic, donneesTrafic, { vue: self._trVue, onVue: function (v) { self._trVue = v; } }); }
+        catch (e) { console.error('[console] onglet Trafic', e); hoteTrafic.innerHTML = '<p class="rdrc-err">Les chiffres du trafic n’ont pas pu s’afficher.</p>'; }
+      }
 
        
        
