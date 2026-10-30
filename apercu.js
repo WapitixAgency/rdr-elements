@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum f5edda7 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="f5edda7";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum d9cd9b2 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d9cd9b2";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1513,6 +1513,45 @@ rdr-accueil-apercu .em-bt--son{background:var(--jaune);color:#0E111D}
 rdr-accueil-apercu .em-bt--son:hover{background:#fff}
 rdr-accueil-apercu .em-bt--fermer{padding:0}
 rdr-accueil-apercu .em-bt--ranger,rdr-accueil-apercu .em-poignee{display:none}
+rdr-accueil-apercu .em.em-entre .em-ec{animation:raa-em-pose .9s cubic-bezier(.2,.7,.3,1) both}
+rdr-accueil-apercu .em.em-entre .em-col > *{animation:raa-em-monte .7s cubic-bezier(.2,.7,.3,1) both}
+rdr-accueil-apercu .em.em-entre .em-col > :nth-child(1){animation-delay:.12s}
+rdr-accueil-apercu .em.em-entre .em-col > :nth-child(2){animation-delay:.2s}
+rdr-accueil-apercu .em.em-entre .em-col > :nth-child(3){animation-delay:.28s}
+rdr-accueil-apercu .em.em-entre .em-col > :nth-child(4){animation-delay:.36s}
+@keyframes raa-em-pose{from{opacity:0;transform:translateY(26px) scale(.965)}to{opacity:1;transform:none}}
+@keyframes raa-em-monte{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+rdr-accueil-apercu .em-fin{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;color:#fff;background:radial-gradient(70% 70% at 50% 45%,rgba(22,53,93,.72),rgba(10,18,40,.94));opacity:0;pointer-events:none;transition:opacity .5s ease}
+rdr-accueil-apercu .em.em-fini .em-fin{opacity:1}
+rdr-accueil-apercu .em-fin b{font:400 clamp(28px,3.4vw,52px)/1 var(--titre);font-style:italic;text-transform:uppercase}
+rdr-accueil-apercu .em-fin span{font-size:clamp(13px,1.2vw,15px);color:rgba(255,255,255,.86)}
+rdr-accueil-apercu .em-fin-barre{width:min(260px,60%);height:4px;margin-top:10px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}
+rdr-accueil-apercu .em-fin-barre::after{content:'';display:block;height:100%;width:100%;background:var(--jaune);transform:scaleX(0);transform-origin:left}
+rdr-accueil-apercu .em.em-fini .em-fin-barre::after{animation:raa-em-remplit 4s linear forwards}
+@keyframes raa-em-remplit{to{transform:none}}
+rdr-accueil-apercu .em-termine{display:inline-flex;align-items:center;gap:7px;color:#4A5266}
+rdr-accueil-apercu .em-termine i{flex:none;display:block;width:8px;height:8px;border-radius:50%;background:#8A93A6}
+rdr-accueil-apercu .em-rideau{position:fixed;inset:0;z-index:9000;overflow:hidden;pointer-events:none;visibility:hidden}
+rdr-accueil-apercu .em-rideau-fond{position:absolute;left:-10%;right:-10%;top:0;height:130%;background:#0E111D;transform:translateY(110%)}
+rdr-accueil-apercu .em-rideau-fond::before,rdr-accueil-apercu .em-rideau-fond::after{content:'';position:absolute;left:0;right:0;height:16vh;background:#0E111D}
+rdr-accueil-apercu .em-rideau-fond::before{top:calc(-16vh + 1px);border-radius:50% 50% 0 0 / 100% 100% 0 0}
+rdr-accueil-apercu .em-rideau-fond::after{bottom:calc(-16vh + 1px);border-radius:0 0 50% 50% / 0 0 100% 100%}
+rdr-accueil-apercu .em-rideau-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+rdr-accueil-apercu .em-rideau-logo{width:clamp(120px,13vw,180px);height:auto;opacity:0}
+rdr-accueil-apercu .em-rideau-mot{display:inline-flex;align-items:center;gap:9px;padding:9px 16px 8px;border-radius:8px;font:400 clamp(18px,1.8vw,24px)/1 var(--titre);font-style:italic;text-transform:uppercase;opacity:0}
+rdr-accueil-apercu .em-rideau-mot i{width:10px;height:10px;border-radius:50%;background:#fff}
+rdr-accueil-apercu .em-rideau.va-direct .em-rideau-mot{background:#C4302B;color:#fff}
+rdr-accueil-apercu .em-rideau.va-hero .em-rideau-mot{background:var(--jaune);color:#0E111D}
+rdr-accueil-apercu .em-rideau.va-hero .em-rideau-mot i{display:none}
+rdr-accueil-apercu .em-rideau.joue{visibility:visible}
+rdr-accueil-apercu .em-rideau.joue .em-rideau-fond{animation:raa-em-rideau 2s cubic-bezier(.65,0,.35,1) both}
+rdr-accueil-apercu .em-rideau.joue .em-rideau-logo{animation:raa-em-logo 2s cubic-bezier(.2,.7,.3,1) both}
+rdr-accueil-apercu .em-rideau.joue .em-rideau-mot{animation:raa-em-mot 2s cubic-bezier(.2,.7,.3,1) both}
+rdr-accueil-apercu .em-rideau.joue .em-rideau-mot i{animation:raa-em-clignote .8s ease-in-out infinite alternate}
+@keyframes raa-em-rideau{0%{transform:translateY(110%)}32%,62%{transform:translateY(-12%)}100%{transform:translateY(-145%)}}
+@keyframes raa-em-logo{0%,22%{opacity:0;transform:scale(.7) rotate(-6deg)}36%,60%{opacity:1;transform:none}74%,100%{opacity:0;transform:translateY(-40px) scale(.94)}}
+@keyframes raa-em-mot{0%,30%{opacity:0;transform:translateY(12px)}42%,60%{opacity:1;transform:none}72%,100%{opacity:0;transform:translateY(-30px)}}
+@keyframes raa-em-clignote{to{opacity:.35}}
 rdr-accueil-apercu .em-heure{position:absolute;z-index:2;left:50%;top:47%;transform:translate(-50%,-50%);font-family:var(--titre);font-style:italic;font-size:clamp(64px,min(11vw,22vh),200px);line-height:.8;color:#fff;white-space:nowrap;text-shadow:0 10px 50px rgba(0,0,0,.4);pointer-events:none}
 rdr-accueil-apercu .em-heure i{font-style:inherit;color:var(--jaune)}
 rdr-accueil-apercu .em-pastille{position:absolute;z-index:2;left:clamp(14px,1.6vw,22px);top:clamp(14px,1.6vw,20px);display:inline-flex;align-items:center;gap:8px;padding:7px 12px 6px;border-radius:6px;background:var(--jaune);color:#0E111D;font:14px/1 var(--titre);font-style:italic;text-transform:uppercase}
@@ -3328,8 +3367,8 @@ function monter(racine, portail, D) {
     bas: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
   };
   const EM_TXT = EN
-    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live', ranger: 'Tuck the mini player away', rouvrir: 'Open the mini player', agrandir: 'Expand', fermer: 'Close' }
-    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct', ranger: 'Ranger la petite fenêtre', rouvrir: 'Rouvrir la petite fenêtre', agrandir: 'Agrandir', fermer: 'Fermer' };
+    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live', ranger: 'Tuck the mini player away', rouvrir: 'Open the mini player', agrandir: 'Expand', fermer: 'Close', termine: 'Ended', termineA: (h) => 'Ended at ' + h, finDirect: 'End of the live', merciSur: (a) => 'Thanks for watching' + (a ? ' on ' + a : '') + '.', merci: 'Thanks for watching. The home page is coming back in a moment.', aBientot: 'See you soon!' }
+    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct', ranger: 'Ranger la petite fenêtre', rouvrir: 'Rouvrir la petite fenêtre', agrandir: 'Agrandir', fermer: 'Fermer', termine: 'Terminé', termineA: (h) => 'Terminé à ' + h, finDirect: 'Fin du direct', merciSur: (a) => 'Merci d\'avoir suivi le direct' + (a ? ' sur ' + a : '') + '.', merci: 'Merci d\'avoir suivi. L\'accueil revient dans un instant.', aBientot: 'À très vite !' };
   const EM_PARIS = { timeZone: 'Europe/Paris' };
   const emHeure = (ms) => EN
     ? new Date(ms).toLocaleTimeString('en-US', { ...EM_PARIS, hour: 'numeric', minute: '2-digit' }).toLowerCase().replace(':00 ', ' ')
@@ -3469,8 +3508,8 @@ function monter(racine, portail, D) {
     if (!oui) emRanger(ec, false);
   }
   function emMajFlottant() {
-    const ec = $('emEc');
-    if (!ec || !ec.querySelector('iframe')) return;
+    const ec = $('emEc'), sec = $('em');
+    if (!ec || !ec.querySelector('iframe') || !sec || sec.hidden || emBascule) return;
     if (emPf.transforme === null) emPf.transforme = emTransforme(ec);
     const veut = emPf.horsVue && !emPf.ferme && !emPf.retour && !emPf.transforme && (emPf.flottant || emJoue());
     if (veut !== emPf.flottant) emPoser(veut);
@@ -3544,12 +3583,65 @@ function monter(racine, portail, D) {
       emAjuster(c);
     });
   }
+  
+
+
+
+  let emPremier = true, emBascule = false, emRideauEl = null;
+  const emDansEcran = (el) => { if (document.hidden || !el) return false; const r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < innerHeight; };
+   
+  function emRideau(mot, sens, auMilieu, aLaFin) {
+    if (!emRideauEl) {
+      emRideauEl = document.createElement('div');
+      emRideauEl.className = 'em-rideau';
+      emRideauEl.setAttribute('aria-hidden', 'true');
+      emRideauEl.innerHTML = '<div class="em-rideau-fond"></div><div class="em-rideau-c">' + (M.logoIntro ? '<img class="em-rideau-logo" src="' + esc(M.logoIntro) + '" alt="">' : '') + '<span class="em-rideau-mot"><i></i><span></span></span></div>';
+      racine.appendChild(emRideauEl);
+    }
+    emRideauEl.classList.remove('joue', 'va-direct', 'va-hero');
+    emRideauEl.classList.add(sens === 'direct' ? 'va-direct' : 'va-hero');
+    emRideauEl.querySelector('.em-rideau-mot > span').textContent = mot;
+    void emRideauEl.offsetWidth;
+    emRideauEl.classList.add('joue');
+    minuteurs.push(setTimeout(auMilieu, 800));
+    minuteurs.push(setTimeout(() => { emRideauEl.classList.remove('joue'); if (aLaFin) aLaFin(); }, 2000));
+  }
+  function emCacher() {
+    const sec = $('em'), hero = $('hero');
+    emOubliePetite();
+    if (sec) { sec.classList.remove('a-flottant', 'em-fini', 'em-entre'); sec.hidden = true; sec.innerHTML = ''; }
+    if (hero) hero.hidden = false;
+    emCle = '';
+  }
+  
+
+  function emTerminer(e) {
+    const sec = $('em'); if (!sec) return;
+    emBascule = true;
+    emPoser(false);
+    const ec = sec.querySelector('.em-ec'), f = ec && ec.querySelector('iframe');
+    if (f) emCommande(f, 'pauseVideo');
+    if (ec && !ec.querySelector('.em-fin')) ec.insertAdjacentHTML('beforeend', '<div class="em-fin" role="status"><b>' + EM_TXT.finDirect + '</b><span>' + esc(EM_TXT.merciSur(e.antenne)) + '</span><span class="em-fin-barre" aria-hidden="true"></span></div>');
+    const k = sec.querySelector('.em-k'), date = k && k.querySelector('span:not(.em-direct)');
+    if (k) k.innerHTML = '<span class="em-termine"><i></i>' + EM_TXT.termine + '</span>' + (date ? date.outerHTML : '');
+    const l = sec.querySelector('.em-cpt-l'); if (l) l.textContent = EM_TXT.termineA(emHeure(Math.min(e.tFin, horloge.maintenant())));
+    const p = sec.querySelector('.em-p'); if (p) p.textContent = EM_TXT.merci;
+    sec.classList.add('em-fini');
+    minuteurs.push(setTimeout(() => {
+      const e2 = emLire(), t2 = horloge.maintenant();
+      if (e2 && t2 < e2.tFin && t2 >= e2.tDebut - e2.annonce * 60000) { emBascule = false; sec.classList.remove('em-fini'); emCle = ''; emRendre(); return; }
+      emRideau(EM_TXT.aBientot, 'hero', () => { emCacher(); entreeDouce(); }, () => { emBascule = false; });
+    }, 4000));
+  }
   function emRendre() {
     const sec = $('em'), hero = $('hero');
-    if (!sec || !hero) return;
+    if (!sec || !hero || emBascule) return;
     const e = emLire(), t = horloge.maintenant();
     if (!e || t >= e.tFin || t < e.tDebut - e.annonce * 60000) {
-      if (!sec.hidden) { emOubliePetite(); sec.classList.remove('a-flottant'); sec.hidden = true; sec.innerHTML = ''; hero.hidden = false; emCle = ''; }
+      if (!sec.hidden) {
+        if (!emPremier && emEn.e && emDansEcran(sec) && !mouvementReduit()) emTerminer(emEn.e);
+        else emCacher();
+      }
       emEn.e = null;
       return;
     }
@@ -3561,8 +3653,17 @@ function monter(racine, portail, D) {
     if (cle === emCle) { emTic(e, t); return; }
     emCle = cle;
     const ici = !!e.youtube && consent;
+     
+    const arrive = sec.hidden && !emPremier && emDansEcran(hero) && !mouvementReduit();
     sec.innerHTML = '<div class="trame em-g">' + emEcran(e, t, ph, consent) + emColonne(e, t, ph, ici) + '</div>';
-    sec.hidden = false; hero.hidden = true;
+    if (arrive) {
+      emBascule = true;
+      emRideau(ph === 'avant' ? EM_TXT.pastille(emHeure(e.tDebut)) : EM_TXT.direct, 'direct', () => {
+        sec.hidden = false; hero.hidden = true;
+        sec.classList.remove('em-entre'); void sec.offsetWidth; sec.classList.add('em-entre');
+        minuteurs.push(setTimeout(() => sec.classList.remove('em-entre'), 1400));
+      }, () => { emBascule = false; emMajFlottant(); });
+    } else { sec.hidden = false; hero.hidden = true; }
     if (M.topoFaq && !sec.style.getPropertyValue('--topo')) sec.style.setProperty('--topo', 'url("' + M.topoFaq + '")');
     emBrancher();
     const ck = sec.querySelector('[data-em-cookies]');
@@ -3583,7 +3684,7 @@ function monter(racine, portail, D) {
     else if (emEn.e) emTic(emEn.e, horloge.maintenant());
   }, 1000));
 
-  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge(); emRendre();
+  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge(); emRendre(); emPremier = false;
   {
     const ph = $('hero-photo');
     const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
