@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d8f93cb | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d8f93cb";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 3af0c2c | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="3af0c2c";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1492,6 +1492,27 @@ rdr-accueil-apercu .em-img{position:absolute;inset:0;width:100%;height:100%;obje
 rdr-accueil-apercu .em-ec::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,29,.42) 0%,rgba(14,17,29,.12) 34%,rgba(14,17,29,.2) 58%,rgba(14,17,29,.88) 100%)}
 rdr-accueil-apercu .em-ec--lecteur::before{display:none}
 rdr-accueil-apercu .em-ec iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+rdr-accueil-apercu .em-place{position:relative;width:100%;aspect-ratio:16/9;border-radius:22px 4px 22px 4px;background:#05070d var(--em-affiche,none) center/cover}
+rdr-accueil-apercu .em-place::before{content:'';position:absolute;inset:0;border-radius:inherit;background:rgba(5,7,13,.8)}
+rdr-accueil-apercu .em.a-flottant > .trame{z-index:8000}
+rdr-accueil-apercu .em-barre{display:none}
+rdr-accueil-apercu .em-ec.est-flottant{position:fixed;z-index:8000;top:auto;left:auto;right:40px;bottom:24px;width:320px;aspect-ratio:auto;padding-top:34px;border-radius:14px 3px 14px 3px;background:#0A1228;box-shadow:0 26px 54px -18px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.16);animation:raa-em-mini-entre .32s cubic-bezier(.2,.7,.3,1)}
+@keyframes raa-em-mini-entre{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+rdr-accueil-apercu .em[data-hors] .est-flottant,rdr-accueil-apercu .em[data-hors] .est-flottant *{animation-play-state:running !important}
+rdr-accueil-apercu .em-ec.est-flottant iframe{position:relative;inset:auto;display:block;width:100%;height:auto;aspect-ratio:16/9}
+rdr-accueil-apercu .em-ec.est-flottant .em-son{display:none}
+rdr-accueil-apercu .em-ec.est-flottant .em-barre{display:flex;position:absolute;left:0;right:0;top:0;height:34px;align-items:center;gap:3px;padding:0 5px 0 11px;color:#fff}
+rdr-accueil-apercu .em-barre-l{flex:1;min-width:0;display:flex;align-items:center;gap:7px;font:800 10px/1 var(--police);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+rdr-accueil-apercu .em-barre .em-direct{color:#fff}
+rdr-accueil-apercu .em-barre .em-direct i{color:#FF4D45}
+rdr-accueil-apercu .em-bt{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:26px;min-width:26px;margin:0;padding:0 8px;border:0;border-radius:7px 2px 7px 2px;background:transparent;color:#fff;font:700 11.5px/1 var(--police);cursor:pointer;transition:background .15s}
+rdr-accueil-apercu .em-bt:hover{background:rgba(255,255,255,.14)}
+rdr-accueil-apercu .em-bt:focus-visible{outline:2px solid var(--jaune);outline-offset:1px}
+rdr-accueil-apercu .em-bt svg{flex:none;width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+rdr-accueil-apercu .em-bt--son{background:var(--jaune);color:#0E111D}
+rdr-accueil-apercu .em-bt--son:hover{background:#fff}
+rdr-accueil-apercu .em-bt--fermer{padding:0}
+rdr-accueil-apercu .em-bt--ranger,rdr-accueil-apercu .em-poignee{display:none}
 rdr-accueil-apercu .em-heure{position:absolute;z-index:2;left:50%;top:47%;transform:translate(-50%,-50%);font-family:var(--titre);font-style:italic;font-size:clamp(64px,min(11vw,22vh),200px);line-height:.8;color:#fff;white-space:nowrap;text-shadow:0 10px 50px rgba(0,0,0,.4);pointer-events:none}
 rdr-accueil-apercu .em-heure i{font-style:inherit;color:var(--jaune)}
 rdr-accueil-apercu .em-pastille{position:absolute;z-index:2;left:clamp(14px,1.6vw,22px);top:clamp(14px,1.6vw,20px);display:inline-flex;align-items:center;gap:8px;padding:7px 12px 6px;border-radius:6px;background:var(--jaune);color:#0E111D;font:14px/1 var(--titre);font-style:italic;text-transform:uppercase}
@@ -1534,6 +1555,15 @@ rdr-accueil-apercu .em-ec{border-radius:0}
 rdr-accueil-apercu .em-col{padding:0 var(--marge)}
 rdr-accueil-apercu .em-heure{font-size:clamp(56px,20vw,110px)}
 rdr-accueil-apercu .em-son{bottom:14px}
+rdr-accueil-apercu .em-place{border-radius:0}
+rdr-accueil-apercu .em-ec.est-flottant{right:34px;bottom:14px;width:240px;padding-top:30px;border-radius:12px 3px 12px 3px;transition:transform .3s cubic-bezier(.2,.7,.3,1),clip-path .3s cubic-bezier(.2,.7,.3,1);clip-path:inset(-40px -40px -40px -40px)}
+rdr-accueil-apercu .em-ec.est-flottant .em-barre{height:30px;gap:2px;padding:0 3px 0 10px;touch-action:none;cursor:grab}
+rdr-accueil-apercu .em-barre-l{gap:6px;font-size:9.5px;letter-spacing:.08em}
+rdr-accueil-apercu .em-bt{height:26px;padding:0}
+rdr-accueil-apercu .em-bt .lib,rdr-accueil-apercu .em-bt--son{display:none}
+rdr-accueil-apercu .em-bt--ranger{display:inline-flex}
+rdr-accueil-apercu .em-ec.est-flottant .em-poignee{display:block;position:absolute;left:50%;top:2px;width:26px;height:3px;border-radius:2px;background:rgba(255,255,255,.34);translate:-50% 0}
+rdr-accueil-apercu .em-ec.est-flottant.est-range{transform:translateY(calc(100% - 30px));clip-path:inset(-40px -40px calc(100% - 30px) -40px)}
 }
 @media (prefers-reduced-motion:reduce){
 rdr-accueil-apercu *,rdr-accueil-apercu *::before,rdr-accueil-apercu *::after{animation:none !important;transition:none !important}
@@ -3291,11 +3321,15 @@ function monter(racine, portail, D) {
   const EM_STOCK = 'rdrDernieresInfosV2:' + (EN ? 'en' : 'fr');
   const EM_ICO = {
     son: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>',
-    horloge: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
+    horloge: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+    agrandir: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg>',
+    fermer: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+    haut: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>',
+    bas: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
   };
   const EM_TXT = EN
-    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live' }
-    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct' };
+    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live', ranger: 'Tuck the mini player away', rouvrir: 'Open the mini player', agrandir: 'Expand', fermer: 'Close' }
+    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct', ranger: 'Ranger la petite fenêtre', rouvrir: 'Rouvrir la petite fenêtre', agrandir: 'Agrandir', fermer: 'Fermer' };
   const EM_PARIS = { timeZone: 'Europe/Paris' };
   const emHeure = (ms) => EN
     ? new Date(ms).toLocaleTimeString('en-US', { ...EM_PARIS, hour: 'numeric', minute: '2-digit' }).toLowerCase().replace(':00 ', ' ')
@@ -3320,17 +3354,38 @@ function monter(racine, portail, D) {
     while (fin() > e.clientWidth - 2 && fs > 14 && n++ < 80) { fs -= 0.5; e.style.fontSize = fs + 'px'; }
   }
    
+  const emAnnonce = (a) => typeof a === 'number' && a >= 0 ? Math.min(a, 1440) : 90;
+  function emNormal(e) {
+    if (!e || typeof e !== 'object') return null;
+    const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
+    if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
+    return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, annonce: emAnnonce(e.annonce), sansFin: e.sansFin === true };
+  }
+  
+
+
+  function emDuJeu(t) {
+    const c = [];
+    (Array.isArray(D.emissions) ? D.emissions : []).forEach((x) => {
+      if (!x || typeof x !== 'object') return;
+      const fin = Date.parse(x.fin);
+      let debut = Date.parse(x.debut);
+      if (!isFinite(fin) || fin <= t) return;
+      if (x.maintenant === true) debut = Math.min(isFinite(debut) ? debut : t, t - 60000);
+      else if (!isFinite(debut) || fin <= debut || t < debut - emAnnonce(x.annonce) * 60000) return;
+      const e = emNormal(Object.assign({}, x, { debut: new Date(debut).toISOString() }));
+      if (e) { e.tout = x.maintenant === true; c.push(e); }
+    });
+    c.sort((a, b) => (b.tout ? 1 : 0) - (a.tout ? 1 : 0) || a.tDebut - b.tDebut);
+    return c[0] || null;
+  }
+  
+
   function emLire() {
-    try {
-      const v = JSON.parse(window.localStorage.getItem(EM_STOCK) || 'null');
-      const e = v && v.jeu && v.jeu.emission;
-      if (!e || typeof e !== 'object' || typeof v.t !== 'number' || Date.now() - v.t > 600000) return null;
-      const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
-      if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
-       
-      const annonce = typeof e.annonce === 'number' && e.annonce >= 0 ? Math.min(e.annonce, 1440) : 90;
-      return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, annonce, sansFin: e.sansFin === true };
-    } catch (x) { return null; }
+    let v = null;
+    try { v = JSON.parse(window.localStorage.getItem(EM_STOCK) || 'null'); } catch (x) { v = null; }
+    if (v && typeof v === 'object' && typeof v.t === 'number' && Date.now() - v.t <= 600000) return emNormal(v.jeu && v.jeu.emission);
+    return emDuJeu(horloge.maintenant());
   }
   let emCle = '', emGuet = null;
   const emEn = { e: null };
@@ -3362,9 +3417,124 @@ function monter(racine, portail, D) {
       return '<div class="em-ec">' + affiche + '<div class="em-cookies"><b>' + EM_TXT.cookiesB + '</b><p>' + EM_TXT.cookiesP + '</p><button type="button" data-rdr-cookies data-em-cookies>' + EM_TXT.gerer + '</button><a href="' + esc(lien) + '" target="_blank" rel="noopener">' + EM_TXT.ouvrir + '</a></div></div>';
     }
     const src = 'https://www.youtube.com/embed/' + encodeURIComponent(e.youtube) + '?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
-    return '<div class="em-ec em-ec--lecteur"><iframe src="' + esc(src) + '" title="' + esc(EM_TXT.lecteur(e.antenne || 'YouTube')) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>' +
-      '<button class="em-son" type="button" data-em-son>' + EM_ICO.son + EM_TXT.son + '</button></div>';
+     
+    return '<div class="em-place" id="emPlace"' + (photo ? ' style="--em-affiche:url(&quot;' + IMG(photo, large, Math.round(large * 9 / 16), 75) + '&quot;)"' : '') + '><div class="em-ec em-ec--lecteur" id="emEc">' +
+      '<iframe src="' + esc(src) + '" title="' + esc(EM_TXT.lecteur(e.antenne || 'YouTube')) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>' +
+      '<button class="em-son" type="button" data-em-son>' + EM_ICO.son + EM_TXT.son + '</button>' + emBarre() + '</div></div>';
   }
+  
+
+  const emBarre = () => '<div class="em-barre"><span class="em-poignee" aria-hidden="true"></span><span class="em-barre-l" data-em-mini><span class="em-direct"><i></i>' + EM_TXT.direct + '</span></span>' +
+    '<button class="em-bt em-bt--son" type="button" data-em-son aria-label="' + EM_TXT.son + '" title="' + EM_TXT.son + '">' + EM_ICO.son + '</button>' +
+    '<button class="em-bt em-bt--ranger" type="button" data-em-ranger aria-expanded="true" aria-label="' + EM_TXT.ranger + '">' + EM_ICO.bas + '</button>' +
+    '<button class="em-bt" type="button" data-em-agrandir aria-label="' + EM_TXT.agrandir + '">' + EM_ICO.agrandir + '<span class="lib">' + EM_TXT.agrandir + '</span></button>' +
+    '<button class="em-bt em-bt--fermer" type="button" data-em-fermer aria-label="' + EM_TXT.fermer + '" title="' + EM_TXT.fermer + '">' + EM_ICO.fermer + '</button></div>';
+  
+
+
+
+
+
+
+
+
+  const EM_PF_CLE = 'rdrEmPetiteFenetre';
+  const emPf = { ferme: false, horsVue: false, flottant: false, etat: null, retour: false, io: null, transforme: null };
+  try { emPf.ferme = window.sessionStorage.getItem(EM_PF_CLE) === 'fermee'; } catch (x) {   }
+  const emEtroit = () => { try { return window.matchMedia('(max-width:760px)').matches; } catch (x) { return false; } };
+  const emJoue = () => emPf.etat === 1 || emPf.etat === 3 || (emPf.etat !== 2 && emPf.etat !== 0);
+  const emCommande = (f, func, args) => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: args || [] }), '*'); } catch (x) {   } };
+  function emTransforme(el) {
+    for (let n = el.parentElement; n && n !== document.documentElement; n = n.parentElement) {
+      const s = getComputedStyle(n);
+      if (s.transform !== 'none' || s.filter !== 'none' || s.perspective !== 'none' || /transform|filter|perspective/.test(s.willChange) || /paint|layout|strict|content/.test(s.contain)) return true;
+    }
+    return false;
+  }
+  function emRanger(ec, oui) {
+    ec.classList.toggle('est-range', oui);
+    const r = ec.querySelector('[data-em-ranger]'); if (!r) return;
+    r.setAttribute('aria-expanded', String(!oui));
+    r.setAttribute('aria-label', oui ? EM_TXT.rouvrir : EM_TXT.ranger);
+    r.innerHTML = oui ? EM_ICO.haut : EM_ICO.bas;
+  }
+  function emPoser(oui) {
+    const sec = $('em'), ec = $('emEc');
+    emPf.flottant = oui && !!ec;
+    if (sec) sec.classList.toggle('a-flottant', emPf.flottant);
+    if (!ec) return;
+    ec.classList.toggle('est-flottant', oui);
+    if (!oui) emRanger(ec, false);
+  }
+  function emMajFlottant() {
+    const ec = $('emEc');
+    if (!ec || !ec.querySelector('iframe')) return;
+    if (emPf.transforme === null) emPf.transforme = emTransforme(ec);
+    const veut = emPf.horsVue && !emPf.ferme && !emPf.retour && !emPf.transforme && (emPf.flottant || emJoue());
+    if (veut !== emPf.flottant) emPoser(veut);
+  }
+   
+  function emBrancher() {
+    if (emPf.io) { emPf.io.disconnect(); emPf.io = null; }
+    emPf.flottant = false; emPf.etat = null;
+    const sec = $('em'); if (sec) sec.classList.remove('a-flottant');
+    const place = $('emPlace'), ec = $('emEc'), f = ec && ec.querySelector('iframe');
+    if (!place || !f || typeof IntersectionObserver !== 'function') return;
+    emPf.io = new IntersectionObserver(([x]) => { emPf.horsVue = x.intersectionRatio < 0.4; if (!emPf.horsVue) emPf.retour = false; emMajFlottant(); }, { threshold: [0, 0.2, 0.4, 0.6, 1] });
+    emPf.io.observe(place);
+    observateurs.push(emPf.io);
+    f.addEventListener('load', () => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'rdr-em', channel: 'widget' }), '*'); } catch (x) {   } });
+    const barre = ec.querySelector('.em-barre');
+    let y0 = null;
+    barre.addEventListener('pointerdown', (e) => { if (!emEtroit() || e.target.closest('button') || !ec.classList.contains('est-flottant')) return; y0 = e.clientY; });
+    barre.addEventListener('pointerup', (e) => { if (y0 == null) return; const dy = e.clientY - y0; y0 = null; if (Math.abs(dy) > 18) { ec._glisse = Date.now(); emRanger(ec, dy > 0); } });
+    barre.addEventListener('pointercancel', () => { y0 = null; });
+  }
+  function emOubliePetite() {
+    if (emPf.io) { emPf.io.disconnect(); emPf.io = null; }
+    emPf.flottant = false; emPf.etat = null;
+  }
+   
+  const emEcoute = (e) => {
+    if (!/^https:\/\/www\.youtube(-nocookie)?\.com$/.test(e.origin)) return;
+    const f = $('emEc') && $('emEc').querySelector('iframe');
+    if (!f || e.source !== f.contentWindow) return;
+    let d = e.data;
+    if (typeof d === 'string') { try { d = JSON.parse(d); } catch (x) { return; } }
+    const st = d && d.info && d.info.playerState;
+    if (typeof st === 'number') { emPf.etat = st; emMajFlottant(); }
+  };
+  window.addEventListener('message', emEcoute);
+  ecouteurs.push(() => window.removeEventListener('message', emEcoute));
+   
+  const emSection = $('em');
+  if (emSection) emSection.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-em-son],[data-em-ranger],[data-em-mini],[data-em-agrandir],[data-em-fermer]');
+    if (!b) return;
+    const ec = $('emEc'), f = ec && ec.querySelector('iframe');
+    if (b.matches('[data-em-son]')) {
+      if (f) { emCommande(f, 'unMute'); emCommande(f, 'setVolume', [80]); emCommande(f, 'playVideo'); }
+      emSection.querySelectorAll('[data-em-son]').forEach((x) => x.remove());
+      return;
+    }
+    if (!ec || !ec.classList.contains('est-flottant')) return;
+    if (b.matches('[data-em-ranger],[data-em-mini]')) {
+      if (emEtroit() && !(ec._glisse && Date.now() - ec._glisse < 400)) emRanger(ec, !ec.classList.contains('est-range'));
+      return;
+    }
+    if (b.matches('[data-em-agrandir]')) {
+      emPf.retour = true;
+      emPoser(false);
+      window.scrollTo({ top: 0, behavior: mouvementReduit() ? 'auto' : 'smooth' });
+      return;
+    }
+    if (b.matches('[data-em-fermer]')) {
+      emPf.ferme = true;
+      try { window.sessionStorage.setItem(EM_PF_CLE, 'fermee'); } catch (x) {   }
+      if (f) emCommande(f, 'pauseVideo');
+      emPoser(false);
+    }
+  });
   function emTic(e, t) {
     const sec = $('em'); if (!sec) return;
     sec.querySelectorAll('[data-em-cpt]').forEach((c) => {
@@ -3377,7 +3547,7 @@ function monter(racine, portail, D) {
     if (!sec || !hero) return;
     const e = emLire(), t = horloge.maintenant();
     if (!e || t >= e.tFin || t < e.tDebut - e.annonce * 60000) {
-      if (!sec.hidden) { sec.hidden = true; sec.innerHTML = ''; hero.hidden = false; emCle = ''; }
+      if (!sec.hidden) { emOubliePetite(); sec.classList.remove('a-flottant'); sec.hidden = true; sec.innerHTML = ''; hero.hidden = false; emCle = ''; }
       emEn.e = null;
       return;
     }
@@ -3392,13 +3562,7 @@ function monter(racine, portail, D) {
     sec.innerHTML = '<div class="trame em-g">' + emEcran(e, t, ph, consent) + emColonne(e, t, ph, ici) + '</div>';
     sec.hidden = false; hero.hidden = true;
     if (M.topoFaq && !sec.style.getPropertyValue('--topo')) sec.style.setProperty('--topo', 'url("' + M.topoFaq + '")');
-    const son = sec.querySelector('[data-em-son]');
-    if (son) son.addEventListener('click', () => {
-      const f = sec.querySelector('iframe');
-      const commande = (func, args) => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: args || [] }), '*'); } catch (x) {   } };
-      commande('unMute'); commande('setVolume', [80]); commande('playVideo');
-      son.remove();
-    });
+    emBrancher();
     const ck = sec.querySelector('[data-em-cookies]');
     if (ck) {
       ck.addEventListener('click', ouvrirCookies);
