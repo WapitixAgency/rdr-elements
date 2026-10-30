@@ -1,5 +1,5 @@
-/* rdr-elements suivre-depart | source route-du-rhum d9cd9b2 | rdr-suivre-depart.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="d9cd9b2";performance.mark("rdr-elements:suivre-depart")}catch(e){}
+/* rdr-elements suivre-depart | source route-du-rhum 0d63daa | rdr-suivre-depart.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-depart"]="0d63daa";performance.mark("rdr-elements:suivre-depart")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1192,7 +1192,7 @@ function chezSoi() {
       '<span class="direct-texte"><span class="direct-badge' + (live ? ' live' : '') + '">' + esc(live ? D.badgeLive : replay ? D.badgeReplay : D.badge) + '</span><h4>' + esc(D.titre) + '</h4><span class="direct-p">' + esc(replay ? D.texteReplay : D.texte) + '</span>' +
       '<span class="emp"><span class="emp-tag">' + esc(PAGE.interface.emplacement) + '</span> ' + esc(D.emp) + '</span></span></a>' +
     '<ul class="rdv">' + C.rdv.map((r) => '<li class="rdv-item"><span class="p">' + ico(r.pic) + '</span><div><h4>' + esc(r.t) + '</h4><p>' + riche(r.d) + '</p>' +
-      (r.liens ? '<div class="rdv-liens">' + r.liens.map(([t, l, k]) => '<a href="' + l + '" target="_blank" rel="noopener">' + (MEDIAS.reseaux[k] ? '<img src="' + MEDIAS.reseaux[k] + '" alt="" width="20" height="20">' : ico(k)) + esc(t) + '</a>').join('') + '</div>' : '') +
+      (r.liens ? '<div class="rdv-liens">' + r.liens.map(([t, l, k]) => '<a href="' + l + '"' + (/^https?:/.test(l) ? ' target="_blank" rel="noopener"' : '') + '>' + (MEDIAS.reseaux[k] ? '<img src="' + MEDIAS.reseaux[k] + '" alt="" width="20" height="20">' : ico(k)) + esc(t) + '</a>').join('') + '</div>' : '') +
       (r.emp ? '<div class="emp"><span class="emp-tag">' + esc(PAGE.interface.emplacement) + '</span> ' + esc(r.emp) + '</div>' : '') +
     '</div></li>').join('') + '</ul>' +
   '</div>';
