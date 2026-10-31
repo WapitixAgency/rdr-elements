@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum d8238ca | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="d8238ca";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 9c82f21 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="9c82f21";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1155,6 +1155,99 @@ rdr-accueil-apercu .jx-carte .cta-rhum svg{width:16px;height:16px}
 rdr-accueil-apercu .jx-lien{font-size:12px;font-weight:700;color:#6B7287;text-decoration:underline;text-underline-offset:3px}
 rdr-accueil-apercu .jx-lien:hover{color:var(--marine2)}
 rdr-accueil-apercu .jx-lien:focus-visible{outline:3px solid #13204A;outline-offset:3px}
+rdr-accueil-apercu .dp{--dp-papier:#F4F1E8;--dp-encre:#0E111D;--dp-encre3:#646B7E;--dp-violet:#8B86E0;--dp-r:24px 4px 16px 4px;position:relative;background:var(--dp-papier);color:var(--dp-encre);padding:clamp(36px,5.6vh,60px) 0 0}
+rdr-accueil-apercu .dp > .vague-sep{margin-top:clamp(30px,5vh,52px)}
+rdr-accueil-apercu .dp::after{content:'';position:absolute;inset:0;z-index:0;background:#16355D;opacity:.06;pointer-events:none;-webkit-mask:var(--topo) repeat center top/1200px auto;mask:var(--topo) repeat center top/1200px auto}
+rdr-accueil-apercu .dp > .trame{position:relative;z-index:1}
+rdr-accueil-apercu .dp-g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,1.6vw,24px)}
+rdr-accueil-apercu .dp-c{position:relative;display:flex;flex-direction:column;min-width:0;min-height:clamp(290px,40vh,350px);border-radius:var(--dp-r);background:#fff;color:var(--dp-encre);box-shadow:0 1px 0 rgba(14,17,29,.06),0 22px 44px -28px rgba(14,17,29,.5);overflow:hidden}
+rdr-accueil-apercu .dp-haut{position:relative;flex:1;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:18px 20px 16px;color:#fff;isolation:isolate;overflow:hidden}
+rdr-accueil-apercu .dp-haut > img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,.8,.3,1)}
+rdr-accueil-apercu .dp-c:hover .dp-haut > img{transform:scale(1.04)}
+rdr-accueil-apercu .dp-haut::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,17,29,.1) 0%,rgba(14,17,29,.25) 40%,rgba(14,17,29,.88) 100%)}
+rdr-accueil-apercu .dp-k{font:800 10.5px/1.25 var(--police);letter-spacing:.16em;text-transform:uppercase;color:#fff;opacity:.88}
+rdr-accueil-apercu .dp-haut h2{font-size:clamp(22px,1.85vw,30px);line-height:1;text-wrap:balance;color:#fff}
+rdr-accueil-apercu .dp-bas{--hl:98px;--d:calc(var(--hl) * .2867);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+rdr-accueil-apercu .dp-l{--c:var(--teal);position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:center;gap:5px;height:var(--hl);padding:12px 14px 12px 22px;color:var(--dp-encre);outline:none;text-decoration:none}
+rdr-accueil-apercu .dp-l + .dp-l::before{content:'';position:absolute;z-index:1;left:-1.5px;top:0;bottom:0;width:3px;background:var(--c);transform:skewX(-16deg)}
+rdr-accueil-apercu .dp-l::after{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:calc(var(--d) / -2);right:calc(var(--d) / -2);background:color-mix(in srgb,var(--c) 22%,#fff);clip-path:polygon(var(--d) 0,var(--d) 0,0 100%,0 100%);transition:clip-path .5s cubic-bezier(.22,.8,.3,1)}
+rdr-accueil-apercu .dp-l:first-child::after{left:0;clip-path:polygon(0 0,0 0,0 100%,0 100%)}
+rdr-accueil-apercu .dp-l:last-child::after{right:0}
+rdr-accueil-apercu .dp-l:hover::after,rdr-accueil-apercu .dp-l:focus-visible::after{clip-path:polygon(var(--d) 0,100% 0,calc(100% - var(--d)) 100%,0 100%)}
+rdr-accueil-apercu .dp-l:first-child:hover::after,rdr-accueil-apercu .dp-l:first-child:focus-visible::after{clip-path:polygon(0 0,100% 0,calc(100% - var(--d)) 100%,0 100%)}
+rdr-accueil-apercu .dp-l:last-child:hover::after,rdr-accueil-apercu .dp-l:last-child:focus-visible::after{clip-path:polygon(var(--d) 0,100% 0,100% 100%,0 100%)}
+rdr-accueil-apercu .dp-l:focus-visible b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+rdr-accueil-apercu .dp-l > i{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--dp-encre);transition:transform .35s cubic-bezier(.22,.8,.3,1)}
+rdr-accueil-apercu .dp-l:hover > i,rdr-accueil-apercu .dp-l:focus-visible > i{transform:translateY(-2px) rotate(-6deg)}
+rdr-accueil-apercu .dp-l > i svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+rdr-accueil-apercu .dp-l small{font:800 9.5px/1 var(--police);letter-spacing:.14em;text-transform:uppercase;color:var(--dp-encre3)}
+rdr-accueil-apercu .dp-l b{font:clamp(15px,1.3vw,19px)/1 var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;white-space:nowrap}
+rdr-accueil-apercu .dp-l .dp-fl{position:absolute;right:12px;top:12px;width:15px;height:15px;fill:none;stroke:var(--dp-encre3);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s,stroke .2s}
+rdr-accueil-apercu .dp-l:hover .dp-fl,rdr-accueil-apercu .dp-l:focus-visible .dp-fl{transform:translate(2px,-2px);stroke:var(--dp-encre)}
+rdr-accueil-apercu .dp-masque{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+rdr-accueil-apercu .dp-l[data-cle="mer"]{--c:var(--teal)}
+rdr-accueil-apercu .dp-l[data-cle="terre"]{--c:var(--or)}
+rdr-accueil-apercu .dp-l[data-cle="canape"]{--c:var(--dp-violet)}
+rdr-accueil-apercu .dp-c--carto .dp-l:nth-child(1){--c:var(--jaune)}
+rdr-accueil-apercu .dp-c--carto .dp-l:nth-child(2){--c:var(--teal)}
+rdr-accueil-apercu .dp-c--car{background:var(--marine);color:#fff}
+rdr-accueil-apercu .dp-car{position:relative;flex:1;min-height:0}
+rdr-accueil-apercu .dp-f{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;visibility:hidden;transition:none}
+rdr-accueil-apercu .dp-f.est-vue{opacity:1;visibility:visible;transition:opacity .6s ease}
+rdr-accueil-apercu .dp-f > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+rdr-accueil-apercu .dp-f--jeu > img{object-position:50% 0}
+rdr-accueil-apercu .dp-f--roue .jx-roue{right:-70px;top:-70px;width:210px;height:210px;transform:rotate(-12deg)}
+rdr-accueil-apercu .dp-logo{display:block;height:clamp(30px,3.6vh,40px);width:auto;max-width:85%;object-fit:contain;object-position:left center;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+rdr-accueil-apercu .dp-lots{display:flex;align-items:flex-end;gap:2px;height:clamp(60px,9vh,100px);margin-bottom:2px}
+rdr-accueil-apercu .dp-lots img{height:100%;width:auto;max-width:31%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+rdr-accueil-apercu .dp-f::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,20,28,0) 38%,rgba(6,20,28,.86) 68%,#06141c 100%)}
+rdr-accueil-apercu .dp-fb{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:16px 18px 18px}
+rdr-accueil-apercu .dp-fb .dp-k{color:var(--jaune);opacity:1}
+rdr-accueil-apercu .dp-ft{font-size:clamp(19px,1.5vw,24px);line-height:1.02;color:#fff}
+rdr-accueil-apercu .dp-fb p{font:600 13px/1.42 var(--police);color:rgba(255,255,255,.9);max-width:34ch}
+rdr-accueil-apercu .dp-reste{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--jaune);color:var(--marine);font:800 11.5px/1 var(--police);white-space:nowrap}
+rdr-accueil-apercu .dp-reste svg{width:13px;height:13px}
+rdr-accueil-apercu .dp-bt{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;background:var(--jaune);color:var(--marine);font:800 13px/1 var(--police);text-decoration:none;white-space:nowrap}
+rdr-accueil-apercu .dp-bt svg{width:15px;height:15px}
+rdr-accueil-apercu .dp-bt:focus-visible{outline:3px solid #fff;outline-offset:3px}
+rdr-accueil-apercu .dp-nav{position:absolute;z-index:4;right:14px;top:14px;display:flex;gap:6px}
+rdr-accueil-apercu .dp-nav button{position:relative;width:30px;height:20px;padding:0;border:0;background:none;cursor:pointer}
+rdr-accueil-apercu .dp-nav button::before{content:'';position:absolute;left:3px;right:3px;top:8px;height:5px;border-radius:2px;background:rgba(255,255,255,.35);transform:skewX(-20deg);transition:background .2s}
+rdr-accueil-apercu .dp-nav button[aria-pressed="true"]::before{background:var(--jaune)}
+rdr-accueil-apercu .dp-vil{position:relative;margin-top:clamp(16px,2.4vh,24px);display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(14px,1.6vw,22px);padding:clamp(14px,2vh,20px) clamp(18px,2vw,26px);border-radius:var(--dp-r);background:radial-gradient(520px 200px at 0 0,rgba(93,191,192,.22),transparent 70%),radial-gradient(420px 180px at 100% 100%,rgba(252,241,80,.12),transparent 70%),var(--marine);color:#fff;box-shadow:0 22px 44px -28px rgba(14,17,29,.55)}
+rdr-accueil-apercu .dp-vil-pic{display:grid;place-items:center;width:clamp(42px,3.4vw,50px);height:clamp(42px,3.4vw,50px);border-radius:12px;background:var(--teal);color:var(--marine)}
+rdr-accueil-apercu .dp-vil-pic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+rdr-accueil-apercu .dp-vil-ty{width:clamp(70px,5.8vw,92px);height:auto;margin:-30px -2px -16px -6px;transform:rotate(-7deg);filter:drop-shadow(0 12px 14px rgba(0,0,0,.4))}
+rdr-accueil-apercu .dp-vil-t{display:flex;flex-direction:column;gap:4px;min-width:0}
+rdr-accueil-apercu .dp-vil-t b{font-size:clamp(18px,1.55vw,23px);line-height:1;color:var(--jaune)}
+rdr-accueil-apercu .dp-vil-t span{font:600 14px/1.45 var(--police);color:rgba(255,255,255,.82);text-wrap:pretty}
+@media (max-height:820px) and (min-width:761px){
+rdr-accueil-apercu .dp-c{min-height:clamp(270px,42vh,320px)}
+rdr-accueil-apercu .dp-bas{--hl:88px}
+rdr-accueil-apercu .dp-l{padding-top:10px;padding-bottom:10px}
+rdr-accueil-apercu .dp-l > i{width:26px;height:26px;border-radius:8px}
+}
+@media (max-width:1100px){
+rdr-accueil-apercu .dp-g{grid-template-columns:repeat(2,minmax(0,1fr))}
+rdr-accueil-apercu .dp-c--suivre{grid-column:1/-1}
+}
+@media (max-width:760px){
+rdr-accueil-apercu .dp{padding:34px 0 0}
+rdr-accueil-apercu .dp-g{grid-template-columns:minmax(0,1fr);gap:14px}
+rdr-accueil-apercu .dp-c{min-height:0}
+rdr-accueil-apercu .dp-haut{min-height:150px}
+rdr-accueil-apercu .dp-bas{--hl:100px}
+rdr-accueil-apercu .dp-l{padding:10px 10px 10px 16px}
+rdr-accueil-apercu .dp-l > i{width:26px;height:26px;border-radius:8px}
+rdr-accueil-apercu .dp-l b{font-size:16px;white-space:normal}
+rdr-accueil-apercu .dp-l .dp-fl{display:none}
+rdr-accueil-apercu .dp-c--car{min-height:320px}
+rdr-accueil-apercu .dp-vil{grid-template-columns:auto minmax(0,1fr);row-gap:14px}
+rdr-accueil-apercu .dp-vil .dp-bt{grid-column:1/-1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+rdr-accueil-apercu .dp-f,rdr-accueil-apercu .dp-f.est-vue,rdr-accueil-apercu .dp-haut > img,rdr-accueil-apercu .dp-l::after,rdr-accueil-apercu .dp-l > i{transition:none}
+}
 rdr-accueil-apercu .jx-carte--inscr{background:linear-gradient(160deg,#16355D 0%,#0F2747 100%);color:#fff;position:relative}
 rdr-accueil-apercu .jx-carte--inscr .jx-haut{position:relative;height:clamp(168px,24vh,214px);flex:none;overflow:hidden;background:radial-gradient(70% 80% at 50% 100%,rgba(93,191,192,.35),rgba(93,191,192,0) 70%)}
 rdr-accueil-apercu .jx-carte--inscr .jx-haut::before{content:'';position:absolute;left:46%;top:54%;width:min(100%,330px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(133,216,213,.42) 0%,rgba(93,191,192,.24) 30%,rgba(93,191,192,.1) 52%,rgba(93,191,192,0) 70%);filter:blur(10px);pointer-events:none}
@@ -1686,6 +1779,7 @@ rdr-accueil-apercu .carte,rdr-accueil-apercu .breve,rdr-accueil-apercu .sk-flip{
   <span class="hv-defiler" id="hv-defiler" aria-hidden="true"></span>
 </section>
 <rdr-dernieres-infos page="accueil"></rdr-dernieres-infos>
+<section class="dp" id="dp" hidden aria-label="Suivre le départ"></section>
 <section class="hv-acces-sous"><div class="trame"><div class="cta-liste" id="ctas"></div></div></section>
 <section class="affiche"><div class="trame">
   <div class="affiche-tete"><h2 class="titre">À l'affiche<small>Les prochains temps forts, jour par jour</small></h2><a class="affiche-lien" href="/programmation">Toute la programmation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
@@ -2624,7 +2718,7 @@ function monter(racine, portail, D) {
       heroTimer = setTimeout(() => {
         if (gen !== heroGen) return;
         phase = nouvelle; racine.dataset.phase = phase;
-        rendreHero(); rendreCtas(); rendreTymal(); rendreFaq(); if (majHorloge) majHorloge();
+        rendreHero(); rendreCtas(); rendreDepart(); rendreTymal(); rendreFaq(); if (majHorloge) majHorloge();
         requestAnimationFrame(() => requestAnimationFrame(() => { if (gen !== heroGen) return; h.classList.add('est-photo'); compter(); }));
         try { racine.dispatchEvent(new CustomEvent('raa-phase', { detail: { phase } })); } catch (e) {   }
       }, 1000);
@@ -3073,6 +3167,102 @@ function monter(racine, portail, D) {
   }
   rendreJeux();
   ecoute(racine, 'raa-jeux', rendreJeux);
+  
+
+
+
+
+  const DP_L = {
+    hautDroite: '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+    voilier: '<path d="M10 2v15"/><path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z"/><path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z"/>',
+    jumelles: '<path d="M10 10h4"/><path d="M19 7V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v3"/><path d="M20 21a2 2 0 0 0 2-2v-3.851c0-1.39-2-2.962-2-4.829V8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2z"/><path d="M 22 16 L 2 16"/><path d="M4 21a2 2 0 0 1-2-2v-3.851c0-1.39 2-2.962 2-4.829V8a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v11a2 2 0 0 1-2 2z"/><path d="M9 7V4a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v3"/>',
+    canape: '<path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/>',
+    carte: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
+    globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    tente: '<path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/>'
+  };
+  const dpIco = (k, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" aria-hidden="true">' + (DP_L[k] || DP_L.voilier) + '</svg>';
+  const resteDp = (fin) => {
+    const ms = Math.max(0, fin - horloge.maintenant());
+    const j = Math.floor(ms / 864e5), h = Math.floor((ms % 864e5) / 36e5), m = Math.floor((ms % 36e5) / 6e4);
+    return j ? j + (EN ? ' d ' : ' j ') + h + ' h' : h ? h + ' h ' + String(m).padStart(2, '0') : m + ' min';
+  };
+  let dpTour = 0, dpMaj = 0;
+  function rendreDepart() {
+    const boite = $('dp');
+    if (!boite) return;
+    clearInterval(dpTour); clearInterval(dpMaj); dpTour = dpMaj = 0;
+    const t = PHASES[phase] && PHASES[phase].trio;
+    tout('.hv-acces-sous, .affiche').forEach((e) => { e.hidden = !!t; });
+    if (!t) { boite.hidden = true; boite.innerHTML = ''; return; }
+    const lienDp = (x, ico, cle) => (lienPub(x.lien) ? '<a class="dp-l"' + (cle ? ' data-cle="' + esc(cle) + '"' : '') + href(x.lien) + '>' : '<span class="dp-l">') +
+      '<i>' + dpIco(ico) + '</i><small>' + esc(x.petit) + '</small><b>' + esc(x.grand) + '</b>' + (x.texte ? '<span class="dp-masque"> : ' + esc(x.texte) + '</span>' : '') +
+      dpIco('hautDroite', 'dp-fl') + (lienPub(x.lien) ? '</a>' : '</span>');
+    const s = t.suivre || {}, c = t.carto || {};
+    const maintenant = horloge.maintenant();
+    const lesJeux = jeuxAttribut() || [];
+    const faces = [];
+    let prochaineFin = Infinity;
+    (t.jeux || []).forEach((g) => {
+      const jeu = lesJeux.find((x) => x && x.id === g.id && typeof x.fin === 'number' && x.fin > maintenant && lienPub(x.lien));
+      if (!jeu) return;
+      const v = jeu.visuel || {};
+      const image = idJx(g.image) ? IMG(g.image, pourLarge(480), pourLarge(480) * 0.9 | 0, 78) : v.genre === 'image' && idJx(v.image) ? urlJx(idJx(v.image), 'fit', 840, 1400) : '';
+      const roue = !image && v.genre === 'roue';
+      if (!image && !roue) return;
+      prochaineFin = Math.min(prochaineFin, jeu.fin);
+      const fond = image ? '<img src="' + image + '" alt="' + esc(jeu.nom) + '" loading="lazy" decoding="async">'
+        : '<span class="jx-roue" aria-hidden="true"></span>';
+      const lots = roue ? (v.lots || []).map(idJx).filter(Boolean).slice(0, 3) : [];
+      faces.push('<div class="dp-f ' + (roue ? 'dp-f--roue jx-vis--roue' : 'dp-f--jeu') + '">' + fond + '<div class="dp-fb">' +
+        (lots.length ? '<div class="dp-lots">' + lots.map((id) => '<img src="' + urlJx(id, 'fit', 200, 200) + '" alt="" loading="lazy" decoding="async">').join('') + '</div>' : '') +
+        (g.logo && idJx(v.logo) ? '<img class="dp-logo" src="' + urlJx(idJx(v.logo), 'fit', 560, 200) + '" alt="' + esc(jeu.nom) + '" loading="lazy" decoding="async">' : '') +
+        '<span class="dp-reste">' + JX_ICO.horloge + '<span data-dp-fin="' + jeu.fin + '" data-dp-modele="' + esc(g.reste || '') + '">' + esc(String(g.reste || '').replace('{t}', resteDp(jeu.fin))) + '</span></span>' +
+        (g.kicker ? '<span class="dp-k">' + esc(g.kicker) + '</span>' : '') + (g.titre ? '<h3 class="titre dp-ft">' + esc(g.titre) + '</h3>' : '') +
+        (g.texte ? '<p>' + esc(String(g.texte).replace('{lot}', jeu.lot || '')) + '</p>' : '') +
+        '<a class="dp-bt" href="' + esc(lienPub(jeu.lien)) + '">' + esc(g.bouton || jeu.bouton) + JX_ICO.fleche + '</a></div></div>');
+    });
+    const premieres = [];
+    (t.faces || []).forEach((f) => {
+      if (!f || !idJx(f.image) || !lienPub(f.lien)) return;
+      premieres.push('<div class="dp-f"><img src="' + IMG(f.image, pourLarge(480), pourLarge(480) * 0.9 | 0, 78) + '" alt="" loading="lazy" decoding="async"><div class="dp-fb">' +
+        '<span class="dp-k">' + esc(f.kicker) + '</span><h3 class="titre dp-ft">' + esc(f.titre) + '</h3>' + (f.texte ? '<p>' + esc(f.texte) + '</p>' : '') +
+        '<a class="dp-bt"' + href(f.lien) + '>' + esc(f.bouton) + JX_ICO.fleche + '</a></div></div>');
+    });
+    faces.unshift(...premieres);
+
+    const nav = faces.length > 1 ? '<div class="dp-nav" role="group" aria-label="' + esc(t.navLibelle || '') + '">' + faces.map((_, k) => '<button type="button" data-dp-voir="' + k + '" aria-pressed="' + (k === 0) + '" aria-label="' + (k + 1) + ' / ' + faces.length + '"></button>').join('') + '</div>' : '';
+    const v = t.village;
+    const vil = v && v.texte ? '<div class="dp-vil">' + (M.tymalDrapeau ? '<img class="dp-vil-ty" src="' + esc(M.tymalDrapeau) + '/v1/fit/w_220,h_220,q_90,enc_auto/tymal.png" alt="" width="110" height="110" loading="lazy" decoding="async">' : '<span class="dp-vil-pic">' + dpIco('tente') + '</span>') + '<p class="dp-vil-t"><b class="titre">' + esc(v.titre) + '</b><span>' + esc(v.texte) + '</span></p>' +
+      (lienPub(v.lien) ? '<a class="dp-bt"' + href(v.lien) + '>' + esc(v.bouton) + JX_ICO.fleche + '</a>' : '') + '</div>' : '';
+    const VAGUE = '<div class="vague-sep" style="--avant:#F4F1E8;--apres:#0E111D"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30c140 10 260 24 380 20s230-26 350-24 250 18 370 22 220-6 340-16v32H0z"/><path d="M0 40c120 20 240 26 360 18s240-30 360-30 240 22 360 30 240 2 360-18v24H0z"/></svg></div>';
+    boite.innerHTML = '<div class="trame"><div class="dp-g">' +
+      '<article class="dp-c dp-c--suivre"><div class="dp-haut">' + (idJx(s.photo) ? '<img src="' + IMG(s.photo, pourLarge(560), pourLarge(560) * 0.5 | 0, 72) + '" alt="" loading="lazy" decoding="async">' : '') +
+        '<span class="dp-k">' + esc(s.kicker) + '</span><h2 class="titre">' + esc(s.titre) + '</h2></div><div class="dp-bas">' + (s.liens || []).map((x) => lienDp(x, { mer: 'voilier', terre: 'jumelles', canape: 'canape' }[x.cle] || 'voilier', x.cle)).join('') + '</div></article>' +
+      '<article class="dp-c dp-c--carto"><div class="dp-haut">' + (idJx(c.photo) ? '<img src="' + IMG(c.photo, pourLarge(440), pourLarge(440) * 0.62 | 0, 75) + '" alt="" loading="lazy" decoding="async">' : '') +
+        '<span class="dp-k">' + esc(c.kicker) + '</span><h2 class="titre">' + esc(c.titre) + '</h2></div><div class="dp-bas">' + (c.liens || []).map((x, k) => lienDp(x, k ? 'globe' : 'carte')).join('') + '</div></article>' +
+      (faces.length ? '<article class="dp-c dp-c--car" aria-roledescription="carrousel"><div class="dp-car">' + faces.join('') + '</div>' + nav + '</article>' : '') +
+      '</div>' + vil + '</div>' + VAGUE;
+    if (M.topoFaq && !boite.style.getPropertyValue('--topo')) boite.style.setProperty('--topo', 'url("' + M.topoFaq + '")');
+    boite.hidden = false;
+    const fs = [...boite.querySelectorAll('.dp-f')], bs = [...boite.querySelectorAll('[data-dp-voir]')];
+    let k = 0, arret = false;
+    const voir = (n) => { k = (n + fs.length) % fs.length; fs.forEach((f, i) => f.classList.toggle('est-vue', i === k)); bs.forEach((b, i) => b.setAttribute('aria-pressed', String(i === k))); };
+    if (fs.length) voir(0);
+    bs.forEach((b) => b.addEventListener('click', () => voir(Number(b.dataset.dpVoir))));
+    const car = boite.querySelector('.dp-c--car');
+    if (car) { car.addEventListener('mouseenter', () => { arret = true; }); car.addEventListener('mouseleave', () => { arret = false; }); car.addEventListener('focusin', () => { arret = true; }); car.addEventListener('focusout', () => { arret = false; }); }
+    const calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (fs.length > 1 && !calme) { dpTour = setInterval(() => { if (!arret && !document.hidden) voir(k + 1); }, 7000); minuteurs.push(dpTour); }
+    const fins = [...boite.querySelectorAll('[data-dp-fin]')];
+    if (fins.length) {
+      dpMaj = setInterval(() => fins.forEach((e) => { e.textContent = String(e.dataset.dpModele || '').replace('{t}', resteDp(Number(e.dataset.dpFin))); }), 30000);
+      minuteurs.push(dpMaj);
+    }
+     
+    if (prochaineFin - maintenant < 864e5) minuteurs.push(setTimeout(rendreDepart, horloge.delai(prochaineFin - maintenant) + 500));
+  }
+  ecoute(racine, 'raa-jeux', rendreDepart);
   ecoute(racine, 'raa-membre', rendreJeux);
    
   { const sectionEspace = un('.espace'); if (sectionEspace && M.topoFaq) aLApproche(sectionEspace, () => sectionEspace.style.setProperty('--topo', 'url("' + M.topoFaq + '")')); }
@@ -3819,7 +4009,7 @@ function monter(racine, portail, D) {
     else if (emEn.e) emTic(emEn.e, horloge.maintenant());
   }, 1000));
 
-  rendreFaq(); rendreHero(); rendreCtas(); rendreTymal(); entree(); montrerHorloge(); emRendre(); emPremier = false;
+  rendreFaq(); rendreHero(); rendreCtas(); rendreDepart(); rendreTymal(); entree(); montrerHorloge(); emRendre(); emPremier = false;
   {
     const ph = $('hero-photo');
     const prete = ph && ph.getAttribute('src') && ph.decode ? ph.decode().catch(() => 0) : Promise.resolve();
