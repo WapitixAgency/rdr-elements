@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 046604c | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="046604c";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 98a1a83 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="98a1a83";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3048,7 +3048,7 @@ function monter(racine, portail, D) {
   
 
 
-  const cleActus = (posts) => JSON.stringify(posts.map((p) => [p._id || '', p.title, p.excerpt || '', p.coverImage || '', p.publishedDate, p.postPageUrl || '', Number(p.timeToRead) || 0, (p.categorie && p.categorie.slug) || '', p.tags || []]));
+  const cleActus = (posts) => JSON.stringify(posts.map((p) => [p._id || '', p.title, p.excerpt || '', p.coverImage || '', p.publishedDate, p.postPageUrl || '', Number(p.timeToRead) || 0, (p.categorie && p.categorie.slug) || '', p.tags || [], !!p.featured]));
   function rendreActus(liste) {
     const posts = trierActus(liste);
     if (!posts.length) return;
@@ -3057,7 +3057,12 @@ function monter(racine, portail, D) {
     actusDessines = cle;
     const pris = new Set();
     const prendre = (ok) => { const p = posts.find((x) => !pris.has(x) && ok(x)); if (p) pris.add(p); return p || null; };
-    const une = prendre((p) => typeDe(p) === 'actu' || typeDe(p) === 'interview') || prendre(() => true);
+    
+
+
+
+    const actuOuInterview = (p) => typeDe(p) === 'actu' || typeDe(p) === 'interview';
+    const une = prendre((p) => p.featured && actuOuInterview(p)) || prendre(actuOuInterview) || prendre(() => true);
     
 
 
