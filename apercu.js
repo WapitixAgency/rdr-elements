@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 98a1a83 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="98a1a83";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 692b643 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="692b643";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2624,6 +2624,13 @@ function monter(racine, portail, D) {
 
 
 
+  const EM_APRES_BASCULE_MS = 700;
+  let emApresIntro = 0;
+  
+
+
+
+
   const signal = (etape) => { if (window.__rdrIntro) window.__rdrIntro.etape = etape; try { window.dispatchEvent(new CustomEvent('rdr-intro', { detail: { etape } })); } catch (e) {   } };
   function jouerHero() {
     const h = $('hero'); h.classList.remove('est-photo');
@@ -2641,6 +2648,7 @@ function monter(racine, portail, D) {
     const sansVideoIci = !h.querySelector('video');
     h.classList.toggle('entree-affiche', sansVideoIci);
     h.classList.remove('entree-douce');
+    emApresIntro = Date.now() + 8000;
     signal('debut');
     
 
@@ -2654,7 +2662,13 @@ function monter(racine, portail, D) {
       const s2 = v2.querySelector('source[data-media]');
       if (s2 && s2.getAttribute('src')) { s2.removeAttribute('src'); try { v2.load(); } catch (e) {   } }
     };
-    const bascule = () => { if (gen !== heroGen) return; h.classList.add('est-photo'); compter(); signal('bascule'); minuteurs.push(setTimeout(() => { if (gen === heroGen) arreterVideo(); }, 1500)); };
+    const bascule = () => {
+      if (gen !== heroGen) return;
+      h.classList.add('est-photo'); compter(); signal('bascule');
+      minuteurs.push(setTimeout(() => { if (gen === heroGen) arreterVideo(); }, 1500));
+      emApresIntro = Date.now() + EM_APRES_BASCULE_MS;
+      minuteurs.push(setTimeout(emRendre, EM_APRES_BASCULE_MS + 20));
+    };
     const partir = () => { if (gen !== heroGen || parti) return; parti = true; clearTimeout(heroTimer); heroTimer = setTimeout(bascule, 3200); };
     clearTimeout(heroTimer);
     const v = h.querySelector('video');
@@ -2670,6 +2684,7 @@ function monter(racine, portail, D) {
 
   function entreeDouce() {
     const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
+    emApresIntro = 0;
     const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
     h.classList.remove('est-photo', 'entree-affiche'); h.classList.add('entree-douce');
     signal('douce');
@@ -3599,6 +3614,7 @@ function monter(racine, portail, D) {
 
 
 
+
   let emPremier = true, emBascule = false, emRideauEl = null;
   const emDansEcran = (el) => { if (document.hidden || !el) return false; const r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < innerHeight; };
    
@@ -3659,6 +3675,7 @@ function monter(racine, portail, D) {
       emEn.e = null;
       return;
     }
+    if (sec.hidden && Date.now() < emApresIntro) { emEn.e = null; return; }
     emEn.e = e;
     const ph = t < e.tDebut ? 'avant' : 'direct';
     const consent = politiqueMarketing();
