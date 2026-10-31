@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum ee1ddce | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ee1ddce";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 046604c | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="046604c";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1529,6 +1529,10 @@ rdr-accueil-apercu .em-fin-barre{width:min(260px,60%);height:4px;margin-top:10px
 rdr-accueil-apercu .em-fin-barre::after{content:'';display:block;height:100%;width:100%;background:var(--jaune);transform:scaleX(0);transform-origin:left}
 rdr-accueil-apercu .em.em-fini .em-fin-barre::after{animation:raa-em-remplit 4s linear forwards}
 @keyframes raa-em-remplit{to{transform:none}}
+rdr-accueil-apercu .em-fin--affiche{justify-content:flex-end;padding:0 0 clamp(14px,2.4vw,26px);background:#05070d}
+rdr-accueil-apercu .em-fin-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+rdr-accueil-apercu .em-fin--affiche b,rdr-accueil-apercu .em-fin--affiche > span:not(.em-fin-barre){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+rdr-accueil-apercu .em-fin--affiche .em-fin-barre{position:relative;z-index:1}
 rdr-accueil-apercu .em-termine{display:inline-flex;align-items:center;gap:7px;color:#4A5266}
 rdr-accueil-apercu .em-termine i{flex:none;display:block;width:8px;height:8px;border-radius:50%;background:#8A93A6}
 rdr-accueil-apercu .em-rideau{position:fixed;inset:0;z-index:9000;overflow:hidden;pointer-events:none;visibility:hidden}
@@ -3393,12 +3397,12 @@ function monter(racine, portail, D) {
     while (fin() > e.clientWidth - 2 && fs > 14 && n++ < 80) { fs -= 0.5; e.style.fontSize = fs + 'px'; }
   }
    
-  const emAnnonce = (a) => typeof a === 'number' && a >= 0 ? Math.min(a, 1440) : 90;
+  const emAnnonce = (a) => typeof a === 'number' && a >= 0 ? Math.min(a, 2880) : 90;
   function emNormal(e) {
     if (!e || typeof e !== 'object') return null;
     const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
     if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
-    return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', tDebut, tFin, annonce: emAnnonce(e.annonce), sansFin: e.sansFin === true };
+    return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', afficheFin: /^[\w~.-]+$/.test(e.afficheFin || '') ? e.afficheFin : '', tDebut, tFin, annonce: emAnnonce(e.annonce), sansFin: e.sansFin === true };
   }
   
 
@@ -3451,7 +3455,10 @@ function monter(racine, portail, D) {
     if (ph === 'avant' || !e.youtube) {
       const hm = new Date(e.tDebut).toLocaleTimeString('en-GB', { ...EM_PARIS, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).split(':');
       const pastille = ph === 'avant' ? '<span class="em-pastille">' + EM_ICO.horloge + EM_TXT.pastille(emHeure(e.tDebut)) + '</span>' : '<span class="em-pastille"><span class="em-direct" style="color:inherit"><i></i></span>' + esc(e.antenne || EM_TXT.direct) + '</span>';
-      return '<div class="em-ec">' + affiche + pastille + (ph === 'avant' ? '<span class="em-heure" aria-hidden="true">' + hm[0] + '<i>H</i>' + hm[1] + '</span>' : '') + '</div>';
+      
+
+
+      return '<div class="em-ec">' + affiche + pastille + (ph === 'avant' && !e.affiche ? '<span class="em-heure" aria-hidden="true">' + hm[0] + '<i>H</i>' + hm[1] + '</span>' : '') + '</div>';
     }
     const lien = 'https://www.youtube.com/watch?v=' + encodeURIComponent(e.youtube);
     if (!consent) {
@@ -3621,7 +3628,9 @@ function monter(racine, portail, D) {
     emPoser(false);
     const ec = sec.querySelector('.em-ec'), f = ec && ec.querySelector('iframe');
     if (f) emCommande(f, 'pauseVideo');
-    if (ec && !ec.querySelector('.em-fin')) ec.insertAdjacentHTML('beforeend', '<div class="em-fin" role="status"><b>' + EM_TXT.finDirect + '</b><span>' + esc(EM_TXT.merciSur(e.antenne)) + '</span><span class="em-fin-barre" aria-hidden="true"></span></div>');
+     
+    const finImg = e.afficheFin ? '<img class="em-fin-img" src="' + IMG(e.afficheFin, 1100, 619, 75) + '" alt="">' : '';
+    if (ec && !ec.querySelector('.em-fin')) ec.insertAdjacentHTML('beforeend', '<div class="em-fin' + (finImg ? ' em-fin--affiche' : '') + '" role="status">' + finImg + '<b>' + EM_TXT.finDirect + '</b><span>' + esc(EM_TXT.merciSur(e.antenne)) + '</span><span class="em-fin-barre" aria-hidden="true"></span></div>');
     const k = sec.querySelector('.em-k'), date = k && k.querySelector('span:not(.em-direct)');
     if (k) k.innerHTML = '<span class="em-termine"><i></i>' + EM_TXT.termine + '</span>' + (date ? date.outerHTML : '');
     const l = sec.querySelector('.em-cpt-l'); if (l) l.textContent = EM_TXT.termineA(emHeure(Math.min(e.tFin, horloge.maintenant())));
