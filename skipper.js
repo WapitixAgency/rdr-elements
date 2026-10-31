@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 5ec0790 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="5ec0790";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 44dfe05 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="44dfe05";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2828,6 +2828,36 @@ customElements.define('skippers-carousel', SkippersCarousel);
 
   const OUVERTURE_CARTO = Date.parse('2026-10-29T23:30:00Z');
   const ouvertureCartoDe = (p) => { const t = p && typeof p.ouvertureCarto === 'string' ? Date.parse(p.ouvertureCarto) : NaN; return isFinite(t) ? t : OUVERTURE_CARTO; };
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const CARTO_GEO = { fr: 'https://carto.routedurhum.com/fr/index.html', en: 'https://carto.routedurhum.com/en/index.html' };
+  const CARTO_ORIGINE = 'https://carto.routedurhum.com';
+  const CLASSES_CARTO = { ultim: 2, 'ocean-fifty': 4, imoca: 3, class40: 1, 'vintage-mono': 5, 'vintage-multi': 6 };
+  const CARTO_DELAI = 12000;
+  const apercuCarto = () => { try { return new URLSearchParams(location.search).get('carto') === 'compact'; } catch (e) { return false; } };
+  const CARTO_T = {
+    fr: { titre: 'Cartographie officielle de la course', activer: 'Cliquer pour déplacer et zoomer', complete: 'La cartographie complète', recentrer: (p) => 'Recentrer sur ' + p, lente: 'La carte de la course met plus de temps que prévu.' },
+    en: { titre: 'Official race tracker', activer: 'Click to pan and zoom', complete: 'Full race tracker', recentrer: (p) => 'Back to ' + p, lente: 'The race map is taking longer than usual.' }
+  };
    
   const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
   const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
@@ -3762,7 +3792,10 @@ customElements.define('skippers-carousel', SkippersCarousel);
     micro: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
     casque: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
     horloge: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-    site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9M12 3C9.4 5.6 8.2 8.6 8.2 12s1.2 6.4 3.8 9"/>'
+    site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9M12 3C9.4 5.6 8.2 8.6 8.2 12s1.2 6.4 3.8 9"/>',
+     
+    carte: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
+    cible: '<path d="M2 12h3M19 12h3M12 2v3M12 19v3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/>'
   };
   
 
@@ -4982,6 +5015,86 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
 
+
+  const CSS_CARTO = `
+rdr-skipper .sk .sk-hero--course .sk-scene.est-cible{background:#0B2747;}
+rdr-skipper .sk:not(.sous-860) .sk-scene.est-cible.est-geovoile{background:#0F3459;}
+rdr-skipper .sk .sk-scene.est-geovoile::after{opacity:0;}
+
+
+
+rdr-skipper .sk .skc-geovoile{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;border:0;opacity:0;pointer-events:none;background:#0B1A33;
+  transform-origin:0 0;transform:scale(var(--skc-geo-e,1));transition:opacity .6s ease;}
+rdr-skipper .sk .est-geovoile .skc-geovoile{opacity:1;}
+rdr-skipper .sk:not(.sous-860) .skc-geovoile{left:18px;width:calc((100% - 18px) / var(--skc-geo-e,1));height:calc((100% - var(--sk-nav-h) * .5) / var(--skc-geo-e,1));}
+ 
+rdr-skipper .sk.sous-860 .sk-hero--course .sk-scene.est-cible{clip-path:none;height:clamp(400px,62svh,560px);}
+rdr-skipper .sk.sous-860 .sk-hero--course:has(.est-cible) .sk-hero-in{margin-top:0;padding-top:var(--e5);}
+
+
+rdr-skipper .sk .skc-geo-activer{position:absolute;inset:0;z-index:2;display:none;place-items:center;margin:0;padding:0;border:0;background:none;cursor:pointer;}
+rdr-skipper .sk .skc-geo-activer span{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px 3px 12px 3px;background:rgba(11,26,51,.82);color:#fff;
+  font:700 12px/1 Montserrat,sans-serif;letter-spacing:.08em;opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .2s ease;}
+rdr-skipper .sk .skc-geo-activer span svg{width:15px;height:15px;}
+rdr-skipper .sk .skc-geo-activer:hover span,rdr-skipper .sk .skc-geo-activer:focus-visible span{opacity:1;transform:none;}
+rdr-skipper .sk .skc-geo-activer:focus-visible{outline:3px solid var(--sk-jaune);outline-offset:-3px;}
+@media (hover:hover) and (pointer:fine){
+  rdr-skipper .sk .est-geovoile .skc-geo-activer{display:grid;}
+  rdr-skipper .sk .est-geovoile.est-active .skc-geo-activer{display:none;}
+  rdr-skipper .sk .est-geovoile.est-active .skc-geovoile{pointer-events:auto;}
+  rdr-skipper .sk .skc-geo-complete:hover{border-color:var(--sk-jaune);background:var(--sk-jaune);}
+}
+@media not ((hover:hover) and (pointer:fine)){
+  rdr-skipper .sk .est-geovoile .skc-geo-activer{display:block;}
+  rdr-skipper .sk .skc-geo-activer span{display:none;}
+}
+
+
+rdr-skipper .sk .skc-geo-attente{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  background:radial-gradient(55% 45% at 58% 42%,rgba(77,154,163,.28),rgba(77,154,163,0) 70%),linear-gradient(180deg,#123D66 0%,#0B2747 100%);transition:opacity .6s ease;}
+rdr-skipper .sk .est-geovoile .skc-geo-attente{opacity:0;}
+rdr-skipper .sk .skc-geo-attente::before{content:"";position:absolute;inset:0;background:radial-gradient(38% 32% at 58% 42%,rgba(252,241,80,.12),rgba(252,241,80,0) 70%);animation:skc-att-lueur 2.4s ease-in-out infinite;}
+rdr-skipper .sk .skc-geo-attente > svg{position:absolute;left:14%;top:18%;width:76%;height:54%;overflow:visible;}
+rdr-skipper .sk .skc-geo-attente > svg path{fill:none;stroke:rgba(252,241,80,.8);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 10;animation:skc-att-defile 1.2s linear infinite;}
+rdr-skipper .sk .skc-geo-attente > svg circle{fill:#FCF150;}
+rdr-skipper .sk .skc-geo-attente > svg circle.pouls{fill:rgba(252,241,80,.5);transform-box:fill-box;transform-origin:center;animation:skc-att-pouls 1.6s ease-out infinite;}
+rdr-skipper .sk .skc-att-barre{position:absolute;left:24px;right:24px;bottom:calc(var(--sk-nav-h,0px) * .5 + 22px);height:30px;border-radius:15px;background:rgba(255,255,255,.09);overflow:hidden;}
+rdr-skipper .sk:not(.sous-860) .skc-att-barre{left:calc(var(--sk-cc) * var(--sk-sc-b) * .25 + 24px);}
+rdr-skipper .sk.sous-860 .skc-att-barre{bottom:44px;left:16px;right:16px;}
+rdr-skipper .sk .skc-att-barre::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.16),rgba(255,255,255,0));animation:skc-att-reflet 1.6s ease-in-out infinite;}
+rdr-skipper .sk .skc-att-msg{display:none;}
+rdr-skipper .sk .est-lente:not(.est-geovoile) .skc-geo-attente{pointer-events:auto;}
+rdr-skipper .sk .est-lente:not(.est-geovoile) .skc-geo-attente > svg{display:none;}
+rdr-skipper .sk .est-lente:not(.est-geovoile) .skc-att-msg{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;
+  width:min(340px,88%);margin:0;text-align:center;font:600 15px/1.45 Montserrat,sans-serif;color:#fff;}
+@keyframes skc-att-defile{to{stroke-dashoffset:-24;}}
+@keyframes skc-att-lueur{50%{opacity:.35;}}
+@keyframes skc-att-pouls{0%{transform:scale(1);opacity:1;}100%{transform:scale(2.8);opacity:0;}}
+@keyframes skc-att-reflet{to{transform:translateX(100%);}}
+@media (prefers-reduced-motion:reduce){
+  rdr-skipper .sk .skc-geo-attente > svg path,rdr-skipper .sk .skc-geo-attente > svg circle.pouls,rdr-skipper .sk .skc-geo-attente::before,rdr-skipper .sk .skc-att-barre::after{animation:none;}
+}
+ 
+rdr-skipper .sk .skc-geo-complete{border:1.5px solid #fff;background:#fff;color:#0B1B33;}
+rdr-skipper .sk .skc-geo-bandeau,rdr-skipper .sk .skc-geo-recentrer{display:none;}
+rdr-skipper .sk .est-geovoile .skc-geo-bandeau{position:absolute;z-index:6;top:var(--e6);right:var(--e5);display:flex;align-items:center;gap:var(--e2);
+  padding:6px;border-radius:16px 4px 16px 4px;background:rgba(11,26,51,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+rdr-skipper .sk .est-geovoile .skc-geo-bandeau .sk-btn,rdr-skipper .sk .est-geovoile .skc-geo-recentrer,rdr-skipper .sk .skc-att-msg .sk-btn{min-height:44px;margin:0;padding:0 18px;gap:9px;
+  font-family:inherit;font-size:12px;letter-spacing:.12em;white-space:nowrap;cursor:pointer;}
+@media (min-width:861px) and (max-width:1399px){rdr-skipper .sk .est-geovoile .skc-geo-bandeau .sk-btn{padding:0 13px;gap:8px;font-size:11px;letter-spacing:.08em;}}
+rdr-skipper .sk .skc-geo-bandeau .sk-btn:focus-visible,rdr-skipper .sk .skc-geo-recentrer:focus-visible{outline:3px solid var(--sk-jaune);outline-offset:2px;}
+rdr-skipper .sk .est-geovoile .skc-geo-recentrer:not([hidden]){position:absolute;z-index:6;left:50%;transform:translateX(-50%);display:inline-flex;
+  bottom:calc(var(--sk-nav-h) * .5 + 108px * var(--skc-geo-e,1));background:rgba(11,26,51,.86);}
+rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau{top:calc(var(--e4) + 40px);left:var(--e4);right:var(--e4);padding:5px;}
+rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0 14px;font-size:11px;letter-spacing:.1em;}
+`;
+
+  
+
+
+
+
+
   const MEM = 'rdrMemFicheV1:';
   const memLire = (k) => { try { const m = JSON.parse(sessionStorage.getItem(MEM + k) || 'null'); return m && Date.now() - m.le < 18e5 ? m : null; } catch (e) { return null; } };
   const memEcrire = (k, v) => { try { sessionStorage.setItem(MEM + k, JSON.stringify(Object.assign({ le: Date.now() }, v))); } catch (e) {   } };
@@ -5004,6 +5117,9 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       this._init = false;
       this._lang = 'fr';
       this._phase = 'avant';
+       
+      this._phasePage = 'avant';
+      this._apercu = false;
       this._suivi = false;
       
 
@@ -5168,7 +5284,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
     _appliquer(nom, v) {
       const s = String(v == null ? '' : v).trim();
       if (nom === 'lang') this._lang = s.toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
-      else if (nom === 'phase') this._phase = ['avant', 'course', 'arrivee'].indexOf(s) >= 0 ? s : 'avant';
+      else if (nom === 'phase') this._phase = this._phasePage = ['avant', 'course', 'arrivee'].indexOf(s) >= 0 ? s : 'avant';
       else if (nom === 'suivi') this._suivi = s === 'true';
       else if (nom === 'hero') this._modeHero = s === 'photo' ? 'photo' : 'affiche';
       else if (nom === 'membre') this._membre = s === 'oui' || s === 'non' ? s : '';
@@ -5235,6 +5351,10 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
     _rendre() {
       this._nettoyer();
+      
+
+      this._apercu = apercuCarto();
+      this._phase = this._apercu ? 'course' : this._phasePage;
       this._prechargerListe();
        
       this._heroObserve = false;
@@ -5428,7 +5548,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       return '<div class="sk-hero-actions' + (this._phase !== 'course' && this._cartoOuverte() ? ' sk-hero-actions--carto' : '') + '">' +
           this._boutonSuivre('sk-btn sk-btn--suivre', true) +
           (this._phase === 'course'
-            ? '<a class="sk-btn sk-btn--ligne" href="#sk-suivre" data-sk-ancre="sk-suivre">' + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>'
+            ? '<a class="sk-btn sk-btn--ligne" href="' + (this._apercu ? esc(this._lienCarto()) + '">' : '#sk-suivre" data-sk-ancre="sk-suivre">') + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>'
             : this._cartoOuverte()
             ? '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '">' + svg('boussole') + '<span>' + esc(T.surCarto) + '</span></a>'
             : '<button class="sk-btn sk-btn--ligne" type="button" data-sk-partager aria-label="' + esc(T.partagerAria(this._nomAffiche)) + '">' + svg('partager') + '<span>' + esc(T.partager) + '</span></button>') +
@@ -5470,14 +5590,14 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 
         '<img class="sk-hero-vagues" src="' + esc(urlImage(FOND_MOTIF, 1100, 0, 'fit')) + '" alt="" decoding="async" aria-hidden="true">' +
-        '<div class="sk-scene' + (enCourse ? ' sk-scene--carto' : '') + '" data-sk-scene' + (enCourse ? '' : ' aria-hidden="true"') + '>' +
-          (enCourse ? this._carteLive(s, T) : '') +
+        '<div class="sk-scene' + (enCourse ? ' sk-scene--carto' : '') + (this._apercu ? ' est-cible' : '') + '" data-sk-scene' + (enCourse ? '' : ' aria-hidden="true"') + '>' +
+          (enCourse ? (this._apercu ? this._cartoApercu(s) : this._carteLive(s, T)) : '') +
           (portrait && !enCourse
             ? '<div class="sk-scene-sujet"><img class="sk-scene-portrait" data-sk-portrait src="' + esc(urlImage(portrait, 720, 0, 'fit')) + '"' +
               ' srcset="' + esc(srcset(portrait, [480, 720, 960, 1280])) + '" sizes="' + (libre ? '(max-width: 600px) 100vw, 58vw' : '(max-width: 600px) 82vw, 40vw') + '"' +
               ' alt="" fetchpriority="high" decoding="async" crossorigin="anonymous"' + attrsTaille(portrait, 720) + '></div>'
             : '') +
-          (s.classe && s.classe.icone ? '<img class="sk-scene-ecusson" src="' + esc(urlVecteur(s.classe.icone)) + '" alt="" decoding="async"' + (enCourse ? ' aria-hidden="true"' : '') + '>' : '') +
+          (s.classe && s.classe.icone && !this._apercu ? '<img class="sk-scene-ecusson" src="' + esc(urlVecteur(s.classe.icone)) + '" alt="" decoding="async"' + (enCourse ? ' aria-hidden="true"' : '') + '>' : '') +
         '</div>' +
         '<div class="sk-cadre sk-hero-in"><div class="sk-hero-texte">' +
           (enCourse ? this._badgeCourse(T) : this._decompte(T)) +
@@ -5645,6 +5765,112 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
           (L.rang ? '<ul class="sk-carto-legende"><li><i class="est-moi"></i>' + esc(this._prenomAffiche) + '</li>' + (pl ? '<li><i class="est-leader"></i>' + esc(T.leader) + '</li>' : '') + (flotte.length ? '<li><i class="est-flotte"></i>' + esc(T.flotte(classeNom)) + '</li>' : '') + '</ul>' : '<span></span>') +
           '<a class="sk-carto-ouvrir" href="' + esc(this._urlCarto()) + '"' + (this._urlCarto().charAt(0) === '#' ? ' data-sk-ancre="sk-suivre"' : ' target="_blank" rel="noopener"') + '>' + esc(T.ouvrirCarte) + svg('sortie') + '</a>' +
         '</div>';
+    }
+
+    
+
+
+
+
+
+
+    _idGeo() {
+      const v = String((this._p && this._p.skipper && this._p.skipper.idGeovoile) || '').trim();
+      return /^\d{1,6}$/.test(v) ? v : '';
+    }
+    _srcCarto(s) {
+      const cl = CLASSES_CARTO[String((s.classe && s.classe.nom) || '').trim().toLowerCase().replace(/\s+/g, '-')] || 2;
+      const id = this._idGeo();
+      return CARTO_GEO[this._lang] + '?compact=1&cl=' + cl + (id ? '&lbl=' + id : '');
+    }
+    _cartoApercu(s) {
+      const C = CARTO_T[this._lang];
+      const complete = '<a class="sk-btn skc-geo-complete" href="' + esc(this._lienCarto()) + '">' + svg('carte') + '<span>' + esc(C.complete) + '</span></a>';
+      return '<div class="skc-geo-attente">' +
+          '<svg viewBox="0 0 400 240" aria-hidden="true" focusable="false"><path d="M352 40C280 40 150 92 46 206"/><circle class="pouls" cx="352" cy="40" r="6"/><circle cx="352" cy="40" r="5"/><circle cx="46" cy="206" r="4"/></svg>' +
+          '<span class="skc-att-barre" aria-hidden="true"></span>' +
+          '<p class="skc-att-msg"><span>' + esc(C.lente) + '</span>' + complete + '</p>' +
+        '</div>' +
+        '<iframe class="skc-geovoile" src="' + esc(this._srcCarto(s)) + '" title="' + esc(C.titre) + '" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>' +
+        '<button class="skc-geo-activer" type="button"><span>' + svg('carte') + esc(C.activer) + '</span></button>' +
+        '<div class="skc-geo-bandeau">' + complete + '</div>' +
+        '<button class="sk-btn sk-btn--ligne skc-geo-recentrer" type="button" hidden>' + svg('cible') + '<span>' + esc(C.recentrer(this._prenomAffiche)) + '</span></button>';
+    }
+    
+
+
+    _brancherCarto(R) {
+      const scene = R.querySelector('.sk-scene.est-cible');
+      const cadre = scene && scene.querySelector('.skc-geovoile');
+      if (!cadre) return;
+      if (!document.getElementById('sk-style-carto')) {
+        const st = document.createElement('style');
+        st.id = 'sk-style-carto';
+        st.textContent = CSS_CARTO;
+        document.head.appendChild(st);
+      }
+      const src = cadre.getAttribute('src');
+      const id = this._idGeo();
+      const activer = scene.querySelector('.skc-geo-activer');
+      const recentrer = scene.querySelector('.skc-geo-recentrer');
+      let pret = false;
+      scene.setAttribute('data-carto', 'attente');
+      const garde = setTimeout(() => {
+        if (pret) return;
+        scene.classList.add('est-lente');
+        scene.setAttribute('data-carto', 'lente');
+      }, CARTO_DELAI);
+      this._nettoyages.push(() => clearTimeout(garde));
+      this._ecoute(window, 'message', (e) => {
+        if (e.origin !== CARTO_ORIGINE || !cadre.contentWindow || e.source !== cadre.contentWindow) return;
+        const d = e.data;
+        if (!d || typeof d !== 'object' || d.type !== 'geovoile-ready') return;
+        clearTimeout(garde);
+        e.source.postMessage({ type: 'routedurhum-ok', geovoileid: id ? Number(id) : 0 }, CARTO_ORIGINE);
+        if (pret) return;
+        pret = true;
+        scene.classList.add('est-geovoile');
+        scene.setAttribute('data-carto', 'prete');
+      });
+      
+
+      if (typeof ResizeObserver === 'function') {
+        const ro = new ResizeObserver(() => scene.style.setProperty('--skc-geo-e', String(Math.max(1, scene.clientWidth / 900))));
+        ro.observe(scene);
+        this._nettoyages.push(() => ro.disconnect());
+      }
+      
+
+
+
+      const tactile = () => !(window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches);
+      let verrou = null, activeeA = 0, survol = 0;
+      const figer = () => {
+        if (verrou) return;
+        const h = document.documentElement, barre = window.innerWidth - h.clientWidth;
+        verrou = [h.style.overflow, h.style.paddingRight];
+        h.style.overflow = 'hidden';
+        if (barre > 0) h.style.paddingRight = barre + 'px';
+      };
+      const liberer = () => {
+        if (!verrou) return;
+        document.documentElement.style.overflow = verrou[0];
+        document.documentElement.style.paddingRight = verrou[1];
+        verrou = null;
+      };
+      const decentre = () => { if (activeeA && Date.now() - activeeA > 400 && scene.classList.contains('est-active')) recentrer.hidden = false; };
+      this._ecoute(activer, 'click', () => {
+        if (tactile()) { location.assign(this._lienCarto()); return; }
+        scene.classList.add('est-active');
+        activeeA = Date.now();
+        figer();
+      });
+      this._ecoute(scene, 'mouseleave', () => { scene.classList.remove('est-active'); clearTimeout(survol); activeeA = 0; liberer(); });
+      this._ecoute(window, 'blur', () => setTimeout(() => { if (document.activeElement === cadre) decentre(); }, 0));
+      this._ecoute(cadre, 'mouseenter', () => { clearTimeout(survol); survol = setTimeout(decentre, 1500); });
+      this._ecoute(cadre, 'mouseleave', () => clearTimeout(survol));
+      this._ecoute(recentrer, 'click', () => { recentrer.hidden = true; scene.classList.remove('est-active'); activeeA = 0; liberer(); cadre.src = src; });
+      this._nettoyages.push(() => { clearTimeout(survol); liberer(); });
     }
 
     
@@ -6227,6 +6453,7 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
       }
 
       this._mesurerScene(R, s);
+      if (this._apercu) this._brancherCarto(R);
 
        
       this._ecoute(R, 'click', (ev) => {
