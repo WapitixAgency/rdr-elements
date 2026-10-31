@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 634e7dc | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="634e7dc";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 5ec0790 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="5ec0790";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1631,6 +1631,7 @@ rdr-accueil-apercu .em-direct i::after{content:'';position:absolute;inset:0;bord
 rdr-accueil-apercu .em-col h2{margin:0;padding-bottom:4px;font-family:var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;font-size:clamp(30px,2.8vw,46px);line-height:1.08;text-wrap:balance}
 rdr-accueil-apercu .em-col h2 em{font-style:inherit;padding:0 .1em;background:linear-gradient(180deg,transparent 58%,var(--jaune) 58%,var(--jaune) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
 rdr-accueil-apercu .em-cpt-l{display:block;font:800 10.5px/1 var(--police);letter-spacing:.16em;text-transform:uppercase;color:#4A5266}
+rdr-accueil-apercu .em-col > div:has(> [data-em-fin]:empty){display:none}
 rdr-accueil-apercu .em-cpt-n{display:flex;flex-wrap:nowrap;align-items:baseline;margin-top:9px;font-family:var(--titre);font-style:italic;font-size:clamp(34px,3.1vw,50px);line-height:.9;color:#16355D;white-space:nowrap}
 rdr-accueil-apercu .em-cpt-n b{font-weight:400}
 rdr-accueil-apercu .em-cpt-n b i{display:inline-block;width:.78em;text-align:center;font-style:inherit}
@@ -3484,8 +3485,8 @@ function monter(racine, portail, D) {
     bas: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
   };
   const EM_TXT = EN
-    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live', ranger: 'Tuck the mini player away', rouvrir: 'Open the mini player', agrandir: 'Expand', fermer: 'Close', termine: 'Ended', termineA: (h) => 'Ended at ' + h, finDirect: 'End of the live', merciSur: (a) => 'Thanks for watching' + (a ? ' on ' + a : '') + '.', merci: 'Thanks for watching. The home page is coming back in a moment.', aBientot: 'See you soon!' }
-    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct', ranger: 'Ranger la petite fenêtre', rouvrir: 'Rouvrir la petite fenêtre', agrandir: 'Agrandir', fermer: 'Fermer', termine: 'Terminé', termineA: (h) => 'Terminé à ' + h, finDirect: 'Fin du direct', merciSur: (a) => 'Merci d\'avoir suivi le direct' + (a ? ' sur ' + a : '') + '.', merci: 'Merci d\'avoir suivi. L\'accueil revient dans un instant.', aBientot: 'À très vite !' };
+    ? { direct: 'Live', commence: 'Starts in', jusqua: (h) => 'On air until ' + h, prolonge: 'The live continues', son: 'Turn the sound on', lance: 'The show is on, muted. <b>Turn the sound on</b> in one click.', enCours: (a) => 'The show is on ' + a + '.', seul: (h) => ' It starts on its own here at <b>' + h + '</b>.', rdv: (a, h) => ' Watch it on ' + a + ' at <b>' + h + '</b>.', ce: 'Tonight', auj: 'Today', dem: 'Tomorrow', a: ' at ', pastille: (h) => 'Live at ' + h, cookiesB: 'The show is streamed by YouTube', cookiesP: 'To watch it here, allow YouTube content in your cookie settings.', gerer: 'Manage my cookies', ouvrir: 'Open on YouTube', lecteur: (a) => a + ', live', ranger: 'Tuck the mini player away', rouvrir: 'Open the mini player', agrandir: 'Expand', fermer: 'Close', termine: 'Ended', termineA: (h) => 'Ended at ' + h, finDirect: 'End of the live', merciSur: (a) => 'Thanks for watching' + (a ? ' on ' + a : '') + '.', merci: 'Thanks for watching. The home page is coming back in a moment.', aBientot: 'See you soon!' }
+    : { direct: 'En direct', commence: 'L\'émission commence dans', jusqua: (h) => 'À l\'antenne jusqu\'à ' + h, prolonge: 'Le direct se prolonge', son: 'Activer le son', lance: 'L\'émission est lancée, en muet. <b>Activez le son</b> d\'un clic.', enCours: (a) => 'L\'émission est en cours sur ' + a + '.', seul: (h) => ' Elle se lance toute seule ici, à <b>' + h + '</b>.', rdv: (a, h) => ' Rendez-vous sur ' + a + ' à <b>' + h + '</b>.', ce: 'Ce soir', auj: 'Aujourd\'hui', dem: 'Demain', a: ', ', pastille: (h) => 'En direct à ' + h, cookiesB: 'L\'émission est diffusée par YouTube', cookiesP: 'Pour la regarder ici, autorisez les contenus YouTube dans vos réglages de cookies.', gerer: 'Gérer mes cookies', ouvrir: 'Ouvrir sur YouTube', lecteur: (a) => a + ', en direct', ranger: 'Ranger la petite fenêtre', rouvrir: 'Rouvrir la petite fenêtre', agrandir: 'Agrandir', fermer: 'Fermer', termine: 'Terminé', termineA: (h) => 'Terminé à ' + h, finDirect: 'Fin du direct', merciSur: (a) => 'Merci d\'avoir suivi le direct' + (a ? ' sur ' + a : '') + '.', merci: 'Merci d\'avoir suivi. L\'accueil revient dans un instant.', aBientot: 'À très vite !' };
   const EM_PARIS = { timeZone: 'Europe/Paris' };
   const emHeure = (ms) => EN
     ? new Date(ms).toLocaleTimeString('en-US', { ...EM_PARIS, hour: 'numeric', minute: '2-digit' }).toLowerCase().replace(':00 ', ' ')
@@ -3515,7 +3516,7 @@ function monter(racine, portail, D) {
     if (!e || typeof e !== 'object') return null;
     const tDebut = Date.parse(e.debut), tFin = Date.parse(e.fin);
     if (!isFinite(tDebut) || !isFinite(tFin) || tFin <= tDebut || !e.titre) return null;
-    return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', afficheFin: /^[\w~.-]+$/.test(e.afficheFin || '') ? e.afficheFin : '', tDebut, tFin, annonce: emAnnonce(e.annonce), sansFin: e.sansFin === true };
+    return { titre: String(e.titre), antenne: String(e.antenne || ''), texte: String(e.texte || ''), youtube: /^[\w-]{11}$/.test(e.youtube || '') ? e.youtube : '', affiche: /^[\w~.-]+$/.test(e.affiche || '') ? e.affiche : '', afficheFin: /^[\w~.-]+$/.test(e.afficheFin || '') ? e.afficheFin : '', tDebut, tFin, annonce: emAnnonce(e.annonce), sansFin: e.sansFin === true, finPrevue: isFinite(Date.parse(e.finPrevue)) ? String(e.finPrevue) : '', prolonge: e.prolonge === true, finReelle: isFinite(Date.parse(e.finReelle)) ? String(e.finReelle) : '' };
   }
   
 
@@ -3552,10 +3553,10 @@ function monter(racine, portail, D) {
       : '<span>' + jour + EM_TXT.a + emHeure(e.tDebut) + (e.antenne ? ' · ' + esc(e.antenne) : '') + '</span>';
     const cpt = ph === 'avant'
       ? '<div><span class="em-cpt-l">' + EM_TXT.commence + '</span><div class="em-cpt-n" data-em-cpt="debut">' + emDecompte(e.tDebut - t) + '</div></div>'
-      : e.sansFin ? ''
       
 
-      : '<div><span class="em-cpt-l">' + EM_TXT.jusqua(emHeure(e.tFin)) + '</span></div>';
+       
+      : '<div><span class="em-cpt-l" data-em-fin>' + emFinTexte(e, t) + '</span></div>';
     const p = ph === 'avant'
       ? esc(e.texte) + (ici ? EM_TXT.seul(emHeure(e.tDebut)) : e.antenne ? EM_TXT.rdv(esc(e.antenne), emHeure(e.tDebut)) : '')
       : ici ? EM_TXT.lance : EM_TXT.enCours(esc(e.antenne || 'YouTube'));
@@ -3696,8 +3697,16 @@ function monter(racine, portail, D) {
       emPoser(false);
     }
   });
+  
+
+  function emFinTexte(e, t) {
+    if (e.finPrevue) { const p = Date.parse(e.finPrevue); return t < p ? EM_TXT.jusqua(emHeure(p)) : e.prolonge && !e.finReelle ? EM_TXT.prolonge : ''; }
+    return e.sansFin ? '' : EM_TXT.jusqua(emHeure(e.tFin));
+  }
   function emTic(e, t) {
     const sec = $('em'); if (!sec) return;
+    const f = sec.querySelector('[data-em-fin]');
+    if (f && !sec.classList.contains('em-fini')) { const x = emFinTexte(e, t); if (f.textContent !== x) f.textContent = x; }
     sec.querySelectorAll('[data-em-cpt]').forEach((c) => {
       c.innerHTML = emDecompte(c.dataset.emCpt === 'debut' ? e.tDebut - t : e.tFin - t);
       emAjuster(c);
@@ -3747,7 +3756,8 @@ function monter(racine, portail, D) {
     if (ec && !ec.querySelector('.em-fin')) ec.insertAdjacentHTML('beforeend', '<div class="em-fin' + (finImg ? ' em-fin--affiche' : '') + '" role="status">' + finImg + '<b>' + EM_TXT.finDirect + '</b><span>' + esc(EM_TXT.merciSur(e.antenne)) + '</span><span class="em-fin-barre" aria-hidden="true"></span></div>');
     const k = sec.querySelector('.em-k'), date = k && k.querySelector('span:not(.em-direct)');
     if (k) k.innerHTML = '<span class="em-termine"><i></i>' + EM_TXT.termine + '</span>' + (date ? date.outerHTML : '');
-    const l = sec.querySelector('.em-cpt-l'); if (l) l.textContent = EM_TXT.termineA(emHeure(Math.min(e.tFin, horloge.maintenant())));
+     
+    const l = sec.querySelector('.em-cpt-l'); if (l) l.textContent = EM_TXT.termineA(emHeure(e.finReelle ? Date.parse(e.finReelle) : Math.min(e.tFin, horloge.maintenant())));
     const p = sec.querySelector('.em-p'); if (p) p.textContent = EM_TXT.merci;
     sec.classList.add('em-fini');
     minuteurs.push(setTimeout(() => {
@@ -3773,7 +3783,8 @@ function monter(racine, portail, D) {
     const ph = t < e.tDebut ? 'avant' : 'direct';
     const consent = politiqueMarketing();
      
-    const cle = [e.youtube, ph === 'avant' ? e.tDebut : '', e.sansFin ? 'sans-fin' : e.tFin, e.titre, e.antenne, e.texte, e.affiche, ph, consent].join('|');
+     
+    const cle = [e.youtube, ph === 'avant' ? e.tDebut : '', e.finPrevue ? Date.parse(e.finPrevue) : e.sansFin ? 'sans-fin' : e.tFin, e.titre, e.antenne, e.texte, e.affiche, ph, consent].join('|');
     if (cle === emCle) { emTic(e, t); return; }
     emCle = cle;
     const ici = !!e.youtube && consent;
