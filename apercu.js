@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 71f04c6 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="71f04c6";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum ae8df10 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="ae8df10";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3506,6 +3506,9 @@ function monter(racine, portail, D) {
   const coDuree = (ms) => { let x = Math.round(ms / 1000); const j = Math.floor(x / 86400); x -= j * 86400; const h = Math.floor(x / 3600); x -= h * 3600; const m = Math.floor(x / 60); return (j ? j + (EN ? ' d ' : ' j ') : '') + h + ' h ' + String(m).padStart(2, '0'); };
   const coEcart = (h) => { if (h < 1) return Math.round(h * 60) + ' min'; const hh = Math.floor(h); return hh + ' h ' + String(Math.round((h - hh) * 60)).padStart(2, '0'); };
   const coImg = (id, w, h, q) => (/^https?:/.test(String(id || '')) ? String(id) : IMG(id, w, h, q).replace(',al_c,', ',al_t,'));
+  
+
+  const coPhrase = (x) => { const t = String(x || '').replace(/\s+/g, ' ').trim(); if (/^(photos?|cr[ée]dits?)\s*(n°|no\.?)\s*\d/i.test(t)) return ''; const m = t.match(/^.{40,}?[.!?…](?=\s+[A-ZÀ-ÖØ-Þ«"“])/); const p = m ? m[0] : t; return p.length > 230 ? p.slice(0, 230).replace(/\s+\S*$/, '') + '…' : p; };
   const coHachis = (x) => { let h = 0; for (const ch of String(x)) h = (h * 31 + ch.charCodeAt(0)) | 0; return ((h >>> 0) % 1000) / 1000; };
   const emEnDirect = () => { const e = emLire(), t = horloge.maintenant(); return !!(e && t >= e.tDebut && t < e.tFin); };
   const emVisible = () => { const x = $('em'); return !!(x && !x.hidden); };
@@ -3546,14 +3549,14 @@ function monter(racine, portail, D) {
     const co = PHASES[phase].course, H = co.hero || {}, larg = pourLarge(innerWidth);
     const court = (t) => String(t).replace(/^Route du Rhum\s*[–-]\s*Destination Guadeloupe\s*[–-]\s*/i, '').trim();
     const rubrique = (p) => { const l = String((p.categorie && p.categorie.label) || p._categoryLabel || ''); return l ? l.charAt(0).toUpperCase() + l.slice(1).toLowerCase() : ''; };
-    const avant = (p) => (p.pinned || p.featured ? 1 : 0);
+    const avant = (p) => (p.pinned ? 1 : 0);
     const posts = (actusAttribut() || (Array.isArray(D.actus) ? D.actus : [])).filter((p) => p && p.title && p.coverImage)
       .sort((a, b) => avant(b) - avant(a) || Date.parse(b.publishedDate) - Date.parse(a.publishedDate)).slice(0, 3);
     const sec = H.secours || {};
-    const slides = posts.length ? posts.map((p) => ({ img: wixImg(p.coverImage, larg, larg * 0.5 | 0), k: esc(H.kicker || '') + (rubrique(p) ? ' · ' + esc(rubrique(p)) : ''), t: court(p.title), s: String(p.excerpt || '').split(/(?<=\.)\s/)[0], lien: lienPost(p), btn: H.bouton }))
+    const slides = posts.length ? posts.map((p) => ({ img: wixImg(p.coverImage, larg, larg * 0.5 | 0), k: esc(H.kicker || '') + (rubrique(p) ? ' · ' + esc(rubrique(p)) : ''), t: court(p.title), s: coPhrase(p.excerpt), lien: lienPost(p), btn: H.bouton }))
       : [{ img: idJx(sec.photo) ? IMG(sec.photo, larg, larg * 0.5 | 0, 75) : '', k: esc(sec.kicker || ''), t: sec.titre || '', s: sec.texte || '', lien: sec.lien, btn: sec.bouton }];
     const R = co.revoir;
-    const revoir = R && R.lien && Date.now() < Date.parse(R.fin) ? '<a class="hc-revoir"' + href(R.lien) + '><span class="hc-revoir-vig">' + (idJx(R.image) ? '<img src="' + IMG(R.image, 240, 136, 72) + '" alt="" loading="lazy" decoding="async">' : '') + '<i>' + coIco('lecture') + '</i></span><span><b>' + esc(R.titre) + '</b><small>' + esc(R.sous) + '</small></span></a>' : '';
+    const revoir = R && R.lien && horloge.maintenant() < Date.parse(R.fin) ? '<a class="hc-revoir"' + href(R.lien) + '><span class="hc-revoir-vig">' + (idJx(R.image) ? '<img src="' + IMG(R.image, 240, 136, 72) + '" alt="" loading="lazy" decoding="async">' : '') + '<i>' + coIco('lecture') + '</i></span><span><b>' + esc(R.titre) + '</b><small>' + esc(R.sous) + '</small></span></a>' : '';
     hc.setAttribute('aria-label', H.aria || '');
     hc.innerHTML = '<div class="hc-in"><div class="hc-slides">' + slides.map((x, i) => '<div class="hc-slide' + (i ? '' : ' est-vue') + '" id="hcs' + i + '" role="tabpanel" aria-label="' + (i + 1) + ' / ' + slides.length + '"' + (i ? ' aria-hidden="true"' : '') + '>' +
       (x.img ? '<img src="' + x.img + '" alt=""' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ' decoding="async">' : '') +
