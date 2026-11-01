@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum a094432 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="a094432";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 9a3f9d5 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="9a3f9d5";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1168,8 +1168,8 @@ rdr-accueil-apercu .co-btn--encre:hover{background:var(--marine2);border-color:v
 rdr-accueil-apercu .co-btn--petit{height:38px;padding:0 15px;font-size:13px}
 rdr-accueil-apercu .co-trait{display:inline-block;width:54px;height:6px;border-radius:3px;background:var(--jaune);transform:skewX(-20deg)}
 rdr-accueil-apercu .hc{position:relative;height:clamp(430px,calc(100svh - var(--haut-entete) - 64px),700px);background:var(--co-nuit);color:#fff;overflow:hidden;isolation:isolate}
-@media (max-height:820px) and (min-width:761px){
-html[data-rdr-entete="dessus"] rdr-accueil-apercu .hc{height:calc(100svh - 64px)}
+@media (min-width:761px){
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hc{height:calc(clamp(430px,calc(100svh - var(--rdr-entete-h,175px) - 64px),700px) + var(--rdr-entete-h,175px))}
 }
 rdr-accueil-apercu .hc-in{position:absolute;inset:0}
 rdr-accueil-apercu .hc-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s .9s}
@@ -1184,7 +1184,12 @@ rdr-accueil-apercu .hc-k .co-k{color:#fff}
 rdr-accueil-apercu .hc-t{font-size:clamp(34px,min(4.4vw,7.2vh),74px);line-height:1.03;text-wrap:balance;text-shadow:0 8px 40px rgba(0,0,0,.35)}
 rdr-accueil-apercu .hc-t.est-long{font-size:clamp(30px,min(3.4vw,5.8vh),56px)}
 rdr-accueil-apercu .hc-t em,rdr-accueil-apercu .cl .titre em{font-style:inherit;color:var(--jaune)}
-rdr-accueil-apercu .hc-sous{font-size:15px;line-height:1.55;color:rgba(255,255,255,.86);max-width:54ch;text-wrap:pretty}
+rdr-accueil-apercu .hc-sous{font-size:15px;line-height:1.55;color:rgba(255,255,255,.86);max-width:54ch;text-wrap:pretty;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-height:820px) and (min-width:761px){
+rdr-accueil-apercu .hc-t{font-size:clamp(30px,min(3.8vw,6.2vh),60px)}
+rdr-accueil-apercu .hc-t.est-long{font-size:clamp(28px,min(3.2vw,5.2vh),48px)}
+rdr-accueil-apercu .hc-sous{-webkit-line-clamp:2}
+}
 rdr-accueil-apercu .hc-bas{position:absolute;left:0;right:0;bottom:clamp(18px,3vh,30px);z-index:3}
 rdr-accueil-apercu .hc-bas .trame{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
 rdr-accueil-apercu .hc-tirets{display:flex;gap:6px;align-items:center}
@@ -1196,6 +1201,16 @@ rdr-accueil-apercu .hc.est-pause .hc-tiret span::after{animation-play-state:paus
 rdr-accueil-apercu .hc.est-fixe .hc-tiret[aria-selected="true"] span::after{animation:none;transform:none}
 @keyframes raa-co-remplit{to{transform:scaleX(1)}}
 rdr-accueil-apercu .hc-revoir{position:absolute;z-index:4;right:max(var(--marge),calc((100% - var(--largeur)) / 2));bottom:clamp(14px,2.4vh,24px);display:flex;align-items:center;gap:14px;padding:7px 18px 7px 7px;border:1px solid rgba(255,255,255,.2);border-radius:14px 3px 14px 3px;background:rgba(14,17,29,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+rdr-accueil-apercu button.hc-revoir{font:inherit;color:inherit;text-align:left;cursor:pointer}
+rdr-accueil-apercu .hc-rv{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px;background:rgba(10,18,40,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+rdr-accueil-apercu .hc-rv-f{width:min(1100px,100%,calc((100svh - 190px) * 16 / 9));display:flex;flex-direction:column;gap:14px;outline:none}
+rdr-accueil-apercu .hc-rv-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;color:#fff}
+rdr-accueil-apercu .hc-rv-t b{font:clamp(24px,2.6vw,34px)/1 var(--titre);font-style:italic;font-weight:400;text-transform:uppercase}
+rdr-accueil-apercu .hc-rv-t small{font:700 12px/1.2 var(--police);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+rdr-accueil-apercu .hc-rv-v{position:relative;aspect-ratio:16/9;border-radius:18px 4px 18px 4px;overflow:hidden;background:#05070d;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+rdr-accueil-apercu .hc-rv-v iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+rdr-accueil-apercu .hc-rv-b{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+rdr-accueil-apercu .hc-rv-x{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
 rdr-accueil-apercu .hc-revoir:hover{background:rgba(14,17,29,.92);border-color:var(--jaune);transform:translateY(-2px)}
 rdr-accueil-apercu .hc-revoir-vig{position:relative;flex:none;width:92px;aspect-ratio:16/9;border-radius:9px 2px 9px 2px;overflow:hidden;background:#05070d}
 rdr-accueil-apercu .hc-revoir-vig img{width:100%;height:100%;object-fit:cover}
@@ -3543,6 +3558,32 @@ function monter(racine, portail, D) {
       if (j && Array.isArray(j.classes)) { coJeu = j; coLuLe = Date.now(); }
     }).catch(() => {   }).then(() => { coLecture = false; if (estCourse()) rendreClassement(); });
   }
+  
+
+  let rvVoile = null, rvOuvreur = null;
+  const rvTouche = (e) => { if (e.key === 'Escape') fermerRevoir(); };
+  function fermerRevoir() {
+    if (!rvVoile) return;
+    rvVoile.remove(); rvVoile = null;
+    document.removeEventListener('keydown', rvTouche);
+    try { if (rvOuvreur) rvOuvreur.focus({ preventScroll: true }); } catch (e) {   }
+  }
+  function ouvrirRevoir(R, v, ouvreur) {
+    fermerRevoir();
+    rvOuvreur = ouvreur || null;
+    const src = 'https://www.youtube.com/embed/' + encodeURIComponent(v) + '?autoplay=1&rel=0&playsinline=1&modestbranding=1&origin=' + encodeURIComponent(location.origin);
+    rvVoile = document.createElement('div');
+    rvVoile.className = 'hc-rv';
+    rvVoile.setAttribute('role', 'dialog'); rvVoile.setAttribute('aria-modal', 'true'); rvVoile.setAttribute('aria-labelledby', 'hcRvT');
+    rvVoile.innerHTML = '<div class="hc-rv-f" tabindex="-1"><div class="hc-rv-t"><b id="hcRvT">' + esc(R.titre || '') + '</b><small>' + esc(R.sous || '') + '</small></div>' +
+      '<div class="hc-rv-v"><iframe src="' + esc(src) + '" title="' + esc(R.titre || '') + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>' +
+      '<div class="hc-rv-b"><a class="co-btn co-btn--jaune" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v) + '" target="_blank" rel="noopener">' + esc(R.surYoutube || 'YouTube') + coIco('fleche') + '</a>' +
+      '<button class="co-btn hc-rv-x" type="button" data-hc-rv-fermer>' + esc(R.fermer || '×') + '</button></div></div>';
+    rvVoile.addEventListener('click', (e) => { if (e.target === rvVoile || (e.target.closest && e.target.closest('[data-hc-rv-fermer]'))) fermerRevoir(); });
+    racine.appendChild(rvVoile);
+    document.addEventListener('keydown', rvTouche);
+    try { rvVoile.querySelector('.hc-rv-f').focus({ preventScroll: true }); } catch (e) {   }
+  }
   function rendreHc() {
     const hc = $('hc'); if (!hc) return;
     clearInterval(coHc); coHc = 0;
@@ -3556,17 +3597,26 @@ function monter(racine, portail, D) {
     const slides = posts.length ? posts.map((p) => ({ img: wixImg(p.coverImage, larg, larg * 0.5 | 0), k: esc(H.kicker || '') + (rubrique(p) ? ' · ' + esc(rubrique(p)) : ''), t: court(p.title), s: coPhrase(p.excerpt), lien: lienPost(p), btn: H.bouton }))
       : [{ img: idJx(sec.photo) ? IMG(sec.photo, larg, larg * 0.5 | 0, 75) : '', k: esc(sec.kicker || ''), t: sec.titre || '', s: sec.texte || '', lien: sec.lien, btn: sec.bouton }];
     const R = co.revoir;
-    const revoir = R && R.lien && horloge.maintenant() < Date.parse(R.fin) ? '<a class="hc-revoir"' + href(R.lien) + '><span class="hc-revoir-vig">' + (idJx(R.image) ? '<img src="' + IMG(R.image, 240, 136, 72) + '" alt="" loading="lazy" decoding="async">' : '') + '<i>' + coIco('lecture') + '</i></span><span><b>' + esc(R.titre) + '</b><small>' + esc(R.sous) + '</small></span></a>' : '';
+    
+
+    const ytRevoir = R && /^[\w-]{11}$/.test(R.youtube || '') ? R.youtube : '';
+    const dansRevoir = R ? '<span class="hc-revoir-vig">' + (idJx(R.image) ? '<img src="' + IMG(R.image, 240, 136, 72) + '" alt="" loading="lazy" decoding="async">' : '') + '<i>' + coIco('lecture') + '</i></span><span><b>' + esc(R.titre) + '</b><small>' + esc(R.sous) + '</small></span>' : '';
+    const revoir = !R || !(horloge.maintenant() < Date.parse(R.fin)) ? ''
+      : ytRevoir && politiqueMarketing() ? '<button class="hc-revoir" type="button" data-hc-revoir aria-haspopup="dialog">' + dansRevoir + '</button>'
+        : ytRevoir ? '<a class="hc-revoir" href="https://www.youtube.com/watch?v=' + ytRevoir + '" target="_blank" rel="noopener">' + dansRevoir + '</a>'
+          : R.lien ? '<a class="hc-revoir"' + href(R.lien) + '>' + dansRevoir + '</a>' : '';
     hc.setAttribute('aria-label', H.aria || '');
     hc.innerHTML = '<div class="hc-in"><div class="hc-slides">' + slides.map((x, i) => '<div class="hc-slide' + (i ? '' : ' est-vue') + '" id="hcs' + i + '" role="tabpanel" aria-label="' + (i + 1) + ' / ' + slides.length + '"' + (i ? ' aria-hidden="true"' : '') + '>' +
       (x.img ? '<img src="' + x.img + '" alt=""' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ' decoding="async">' : '') +
-      '<div class="hc-txt"><div class="trame"><div><div class="hc-k"><span class="co-k">' + x.k + '</span></div><h2 class="titre hc-t' + (String(x.t).length > 52 ? ' est-long' : '') + '">' + titreHtml(x.t) + '</h2>' +
+      '<div class="hc-txt"><div class="trame"><div><div class="hc-k"><span class="co-k">' + x.k + '</span></div><h2 class="titre hc-t' + (String(x.t).length > 34 ? ' est-long' : '') + '">' + titreHtml(x.t) + '</h2>' +
       (x.s ? '<p class="hc-sous">' + esc(x.s) + '</p>' : '') + (lienPub(x.lien) ? '<a class="co-btn co-btn--jaune"' + href(x.lien) + (i ? ' tabindex="-1"' : '') + '>' + esc(x.btn) + coIco('fleche') + '</a>' : '') + '</div></div></div></div>').join('') +
       '</div><div class="hc-bas"><div class="trame"><div class="hc-tirets" role="tablist" aria-label="' + esc(H.choisir || '') + '">' + (slides.length > 1 ? slides.map((x, i) => '<button class="hc-tiret" type="button" role="tab" aria-controls="hcs' + i + '" aria-selected="' + (i === 0) + '" aria-label="' + (i + 1) + '"><span></span></button>').join('') : '') + '</div></div></div>' + revoir + '</div>';
     const sl = [...hc.querySelectorAll('.hc-slide')], tirets = [...hc.querySelectorAll('.hc-tiret')];
     let k = 0, pause = false, dernier = Date.now();
     const voir = (n) => { k = (n + sl.length) % sl.length; dernier = Date.now(); sl.forEach((x, i) => { x.classList.toggle('est-vue', i === k); x.setAttribute('aria-hidden', String(i !== k)); x.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', i === k ? '0' : '-1')); }); tirets.forEach((b, i) => b.setAttribute('aria-selected', String(i === k))); };
     tirets.forEach((b, i) => b.addEventListener('click', () => voir(i)));
+    const btnRevoir = hc.querySelector('[data-hc-revoir]');
+    if (btnRevoir) btnRevoir.addEventListener('click', () => ouvrirRevoir(R, ytRevoir, btnRevoir));
     const zone = hc.querySelector('.hc-in');
     const p = (v) => { pause = v; hc.classList.toggle('est-pause', v); };
     zone.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') voir(k + 1); if (e.key === 'ArrowLeft') voir(k - 1); });
