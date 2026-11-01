@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 193ac5e | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="193ac5e";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 76dccbf | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="76dccbf";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2858,6 +2858,140 @@ customElements.define('skippers-carousel', SkippersCarousel);
     fr: { titre: 'Cartographie officielle de la course', activer: 'Cliquer pour déplacer et zoomer', complete: 'La cartographie complète', recentrer: (p) => 'Recentrer sur ' + p, lente: 'La carte de la course met plus de temps que prévu.' },
     en: { titre: 'Official race tracker', activer: 'Click to pan and zoom', complete: 'Full race tracker', recentrer: (p) => 'Back to ' + p, lente: 'The race map is taking longer than usual.' }
   };
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const COURSE_SOURCE = 'https://www.routedurhum.com/_functions/classement?lang=fr';
+  const COURSE_CLE = 'rdrSkCourse1';
+  const COURSE_T = {
+    fr: {
+      locale: 'fr-FR', mn: 'milles nautiques', mnCourt: 'MN', nds: 'nœuds', ndsCourt: 'nds',
+      surEnCourse: (n) => 'sur ' + n + ' en course', enClasse: (c) => 'en ' + c, place: (n) => n > 1 ? 'places' : 'place',
+      stableCourt: 'Stable', enEscale: 'En escale', jourEscale: 'en escale',
+      gagne: (n) => 'Gagne ' + n + (n > 1 ? ' places' : ' place') + ' depuis le pointage précédent', perd: (n) => 'Perd ' + n + (n > 1 ? ' places' : ' place') + ' depuis le pointage précédent', stable: 'Même place qu’au pointage précédent',
+      parcours: 'Parcours', route: (p) => p + ' % de la route', saintMalo: 'Saint-Malo', pap: 'Pointe-à-Pitre',
+      avantArrivee: 'Avant l’arrivée', kmAvant: (k) => k + ' km avant l’arrivée', vitesse: 'Vitesse', kmh: (k) => k + ' km/h au dernier pointage',
+      derriere: 'Derrière le premier', kmDerriere: (k, t) => k + ' km' + (t ? ', ≈ ' + t + ' de mer' : ''), enTete: 'En tête', avance: (mn, qui) => mn + ' MN d’avance sur ' + qui,
+      classementLien: (c) => 'Le classement ' + c, carto: 'La cartographie complète', cartoCourt: 'Cartographie', classementCourt: 'Classement',
+      pointage: (h, m) => 'Pointage de ' + h + ', heure de Paris · il y a ' + m + ' min', prochain: (h) => 'prochain à ' + h,
+      demo: 'Données fictives', detail: 'Sa course en détail', escale: (m) => m || 'Escale technique',
+      arrive: 'Arrivé', aPap: 'à Pointe-à-Pitre', arriveeLe: (j, h) => 'Arrivé le ' + j + ' à ' + h + ', heure de Paris',
+      grandVainqueurSur: 'Grand vainqueur, 1er au scratch', vainqueurCategorie: 'Vainqueur de la catégorie', arriveRang: (r, n) => 'Arrivé ' + r + ' sur ' + n,
+      tempsCourse: 'Temps de course', moyenne: 'Moyenne', ecartVainqueur: 'Après le vainqueur', surQui: (q) => 'sur ' + q, premierArrive: 'Premier arrivé', aheadDe: (q) => 'd’avance sur ' + q, kmhMoy: (k) => k + ' km/h de moyenne',
+      abandon: 'Abandon', aDeArrivee: (mn, km) => 'à ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée', routeFaite: (p) => p + ' % de la route faite',
+      absent: 'Sa position n’est pas transmise par la cartographie officielle. Elle s’affichera ici dès qu’elle le sera.',
+      attente: 'Les positions arrivent ici au premier pointage de la course.',
+      panne: 'Le classement ne répond pas pour l’instant. Les positions reviennent ici dès qu’il répond.',
+      kCourse: 'Au fil de la course', tCourse: 'Sa course',
+      autour: 'Autour de lui, en milles nautiques', autourElle: 'Autour d’elle, en milles nautiques', devant: 'devant', derriereMot: 'derrière', duPremier: 'du 1er',
+      rang12: 'Son rang sur 12 heures', ilYa: (r, h) => r + ' il y a ' + h + ' h', maintenant: (r, n) => r + ' sur ' + n + ' maintenant', courbeVide: 'La courbe se dessine au fil des pointages.',
+      chiffres: 'Au dernier pointage', sur24: 'Sur 24 h', moy24: 'Moyenne 24 h', cap: 'Cap', vmg: 'VMG', ecartPrec: 'Écart au précédent', ecartSuiv: 'Écart au suivant',
+      sonArrivee: 'Son arrivée', lesArrives: (c) => 'Les arrivés ' + c, sonAbandon: 'Son abandon', enTeteClasse: (c) => 'En tête ' + (c === 'IMOCA' || c === 'Ultim' ? 'des ' + c : 'de la classe ' + c),
+      arriveeQuand: 'Arrivée', temps: 'Temps', ecart: 'Écart', vainqueurMot: 'Vainqueur'
+    },
+    en: {
+      locale: 'en-GB', mn: 'nautical miles', mnCourt: 'nm', nds: 'knots', ndsCourt: 'kn',
+      surEnCourse: (n) => 'of ' + n + ' racing', enClasse: (c) => 'in ' + c, place: (n) => n > 1 ? 'places' : 'place',
+      stableCourt: 'Steady', enEscale: 'Stopover', jourEscale: 'stopover',
+      gagne: (n) => 'Up ' + n + (n > 1 ? ' places' : ' place') + ' since the last report', perd: (n) => 'Down ' + n + (n > 1 ? ' places' : ' place') + ' since the last report', stable: 'Same place as the last report',
+      parcours: 'Progress', route: (p) => p + ' % of the course', saintMalo: 'Saint-Malo', pap: 'Pointe-à-Pitre',
+      avantArrivee: 'To the finish', kmAvant: (k) => k + ' km to the finish', vitesse: 'Speed', kmh: (k) => k + ' km/h at the last report',
+      derriere: 'Behind the leader', kmDerriere: (k, t) => k + ' km' + (t ? ', ≈ ' + t + ' at sea' : ''), enTete: 'Leading', avance: (mn, qui) => mn + ' nm ahead of ' + qui,
+      classementLien: (c) => 'The ' + c + ' ranking', carto: 'Full race tracker', cartoCourt: 'Tracker', classementCourt: 'Ranking',
+      pointage: (h, m) => 'Position report of ' + h + ' (Paris time) · ' + m + ' min ago', prochain: (h) => 'next at ' + h,
+      demo: 'Demo data', detail: 'Their race in detail', escale: (m) => m || 'Technical stopover',
+      arrive: 'Finished', aPap: 'in Pointe-à-Pitre', arriveeLe: (j, h) => 'Finished on ' + j + ' at ' + h + ', Paris time',
+      grandVainqueurSur: 'Overall winner, first across the line', vainqueurCategorie: 'Class winner', arriveRang: (r, n) => 'Finished ' + r + ' of ' + n,
+      tempsCourse: 'Race time', moyenne: 'Average', ecartVainqueur: 'Behind the winner', surQui: (q) => 'on ' + q, premierArrive: 'First to finish', aheadDe: (q) => 'ahead of ' + q, kmhMoy: (k) => k + ' km/h average',
+      abandon: 'Retired', aDeArrivee: (mn, km) => mn + ' nautical miles (' + km + ' km) from the finish', routeFaite: (p) => p + ' % of the course sailed',
+      absent: 'Their position is not provided by the official tracker yet. It will appear here as soon as it is.',
+      attente: 'Positions appear here at the first race position report.',
+      panne: 'The ranking is not responding right now. Positions will be back here as soon as it does.',
+      kCourse: 'Race updates', tCourse: 'Their race',
+      autour: 'Around them, in nautical miles', autourElle: 'Around her, in nautical miles', devant: 'ahead', derriereMot: 'behind', duPremier: 'from 1st',
+      rang12: 'Their rank over 12 hours', ilYa: (r, h) => r + ' ' + h + ' h ago', maintenant: (r, n) => r + ' of ' + n + ' now', courbeVide: 'The chart builds up with each position report.',
+      chiffres: 'At the last report', sur24: 'Over 24 h', moy24: '24 h average', cap: 'Heading', vmg: 'VMG', ecartPrec: 'Gap to boat ahead', ecartSuiv: 'Gap to next boat',
+      sonArrivee: 'Their finish', lesArrives: (c) => c + ' finishers', sonAbandon: 'Their retirement', enTeteClasse: (c) => 'Leading the ' + c + ' class',
+      arriveeQuand: 'Finish', temps: 'Time', ecart: 'Gap', vainqueurMot: 'Winner'
+    }
+  };
+   
+  let jeuCourse = null, lectureCourse = null;
+  const jeuValide = (j) => !!(j && typeof j === 'object' && Array.isArray(j.classes) && typeof j.maj === 'string');
+  function jeuEnMemoire() {
+    if (!jeuCourse) {
+      try { const x = JSON.parse(sessionStorage.getItem(COURSE_CLE) || 'null'); if (x && jeuValide(x.j) && x.lu > 0) jeuCourse = x; } catch (e) {   }
+    }
+    return jeuCourse;
+  }
+  function jeuFrais(x) {
+    if (!x) return false;
+    const age = Date.now() - x.lu, prochain = Date.parse(x.j.prochain);
+    return age >= 0 && (age < 60000 || (age < 900000 && isFinite(prochain) && Date.now() < prochain + 90000));
+  }
+  function lireJeuCourse(forcer) {
+    const m = jeuEnMemoire();
+    if (!forcer && jeuFrais(m)) return Promise.resolve(m.j);
+    if (lectureCourse) return lectureCourse;
+    const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    const minuteur = setTimeout(() => { if (ctrl) ctrl.abort(); }, 15000);
+    lectureCourse = fetch(COURSE_SOURCE, { credentials: 'omit', cache: forcer ? 'no-cache' : 'default', signal: ctrl ? ctrl.signal : undefined })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (!jeuValide(j)) throw new Error('classement illisible');
+        jeuCourse = { j, lu: Date.now() };
+        try { sessionStorage.setItem(COURSE_CLE, JSON.stringify(jeuCourse)); } catch (e) {   }
+        return j;
+      })
+      .finally(() => { clearTimeout(minuteur); lectureCourse = null; });
+    return lectureCourse;
+  }
+  
+
+  function vueCourse(J, id, idGeo) {
+    if (!jeuValide(J) || J.phase !== 'course') return null;
+    for (const c of J.classes) {
+      const lignes = Array.isArray(c && c.lignes) ? c.lignes : [];
+      const l = lignes.find((x) => x && x.id && x.id === id) || (idGeo ? lignes.find((x) => x && String(x.idCourse || '') === idGeo) : null);
+      if (!l || !(l.rang > 0) && l.statut !== 'RET') continue;
+      const parRang = (a, b) => (a.rang || 999) - (b.rang || 999);
+      const arv = lignes.filter((x) => x.statut === 'ARV').sort(parRang);
+      const mer = lignes.filter((x) => x.statut === 'RAC' || x.statut === 'ESC').sort(parRang);
+      const ret = lignes.filter((x) => x.statut === 'RET');
+      const toutesArv = J.classes.flatMap((k) => k.lignes || []).filter((x) => x.statut === 'ARV').sort((a, b) => Date.parse(a.arrivee) - Date.parse(b.arrivee));
+      const etat = l.statut === 'ARV' ? 'arrive' : l.statut === 'RET' ? 'abandon' : l.statut === 'ESC' ? 'escale' : 'course';
+      return { J, c, l, etat, arv, mer, ret, ordre: arv.concat(mer), enCourse: lignes.length - ret.length, vainqueurCourse: !!(toutesArv[0] && toutesArv[0] === l) };
+    }
+    return null;
+  }
+   
+  const PARIS = { timeZone: 'Europe/Paris' };
+  const nfc = (C, n, d) => n == null || n === '' || isNaN(n) ? '–' : Number(n).toLocaleString(C.locale, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).replace(/[  ]/g, ' ');
+  const kmc = (C, mn) => nfc(C, mn == null ? null : mn * 1.852, mn * 1.852 < 10 ? 1 : 0);
+  const kmhc = (C, nd) => nfc(C, nd == null ? null : nd * 1.852, 1);
+  const heureC = (C, iso) => { const s = new Date(iso).toLocaleTimeString(C.locale, { timeZone: 'Europe/Paris', hour: 'numeric', minute: '2-digit' }); return C.locale === 'fr-FR' ? s.replace(':', ' h ').replace(/ h 00$/, ' h') : s; };
+  const jourLongC = (C, iso) => new Date(iso).toLocaleDateString(C.locale, { timeZone: PARIS.timeZone, weekday: 'long', day: 'numeric', month: 'long' });
+  const dureeC = (C, ms, sec) => { let s = Math.round(ms / 1000); const j = Math.floor(s / 86400); s -= j * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60; return (j ? j + (C.locale === 'fr-FR' ? ' j ' : ' d ') : '') + h + ' h ' + String(m).padStart(2, '0') + ' min' + (sec !== false ? ' ' + String(s).padStart(2, '0') + ' s' : ''); };
+  const ecartTemps = (h) => { if (h < 1) return Math.round(h * 60) + ' min'; const hh = Math.floor(h); const mm = Math.round((h - hh) * 60); return hh + ' h ' + String(mm).padStart(2, '0'); };
+  const titreNom = (t) => String(t || '').trim().replace(/\s+/g, ' ').toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()).replace(/(^|[\s-])(\p{L})([’'])(\p{L})/gu, (m, a, b, q, c) => a + b + q + c.toUpperCase());
+  const nomCourt = (l) => (l.prenom ? String(l.prenom).trim()[0] + '. ' : '') + titreNom(l.nom);
+  const imgLigne = (id, w, h) => id ? (/^https?:/.test(id) ? id : 'https://static.wixstatic.com/media/' + id + '/v1/fill/w_' + w + ',h_' + h + ',al_t,q_80,enc_auto/' + id) : '';
+  const pctRoute = (J, l) => l.statut === 'ARV' ? 100 : l.dtf == null || !(J.distance > 0) ? 0 : Math.max(0, Math.min(100, Math.floor((1 - l.dtf / J.distance) * 100)));
    
   const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
   const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
@@ -2870,37 +3004,6 @@ customElements.define('skippers-carousel', SkippersCarousel);
   
 
   const SILHOUETTE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240'%3E%3Cpath fill='%23fff' d='M100 22c-22 0-38 18-38 42 0 17 8 32 20 39-38 7-64 38-68 137h172c-4-99-30-130-68-137 12-7 20-22 20-39 0-24-16-42-38-42Z'/%3E%3C/svg%3E";
-
-  
-
-
-
-
-  const COTES = [
-    '20,68 14,68 12.5,66 10,64.3 8,63.2 5.2,62 5,60.5 5.3,59.2 6.8,58.1 8.1,58.1 10.6,57.7 8.1,56.5 8.6,55.4 8.7,54 7,53.6 5,53.3 4.6,52.8 3.6,51.4 2.5,51.1 1.6,50.9 1.4,50.1 0.2,49.6 -1.1,49.3 -1.3,49.7 -1.9,49.7 -1.6,49.2 -1.5,48.7 -2,48.65 -3,48.8 -4.1,48.7 -4.8,48.4 -4.3,48.1 -4.4,47.8 -3.5,47.7 -2.8,47.5 -2.2,47.1 -2.1,46.8 -1.8,46.4 -1.2,45.8 -1.2,45.1 -1.3,44.3 -1.5,43.5 -1.8,43.4 -3.8,43.45 -5.9,43.6 -7.7,43.75 -9.2,43.2 -9.3,42.9 -8.9,42.1 -8.7,41.2 -9,40.3 -9.4,39.4 -9.5,38.7 -8.9,38.5 -8.8,37.9 -9,37 -7.4,37.2 -6.4,36.8 -6.2,36.4 -5.6,36 -4.4,36.7 -2.1,36.7 -0.8,37.6 0.2,38.8 -0.3,39.5 0.9,41 3.2,41.9 3.1,43.1 4.8,43.4 7.5,43.8 8,44 20,44',
-    '20,37 10,37.3 8,37 5,36.8 1.2,36.5 -1.3,35.3 -2.2,35.1 -5.3,35.9 -5.9,35.8 -6.3,35 -6.8,34 -7.6,33.6 -8.5,33.2 -9.3,32.4 -9.8,31.4 -9.6,30.4 -10.3,29.2 -11.1,28.3 -12.9,27.9 -13.4,27.3 -14.5,26.2 -15,24.8 -16,23.8 -16.5,22.4 -17.1,21 -16.5,19.5 -16.1,18.1 -16.5,16.5 -17.4,14.7 -16.8,13.5 -16.7,12.5 -15.5,11.3 -14.5,10.3 -13.3,9.4 -12.5,7.6 -11.4,6.9 -10,6 -7.5,4.4 -5,5 -2,4.7 1,6 4.3,6.3 6,4.3 8.5,4.5 9.5,3.5 9.8,2 9.4,0 9,-4 20,-4',
-    '-5.7,50.05 -4.2,50.35 -3.4,50.6 -1.9,50.6 -0.8,50.75 1.4,51.15 1.75,52.5 1.3,52.9 0.3,53.4 -0.3,54.1 -1.3,54.9 -1.6,55.6 -2.6,56.3 -1.8,57.5 -3.4,57.7 -3.1,58.6 -5,58.6 -5.4,58 -5.8,57.3 -5.7,56.5 -6.1,55.6 -5.1,55.4 -4.9,54.9 -3.4,54.9 -3.2,54.2 -3,53.6 -3.1,53.25 -4.6,53.3 -4.1,52.8 -4.1,52.2 -5.3,51.8 -3.2,51.4 -4.2,51.2',
-    '-6,55.2 -5.5,54.4 -6,53.4 -6.3,52.2 -7,52.1 -8.5,51.6 -10.1,51.6 -10.3,52.2 -9.4,53 -10.1,53.5 -9.9,54.3 -8.3,55.1 -7.3,55.3',
-    '-24,65.5 -22.4,64.1 -18.5,63.4 -14.5,64.3 -13.5,65.2 -15,66.4 -18,66.2 -22.4,66.4',
-    '-55,68 -53,66.5 -51.5,64 -49.5,62 -48,60.9 -45,60.1 -43.2,60.1 -42.4,61.2 -41,63.2 -39.5,65.2 -37,66 -32,68',
-    '-90,68 -67,68 -64.5,60.3 -61.9,57.7 -60.1,55.3 -57.3,53.6 -55.8,52.1 -57.5,51.4 -60,50.2 -64,50.2 -66.4,50.2 -64.2,48.5 -65.3,47.9 -64.8,46.8 -63.6,46.1 -61.4,45.6 -60,46.2 -59.8,45.9 -61.2,45.1 -63.5,44.6 -65.8,43.6 -66.3,44.4 -67.4,44.7 -68.9,44.3 -70.2,43.6 -70.8,42.6 -70,41.8 -71.4,41.4 -73.9,40.6 -74.1,39.7 -74.9,38.9 -75.5,37.9 -76.1,37 -75.5,35.2 -76.6,34.7 -78,33.9 -79.3,33.1 -80.9,32 -81.4,30.7 -80.6,28.4 -80.1,26.7 -80.2,25.5 -81.1,25.1 -81.8,26.1 -82.7,27.5 -82.8,29.6 -84.3,30 -90,30',
-    '-55.5,51.6 -53.6,49.4 -52.7,47.6 -53.6,46.7 -55.7,46.9 -56.2,47.6 -59.3,47.6 -58.4,49.2 -57.4,50.7',
-    '-84.9,21.9 -82,23.1 -80.3,23.1 -78.4,22.4 -76.2,21.2 -74.2,20.2 -75.5,19.9 -77.6,19.9 -78.9,21.4 -81.2,22.1 -82.5,22.6 -84,22',
-    '-74.4,19.8 -72.8,19.9 -71.1,19.9 -69.3,19.2 -68.3,18.6 -69.9,18.4 -71.7,17.8 -73.1,18.1 -74.4,18.4',
-    '-67.2,18.5 -65.6,18.4 -65.6,18 -67.2,17.95',
-    '-78.3,18.4 -76.2,18.2 -76.3,17.9 -78.2,18.1',
-    '-90,-4 -90,8 -79.5,9.2 -77.3,8.6 -75.5,10.4 -74.2,11.2 -72.2,11.8 -71.2,12.3 -70,11.5 -68.4,10.5 -66.9,10.6 -64.3,10.4 -62.3,10.7 -61.6,9.9 -60,8.5 -58.3,6.9 -56,5.9 -54,5.7 -52.3,4.9 -51.1,3.9 -50.2,1.8 -50,0.2 -48.4,-1.2 -44.3,-2.5 -41,-2.9 -38.5,-3.7 -37,-4',
-    '-61.9,10.8 -60.9,10.8 -61,10.1 -61.9,10.05',
-    '-61.8,16.35 -61.55,16.3 -61.55,15.95 -61.8,15.98',
-    '-61.55,16.5 -61.2,16.35 -61.25,16.2 -61.55,16.22'
-  ];
-  
-
-  const ILES = '-25.7,37.8 -27.2,38.7 -28.3,38.5 -31.1,39.4 -25.1,36.95 -16.9,32.7 -15.5,28.1 -16.6,28.3 -13.9,28.5 -13.6,29 -17.9,27.7 -17.8,28.7 -23.6,15.1 -24.4,16.7 -22.9,16.1 -25.1,17.1 -64.75,32.3 -63.05,18.07 -62.85,17.9 -61.8,17.1 -61.35,15.4 -61,14.65 -60.97,13.9 -61.2,13.25 -59.55,13.15 -61.7,12.1 -60.7,11.2';
-  
-
-
-  const ROUTE_RDR = [[-2.02, 48.65], [-3.4, 49.15], [-5.4, 48.6], [-9.6, 45.4], [-13.6, 40], [-19, 33.5], [-27, 27], [-38, 21.6], [-50, 17.6], [-58.4, 16.3], [-61.1, 15.75], [-61.85, 16.05], [-61.53, 16.24]];
 
   const esc = (s) => String(s == null ? '' : s)
     .replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -3459,7 +3562,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const I18N = {
     fr: {
       locale: 'fr-FR',
-      nav: { profil: 'Profil', actus: 'Actus', palmares: 'Palmarès', bateau: 'Bateau', medias: 'Médias', suivre: 'Suivre' },
+      nav: { course: 'Course', profil: 'Profil', actus: 'Actus', palmares: 'Palmarès', bateau: 'Bateau', medias: 'Médias', suivre: 'Suivre' },
       navAria: 'Sections de la fiche',
       kProfil: 'Informations', tProfil: 'Profil',
       kPalmares: 'Parcours', tPalmares: 'Palmarès',
@@ -3524,21 +3627,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
       niveau: { international: 'Internationale', national: 'Nationale' },
       victoire: 'Victoire', podium: 'Podium',
       jourCourse: (j) => ['J' + j, 'en course'], jourCourseAria: (j, p) => 'En course, jour ' + j + ', ' + p + ' % de la route parcourue',
-      classement: 'Classement', surN: (n, c) => 'sur ' + n + (c ? ' en ' + c : ''),
-      distanceArrivee: 'À l’arrivée', vitesse: 'Vitesse', ecartLeader: 'Écart au leader', cap: 'Cap',
-      enTete: 'En tête', milles: 'milles', noeuds: 'nœuds',
-      evolution: (d) => d > 0 ? '+' + d + (d > 1 ? ' places' : ' place') + ' en 24 h' : d < 0 ? '−' + (-d) + (d < -1 ? ' places' : ' place') + ' en 24 h' : 'Stable sur 24 h',
-      positionIlYa: (m) => 'Position d’il y a ' + m + ' min',
-      cartoLive: 'La cartographie', surCarto: 'Sur la cartographie',
-      liveAttente: 'Les positions arrivent dès le départ, le 1er novembre.',
-      demo: 'Données fictives',
-      saintMalo: 'Saint-Malo', pointeAPitre: 'Pointe-à-Pitre',
-      parcours: 'Parcours', parcoursAria: (p, t) => p + ' % du parcours, le leader à ' + t + ' %',
-      arriveeEstimee: 'Arrivée estimée', tempsCourse: (j, h) => j + ' j ' + h + ' h de course',
-      statsAvancees: 'Stats avancées', vmg: 'VMG', vitesseMoy: 'Vitesse moy. 24 h', distance24: 'Distance 24 h',
-      vent: 'Vent', position: 'Position', ecartSuivant: 'Écart au suivant', ecartPrecedent: 'Écart au précédent',
-      ouvrirCarte: 'Ouvrir la carte live', leader: 'Leader', flotte: (c) => 'Flotte ' + c, oceanAtlantique: 'OCÉAN ATLANTIQUE',
-      carteAria: (n, r, p) => 'Carte de la course : ' + n + ', ' + r + ', à ' + p + ' % de la route entre Saint-Malo et Pointe-à-Pitre',
+      surCarto: 'Sur la cartographie',
       
 
 
@@ -3567,7 +3656,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
     },
     en: {
       locale: 'en-GB',
-      nav: { profil: 'Profile', actus: 'News', palmares: 'Record', bateau: 'Boat', medias: 'Media', suivre: 'Follow' },
+      nav: { course: 'Race', profil: 'Profile', actus: 'News', palmares: 'Record', bateau: 'Boat', medias: 'Media', suivre: 'Follow' },
       navAria: 'Profile sections',
       kProfil: 'About', tProfil: 'Profile',
       kPalmares: 'Career', tPalmares: 'Record',
@@ -3632,21 +3721,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
       niveau: { international: 'International', national: 'National' },
       victoire: 'Win', podium: 'Podium',
       jourCourse: (j) => ['Day ' + j, 'racing'], jourCourseAria: (j, p) => 'Racing, day ' + j + ', ' + p + ' % of the route sailed',
-      classement: 'Ranking', surN: (n, c) => 'of ' + n + (c ? ' in ' + c : ''),
-      distanceArrivee: 'To the finish', vitesse: 'Speed', ecartLeader: 'Gap to leader', cap: 'Heading',
-      enTete: 'Leading', milles: 'nm', noeuds: 'kn',
-      evolution: (d) => d > 0 ? '+' + d + (d > 1 ? ' places' : ' place') + ' in 24 h' : d < 0 ? '−' + (-d) + (d < -1 ? ' places' : ' place') + ' in 24 h' : 'Steady over 24 h',
-      positionIlYa: (m) => 'Position from ' + m + ' min ago',
-      cartoLive: 'Race tracker', surCarto: 'On the race tracker',
-      liveAttente: 'Positions go live at the start, on 1 November.',
-      demo: 'Demo data',
-      saintMalo: 'Saint-Malo', pointeAPitre: 'Pointe-à-Pitre',
-      parcours: 'Progress', parcoursAria: (p, t) => p + ' % of the course, leader at ' + t + ' %',
-      arriveeEstimee: 'Estimated arrival', tempsCourse: (j, h) => j + ' d ' + h + ' h racing',
-      statsAvancees: 'Advanced stats', vmg: 'VMG', vitesseMoy: 'Avg speed 24 h', distance24: 'Distance 24 h',
-      vent: 'Wind', position: 'Position', ecartSuivant: 'Gap to next boat', ecartPrecedent: 'Gap to boat ahead',
-      ouvrirCarte: 'Open live map', leader: 'Leader', flotte: (c) => c + ' fleet', oceanAtlantique: 'ATLANTIC OCEAN',
-      carteAria: (n, r, p) => 'Race map: ' + n + ', ' + r + ', ' + p + ' % of the route from Saint-Malo to Pointe-à-Pitre',
+      surCarto: 'On the race tracker',
       jeSuisFan: (p) => 'Follow ' + p, tuEsFan: (p) => 'You follow ' + p,
       ouvertureInscription: 'Opening sign-up…', patience: 'One moment…',
       prefKicker: 'Favourite skipper', prefNumeroUn: 'Your no. 1',
@@ -3679,61 +3754,6 @@ customElements.define('skippers-carousel', SkippersCarousel);
     }
     return n === 1 ? '1er' : n + 'e';
   }
-  
-
-  const ROSE = {
-    fr: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSO', 'SO', 'OSO', 'O', 'ONO', 'NO', 'NNO'],
-    en: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
-  };
-  function rose(deg, lang) {
-    const i = Math.round((((Number(deg) || 0) % 360) + 360) % 360 / 22.5) % 16;
-    return ROSE[lang === 'en' ? 'en' : 'fr'][i];
-  }
-  function dms(v, axe, lang) {
-    const n = Number(v) || 0, a = Math.abs(n);
-    const deg = Math.floor(a), min = Math.round((a - deg) * 60);
-    const lettre = axe === 'lat' ? (n >= 0 ? 'N' : 'S') : (n >= 0 ? 'E' : (lang === 'en' ? 'W' : 'O'));
-    return deg + '°' + String(min).padStart(2, '0') + '′ ' + lettre;
-  }
-  
-
-
-
-  let geoCache = null;
-  function geoRoute() {
-    if (geoCache) return geoCache;
-    const LON0 = -70, LAT0 = 68, K = 12.09, COS = 0.848;
-    const px = (lon, lat) => [(lon - LON0) * COS * K, (LAT0 - lat) * K];
-    const f = (p) => p[0].toFixed(1) + ' ' + p[1].toFixed(1);
-    const pts = ROUTE_RDR.map(([lon, lat]) => px(lon, lat));
-    let d = 'M' + f(pts[0]);
-    const ech = [pts[0]];
-    for (let i = 0; i < pts.length - 1; i++) {
-      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || pts[i + 1];
-      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
-      const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
-      d += 'C' + f(c1) + ' ' + f(c2) + ' ' + f(p2);
-      for (let k = 1; k <= 16; k++) {
-        const t = k / 16, u = 1 - t;
-        ech.push([0, 1].map(j => u * u * u * p1[j] + 3 * u * u * t * c1[j] + 3 * u * t * t * c2[j] + t * t * t * p2[j]));
-      }
-    }
-    const cumul = [0];
-    for (let i = 1; i < ech.length; i++) cumul.push(cumul[i - 1] + Math.hypot(ech[i][0] - ech[i - 1][0], ech[i][1] - ech[i - 1][1]));
-    const total = cumul[cumul.length - 1] || 1;
-    const surRoute = (t) => {
-      const cible = Math.max(0, Math.min(1, t)) * total;
-      let i = 1;
-      while (i < cumul.length - 1 && cumul[i] < cible) i++;
-      const r = (cible - cumul[i - 1]) / ((cumul[i] - cumul[i - 1]) || 1);
-      const a = ech[i - 1], b = ech[i];
-      return { p: [a[0] + (b[0] - a[0]) * r, a[1] + (b[1] - a[1]) * r], i, dx: b[0] - a[0], dy: b[1] - a[1] };
-    };
-    const inverse = (p) => ({ lon: p[0] / (COS * K) + LON0, lat: LAT0 - p[1] / K });
-    geoCache = { px, f, d, ech, surRoute, inverse };
-    return geoCache;
-  }
-
    
   const ESPACE_RHUM_SKIPPERS = '/mon-espace-rhum?go=skippers';
   
@@ -3795,7 +3815,14 @@ customElements.define('skippers-carousel', SkippersCarousel);
     site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9M12 3C9.4 5.6 8.2 8.6 8.2 12s1.2 6.4 3.8 9"/>',
      
     carte: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
-    cible: '<path d="M2 12h3M19 12h3M12 2v3M12 19v3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/>'
+    cible: '<path d="M2 12h3M19 12h3M12 2v3M12 19v3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/>',
+     
+    liste: '<path d="M11 5h10M11 12h10M11 19h10M4 4h1v5M4 9h2M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02"/>',
+    hausse: '<path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/>', baisse: '<path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/>', stable: '<path d="M18 8l4 4-4 4M2 12h20"/>',
+    cle: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/>',
+    alerte: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/>',
+    route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+    chevron: '<path d="m6 9 6 6 6-6"/>'
   };
   
 
@@ -4060,41 +4087,6 @@ rdr-skipper .sk .sk-course-visage{position:relative;flex:none;width:clamp(78px,6
 rdr-skipper .sk .sk-course-visage img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;transform:scale(1.3);transform-origin:50% 14%;}
 
  
-rdr-skipper .sk .sk-carto{position:absolute;inset:0;width:100%;height:100%;}
-rdr-skipper .sk .sk-carto-terre{fill:rgba(238,242,248,.09);stroke:rgba(238,242,248,.24);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-ile{fill:rgba(238,242,248,.3);}
-rdr-skipper .sk .sk-carto-grille{fill:none;stroke:rgba(238,242,248,.055);stroke-width:1;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-route{fill:none;stroke:rgba(238,242,248,.36);stroke-width:1.6;stroke-dasharray:5 7;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-sillage{fill:none;stroke:var(--sk-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-flotte circle{fill:rgba(238,242,248,.5);}
-rdr-skipper .sk .sk-carto-leader{fill:none;stroke:var(--sk-jaune);stroke-width:2;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-port{fill:#EEF2F8;}
-rdr-skipper .sk .sk-carto-arrivee{fill:none;stroke:var(--sk-jaune);stroke-width:2.4;vector-effect:non-scaling-stroke;}
-
-
-rdr-skipper .sk .sk-carto-nom{fill:rgba(238,242,248,.86);font:700 calc(14px * var(--sk-carto-k,1)) Montserrat,sans-serif;letter-spacing:.04em;paint-order:stroke;stroke:#0B1A33;stroke-width:calc(3px * var(--sk-carto-k,1));stroke-linejoin:round;}
-rdr-skipper .sk .sk-carto-nom--leader{fill:var(--sk-jaune);font-size:calc(12px * var(--sk-carto-k,1));}
-rdr-skipper .sk .sk-carto-mer{fill:rgba(238,242,248,.3);font:600 italic calc(12px * var(--sk-carto-k,1)) Montserrat,sans-serif;letter-spacing:.24em;}
-rdr-skipper .sk .sk-carto-balise,rdr-skipper .sk .sk-carto-leader,rdr-skipper .sk .sk-carto-flotte circle{transform-box:fill-box;transform-origin:center;transform:scale(var(--sk-carto-k,1));}
-rdr-skipper .sk .sk-carto-bateau path{fill:var(--sk-accent);stroke:#0B1A33;stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
- 
-rdr-skipper .sk .sk-carto-halo{fill:none;stroke:var(--sk-accent);stroke-width:1.5;opacity:.5;vector-effect:non-scaling-stroke;}
-rdr-skipper .sk .sk-carto-ui{position:absolute;z-index:5;left:calc(var(--sk-cc) * .12);right:max(clamp(20px,4cqw,56px),calc(100cqw - var(--sk-cg) - var(--sk-cc) - 40px));bottom:calc(var(--e6) + var(--sk-nav-h) * .5);
-  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--e3);pointer-events:none;}
-rdr-skipper .sk .sk-carto-ui > *{pointer-events:auto;}
-rdr-skipper .sk .sk-carto-legende{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0;padding:10px 14px;border-radius:12px 3px 12px 3px;background:rgba(11,26,51,.74);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(238,242,248,.1);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--sk-encre-2);}
-rdr-skipper .sk .sk-carto-legende li{display:flex;align-items:center;gap:7px;white-space:nowrap;}
-rdr-skipper .sk .sk-carto-legende i{display:block;width:10px;height:10px;border-radius:50%;}
-rdr-skipper .sk .sk-carto-legende .est-moi{background:var(--sk-accent);box-shadow:0 0 0 2px rgba(11,26,51,.9),0 0 0 3px var(--sk-accent);}
-rdr-skipper .sk .sk-carto-legende .est-leader{box-shadow:inset 0 0 0 2px var(--sk-jaune);}
-rdr-skipper .sk .sk-carto-legende .est-flotte{background:rgba(238,242,248,.5);width:7px;height:7px;}
-rdr-skipper .sk .sk-carto-ouvrir{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:14px 3px 14px 3px;background:#fff;color:#0B1B33;
-  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 14px 30px -14px rgba(0,0,0,.7);}
-rdr-skipper .sk .sk-carto-ouvrir svg{width:16px;height:16px;}
-rdr-skipper .sk .sk-carto-direct{position:absolute;z-index:5;top:var(--e6);left:calc(var(--sk-cc) * .16);display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px 3px 12px 3px;
-  background:rgba(11,26,51,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sk-encre-2);}
-rdr-skipper .sk .sk-carto-direct svg{width:16px;height:16px;color:#9EF4FD;}
 
  
 rdr-skipper .sk .sk-bord{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e3);margin-top:var(--e5);}
@@ -4113,8 +4105,6 @@ rdr-skipper .sk .sk-bord-pos{font-family:RDRNoir,Montserrat,sans-serif;font-styl
 rdr-skipper .sk .sk-bord-pos sup{font-size:.4em;line-height:0;vertical-align:.95em;margin-left:.04em;letter-spacing:0;}
 rdr-skipper .sk .sk-bord-rang-textes{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;}
 rdr-skipper .sk .sk-bord-sur{font-size:13px;font-weight:600;color:var(--sk-encre-2);}
-rdr-skipper .sk .sk-bord-tendance{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:4px 9px;border-radius:var(--r-btn);font-size:11px;font-weight:700;line-height:1.3;background:rgba(93,191,192,.16);color:#9EF4FD;}
-rdr-skipper .sk .sk-bord-tendance.est-baisse{background:rgba(245,190,65,.14);color:#F5BE41;}
 rdr-skipper .sk .sk-bord-parcours{justify-content:center;gap:10px;}
 rdr-skipper .sk .sk-bord-parcours-tete{display:flex;align-items:baseline;justify-content:space-between;gap:var(--e3);}
 rdr-skipper .sk .sk-bord-parcours-tete b{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:clamp(24px,2.2vw,32px);line-height:1;color:#fff;}
@@ -4127,26 +4117,9 @@ rdr-skipper .sk .sk-bord-mesures{grid-column:1 / -1;display:grid;grid-template-c
 rdr-skipper .sk .sk-bord-actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:var(--e3);}
 rdr-skipper .sk .sk-bord-outils{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--e3);font-size:12px;color:var(--sk-encre-3);}
 rdr-skipper .sk .sk-bord-outils p{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0;}
-rdr-skipper .sk .sk-bord-avance-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:14px 3px 14px 3px;
-  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(238,242,248,.08);box-shadow:inset 0 0 0 1px rgba(238,242,248,.22);transition:background-color .2s ease;}
-@media (hover:hover) and (pointer:fine){rdr-skipper .sk .sk-bord-avance-btn:hover{background:rgba(238,242,248,.14);}}
-rdr-skipper .sk .sk-bord-avance-btn svg{width:16px;height:16px;transition:transform .25s ease;}
-rdr-skipper .sk .sk-bord-avance-btn[aria-expanded="true"] svg{transform:rotate(180deg);}
-rdr-skipper .sk .sk-bord-avance{grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;overflow:hidden;border-radius:var(--r-carte);background:rgba(238,242,248,.1);}
-rdr-skipper .sk .sk-bord-avance > div{padding:12px 14px;background:rgba(14,17,29,.8);}
-rdr-skipper .sk .sk-bord-avance dt{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sk-encre-3);}
-rdr-skipper .sk .sk-bord-avance dd{margin-top:4px;font-family:Varien,Impact,sans-serif;font-style:italic;font-size:19px;line-height:1.1;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;}
-rdr-skipper .sk .sk-bord-avance dd small{font-family:Montserrat,sans-serif;font-style:normal;font-size:11px;font-weight:700;color:var(--sk-encre-2);}
-rdr-skipper .sk .sk-bord-avance dd.est-coord{font-size:16px;}
-rdr-skipper .sk .sk-bord-avance dd.est-coord small{display:block;margin:3px 0 0;font:inherit;color:inherit;}
 
 
-rdr-skipper .sk .sk-bord-avance > div:last-child:nth-child(4n+3){grid-column:span 2;}
-rdr-skipper .sk .sk-bord-avance > div:last-child:nth-child(4n+2){grid-column:span 3;}
-rdr-skipper .sk .sk-bord-avance > div:last-child:nth-child(4n+1){grid-column:1 / -1;}
 rdr-skipper .sk .sk-bord-demo{white-space:nowrap;padding:3px 8px;border-radius:3px 8px 3px 8px;background:rgba(245,190,65,.16);color:#F5BE41;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:10px;}
-rdr-skipper .sk .sk-bord-attente{display:flex;align-items:center;gap:var(--e3);max-width:44ch;margin:var(--e5) 0 0;font-size:15px;color:var(--sk-encre-2);}
-rdr-skipper .sk .sk-bord-attente svg{width:22px;height:22px;color:var(--sk-teal);}
 
 
 
@@ -4835,8 +4808,6 @@ rdr-skipper .sk.sous-600 .sk-decompte{margin-bottom:var(--e4);}
 rdr-skipper .sk.sous-860 .sk-hero--course{display:block;min-height:0;}
 rdr-skipper .sk.sous-860 .sk-hero--course .sk-scene{position:relative;z-index:0;left:auto;right:auto;width:100%;height:clamp(330px,54svh,500px);clip-path:polygon(0 0,100% 0,100% 88%,0 100%);}
 rdr-skipper .sk.sous-860 .sk-hero--course .sk-scene::after{background:linear-gradient(0deg,rgba(14,17,29,.92) 0%,rgba(14,17,29,.28) 24%,rgba(14,17,29,0) 42%);}
-rdr-skipper .sk.sous-860 .sk-carto-ui{left:var(--e4);right:var(--e4);bottom:calc(12% + var(--e3));}
-rdr-skipper .sk.sous-860 .sk-carto-direct{top:var(--e4);left:var(--e4);}
 rdr-skipper .sk.sous-860 .sk-hero--course .sk-hero-in{margin-top:-36px;padding-top:0;}
 rdr-skipper .sk.sous-860 .sk-hero--course .sk-hero-texte{max-width:none;}
 rdr-skipper .sk.sous-860 .sk-hero--course .sk-hero-famille{font-size:min(clamp(40px,8vw,72px),calc((100cqw - 150px) * 1.45 / var(--sk-lettres,7)));}
@@ -4851,12 +4822,7 @@ rdr-skipper .sk.sous-600 .sk-bord-mesures .sk-bord-lib svg{display:none;}
 rdr-skipper .sk.sous-600 .sk-bord-pos{font-size:58px;}
 rdr-skipper .sk.sous-600 .sk-bord-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--e2);}
 rdr-skipper .sk.sous-600 .sk-bord-actions .sk-btn{padding:0 var(--e3);}
-rdr-skipper .sk.sous-600 .sk-bord-avance{grid-template-columns:repeat(2,minmax(0,1fr));}
-rdr-skipper .sk.sous-600 .sk-bord-avance > div:last-child:nth-child(n){grid-column:auto;}
-rdr-skipper .sk.sous-600 .sk-bord-avance > div:last-child:nth-child(odd){grid-column:1 / -1;}
 rdr-skipper .sk.sous-600 .sk-course-visage{width:64px;border-radius:18px 3px 18px 3px;}
-rdr-skipper .sk.sous-600 .sk-carto-legende{display:none;}
-rdr-skipper .sk.sous-600 .sk-carto-ui{justify-content:flex-end;}
 rdr-skipper .sk.sous-600 .sk-att-faits .sk-att-barre{width:30%;}
 rdr-skipper .sk.sous-600 .sk-att-actions{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);}
 rdr-skipper .sk.sous-600 .sk-att-actions .sk-att-barre{width:auto;}
@@ -5005,8 +4971,139 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
   rdr-skipper .sk .sk-hero-img,rdr-skipper .sk .sk-hero-bas svg,rdr-skipper .sk .sk-live i{animation:none;}
   rdr-skipper .sk .sk-nav-id,rdr-skipper .sk .sk-nav-indic{transition:none;}
   rdr-skipper .sk .sk-scene-portrait{transition:none;translate:0 0;}
-  rdr-skipper .sk .sk-att-silhouette,rdr-skipper .sk .sk-att-houle,rdr-skipper .sk .sk-att-barre,rdr-skipper .sk .sk-att-nom,rdr-skipper .sk .sk-att-legende,rdr-skipper .sk .sk-carto-halo,rdr-skipper .sk .sk-carto-direct i{animation:none;}
+  rdr-skipper .sk .sk-att-silhouette,rdr-skipper .sk .sk-att-houle,rdr-skipper .sk .sk-att-barre,rdr-skipper .sk .sk-att-nom,rdr-skipper .sk .sk-att-legende{animation:none;}
 }
+
+
+rdr-skipper .sk .skc-bord .sk-bord-mesures .sk-bord-val small{white-space:normal;line-height:1.35;}
+rdr-skipper .sk .skc-bord .sk-bord-val small span{display:block;color:var(--sk-encre-3);font-weight:600;}
+rdr-skipper .sk .skc-bord .sk-bord-pos.est-argent{color:var(--sk-argent);}
+rdr-skipper .sk .skc-bord .sk-bord-pos.est-bronze{color:var(--sk-bronze);}
+rdr-skipper .sk .skc-bord .sk-bord-pos.est-mer{color:#fff;}
+rdr-skipper .sk .skc-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:4px 9px;border-radius:var(--r-btn);font-size:11px;font-weight:700;line-height:1.3;}
+rdr-skipper .sk .skc-chip svg{width:13px;height:13px;flex:none;}
+rdr-skipper .sk .skc-chip--hausse{background:rgba(93,191,192,.16);color:#9EF4FD;}
+rdr-skipper .sk .skc-chip--baisse,rdr-skipper .sk .skc-chip--escale{background:rgba(245,190,65,.14);color:#F5BE41;}
+rdr-skipper .sk .skc-chip--stable{background:rgba(238,242,248,.1);color:var(--sk-encre-2);}
+rdr-skipper .sk .skc-route{display:flex;justify-content:space-between;gap:var(--e2);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;color:var(--sk-encre-3);}
+
+
+
+rdr-skipper .sk .sk-hero--course .sk-hero-in{padding-top:calc(var(--e6) + 52px);}
+rdr-skipper .sk.sous-860 .sk-hero--course .sk-hero-in{padding-top:0;}
+rdr-skipper .sk .skc-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+rdr-skipper .sk .skc-bord .sk-bord-rang{align-items:center;}
+rdr-skipper .sk .skc-bord .sk-bord-rang-textes .sk-bord-lib{color:#fff;font-size:12px;}
+rdr-skipper .sk .skc-arrive .sk-bord-jauge i{background:linear-gradient(90deg,color-mix(in srgb,var(--sk-accent) 55%,#fff),var(--sk-jaune));}
+rdr-skipper .sk .skc-abandon .sk-bord-jauge i{background:rgba(245,190,65,.55);}
+ 
+rdr-skipper .sk .skc-bord .sk-bord-actions{display:grid;grid-template-columns:auto auto auto;justify-content:start;gap:var(--e3);}
+rdr-skipper .sk .skc-bord .sk-bord-actions .sk-btn{min-height:48px;padding:0 var(--e4);font-size:12px;letter-spacing:.12em;}
+rdr-skipper .sk .skc-bord .sk-bord-actions .sk-btn svg{width:16px;height:16px;}
+rdr-skipper .sk .skc-bord .sk-bord-outils a{display:inline-flex;align-items:center;gap:6px;color:var(--sk-encre-2);font-weight:700;letter-spacing:.06em;}
+rdr-skipper .sk .skc-bord .sk-bord-outils a svg{width:14px;height:14px;}
+rdr-skipper .sk .skc-abandon-case{display:flex;flex-direction:column;justify-content:center;gap:8px;}
+rdr-skipper .sk .skc-abandon-mot{display:flex;align-items:center;gap:10px;font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:clamp(30px,2.8vw,42px);line-height:.95;letter-spacing:-.03em;color:#F5BE41;}
+rdr-skipper .sk .skc-abandon-mot svg{width:.8em;height:.8em;stroke-width:2.4;}
+rdr-skipper .sk .sk-live.skc-live--arrive svg{width:18px;height:18px;flex:none;align-self:center;color:var(--sk-jaune);}
+rdr-skipper .sk .sk-live.skc-live--arrive span{text-transform:none;letter-spacing:.04em;}
+ 
+rdr-skipper .sk.sous-860 .sk-live.skc-live--arrive{flex-wrap:wrap;row-gap:4px;}
+rdr-skipper .sk .skc-abandon-motif{font-size:var(--t3);font-weight:700;color:#fff;}
+rdr-skipper .sk .skc-abandon-ou{font-size:13px;font-weight:600;color:var(--sk-encre-2);}
+rdr-skipper .sk .skc-attente{display:flex;align-items:flex-start;gap:var(--e3);max-width:46ch;margin:var(--e5) 0 0;font-size:15px;line-height:1.5;color:var(--sk-encre-2);}
+rdr-skipper .sk .skc-attente svg{width:22px;height:22px;flex:none;color:var(--sk-teal);margin-top:2px;}
+ 
+rdr-skipper .sk .skc-bord .skc-attente{grid-column:1 / -1;}
+rdr-skipper .sk .skc-vide{grid-column:1 / -1;min-height:128px;border-radius:var(--r-carte);background:rgba(238,242,248,.05);box-shadow:inset 0 0 0 1px rgba(238,242,248,.08);}
+ 
+rdr-skipper .sk .sk-live.skc-live--arrive b{color:var(--sk-jaune);}
+rdr-skipper .sk .sk-live.skc-live--abandon b{color:#F5BE41;}
+rdr-skipper .sk .sk-live.skc-live--abandon::after{background:rgba(245,190,65,.55);}
+
+ 
+@media (min-width:861px) and (max-height:820px){
+  rdr-skipper .sk .sk-hero--course{min-height:clamp(600px,calc(100svh - 56px),760px);}
+  rdr-skipper .sk .sk-hero--course .sk-hero-in{padding-top:calc(var(--e5) + 48px);padding-bottom:calc(var(--e4) + var(--sk-nav-h) * .5);}
+  rdr-skipper .sk .sk-hero--course .sk-live{margin-bottom:var(--e3);}
+  rdr-skipper .sk .skc-bord .sk-bord-outils a{display:none;}
+  rdr-skipper .sk .skc-bord .sk-bord-val small{font-size:11px;margin-top:4px;}
+  rdr-skipper .sk .sk-hero--course .sk-suivis{display:none;}
+  rdr-skipper .sk .sk-hero--course .sk-course-visage{width:72px;}
+  rdr-skipper .sk .sk-hero--course .sk-hero-famille{font-size:min(clamp(40px,4vw,62px),calc(min(30vw,380px) * 1.4 / var(--sk-lettres,7)));}
+  rdr-skipper .sk .skc-bord{margin-top:var(--e4);gap:10px;}
+  rdr-skipper .sk .skc-bord .sk-bord-case{padding:12px var(--e4);}
+  rdr-skipper .sk .skc-bord .sk-bord-pos{font-size:clamp(48px,4.4vw,64px);}
+  rdr-skipper .sk .skc-bord .sk-bord-val{font-size:min(clamp(22px,2vw,28px),calc(100cqw * 1.5 / var(--sk-car,5)));}
+  rdr-skipper .sk .skc-bord .sk-bord-actions .sk-btn{min-height:44px;}
+  rdr-skipper .sk .skc-bord .sk-bord-outils{font-size:11px;}
+}
+ 
+rdr-skipper .sk.sous-860:not(.sous-600) .skc-bord .sk-bord-actions{grid-template-columns:repeat(2,minmax(0,1fr));}
+rdr-skipper .sk.sous-860:not(.sous-600) .skc-bord .sk-bord-actions > :first-child{grid-column:1 / -1;}
+rdr-skipper .sk.sous-600 .skc-bord .sk-bord-actions{grid-template-columns:minmax(0,1fr);}
+
+
+
+
+
+rdr-skipper .sk .skc-course{background:linear-gradient(323deg,#16355D 0%,#1d4a7a 62%,#2b5f95 100%);}
+rdr-skipper .sk .skc-course .sk-tete{flex-wrap:wrap;}
+rdr-skipper .sk .skc-pointage{order:2;display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:.35em;font-size:var(--t2);font-weight:600;color:var(--sk-encre-2);}
+rdr-skipper .sk .skc-pointage b{color:#fff;}
+rdr-skipper .sk .skc-course .sk-tete::after{order:1;}
+rdr-skipper .sk .skc-grille{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:var(--e5);align-items:stretch;}
+rdr-skipper .sk .skc-grille.est-deux{grid-template-columns:1.25fr 1fr;}
+rdr-skipper .sk .skc-carte{display:flex;flex-direction:column;gap:var(--e4);min-width:0;padding:var(--e5) var(--e5) var(--e4);border-radius:var(--r-carte);background:var(--sk-carte);color:var(--sk-carte-encre);box-shadow:var(--ombre);}
+rdr-skipper .sk .skc-carte-titre{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-autour{display:flex;flex-direction:column;gap:4px;}
+rdr-skipper .sk .skc-autour li{display:grid;grid-template-columns:34px 36px minmax(0,1fr) auto;align-items:center;gap:10px;min-height:46px;padding:4px 10px 4px 8px;border-radius:12px 3px 12px 3px;}
+rdr-skipper .sk .skc-autour li.est-lui{background:color-mix(in srgb,var(--sk-accent) 16%,#fff);box-shadow:inset 3px 0 0 var(--sk-jaune);}
+rdr-skipper .sk .skc-autour .r{font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:20px;line-height:1;color:var(--sk-carte-encre);}
+rdr-skipper .sk .skc-autour img{width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--sk-carte-filet);}
+rdr-skipper .sk .skc-autour .n{min-width:0;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+rdr-skipper .sk .skc-autour a.n{text-decoration:underline;text-decoration-color:var(--sk-carte-filet);text-underline-offset:4px;}
+@media (hover:hover){rdr-skipper .sk .skc-autour a.n:hover{text-decoration-color:currentColor;}}
+rdr-skipper .sk .skc-autour .e{font-size:13px;font-weight:700;white-space:nowrap;color:#00676E;}
+rdr-skipper .sk .skc-autour .e.est-derriere{color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-autour .e small{font-weight:600;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-courbe{width:100%;height:auto;}
+rdr-skipper .sk .skc-courbe .ax{stroke:var(--sk-carte-filet);stroke-width:1;}
+rdr-skipper .sk .skc-courbe .aire{fill:color-mix(in srgb,var(--sk-accent) 22%,#fff);}
+rdr-skipper .sk .skc-courbe .tr{fill:none;stroke:#16355D;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;}
+rdr-skipper .sk .skc-courbe .pt{fill:var(--sk-jaune);stroke:#16355D;stroke-width:2;}
+rdr-skipper .sk .skc-courbe-legende{display:flex;justify-content:space-between;gap:var(--e3);font-size:12px;font-weight:600;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-courbe-legende b{color:var(--sk-carte-encre);}
+rdr-skipper .sk .skc-chiffres{display:grid;grid-template-columns:1fr 1fr;gap:var(--e4) var(--e3);}
+rdr-skipper .sk .skc-chiffres dt{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-chiffres dd{margin-top:4px;font-family:Varien,Impact,sans-serif;font-style:italic;font-size:22px;line-height:1.05;color:var(--sk-carte-encre);font-variant-numeric:tabular-nums;}
+rdr-skipper .sk .skc-chiffres dd small{display:block;margin-top:3px;font-family:Montserrat,sans-serif;font-style:normal;font-size:12px;font-weight:600;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-pied{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e3);margin-top:var(--e6);}
+rdr-skipper .sk .skc-pied .sk-bord-demo{margin-left:auto;}
+rdr-skipper .sk .skc-chiffres .skc-pleine{grid-column:1 / -1;}
+rdr-skipper .sk .skc-note{font-size:13px;line-height:1.5;color:var(--sk-carte-label);}
+rdr-skipper .sk .skc-course{scroll-margin-top:calc(var(--sk-nav-h) - 1px);}
+rdr-skipper .sk .skc-autour li.skc-sep{display:block;min-height:0;padding:0 0 0 14px;font-weight:800;letter-spacing:.2em;color:var(--sk-carte-label);}
+ 
+rdr-skipper .sk.sous-600 .skc-arrive .sk-bord-mesures{grid-template-columns:repeat(2,minmax(0,1fr));}
+rdr-skipper .sk.sous-600 .skc-arrive .sk-bord-mesures > :first-child{grid-column:1 / -1;}
+rdr-skipper .sk.sous-600 .skc-autour li{grid-template-columns:26px 30px minmax(0,1fr) auto;gap:8px;padding:4px 6px;}
+rdr-skipper .sk.sous-600 .skc-autour img{width:30px;height:30px;}
+rdr-skipper .sk.sous-600 .skc-autour .r{font-size:17px;}
+rdr-skipper .sk.sous-600 .skc-autour .n{font-size:13px;}
+rdr-skipper .sk.sous-600 .skc-autour .e{font-size:12px;}
+@media (min-width:761px) and (max-height:820px){
+  rdr-skipper .sk .skc-course .sk-titre{font-size:clamp(44px,5.4vw,76px);}
+  rdr-skipper .sk .skc-course .sk-tete{margin-bottom:var(--e6);}
+}
+rdr-skipper .sk.sous-1100 .skc-grille{grid-template-columns:1fr 1fr;}
+rdr-skipper .sk.sous-1100 .skc-grille > :first-child{grid-column:1 / -1;}
+rdr-skipper .sk.sous-600 .skc-grille,rdr-skipper .sk.sous-600 .skc-grille.est-deux{grid-template-columns:minmax(0,1fr);gap:var(--e3);}
+rdr-skipper .sk.sous-600 .skc-carte{padding:var(--e4);}
+rdr-skipper .sk.sous-600 .skc-pied{display:grid;grid-template-columns:minmax(0,1fr);}
+rdr-skipper .sk.sous-600 .skc-pied .sk-btn{width:100%;}
+rdr-skipper .sk.sous-600 .skc-pied .sk-bord-demo{margin-left:0;justify-self:start;}
+rdr-skipper .sk.sous-600 .skc-course .sk-tete{flex-direction:column;align-items:flex-start;gap:var(--e3);}
 `;
 
   
@@ -5353,8 +5450,13 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       this._nettoyer();
       
 
-      this._apercu = apercuCarto();
+      this._apercu = apercuCarto() || this._departPasse() || this._phasePage === 'course';
       this._phase = this._apercu ? 'course' : this._phasePage;
+      
+
+      this._rendu = (this._rendu || 0) + 1;
+      this._vue = null; this._jeuEtat = 'charge'; this._jeuMaj = ''; this._jeuPhase = '';
+      if (this._phase === 'course') { const m = jeuEnMemoire(); if (m) this._prendreJeu(m.j); }
       this._prechargerListe();
        
       this._heroObserve = false;
@@ -5386,6 +5488,8 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const accent = couleurSure(s.classe && s.classe.couleur);
 
       const sections = [];
+       
+      if (this._phase === 'course') sections.push({ id: 'skc-course', cle: 'course', html: this._sectionCourse() });
       sections.push({ id: 'sk-profil', cle: 'profil', html: this._profil(s, T) });
        
       if (p.actus && (p.actus.liste || []).length) sections.push({ id: 'sk-actus', cle: 'actus', html: this._actus(s, p.actus, T) });
@@ -5478,19 +5582,6 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
 
     
 
-
-
-    _echelleCarte() {
-      const svg = this._racine && this._racine.querySelector('.sk-carto');
-      if (!svg) return;
-      const r = svg.getBoundingClientRect();
-      if (!r.width || !r.height) return;
-      const k = Math.max(1, Math.min(1.9, 0.78 / Math.max(r.width / 800, r.height / 870)));
-      svg.style.setProperty('--sk-carto-k', k.toFixed(3));
-    }
-
-    
-
     _hero(s, T) {
       const h = this._modeHero === 'photo' ? this._heroPhoto(s, T) : this._heroAffiche(s, T);
       const i = h.indexOf('>') + 1;
@@ -5547,9 +5638,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
     _actionsHero(T) {
       return '<div class="sk-hero-actions' + (this._phase !== 'course' && this._cartoOuverte() ? ' sk-hero-actions--carto' : '') + '">' +
           this._boutonSuivre('sk-btn sk-btn--suivre', true) +
-          (this._phase === 'course'
-            ? '<a class="sk-btn sk-btn--ligne" href="' + (this._apercu ? esc(this._lienCarto()) + '">' : '#sk-suivre" data-sk-ancre="sk-suivre">') + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>'
-            : this._cartoOuverte()
+          (this._cartoOuverte()
             ? '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '">' + svg('boussole') + '<span>' + esc(T.surCarto) + '</span></a>'
             : '<button class="sk-btn sk-btn--ligne" type="button" data-sk-partager aria-label="' + esc(T.partagerAria(this._nomAffiche)) + '">' + svg('partager') + '<span>' + esc(T.partager) + '</span></button>') +
         '</div>';
@@ -5591,7 +5680,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
 
         '<img class="sk-hero-vagues" src="' + esc(urlImage(FOND_MOTIF, 1100, 0, 'fit')) + '" alt="" decoding="async" aria-hidden="true">' +
         '<div class="sk-scene' + (enCourse ? ' sk-scene--carto' : '') + (this._apercu ? ' est-cible' : '') + '" data-sk-scene' + (enCourse ? '' : ' aria-hidden="true"') + '>' +
-          (enCourse ? (this._apercu ? this._cartoApercu(s) : this._carteLive(s, T)) : '') +
+          (enCourse ? this._cartoApercu(s) : '') +
           (portrait && !enCourse
             ? '<div class="sk-scene-sujet"><img class="sk-scene-portrait" data-sk-portrait src="' + esc(urlImage(portrait, 720, 0, 'fit')) + '"' +
               ' srcset="' + esc(srcset(portrait, [480, 720, 960, 1280])) + '" sizes="' + (libre ? '(max-width: 600px) 100vw, 58vw' : '(max-width: 600px) 82vw, 40vw') + '"' +
@@ -5602,170 +5691,349 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
         '<div class="sk-cadre sk-hero-in"><div class="sk-hero-texte">' +
           (enCourse ? this._badgeCourse(T) : this._decompte(T)) +
           this._identiteHero(s, T) +
-          (enCourse ? this._tableauDeBord(s, T) : this._faitsHero(s, T)) +
-          (enCourse && this._p.live && this._p.live.rang ? '' : this._actionsHero(T)) +
+          (enCourse ? this._bordCourse() : this._faitsHero(s, T) + this._actionsHero(T)) +
           (suivis >= SEUIL_SUIVIS ? '<p class="sk-suivis">' + esc(T.suivisPar(suivis)) + '</p>' : '') +
         '</div></div>' +
         '<a class="sk-hero-bas" href="#sk-profil" data-sk-ancre="sk-profil" aria-label="' + esc(T.descendre) + '">' + svg('bas') + '</a>' +
       '</header>';
     }
 
+    
+
+
+
+
+
     _badgeCourse(T) {
-      const L = this._p.live;
+      const C = COURSE_T[this._lang], V = this._vue;
       const depart = departDe(this._p);
-      const jour = L && L.jour ? L.jour : (Date.now() > depart ? Math.floor((Date.now() - depart) / 86400000) + 1 : 0);
-      
+      const t = V ? Date.parse(V.J.maj) : Date.now();
+      const jour = t > depart ? Math.floor((t - depart) / 86400000) + 1 : 0;
+      const pct = V ? pctRoute(V.J, V.l) : 0;
+      let cls = '', html;
+      if (V && V.etat === 'arrive') { cls = ' skc-live--arrive'; html = '<b>' + esc(C.arrive) + '</b><span>' + esc(C.aPap) + '</span>'; }
+      else if (V && V.etat === 'abandon') { cls = ' skc-live--abandon'; html = '<b>' + esc(C.abandon) + '</b><span>' + esc(C.route(pct)) + '</span>'; }
+      else {
+        
 
-
-
-
-      const pct = L && L.progression != null ? Math.max(0, Math.min(100, Math.round(Number(L.progression) * 100))) : 0;
-      const [fort, texte] = jour ? T.jourCourse(jour) : ['', T.enCourse];
-      return '<a class="sk-live" href="#sk-suivre" data-sk-ancre="sk-suivre" style="--sk-fait:' + pct + '%"' + (pct ? ' aria-label="' + esc(T.jourCourseAria(jour, pct)) + '"' : '') + '>' +
-        (fort ? '<b>' + esc(fort) + '</b>' : '') + '<span>' + esc(texte) + '</span></a>';
+        const [fort, texte] = jour ? T.jourCourse(jour) : ['', T.enCourse];
+        html = (fort ? '<b>' + esc(fort) + '</b>' : '') + '<span>' + esc(V && V.etat === 'escale' ? C.jourEscale : texte) + '</span>';
+      }
+      const cible = V ? 'skc-course' : 'sk-suivre';
+      return '<a class="sk-live' + cls + '" href="#' + cible + '" data-sk-ancre="' + cible + '" style="--sk-fait:' + pct + '%"' + (pct && !cls ? ' aria-label="' + esc(T.jourCourseAria(jour, pct)) + '"' : '') + '>' + html + '</a>';
     }
 
+    _lienClassement(V) {
+      return (this._lang === 'en' ? '/en' : '') + '/classement' + (V ? '?classe=' + encodeURIComponent(V.c.cle || '') + '&skipper=' + encodeURIComponent(V.l.id || '') : '');
+    }
     
 
-
-
-
-
-
-
-
-
-
-
-    _tableauDeBord(s, T) {
-      const L = this._p.live;
-      if (!L || !L.rang) return '<p class="sk-bord-attente">' + svg('direct') + '<span>' + esc(T.liveAttente) + '</span></p>';
-      const nf = (v, dec) => new Intl.NumberFormat(T.locale, { maximumFractionDigits: dec || 0, minimumFractionDigits: dec || 0 }).format(v);
-      const tendance = Number(L.evolution24h) || 0;
-      const pct = (v) => Math.max(0, Math.min(100, Math.round((Number(v) || 0) * 100)));
-      const rang = '<div class="sk-bord-case sk-bord-rang"><b class="sk-bord-pos">' + ordinalHtml(L.rang, this._lang) + '</b>' +
-        '<div class="sk-bord-rang-textes"><span class="sk-bord-lib">' + svg('palmares') + esc(T.classement) + '</span>' +
-          '<span class="sk-bord-sur">' + esc(T.surN(L.partants, (s.classe && s.classe.nom) || '')) + '</span>' +
-          '<span class="sk-bord-tendance' + (tendance < 0 ? ' est-baisse' : '') + '">' + esc(T.evolution(tendance)) + '</span></div></div>';
-      const eta = L.eta ? new Intl.DateTimeFormat(T.locale, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(L.eta)) : '';
-      const h = Number(L.tempsCourseH) || 0;
-      const parcours = '<div class="sk-bord-case sk-bord-parcours">' +
-        '<div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + svg('depart') + esc(T.parcours) + '</span><b>' + pct(L.progression) + ' %</b></div>' +
-        '<div class="sk-bord-jauge" style="--sk-jauge:' + pct(L.progression) + '%;--sk-jauge-tete:' + pct(L.progressionLeader || L.progression) + '%" role="img" aria-label="' + esc(T.parcoursAria(pct(L.progression), pct(L.progressionLeader || L.progression))) + '"><i></i>' + (L.rang > 1 ? '<b></b>' : '') + '</div>' +
-        '<p class="sk-bord-eta">' + (eta ? '<span>' + esc(T.arriveeEstimee) + ' <strong>' + esc(eta) + '</strong></span>' : '') + (h ? '<span>' + esc(T.tempsCourse(Math.floor(h / 24), Math.round(h % 24))) + '</span>' : '') + '</p>' +
-      '</div>';
-      const mesures = '<dl class="sk-bord-mesures">' + [
-        ['arrivee', T.distanceArrivee, nf(L.distanceArrivee), T.milles],
-        ['vitesse', T.vitesse, nf(L.vitesse, 1), T.noeuds],
-        ['ecart', T.ecartLeader, L.rang === 1 ? T.enTete : '+' + nf(L.ecartLeader, 1), L.rang === 1 ? '' : T.milles]
-      ].map(([ic, lib, val, unite]) => '<div class="sk-bord-case"><dt class="sk-bord-lib">' + svg(ic) + esc(lib) + '</dt>' +
-        '<dd class="sk-bord-val" style="--sk-car:' + Math.max(4, String(val).length) + '">' + esc(val) + (unite ? ' <small>' + esc(unite) + '</small>' : '') + '</dd></div>').join('') + '</dl>';
-      
-
-      const pos = L.position || (L.progression != null ? geoRoute().inverse(geoRoute().surRoute(Number(L.progression) || 0).p) : null);
-      const avance = [
-        [T.vmg, L.vmg != null ? nf(L.vmg, 1) : '', T.noeuds],
-        [T.cap, L.cap != null ? nf(L.cap) + '°' : '', ''],
-        [T.vitesseMoy, L.vitesseMoy24h != null ? nf(L.vitesseMoy24h, 1) : '', T.noeuds],
-        [T.distance24, L.distance24h != null ? nf(L.distance24h) : '', T.milles],
-        [T.vent, L.vent && L.vent.force != null ? nf(L.vent.force) : '', L.vent ? T.noeuds + (L.vent.direction != null ? ' · ' + rose(L.vent.direction, this._lang) : '') : ''],
-        [T.position, pos ? dms(pos.lat, 'lat', this._lang) : '', pos ? dms(pos.lon, 'lon', this._lang) : ''],
-        [T.ecartSuivant, L.ecartSuivant != null ? nf(L.ecartSuivant, 1) : '', T.milles],
-        [T.ecartPrecedent, L.ecartPrecedent != null ? nf(L.ecartPrecedent, 1) : '', T.milles]
-      ].filter(x => x[1]);
-      const avanceHtml = avance.length
-        ? '<dl class="sk-bord-avance" id="sk-bord-avance" hidden>' + avance.map(([lib, val, unite]) => '<div><dt>' + esc(lib) + '</dt><dd' + (lib === T.position ? ' class="est-coord"' : '') + '>' + esc(val) + (unite ? ' <small>' + esc(unite) + '</small>' : '') + '</dd></div>').join('') + '</dl>'
-        : '';
-      return '<div class="sk-bord">' + rang + parcours + mesures +
-        '<div class="sk-bord-actions">' +
-          '<a class="sk-btn sk-btn--suivre sk-bord-live" href="' + esc(this._urlCarto()) + '"' + (this._urlCarto().charAt(0) === '#' ? ' data-sk-ancre="sk-suivre"' : ' target="_blank" rel="noopener"') + '>' + svg('direct') + '<span>' + esc(T.cartoLive) + '</span></a>' +
-          this._boutonSuivre('sk-btn sk-btn--ligne', true) +
-        '</div>' +
-        '<div class="sk-bord-outils">' +
-          (avance.length ? '<button class="sk-bord-avance-btn" type="button" data-sk-avance aria-expanded="false" aria-controls="sk-bord-avance">' + esc(T.statsAvancees) + svg('bas') + '</button>' : '<span></span>') +
-          '<p><span>' + esc(T.positionIlYa(L.ilYaMin || 0)) + '</span>' + (L.demo ? '<span class="sk-bord-demo">' + esc(T.demo) + '</span>' : '') + '</p>' +
-        '</div>' +
-        avanceHtml +
+    _accesCourse(V, suivre) {
+      const C = COURSE_T[this._lang];
+      return '<div class="sk-bord-actions">' + suivre +
+        '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienClassement(V)) + '"' + (V ? ' aria-label="' + esc(C.classementLien(V.c.nom)) + '"' : '') + '>' + svg('liste') + '<span>' + esc(C.classementCourt) + '</span></a>' +
+        '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '" aria-label="' + esc(C.carto) + '">' + svg('carte') + '<span>' + esc(C.cartoCourt) + '</span></a>' +
       '</div>';
     }
-
+     
+    _textePointage(J, avecProchain) {
+      const C = COURSE_T[this._lang];
+      return C.pointage(heureC(C, J.maj), Math.max(0, Math.round((Date.now() - Date.parse(J.maj)) / 60000))) +
+        (avecProchain && J.prochain ? ' · ' + C.prochain(heureC(C, J.prochain)) : '');
+    }
+    _tictac() {
+      const J = this._vue && this._vue.J;
+      if (!J || !this._racine) return;
+      this._racine.querySelectorAll('[data-skc-ilya]').forEach((el) => { el.textContent = this._textePointage(J, el.getAttribute('data-skc-ilya') === '2'); });
+    }
+    _lignePointage(V) {
+      const C = COURSE_T[this._lang], J = V.J;
+      return '<div class="sk-bord-outils"><p><span data-skc-ilya="1">' + esc(this._textePointage(J)) + '</span>' + (J.demo ? '<span class="sk-bord-demo">' + esc(C.demo) + '</span>' : '') + '</p>' +
+        '<a href="#skc-course" data-sk-ancre="skc-course">' + esc(C.detail) + svg('chevron') + '</a></div>';
+    }
     
 
-    _urlCarto() {
-      return lienSur(this.getAttribute('live-url')) || '#sk-suivre';
+
+    _tendance(l) {
+      const C = COURSE_T[this._lang];
+      if (l.rangAvant == null || !l.rang) return '';
+      const d = (l.rangAvant || l.rang) - l.rang;
+      const court = d ? (d > 0 ? '+' : '−') + Math.abs(d) + ' ' + C.place(Math.abs(d)) : C.stableCourt;
+      const k = d > 0 ? 'hausse' : d < 0 ? 'baisse' : 'stable';
+      return '<span class="skc-chip skc-chip--' + k + '" title="' + esc(this._tendanceLongue(l)) + '">' + svg(k) + '<span aria-hidden="true">' + esc(court) + '</span><span class="skc-sr">' + esc(this._tendanceLongue(l)) + '</span></span>';
+    }
+    _tendanceLongue(l) {
+      const C = COURSE_T[this._lang];
+      if (l.rangAvant == null || !l.rang) return '';
+      const d = (l.rangAvant || l.rang) - l.rang;
+      return d > 0 ? C.gagne(d) : d < 0 ? C.perd(-d) : C.stable;
+    }
+
+    _bordCourse() {
+      const C = COURSE_T[this._lang], V = this._vue;
+      const suivre = this._boutonSuivre('sk-btn sk-btn--suivre', true);
+      if (!V) {
+        const msg = this._jeuEtat === 'charge' ? '' : this._jeuEtat === 'panne' ? C.panne : this._jeuPhase === 'course' ? C.absent : C.attente;
+        return '<div class="sk-bord skc-bord" data-skc-bord>' +
+          (msg ? '<p class="skc-attente">' + svg('carte') + '<span>' + esc(msg) + '</span></p>' : '<div class="skc-vide" aria-hidden="true"></div>') +
+          this._accesCourse(null, suivre) + '</div>';
+      }
+      return V.etat === 'arrive' ? this._bordArrive(V, suivre) : V.etat === 'abandon' ? this._bordAbandon(V, suivre) : this._bordEnMer(V, suivre);
+    }
+    
+
+
+    _caseMesure(lib, val, sous, car) {
+      return '<div class="sk-bord-case"><dt class="skc-sr">' + esc(lib) + '</dt><dd class="sk-bord-val" style="--sk-car:' + Math.max(4, car || String(val).length) + '">' + esc(val) + (sous && val !== '–' ? ' <small>' + sous + '</small>' : '') + '</dd></div>';
+    }
+    _bordEnMer(V, suivre) {
+      const C = COURSE_T[this._lang];
+      const { c, l, J } = V;
+      const nf = (n, d) => nfc(C, n, d);
+      const pct = pctRoute(J, l);
+      const tete = V.mer[0], second = V.mer[1];
+      const pctTete = tete ? pctRoute(J, tete) : pct;
+      const premier = l.rang === V.arv.length + 1 && tete === l;
+       
+      const ecartH = tete && tete.vitesse && l.dtl ? l.dtl / tete.vitesse : 0;
+      const ecart = premier
+        ? '<div class="sk-bord-case"><dt class="skc-sr">' + esc(C.enTete) + '</dt><dd class="sk-bord-val" style="--sk-car:6">' + esc(C.enTete) +
+            (second && second.dtf != null && l.dtf != null ? ' <small>' + esc(C.avance(nf(second.dtf - l.dtf, 1), nomCourt(second))) + '</small>' : '') + '</dd></div>'
+        : this._caseMesure(C.derriere, l.dtl == null ? '–' : '+' + nf(l.dtl, 1), esc(C.mn) + '<span>' + esc(C.kmDerriere(kmc(C, l.dtl), ecartH ? ecartTemps(ecartH) : '')) + '</span>', nf(l.dtl, 1).length + 1);
+      return '<div class="sk-bord skc-bord" data-skc-bord>' +
+        '<div class="sk-bord-case sk-bord-rang"><b class="sk-bord-pos">' + ordinalHtml(l.rang, this._lang) + '</b>' +
+          '<div class="sk-bord-rang-textes"><span class="sk-bord-lib">' + esc(C.enClasse(c.nom)) + '</span><span class="sk-bord-sur">' + esc(C.surEnCourse(V.enCourse)) + '</span>' +
+          (V.etat === 'escale' ? '<span class="skc-chip skc-chip--escale" title="' + esc(C.escale(l.motif)) + '">' + svg('cle') + '<span aria-hidden="true">' + esc(C.enEscale) + '</span><span class="skc-sr">' + esc(C.escale(l.motif)) + '</span></span>' : this._tendance(l)) +
+        '</div></div>' +
+        '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.parcours) + '</span><b>' + pct + ' %</b></div>' +
+          '<div class="sk-bord-jauge" style="--sk-jauge:' + pct + '%;--sk-jauge-tete:' + pctTete + '%" role="img" aria-label="' + esc(C.route(pct)) + '"><i></i>' + (premier ? '' : '<b></b>') + '</div>' +
+          '<p class="skc-route"><span>' + esc(C.saintMalo) + '</span><span>' + esc(C.pap) + '</span></p></div>' +
+        '<dl class="sk-bord-mesures">' +
+          this._caseMesure(C.avantArrivee, nf(l.dtf), esc(C.mn) + '<span>' + esc(C.kmAvant(kmc(C, l.dtf))) + '</span>') +
+          this._caseMesure(C.vitesse, nf(l.vitesse, 1), esc(C.nds) + '<span>' + esc(V.etat === 'escale' ? C.escale(l.motif) : C.kmh(kmhc(C, l.vitesse))) + '</span>') +
+          ecart +
+        '</dl>' + this._accesCourse(V, suivre) + this._lignePointage(V) +
+      '</div>';
+    }
+    _bordArrive(V, suivre) {
+      const C = COURSE_T[this._lang];
+      const { c, l } = V;
+      const vainqueur = V.arv[0], second = V.arv[1];
+      const medaille = l.rang === 1 ? '' : l.rang === 2 ? ' est-argent' : l.rang === 3 ? ' est-bronze' : ' est-mer';
+      const duree = (ms) => dureeC(C, ms, false).replace(/ min$/, '');
+      const ecartCase = l.ecartPremier
+        ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.ecartVainqueur) + '</dt><dd class="sk-bord-val" style="--sk-car:8">+' + esc(ecartTemps(l.ecartPremier / 3600000)) + ' <small>' + esc(C.surQui(nomCourt(vainqueur))) + '</small></dd></div>'
+        : '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.premierArrive) + '</dt><dd class="sk-bord-val" style="--sk-car:8">' +
+            (second && second.ecartPremier ? esc(ecartTemps(second.ecartPremier / 3600000)) + ' <small>' + esc(C.aheadDe(nomCourt(second))) + '</small>' : esc(C.vainqueurMot)) + '</dd></div>';
+      return '<div class="sk-bord skc-bord skc-arrive" data-skc-bord>' +
+        '<div class="sk-bord-case sk-bord-rang"><b class="sk-bord-pos' + medaille + '">' + ordinalHtml(l.rang, this._lang) + '</b>' +
+          '<div class="sk-bord-rang-textes"><span class="sk-bord-lib">' + esc(C.enClasse(c.nom)) + '</span>' +
+          '<span class="sk-bord-sur">' + esc(V.vainqueurCourse ? C.grandVainqueurSur : l.rang === 1 ? C.vainqueurCategorie : C.arriveRang(ordinal(l.rang, this._lang), V.enCourse)) + '</span>' +
+        '</div></div>' +
+        '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.arrive) + '</span><b>100 %</b></div>' +
+          '<div class="sk-bord-jauge" style="--sk-jauge:100%"><i></i></div>' +
+          (l.arrivee ? '<p class="sk-bord-eta"><span>' + esc(C.arriveeLe(jourLongC(C, l.arrivee), heureC(C, l.arrivee))) + '</span></p>' : '') + '</div>' +
+        '<dl class="sk-bord-mesures">' +
+          (l.temps ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.tempsCourse) + '</dt><dd class="sk-bord-val" style="--sk-car:' + (duree(l.temps).length + 1) + '">' + esc(duree(l.temps)) + ' <small>' + esc(dureeC(C, l.temps)) + '</small></dd></div>' : '') +
+          (l.vitesseMoy ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.moyenne) + '</dt><dd class="sk-bord-val" style="--sk-car:5">' + esc(nfc(C, l.vitesseMoy, 2)) + ' <small>' + esc(C.nds) + '<span>' + esc(C.kmhMoy(kmhc(C, l.vitesseMoy))) + '</span></small></dd></div>' : '') +
+          ecartCase +
+        '</dl>' + this._accesCourse(V, suivre) + this._lignePointage(V) +
+      '</div>';
+    }
+    _bordAbandon(V, suivre) {
+      const C = COURSE_T[this._lang];
+      const { l, J } = V;
+      const pct = pctRoute(J, l);
+      return '<div class="sk-bord skc-bord skc-abandon" data-skc-bord>' +
+        '<div class="sk-bord-case skc-abandon-case"><b class="skc-abandon-mot">' + svg('alerte') + esc(C.abandon) + '</b>' +
+          '<span class="skc-abandon-motif">' + esc(l.motif || '') + '</span>' + (l.dtf != null ? '<span class="skc-abandon-ou">' + esc(C.aDeArrivee(nfc(C, l.dtf), kmc(C, l.dtf))) + '</span>' : '') + '</div>' +
+        '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.parcours) + '</span><b>' + pct + ' %</b></div>' +
+          '<div class="sk-bord-jauge" style="--sk-jauge:' + pct + '%"><i></i></div><p class="skc-route"><span>' + esc(C.saintMalo) + '</span><span>' + esc(C.pap) + '</span></p></div>' +
+        this._accesCourse(V, suivre) + this._lignePointage(V) +
+      '</div>';
     }
 
     
 
 
 
-
-    _carteLive(s, T) {
-      const L = this._p.live || {};
-      const G = geoRoute();
-      const px = G.px, f = G.f;
-      const lire = (chaine) => chaine.split(' ').map(c => c.split(',').map(Number));
-      const terres = COTES.map(c => '<path class="sk-carto-terre" d="M' + lire(c).map(([lon, lat]) => f(px(lon, lat))).join('L') + 'Z"/>').join('');
-      const iles = lire(ILES).map(([lon, lat]) => { const p = px(lon, lat); return '<circle class="sk-carto-ile" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="2.6"/>'; }).join('');
-      let grille = '';
-      for (let lon = -60; lon <= 0; lon += 10) grille += 'M' + f(px(lon, 68)) + 'L' + f(px(lon, -4));
-      for (let lat = 0; lat <= 60; lat += 10) grille += 'M' + f(px(-70, lat)) + 'L' + f(px(8, lat));
-      const d = G.d, ech = G.ech, surRoute = G.surRoute;
-      const placer = (x) => {
-        if (x && Number.isFinite(x.lat) && Number.isFinite(x.lon)) return px(x.lon, x.lat);
-        const o = surRoute(Number(x && x.progression) || 0);
-        const n = Math.hypot(o.dx, o.dy) || 1, dec = Number(x && x.decalage) || 0;
-        return [o.p[0] - o.dy / n * dec, o.p[1] + o.dx / n * dec];
-      };
-
-      const t = Math.max(0, Math.min(1, Number(L.progression) || 0));
-      const ici = surRoute(t);
-      const moi = L.position ? px(L.position.lon, L.position.lat) : ici.p;
-      const sillage = ech.slice(0, ici.i).concat([moi]).map(f).join(' ');
-      
-
-
-      const lg = Math.hypot(ici.dx, ici.dy) || 1;
-      const nordX = -ici.dy / lg, nordY = ici.dx / lg;
-      const nom = (p, dx, dy, ancre, cls, texte) => '<text class="sk-carto-nom' + (cls ? ' ' + cls : '') + '" x="' + p[0].toFixed(1) + '" y="' + p[1].toFixed(1) + '" dx="' + dx.toFixed(2) + 'em" dy="' + dy.toFixed(2) + 'em" text-anchor="' + ancre + '">' + esc(texte) + '</text>';
-      const cote = (ux, uy, ecart) => [ux * ecart, uy * ecart + 0.36, ux < -0.38 ? 'end' : ux > 0.38 ? 'start' : 'middle'];
-      const flotte = (L.flotte || []).filter(b => b && b.rang !== L.rang);
-      const leader = L.rang === 1 ? null : flotte.find(b => b.rang === 1);
-      const flotteSvg = flotte.filter(b => b !== leader).map(b => { const p = placer(b); return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.4"/>'; }).join('');
-      const pl = leader ? placer(leader) : null;
-      const depart = px(ROUTE_RDR[0][0], ROUTE_RDR[0][1]);
-      const arrivee = px(ROUTE_RDR[ROUTE_RDR.length - 1][0], ROUTE_RDR[ROUTE_RDR.length - 1][1]);
-      const mer = px(-43, 36);
-      const cap = Number(L.cap) || 0;
-      const classeNom = (s.classe && s.classe.nom) || '';
-      
-
-      const libre = (port) => [L.rang ? moi : null, pl].every(b => !b || Math.hypot(b[0] - port[0], b[1] - port[1]) > 90);
-
-      return '<svg class="sk-carto" viewBox="0 0 800 870" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + esc(T.carteAria(this._nomAffiche, ordinal(L.rang, this._lang), Math.round(t * 100))) + '" focusable="false">' +
-          '<path class="sk-carto-grille" d="' + grille + '"/>' +
-          '<g>' + terres + iles + '</g>' +
-          '<text class="sk-carto-mer" x="' + mer[0].toFixed(1) + '" y="' + mer[1].toFixed(1) + '" text-anchor="middle">' + esc(T.oceanAtlantique) + '</text>' +
-          '<path class="sk-carto-route" d="' + d + '"/>' +
-          (L.rang ? '<polyline class="sk-carto-sillage" points="' + sillage + '"/>' : '') +
-          '<g class="sk-carto-flotte">' + flotteSvg + '</g>' +
-          '<circle class="sk-carto-port" cx="' + depart[0].toFixed(1) + '" cy="' + depart[1].toFixed(1) + '" r="5"/>' +
-          (libre(depart) ? nom(depart, -0.86, -0.86, 'end', '', T.saintMalo) : '') +
-          '<circle class="sk-carto-arrivee" cx="' + arrivee[0].toFixed(1) + '" cy="' + arrivee[1].toFixed(1) + '" r="7"/>' +
-          (libre(arrivee) ? nom(arrivee, 0.29, 2.14, 'start', '', T.pointeAPitre) : '') +
-          (pl ? '<circle class="sk-carto-leader" cx="' + pl[0].toFixed(1) + '" cy="' + pl[1].toFixed(1) + '" r="6.5"/>' +
-            nom(pl, ...cote(-nordX, -nordY, 1.25), 'sk-carto-nom--leader', leader.nom || T.leader) : '') +
-          (L.rang
-            ? '<g class="sk-carto-bateau" transform="translate(' + f(moi) + ')"><g class="sk-carto-balise"><circle class="sk-carto-halo" r="11"/><path transform="rotate(' + cap.toFixed(0) + ')" d="M0 -13 L8 10 L0 5.5 L-8 10 Z"/></g></g>' +
-              nom(moi, ...cote(nordX, nordY, 1.55), '', this._prenomAffiche)
-            : '') +
-        '</svg>' +
-        '<p class="sk-carto-direct">' + svg('direct') + esc(T.cartoLive) + '</p>' +
-        '<div class="sk-carto-ui">' +
-          (L.rang ? '<ul class="sk-carto-legende"><li><i class="est-moi"></i>' + esc(this._prenomAffiche) + '</li>' + (pl ? '<li><i class="est-leader"></i>' + esc(T.leader) + '</li>' : '') + (flotte.length ? '<li><i class="est-flotte"></i>' + esc(T.flotte(classeNom)) + '</li>' : '') + '</ul>' : '<span></span>') +
-          '<a class="sk-carto-ouvrir" href="' + esc(this._urlCarto()) + '"' + (this._urlCarto().charAt(0) === '#' ? ' data-sk-ancre="sk-suivre"' : ' target="_blank" rel="noopener"') + '>' + esc(T.ouvrirCarte) + svg('sortie') + '</a>' +
-        '</div>';
+    _lienFiche(x) {
+      const n = nomCourt(x);
+      if (!x.fiche || !/^\/skippers\/[^\s"'<>]+$/.test(String(x.fiche))) return '<span class="n">' + esc(n) + '</span>';
+      return '<a class="n" href="' + esc((this._lang === 'en' ? '/en' : '') + x.fiche) + '">' + esc(n) + '</a>';
     }
+    _ligneAutour(x, lui, e, derriere) {
+      return '<li' + (x === lui ? ' class="est-lui"' : '') + '><span class="r">' + esc(x.rang || '') + '</span><img src="' + esc(imgLigne(x.photo, 72, 72)) + '" alt="" loading="lazy" decoding="async">' +
+        (x === lui ? '<span class="n">' + esc(nomCourt(x)) + '</span>' : this._lienFiche(x)) + '<span class="e' + (derriere ? ' est-derriere' : '') + '">' + e + '</span></li>';
+    }
+    _autourDeLui(V) {
+      const C = COURSE_T[this._lang], l = V.l;
+      const i = V.ordre.indexOf(l);
+      const debut = Math.max(0, Math.min(i - 2, V.ordre.length - 5));
+      return V.ordre.slice(debut, debut + 5).map((x) => {
+        const d = x.dtf != null && l.dtf != null ? Math.round((x.dtf - l.dtf) * 10) / 10 : null;
+        const e = x === l ? (l.dtl ? '+' + nfc(C, l.dtl, 1) + ' <small>' + esc(C.duPremier) + '</small>' : esc(C.enTete))
+          : x.statut === 'ARV' ? esc(C.arrive)
+          : d == null ? '–'
+          : d < 0 ? nfc(C, -d, 1) + ' ' + C.mnCourt + ' ' + C.devant : nfc(C, d, 1) + ' ' + C.mnCourt + ' ' + C.derriereMot;
+        return this._ligneAutour(x, l, e, d > 0);
+      }).join('');
+    }
+    
+
+
+
+
+    _courbe(l, n) {
+      const C = COURSE_T[this._lang];
+      const hist = Array.isArray(l.hist) ? l.hist.slice(-12) : [];
+      while (hist.length < 12) hist.unshift(null);
+      const serie = hist.concat([l.rang]).map((r, k) => ({ r: Number(r) > 0 ? Number(r) : null, h: 12 - k }));
+      const k0 = serie.findIndex((x) => x.r !== null);
+      const h = serie.slice(k0).filter((x) => x.r !== null);
+      if (k0 < 0 || h.length < 2 || !l.rang) return '';
+      const rs = h.map((x) => x.r);
+      const min = Math.max(1, Math.min.apply(null, rs) - 1), max = Math.max.apply(null, rs) + 1;
+      const pas = 258 / ((12 - k0) || 1);
+      const X = (x) => 34 + (12 - x.h - k0) * pas, Y = (r) => 12 + (r - min) / ((max - min) || 1) * 100;
+      const pts = h.map((x) => X(x).toFixed(1) + ',' + Y(x.r).toFixed(1));
+      const avant = ordinal(h[0].r, this._lang), mtn = ordinal(l.rang, this._lang);
+      return '<svg class="skc-courbe" viewBox="0 0 300 130" role="img" aria-label="' + esc(C.rang12 + ' : ' + C.ilYa(avant, h[0].h) + ', ' + C.maintenant(mtn, n)) + '">' +
+        [min, max].map((r) => '<line class="ax" x1="30" y1="' + Y(r).toFixed(1) + '" x2="300" y2="' + Y(r).toFixed(1) + '"/><text x="24" y="' + (Y(r) + 4).toFixed(1) + '" text-anchor="end" font-size="11" font-weight="700" fill="#56617A" font-family="Montserrat,sans-serif">' + r + '</text>').join('') +
+        '<path class="aire" d="M' + X(h[0]).toFixed(1) + ',' + Y(max).toFixed(1) + ' L' + pts.join(' L') + ' L' + X(h[h.length - 1]).toFixed(1) + ',' + Y(max).toFixed(1) + ' Z"/>' +
+        '<polyline class="tr" points="' + pts.join(' ') + '"/><circle class="pt" r="5" cx="' + X(h[h.length - 1]).toFixed(1) + '" cy="' + Y(l.rang).toFixed(1) + '"/></svg>' +
+        '<p class="skc-courbe-legende"><span>' + C.ilYa(ordinalHtml(h[0].r, this._lang), h[0].h) + '</span><b>' + C.maintenant(ordinalHtml(l.rang, this._lang), n) + '</b></p>';
+    }
+    _chiffresPointage(V) {
+      const C = COURSE_T[this._lang];
+      const { l, ordre } = V;
+      const i = ordre.indexOf(l), prec = ordre[i - 1], suiv = ordre[i + 1];
+      const c = (lib, val, sous) => '<div><dt>' + esc(lib) + '</dt><dd>' + esc(val) + (sous && val !== '–' ? '<small>' + esc(sous) + '</small>' : '') + '</dd></div>';
+      const avec = (v, unite) => (v === '–' ? v : v + ' ' + unite);
+      const ecartDe = (x, y) => x && y && x.dtf != null && y.dtf != null ? nfc(C, x.dtf - y.dtf, 1) : '–';
+      return '<dl class="skc-chiffres">' +
+        c(C.sur24, avec(nfc(C, l.dist24h), C.mnCourt), kmc(C, l.dist24h) + ' km') +
+        c(C.moy24, avec(nfc(C, l.vitesse24h, 1), C.ndsCourt), kmhc(C, l.vitesse24h) + ' km/h') +
+        c(C.cap, l.cap == null ? '–' : nfc(C, l.cap) + '°', '') +
+        c(C.vmg, avec(nfc(C, l.vmg, 1), C.ndsCourt), kmhc(C, l.vmg) + ' km/h') +
+        (prec && prec.statut !== 'ARV' ? c(C.ecartPrec, avec(ecartDe(l, prec), C.mnCourt), nomCourt(prec)) : '') +
+        (suiv ? c(C.ecartSuiv, avec(ecartDe(suiv, l), C.mnCourt), nomCourt(suiv)) : '') +
+      '</dl>';
+    }
+    _sectionCourse() {
+      const C = COURSE_T[this._lang], V = this._vue;
+      if (!V) return '<div id="skc-course" data-skc-section hidden></div>';
+      const { c, l, J } = V;
+      const carte = (titre, corps) => '<article class="skc-carte"><h3 class="skc-carte-titre">' + esc(titre) + '</h3>' + corps + '</article>';
+      const duree = (ms) => dureeC(C, ms, false);
+      let cartes = '', deux = false;
+      if (V.etat === 'course' || V.etat === 'escale') {
+         
+        const elle = (l.filtres || []).indexOf('FEMMES') >= 0;
+        const courbe = this._courbe(l, V.enCourse);
+        const note = V.etat === 'escale' ? C.escale(l.motif) : this._tendanceLongue(l);
+        cartes = carte(elle ? C.autourElle : C.autour, '<ol class="skc-autour">' + this._autourDeLui(V) + '</ol>') +
+          carte(C.rang12, courbe + (note || !courbe ? '<p class="skc-note">' + esc(note || C.courbeVide) + '</p>' : '')) +
+          carte(C.chiffres, this._chiffresPointage(V));
+      } else if (V.etat === 'arrive') {
+        deux = true;
+         
+        const i = V.arv.indexOf(l);
+        const liste = i < 6 ? V.arv.slice(0, 6) : V.arv.slice(0, 3).concat([null], V.arv.slice(i - 1, i + 2));
+        cartes = carte(C.lesArrives(c.nom), '<ol class="skc-autour">' + liste.map((x) => !x ? '<li class="skc-sep" aria-hidden="true">…</li>'
+            : this._ligneAutour(x, l, x.ecartPremier ? '+' + esc(ecartTemps(x.ecartPremier / 3600000)) : x.temps ? esc(duree(x.temps)) : '', false)).join('') + '</ol>') +
+          carte(C.sonArrivee, '<dl class="skc-chiffres">' +
+            (l.arrivee ? '<div><dt>' + esc(C.arriveeQuand) + '</dt><dd>' + esc(heureC(C, l.arrivee)) + '<small>' + esc(jourLongC(C, l.arrivee)) + '</small></dd></div>' : '') +
+            (l.temps ? '<div><dt>' + esc(C.temps) + '</dt><dd>' + esc(duree(l.temps)) + '<small>' + esc(dureeC(C, l.temps)) + '</small></dd></div>' : '') +
+            (l.vitesseMoy ? '<div><dt>' + esc(C.moyenne) + '</dt><dd>' + esc(nfc(C, l.vitesseMoy, 2) + ' ' + C.ndsCourt) + '<small>' + esc(kmhc(C, l.vitesseMoy) + ' km/h') + '</small></dd></div>' : '') +
+            '<div><dt>' + esc(C.ecart) + '</dt><dd>' + (l.ecartPremier ? '+' + esc(ecartTemps(l.ecartPremier / 3600000)) + '<small>' + esc(C.surQui(nomCourt(V.arv[0]))) + '</small>' : esc(C.vainqueurMot) + '<small>' + esc(c.nom) + '</small>') + '</dd></div>' +
+          '</dl>');
+      } else {
+        deux = true;
+        const pct = pctRoute(J, l);
+        cartes = carte(C.sonAbandon, '<dl class="skc-chiffres">' +
+            '<div class="skc-pleine"><dt>' + esc(C.abandon) + '</dt><dd>' + esc(l.motif || '') + (l.dtf != null ? '<small>' + esc(C.aDeArrivee(nfc(C, l.dtf), kmc(C, l.dtf))) + '</small>' : '') + '</dd></div>' +
+            '<div><dt>' + esc(C.parcours) + '</dt><dd>' + pct + ' %<small>' + esc(C.routeFaite(pct)) + '</small></dd></div>' +
+          '</dl>') +
+          carte(C.enTeteClasse(c.nom), '<ol class="skc-autour">' + V.ordre.slice(0, 5).map((x) => this._ligneAutour(x, null, x.statut === 'ARV' ? esc(C.arrive) : nfc(C, x.dtf) + ' ' + C.mnCourt, false)).join('') + '</ol>');
+      }
+      return '<section class="sk-sec skc-course" id="skc-course" data-skc-section aria-labelledby="skc-titre"><div class="sk-cadre">' +
+        '<header class="sk-tete"><div class="sk-tete-textes"><p class="sk-kicker">' + esc(C.kCourse) + '</p><h2 class="sk-titre" id="skc-titre">' + esc(C.tCourse) + '</h2></div>' +
+        '<p class="skc-pointage"><span data-skc-ilya="2">' + esc(this._textePointage(J, true)) + '</span></p></header>' +
+        '<div class="skc-grille' + (deux ? ' est-deux' : '') + '">' + cartes + '</div>' +
+        '<div class="skc-pied"><a class="sk-btn sk-btn--suivre" href="' + esc(this._lienClassement(V)) + '">' + svg('liste') + '<span>' + esc(C.classementLien(c.nom)) + '</span></a>' +
+          '<a class="sk-btn sk-btn--ligne" href="' + esc(this._lienCarto()) + '">' + svg('carte') + '<span>' + esc(C.carto) + '</span></a>' +
+          (J.demo ? '<span class="sk-bord-demo">' + esc(C.demo) + '</span>' : '') + '</div>' +
+      '</div></section>';
+    }
+
+     
+    _prendreJeu(j) {
+      const s = this._p && this._p.skipper;
+      this._jeuEtat = 'pret';
+      this._jeuMaj = j.maj;
+      this._jeuPhase = j.phase;
+      this._vue = s ? vueCourse(j, s.id, this._idGeo()) : null;
+    }
+    
+
+    _poserCourse() {
+      const R = this._racine;
+      if (!R || this._phase !== 'course') return;
+      const remplacer = (sel, html) => { const el = R.querySelector(sel); if (el) el.outerHTML = html; };
+      remplacer('[data-skc-bord]', this._bordCourse());
+      remplacer('.sk-hero .sk-live', this._badgeCourse(this._T));
+      remplacer('[data-skc-section]', this._sectionCourse());
+      const li = R.querySelector('[data-skc-nav]');
+      if (li) li.hidden = !this._vue;
+      const outro = R.querySelector('[data-sk-outro]');
+      if (outro) outro.setAttribute('state', this._etatFinPage());
+      if (this._geoPerimee) this._geoPerimee();
+    }
+    _etatFinPage() {
+      const V = this._vue;
+      return V && (V.etat === 'arrive' || V.etat === 'abandon') ? 'after' : 'during';
+    }
+    
+
+
+    _suivreCourse() {
+      if (this._phase !== 'course') return;
+      const rendu = this._rendu;
+      let fini = false, minuteur = 0, auRetour = null;
+      const tictac = setInterval(() => this._tictac(), 60000);
+      this._nettoyages.push(() => {
+        fini = true; clearTimeout(minuteur); clearInterval(tictac);
+        if (auRetour) document.removeEventListener('visibilitychange', auRetour);
+      });
+      const vivant = () => !fini && rendu === this._rendu && this.isConnected;
+      const planifier = (ms) => { clearTimeout(minuteur); minuteur = setTimeout(relire, Math.min(Math.max(60000, ms), 2147483000)); };
+      const lire = (forcer) => lireJeuCourse(forcer).then((j) => {
+        if (!vivant()) return;
+        const deja = this._jeuEtat === 'pret' && this._jeuMaj === j.maj;
+        this._prendreJeu(j);
+        if (!deja) this._poserCourse(); else this._tictac();
+        const p = Date.parse(j.prochain);
+        planifier(isFinite(p) && !j.demo ? p - Date.now() + 90000 + Math.random() * 60000 : 300000);
+      }, () => {
+        if (!vivant()) return;
+        if (this._jeuEtat !== 'pret') { this._jeuEtat = 'panne'; this._poserCourse(); }
+        planifier(60000);
+      });
+      function relire() {
+        if (fini) return;
+        if (document.hidden) {
+          if (!auRetour) {
+            auRetour = () => { if (document.hidden) return; document.removeEventListener('visibilitychange', auRetour); auRetour = null; if (!fini) lire(true); };
+            document.addEventListener('visibilitychange', auRetour);
+          }
+          return;
+        }
+        lire(true);
+      }
+      lire(false);
+    }
+
 
     
 
@@ -6084,7 +6352,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
     }
 
     _nav(s, sections, T) {
-      const icone = { profil: 'profil', actus: 'actus', palmares: 'palmares', bateau: 'bateau', medias: 'medias', suivre: 'suivre' };
+      const icone = { course: 'route', profil: 'profil', actus: 'actus', palmares: 'palmares', bateau: 'bateau', medias: 'medias', suivre: 'suivre' };
       
 
       const liens = sections.filter(x => x.nav !== false);
@@ -6098,7 +6366,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
             (avatar ? '<span class="sk-nav-avatar"><img src="' + esc(avatar) + '" alt="" width="38" height="38" loading="lazy" decoding="async"></span>' : '') +
             '<span class="sk-nav-qui"><b>' + esc(this._nomAffiche) + '</b>' + (sous ? '<small>' + esc(sous) + '</small>' : '') + '</span></a>' +
           '<div class="sk-nav-defile"><span class="sk-nav-indic" aria-hidden="true"></span><ul class="sk-nav-liste">' +
-            liens.map(x => '<li><a class="sk-nav-lien" href="#' + x.id + '" data-sk-ancre="' + x.id + '">' + svg(icone[x.cle]) + '<span>' + esc(T.nav[x.cle]) + '</span></a></li>').join('') +
+            liens.map(x => '<li' + (x.cle === 'course' ? ' data-skc-nav' + (this._vue ? '' : ' hidden') : '') + '><a class="sk-nav-lien" href="#' + x.id + '" data-sk-ancre="' + x.id + '">' + svg(icone[x.cle]) + '<span>' + esc(T.nav[x.cle]) + '</span></a></li>').join('') +
           '</ul></div>' +
           '<div class="sk-nav-actions">' +
             this._boutonSuivre('sk-nav-btn sk-nav-btn--suivre', false) +
@@ -6435,7 +6703,6 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
 
           if (this._geoPerimee) this._geoPerimee();
           this._paliers();
-          this._echelleCarte();
           this._mesurerBio();
           const w = Math.round(e[0].contentRect.width);
           if (w !== largeurVue) { largeurVue = w; this._ajusterNom(); if (this._fondreNav) this._fondreNav(); }
@@ -6454,17 +6721,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
 
       this._mesurerScene(R, s);
       if (this._apercu) this._brancherCarto(R);
-
-       
-      this._ecoute(R, 'click', (ev) => {
-        const b = ev.target.closest('[data-sk-avance]');
-        if (!b) return;
-        const panneau = R.querySelector('#' + b.getAttribute('aria-controls'));
-        if (!panneau) return;
-        const ouvrir = b.getAttribute('aria-expanded') !== 'true';
-        b.setAttribute('aria-expanded', String(ouvrir));
-        panneau.hidden = !ouvrir;
-      });
+      this._suivreCourse();
 
       
 
@@ -6592,7 +6849,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
         outro.setAttribute('is-followed', this._suivi ? 'true' : 'false');
         
 
-        outro.setAttribute('state', enRoute ? 'during' : 'before');
+        outro.setAttribute('state', enRoute ? this._etatFinPage() : 'before');
         outro.setAttribute('lang', this._lang);
         
 

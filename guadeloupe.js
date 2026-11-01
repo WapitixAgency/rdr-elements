@@ -1,5 +1,5 @@
-/* rdr-elements guadeloupe | source route-du-rhum 193ac5e | rdr-guadeloupe.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["guadeloupe"]="193ac5e";performance.mark("rdr-elements:guadeloupe")}catch(e){}
+/* rdr-elements guadeloupe | source route-du-rhum 76dccbf | rdr-guadeloupe.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["guadeloupe"]="76dccbf";performance.mark("rdr-elements:guadeloupe")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-guadeloupe")) return;
