@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum ae8df10 | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="ae8df10";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum a094432 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="a094432";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -2462,11 +2462,17 @@ function piege(e, boite, avant) {
   else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
 }
 
-let promProg = null, resumeProg = null;
+let promProg = null, resumeProg = null, photosProg = [];
+
+function photosDe(jeu) {
+  return ((jeu && jeu.animations) || []).filter((a) => a && a.type !== 'guadeloupe' && idMedia(a.photo))
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map((a) => idMedia(a.photo));
+}
 function chargerProgramme() {
   if (!promProg) {
     promProg = ctx.programme().then((jeu) => {
       resumeProg = resumer(jeu, maintenantParis());
+      photosProg = photosDe(jeu);
       remplirProgramme();
       return resumeProg;
     }).catch(() => {
@@ -2710,7 +2716,18 @@ function tuilesRubriques() {
     if (!r) return null;
     if (cle === 'actualites') return r.cartes[0] && r.cartes[0].image;
     if (cle === 'skippers') return r.cartes[0] && r.cartes[0].image;
-    if (cle === 'programme') { const v = resumeProg && resumeProg.temps.items.concat(resumeProg.aVenir).find((a) => a.photo); return v ? idMedia(v.photo) : null; }
+    
+
+    if (cle === 'programme') {
+      const cleImage = (x) => idMedia(x) || String(x || '');
+      const l = course(), deja = l && l.image ? cleImage(l.image) : '';
+      const v = resumeProg && resumeProg.temps.items.concat(resumeProg.aVenir).find((a) => a.photo && idMedia(a.photo) && idMedia(a.photo) !== deja);
+      if (v) return idMedia(v.photo);
+      const autre = photosProg.find((p) => p !== deja);
+      if (autre) return autre;
+      const c = r.cartes.find((x) => x.image && cleImage(x.image) !== deja);
+      return c ? c.image : null;
+    }
     const c = r.cartes.find((x) => x.image);
     return c ? c.image : null;
   };
@@ -3078,6 +3095,7 @@ return {
 
   programmeFrais(jeu) {
     resumeProg = resumer(jeu, maintenantParis());
+    photosProg = photosDe(jeu);
     if (!promProg) promProg = Promise.resolve(resumeProg);
     remplirProgramme();
   },
