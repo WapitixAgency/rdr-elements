@@ -1,5 +1,5 @@
-/* rdr-elements entete | source route-du-rhum 73c6f9e | rdr-entete.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="73c6f9e";performance.mark("rdr-elements:entete")}catch(e){}
+/* rdr-elements entete | source route-du-rhum 49e3057 | rdr-entete.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["entete"]="49e3057";performance.mark("rdr-elements:entete")}catch(e){}
 ;(function(){
 ;(function () {
 'use strict';
@@ -135,15 +135,22 @@ function laCourse(lang, apres) {
     ])
   };
 }
+
+const GUA_IMG = {
+  venue: 'wix:image://v1/547c0f_a93eb849bc914ad9bc053ba279699491~mv2.avif/macte-vu-du-ciel.avif',
+  programme: 'wix:image://v1/f7bdc2_213188ec8ec44e289e19d1b21cbd85a4~mv2.jpg/village-arrivee-musiciens.jpg',
+  villages: 'wix:image://v1/df962b_5b67262245ed43399be52b6a0e277161~mv2.jpg/macte-trimaran.jpg'
+};
 function villageGuadeloupe(lang) {
   const en = lang === 'en';
   return {
     cle: 'guadeloupe', libelle: en ? 'Guadeloupe race village' : 'Village de Guadeloupe', lien: '/guadeloupe', panneau: 'guadeloupe', dates: GUA, sansTout: true,
+    faq: { libelle: en ? 'Finish FAQ' : "Vos questions sur l'arrivée", lien: '/faq#arrivee' },
     liens: [
       { libelle: en ? 'Overview' : 'Présentation', lien: '/guadeloupe', source: GUA, date: true },
-      { libelle: en ? 'Programme' : 'Programmation', lien: '/programmation', picto: 'calendrier', image: IMG.ultims, sous: en ? 'Pointe-à-Pitre, every day' : 'Pointe-à-Pitre, jour après jour' },
-      { libelle: en ? 'The finishes' : 'Les arrivées', bientot: true, picto: 'ancre', sous: en ? 'Boat by boat, in Pointe-à-Pitre' : 'Bateau par bateau, à Pointe-à-Pitre' },
-      { libelle: en ? 'Saint-Malo, the start village' : 'Saint-Malo, le village du départ', lien: '/saint-malo', source: SM }
+      { libelle: en ? 'Plan your visit' : 'Préparer sa venue', lien: '/guadeloupe#venue', picto: 'itineraire', image: GUA_IMG.venue, sous: en ? 'The MACTe, Pointe-à-Pitre' : 'Au MACTe, à Pointe-à-Pitre' },
+      { libelle: en ? 'Programme' : 'Programmation', lien: '/programmation', picto: 'calendrier', image: GUA_IMG.programme, sous: en ? 'The finish villages, day by day' : "Les villages de l'arrivée, jour après jour" },
+      { libelle: en ? 'The three villages' : 'Les trois villages', lien: '/guadeloupe#villages', picto: 'carte', image: GUA_IMG.villages, sous: 'MACTe, Bas-du-Fort, Basse-Terre' }
     ]
   };
 }
@@ -153,15 +160,19 @@ function engagements(lang, apres) {
     ? Object.assign({}, l, { bientot: false, bientotAvant: apres ? '' : 'ouverture-cartographie', lien: '/cartographie?mode=enfant', image: IMG.cartoJunior })
     : l)) });
 }
-const phase = (lang, apres) => {
+ 
+const phase = (lang, etape) => {
   const v = (cle) => ent(lang, cle);
-  return apres
+  const apres = etape !== 'depart';
+  const village = Object.assign({}, v('village'), { libelle: lang === 'en' ? 'Race village' : 'Village', titre: v('village').libelle });
+  return etape === 'guadeloupe'
     ? [v('actualites'), laCourse(lang, true), v('skippers'), villageGuadeloupe(lang), v('a-propos'), engagements(lang, true)]
-    : [v('actualites'), laCourse(lang, false), v('programme'), v('skippers'), Object.assign({}, v('village'), { libelle: lang === 'en' ? 'Race village' : 'Village', titre: v('village').libelle }), v('a-propos'), engagements(lang, false)];
+    : [v('actualites'), laCourse(lang, apres), v('programme'), v('skippers'), village, v('a-propos'), engagements(lang, apres)];
 };
 const PHASES_MENU = [
-  { moment: 'entete-depart', fr: phase('fr', false), en: phase('en', false) },
-  { moment: 'entete-course', fr: phase('fr', true), en: phase('en', true) }
+  { moment: 'entete-depart', fr: phase('fr', 'depart'), en: phase('en', 'depart') },
+  { moment: 'entete-course', fr: phase('fr', 'course'), en: phase('en', 'course') },
+  { moment: 'menu-guadeloupe', fr: phase('fr', 'guadeloupe'), en: phase('en', 'guadeloupe') }
 ];
 
 return { ARBORESCENCE, MOMENTS_REPLI, PHASES_MENU };
@@ -1251,7 +1262,8 @@ const NOUVEAU_H = 48;
 
 const carteOuverte = () => MENU.some((r) => (r.liens || []).some((l) => l.lien === '/carte-village-saint-malo' && !l.bientot));
 
-const accesDuMoment = () => (MENU.some((r) => r.cle === 'guadeloupe')
+const enCourse = () => { const p = phaseMenu(); return !!p && (p.moment === 'entete-course' || p.moment === 'menu-guadeloupe'); };
+const accesDuMoment = () => (enCourse()
   ? [{ cle: 'cartographie', lien: '/cartographie' }, { cle: 'classement', lien: '/classement' }].filter((a) => a.cle !== 'classement' || momentPasse('ouverture-classement'))
   : [{ cle: 'carte', lien: '/carte-village-saint-malo' }, { cle: 'programme', lien: '/programmation' }].filter((a) => a.cle !== 'carte' || carteOuverte()));
 let ACCES = accesDuMoment();
@@ -2646,7 +2658,8 @@ function chargerRecherche() {
   return promRecherche;
 }
 
-const phaseRecherche = () => { const p = phaseMenu(); return p ? (p.moment === 'entete-course' ? 'course' : 'depart') : ''; };
+const phaseRecherche = () => { const p = phaseMenu(); return p ? (p.moment === 'entete-course' || p.moment === 'menu-guadeloupe' ? 'course' : 'depart') : ''; };
+const menuGuadeloupe = () => MENU.some((r) => r.cle === 'guadeloupe');
 function lienCourse(u) {
   const c = RUBS.find((r) => r.cle === 'course');
   const l = c && c.liens.find((x) => x.lien === u);
@@ -2655,7 +2668,7 @@ function lienCourse(u) {
 function raccourcisCourse(ph) {
   const r = [];
   const ajouter = (u, ico) => { const x = lienCourse(u); if (x) r.push({ titre: x.l.libelle, lien: x.l.lien, meta: x.c.libelle, ico }); };
-  if (ph === 'course') { ajouter('/cartographie', 'carte'); ajouter('/classement', 'classement'); ajouter('/suivre-le-depart', 'voile'); }
+  if (ph === 'course') { ajouter('/cartographie', 'carte'); ajouter('/classement', 'classement'); if (!menuGuadeloupe()) ajouter('/suivre-le-depart', 'voile'); }
   else { ajouter('/suivre-le-depart', 'voile'); ajouter('/cartographie', 'carte'); }
   return r;
 }
@@ -2669,6 +2682,9 @@ function raccourcisMoment() {
       const n = p.temps.mode === 'vedettes' ? p.temps.items.filter((a) => a.vedette).length : 0;
       l.push({ titre: n ? TXT.aujourdhuiVillage(n) : TXT.aujourdhuiProgramme, lien: lienJour(p.jour), meta: TXT.progDuJour, ico: 'calendrier' });
     }
+    const gua = ph === 'course' && RUBS.find((r) => r.cle === 'guadeloupe');
+    const prog = gua && gua.liens.find((x) => x.lien === '/programmation');
+    if (prog) l.push({ titre: prog.libelle, lien: prog.lien, meta: gua.libelle, ico: 'calendrier' });
     if (R.espace) l.push({ titre: R.espace.libelle, lien: R.espace.lien, meta: TXT.espaceMeta, ico: 'skipper' });
     return l.slice(0, 4);
   }
@@ -2703,7 +2719,7 @@ function tuilesRubriques() {
   const course = () => { const x = (ph === 'course' && lienCourse('/cartographie')) || lienCourse('/suivre-le-depart') || lienCourse('/cartographie'); return x ? x.l : null; };
   const sous = (r) => {
     if (r.cle === 'programme' && resumeProg) return resumeProg.etat === 'avant' ? TXT.ouvreDansCourt(resumeProg.joursAvant) : resumeProg.etat === 'pendant' ? TXT.ouvert(jourLong(resumeProg.fermeture)).replace(/\.$/, '') : '';
-    if (r.cle === 'village') return typeof r.dates === 'string' ? r.dates : '';
+    if (r.cle === 'village' || r.cle === 'guadeloupe') return typeof r.dates === 'string' ? r.dates : '';
     if (r.cle === 'course') { const l = course(); return (l && l.sous) || ''; }
     return '';
   };
@@ -2711,15 +2727,15 @@ function tuilesRubriques() {
   const teintes = { actualites: '#1f6f7a', programme: '#8a5d12', skippers: '#2d5f86', village: '#006F7B', 'a-propos': '#1f6f7a', engagements: '#0c7a6a', course: '#16355D', guadeloupe: '#0c7a6a' };
   
 
-  const ordre = ph === 'course' ? ['course', 'skippers', 'actualites', 'guadeloupe', 'a-propos', 'engagements']
-    : ph === 'depart' ? ['course', 'programme', 'actualites', 'skippers', 'village', 'engagements']
+  const ordre = ph === 'course' && menuGuadeloupe() ? ['course', 'guadeloupe', 'actualites', 'skippers', 'a-propos', 'engagements']
+    : ph ? ['course', 'programme', 'actualites', 'skippers', 'village', 'engagements']
     : ['programme', 'village', 'actualites', 'skippers', 'a-propos', 'engagements'];
   return ordre.map((cle) => RUBS.find((x) => x.cle === cle)).filter(Boolean).map((r, i) => ({
     cle: r.cle, num: r.num, titre: r.libelle, image: imageDe(r.cle), al: r.cle === 'skippers' ? 't' : 'c', sous: sous(r), grand: i < 2, t1: teintes[r.cle]
   }));
 }
  
-const themesRecherche = () => phaseRecherche() !== 'course';
+const themesRecherche = () => !menuGuadeloupe();
  
 function ouvrirRecherche(texte) {
   if (format() === 'pc') { fermerLarge(); chargerRecherche().then((rc) => rc.ouvrirPalette(texte || '')); }
