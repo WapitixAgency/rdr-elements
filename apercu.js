@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum be7e556 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="be7e556";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 73c6f9e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="73c6f9e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -916,6 +916,7 @@ rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(2){--d:.57s}
 rdr-accueil-apercu .hero.est-photo ~ .hv-acces-sous .cta:nth-child(3){--d:.69s}
 rdr-accueil-apercu .hero ~ rdr-dernieres-infos{background:#0E111D}
 rdr-accueil-apercu .hero ~ rdr-dernieres-infos .rdi{margin:clamp(14px,2.6vh,26px) 0 clamp(4px,1vh,10px)}
+rdr-accueil-apercu .hero ~ rdr-dernieres-infos.dp-colle .rdi{margin-bottom:0}
 rdr-accueil-apercu .hero:not(.est-photo) ~ rdr-dernieres-infos .rdi{opacity:0}
 rdr-accueil-apercu .hero.est-photo ~ rdr-dernieres-infos .rdi{animation:raa-rdi-monte .7s cubic-bezier(.22,.8,.3,1) .3s both}
 rdr-accueil-apercu .em:not([hidden]) ~ rdr-dernieres-infos .rdi{margin-top:0}
@@ -3195,6 +3196,7 @@ function monter(racine, portail, D) {
     clearInterval(dpTour); clearInterval(dpMaj); dpTour = dpMaj = 0;
     const t = PHASES[phase] && PHASES[phase].trio;
     tout('.hv-acces-sous, .affiche').forEach((e) => e.classList.toggle('dp-masque-phase', !!t));
+    tout('rdr-dernieres-infos').forEach((e) => e.classList.toggle('dp-colle', !!t));
     if (!t) { boite.hidden = true; boite.innerHTML = ''; return; }
     const lienDp = (x, ico, cle) => (lienPub(x.lien) ? '<a class="dp-l"' + (cle ? ' data-cle="' + esc(cle) + '"' : '') + href(x.lien) + '>' : '<span class="dp-l">') +
       '<i>' + dpIco(ico) + '</i><small>' + esc(x.petit) + '</small><b>' + esc(x.grand) + '</b>' + (x.texte ? '<span class="dp-masque"> : ' + esc(x.texte) + '</span>' : '') +
