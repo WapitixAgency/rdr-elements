@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 9c82f21 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="9c82f21";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum be7e556 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="be7e556";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1184,6 +1184,7 @@ rdr-accueil-apercu .dp-l small{font:800 9.5px/1 var(--police);letter-spacing:.14
 rdr-accueil-apercu .dp-l b{font:clamp(15px,1.3vw,19px)/1 var(--titre);font-style:italic;font-weight:400;text-transform:uppercase;white-space:nowrap}
 rdr-accueil-apercu .dp-l .dp-fl{position:absolute;right:12px;top:12px;width:15px;height:15px;fill:none;stroke:var(--dp-encre3);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s,stroke .2s}
 rdr-accueil-apercu .dp-l:hover .dp-fl,rdr-accueil-apercu .dp-l:focus-visible .dp-fl{transform:translate(2px,-2px);stroke:var(--dp-encre)}
+rdr-accueil-apercu .dp-masque-phase{display:none!important}
 rdr-accueil-apercu .dp-masque{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 rdr-accueil-apercu .dp-l[data-cle="mer"]{--c:var(--teal)}
 rdr-accueil-apercu .dp-l[data-cle="terre"]{--c:var(--or)}
@@ -3193,7 +3194,7 @@ function monter(racine, portail, D) {
     if (!boite) return;
     clearInterval(dpTour); clearInterval(dpMaj); dpTour = dpMaj = 0;
     const t = PHASES[phase] && PHASES[phase].trio;
-    tout('.hv-acces-sous, .affiche').forEach((e) => { e.hidden = !!t; });
+    tout('.hv-acces-sous, .affiche').forEach((e) => e.classList.toggle('dp-masque-phase', !!t));
     if (!t) { boite.hidden = true; boite.innerHTML = ''; return; }
     const lienDp = (x, ico, cle) => (lienPub(x.lien) ? '<a class="dp-l"' + (cle ? ' data-cle="' + esc(cle) + '"' : '') + href(x.lien) + '>' : '<span class="dp-l">') +
       '<i>' + dpIco(ico) + '</i><small>' + esc(x.petit) + '</small><b>' + esc(x.grand) + '</b>' + (x.texte ? '<span class="dp-masque"> : ' + esc(x.texte) + '</span>' : '') +
