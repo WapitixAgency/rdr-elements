@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 35a37c3 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="35a37c3";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 71f04c6 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="71f04c6";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1168,6 +1168,9 @@ rdr-accueil-apercu .co-btn--encre:hover{background:var(--marine2);border-color:v
 rdr-accueil-apercu .co-btn--petit{height:38px;padding:0 15px;font-size:13px}
 rdr-accueil-apercu .co-trait{display:inline-block;width:54px;height:6px;border-radius:3px;background:var(--jaune);transform:skewX(-20deg)}
 rdr-accueil-apercu .hc{position:relative;height:clamp(430px,calc(100svh - var(--haut-entete) - 64px),700px);background:var(--co-nuit);color:#fff;overflow:hidden;isolation:isolate}
+@media (max-height:820px) and (min-width:761px){
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hc{height:calc(100svh - 64px)}
+}
 rdr-accueil-apercu .hc-in{position:absolute;inset:0}
 rdr-accueil-apercu .hc-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s .9s}
 rdr-accueil-apercu .hc-slide.est-vue{opacity:1;visibility:visible;transition:opacity .9s ease}

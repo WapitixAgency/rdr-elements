@@ -1,5 +1,5 @@
-/* rdr-elements saint-malo | source route-du-rhum 35a37c3 | rdr-saint-malo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["saint-malo"]="35a37c3";performance.mark("rdr-elements:saint-malo")}catch(e){}
+/* rdr-elements saint-malo | source route-du-rhum 71f04c6 | rdr-saint-malo.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["saint-malo"]="71f04c6";performance.mark("rdr-elements:saint-malo")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-saint-malo")) return;
