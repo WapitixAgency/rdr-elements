@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 9a3f9d5 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="9a3f9d5";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 193ac5e | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="193ac5e";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1156,7 +1156,7 @@ rdr-accueil-apercu .jx-carte .cta-rhum svg{width:16px;height:16px}
 rdr-accueil-apercu .jx-lien{font-size:12px;font-weight:700;color:#6B7287;text-decoration:underline;text-underline-offset:3px}
 rdr-accueil-apercu .jx-lien:hover{color:var(--marine2)}
 rdr-accueil-apercu .jx-lien:focus-visible{outline:3px solid #13204A;outline-offset:3px}
-rdr-accueil-apercu .hc,rdr-accueil-apercu .cl{--co-papier:#F4F1E8;--co-encre:#0E111D;--co-encre2:#3A4256;--co-encre3:#646B7E;--co-nuit:#0A1228;--co-rouge:#E63946;--co-r:24px 4px 16px 4px;--dp-papier:#F4F1E8;--dp-encre:#0E111D;--dp-encre3:#646B7E;--dp-violet:#8B86E0;--dp-r:24px 4px 16px 4px}
+rdr-accueil-apercu .hc,rdr-accueil-apercu .cl,rdr-accueil-apercu .hc-rv{--co-papier:#F4F1E8;--co-encre:#0E111D;--co-encre2:#3A4256;--co-encre3:#646B7E;--co-nuit:#0A1228;--co-rouge:#E63946;--co-r:24px 4px 16px 4px;--dp-papier:#F4F1E8;--dp-encre:#0E111D;--dp-encre3:#646B7E;--dp-violet:#8B86E0;--dp-r:24px 4px 16px 4px}
 rdr-accueil-apercu .co-k{display:inline-flex;align-items:center;gap:8px;font:800 10.5px/1.25 var(--police);letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
 rdr-accueil-apercu .co-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:44px;padding:0 20px;border:2px solid currentColor;border-radius:10px 0 10px 0;background:transparent;color:#fff;font:700 14px/1 var(--police);white-space:nowrap;text-decoration:none;transition:background .15s,color .15s,border-color .15s}
 rdr-accueil-apercu .co-btn svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
@@ -1202,8 +1202,10 @@ rdr-accueil-apercu .hc.est-fixe .hc-tiret[aria-selected="true"] span::after{anim
 @keyframes raa-co-remplit{to{transform:scaleX(1)}}
 rdr-accueil-apercu .hc-revoir{position:absolute;z-index:4;right:max(var(--marge),calc((100% - var(--largeur)) / 2));bottom:clamp(14px,2.4vh,24px);display:flex;align-items:center;gap:14px;padding:7px 18px 7px 7px;border:1px solid rgba(255,255,255,.2);border-radius:14px 3px 14px 3px;background:rgba(14,17,29,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
 rdr-accueil-apercu button.hc-revoir{font:inherit;color:inherit;text-align:left;cursor:pointer}
-rdr-accueil-apercu .hc-rv{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px;background:rgba(10,18,40,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-rdr-accueil-apercu .hc-rv-f{width:min(1100px,100%,calc((100svh - 190px) * 16 / 9));display:flex;flex-direction:column;gap:14px;outline:none}
+rdr-accueil-apercu .hc-rv{position:fixed;inset:0;z-index:2147483000;width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:16px;border:0;box-sizing:border-box;display:grid;place-items:center;color:#fff;background:rgba(10,18,40,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+rdr-accueil-apercu .hc-rv:not([open]){display:none}
+rdr-accueil-apercu .hc-rv::backdrop{background:transparent}
+rdr-accueil-apercu .hc-rv-f{width:min(1100px,calc(100vw - 32px),calc((100svh - 190px) * 16 / 9));display:flex;flex-direction:column;gap:14px;outline:none}
 rdr-accueil-apercu .hc-rv-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;color:#fff}
 rdr-accueil-apercu .hc-rv-t b{font:clamp(24px,2.6vw,34px)/1 var(--titre);font-style:italic;font-weight:400;text-transform:uppercase}
 rdr-accueil-apercu .hc-rv-t small{font:700 12px/1.2 var(--police);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
@@ -3560,28 +3562,30 @@ function monter(racine, portail, D) {
   }
   
 
+
   let rvVoile = null, rvOuvreur = null;
-  const rvTouche = (e) => { if (e.key === 'Escape') fermerRevoir(); };
   function fermerRevoir() {
     if (!rvVoile) return;
-    rvVoile.remove(); rvVoile = null;
-    document.removeEventListener('keydown', rvTouche);
+    const d = rvVoile; rvVoile = null;
+    try { if (d.open) d.close(); } catch (e) {   }
+    d.remove();
     try { if (rvOuvreur) rvOuvreur.focus({ preventScroll: true }); } catch (e) {   }
   }
   function ouvrirRevoir(R, v, ouvreur) {
     fermerRevoir();
     rvOuvreur = ouvreur || null;
     const src = 'https://www.youtube.com/embed/' + encodeURIComponent(v) + '?autoplay=1&rel=0&playsinline=1&modestbranding=1&origin=' + encodeURIComponent(location.origin);
-    rvVoile = document.createElement('div');
+    rvVoile = document.createElement('dialog');
     rvVoile.className = 'hc-rv';
-    rvVoile.setAttribute('role', 'dialog'); rvVoile.setAttribute('aria-modal', 'true'); rvVoile.setAttribute('aria-labelledby', 'hcRvT');
+    rvVoile.setAttribute('aria-labelledby', 'hcRvT');
     rvVoile.innerHTML = '<div class="hc-rv-f" tabindex="-1"><div class="hc-rv-t"><b id="hcRvT">' + esc(R.titre || '') + '</b><small>' + esc(R.sous || '') + '</small></div>' +
       '<div class="hc-rv-v"><iframe src="' + esc(src) + '" title="' + esc(R.titre || '') + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>' +
       '<div class="hc-rv-b"><a class="co-btn co-btn--jaune" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v) + '" target="_blank" rel="noopener">' + esc(R.surYoutube || 'YouTube') + coIco('fleche') + '</a>' +
       '<button class="co-btn hc-rv-x" type="button" data-hc-rv-fermer>' + esc(R.fermer || '×') + '</button></div></div>';
     rvVoile.addEventListener('click', (e) => { if (e.target === rvVoile || (e.target.closest && e.target.closest('[data-hc-rv-fermer]'))) fermerRevoir(); });
+    rvVoile.addEventListener('close', fermerRevoir);
     racine.appendChild(rvVoile);
-    document.addEventListener('keydown', rvTouche);
+    try { rvVoile.showModal(); } catch (e) { rvVoile.setAttribute('open', ''); }
     try { rvVoile.querySelector('.hc-rv-f').focus({ preventScroll: true }); } catch (e) {   }
   }
   function rendreHc() {
