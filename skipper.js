@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum 148d447 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="148d447";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 5508e16 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="5508e16";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2849,16 +2849,20 @@ customElements.define('skippers-carousel', SkippersCarousel);
 
 
 
+
+
   const CARTO_GEO = { fr: 'https://carto.routedurhum.com/fr/index.html', en: 'https://carto.routedurhum.com/en/index.html' };
   const CARTO_ORIGINE = 'https://carto.routedurhum.com';
   const CLASSES_CARTO = { ultim: 2, 'ocean-fifty': 4, imoca: 3, class40: 1, 'vintage-mono': 5, 'vintage-multi': 6 };
   const CARTO_DELAI = 12000;
+  const auDoigt = () => !(window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches);
   const apercuCarto = () => { try { return new URLSearchParams(location.search).get('carto') === 'compact'; } catch (e) { return false; } };
   const CARTO_T = {
-    fr: { titre: 'Cartographie officielle de la course', activer: 'Cliquer pour déplacer et zoomer', complete: 'La cartographie complète', recentrer: (p) => 'Recentrer sur ' + p, lente: 'La carte de la course met plus de temps que prévu.' },
-    en: { titre: 'Official race tracker', activer: 'Click to pan and zoom', complete: 'Full race tracker', recentrer: (p) => 'Back to ' + p, lente: 'The race map is taking longer than usual.' }
+    fr: { titre: 'Cartographie officielle de la course', activer: 'Cliquer pour déplacer et zoomer', activerDoigt: 'Déplacer la carte', fini: 'Terminer', complete: 'La cartographie complète', recentrer: (p) => 'Recentrer sur ' + p, lente: 'La carte de la course met plus de temps que prévu.' },
+    en: { titre: 'Official race tracker', activer: 'Click to pan and zoom', activerDoigt: 'Move the map', fini: 'Done', complete: 'Full race tracker', recentrer: (p) => 'Back to ' + p, lente: 'The race map is taking longer than usual.' }
   };
   
+
 
 
 
@@ -2893,7 +2897,9 @@ customElements.define('skippers-carousel', SkippersCarousel);
       arrive: 'Arrivé', aPap: 'à Pointe-à-Pitre', arriveeLe: (j, h) => 'Arrivé le ' + j + ' à ' + h + ', heure de Paris',
       grandVainqueurSur: 'Grand vainqueur, 1er au scratch', vainqueurCategorie: 'Vainqueur de la catégorie', arriveRang: (r, n) => 'Arrivé ' + r + ' sur ' + n,
       tempsCourse: 'Temps de course', moyenne: 'Moyenne', ecartVainqueur: 'Après le vainqueur', surQui: (q) => 'sur ' + q, premierArrive: 'Premier arrivé', aheadDe: (q) => 'd’avance sur ' + q, kmhMoy: (k) => k + ' km/h de moyenne',
-      abandon: 'Abandon', aDeArrivee: (mn, km) => 'à ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée', routeFaite: (p) => p + ' % de la route faite',
+      abandon: 'Abandon', aDeArrivee: (mn, km) => 'à ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée',
+      aDeArriveeEnv: (mn, km) => 'à environ ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée, d’après sa dernière position',
+      abandonA: 'Abandon à', duParcours: 'du parcours', raison: 'Raison', lireArticle: 'Lire l’article', routeFaite: (p) => p + ' % de la route faite',
       absent: 'Sa position n’est pas transmise par la cartographie officielle. Elle s’affichera ici dès qu’elle le sera.',
       attente: 'Les positions arrivent ici au premier pointage de la course.',
       panne: 'Le classement ne répond pas pour l’instant. Les positions reviennent ici dès qu’il répond.',
@@ -2902,7 +2908,13 @@ customElements.define('skippers-carousel', SkippersCarousel);
       rang12: 'Son rang sur 12 heures', ilYa: (r, h) => r + ' il y a ' + h + ' h', maintenant: (r, n) => r + ' sur ' + n + ' maintenant', courbeVide: 'La courbe se dessine au fil des pointages.',
       chiffres: 'Au dernier pointage', sur24: 'Sur 24 h', moy24: 'Moyenne 24 h', cap: 'Cap', vmg: 'VMG', ecartPrec: 'Écart au précédent', ecartSuiv: 'Écart au suivant',
       sonArrivee: 'Son arrivée', lesArrives: (c) => 'Les arrivés ' + c, sonAbandon: 'Son abandon', enTeteClasse: (c) => 'En tête ' + (c === 'IMOCA' || c === 'Ultim' ? 'des ' + c : 'de la classe ' + c),
-      arriveeQuand: 'Arrivée', temps: 'Temps', ecart: 'Écart', vainqueurMot: 'Vainqueur'
+      arriveeQuand: 'Arrivée', temps: 'Temps', ecart: 'Écart', vainqueurMot: 'Vainqueur',
+      bordTitre: 'À bord', bordDirect: 'En direct', bordDerniere: (q, v) => (v ? 'Dernière vidéo ' : 'Dernière photo ') + q,
+      bordTout: (n, g) => 'Voir les ' + n + (g === 'video' ? ' vidéos' : g === 'photo' ? ' photos' : ' photos et vidéos'),
+      bordOuvrir: (q, v) => (v ? 'Voir la vidéo, ' : 'Agrandir la photo, ') + q, fermer: 'Fermer', prec: 'Précédent', suiv: 'Suivant', youtube: 'Voir la vidéo sur YouTube',
+      ilya: (m) => m < 60 ? 'il y a ' + Math.max(1, m) + ' min' : 'il y a ' + Math.round(m / 60) + ' h',
+      visuelKickerGrand: 'Route du Rhum - Destination Guadeloupe 2026', visuelKickerCategorie: (c) => 'Route du Rhum 2026 · catégorie ' + c,
+      visuelGrand: 'Grand vainqueur', visuelCategorie: (c) => 'Vainqueur ' + c, passer: 'Passer', visuelAria: (n) => 'Visuel de ' + n + ', vainqueur'
     },
     en: {
       locale: 'en-GB', mn: 'nautical miles', mnCourt: 'nm', nds: 'knots', ndsCourt: 'kn',
@@ -2918,7 +2930,9 @@ customElements.define('skippers-carousel', SkippersCarousel);
       arrive: 'Finished', aPap: 'in Pointe-à-Pitre', arriveeLe: (j, h) => 'Finished on ' + j + ' at ' + h + ', Paris time',
       grandVainqueurSur: 'Overall winner, first across the line', vainqueurCategorie: 'Class winner', arriveRang: (r, n) => 'Finished ' + r + ' of ' + n,
       tempsCourse: 'Race time', moyenne: 'Average', ecartVainqueur: 'Behind the winner', surQui: (q) => 'on ' + q, premierArrive: 'First to finish', aheadDe: (q) => 'ahead of ' + q, kmhMoy: (k) => k + ' km/h average',
-      abandon: 'Retired', aDeArrivee: (mn, km) => mn + ' nautical miles (' + km + ' km) from the finish', routeFaite: (p) => p + ' % of the course sailed',
+      abandon: 'Retired', aDeArrivee: (mn, km) => mn + ' nautical miles (' + km + ' km) from the finish',
+      aDeArriveeEnv: (mn, km) => 'about ' + mn + ' nautical miles (' + km + ' km) from the finish, from their last position',
+      abandonA: 'Retired at', duParcours: 'of the course', raison: 'Reason', lireArticle: 'Read the article', routeFaite: (p) => p + ' % of the course sailed',
       absent: 'Their position is not provided by the official tracker yet. It will appear here as soon as it is.',
       attente: 'Positions appear here at the first race position report.',
       panne: 'The ranking is not responding right now. Positions will be back here as soon as it does.',
@@ -2927,7 +2941,13 @@ customElements.define('skippers-carousel', SkippersCarousel);
       rang12: 'Their rank over 12 hours', ilYa: (r, h) => r + ' ' + h + ' h ago', maintenant: (r, n) => r + ' of ' + n + ' now', courbeVide: 'The chart builds up with each position report.',
       chiffres: 'At the last report', sur24: 'Over 24 h', moy24: '24 h average', cap: 'Heading', vmg: 'VMG', ecartPrec: 'Gap to boat ahead', ecartSuiv: 'Gap to next boat',
       sonArrivee: 'Their finish', lesArrives: (c) => c + ' finishers', sonAbandon: 'Their retirement', enTeteClasse: (c) => 'Leading the ' + c + ' class',
-      arriveeQuand: 'Finish', temps: 'Time', ecart: 'Gap', vainqueurMot: 'Winner'
+      arriveeQuand: 'Finish', temps: 'Time', ecart: 'Gap', vainqueurMot: 'Winner',
+      bordTitre: 'On board', bordDirect: 'Live', bordDerniere: (q, v) => (v ? 'Latest video ' : 'Latest photo ') + q,
+      bordTout: (n, g) => 'See all ' + n + (g === 'video' ? ' videos' : g === 'photo' ? ' photos' : ' photos and videos'),
+      bordOuvrir: (q, v) => (v ? 'Watch the video, ' : 'Enlarge the photo, ') + q, fermer: 'Close', prec: 'Previous', suiv: 'Next', youtube: 'Watch on YouTube',
+      ilya: (m) => m < 60 ? Math.max(1, m) + ' min ago' : Math.round(m / 60) + ' h ago',
+      visuelKickerGrand: 'Route du Rhum - Destination Guadeloupe 2026', visuelKickerCategorie: (c) => 'Route du Rhum 2026 · ' + c + ' class',
+      visuelGrand: 'Overall winner', visuelCategorie: (c) => c + ' winner', passer: 'Skip', visuelAria: (n) => 'Visual of ' + n + ', winner'
     }
   };
    
@@ -2944,6 +2964,8 @@ customElements.define('skippers-carousel', SkippersCarousel);
     const age = Date.now() - x.lu, prochain = Date.parse(x.j.prochain);
     return age >= 0 && (age < 60000 || (age < 900000 && isFinite(prochain) && Date.now() < prochain + 90000));
   }
+   
+  const sigOfficiel = (j) => (j && Array.isArray(j.classes) ? j.classes.map((c) => (Array.isArray(c.lignes) ? c.lignes : []).filter((l) => l && l.officiel).map((l) => l.id + ':' + l.officiel).join(',')).join('|') : '');
   function lireJeuCourse(forcer) {
     const m = jeuEnMemoire();
     if (!forcer && jeuFrais(m)) return Promise.resolve(m.j);
@@ -2963,6 +2985,106 @@ customElements.define('skippers-carousel', SkippersCarousel);
   }
   
 
+
+
+
+
+  const ABORD_STATIQUE = 'https://wapitixagency.github.io/rdr-elements/statique/abord.json';
+  const ABORD_SITE = 'https://www.routedurhum.com/_functions/abord?sailor=';
+  let repliABordMemoire = 0;
+  function repliABordPermis() {
+    const t = Date.now();
+    try {
+      const avant = Number(sessionStorage.getItem('rdrAbordRepli') || 0);
+      if (t - avant < 900000) return false;
+      sessionStorage.setItem('rdrAbordRepli', String(t));
+      return true;
+    } catch (e) {
+      if (t - repliABordMemoire < 900000) return false;
+      repliABordMemoire = t;
+      return true;
+    }
+  }
+  function lireAbord(url) {
+    const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    const minuteur = setTimeout(() => { if (ctrl) ctrl.abort(); }, 15000);
+    return fetch(url, { credentials: 'omit', signal: ctrl ? ctrl.signal : undefined })
+      .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then((j) => { if (!j || !Array.isArray(j.sailors)) throw new Error('flux du bord illisible'); return j; })
+      .finally(() => clearTimeout(minuteur));
+  }
+  const sureAbord = (u) => /^https:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : '';
+  const imageAbord = (m, grande) => grande && m.type !== 'video' ? sureAbord(m.photo) || sureAbord(m.thumbnail) : sureAbord(m.thumbnail) || sureAbord(m.photo);
+   
+  const legendeAbord = (t) => { const x = String(t || '').replace(/\s+/g, ' ').trim(); return /^(image|img|photo|dsc|p)[\s_-]*\d+$/i.test(x) ? '' : x; };
+  const creditAbord = (t) => { const x = String(t || '').replace(/\s+/g, ' ').trim(); return x && !/^©/.test(x) ? '© ' + x : x; };
+  function quandAbord(m, court, C) {
+    const d = new Date(m.date);
+    if (isNaN(d)) return '';
+    const min = Math.round((Date.now() - d.getTime()) / 60000);
+    if (min >= 0 && min < 48 * 60) return C.ilya(min);
+    const s = d.toLocaleString(C.locale, court ? { day: 'numeric', month: 'short', ...PARIS } : { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', ...PARIS });
+    return C.locale === 'fr-FR' ? s.replace(':', ' h ') : s;
+  }
+  function blocABord(medias, enCourse, bateau, C) {
+    const [une, ...autres] = medias;
+    const genre = medias.every((m) => m.type === 'video') ? 'video' : medias.every((m) => m.type !== 'video') ? 'photo' : 'mix';
+    const tuile = (m, i, classe) => {
+      const q = quandAbord(m, classe !== 'une', C);
+      const cache = classe !== 'une' && i > 4 ? ' data-cache' : '';
+      const plus = classe !== 'une' && i === 4 && medias.length > 5 ? '<span class="sk-abord-plus" aria-hidden="true">+' + (medias.length - 4) + '</span>' : '';
+      const lib = classe === 'une'
+        ? '<span class="sk-abord-legende"><span class="sk-abord-quand">' + esc(q) + '</span>' + (legendeAbord(m.caption) ? '<span class="sk-abord-texte">' + esc(legendeAbord(m.caption)) + '</span>' : '') + (m.credit ? '<span class="sk-abord-credit">' + esc(creditAbord(m.credit)) + '</span>' : '') + '</span>'
+        : '<span class="sk-abord-mini">' + esc(q) + '</span>';
+      
+
+      const compose = classe === 'une' && m.type === 'video';
+      return '<button type="button" class="sk-abord-photo sk-abord-' + classe + '"' + (compose ? ' data-compose' : '') + ' data-abord="' + i + '"' + cache + ' aria-label="' + esc(C.bordOuvrir(quandAbord(m, false, C), m.type === 'video')) + '">' +
+        (compose ? '<img class="sk-abord-flou" src="' + esc(imageAbord(m, true)) + '" alt="" aria-hidden="true" decoding="async">' : '') +
+        '<img src="' + esc(imageAbord(m, classe === 'une')) + '" alt="" loading="' + (classe === 'une' ? 'eager' : 'lazy') + '" decoding="async" data-attente>' +
+        (m.type === 'video' ? '<span class="sk-abord-video" aria-hidden="true">' + svg('lecture') + '</span>' : '') + lib + plus + '</button>';
+    };
+    return '<section class="sk-sec sk-abord" id="sk-abord" data-abord-section aria-labelledby="sk-abord-titre"><div class="sk-cadre">' +
+      '<header class="sk-tete"><div class="sk-tete-textes"><p class="sk-kicker">' + esc(bateau) + '</p><h2 class="sk-titre" id="sk-abord-titre">' + esc(C.bordTitre) + '</h2></div>' +
+      (enCourse ? '<p class="sk-abord-direct"><i aria-hidden="true"></i>' + esc(C.bordDirect) + '<span>' + esc(C.bordDerniere(quandAbord(une, false, C), une.type === 'video')) + '</span></p>' : '') + '</header>' +
+      '<div class="sk-abord-grille">' + tuile(une, 0, 'une') + (autres.length ? '<div class="sk-abord-autres">' + autres.map((m, k) => tuile(m, k + 1, 'vignette')).join('') + '</div>' : '') + '</div>' +
+      (medias.length > 1 ? '<div class="sk-abord-pied"><button type="button" class="sk-abord-tout" data-abord="0">' + svg('grille') + esc(C.bordTout(medias.length, genre)) + '</button></div>' : '') +
+    '</div></section>';
+  }
+  
+
+  const visABord = { el: null, medias: [], i: 0, retour: null, departX: null, C: null, nom: '' };
+  function ouvrirABord(medias, i, declencheur, C, nom) {
+    Object.assign(visABord, { medias, i, retour: declencheur || document.activeElement, C, nom });
+    let v = visABord.el;
+    if (!v) {
+      v = visABord.el = document.createElement('div'); v.className = 'sk-abord-visionneuse'; v.setAttribute('role', 'dialog'); v.setAttribute('aria-modal', 'true'); document.body.appendChild(v);
+      v.addEventListener('click', (e) => { if (e.target.closest('[data-v-fermer]')) fermerABord(); else if (e.target.closest('[data-v-prec]')) allerABord(-1); else if (e.target.closest('[data-v-suiv]')) allerABord(1); else if (e.target.classList.contains('v-scene')) fermerABord(); });
+      v.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') visABord.departX = e.clientX; });
+      v.addEventListener('pointerup', (e) => { if (visABord.departX == null) return; const dx = e.clientX - visABord.departX; visABord.departX = null; if (Math.abs(dx) > 50) allerABord(dx < 0 ? 1 : -1); });
+    }
+    peindreABord(); document.addEventListener('keydown', clavierABord); document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => v.classList.add('est-ouverte')); v.querySelector('[data-v-fermer]').focus();
+  }
+  function peindreABord() {
+    const { el: v, medias, i, C, nom } = visABord; const m = medias[i];
+    v.setAttribute('aria-label', C.bordTitre + ', ' + (i + 1) + ' / ' + medias.length);
+    const corps = m.type === 'video' && sureAbord(m.youtube) ? '<a class="v-lien" href="' + esc(sureAbord(m.youtube)) + '" target="_blank" rel="noopener">' + esc(C.youtube) + '</a>' : '<img src="' + esc(imageAbord(m, true)) + '" alt="' + esc(nom + ', ' + quandAbord(m, false, C)) + '">';
+    v.innerHTML = '<div class="v-haut"><span>' + esc(nom) + ' · ' + (i + 1) + ' / ' + medias.length + '</span><button type="button" class="v-btn" data-v-fermer aria-label="' + esc(C.fermer) + '">' + svg('croix') + '</button></div>' +
+      '<div class="v-scene">' + corps + '</div>' +
+      '<div class="v-bas"><button type="button" class="v-btn" data-v-prec aria-label="' + esc(C.prec) + '"' + (i === 0 ? ' disabled' : '') + '>' + svg('gauche') + '</button>' +
+        '<div class="v-legende"><span class="v-quand">' + esc(quandAbord(m, false, C)) + '</span>' + (legendeAbord(m.caption) ? '<span class="v-texte">' + esc(legendeAbord(m.caption)) + '</span>' : '') + (m.credit ? '<span class="v-credit">' + esc(creditAbord(m.credit)) + '</span>' : '') + '</div>' +
+        '<button type="button" class="v-btn" data-v-suiv aria-label="' + esc(C.suiv) + '"' + (i === medias.length - 1 ? ' disabled' : '') + '>' + svg('droite') + '</button></div>';
+  }
+  function allerABord(pas) { const n = visABord.i + pas; if (n < 0 || n >= visABord.medias.length) return; visABord.i = n; peindreABord(); const v = visABord.el; (v.querySelector(pas > 0 ? '[data-v-suiv]:not(:disabled)' : '[data-v-prec]:not(:disabled)') || v.querySelector('[data-v-fermer]')).focus(); }
+  function clavierABord(e) {
+    const v = visABord.el;
+    if (e.key === 'Escape') { e.preventDefault(); fermerABord(); } else if (e.key === 'ArrowRight') { e.preventDefault(); allerABord(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); allerABord(-1); }
+    else if (e.key === 'Tab') { const f = [...v.querySelectorAll('button:not(:disabled), a[href]')]; const k = f.indexOf(document.activeElement); if (e.shiftKey && k <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && k === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+  }
+  function fermerABord() { const v = visABord.el; if (!v) return; document.removeEventListener('keydown', clavierABord); document.body.style.overflow = ''; v.classList.remove('est-ouverte'); visABord.el = null; setTimeout(() => v.remove(), 180); if (visABord.retour && visABord.retour.focus) visABord.retour.focus(); }
+  
+
   function vueCourse(J, id, idGeo) {
     if (!jeuValide(J) || J.phase !== 'course') return null;
     for (const c of J.classes) {
@@ -2973,11 +3095,124 @@ customElements.define('skippers-carousel', SkippersCarousel);
       const arv = lignes.filter((x) => x.statut === 'ARV').sort(parRang);
       const mer = lignes.filter((x) => x.statut === 'RAC' || x.statut === 'ESC').sort(parRang);
       const ret = lignes.filter((x) => x.statut === 'RET');
-      const toutesArv = J.classes.flatMap((k) => k.lignes || []).filter((x) => x.statut === 'ARV').sort((a, b) => Date.parse(a.arrivee) - Date.parse(b.arrivee));
       const etat = l.statut === 'ARV' ? 'arrive' : l.statut === 'RET' ? 'abandon' : l.statut === 'ESC' ? 'escale' : 'course';
-      return { J, c, l, etat, arv, mer, ret, ordre: arv.concat(mer), enCourse: lignes.length - ret.length, vainqueurCourse: !!(toutesArv[0] && toutesArv[0] === l) };
+      
+
+
+
+
+
+
+
+
+      const arrive = l.statut === 'ARV';
+      const vainqueurCourse = arrive && l.officiel === 'grand';
+      const vainqueurClasse = arrive && (l.officiel === 'grand' || l.officiel === 'categorie');
+      const est = l.statut === 'RET' && !(Number(l.dtf) > 0) ? dtfEstimee(J, l) : null;
+      const ligne = est != null ? Object.assign({}, l, { dtf: est, dtfEstimee: true }) : l;
+      return { J, c, l: ligne, etat, arv, mer, ret, ordre: arv.concat(mer), enCourse: lignes.length - ret.length, vainqueurClasse, vainqueurCourse };
     }
     return null;
+  }
+  
+
+
+
+
+  const TROPHEE = 'https://static.wixstatic.com/shapes/df962b_5c53bd7ada884b219bbf484518b01364.svg';
+  const etatFin = (v) => !v ? null : v.etat !== 'arrive' ? v.etat : v.vainqueurCourse ? 'grand' : v.vainqueurClasse ? 'categorie' : 'arrive';
+  const vecteurSur = (u) => { const v = String(u || ''); const m = v.match(/^wix:vector:\/\/v1\/([^/#]+)/); return m ? 'https://static.wixstatic.com/shapes/' + m[1] : /^https:\/\//.test(v) ? v : ''; };
+  const couleurClasse = (V) => /^#[0-9a-f]{3,8}$/i.test(String(V.c.couleur || '')) ? V.c.couleur : '#5DBFC0';
+  function visuelVainqueur(V, s, C) {
+    const grand = !!V.vainqueurCourse;
+    return '<div class="skc-visuel-carte' + (grand ? ' est-grand' : ' est-classe') + '" role="img" aria-label="' + esc(C.visuelAria([s.prenom, s.nom].join(' '))) + '" style="--skc-c:' + esc(couleurClasse(V)) + '">' +
+      (s.photoProfil ? '<img class="skc-visuel-portrait" src="' + esc(urlImage(s.photoProfil, 864, 1080, 'fill', 't')) + '" alt="" decoding="async">' : '') +
+      (grand ? '<img class="skc-visuel-trophee" src="' + esc(TROPHEE) + '" alt="" decoding="async">' : '') +
+      '<span class="skc-visuel-texte">' +
+        '<span class="skc-visuel-kicker">' + esc(grand ? C.visuelKickerGrand : C.visuelKickerCategorie(V.c.nom)) + '</span>' +
+        '<b class="skc-visuel-titre">' + esc(grand ? C.visuelGrand : C.visuelCategorie(V.c.nom)) + '</b>' +
+        '<span class="skc-visuel-nom">' + esc(s.prenom) + ' <strong>' + esc(s.nom) + '</strong></span>' +
+        (V.l.temps ? '<span class="skc-visuel-temps">' + svg('chrono') + esc(dureeC(C, V.l.temps, true)) + '</span>' : '') +
+      '</span></div>';
+  }
+  
+
+  const BOUTEILLE = '<svg viewBox="0 0 60 200" aria-hidden="true" focusable="false">' +
+    '<path d="M12 197C9 197 8 195 8 192V108C8 90 23 82 24.5 64V26h11v38C37 82 52 90 52 108v84c0 3-1 5-4 5Z" fill="rgba(22,53,93,.6)" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>' +
+    '<path d="M24 26h12v26c0 4-3 7-6 7s-6-3-6-7Z" fill="#FCF150"/><path d="M24 41h12" stroke="#16355D" stroke-width="1" opacity=".45"/>' +
+    '<path d="M8 124h44v36H8Z" fill="rgba(252,241,80,.08)" stroke="#FCF150" stroke-width="1.4"/>' +
+    '<path d="M30 134l2 6 6 2-6 2-2 6-2-6-6-2 6-2Z" fill="#FCF150"/><path d="M14 112v74" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round"/></svg>';
+  const BOUCHON = '<svg class="skc-b-bouchon" viewBox="0 0 60 200" aria-hidden="true" focusable="false"><path d="M25 26h10l-.8-10c-.2-4-1.7-6-4.2-6s-4 2-4.2 6Z" fill="#fff" stroke="#FCF150" stroke-width="1"/><path d="M25.5 21h9" stroke="#FCF150" stroke-width="1"/></svg>';
+  const ECLAT = '<svg class="skc-eclat" viewBox="-20 -20 40 40" aria-hidden="true" focusable="false">' +
+    [0, 45, 90, 135, 180, 225, 270, 315].map((a) => { const r = a * Math.PI / 180, c = Math.cos(r), s = Math.sin(r); return '<path d="M' + (c * 8).toFixed(1) + ' ' + (s * 8).toFixed(1) + 'L' + (c * 17).toFixed(1) + ' ' + (s * 17).toFixed(1) + '" stroke="' + (a % 90 ? '#fff' : '#FCF150') + '" stroke-width="2" stroke-linecap="round"/>'; }).join('') + '</svg>';
+  function feteVainqueur(ov, grand) {
+    const scene = ov.querySelector('.skc-intro-scene'), carte = scene && scene.querySelector('.skc-visuel-carte');
+    if (!carte) return;
+    carte.insertAdjacentHTML('beforeend', '<span class="skc-reflet" aria-hidden="true"></span>');
+    ov.classList.add('est-fete');
+    if (!grand) return;
+     
+    const W = carte.offsetWidth, H = carte.offsetHeight, cote = (innerWidth - W) / 2, dessus = (innerHeight - H) / 2;
+    let bh = Math.round(Math.min(300, Math.max(150, H * .42))), mode = 'cotes';
+    if (cote < bh * .3 + bh * .14 + bh * .34 + 12) { mode = 'dessus'; bh = Math.round(Math.max(72, Math.min(120, dessus - 80))); }
+    let graine = 7;
+    const alea = () => (graine = graine * 16807 % 2147483647) / 2147483647;
+    const entre = (a, b) => a + (b - a) * alea();
+    const gerbe = (sens) => Array.from({ length: 24 }, (_, i) => {
+      const sorte = i % 5 === 0 ? 'lueur' : i % 3 === 0 ? 'etincelle' : 'bulle';
+      const s = sorte === 'bulle' ? entre(.022, .046) : sorte === 'etincelle' ? entre(.04, .065) : entre(.014, .022);
+      const haut = mode === 'dessus';
+      const dx = sens * -1 * (haut ? entre(.3, 1.6) : entre(.12, 1.05)) * bh, dy = -(haut ? entre(0, .25) : entre(.66, 1.25)) * bh;
+      const taille = Math.max(s * bh, sorte === 'lueur' ? 3 : 5);
+      return '<i class="skc-p skc-p--' + sorte + '" style="--s:' + taille.toFixed(1) + 'px;--dx:' + dx.toFixed(1) + 'px;--dy:' + dy.toFixed(1) + 'px;--chute:' + ((haut ? entre(1, 1.6) : entre(.16, .36)) * bh).toFixed(1) + 'px;--rot:' + Math.round(entre(-90, 90)) + 'deg;--t:' + entre(1.25, 1.75).toFixed(2) + 's;--d:' + entre(.82, 1.3).toFixed(2) + 's"></i>';
+    }).join('');
+    const bouteille = (cote, sens) => '<div class="skc-bouteille skc-bouteille--' + cote + '">' + BOUTEILLE + BOUCHON + '<div class="skc-jet">' + ECLAT + gerbe(sens) + '</div></div>';
+    const fete = document.createElement('div');
+    fete.className = 'skc-fete est-' + mode;
+    fete.setAttribute('aria-hidden', 'true');
+    fete.style.setProperty('--bh', bh + 'px');
+    fete.innerHTML = bouteille('g', -1) + bouteille('d', 1);
+    scene.appendChild(fete);
+  }
+  
+
+
+  function jouerIntro(cible, V, s, C) {
+    if (!cible) return;
+    try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {   }
+    cible.style.visibility = 'hidden';
+    const ov = document.createElement('div');
+    ov.className = 'skc-intro';
+    ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
+    ov.setAttribute('aria-label', C.visuelAria([s.prenom, s.nom].join(' ')));
+    ov.innerHTML = '<div class="skc-intro-voile"></div><div class="skc-intro-scene">' + visuelVainqueur(V, s, C) + '</div>' +
+      '<button type="button" class="skc-intro-passer">' + esc(C.passer) + svg('droite') + '</button>';
+    document.body.appendChild(ov);
+    feteVainqueur(ov, !!V.vainqueurCourse);
+    const carte = ov.querySelector('.skc-visuel-carte');
+    requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add('est-ouverte')));
+    let fini = false, minuteur = 0;
+    const cle = (e) => { if (['Escape', 'Enter', ' '].indexOf(e.key) >= 0) { e.preventDefault(); ranger(); } };
+    const ranger = () => {
+      if (fini) return;
+      fini = true;
+      clearTimeout(minuteur);
+      document.removeEventListener('keydown', cle);
+      window.removeEventListener('wheel', ranger);
+      window.removeEventListener('touchmove', ranger);
+      const a = carte.getBoundingClientRect(), b = cible.getBoundingClientRect();
+      carte.style.transformOrigin = '0 0';
+      carte.style.transition = 'transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .7s ease';
+      carte.style.transform = 'translate(' + (b.left - a.left).toFixed(1) + 'px,' + (b.top - a.top).toFixed(1) + 'px) scale(' + (b.width / a.width).toFixed(4) + ')';
+      ov.classList.add('est-rangee');
+      setTimeout(() => { cible.style.visibility = ''; ov.remove(); }, 720);
+    };
+    minuteur = setTimeout(ranger, 4050);
+    ov.addEventListener('click', ranger);
+    document.addEventListener('keydown', cle);
+    window.addEventListener('wheel', ranger, { passive: true });
+    window.addEventListener('touchmove', ranger, { passive: true });
+    ov.querySelector('.skc-intro-passer').focus({ preventScroll: true });
   }
    
   const PARIS = { timeZone: 'Europe/Paris' };
@@ -2992,6 +3227,26 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const nomCourt = (l) => (l.prenom ? String(l.prenom).trim()[0] + '. ' : '') + titreNom(l.nom);
   const imgLigne = (id, w, h) => id ? (/^https?:/.test(id) ? id : 'https://static.wixstatic.com/media/' + id + '/v1/fill/w_' + w + ',h_' + h + ',al_t,q_80,enc_auto/' + id) : '';
   const pctRoute = (J, l) => l.statut === 'ARV' ? 100 : l.dtf == null || !(J.distance > 0) ? 0 : Math.max(0, Math.min(100, Math.floor((1 - l.dtf / J.distance) * 100)));
+  
+
+
+
+  const PAP = [16.2333, -61.5333];
+  function dtfEstimee(J, l) {
+    if (!Number.isFinite(l.lat) || !Number.isFinite(l.lon) || !(J.distance > 0)) return null;
+    const r = Math.PI / 180, a = l.lat * r, b = PAP[0] * r, d = (PAP[1] - l.lon) * r;
+    const gc = 3440.065 * Math.acos(Math.min(1, Math.sin(a) * Math.sin(b) + Math.cos(a) * Math.cos(b) * Math.cos(d)));
+    return Number.isFinite(gc) ? Math.min(J.distance, Math.round(gc * 1.017)) : null;
+  }
+  
+
+
+  const motifPropre = (l, lang) => {
+    const r = String((lang === 'en' ? l.raisonEn : l.raison) || '').trim();
+    if (r) return r;
+    return l.motif && !/^(abandon|retired?)$/i.test(String(l.motif).trim()) ? String(l.motif).trim() : '';
+  };
+  const articleAbandon = (l) => /^https:\/\/www\.routedurhum\.com\/[^\s"'<>]+$/.test(String(l.article || '')) ? String(l.article) : '';
    
   const PARIS_JOUR = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
   const jourParis = (t) => Date.parse(PARIS_JOUR.format(new Date(t)) + 'T00:00:00Z');
@@ -3562,7 +3817,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const I18N = {
     fr: {
       locale: 'fr-FR',
-      nav: { course: 'Course', profil: 'Profil', actus: 'Actus', palmares: 'Palmarès', bateau: 'Bateau', medias: 'Médias', suivre: 'Suivre' },
+      nav: { course: 'Course', abord: 'À bord', profil: 'Profil', actus: 'Actus', palmares: 'Palmarès', bateau: 'Bateau', medias: 'Médias', suivre: 'Suivre' },
       navAria: 'Sections de la fiche',
       kProfil: 'Informations', tProfil: 'Profil',
       kPalmares: 'Parcours', tPalmares: 'Palmarès',
@@ -3656,7 +3911,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
     },
     en: {
       locale: 'en-GB',
-      nav: { course: 'Race', profil: 'Profile', actus: 'News', palmares: 'Record', bateau: 'Boat', medias: 'Media', suivre: 'Follow' },
+      nav: { course: 'Race', abord: 'On board', profil: 'Profile', actus: 'News', palmares: 'Record', bateau: 'Boat', medias: 'Media', suivre: 'Follow' },
       navAria: 'Profile sections',
       kProfil: 'About', tProfil: 'Profile',
       kPalmares: 'Career', tPalmares: 'Record',
@@ -3822,7 +4077,12 @@ customElements.define('skippers-carousel', SkippersCarousel);
     cle: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/>',
     alerte: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/>',
     route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
-    chevron: '<path d="m6 9 6 6 6-6"/>'
+    chevron: '<path d="m6 9 6 6 6-6"/>',
+     
+    gauche: '<path d="M15 5l-7 7 7 7"/>', droite: '<path d="M9 5l7 7-7 7"/>',
+    grille: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
+     
+    chrono: '<line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/>'
   };
   
 
@@ -4130,7 +4390,8 @@ rdr-skipper .sk .sk-bord-demo{white-space:nowrap;padding:3px 8px;border-radius:3
 
 
 rdr-skipper .sk .sk-nav{position:sticky;top:var(--sk-colle);z-index:40;height:var(--sk-nav-h);margin:calc(var(--sk-nav-h) * -.5) 0;pointer-events:none;}
-@media(max-width:750px){rdr-skipper .sk{--sk-colle:60px}}
+ 
+@media(max-width:750px){rdr-skipper .sk{--sk-colle:68px}}
 rdr-skipper .sk .sk-nav > .sk-cadre{display:flex;align-items:center;height:100%;}
 rdr-skipper .sk .sk-nav-in{position:relative;display:flex;align-items:center;gap:var(--e2);width:100%;height:60px;padding:0 8px 0 10px;pointer-events:auto;overflow:clip;
   border-radius:20px 4px 20px 4px;background:rgba(17,21,38,.8);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
@@ -5003,7 +5264,12 @@ rdr-skipper .sk .skc-bord .sk-bord-actions .sk-btn svg{width:16px;height:16px;}
 rdr-skipper .sk .skc-bord .sk-bord-outils a{display:inline-flex;align-items:center;gap:6px;color:var(--sk-encre-2);font-weight:700;letter-spacing:.06em;}
 rdr-skipper .sk .skc-bord .sk-bord-outils a svg{width:14px;height:14px;}
 rdr-skipper .sk .skc-abandon-case{display:flex;flex-direction:column;justify-content:center;gap:8px;}
-rdr-skipper .sk .skc-abandon-mot{display:flex;align-items:center;gap:10px;font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:clamp(30px,2.8vw,42px);line-height:.95;letter-spacing:-.03em;color:#F5BE41;}
+rdr-skipper .sk .skc-abandon-mot{display:flex;align-items:center;gap:10px;font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:clamp(24px,2vw,30px);line-height:.95;letter-spacing:-.03em;color:#F5BE41;}
+rdr-skipper .sk.sous-600 .skc-abandon-mot{font-size:22px;}
+rdr-skipper .sk .skc-abandon-article{display:inline-flex;align-items:center;gap:6px;width:fit-content;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sk-jaune);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px;}
+rdr-skipper .sk .skc-abandon-article svg{width:14px;height:14px;}
+rdr-skipper .sk .skc-chiffres .skc-raison .skc-abandon-article{display:flex;margin-top:10px;color:var(--sk-teal-fonce,#00676E);}
+rdr-skipper .sk .skc-chiffres .skc-raison{font-family:Montserrat,sans-serif;font-style:normal;font-size:var(--t3);font-weight:700;line-height:1.45;letter-spacing:0;text-transform:none;}
 rdr-skipper .sk .skc-abandon-mot svg{width:.8em;height:.8em;stroke-width:2.4;}
 rdr-skipper .sk .sk-live.skc-live--arrive svg{width:18px;height:18px;flex:none;align-self:center;color:var(--sk-jaune);}
 rdr-skipper .sk .sk-live.skc-live--arrive span{text-transform:none;letter-spacing:.04em;}
@@ -5104,6 +5370,87 @@ rdr-skipper .sk.sous-600 .skc-pied{display:grid;grid-template-columns:minmax(0,1
 rdr-skipper .sk.sous-600 .skc-pied .sk-btn{width:100%;}
 rdr-skipper .sk.sous-600 .skc-pied .sk-bord-demo{margin-left:0;justify-self:start;}
 rdr-skipper .sk.sous-600 .skc-course .sk-tete{flex-direction:column;align-items:flex-start;gap:var(--e3);}
+ 
+rdr-skipper .sk .sk-abord{background:var(--sk-marine);}
+rdr-skipper .sk .sk-abord .sk-tete::after{order:1;}
+rdr-skipper .sk .sk-abord-direct{order:2;margin-bottom:.35em;}
+@media (max-width:1500px){
+  rdr-skipper .sk .sk-nav-liste:has([data-abord-nav]:not([hidden])) .sk-nav-lien{padding:0 10px;gap:0;}
+  rdr-skipper .sk .sk-nav-liste:has([data-abord-nav]:not([hidden])) .sk-nav-lien svg{display:none;}
+}
+rdr-skipper .sk .sk-abord-direct{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px 0 14px;border-radius:var(--r-btn);
+  background:rgba(158,244,253,.08);box-shadow:inset 0 0 0 1px rgba(158,244,253,.24);color:#9EF4FD;font-size:var(--t1);font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;}
+rdr-skipper .sk .sk-abord-direct i{position:relative;flex:none;width:8px;height:8px;border-radius:50%;background:#9EF4FD;}
+rdr-skipper .sk .sk-abord-direct span{color:var(--sk-encre-2);font-weight:600;letter-spacing:.06em;text-transform:none;font-size:var(--t2);}
+rdr-skipper .sk .sk-abord-grille{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:var(--e4);height:clamp(320px,58vh,560px);}
+rdr-skipper .sk .sk-abord-photo{position:relative;display:block;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;overflow:hidden;background:#0E111D;
+  color:inherit;font:inherit;text-align:left;cursor:zoom-in;-webkit-tap-highlight-color:transparent;}
+rdr-skipper .sk .sk-abord-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .4s ease;}
+rdr-skipper .sk .sk-abord-photo img[data-attente]{opacity:0;}
+@media (hover:hover){rdr-skipper .sk .sk-abord-photo:hover img{transform:scale(1.035);}}
+rdr-skipper .sk .sk-abord-photo:focus-visible{outline:3px solid var(--sk-jaune);outline-offset:3px;}
+rdr-skipper .sk .sk-abord-une{border-radius:var(--r-carte);box-shadow:var(--ombre);}
+rdr-skipper .sk .sk-abord-une::after{content:"";position:absolute;left:0;right:0;bottom:0;height:48%;background:linear-gradient(180deg,rgba(14,17,29,0),rgba(14,17,29,.84));pointer-events:none;}
+rdr-skipper .sk .sk-abord-legende{position:absolute;left:var(--e5);right:var(--e5);bottom:var(--e5);z-index:1;display:flex;flex-direction:column;gap:6px;}
+rdr-skipper .sk .sk-abord-quand{font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:var(--t5);line-height:1.05;letter-spacing:-.01em;color:#fff;}
+rdr-skipper .sk .sk-abord-texte{max-width:58ch;font-size:var(--t3);font-weight:500;line-height:1.45;color:var(--sk-encre-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+rdr-skipper .sk .sk-abord-credit{font-size:var(--t1);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sk-encre-3);}
+rdr-skipper .sk .sk-abord-nouveau{position:absolute;top:var(--e4);left:var(--e4);z-index:1;padding:6px 10px;border-radius:10px 2px 10px 2px;background:var(--sk-jaune);color:#191D31;
+  font-size:var(--t1);font-weight:800;letter-spacing:.14em;text-transform:uppercase;}
+rdr-skipper .sk .sk-abord-video{position:absolute;top:50%;left:50%;z-index:1;display:grid;place-items:center;width:64px;height:64px;translate:-50% -50%;border-radius:3px 18px 3px 18px;background:rgba(14,17,29,.66);color:#fff;}
+rdr-skipper .sk .sk-abord-video svg{width:24px;height:24px;}
+rdr-skipper .sk .sk-abord-autres{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:var(--e4);min-height:0;}
+rdr-skipper .sk .sk-abord-vignette{border-radius:18px 3px 18px 3px;}
+rdr-skipper .sk .sk-abord-mini{position:absolute;left:10px;bottom:10px;z-index:1;padding:5px 8px;border-radius:8px 2px 8px 2px;background:rgba(14,17,29,.74);
+  font-size:var(--t1);font-weight:700;letter-spacing:.04em;color:#fff;white-space:nowrap;}
+rdr-skipper .sk .sk-abord-plus{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:rgba(22,53,93,.64);
+  font-family:Varien,Impact,sans-serif;font-style:italic;font-size:clamp(30px,3.2vw,46px);line-height:1;color:#fff;}
+rdr-skipper .sk .sk-abord-pied{display:flex;align-items:center;justify-content:flex-end;gap:var(--e4);margin-top:var(--e5);}
+rdr-skipper .sk .sk-abord-tout{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border:0;border-radius:var(--r-btn);
+  background:transparent;box-shadow:inset 0 0 0 1.5px rgba(238,242,248,.5);color:#fff;font:700 var(--t2)/1 Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;}
+rdr-skipper .sk .sk-abord-tout svg{width:16px;height:16px;}
+@media (min-width:761px) and (max-height:820px){
+  rdr-skipper .sk .sk-abord-grille{height:clamp(300px,56vh,480px);}
+  rdr-skipper .sk .sk-abord .sk-titre{font-size:clamp(44px,5.4vw,76px);}
+  rdr-skipper .sk .sk-abord .sk-tete{margin-bottom:var(--e6);}
+}
+@media (max-width:760px){
+  rdr-skipper .sk .sk-abord-grille{display:block;height:auto;}
+  rdr-skipper .sk .sk-abord-une{height:auto;aspect-ratio:4/3;}
+  rdr-skipper .sk .sk-abord-legende{left:16px;right:16px;bottom:16px;}
+  rdr-skipper .sk .sk-abord-texte{-webkit-line-clamp:2;font-size:14px;}
+  rdr-skipper .sk .sk-abord-autres{display:flex;gap:10px;margin:12px calc(clamp(20px,5vw,72px) * -1) 0;padding:0 clamp(20px,5vw,72px);overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;scroll-padding:0 clamp(20px,5vw,72px);scrollbar-width:none;}
+  rdr-skipper .sk .sk-abord-autres::-webkit-scrollbar{display:none;}
+  rdr-skipper .sk .sk-abord-vignette{flex:0 0 38%;height:auto;aspect-ratio:3/4;scroll-snap-align:start;}
+  rdr-skipper .sk .sk-abord-plus{display:none;}
+  rdr-skipper .sk .sk-abord-pied{justify-content:stretch;}
+  rdr-skipper .sk .sk-abord-tout{width:100%;}
+  rdr-skipper .sk .sk-abord .sk-tete{flex-direction:column;align-items:flex-start;}
+  rdr-skipper .sk .sk-abord-direct{flex-wrap:wrap;row-gap:2px;max-width:100%;min-height:0;padding:9px 14px;white-space:normal;margin-bottom:0;}
+}
+@media (min-width:761px){rdr-skipper .sk .sk-abord-vignette[data-cache]{display:none;}}
+.sk-abord-visionneuse{position:fixed;inset:0;z-index:2147483200;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:rgba(10,13,24,.97);color:#EEF2F8;
+  font-family:Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;opacity:0;transition:opacity .18s ease;}
+.sk-abord-visionneuse.est-ouverte{opacity:1;}
+.sk-abord-visionneuse .v-haut{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,3vw,32px);
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,242,248,.72);}
+.sk-abord-visionneuse .v-scene{position:relative;display:grid;place-items:center;min-height:0;padding:0 clamp(12px,4vw,72px);touch-action:pan-y;overflow:hidden;}
+.sk-abord-visionneuse .v-scene img{display:block;max-width:100%;max-height:calc(100vh - 190px);max-height:calc(100dvh - 190px);object-fit:contain;border-radius:3px;user-select:none;-webkit-user-drag:none;}
+.sk-abord-visionneuse .v-bas{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:14px clamp(16px,3vw,32px) max(14px,env(safe-area-inset-bottom));}
+.sk-abord-visionneuse .v-legende{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;text-align:center;}
+.sk-abord-visionneuse .v-quand{font-size:15px;font-weight:700;color:#fff;}
+.sk-abord-visionneuse .v-texte{max-width:70ch;font-size:14px;line-height:1.45;color:rgba(238,242,248,.86);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.sk-abord-visionneuse .v-credit{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,248,.62);}
+.sk-abord-visionneuse .v-btn{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:3px 15px 3px 15px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;}
+.sk-abord-visionneuse .v-btn:focus-visible{outline:3px solid #FCF150;outline-offset:2px;}
+.sk-abord-visionneuse .v-btn:disabled{opacity:.3;cursor:default;}
+.sk-abord-visionneuse .v-btn svg{width:20px;height:20px;}
+.sk-abord-visionneuse .v-lien{color:#FCF150;font-weight:700;}
+@media (max-width:760px),(max-height:760px){.sk-abord-visionneuse .v-texte{-webkit-line-clamp:2;}}
+rdr-skipper .sk .sk-abord{scroll-margin-top:calc(var(--sk-nav-h) - 1px);}
+rdr-skipper .sk .sk-abord-photo[data-compose] img:not(.sk-abord-flou){position:relative;object-fit:contain;}
+rdr-skipper .sk .sk-abord-photo .sk-abord-flou{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;filter:blur(22px) brightness(.62);transform:none;}
 `;
 
   
@@ -5141,10 +5488,169 @@ rdr-skipper .sk .skc-geo-activer:focus-visible{outline:3px solid var(--sk-jaune)
   rdr-skipper .sk .est-geovoile.est-active .skc-geovoile{pointer-events:auto;}
   rdr-skipper .sk .skc-geo-complete:hover{border-color:var(--sk-jaune);background:var(--sk-jaune);}
 }
+
+
+
 @media not ((hover:hover) and (pointer:fine)){
-  rdr-skipper .sk .est-geovoile .skc-geo-activer{display:block;}
-  rdr-skipper .sk .skc-geo-activer span{display:none;}
+  rdr-skipper .sk .est-geovoile .skc-geo-activer{display:grid;place-items:start end;padding:var(--e4);}
+  rdr-skipper .sk .skc-geo-activer span{opacity:1;transform:none;min-height:40px;padding:0 12px;font-size:10.5px;}
+  rdr-skipper .sk .est-geovoile.est-active .skc-geo-activer{display:none;}
+  rdr-skipper .sk .est-geovoile.est-active .skc-geovoile{pointer-events:auto;}
+  rdr-skipper .sk .est-geovoile.est-active .skc-geo-fini{display:inline-flex;}
 }
+rdr-skipper .sk .skc-geo-fini{display:none;position:absolute;z-index:6;top:var(--e4);right:var(--e4);align-items:center;gap:8px;min-height:40px;margin:0;padding:0 14px;
+  border:1.5px solid #fff;border-radius:12px 3px 12px 3px;background:rgba(11,26,51,.86);color:#fff;font:700 10.5px/1 Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
+rdr-skipper .sk .skc-geo-fini svg{width:14px;height:14px;}
+rdr-skipper .sk .skc-geo-fini:focus-visible{outline:3px solid var(--sk-jaune);outline-offset:2px;}
+
+
+
+
+
+
+
+
+
+
+
+rdr-skipper .sk .sk-live.skc-live--classe{--skc-fanion:84px;--skc-medaille:74px;align-items:center;gap:12px;vertical-align:top;max-width:100%;overflow:visible;padding:0;background:none;box-shadow:none;
+  letter-spacing:0;text-transform:none;}
+rdr-skipper .sk .sk-live.skc-live--classe::after{display:none;}
+
+
+rdr-skipper .sk:not(.sous-860) .sk-live.skc-live--classe{width:max-content;max-width:min(680px,calc(var(--sk-cc) * (var(--sk-sc-g) + var(--sk-sc-b) * .8) - 24px));}
+rdr-skipper .sk .sk-live.skc-live--grand{--skc-c:#FCF150;}
+rdr-skipper .sk .skc-live-fanion{flex:none;width:auto;height:var(--skc-fanion);margin:-12px 0 -26px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.45));
+  transform-origin:50% 92%;animation:skc-fanion 7s ease-in-out infinite alternate;}
+rdr-skipper .sk .skc-live-medaille{position:relative;flex:none;display:block;width:var(--skc-medaille);height:var(--skc-medaille);margin:-14px 0;overflow:hidden;border-radius:50%;
+  box-shadow:0 10px 18px -8px rgba(0,0,0,.7);}
+rdr-skipper .sk .skc-live-medaille img{display:block;width:100%;height:100%;}
+rdr-skipper .sk .skc-live-medaille::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+  background:linear-gradient(115deg,transparent 34%,rgba(255,244,190,.75) 50%,transparent 66%);transform:translateX(-120%);animation:skc-medaille 7s cubic-bezier(.35,0,.35,1) .6s infinite;}
+rdr-skipper .sk .skc-live-etiquette{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 18px;min-width:0;padding:10px 20px 10px 18px;
+  border-radius:var(--r-btn);color:#0B1B33;
+  --skc-clair:color-mix(in srgb,var(--skc-c,#5DBFC0) 58%,#fff);--skc-fonce:color-mix(in srgb,var(--skc-c,#5DBFC0) 86%,#0B1B33);
+  background:linear-gradient(115deg,var(--skc-c,#5DBFC0) 0%,var(--skc-clair) 18%,var(--skc-c,#5DBFC0) 38%,var(--skc-fonce) 58%,var(--skc-c,#5DBFC0) 78%,var(--skc-clair) 100%) 30% 50% / 300% 100%;
+  box-shadow:0 14px 26px -16px rgba(0,0,0,.8),inset 0 -3px 0 rgba(11,27,51,.18),inset 0 1px 0 rgba(255,255,255,.4);animation:skc-ondule 16s ease-in-out infinite alternate;}
+rdr-skipper .sk .skc-live--grand .skc-live-etiquette{--skc-clair:#FFFADB;--skc-fonce:#F3CF3C;}
+ 
+rdr-skipper .sk .skc-live-etiquette::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 1px,transparent 1px 6px),repeating-linear-gradient(45deg,rgba(11,27,51,.07) 0 1px,transparent 1px 6px);}
+ 
+rdr-skipper .sk .skc-live-etiquette::after{content:"";position:absolute;top:-30%;bottom:-30%;left:0;width:42%;z-index:-1;pointer-events:none;
+  background:linear-gradient(100deg,transparent 0%,var(--skc-ombre,rgba(11,27,51,.1)) 30%,rgba(255,255,255,.85) 50%,var(--skc-ombre,rgba(11,27,51,.1)) 70%,transparent 100%);
+  transform:translateX(-110%) skewX(-14deg);animation:skc-satin 7s cubic-bezier(.35,0,.35,1) 1.3s infinite;}
+rdr-skipper .sk .skc-live--grand .skc-live-etiquette::after{--skc-ombre:rgba(190,140,10,.26);}
+rdr-skipper .sk .sk-live.skc-live--classe b{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:26px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase;color:#0B1B33;}
+rdr-skipper .sk .skc-live-etiquette > span{display:inline-flex;align-items:center;gap:6px;font-size:var(--t2);font-weight:800;line-height:1.25;letter-spacing:.02em;color:#0B1B33;white-space:nowrap;}
+rdr-skipper .sk .skc-live-etiquette > span svg{width:15px;height:15px;flex:none;}
+rdr-skipper .sk.sous-860 .sk-live.skc-live--classe{--skc-fanion:72px;--skc-medaille:66px;gap:10px;}
+rdr-skipper .sk.sous-860 .skc-live-fanion{margin:-6px 0;}
+rdr-skipper .sk.sous-860 .skc-live-medaille{margin:-2px 0;}
+rdr-skipper .sk.sous-860 .skc-live-etiquette{flex-direction:column;align-items:flex-start;row-gap:5px;padding:10px 16px;}
+rdr-skipper .sk.sous-860 .sk-live.skc-live--classe b{font-size:23px;}
+@keyframes skc-ondule{from{background-position:0% 50%;}to{background-position:100% 50%;}}
+@keyframes skc-satin{0%{transform:translateX(-110%) skewX(-14deg);}30%,100%{transform:translateX(250%) skewX(-14deg);}}
+@keyframes skc-medaille{0%{transform:translateX(-120%);}14%,100%{transform:translateX(120%);}}
+@keyframes skc-fanion{from{rotate:-1.6deg;}to{rotate:1.6deg;}}
+@media (prefers-reduced-motion:reduce){
+  rdr-skipper .sk .skc-live-etiquette,rdr-skipper .sk .skc-live-fanion{animation:none;}
+  rdr-skipper .sk .skc-live-etiquette::after,rdr-skipper .sk .skc-live-medaille::after{animation:none;display:none;}
+}
+
+
+
+
+rdr-skipper .sk .skc-scene--visuel .skc-geovoile,rdr-skipper .sk .skc-scene--visuel .skc-geo-attente,rdr-skipper .sk .skc-scene--visuel .skc-geo-activer,
+rdr-skipper .sk .skc-scene--visuel .skc-geo-fini,rdr-skipper .sk .skc-scene--visuel .skc-geo-recentrer,rdr-skipper .sk .skc-scene--visuel .sk-scene-ecusson{display:none !important;}
+rdr-skipper .sk .skc-scene--visuel .skc-geo-bandeau{display:flex;}
+ 
+rdr-skipper .sk:not(.sous-860) .skc-scene--visuel .skc-geo-bandeau{top:auto;bottom:calc(var(--e6) + var(--sk-nav-h) * .5 + 4px);}
+rdr-skipper .sk .skc-visuel{position:absolute;z-index:5;margin:0;top:clamp(20px,3.5vh,40px);bottom:calc(var(--e6) + var(--sk-nav-h) * .5 + 64px);
+  left:calc(var(--sk-cc) * .14);right:max(clamp(20px,4cqw,56px),calc(100cqw - var(--sk-cg) - var(--sk-cc) - 40px));display:flex;align-items:center;justify-content:center;pointer-events:none;}
+rdr-skipper .sk .skc-visuel{container-type:size;}
+rdr-skipper .sk .skc-visuel .skc-visuel-carte{width:min(100cqw,80cqh);}
+rdr-skipper .sk.sous-860 .skc-visuel{top:calc(var(--e4) + 46px);bottom:calc(12% + 64px);left:var(--e4);right:var(--e4);}
+.skc-visuel-carte{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;container-type:size;border-radius:26px 3px 26px 3px;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--skc-c,#5DBFC0) 72%,#16355D) 0%,#16355D 58%,#0E111D 100%);
+  box-shadow:0 30px 60px -22px rgba(0,0,0,.7),inset 0 0 0 2px rgba(252,241,80,.5);font-family:Montserrat,sans-serif;color:#fff;}
+.skc-visuel-carte.est-grand{box-shadow:0 30px 60px -22px rgba(0,0,0,.7),inset 0 0 0 3px #FCF150;}
+ 
+.skc-visuel-trophee{position:absolute;z-index:2;top:3.5cqh;right:4.5cqw;width:19cqw;height:auto;border-radius:50%;box-shadow:0 12px 26px -10px rgba(0,0,0,.7);}
+
+
+.skc-visuel-carte.est-classe{box-shadow:0 30px 60px -22px rgba(0,0,0,.7),inset 0 0 0 3px var(--skc-c,#5DBFC0);}
+.skc-visuel-carte.est-classe .skc-visuel-temps{background:var(--skc-c,#5DBFC0);}
+.skc-visuel-portrait{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 8%;}
+.skc-visuel-carte::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,17,29,.95) 0%,rgba(14,17,29,.72) 30%,rgba(14,17,29,0) 58%);pointer-events:none;}
+.skc-visuel-texte{position:absolute;z-index:1;left:7cqw;right:7cqw;bottom:6cqh;display:flex;flex-direction:column;align-items:flex-start;gap:1.4cqh;}
+.skc-visuel-kicker{font-size:max(9px,3.1cqw);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FCF150;text-shadow:0 1px 2px rgba(14,17,29,.85),0 0 14px rgba(14,17,29,.7);}
+.skc-visuel-titre{font-family:Varien,Impact,sans-serif;font-style:italic;font-weight:400;font-size:12.5cqw;line-height:1.04;text-transform:uppercase;color:#fff;}
+.skc-visuel-nom{font-size:max(11px,4.6cqw);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(238,242,248,.92);}
+.skc-visuel-nom strong{font-weight:800;}
+.skc-visuel-temps{display:inline-flex;align-items:center;gap:.5em;margin-top:.6cqh;padding:.45em .8em;border-radius:12px 2px 12px 2px;background:#FCF150;color:#0B1B33;
+  font-family:RDRNoir,Montserrat,sans-serif;font-style:italic;font-weight:900;font-size:max(11px,4.6cqw);line-height:1;}
+.skc-visuel-temps svg{width:1em;height:1em;}
+ 
+.skc-intro{position:fixed;inset:0;z-index:2147483200;display:grid;place-items:center;font-family:Montserrat,sans-serif;}
+.skc-intro-voile{position:absolute;inset:0;background:rgba(10,13,24,.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .45s ease;}
+.skc-intro.est-ouverte .skc-intro-voile{opacity:1;}
+.skc-intro.est-rangee .skc-intro-voile{opacity:0;transition-duration:.6s;}
+.skc-intro-scene{position:relative;width:min(88vw,calc(min(80vh,760px) * .8));opacity:0;transform:scale(.94);transition:opacity .45s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+.skc-intro.est-ouverte .skc-intro-scene{opacity:1;transform:none;}
+.skc-intro-scene .skc-visuel-carte{width:100%;}
+.skc-intro-passer{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:14px 2px 14px 2px;
+  background:rgba(255,255,255,.12);color:#fff;font:700 12px/1 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:opacity .3s ease;}
+.skc-intro-passer svg{width:16px;height:16px;}
+.skc-intro-passer:focus-visible{outline:3px solid #FCF150;outline-offset:2px;}
+.skc-intro.est-rangee .skc-intro-passer{opacity:0;}
+@media (prefers-reduced-motion:reduce){.skc-intro{display:none;}}
+
+
+
+
+
+
+.skc-intro{overflow:hidden;}
+.skc-fete{position:absolute;inset:0;pointer-events:none;--ecart:calc(var(--bh) * .14);}
+.skc-bouteille{position:absolute;bottom:9%;width:calc(var(--bh) * .3);height:var(--bh);transform-origin:50% 100%;opacity:0;
+  animation:skc-b-entree .5s cubic-bezier(.2,.8,.25,1) .25s both,skc-b-recul .32s ease-out .8s,skc-b-sortie .4s ease-in 2.7s forwards;}
+.skc-bouteille--g{--r:-14deg;--sens:-1;}
+.skc-bouteille--d{--r:14deg;--sens:1;}
+.skc-fete.est-cotes .skc-bouteille--g{right:calc(100% + var(--ecart));}
+.skc-fete.est-cotes .skc-bouteille--d{left:calc(100% + var(--ecart));}
+.skc-fete.est-dessus .skc-bouteille{bottom:calc(100% + 10px);}
+.skc-fete.est-dessus .skc-bouteille--g{left:9%;}
+.skc-fete.est-dessus .skc-bouteille--d{right:9%;}
+.skc-bouteille > svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.skc-b-bouchon{transform-origin:50% 9%;animation:skc-bouchon .75s cubic-bezier(.18,.8,.3,1) .8s both;}
+.skc-jet{position:absolute;left:50%;top:9%;width:0;height:0;}
+.skc-eclat{position:absolute;width:calc(var(--bh) * .26);height:calc(var(--bh) * .26);left:calc(var(--bh) * -.13);top:calc(var(--bh) * -.13);opacity:0;animation:skc-eclat .5s ease-out .8s both;}
+.skc-p{position:absolute;left:0;top:0;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);opacity:0;animation:skc-gerbe var(--t) var(--d) both;}
+.skc-p--bulle{border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.9);background:radial-gradient(circle at 34% 32%,rgba(255,255,255,.6),rgba(255,255,255,.06) 62%);}
+.skc-p--etincelle{background:#FCF150;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);}
+.skc-p--lueur{border-radius:50%;background:#FFF7B0;box-shadow:0 0 6px 2px rgba(252,241,80,.75);}
+.skc-reflet{position:absolute;inset:-10% 0;z-index:3;pointer-events:none;mix-blend-mode:screen;transform:translateX(-85%);
+  background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,.55) 50%,transparent 64%);animation:skc-reflet .9s cubic-bezier(.35,0,.3,1) 1.75s both;}
+.skc-intro.est-fete .skc-visuel-carte.est-grand .skc-visuel-titre{animation:skc-allume .85s ease-out 1.55s both;}
+.skc-intro.est-rangee .skc-fete{opacity:0;transition:opacity .2s ease;}
+.skc-intro.est-rangee .skc-reflet{display:none;}
+.skc-intro.est-rangee .skc-visuel-titre{animation:none !important;}
+@keyframes skc-b-entree{from{opacity:0;translate:calc(var(--sens) * 44px) 36px;rotate:calc(var(--r) * .25);}to{opacity:1;translate:0 0;rotate:var(--r);}}
+@keyframes skc-b-recul{0%{rotate:var(--r);}30%{rotate:calc(var(--r) * 1.4);}100%{rotate:var(--r);}}
+@keyframes skc-b-sortie{to{opacity:0;translate:0 18px;}}
+@keyframes skc-bouchon{0%{transform:none;opacity:1;}75%{opacity:1;}100%{transform:translate(calc(var(--sens) * 30%),-115%) rotate(calc(var(--sens) * 300deg));opacity:0;}}
+@keyframes skc-eclat{0%{opacity:0;transform:scale(.3);}25%{opacity:1;}100%{opacity:0;transform:scale(1.5);}}
+@keyframes skc-gerbe{
+  0%{opacity:0;transform:translate(0,0) scale(.3);animation-timing-function:cubic-bezier(.1,.8,.3,1);}
+  12%{opacity:1;}
+  58%{opacity:1;transform:translate(calc(var(--dx) * .8),var(--dy)) scale(1) rotate(var(--rot));animation-timing-function:cubic-bezier(.5,0,.75,.5);}
+  100%{opacity:0;transform:translate(var(--dx),calc(var(--dy) + var(--chute))) scale(.6) rotate(calc(var(--rot) * 2));}}
+@keyframes skc-reflet{from{transform:translateX(-85%);}to{transform:translateX(85%);}}
+@keyframes skc-allume{
+  0%{color:transparent;-webkit-text-stroke:2px #FCF150;text-shadow:none;}
+  45%{color:#fff;-webkit-text-stroke:2px rgba(252,241,80,0);text-shadow:0 0 4px rgba(252,241,80,.9),0 0 26px rgba(252,241,80,.75);}
+  100%{color:#fff;-webkit-text-stroke:2px rgba(252,241,80,0);text-shadow:0 0 4px rgba(252,241,80,0),0 0 26px rgba(252,241,80,0);}}
 
 
 rdr-skipper .sk .skc-geo-attente{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
@@ -5182,8 +5688,9 @@ rdr-skipper .sk .est-geovoile .skc-geo-bandeau .sk-btn,rdr-skipper .sk .est-geov
 rdr-skipper .sk .skc-geo-bandeau .sk-btn:focus-visible,rdr-skipper .sk .skc-geo-recentrer:focus-visible{outline:3px solid var(--sk-jaune);outline-offset:2px;}
 rdr-skipper .sk .est-geovoile .skc-geo-recentrer:not([hidden]){position:absolute;z-index:6;left:50%;transform:translateX(-50%);display:inline-flex;
   bottom:calc(var(--sk-nav-h) * .5 + 108px * var(--skc-geo-e,1));background:rgba(11,26,51,.86);}
-rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau{top:calc(var(--e4) + 40px);left:var(--e4);right:var(--e4);padding:5px;}
-rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0 14px;font-size:11px;letter-spacing:.1em;}
+ 
+rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau{top:auto;bottom:var(--e4);left:var(--e4);right:auto;padding:4px;border-radius:14px 3px 14px 3px;}
+rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{min-height:40px;padding:0 12px;gap:7px;font-size:10.5px;letter-spacing:.08em;}
 `;
 
   
@@ -5329,6 +5836,8 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
     }
 
     disconnectedCallback() {
+       
+      fermerABord();
       clearTimeout(this._panneMinuteur); this._panneMinuteur = null;
       this._nettoyer();
       this._init = false;
@@ -5480,7 +5989,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const T = I18N[this._lang];
       const s = p.skipper;
       const autreSkipper = this._dernierId !== null && this._dernierId !== s.id;
-      if (autreSkipper) { this._fansDelta = 0; this._fanEnAttente = false; this._prefereEnAttente = false; }
+      if (autreSkipper) { this._fansDelta = 0; this._fanEnAttente = false; this._prefereEnAttente = false; this._abordMedias = null; }
       const premier = !this._dejaRendu;
       this._T = T;
       this._nomAffiche = [casse(s.prenom), casse(s.nom)].filter(Boolean).join(' ');
@@ -5490,9 +5999,14 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const sections = [];
        
       if (this._phase === 'course') sections.push({ id: 'skc-course', cle: 'course', html: this._sectionCourse() });
+      
+
+      const abord = { id: 'sk-abord', cle: 'abord', html: '<div id="sk-abord" data-abord-section hidden></div>' };
+      if (this._phase === 'course') sections.push(abord);
       sections.push({ id: 'sk-profil', cle: 'profil', html: this._profil(s, T) });
        
       if (p.actus && (p.actus.liste || []).length) sections.push({ id: 'sk-actus', cle: 'actus', html: this._actus(s, p.actus, T) });
+      if (this._phase !== 'course') sections.push(abord);
       
 
 
@@ -5711,8 +6225,22 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const jour = t > depart ? Math.floor((t - depart) / 86400000) + 1 : 0;
       const pct = V ? pctRoute(V.J, V.l) : 0;
       let cls = '', html;
+      const fin = etatFin(V);
+      
+
+
+      if (fin === 'grand' || fin === 'categorie') {
+        const temps = V.l.temps ? '<span>' + svg('chrono') + esc(dureeC(C, V.l.temps, true)) + '</span>' : '';
+        const titre = fin === 'grand' ? C.visuelGrand : C.visuelCategorie(V.c.nom);
+        const fanion = fin === 'categorie' ? vecteurSur(V.c.icone) || vecteurSur(this._p.skipper.classe && this._p.skipper.classe.icone) : '';
+        const cible = 'skc-course';
+        return '<a class="sk-live skc-live--classe' + (fin === 'grand' ? ' skc-live--grand' : '') + '" href="#' + cible + '" data-sk-ancre="' + cible + '"' +
+          ' style="--sk-fait:100%' + (fin === 'categorie' ? ';--skc-c:' + esc(couleurClasse(V)) : '') + '" aria-label="' + esc(titre + (V.l.temps ? ', ' + dureeC(C, V.l.temps, true) : '')) + '">' +
+          (fin === 'grand' ? '<span class="skc-live-medaille"><img src="' + esc(TROPHEE) + '" alt="" decoding="async"></span>' : fanion ? '<img class="skc-live-fanion" src="' + esc(fanion) + '" alt="" decoding="async">' : '') +
+          '<span class="skc-live-etiquette"><b>' + esc(titre) + '</b>' + temps + '</span></a>';
+      }
       if (V && V.etat === 'arrive') { cls = ' skc-live--arrive'; html = '<b>' + esc(C.arrive) + '</b><span>' + esc(C.aPap) + '</span>'; }
-      else if (V && V.etat === 'abandon') { cls = ' skc-live--abandon'; html = '<b>' + esc(C.abandon) + '</b><span>' + esc(C.route(pct)) + '</span>'; }
+      else if (V && V.etat === 'abandon') { cls = ' skc-live--abandon'; html = '<b>' + esc(C.abandon) + '</b><span>' + esc((V.l.dtfEstimee ? '≈ ' : '') + C.route(pct)) + '</span>'; }
       else {
         
 
@@ -5828,7 +6356,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       return '<div class="sk-bord skc-bord skc-arrive" data-skc-bord>' +
         '<div class="sk-bord-case sk-bord-rang"><b class="sk-bord-pos' + medaille + '">' + ordinalHtml(l.rang, this._lang) + '</b>' +
           '<div class="sk-bord-rang-textes"><span class="sk-bord-lib">' + esc(C.enClasse(c.nom)) + '</span>' +
-          '<span class="sk-bord-sur">' + esc(V.vainqueurCourse ? C.grandVainqueurSur : l.rang === 1 ? C.vainqueurCategorie : C.arriveRang(ordinal(l.rang, this._lang), V.enCourse)) + '</span>' +
+          '<span class="sk-bord-sur">' + esc(V.vainqueurCourse ? C.grandVainqueurSur : V.vainqueurClasse ? C.vainqueurCategorie : C.arriveRang(ordinal(l.rang, this._lang), V.enCourse)) + '</span>' +
         '</div></div>' +
         '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.arrive) + '</span><b>100 %</b></div>' +
           '<div class="sk-bord-jauge" style="--sk-jauge:100%"><i></i></div>' +
@@ -5843,11 +6371,13 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
     _bordAbandon(V, suivre) {
       const C = COURSE_T[this._lang];
       const { l, J } = V;
-      const pct = pctRoute(J, l);
+      const pct = pctRoute(J, l), motif = motifPropre(l, this._lang), article = articleAbandon(l);
       return '<div class="sk-bord skc-bord skc-abandon" data-skc-bord>' +
         '<div class="sk-bord-case skc-abandon-case"><b class="skc-abandon-mot">' + svg('alerte') + esc(C.abandon) + '</b>' +
-          '<span class="skc-abandon-motif">' + esc(l.motif || '') + '</span>' + (l.dtf != null ? '<span class="skc-abandon-ou">' + esc(C.aDeArrivee(nfc(C, l.dtf), kmc(C, l.dtf))) + '</span>' : '') + '</div>' +
-        '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.parcours) + '</span><b>' + pct + ' %</b></div>' +
+          (motif ? '<span class="skc-abandon-motif">' + esc(motif) + '</span>' : '') +
+          (article ? '<a class="skc-abandon-article" href="' + esc(article) + '">' + esc(C.lireArticle) + svg('droite') + '</a>' : '') +
+          (l.dtf != null ? '<span class="skc-abandon-ou">' + esc((l.dtfEstimee ? C.aDeArriveeEnv : C.aDeArrivee)(nfc(C, l.dtf), kmc(C, l.dtf))) + '</span>' : '') + '</div>' +
+        '<div class="sk-bord-case sk-bord-parcours"><div class="sk-bord-parcours-tete"><span class="sk-bord-lib">' + esc(C.parcours) + '</span><b>' + (l.dtfEstimee ? '≈ ' : '') + pct + ' %</b></div>' +
           '<div class="sk-bord-jauge" style="--sk-jauge:' + pct + '%"><i></i></div><p class="skc-route"><span>' + esc(C.saintMalo) + '</span><span>' + esc(C.pap) + '</span></p></div>' +
         this._accesCourse(V, suivre) + this._lignePointage(V) +
       '</div>';
@@ -5950,10 +6480,12 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
           '</dl>');
       } else {
         deux = true;
-        const pct = pctRoute(J, l);
+        const pct = pctRoute(J, l), motif = motifPropre(l, this._lang), article = articleAbandon(l);
         cartes = carte(C.sonAbandon, '<dl class="skc-chiffres">' +
-            '<div class="skc-pleine"><dt>' + esc(C.abandon) + '</dt><dd>' + esc(l.motif || '') + (l.dtf != null ? '<small>' + esc(C.aDeArrivee(nfc(C, l.dtf), kmc(C, l.dtf))) + '</small>' : '') + '</dd></div>' +
-            '<div><dt>' + esc(C.parcours) + '</dt><dd>' + pct + ' %<small>' + esc(C.routeFaite(pct)) + '</small></dd></div>' +
+            '<div class="skc-pleine"><dt>' + esc(C.abandonA) + '</dt><dd>' + (l.dtfEstimee ? '≈ ' : '') + pct + ' %<small>' + esc(C.duParcours) +
+              (l.dtf != null ? ', ' + esc((l.dtfEstimee ? C.aDeArriveeEnv : C.aDeArrivee)(nfc(C, l.dtf), kmc(C, l.dtf))) : '') + '</small></dd></div>' +
+            (motif || article ? '<div class="skc-pleine"><dt>' + esc(C.raison) + '</dt><dd class="skc-raison">' + esc(motif) +
+              (article ? '<a class="skc-abandon-article" href="' + esc(article) + '">' + esc(C.lireArticle) + svg('droite') + '</a>' : '') + '</dd></div>' : '') +
           '</dl>') +
           carte(C.enTeteClasse(c.nom), '<ol class="skc-autour">' + V.ordre.slice(0, 5).map((x) => this._ligneAutour(x, null, x.statut === 'ARV' ? esc(C.arrive) : nfc(C, x.dtf) + ' ' + C.mnCourt, false)).join('') + '</ol>');
       }
@@ -5988,7 +6520,33 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       if (li) li.hidden = !this._vue;
       const outro = R.querySelector('[data-sk-outro]');
       if (outro) outro.setAttribute('state', this._etatFinPage());
+      this._poserVisuel();
       if (this._geoPerimee) this._geoPerimee();
+    }
+    
+
+
+    _poserVisuel() {
+      const R = this._racine;
+      const scene = R && R.querySelector('.sk-hero .sk-scene');
+      if (!scene || this._phase !== 'course') return;
+      const V = this._vue, fin = etatFin(V), s = this._p.skipper;
+      const vieux = scene.querySelector('.skc-visuel');
+      if (fin !== 'grand' && fin !== 'categorie') {
+        if (vieux) vieux.remove();
+        scene.classList.remove('skc-scene--visuel');
+        return;
+      }
+      const cle = fin + '|' + (V.l.temps || '') + '|' + this._lang;
+      if (vieux && vieux.getAttribute('data-cle') === cle) return;
+      const html = '<figure class="skc-visuel" data-cle="' + esc(cle) + '">' + visuelVainqueur(V, s, COURSE_T[this._lang]) + '</figure>';
+      if (vieux) vieux.outerHTML = html; else scene.insertAdjacentHTML('beforeend', html);
+      scene.classList.add('skc-scene--visuel');
+      if (vieux) return;
+      const memo = 'skc-intro-' + s.id;
+      let vu = false;
+      try { vu = sessionStorage.getItem(memo) === '1'; sessionStorage.setItem(memo, '1'); } catch (e) { vu = false; }
+      if (!vu) requestAnimationFrame(() => jouerIntro(scene.querySelector('.skc-visuel-carte'), V, s, COURSE_T[this._lang]));
     }
     _etatFinPage() {
       const V = this._vue;
@@ -6010,9 +6568,14 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const planifier = (ms) => { clearTimeout(minuteur); minuteur = setTimeout(relire, Math.min(Math.max(60000, ms), 2147483000)); };
       const lire = (forcer) => lireJeuCourse(forcer).then((j) => {
         if (!vivant()) return;
-        const deja = this._jeuEtat === 'pret' && this._jeuMaj === j.maj;
+        
+
+        const off = sigOfficiel(j);
+        const deja = this._jeuEtat === 'pret' && this._jeuMaj === j.maj && this._jeuOff === off;
+        this._jeuOff = off;
         this._prendreJeu(j);
-        if (!deja) this._poserCourse(); else this._tictac();
+         
+        if (!deja) this._poserCourse(); else { this._tictac(); this._poserVisuel(); }
         const p = Date.parse(j.prochain);
         planifier(isFinite(p) && !j.demo ? p - Date.now() + 90000 + Math.random() * 60000 : 300000);
       }, () => {
@@ -6046,6 +6609,55 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       const v = String((this._p && this._p.skipper && this._p.skipper.idGeovoile) || '').trim();
       return /^\d{1,6}$/.test(v) ? v : '';
     }
+    
+
+    _suivreABord() {
+      const id = this._idGeo();
+      if (!id) return;
+      const rendu = this._rendu;
+      let fini = false;
+      const vivant = () => !fini && rendu === this._rendu && this.isConnected;
+       
+      if (this._abordMedias && this._abordMedias.length) { this._abordCle = null; this._poserABord({ medias: this._abordMedias }); }
+      const lire = () => lireAbord(ABORD_STATIQUE)
+        .then((j) => j.sailors.find((m) => String(m.geovoileId) === id) || null)
+        
+
+        .catch(() => (repliABordPermis() ? lireAbord(ABORD_SITE + encodeURIComponent(id)).then((j) => j.sailors[0] || null) : Promise.reject(new Error('repli différé'))))
+        .then((marin) => { if (vivant()) this._poserABord(marin); })
+        .catch(() => {   });
+      lire();
+      const minuteur = setInterval(() => { if (document.visibilityState === 'visible') lire(); }, 600000);
+      this._nettoyages.push(() => { fini = true; clearInterval(minuteur); });
+    }
+    _poserABord(marin) {
+      const R = this._racine;
+      if (!R) return;
+      const medias = (marin ? marin.medias || marin.onboard || [] : []).filter((m) => m && m.date && imageAbord(m, true) && (m.type !== 'video' || sureAbord(m.youtube)));
+      const cle = medias.map((m) => m.id + m.date).join('|');
+      const place = R.querySelector('[data-abord-section]');
+      if (!place || (cle === this._abordCle && !place.hidden)) return;
+      this._abordCle = cle;
+      this._abordMedias = medias;
+      const li = R.querySelector('[data-abord-nav]');
+      if (li) li.hidden = !medias.length;
+      if (!medias.length) { place.outerHTML = '<div id="sk-abord" data-abord-section hidden></div>'; return; }
+      const C = COURSE_T[this._lang];
+      const s = this._p.skipper;
+      place.outerHTML = blocABord(medias, this._phase === 'course', (s.bateau && s.bateau.nom) || (marin && marin.boat) || '', C);
+      if (this._geoPerimee) this._geoPerimee();
+      const sec = R.querySelector('[data-abord-section]');
+      sec.querySelectorAll('img[data-attente]').forEach((im) => {
+        const voir = () => im.removeAttribute('data-attente');
+        if (im.complete) voir(); else { im.addEventListener('load', voir, { once: true }); im.addEventListener('error', voir, { once: true }); }
+      });
+      sec.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-abord]');
+        if (!b) return;
+        e.preventDefault();
+        ouvrirABord(this._abordMedias, Number(b.getAttribute('data-abord')) || 0, b, C, this._nomAffiche);
+      });
+    }
     _srcCarto(s) {
       const cl = CLASSES_CARTO[String((s.classe && s.classe.nom) || '').trim().toLowerCase().replace(/\s+/g, '-')] || 2;
       const id = this._idGeo();
@@ -6060,7 +6672,8 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
           '<p class="skc-att-msg"><span>' + esc(C.lente) + '</span>' + complete + '</p>' +
         '</div>' +
         '<iframe class="skc-geovoile" src="' + esc(this._srcCarto(s)) + '" title="' + esc(C.titre) + '" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>' +
-        '<button class="skc-geo-activer" type="button"><span>' + svg('carte') + esc(C.activer) + '</span></button>' +
+        '<button class="skc-geo-activer" type="button"><span>' + svg('carte') + esc(auDoigt() ? C.activerDoigt : C.activer) + '</span></button>' +
+        '<button class="skc-geo-fini" type="button">' + svg('coche') + '<span>' + esc(C.fini) + '</span></button>' +
         '<div class="skc-geo-bandeau">' + complete + '</div>' +
         '<button class="sk-btn sk-btn--ligne skc-geo-recentrer" type="button" hidden>' + svg('cible') + '<span>' + esc(C.recentrer(this._prenomAffiche)) + '</span></button>';
     }
@@ -6115,24 +6728,33 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       let verrou = null, activeeA = 0, survol = 0;
       const figer = () => {
         if (verrou) return;
-        const h = document.documentElement, barre = window.innerWidth - h.clientWidth;
+        const h = document.body, barre = window.innerWidth - document.documentElement.clientWidth;
         verrou = [h.style.overflow, h.style.paddingRight];
         h.style.overflow = 'hidden';
         if (barre > 0) h.style.paddingRight = barre + 'px';
       };
       const liberer = () => {
         if (!verrou) return;
-        document.documentElement.style.overflow = verrou[0];
-        document.documentElement.style.paddingRight = verrou[1];
+        document.body.style.overflow = verrou[0];
+        document.body.style.paddingRight = verrou[1];
         verrou = null;
       };
       const decentre = () => { if (activeeA && Date.now() - activeeA > 400 && scene.classList.contains('est-active')) recentrer.hidden = false; };
+      const fini = scene.querySelector('.skc-geo-fini');
+      const rendre = () => { scene.classList.remove('est-active'); activeeA = 0; if (recentrer) recentrer.hidden = true; liberer(); };
       this._ecoute(activer, 'click', () => {
-        if (tactile()) { location.assign(this._lienCarto()); return; }
         scene.classList.add('est-active');
         activeeA = Date.now();
-        figer();
+         
+        if (!tactile()) figer();
       });
+      if (fini) this._ecoute(fini, 'click', rendre);
+       
+      if (typeof IntersectionObserver === 'function') {
+        const io = new IntersectionObserver((es) => { if (es.some((x) => !x.isIntersecting) && tactile() && scene.classList.contains('est-active')) rendre(); });
+        io.observe(scene);
+        this._nettoyages.push(() => io.disconnect());
+      }
       this._ecoute(scene, 'mouseleave', () => { scene.classList.remove('est-active'); clearTimeout(survol); activeeA = 0; liberer(); });
       this._ecoute(window, 'blur', () => setTimeout(() => { if (document.activeElement === cadre) decentre(); }, 0));
       this._ecoute(cadre, 'mouseenter', () => { clearTimeout(survol); survol = setTimeout(decentre, 1500); });
@@ -6352,7 +6974,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
     }
 
     _nav(s, sections, T) {
-      const icone = { course: 'route', profil: 'profil', actus: 'actus', palmares: 'palmares', bateau: 'bateau', medias: 'medias', suivre: 'suivre' };
+      const icone = { course: 'route', abord: 'photo', profil: 'profil', actus: 'actus', palmares: 'palmares', bateau: 'bateau', medias: 'medias', suivre: 'suivre' };
       
 
       const liens = sections.filter(x => x.nav !== false);
@@ -6366,7 +6988,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
             (avatar ? '<span class="sk-nav-avatar"><img src="' + esc(avatar) + '" alt="" width="38" height="38" loading="lazy" decoding="async"></span>' : '') +
             '<span class="sk-nav-qui"><b>' + esc(this._nomAffiche) + '</b>' + (sous ? '<small>' + esc(sous) + '</small>' : '') + '</span></a>' +
           '<div class="sk-nav-defile"><span class="sk-nav-indic" aria-hidden="true"></span><ul class="sk-nav-liste">' +
-            liens.map(x => '<li' + (x.cle === 'course' ? ' data-skc-nav' + (this._vue ? '' : ' hidden') : '') + '><a class="sk-nav-lien" href="#' + x.id + '" data-sk-ancre="' + x.id + '">' + svg(icone[x.cle]) + '<span>' + esc(T.nav[x.cle]) + '</span></a></li>').join('') +
+            liens.map(x => '<li' + (x.cle === 'course' ? ' data-skc-nav' + (this._vue ? '' : ' hidden') : x.cle === 'abord' ? ' data-abord-nav' + (this._abordMedias && this._abordMedias.length ? '' : ' hidden') : '') + '><a class="sk-nav-lien" href="#' + x.id + '" data-sk-ancre="' + x.id + '">' + svg(icone[x.cle]) + '<span>' + esc(T.nav[x.cle]) + '</span></a></li>').join('') +
           '</ul></div>' +
           '<div class="sk-nav-actions">' +
             this._boutonSuivre('sk-nav-btn sk-nav-btn--suivre', false) +
@@ -6722,6 +7344,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       this._mesurerScene(R, s);
       if (this._apercu) this._brancherCarto(R);
       this._suivreCourse();
+      this._suivreABord();
 
       
 
@@ -7285,10 +7908,12 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{flex:1;padding:0
       let geo = null;
       const mesurer = (y, docH) => {
         const haut = (el) => el.getBoundingClientRect().top + y;
+        
+
         geo = {
           docH, debut: haut(R), hh: hero ? hero.offsetHeight : 0,
           navH: this._navHaut(R),
-          hauts: cibles.map(haut)
+          hauts: cibles.map((c) => { const el = R.querySelector('#' + c.id); return el && !el.hidden ? haut(el) : Infinity; })
         };
       };
       this._geoPerimee = () => { geo = null; };

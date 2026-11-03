@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 148d447 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 5508e16 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="5508e16";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -26,6 +26,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
     { id: 'profils',  label: 'Profils' },
     { id: 'insta',    label: 'Instagram' },
     { id: 'village',  label: 'Village' },
+    { id: 'vainqueurs', label: 'Vainqueurs' },
     { id: 'jeux',     label: 'Jeux concours', groupe: true }
   ];
 
@@ -505,6 +506,20 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
     '.rdrc-mob-st[data-s="Refusé"]{background:#FBE3E0;color:var(--no)}',
     '.rdrc-mob-st[data-s="Exclue"]{background:#EEF2F7;color:var(--ink-3)}',
     '.rdrc-mob-acts{display:flex;gap:6px;justify-content:flex-end}.rdrc-mob-acts .rdrc-btn{padding:6px 10px;font-size:11px}',
+     
+    '.rdrc-vq{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:14px}',
+    '.rdrc-vq-carte--grand{grid-column:1/-1;border-color:#E8C935;box-shadow:inset 0 3px 0 #FCF150}',
+    '.rdrc-vq-ok{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 2px;font-size:15px}',
+    '.rdrc-vq-bat{font-size:12px;font-weight:600;color:#5B6B82}',
+    '.rdrc-vq-pastille{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}',
+    '.rdrc-vq-pastille[data-s="valide"]{background:#DDF3E4;color:#17663A}.rdrc-vq-pastille[data-s="propose"]{background:#FFF4CC;color:#7A5A00}',
+    '.rdrc-vq-meta{margin:0;font-size:12px;color:#5B6B82}.rdrc-vq-attente{margin:6px 0 0;font-size:13px;color:#5B6B82}',
+    '.rdrc-vq-ecart{margin:8px 0 0;padding:8px 10px;border-radius:8px;background:#FFF1E6;color:#8A3B00;font-size:12px;font-weight:600}',
+    '.rdrc-vq-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rdrc-vq-acts .rdrc-btn.rdrc-go{border-color:var(--navy);background:var(--navy);color:#fff}',
+    '.rdrc-vq-choix{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dashed #DCE3ED}',
+    '.rdrc-vq-choix label{display:flex;flex-direction:column;gap:4px;flex:1 1 220px;font-size:12px;color:#5B6B82}.rdrc-vq-choix select{width:100%}',
+    '.rdrc-vq-intro{margin-top:0}',
+    '.rdrc-vq-sel{display:block;width:100%;height:40px;padding:0 10px;border:1px solid #C9D3E1;border-radius:8px;background:#fff;color:#16263F;font:inherit;font-size:13px}',
     '.rdrc-mob[data-gagnant="1"]{border-color:var(--amber);background:#FFFBEE}',
     '.rdrc-mob-trophee{color:var(--amber);font-weight:800;font-size:11px}',
     '.rdrc-tirage{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff}',
@@ -1573,6 +1588,15 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
     setTimeout(function () { URL.revokeObjectURL(url); }, 0);
   }
    
+   
+   
+  function traficRecule(t) {
+    if (!t || !t.maj || !Array.isArray(t.jours) || traficPret(t)) return t;
+    var pret = null;
+    for (var i = 0; i < t.jours.length; i++) { var x = t.jours[i]; if (x.j < t.maj && x.v && (x.fc || x.fj) && (!pret || x.j > pret.j)) pret = x; }
+    if (!pret) return t;
+    return Object.assign({}, t, { maj: pret.j, jours: t.jours.filter(function (y) { return y.j <= pret.j; }), enAttente: t.maj });
+  }
   function traficPret(t) {
     if (!t || !t.maj || !Array.isArray(t.jours)) return false;
     for (var i = 0; i < t.jours.length; i++) if (t.jours[i].j === t.maj) return !!(t.jours[i].v && (t.jours[i].fc || t.jours[i].fj));
@@ -2126,8 +2150,10 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
     _traficHtml(p) {
       if (p.traficError) return '<p class="rdrc-err">' + esc(p.traficError) + '</p>';
       if (!p.trafic) return '<div class="rdrc-state">Chargement des chiffres du trafic…</div>';
-      if (!traficPret(p.trafic)) return '<div class="rdrc-state">Les chiffres du trafic se rangent chaque matin vers 7 h : ceux d’hier ne sont pas encore là.</div>';
-      return '<div class="rdrc-tr-hote" data-tr-hote></div>';
+      var tr = traficRecule(p.trafic);
+      if (!traficPret(tr)) return '<div class="rdrc-state">Les chiffres du trafic se rangent chaque matin vers 7 h : ceux d’hier ne sont pas encore là.</div>';
+      var attente = tr.enAttente ? '<p class="rdrc-note">Les chiffres du ' + esc(new Date(tr.enAttente + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })) + ' ne sont pas encore rangés : en attendant, ceux du ' + esc(new Date(tr.maj + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })) + '.</p>' : '';
+      return attente + '<div class="rdrc-tr-hote" data-tr-hote></div>';
     }
 
      
@@ -3300,8 +3326,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
         self._chaineDecider(v, true);
       };
       document.addEventListener('keydown', this._chTouche, true);
-      this._chDebordement = document.documentElement.style.overflow;
-      document.documentElement.style.overflow = 'hidden';
+      this._chDebordement = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
       document.body.appendChild(o);
       this._chEl = o;
       this._chaineDessiner();
@@ -3380,7 +3406,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
       if (!ch) return;
       this._ch = null;
       document.removeEventListener('keydown', this._chTouche, true);
-      document.documentElement.style.overflow = this._chDebordement || '';
+      document.body.style.overflow = this._chDebordement || '';
       if (this._chEl) this._chEl.remove();
       this._chEl = null;
        
@@ -4365,7 +4391,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
       if (this._view === 'insta') return !!(p.claims || p.approved);
       if (this._view === 'village') return !!(p.audience && p.audience.village && p.audience.village.repondu);
       if (this._view === 'contenu') return !!(p.contenu && (p.contenu.jours || []).length);
-      if (this._view === 'trafic') return traficPret(p.trafic);
+      if (this._view === 'trafic') return traficPret(traficRecule(p.trafic));
       if (this._view === 'profils') {
         var dd = (p.audience || {}).demographie;
         return !!(dd && (dd.agesBase || dd.geoBase || dd.civilitesBase || dd.voileBase));
@@ -4589,6 +4615,60 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
 
 
 
+    
+
+
+
+
+    _vainqueursHtml(p) {
+      if (p.vainqueursError) return '<p class="rdrc-err">' + esc(p.vainqueursError) + '</p>';
+      var v = p.vainqueurs;
+      if (!v) return '<div class="rdrc-state">' + (p.loading ? 'Lecture du classement…' : 'Aucune donnée pour l\'instant.') + '</div>';
+      var date = function (iso) {
+        var d = new Date(iso);
+        if (!iso || isNaN(d.getTime())) return '';
+        try { return new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(d).replace(':', ' h '); }
+        catch (e) { return d.toISOString().slice(0, 16); }
+      };
+      var duree = function (ms) {
+        if (typeof ms !== 'number' || !(ms > 0)) return '';
+        var t = Math.round(ms / 1000), j = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
+         
+        return ((j ? j + ' j ' : '') + h + ' h ' + (m < 10 ? '0' : '') + m + ' min ' + (sec < 10 ? '0' : '') + sec + ' s').replace(/ /g, ' ');
+      };
+      var arrivee = function (x) { return x.arrivee ? 'arrivé ' + date(x.arrivee) + (x.temps ? ', en ' + duree(x.temps) : '') : 'pas encore arrivé au classement'; };
+      var qui = function (x) { return '<b>' + esc(x.nom) + '</b>' + (x.bateau ? ' <span class="rdrc-vq-bat">' + esc(x.bateau) + (x.classe ? ' · ' + esc(x.classe) : '') + '</span>' : ''); };
+      var intro = '<p class="rdrc-note rdrc-vq-intro"><b>Le site n\'annonce aucun vainqueur sans votre validation.</b> Le classement propose le premier arrivé ; validez une fois la décision officielle de la direction de course connue (pénalités, réclamations). Le vainqueur validé s\'affiche sur sa fiche (pastille, visuel, célébration) en deux minutes pour un nouveau visiteur, un quart d\'heure au plus pour une page déjà ouverte. En cas de changement, choisissez un autre skipper ou retirez la validation.</p>';
+      if (!v.enCourse) return intro + '<div class="rdrc-state"><b>Pas encore de course au classement</b>Les propositions paraîtront ici aux premières arrivées.</div>';
+      var cartes = (v.titres || []).map(function (t) {
+        var grand = t.cle === 'grand';
+        var etat, actions = '';
+        if (t.valide) {
+          var choisi = (t.tous || []).filter(function (x) { return x.id === t.valide.skipper; })[0] || { nom: t.valide.nom, bateau: '', classe: '' };
+          etat = '<p class="rdrc-vq-ok"><span class="rdrc-vq-pastille" data-s="valide">Validé</span>' + qui(choisi) + '</p>' +
+            '<p class="rdrc-vq-meta">par ' + esc(t.valide.par || '?') + (t.valide.le ? ', ' + esc(date(t.valide.le)) : '') + ' · ' + esc(arrivee(choisi)) + '</p>' +
+            (t.ecart ? '<p class="rdrc-vq-ecart">⚠ Ce choix ne suit pas le classement' + (t.propose ? ' : le premier arrivé est ' + esc(t.propose.nom) + '.' : ' : aucun arrivé pour l\'instant.') + (choisi.arrivee ? '' : ' Le site ne l\'annoncera qu\'à son arrivée.') + '</p>' : '');
+          actions = '<button type="button" class="rdrc-btn" data-vq-retirer="' + esc(t.cle) + '" data-titre="' + esc(t.nom) + '">Retirer la validation</button>';
+        } else if (t.propose) {
+          etat = '<p class="rdrc-vq-ok"><span class="rdrc-vq-pastille" data-s="propose">Proposé</span>' + qui(t.propose) + '</p>' +
+            '<p class="rdrc-vq-meta">premier arrivé ' + (grand ? 'de la course' : 'de la classe') + ' · ' + esc(arrivee(t.propose)) + '</p>' +
+            '<p class="rdrc-vq-attente">Pas encore annoncé sur le site.</p>';
+          actions = '<button type="button" class="rdrc-btn rdrc-go" data-vq-valider="' + esc(t.cle) + '" data-skipper="' + esc(t.propose.id) + '" data-nom="' + esc(t.propose.nom) + '" data-titre="' + esc(t.nom) + '">Valider ' + esc(t.propose.nom) + '</button>';
+        } else {
+          etat = '<p class="rdrc-vq-attente">Pas encore d\'arrivée ' + (grand ? 'dans la course' : 'dans cette classe') + '.</p>';
+        }
+        var liste = grand ? (t.arrives || []) : (t.tous || []);
+        var choix = liste.length ? '<div class="rdrc-vq-choix"><label><span>' + (t.valide ? 'Changer pour' : 'Ou choisir un autre skipper') + '</span>' +
+          '<select class="rdrc-vq-sel" data-vq-choix="' + esc(t.cle) + '"><option value="">…</option>' +
+          liste.map(function (x) { return '<option value="' + esc(x.id) + '"' + (t.valide && t.valide.skipper === x.id ? ' disabled' : '') + '>' + esc(x.nom + (x.bateau ? ' (' + x.bateau + ')' : '') + ' · ' + (x.arrivee ? 'arrivé ' + date(x.arrivee) : 'pas arrivé')) + '</option>'; }).join('') +
+          '</select></label><button type="button" class="rdrc-btn" data-vq-valider="' + esc(t.cle) + '" data-titre="' + esc(t.nom) + '">Valider ce choix</button></div>' : '';
+        return '<section class="rdrc-card rdrc-vq-carte' + (grand ? ' rdrc-vq-carte--grand' : '') + '" data-vq="' + esc(t.cle) + '">' +
+          '<div class="rdrc-card-h"><h3 class="rdrc-card-t">' + esc(t.nom) + '</h3><span class="rdrc-card-s">' + (grand ? 'premier arrivé de toute la course' : (t.arrives || []).length + ' arrivé' + ((t.arrives || []).length > 1 ? 's' : '')) + '</span></div>' +
+          etat + (actions ? '<div class="rdrc-vq-acts">' + actions + '</div>' : '') + choix + '</section>';
+      }).join('');
+      return intro + '<div class="rdrc-vq">' + cartes + '</div>' + '<p class="rdrc-note">Classement lu au pointage de ' + esc(date(v.maj)) + '. « Actualiser » relit le classement et les validations.</p>';
+    }
+
     _roueHtml(p) {
       if (p.roueError) return '<p class="rdrc-err">' + esc(p.roueError) + '</p>';
       var v = p.roue;
@@ -4773,6 +4853,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
                : this._view === 'profils' ? this._profilsHtml(p)
                : this._view === 'contenu' ? this._contenuHtml(p)
                : this._view === 'trafic' ? this._traficHtml(p)
+               : this._view === 'vainqueurs' ? this._vainqueursHtml(p)
                : this._audienceHtml(p);
       var dernier = this._dernierJeu;
       var menu = '<div class="rdrc-menu" id="rdrc-menu-jeux" role="menu" aria-labelledby="rdrc-tab-jeux"' + (this._menuJeux ? '' : ' hidden') + '>' +
@@ -5126,6 +5207,28 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
         });
         roueFiltrer();
       }
+       
+      this.querySelectorAll('[data-vq-valider]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cle = btn.getAttribute('data-vq-valider'), sk = btn.getAttribute('data-skipper'), nom = btn.getAttribute('data-nom');
+          if (!sk) {
+            var sel = self.querySelector('[data-vq-choix="' + cle + '"]');
+            sk = sel && sel.value;
+            nom = sel && sel.selectedIndex > 0 ? sel.options[sel.selectedIndex].text.split(' · ')[0] : '';
+          }
+          if (!sk) return;
+          if (!window.confirm('Valider ' + nom + ' : ' + btn.getAttribute('data-titre') + ' ?\n\nIl sera annoncé sur sa fiche skipper en deux minutes (un quart d\'heure au plus pour une page déjà ouverte).')) return;
+          btn.disabled = true;
+          self._emit('rc-vainqueur-valider', { cle: cle, skipper: sk });
+        });
+      });
+      this.querySelectorAll('[data-vq-retirer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (!window.confirm('Retirer la validation : ' + btn.getAttribute('data-titre') + ' ?\n\nPlus aucun vainqueur ne sera annoncé pour ce titre.')) return;
+          btn.disabled = true;
+          self._emit('rc-vainqueur-retirer', { cle: btn.getAttribute('data-vq-retirer') });
+        });
+      });
       this.querySelectorAll('[data-roue-statut]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           btn.disabled = true;
@@ -5177,7 +5280,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="148d447";performan
       if (exportBtn) exportBtn.addEventListener('click', function () { self._exportCsv(); });
 
        
-      var hoteTrafic = this.querySelector('[data-tr-hote]'), donneesTrafic = (this._payload || {}).trafic;
+      var hoteTrafic = this.querySelector('[data-tr-hote]'), donneesTrafic = traficRecule((this._payload || {}).trafic);
       if (hoteTrafic && traficPret(donneesTrafic)) {
         try { traficRemplir(hoteTrafic, donneesTrafic, { vue: self._trVue, onVue: function (v) { self._trVue = v; } }); }
         catch (e) { console.error('[console] onglet Trafic', e); hoteTrafic.innerHTML = '<p class="rdrc-err">Les chiffres du trafic n’ont pas pu s’afficher.</p>'; }
