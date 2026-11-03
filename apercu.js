@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 76dccbf | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="76dccbf";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 148d447 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="148d447";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1171,10 +1171,33 @@ rdr-accueil-apercu .hc{position:relative;height:clamp(430px,calc(100svh - var(--
 @media (min-width:761px){
 html[data-rdr-entete="dessus"] rdr-accueil-apercu .hc{height:calc(clamp(430px,calc(100svh - var(--rdr-entete-h,175px) - 64px),700px) + var(--rdr-entete-h,175px))}
 }
+rdr-accueil-apercu .hero.en-course{height:clamp(430px,calc(100svh - var(--haut-entete) - 64px),700px)}
+@media (min-width:761px){
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero.en-course{height:calc(clamp(430px,calc(100svh - var(--rdr-entete-h,175px) - 64px),700px) + var(--rdr-entete-h,175px))}
+}
+@media (max-width:760px){
+rdr-accueil-apercu .hero.en-course,html[data-rdr-entete="dessus"] rdr-accueil-apercu .hero.en-course{height:clamp(470px,calc(100svh - var(--haut-entete) - 40px),620px)}
+}
+rdr-accueil-apercu .hc.hc-entre .hc-in{animation:raa-hc-entre 1.1s ease both}
+@keyframes raa-hc-entre{from{opacity:0}to{opacity:1}}
 rdr-accueil-apercu .hc-in{position:absolute;inset:0}
+rdr-accueil-apercu .hc-attente{position:absolute;inset:0;background:radial-gradient(120% 90% at 78% 30%,#1B2440 0%,var(--co-nuit) 62%)}
+rdr-accueil-apercu .hc-attente::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.045) 50%,transparent 70%);background-size:220% 100%;animation:raa-hc-lueur 2.4s ease-in-out infinite}
+@keyframes raa-hc-lueur{from{background-position:120% 0}to{background-position:-120% 0}}
+rdr-accueil-apercu .hc.hc-arrivee .hc-in{animation:raa-hc-arrivee .8s ease both}
+@keyframes raa-hc-arrivee{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+rdr-accueil-apercu .hc-attente::after{animation:none}
+rdr-accueil-apercu .hc.hc-arrivee .hc-in{animation:none}
+}
 rdr-accueil-apercu .hc-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s .9s}
 rdr-accueil-apercu .hc-slide.est-vue{opacity:1;visibility:visible;transition:opacity .9s ease}
 rdr-accueil-apercu .hc-slide > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 9s linear}
+rdr-accueil-apercu .hc-slide > img.hc-flou{inset:-6%;width:112%;height:112%;filter:blur(34px) saturate(1.25) brightness(.62);transform:none;transition:none}
+rdr-accueil-apercu .hc-slide > img.hc-photo{left:auto;right:0;width:auto;max-width:74%;height:100%;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%);mask-image:linear-gradient(90deg,transparent 0,#000 24%)}
+rdr-accueil-apercu .hc-zone{position:absolute;top:0;bottom:0;right:max(var(--marge),calc((100% - var(--largeur)) / 2));width:min(58%,760px);display:flex;justify-content:center;pointer-events:none}
+rdr-accueil-apercu .hc-zone > img.hc-photo{position:static;display:block;height:100%;width:auto;max-width:100%;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 82%,transparent 100%)}
+rdr-accueil-apercu .hc-slide.est-large > img.hc-photo{left:0;right:0;width:100%;max-width:none;height:auto;top:12%;bottom:auto;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 78%,transparent 100%)}
 rdr-accueil-apercu .hc-slide.est-vue > img{transform:scale(1)}
 rdr-accueil-apercu .hc-slide::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(14,17,29,.86) 0%,rgba(14,17,29,.55) 38%,rgba(14,17,29,0) 70%),linear-gradient(0deg,rgba(14,17,29,.92) 0%,rgba(14,17,29,0) 42%),linear-gradient(180deg,rgba(14,17,29,.45) 0%,rgba(14,17,29,0) 20%)}
 rdr-accueil-apercu .hc-txt{position:absolute;left:0;right:0;bottom:clamp(80px,11.5vh,108px);z-index:2}
@@ -1183,6 +1206,7 @@ rdr-accueil-apercu .hc-k{display:flex;flex-wrap:wrap;align-items:center;gap:8px 
 rdr-accueil-apercu .hc-k .co-k{color:#fff}
 rdr-accueil-apercu .hc-t{font-size:clamp(34px,min(4.4vw,7.2vh),74px);line-height:1.03;text-wrap:balance;text-shadow:0 8px 40px rgba(0,0,0,.35)}
 rdr-accueil-apercu .hc-t.est-long{font-size:clamp(30px,min(3.4vw,5.8vh),56px)}
+rdr-accueil-apercu .hc-t.est-coupe{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 rdr-accueil-apercu .hc-t em,rdr-accueil-apercu .cl .titre em{font-style:inherit;color:var(--jaune)}
 rdr-accueil-apercu .hc-sous{font-size:15px;line-height:1.55;color:rgba(255,255,255,.86);max-width:54ch;text-wrap:pretty;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 @media (max-height:820px) and (min-width:761px){
@@ -1193,6 +1217,11 @@ rdr-accueil-apercu .hc-sous{-webkit-line-clamp:2}
 rdr-accueil-apercu .hc-bas{position:absolute;left:0;right:0;bottom:clamp(18px,3vh,30px);z-index:3}
 rdr-accueil-apercu .hc-bas .trame{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
 rdr-accueil-apercu .hc-tirets{display:flex;gap:6px;align-items:center}
+rdr-accueil-apercu .hc-nav{display:flex;align-items:center;gap:10px}
+rdr-accueil-apercu .hc-fl{flex:none;display:grid;place-items:center;width:34px;height:34px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(14,17,29,.38);color:#fff;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+rdr-accueil-apercu .hc-fl svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+rdr-accueil-apercu .hc-fl:hover{border-color:var(--jaune);color:var(--jaune);background:rgba(14,17,29,.6)}
+rdr-accueil-apercu .hc-fl:focus-visible{outline:2px solid var(--jaune);outline-offset:2px}
 rdr-accueil-apercu .hc-tiret{position:relative;width:74px;height:28px;padding:0;border:0;background:none;cursor:pointer}
 rdr-accueil-apercu .hc-tiret span{position:absolute;left:4px;right:4px;top:11px;height:6px;border-radius:2px;background:rgba(255,255,255,.3);transform:skewX(-20deg);overflow:hidden}
 rdr-accueil-apercu .hc-tiret span::after{content:'';position:absolute;inset:0;background:var(--jaune);transform-origin:left;transform:scaleX(0)}
@@ -1320,7 +1349,10 @@ rdr-accueil-apercu .hc-sous{font-size:13.5px;display:-webkit-box;-webkit-line-cl
 rdr-accueil-apercu .hc-slide::after{background:linear-gradient(0deg,rgba(14,17,29,.95) 0%,rgba(14,17,29,.7) 45%,rgba(14,17,29,.15) 75%),linear-gradient(180deg,rgba(14,17,29,.4) 0%,rgba(14,17,29,0) 22%)}
 rdr-accueil-apercu .hc-bas{bottom:14px}
 rdr-accueil-apercu .hc-tiret{width:58px}
+rdr-accueil-apercu .hc-fl{width:32px;height:32px}
+rdr-accueil-apercu .hc-nav{gap:6px}
 rdr-accueil-apercu .hc-revoir{top:12px;bottom:auto;right:var(--marge);gap:9px;padding:5px 12px 5px 5px}
+html[data-rdr-entete="dessus"] rdr-accueil-apercu .hc-revoir{top:calc(var(--rdr-entete-h,120px) + 10px)}
 rdr-accueil-apercu .hc-revoir-vig{width:58px}
 rdr-accueil-apercu .hc-revoir-vig i::before{width:22px;height:22px}
 rdr-accueil-apercu .hc-revoir-vig svg{width:9px;height:9px}
@@ -3049,6 +3081,10 @@ function monter(racine, portail, D) {
     const sansVideoIci = !h.querySelector('video');
     h.classList.toggle('entree-affiche', sansVideoIci);
     h.classList.remove('entree-douce');
+    
+
+    coIntro = estCourse(); h.classList.toggle('en-course', coIntro);
+    if (coIntro) { montrerHaut(!emVisible()); minuteurs.push(setTimeout(finIntroCourse, 9000)); }
     emApresIntro = Date.now() + 8000;
     signal('debut');
     
@@ -3065,7 +3101,7 @@ function monter(racine, portail, D) {
     };
     const bascule = () => {
       if (gen !== heroGen) return;
-      h.classList.add('est-photo'); compter(); signal('bascule');
+      h.classList.add('est-photo'); compter(); signal('bascule'); finIntroCourse();
       minuteurs.push(setTimeout(() => { if (gen === heroGen) arreterVideo(); }, 1500));
       emApresIntro = Date.now() + EM_APRES_BASCULE_MS;
       minuteurs.push(setTimeout(emRendre, EM_APRES_BASCULE_MS + 20));
@@ -3085,6 +3121,7 @@ function monter(racine, portail, D) {
 
   function entreeDouce() {
     const h = $('hero'); ++heroGen; clearTimeout(heroTimer);
+    finIntroCourse();
     emApresIntro = 0;
     const v = h.querySelector('video'); if (v) { try { v.pause(); } catch (e) {   } }
     h.classList.remove('est-photo', 'entree-affiche'); h.classList.add('entree-douce');
@@ -3499,7 +3536,7 @@ function monter(racine, portail, D) {
 
   const CO_SOURCE = 'https://www.routedurhum.com/_functions/classement';
   const CO_APRES_DIRECT = 5 * 60000, CO_RELIRE = 5 * 60000;
-  let coJeu = null, coLuLe = 0, coLecture = false, coEnAttente = null, coHc = 0, coFil = 0, coEtat = 0, coRelire = 0, coCar = [0, 0];
+  let coJeu = null, coLuLe = 0, coLecture = false, coEnAttente = null, coHc = 0, coFil = 0, coEtat = 0, coRelire = 0, coCar = [0, 0], coIntro = false;
   const estCourse = () => !!(PHASES[phase] && PHASES[phase].course);
   const CO_L = {
     fleche: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
@@ -3532,8 +3569,17 @@ function monter(racine, portail, D) {
    
   function montrerHaut(on) {
     const hero = $('hero'), hc = $('hc');
-    if (estCourse() && hc) { if (hero) hero.hidden = true; hc.hidden = !on; }
+    if (estCourse() && hc && !coIntro) { if (hero) hero.hidden = true; hc.hidden = !on; }
     else { if (hc) hc.hidden = true; if (hero) hero.hidden = !on; }
+  }
+   
+  function finIntroCourse() {
+    if (!coIntro) return;
+    coIntro = false;
+    const hero = $('hero'), hc = $('hc');
+    if (hero) hero.classList.remove('en-course');
+    montrerHaut(!emVisible());
+    if (hc && !hc.hidden) { hc.classList.remove('hc-entre'); void hc.offsetWidth; hc.classList.add('hc-entre'); minuteurs.push(setTimeout(() => hc.classList.remove('hc-entre'), 1300)); }
   }
    
   function coVerifierAttente() {
@@ -3588,18 +3634,103 @@ function monter(racine, portail, D) {
     try { rvVoile.showModal(); } catch (e) { rvVoile.setAttribute('open', ''); }
     try { rvVoile.querySelector('.hc-rv-f').focus({ preventScroll: true }); } catch (e) {   }
   }
-  function rendreHc() {
+  
+
+
+
+
+  function ajusterHc(hc) {
+    if (!hc || hc.hidden || !hc.offsetHeight) return;
+    const racineDoc = document.documentElement;
+    const hEnt = racineDoc.getAttribute('data-rdr-entete') === 'dessus' ? (parseFloat(getComputedStyle(racineDoc).getPropertyValue('--rdr-entete-h')) || 0) : 0;
+    
+
+    const yDans = (n) => { let y = 0; while (n && n !== hc) { y += n.offsetTop; n = n.offsetParent; } return y; };
+    let limite = hEnt + 14;
+    const rv = hc.querySelector('.hc-revoir');
+    if (rv && etroit() && rv.offsetHeight) limite = Math.max(limite, yDans(rv) + rv.offsetHeight + 10);
+    const min = etroit() ? 22 : 26;
+    hc.querySelectorAll('.hc-slide').forEach((s) => {
+      const t = s.querySelector('.hc-t'), so = s.querySelector('.hc-sous'), bloc = s.querySelector('.hc-txt');
+      if (!t || !bloc) return;
+      t.style.fontSize = ''; t.classList.remove('est-coupe'); if (so) so.style.webkitLineClamp = '';
+      const deborde = () => yDans(bloc) < limite;
+      if (!deborde()) return;
+      if (so) so.style.webkitLineClamp = '2';
+      let f = parseFloat(getComputedStyle(t).fontSize) || 30;
+      while (deborde() && f > min) { f = Math.max(min, f - 2); t.style.fontSize = f + 'px'; }
+      if (deborde() && so) so.style.webkitLineClamp = '1';
+      if (deborde()) t.classList.add('est-coupe');
+    });
+  }
+  
+
+  const CLE_HC = 'rdrHcActusV1:' + (EN ? 'en' : 'fr'), HC_MEMOIRE_MS = 6 * 3600 * 1000, HC_ATTENTE_MS = 4000;
+  const hcLireMemoire = () => { try { const m = JSON.parse(localStorage.getItem(CLE_HC) || 'null'); return m && Array.isArray(m.a) && m.a.length && Date.now() - m.le < HC_MEMOIRE_MS ? m.a : null; } catch (e) { return null; } };
+  const hcEcrireMemoire = (a) => { try { localStorage.setItem(CLE_HC, JSON.stringify({ le: Date.now(), a })); } catch (e) {   } };
+  function rendreHc(opts) {
     const hc = $('hc'); if (!hc) return;
-    clearInterval(coHc); coHc = 0;
+    const force = !!(opts && opts.force);
     const co = PHASES[phase].course, H = co.hero || {}, larg = pourLarge(innerWidth);
     const court = (t) => String(t).replace(/^Route du Rhum\s*[–-]\s*Destination Guadeloupe\s*[–-]\s*/i, '').trim();
     const rubrique = (p) => { const l = String((p.categorie && p.categorie.label) || p._categoryLabel || ''); return l ? l.charAt(0).toUpperCase() + l.slice(1).toLowerCase() : ''; };
     const avant = (p) => (p.pinned ? 1 : 0);
-    const posts = (actusAttribut() || (Array.isArray(D.actus) ? D.actus : [])).filter((p) => p && p.title && p.coverImage)
+    const frais = (actusAttribut() || (Array.isArray(D.actus) ? D.actus : [])).filter((p) => p && p.title && p.coverImage)
       .sort((a, b) => avant(b) - avant(a) || Date.parse(b.publishedDate) - Date.parse(a.publishedDate)).slice(0, 3);
+    if (frais.length) hcEcrireMemoire(frais);
+    const posts = frais.length ? frais : (hcLireMemoire() || []);
+     
+    const sigPosts = posts.map((p) => p._id + '|' + p.coverImage + '|' + p.title).join('§');
+    if (!force && posts.length && sigPosts === hc._sigPosts && hc.querySelector('.hc-slide')) return;
+     
+    if (!posts.length && !hc._attenteFinie) {
+      clearInterval(coHc); coHc = 0;
+      if (!hc.querySelector('.hc-attente')) { hc.innerHTML = '<div class="hc-attente" aria-hidden="true"></div>'; hc.setAttribute('aria-busy', 'true'); }
+      clearTimeout(hc._attente);
+      hc._attente = setTimeout(() => { hc._attenteFinie = true; if (estCourse()) rendreHc(); }, HC_ATTENTE_MS);
+      return;
+    }
+    clearTimeout(hc._attente);
+     
+    const arrivee = !!hc.querySelector('.hc-attente') || (!force && ((!!hc._secours && posts.length > 0) || (!!hc._sigPosts && sigPosts !== hc._sigPosts)));
+    hc._sigPosts = sigPosts; hc._secours = !posts.length; hc.removeAttribute('aria-busy');
+    clearInterval(coHc); coHc = 0;
     const sec = H.secours || {};
-    const slides = posts.length ? posts.map((p) => ({ img: wixImg(p.coverImage, larg, larg * 0.5 | 0), k: esc(H.kicker || '') + (rubrique(p) ? ' · ' + esc(rubrique(p)) : ''), t: court(p.title), s: coPhrase(p.excerpt), lien: lienPost(p), btn: H.bouton }))
-      : [{ img: idJx(sec.photo) ? IMG(sec.photo, larg, larg * 0.5 | 0, 75) : '', k: esc(sec.kicker || ''), t: sec.titre || '', s: sec.texte || '', lien: sec.lien, btn: sec.bouton }];
+    
+
+
+    const dens = Math.min(2, window.devicePixelRatio || 1), palier = (v) => Math.max(160, Math.ceil(Math.min(2560, v * dens) / 80) * 80);
+    
+
+    const SEUIL_COMPOSE = 0.2;
+    const formatDe = (v) => { const t = String(v || ''); const m = t.match(/origin(?:al)?Width=(\d+)&origin(?:al)?Height=(\d+)/) || t.match(/w_(\d+),h_(\d+)/); return m ? Number(m[1]) / Number(m[2]) : 0; };
+    const idDe = (v) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([\w~.-]+)(?=[/#]|$)/) || String(v || '').match(/\/media\/([\w~.-]+)\//); return m ? m[1] : ''; };
+    
+
+    const calcul = (cadre) => {
+      
+
+      const W = cadre.width || innerWidth, Hc = cadre.height || innerHeight * 0.92, rc = W / Hc;
+      
+
+
+      const rq = Math.max(0.3, Math.round(rc * 10) / 10), cw = palier(W), ch = Math.round(cw / rq);
+      
+
+      const borne = (v) => { const m = String(v || '').match(/origin(?:al)?Width=(\d+)&origin(?:al)?Height=(\d+)/); const r = m ? Math.min(1, Number(m[1]) / cw, Number(m[2]) / ch) : 1; return [Math.round(cw * r), Math.round(ch * r)]; };
+      const compose = (v) => { const ri = formatDe(v), id = idDe(v); if (!ri || !id || 1 - Math.min(ri / rc, rc / ri) <= SEUIL_COMPOSE) return null;
+        const large = ri > rc, w = large ? cw : Math.round(ch * ri), h = large ? Math.round(cw / ri) : ch;
+        const zoneCss = Math.min((cadre.width || innerWidth) * 0.58, 760), etroite = !large && (cadre.height || innerHeight * 0.92) * ri < zoneCss * 0.9;
+        const r = (String(v).match(/origin(?:al)?Width=(\d+)/) ? Math.min(1, Number(String(v).match(/origin(?:al)?Width=(\d+)/)[1]) / w) : 1);
+        const pw = Math.round(w * r), ph = Math.round(h * r), fh = Math.round(480 / rq);
+        return { large, etroite, pw, ph, fh, flou: IMG(id, 480, fh, 50), photo: IMG(id, pw, ph, 85) }; };
+      const compos = posts.map((p) => compose(p.coverImage));
+      return { cw, ch, borne, compos, modes: compos.map((c) => (c ? (c.large ? 'L' : c.etroite ? 'E' : 'C') : 'P')).join('') };
+    };
+    const plan = calcul(hc.getBoundingClientRect()), { cw, ch, borne } = plan;
+    hc._plan = plan; hc._calcul = calcul;
+    const slides = posts.length ? posts.map((p, i) => ({ compo: plan.compos[i], img: wixImg(p.coverImage, ...borne(p.coverImage), 85), k: esc(H.kicker || '') + (rubrique(p) ? ' · ' + esc(rubrique(p)) : ''), t: court(p.title), s: coPhrase(p.excerpt), lien: lienPost(p), btn: H.bouton }))
+      : [{ img: idJx(sec.photo) ? IMG(sec.photo, cw, ch, 85) : '', k: esc(sec.kicker || ''), t: sec.titre || '', s: sec.texte || '', lien: sec.lien, btn: sec.bouton }];
     const R = co.revoir;
     
 
@@ -3610,22 +3741,45 @@ function monter(racine, portail, D) {
         : ytRevoir ? '<a class="hc-revoir" href="https://www.youtube.com/watch?v=' + ytRevoir + '" target="_blank" rel="noopener">' + dansRevoir + '</a>'
           : R.lien ? '<a class="hc-revoir"' + href(R.lien) + '>' + dansRevoir + '</a>' : '';
     hc.setAttribute('aria-label', H.aria || '');
-    hc.innerHTML = '<div class="hc-in"><div class="hc-slides">' + slides.map((x, i) => '<div class="hc-slide' + (i ? '' : ' est-vue') + '" id="hcs' + i + '" role="tabpanel" aria-label="' + (i + 1) + ' / ' + slides.length + '"' + (i ? ' aria-hidden="true"' : '') + '>' +
-      (x.img ? '<img src="' + x.img + '" alt=""' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ' decoding="async">' : '') +
+    hc.innerHTML = '<div class="hc-in"><div class="hc-slides">' + slides.map((x, i) => '<div class="hc-slide' + (i ? '' : ' est-vue') + (x.compo ? ' est-compose' + (x.compo.large ? ' est-large' : '') : '') + '" id="hcs' + i + '" role="tabpanel" aria-label="' + (i + 1) + ' / ' + slides.length + '"' + (i ? ' aria-hidden="true"' : '') + '>' +
+      (x.compo ? '<img class="hc-flou" src="' + x.compo.flou + '" width="480" height="' + x.compo.fh + '" alt=""' + (i ? ' loading="lazy"' : '') + ' decoding="async">' + (x.compo.etroite ? '<span class="hc-zone">' : '') + '<img class="hc-photo" src="' + x.compo.photo + '" width="' + x.compo.pw + '" height="' + x.compo.ph + '" alt=""' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ' decoding="async">' + (x.compo.etroite ? '</span>' : '')
+        : x.img ? '<img src="' + x.img + '" alt=""' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ' decoding="async">' : '') +
       '<div class="hc-txt"><div class="trame"><div><div class="hc-k"><span class="co-k">' + x.k + '</span></div><h2 class="titre hc-t' + (String(x.t).length > 34 ? ' est-long' : '') + '">' + titreHtml(x.t) + '</h2>' +
       (x.s ? '<p class="hc-sous">' + esc(x.s) + '</p>' : '') + (lienPub(x.lien) ? '<a class="co-btn co-btn--jaune"' + href(x.lien) + (i ? ' tabindex="-1"' : '') + '>' + esc(x.btn) + coIco('fleche') + '</a>' : '') + '</div></div></div></div>').join('') +
-      '</div><div class="hc-bas"><div class="trame"><div class="hc-tirets" role="tablist" aria-label="' + esc(H.choisir || '') + '">' + (slides.length > 1 ? slides.map((x, i) => '<button class="hc-tiret" type="button" role="tab" aria-controls="hcs' + i + '" aria-selected="' + (i === 0) + '" aria-label="' + (i + 1) + '"><span></span></button>').join('') : '') + '</div></div></div>' + revoir + '</div>';
+      '</div><div class="hc-bas"><div class="trame"><div class="hc-nav">' + (slides.length > 1 ? '<button class="hc-fl" type="button" data-hc-fl="-1" aria-label="' + (EN ? 'Previous' : 'Précédent') + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>' : '') + '<div class="hc-tirets" role="tablist" aria-label="' + esc(H.choisir || '') + '">' + (slides.length > 1 ? slides.map((x, i) => '<button class="hc-tiret" type="button" role="tab" aria-controls="hcs' + i + '" aria-selected="' + (i === 0) + '" aria-label="' + (i + 1) + '"><span></span></button>').join('') : '') + '</div>' + (slides.length > 1 ? '<button class="hc-fl" type="button" data-hc-fl="1" aria-label="' + (EN ? 'Next' : 'Suivant') + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>' : '') + '</div></div></div>' + revoir + '</div>';
+    
+
+
+    apresPhoto(() => hc.querySelectorAll('.hc-slide img[loading="lazy"]').forEach((im) => { im.loading = 'eager'; }));
     const sl = [...hc.querySelectorAll('.hc-slide')], tirets = [...hc.querySelectorAll('.hc-tiret')];
+    if (arrivee) { hc.classList.remove('hc-arrivee'); void hc.offsetWidth; hc.classList.add('hc-arrivee'); clearTimeout(hc._arriveeFin); hc._arriveeFin = setTimeout(() => hc.classList.remove('hc-arrivee'), 900); }
     let k = 0, pause = false, dernier = Date.now();
-    const voir = (n) => { k = (n + sl.length) % sl.length; dernier = Date.now(); sl.forEach((x, i) => { x.classList.toggle('est-vue', i === k); x.setAttribute('aria-hidden', String(i !== k)); x.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', i === k ? '0' : '-1')); }); tirets.forEach((b, i) => b.setAttribute('aria-selected', String(i === k))); };
+    const voir = (n) => { k = (n + sl.length) % sl.length; hc._k = k; dernier = Date.now(); sl.forEach((x, i) => { x.classList.toggle('est-vue', i === k); x.setAttribute('aria-hidden', String(i !== k)); x.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', i === k ? '0' : '-1')); }); tirets.forEach((b, i) => b.setAttribute('aria-selected', String(i === k))); };
     tirets.forEach((b, i) => b.addEventListener('click', () => voir(i)));
+    hc.querySelectorAll('[data-hc-fl]').forEach((b) => b.addEventListener('click', () => voir(k + Number(b.dataset.hcFl))));
+    if (hc._garderK) { if (hc._garderK < sl.length) voir(hc._garderK); hc._garderK = 0; } else hc._k = 0;
     const btnRevoir = hc.querySelector('[data-hc-revoir]');
     if (btnRevoir) btnRevoir.addEventListener('click', () => ouvrirRevoir(R, ytRevoir, btnRevoir));
+    
+
+    ajusterHc(hc);
+    if (!hc._ajusteBranche) {
+      hc._ajusteBranche = true;
+      
+
+      const replanifier = () => { clearTimeout(hc._replan); hc._replan = setTimeout(() => { const a = hc._plan, n = a && hc._calcul && hc._calcul(hc.getBoundingClientRect()); if (!n || !hc.getBoundingClientRect().width) return; if (n.modes !== a.modes || n.cw > a.cw * 1.3 || n.ch > a.ch * 1.3) { hc._garderK = hc._k || 0; rendreHc({ force: true }); } }, 250); };
+      if (window.ResizeObserver) { const ro = new window.ResizeObserver(() => { ajusterHc(hc); replanifier(); }); ro.observe(hc); observateurs.push(ro); }
+      if (document.fonts) { ecoute(document.fonts, 'loadingdone', () => ajusterHc(hc)); if (document.fonts.ready) document.fonts.ready.then(() => ajusterHc(hc)); }
+    }
     const zone = hc.querySelector('.hc-in');
     const p = (v) => { pause = v; hc.classList.toggle('est-pause', v); };
     zone.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') voir(k + 1); if (e.key === 'ArrowLeft') voir(k - 1); });
     zone.addEventListener('mouseenter', () => p(true)); zone.addEventListener('mouseleave', () => p(false));
     zone.addEventListener('focusin', () => p(true)); zone.addEventListener('focusout', () => p(false));
+     
+    let x0 = null, y0 = 0;
+    zone.addEventListener('touchstart', (e) => { const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+    zone.addEventListener('touchend', (e) => { if (x0 === null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null; if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.3) voir(k + (dx < 0 ? 1 : -1)); }, { passive: true });
     if (sl.length < 2) return;
     if (mouvementReduit()) { hc.classList.add('est-fixe'); return; }
     coHc = setInterval(() => { if (pause) { dernier += 250; return; } if (!document.hidden && !hc.hidden && Date.now() - dernier >= 7000) voir(k + 1); }, 250);
@@ -3672,6 +3826,13 @@ function monter(racine, portail, D) {
       const pts = []; let nArv = 0;
       if (donnees) cl.forEach((x, kk) => [...x.arv, ...x.mer].forEach((l) => {
         if (l.statut === 'ARV') { const i = nArv++, a = i * 2.4, r = 3 * e * Math.sqrt(i + 0.5); pts.push([f.pap[0] + Math.cos(a) * r, f.pap[1] + Math.sin(a) * r, x.c.couleur]); return; }
+         
+        if (Number.isFinite(Number(l.lat)) && Number.isFinite(Number(l.lon)) && (l.lat !== null && l.lon !== null)) {
+          const my = (la) => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360));
+          const ax = (f.pap[0] - f.malo[0]) / (-61.53 + 2.03), ay = (f.pap[1] - f.malo[1]) / (my(16.24) - my(48.65));
+          pts.push([f.malo[0] + (Number(l.lon) + 2.03) * ax, f.malo[1] + (my(Number(l.lat)) - my(48.65)) * ay, x.c.couleur]);
+          return;
+        }
         const fr = Math.max(0, Math.min(1, 1 - (Number(l.dtf) || 0) / dist));
         const p = sur(fr), q = sur(Math.min(1, fr + 0.004)), b = sur(Math.max(0, fr - 0.004));
         const tx = q[0] - b[0], ty = q[1] - b[1], n = Math.hypot(tx, ty) || 1;
@@ -3740,7 +3901,7 @@ function monter(racine, portail, D) {
       montrerHaut(!emVisible());
       return;
     }
-    rendreHc();
+    rendreHc({ force: true });
     rendreClassement();
     montrerHaut(!emVisible());
     if (!coLuLe || Date.now() - coLuLe > 60000) coLire();
@@ -3792,7 +3953,7 @@ function monter(racine, portail, D) {
    
   $('onglets').innerHTML = ['actu', 'photo', 'video', 'audio'].map(k => '<a class="onglet"' + href('/medias-actualites?cat=' + (k === 'actu' && EN ? 'news' : CAT_HUB[k])) + ' style="--c:' + HUB[k].c + ';--bg:' + HUB[k].bg + '"><i>' + ICO[k] + '</i>' + (k === 'actu' ? 'Actu' : HUB[k].lib) + '</a>').join('');
    
-  const wixImg = (v, w, h) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([\w~.-]+)(?=[/#]|$)/); return m ? IMG(m[1], w, h) : esc(String(v || '')); };
+  const wixImg = (v, w, h, q) => { const m = String(v || '').match(/^wix:image:\/\/v1\/([\w~.-]+)(?=[/#]|$)/); return m ? IMG(m[1], w, h, q) : esc(String(v || '')); };
   const ilYa = (iso) => { const d = (Date.now() - new Date(iso).getTime()) / 86400000; return d < 1 ? 'aujourd\'hui' : d < 2 ? 'hier' : 'il y a ' + Math.floor(d) + ' j'; };
   const cat = (t) => '<span class="cat" style="--c:' + HUB[t].c + ';--bg:' + HUB[t].bg + '">' + ICO[t] + HUB[t].lib + '</span>';
   

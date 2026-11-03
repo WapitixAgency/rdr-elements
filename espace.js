@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 76dccbf | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="76dccbf";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 148d447 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="148d447";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -8076,7 +8076,13 @@ if (!customElements.get('espace-rhum')) {
     
 
     espace-rhum .er-badge-tile[data-state="mystery"] { opacity: 0.55; cursor: pointer; }
-    @media (hover:hover) and (pointer:fine){espace-rhum .er-badge-tile[data-state="mystery"]:hover,espace-rhum .er-badge-tile[data-state="discovered"]:hover{
+    
+
+    espace-rhum .er-badge-tile[data-clos] { background: rgba(255, 255, 255, 0.02); border-style: dashed; }
+    espace-rhum .er-badge-tile[data-clos] .er-badge-tile-icon-wrap,
+    espace-rhum .er-badge-tile[data-clos] .er-badge-tile-name { opacity: 0.32; filter: grayscale(1); }
+    espace-rhum .er-badge-tile[data-clos] .er-badge-tile-hint { color: rgba(255, 255, 255, 0.72); font-style: normal; }
+    @media (hover:hover) and (pointer:fine){espace-rhum .er-badge-tile[data-state="mystery"]:not([data-clos]):hover,espace-rhum .er-badge-tile[data-state="discovered"]:hover{
       opacity: 0.9;
       border-color: rgba(93, 191, 192, 0.35);
       box-shadow: none;
@@ -18303,7 +18309,7 @@ if (!customElements.get('espace-rhum')) {
                 data-badge-key="${escapeHtml(key)}"
                 data-category="${escapeHtml(category)}"
                 data-state="${escapeHtml(state)}"
-                data-tone="${escapeHtml(tone)}"
+                data-tone="${escapeHtml(tone)}"${badge.clos === true ? ' data-clos' : ''}
                 style="--rot: ${rot};"
                 aria-label="${escapeHtml(ariaLabel)}">
           <div class="er-badge-tile-icon-wrap">
