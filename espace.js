@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 5508e16 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="5508e16";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum c9e3aa4 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="c9e3aa4";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -12806,6 +12806,8 @@ if (!customElements.get('espace-rhum')) {
       box.hidden = false;
       v.querySelector('.erst-video').hidden = true;
       c.classList.add('est-joue');
+       
+      box.style.top = v.querySelector('.erst-haut').offsetHeight + 'px';
       stPauser(true, 'video');
       const f = box.querySelector('iframe');
       f.addEventListener('load', () => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'); } catch (e) {   } });
@@ -12814,6 +12816,7 @@ if (!customElements.get('espace-rhum')) {
       const v = ST.el; if (!v) return;
       const box = v.querySelector('.erst-lecteur');
       if (!box.hidden || box.firstChild) { box.innerHTML = ''; box.hidden = true; }
+      box.style.top = '';
       v.querySelector('.erst-carte').classList.remove('est-joue');
       ST.p_video = false;
     }

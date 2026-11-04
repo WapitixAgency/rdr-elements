@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 5508e16 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="5508e16";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum c9e3aa4 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="c9e3aa4";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2077,6 +2077,8 @@ function creerStoriesActus(hote) {
     box.hidden = false;
     v.querySelector('.rnst-video').hidden = true;
     c.classList.add('est-joue');
+     
+    box.style.top = v.querySelector('.rnst-haut').offsetHeight + 'px';
     stPauser(true, 'video');
     const f = box.querySelector('iframe');
     f.addEventListener('load', () => { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'); } catch (e) {   } });
@@ -2085,6 +2087,7 @@ function creerStoriesActus(hote) {
     const v = ST.el; if (!v) return;
     const box = v.querySelector('.rnst-lecteur');
     if (!box.hidden || box.firstChild) { box.innerHTML = ''; box.hidden = true; }
+    box.style.top = '';
     v.querySelector('.rnst-carte').classList.remove('est-joue');
     ST.p_video = false;
   }
