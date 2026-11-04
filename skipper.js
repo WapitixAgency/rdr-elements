@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum ef04332 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="ef04332";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 0c71680 | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="0c71680";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3244,7 +3244,8 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const motifPropre = (l, lang) => {
     const r = String((lang === 'en' ? l.raisonEn : l.raison) || '').trim();
     if (r) return r;
-    return l.motif && !/^(abandon|retired?)$/i.test(String(l.motif).trim()) ? String(l.motif).trim() : '';
+    const m = String((lang === 'en' && l.motifEn) || l.motif || '').trim();
+    return m && !/^(abandon|retired?)$/i.test(m) ? m : '';
   };
   const articleAbandon = (l) => /^https:\/\/www\.routedurhum\.com\/[^\s"'<>]+$/.test(String(l.article || '')) ? String(l.article) : '';
    

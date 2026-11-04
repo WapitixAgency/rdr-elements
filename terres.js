@@ -1,5 +1,5 @@
-/* rdr-elements terres | source route-du-rhum ef04332 | rdr-terres-engagements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["terres"]="ef04332";performance.mark("rdr-elements:terres")}catch(e){}
+/* rdr-elements terres | source route-du-rhum 0c71680 | rdr-terres-engagements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["terres"]="0c71680";performance.mark("rdr-elements:terres")}catch(e){}
 ;(function(){
 (function () {
   if (typeof customElements === 'undefined' || customElements.get("rdr-terres-engagements")) return;
