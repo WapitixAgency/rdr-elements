@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 4097220 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4097220";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum ef04332 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ef04332";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1368,13 +1368,16 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4097220";performan
       var mio = function (n) { return (Math.round(n / 1e5) / 10).toLocaleString('fr-FR'); };
       var fois = function (x) { return (Math.round(x * 10) / 10).toLocaleString('fr-FR'); };
       var MOTS = ['', 'une', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix'];
+      var UNITES = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize'];
+      var lettres = function (n) { if (n <= 16) return UNITES[n]; if (n < 20) return 'dix-' + UNITES[n - 10]; var d = { 2: 'vingt', 3: 'trente', 4: 'quarante', 5: 'cinquante' }[Math.floor(n / 10)], u = n % 10; return !d ? String(n) : u === 0 ? d : u === 1 ? d + ' et un' : d + '-' + UNITES[u]; };
+      var NJ = lettres(JOURS.length), NJM = NJ.charAt(0).toUpperCase() + NJ.slice(1);
       var LOGO = 'https://static.wixstatic.com/shapes/7bb303_520140cd1a1e4d5faab4c5ab489ab525.svg';
       var NOMS = { France: 'France', Belgium: 'Belgique', Germany: 'Allemagne', Switzerland: 'Suisse', Guadeloupe: 'Guadeloupe', 'United Kingdom': 'Royaume-Uni',
         Italy: 'Italie', 'United States': 'États-Unis', Canada: 'Canada', Spain: 'Espagne', Netherlands: 'Pays-Bas', Martinique: 'Martinique', Réunion: 'La Réunion', '(other)': 'Autres pays' };
       var REPERES = { '2026-10-20': 'Ouverture du village', '2026-10-23': 'Tempête', '2026-10-30': 'Cartographie en ligne', '2026-11-01': 'Départ' };
 
        
-      var CMP = [{ J: 0, nom: 'Jour du départ' }, { J: 1, nom: 'Lendemain' }, { J: 2, nom: 'Surlendemain' }].map(function (m) {
+      var CMP = [{ J: 0, nom: 'Jour du départ' }, { J: 1, nom: 'Lendemain' }, { J: 2, nom: 'Surlendemain' }, { J: 3, nom: 'J+3' }, { J: 4, nom: 'J+4' }, { J: 5, nom: 'J+5' }].map(function (m) {
         var r = J26[plus(DEPART, m.J)];
         return { nom: m.nom, J: m.J, r: r, v22: hist(2022, m.J).v, v18: hist(2018, m.J).v };
       }).filter(function (c) { return c.r && c.r.mil != null && c.r.j <= MAJ && c.v22 && c.v18; });
@@ -1469,7 +1472,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4097220";performan
         REC.pic ? [nf(REC.pic.pic.pages), 'pages ouvertes en une seule minute, le ' + long(REC.pic.j) + ' à ' + REC.pic.pic.heure.replace(':', ' h ') + ', pendant le départ.'] : null
       ].filter(Boolean);
       pages.push(planche(2, 'L’essentiel',
-        '<div class="es"><div class="es-g"><p class="es-chapo">En quinze jours, du village de Saint-Malo aux premiers jours de mer, le site officiel a accueilli un public sans précédent pour la Route du Rhum.</p>' +
+        '<div class="es"><div class="es-g"><p class="es-chapo">En ' + NJ + ' jours, du village de Saint-Malo aux premiers jours de mer, le site officiel a accueilli un public sans précédent pour la Route du Rhum.</p>' +
         '<p class="es-txt">Les chiffres qui suivent comptent aussi les visiteurs qui refusent les cookies, environ un sur deux, invisibles pour les statistiques classiques. Chaque estimation est donnée avec sa fourchette, et la méthode est détaillée en fin de document.</p></div>' +
         '<div class="es-d">' + faits.map(function (f) { return '<div class="fait"><b>' + V(f[0]) + '</b><p>' + f[1] + '</p></div>'; }).join('') + '</div></div>'));
 
@@ -1485,7 +1488,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4097220";performan
        
       var tab = '<table class="r-tab"><thead><tr><th></th><th>Jours</th><th>Connexions</th><th>Par jour</th><th>Pages ouvertes</th><th>Visites comptées</th></tr></thead><tbody>' +
         BILAN.map(function (x) { var p = x.p; return '<tr' + (x.tot ? ' class="tot"' : '') + '><td>' + x.nom + ' <small>' + x.quand + '</small></td><td>' + p.jours + '</td><td>≈ ' + nf(arr(p.sMil)) + '</td><td>≈ ' + nf(arr(p.sMil / Math.max(p.jours, 1))) + '</td><td>' + nf(p.po) + '</td><td>' + nf(p.ses) + '</td></tr>'; }).join('') + '</tbody></table>';
-      pages.push(planche(4, 'Quinze jours, du village au grand large',
+      pages.push(planche(4, NJM + ' jours, du village au grand large',
         '<p class="chapo2">Connexions chaque jour. Le village installe l’audience, puis le départ la fait changer d’échelle' + (REC.fortV && REC.fort ? ', de ' + nf(arr(REC.fortV.sMil)) + ' connexions le jour le plus fort du village à ' + mio(REC.fort.sMil) + ' millions le ' + long(REC.fort.j) + '.' : '.') + '</p>' +
         barresJours() + '<p class="leg"><i style="background:#5DBFC0"></i>Village <i style="background:#00676E"></i>Départ <i style="background:#0A1A35"></i>Course <i style="background:#FCF150;outline:1px solid #0A1A35"></i>Record</p>' + tab));
 
