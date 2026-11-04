@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum 83c3e1d | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="83c3e1d";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 4097220 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="4097220";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1517,8 +1517,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="83c3e1d";performan
         '<div class="inc"><p class="inc-t">Les incidents de l’édition, et ce qu’ils ont appris</p><div class="inc-g">' +
         '<div><p class="inc-j">Dimanche 1er novembre, jour du départ</p><dl>' +
         '<dt>Ce qui s’est passé</dt><dd>En fin d’après-midi, au plus fort de l’affluence, la navigation a été perturbée pendant environ ' + hm(arret) + ' pour environ ' + Math.round(PANNE_PART * 10) * 10 + '\u00a0% des visiteurs présents. Le site a été rétabli en moins d’une heure quarante-cinq, puis stabilisé dans la soirée.</dd>' +
-        '<dt>La cause</dt><dd>Une mise à jour publiée en pleine affluence a redémarré tous les serveurs du site. Sous le pic, toutes les pages se sont recalculées en même temps et les serveurs ont saturé.</dd>' +
-        '<dt>La correction</dt><dd>Dès les premiers ralentissements, nos dispositifs de secours, hébergés hors des serveurs de Wix, ont été activés puis étendus à toutes les pages essentielles (accueil, classement, dernières infos, en-tête et pied de page). Le site a ainsi été rétabli pendant que les serveurs étaient relancés progressivement. Depuis, les mises à jour se font de nuit, par paliers.</dd></dl></div>' +
+        '<dt>La cause</dt><dd>Une mise à jour publiée en pleine affluence a redémarré tous les serveurs du site, qui ont saturé sous le pic.</dd>' +
+        '<dt>La correction</dt><dd>Dès les premiers ralentissements, nos dispositifs de secours, hébergés hors des serveurs de Wix, ont été activés puis étendus aux pages essentielles, ce qui a rétabli le site pendant la relance progressive des serveurs.</dd>' +
+        '<dt>Le renforcement</dt><dd>Une copie statique de l’ensemble des contenus publics du site, régénérée automatiquement toutes les cinq minutes, prend désormais le relais instantanément en cas d’incident, avec les contenus les plus récents. Les mises à jour se font de nuit, par paliers.</dd></dl></div>' +
         '<div><p class="inc-j">Du lundi 2 au mardi 3 novembre</p><dl>' +
         '<dt>Ce qui s’est passé</dt><dd>Quelques réseaux d’entreprise ont été bloqués à l’entrée du site, sans effet mesurable sur son audience.</dd>' +
         '<dt>La cause</dt><dd>Une protection automatique contre les robots, activée sur le pare-feu Cloudflare du nom de domaine, géré par le groupe Le Télégramme, en dehors du site et de Wix.</dd>' +
@@ -1541,11 +1542,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="83c3e1d";performan
         '.pl{width:297mm;height:210mm;margin:8mm auto;position:relative;overflow:hidden;background:#fff;padding:14mm 16mm 16mm;box-shadow:0 8px 30px rgba(0,0,0,.35);display:flex;flex-direction:column}' +
         '.pl-h{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:9mm}.pl-h img{width:15mm;height:15mm}' +
         '.pl-couv h1 span,.fait b,.gros,.mult b{font-family:Varien,Georgia,serif;font-style:italic;font-weight:400;letter-spacing:.01em;white-space:nowrap}.sp{display:inline-block;width:.24em}' +
-        'h1,h2{margin:0;color:#0A1A35;font-weight:800;letter-spacing:-.015em}h2{font-size:24pt;line-height:1.15;max-width:235mm}' +
+        '.pl-couv h1,.pl-h h2{margin:0;color:#0A1A35;font-weight:800;letter-spacing:-.015em}.pl-h h2{font-size:24pt;line-height:1.15;max-width:235mm}' +
         '.pl-c{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:6mm}' +
         '.pl-f{position:absolute;left:16mm;right:16mm;bottom:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:10mm;font-size:7pt;line-height:1.5;color:#7B8AA0;border-top:1px solid #E1E6EE;padding-top:2.2mm}' +
         '.pl-w{display:flex;align-items:center;gap:2mm;white-space:nowrap}.pl-w img{height:4.2mm;width:auto}.pl-w b{margin-left:4mm;font-weight:700;color:#45536E}' +
-        '.inc{border-left:3px solid #00676E;background:#F3F7FA;padding:4.5mm 6mm;border-radius:0 3mm 3mm 0}.inc-t{margin:0 0 1mm;font-size:12pt;font-weight:800;color:#0A1A35}.inc p{margin:0 0 3mm;font-size:10.5pt;line-height:1.65;color:#45536E}.inc p:last-child{margin:0}.inc p.inc-j{margin:4mm 0 1.5mm;font-size:10pt;font-weight:800;color:#0A1A35}.fiab{display:flex;flex-direction:column;gap:5mm}.fiab-h{display:grid;grid-template-columns:auto 1fr;gap:12mm;align-items:center}.fiab-h .gros{margin:0;font-size:62pt}.fiab-h .cmp2-lead{margin-bottom:2mm}.inc-g{display:grid;grid-template-columns:1fr 1fr;gap:10mm}.inc dl{margin:0;display:grid;grid-template-columns:27mm 1fr;column-gap:4mm;row-gap:1.6mm}.inc dt{font-size:8pt;font-weight:800;color:#00676E;padding-top:.4mm}.inc dd{margin:0;font-size:9pt;line-height:1.55;color:#45536E}' +
+        '.inc{border-left:3px solid #00676E;background:#F3F7FA;padding:4.5mm 6mm;border-radius:0 3mm 3mm 0}.inc-t{margin:0 0 1mm;font-size:12pt;font-weight:800;color:#0A1A35}.inc p{margin:0 0 3mm;font-size:10.5pt;line-height:1.65;color:#45536E}.inc p:last-child{margin:0}.inc p.inc-j{margin:4mm 0 1.5mm;font-size:10pt;font-weight:800;color:#0A1A35}.fiab{display:flex;flex-direction:column;gap:4mm}.fiab-h{display:grid;grid-template-columns:auto 1fr;gap:12mm;align-items:center}.fiab-h .gros{margin:0;font-size:54pt}.fiab-h .cmp2-lead{margin-bottom:2mm}.inc-g{display:grid;grid-template-columns:1.35fr 1fr;gap:9mm}.inc dl{margin:0;display:grid;grid-template-columns:27mm 1fr;column-gap:4mm;row-gap:1.6mm}.inc dt{font-size:8pt;font-weight:800;color:#00676E;padding-top:.4mm}.inc dd{margin:0;font-size:9pt;line-height:1.55;color:#45536E}' +
         '.pl-couv{background:#0A1A35;color:#fff;padding:16mm 18mm}.pl-couv .cv-haut{display:flex;align-items:center;gap:6mm}.cv-haut img{width:22mm;height:22mm}' +
         '.cv-haut p{margin:0;font-size:11pt;line-height:1.45;color:#5DBFC0}.cv-haut b{color:#fff;font-weight:700}' +
         '.cv-titre{margin-top:14mm;position:relative;z-index:1}.cv-per{margin:0 0 4mm;font-size:12pt;font-weight:600;color:#5DBFC0}' +
