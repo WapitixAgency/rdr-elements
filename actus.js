@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum c9e3aa4 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="c9e3aa4";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 76e9834 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="76e9834";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -645,6 +645,18 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="c9e3aa4";performance
     }[c]));
   }
   const escapeHTML = escAttr;
+  
+
+  function quandPublie(iso, en) {
+    var t = Date.parse(String(iso || '').trim().replace(' ', 'T')); if (isNaN(t)) return '';
+    var min = Math.round((Date.now() - t) / 60000);
+    if (min < 1) return en ? 'just now' : "à l'instant";
+    if (min < 60) return en ? min + ' min ago' : 'il y a ' + min + ' min';
+    if (min < 1440) return en ? Math.round(min / 60) + ' h ago' : 'il y a ' + Math.round(min / 60) + ' h';
+    var o = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' };
+    if (new Date(t).getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+    try { return new Date(t).toLocaleString(en ? 'en-GB' : 'fr-FR', o).replace(':', en ? ':' : ' h '); } catch (e) { return ''; }
+  }
   function isSafeUrl(u, fallback) {
     fallback = arguments.length > 1 ? fallback : '';
     if (u == null) return fallback;
@@ -2750,20 +2762,7 @@ class RdrNews extends HTMLElement {
       if (!key || !label) return '';
       return '<button type="button" class="rn__catbadge" data-rn-cat="' + escAttr(key) + '" style="' + styl + '">' + (IC[st.ic] || IC.news) + escapeHTML(label) + '</button>';
     }
-    _relDate(iso) {
-      if (!iso) return '';
-       
-       
-      const dt = new Date(String(iso).trim().replace(' ', 'T'));
-      if (isNaN(dt.getTime())) return '';
-      const d = Math.floor((Date.now() - dt.getTime()) / 864e5);
-      if (d < 1) return this._t('today');
-      if (d < 2) return this._t('yesterday');
-      if (d < 30) return this._t('days_ago').replace('{n}', String(d));
-      try {
-        return dt.toLocaleDateString(this._state.lang === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'short', timeZone: 'Europe/Paris' });
-      } catch (e) { return ''; }
-    }
+    _relDate(iso) { return quandPublie(iso, this._state.lang === 'en'); }
      
     _estLu(p) {
       return !!(this._lus && p && p.slug && this._lus.has(String(p.slug).toLowerCase()));
@@ -2775,7 +2774,6 @@ class RdrNews extends HTMLElement {
       const lu = this._lus && p.slug && this._lus.has(String(p.slug).toLowerCase());
       return '<div class="rn__meta">' + this._catBadge(p, light) + flags +
         '<span>' + escapeHTML(this._relDate(p.publishedDate)) + '</span>' +
-        (p.timeToRead ? '<span class="rn__clock">' + IC.clock + ' ' + escapeHTML(String(p.timeToRead)) + ' ' + this._t('min_read') + '</span>' : '') +
         (lu ? '<span class="rn__dejalu">' + IC.check + this._t('deja_lu') + '</span>' : '') +
         '</div>';
     }
@@ -2860,7 +2858,7 @@ class RdrNews extends HTMLElement {
         '<div class="rn__body"><div style="display:flex;flex-direction:column;gap:9px">' +
         '<span class="rn__itweyebrow">' + IC.mic + ' ' + escapeHTML(eyebrow) + '</span>' +
         '<div class="rn__meta">' + this._catBadge(p, true) + '<span>' + escapeHTML(this._relDate(p.publishedDate)) + '</span>' +
-        (p.timeToRead ? '<span class="rn__clock">' + IC.clock + ' ' + escapeHTML(String(p.timeToRead)) + ' ' + this._t('min_read') + '</span>' : '') + '</div></div>' +
+        '</div></div>' +
         '<h3 class="rn__cardtitle"><a href="' + isSafeUrl(this._adresse(p.url), '#') + '" data-rn-link>' + escapeHTML(p.title || '') + '</a></h3>' +
         '<div style="display:flex;flex-direction:column;gap:12px">' +
         (p.excerpt ? '<p class="rn__excerpt">« ' + escapeHTML(p.excerpt) + ' »</p>' : '') +
@@ -4501,6 +4499,18 @@ class RdrNews extends HTMLElement {
     'Retire de Mon Espace Rhum': 'Removed from My Espace Rhum',
     'Impossible d enregistrer pour le moment': 'Cannot save right now'
   };
+  
+
+  function quandPublie(iso, en) {
+    var t = Date.parse(String(iso || '').trim().replace(' ', 'T')); if (isNaN(t)) return '';
+    var min = Math.round((Date.now() - t) / 60000);
+    if (min < 1) return en ? 'just now' : "à l'instant";
+    if (min < 60) return en ? min + ' min ago' : 'il y a ' + min + ' min';
+    if (min < 1440) return en ? Math.round(min / 60) + ' h ago' : 'il y a ' + Math.round(min / 60) + ' h';
+    var o = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' };
+    if (new Date(t).getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+    try { return new Date(t).toLocaleString(en ? 'en-GB' : 'fr-FR', o).replace(':', en ? ':' : ' h '); } catch (e) { return ''; }
+  }
   var enAnglais = function (brut) {
     var cle = String(brut == null ? '' : brut).trim();
     if (!cle) return undefined;
@@ -5160,7 +5170,8 @@ class RdrNews extends HTMLElement {
         chapo = coupe[0].replace(/[\s.,;:–-]+$/, '');
         if (chapo && !/[.!?…»]$/.test(chapo)) chapo += '.';
       }
-      var meta = (d.date ? '<span class="m">' + IC.cal + esc(d.date) + '</span>' : '') +
+      var quand = (d.publie && quandPublie(d.publie, this._lang() === 'en')) || d.date;
+      var meta = (quand ? '<span class="m">' + IC.cal + esc(quand) + '</span>' : '') +
         (d.readingTime ? '<span class="m">' + IC.clock + esc(d.readingTime) + ' min de lecture</span>' : '') +
         (d.author ? '<span class="m">Par ' + esc(d.author) + '</span>' : '');
 
@@ -6313,22 +6324,20 @@ class RdrNews extends HTMLElement {
 
   var OUTILS_ADRESSES = { 'espace-rhum': '/mon-espace-rhum', 'carto': '/cartographie', 'skippers': '/skippers', 'palmares': '/heritage' };
   function nouvelOnglet(e) { return !!(e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)); }
-  function relDate(iso) {
-    if (!iso) return '';
-    try {
-      var d = (iso instanceof Date) ? iso : new Date(String(iso).replace(' ', 'T'));
-      if (isNaN(d.getTime())) return '';
-      var days = Math.floor((Date.now() - d.getTime()) / 864e5);
-      if (days < 1) return "aujourd'hui";
-      if (days < 2) return 'hier';
-      if (days < 30) return 'il y a ' + days + ' j';
-      
+  
 
-
-      return d.toLocaleDateString(LANGUE === 'en' ? 'en-GB' : 'fr-FR',
-        { day: 'numeric', month: 'short', timeZone: 'Europe/Paris' });
-    } catch (e) { return ''; }
+  function quandPublie(iso, en) {
+    var t = Date.parse(String(iso || '').trim().replace(' ', 'T')); if (isNaN(t)) return '';
+    var min = Math.round((Date.now() - t) / 60000);
+    if (min < 1) return en ? 'just now' : "à l'instant";
+    if (min < 60) return en ? min + ' min ago' : 'il y a ' + min + ' min';
+    if (min < 1440) return en ? Math.round(min / 60) + ' h ago' : 'il y a ' + Math.round(min / 60) + ' h';
+    var o = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' };
+    if (new Date(t).getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+    try { return new Date(t).toLocaleString(en ? 'en-GB' : 'fr-FR', o).replace(':', en ? ':' : ' h '); } catch (e) { return ''; }
   }
+  function relDate(iso) { return quandPublie(iso, LANGUE === 'en'); }
+
   function isNewPost(iso) {
     if (!iso) return false;
     try { return (Date.now() - new Date(String(iso).replace(' ', 'T')).getTime()) < FENETRE_NOUVEAU_H * 3600e3; }
@@ -6578,7 +6587,6 @@ class RdrNews extends HTMLElement {
         '<div class="rpm-body">' +
           '<div class="rpm-meta">' + this._catBadge(p) +
             '<span>' + esc(relDate(p.publishedDate)) + '</span>' +
-            (p.timeToRead ? '<span class="clock">' + IC.clock + ' ' + esc(p.timeToRead) + ' min</span>' : '') +
           '</div>' +
           '<h3 class="rpm-title"><a href="' + safeUrl(adresseArticle(p.url)) + '" data-rpm-link>' + esc(p.title || '') + '</a></h3>' +
           (p.excerpt ? '<p class="rpm-excerpt">' + esc(p.excerpt) + '</p>' : '') +
