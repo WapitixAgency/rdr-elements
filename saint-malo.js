@@ -1,5 +1,5 @@
-/* rdr-elements saint-malo | source route-du-rhum e7aca79 | rdr-saint-malo.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["saint-malo"]="e7aca79";performance.mark("rdr-elements:saint-malo")}catch(e){}
+/* rdr-elements saint-malo | source route-du-rhum b26f8b1 | rdr-saint-malo.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["saint-malo"]="b26f8b1";performance.mark("rdr-elements:saint-malo")}catch(e){}
 ;(function(){
 (function () {
   if (customElements.get("rdr-saint-malo")) return;
@@ -161,7 +161,7 @@ function fete(V) {
  
 function villages(V) {
   const W = V.villages, A = W.agenda;
-  const agenda = A ? '<div class="vil-agenda rv"><h3>' + typo(A.titre) + '</h3><ol>' + A.liste.map((a) => '<li><b>' + dateCourte(a.date) + '</b><span>' + typo(a.t) + '</span></li>').join('') + '</ol></div>' : '';
+  const agenda = A ? '<div class="vil-agenda rv"><h3>' + typo(A.titre) + '</h3><ol>' + A.liste.map((a) => (a.date ? '<li><b>' + dateCourte(a.date) : '<li class="vil-fort"><b>' + typo(a.titre)) + '</b><span>' + typo(a.t) + '</span></li>').join('') + '</ol></div>' : '';
   return '<div class="trame"><div class="vil-tete"><div class="rv"><p class="vil-sur">' + typo(W.surtitre) + '</p><h2 class="titre" id="t-villages">' + titre(W.titre) + '</h2>' +
       W.texte.map((t) => '<p class="vil-chapo">' + typo(t) + '</p>').join('') + '</div>' + agenda + '</div>' +
     '<ul class="vil-grille rv">' + W.liste.map((v) => '<li class="vil" data-cle="' + esc(v.cle) + '">' +

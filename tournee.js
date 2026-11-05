@@ -1,5 +1,5 @@
-/* rdr-elements tournee | source route-du-rhum e7aca79 | tournee-map.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="e7aca79";performance.mark("rdr-elements:tournee")}catch(e){}
+/* rdr-elements tournee | source route-du-rhum b26f8b1 | tournee-map.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["tournee"]="b26f8b1";performance.mark("rdr-elements:tournee")}catch(e){}
 ;(function(){
 (function () {
 'use strict';

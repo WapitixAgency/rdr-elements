@@ -1,5 +1,5 @@
-/* rdr-elements licence | source route-du-rhum e7aca79 | rdr-licence-marque.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["licence"]="e7aca79";performance.mark("rdr-elements:licence")}catch(e){}
+/* rdr-elements licence | source route-du-rhum b26f8b1 | rdr-licence-marque.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["licence"]="b26f8b1";performance.mark("rdr-elements:licence")}catch(e){}
 ;(function(){
 (function () {
   if (!window.customElements || customElements.get("rdr-licence-marque")) return;

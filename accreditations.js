@@ -1,5 +1,5 @@
-/* rdr-elements accreditations | source route-du-rhum e7aca79 | rdr-accreditations.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="e7aca79";performance.mark("rdr-elements:accreditations")}catch(e){}
+/* rdr-elements accreditations | source route-du-rhum b26f8b1 | rdr-accreditations.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["accreditations"]="b26f8b1";performance.mark("rdr-elements:accreditations")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
