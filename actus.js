@@ -1,5 +1,5 @@
-/* rdr-elements actus | source route-du-rhum 14250d5 | rdr-news.js rdr-post-head.js rdr-post-more.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="14250d5";performance.mark("rdr-elements:actus")}catch(e){}
+/* rdr-elements actus | source route-du-rhum 493b383 | rdr-news.js rdr-post-head.js rdr-post-more.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="493b383";performance.mark("rdr-elements:actus")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -705,16 +705,19 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["actus"]="14250d5";performance
     ecrire(k, v) { try { window.localStorage.setItem(k, v); } catch (e) {   } }
   };
 
-   
+  
+
   const propre = (s) => String(s || '').replace(/[‎‏‪-‮]/g, '').replace(/\s+/g, ' ').trim();
+  const EPISODE = /^[ée]pisode\s*(\d+)\s*(?:[:\-–—]\s*(.*))?$/i;
   function decoder(jeu) {
     const brut = jeu && Array.isArray(jeu.recaps) ? jeu.recaps : jeu && jeu.recap ? [jeu.recap] : [];
     return brut.filter((r) => r && typeof r === 'object' && idSur(r.youtube)).map((r, i) => {
       const titre = propre(r.titre);
       const parts = titre.split('|').map((x) => x.trim()).filter(Boolean);
-      const k = parts.findIndex((x) => /^[ée]pisode\s*\d+$/i.test(x));
-      const num = k >= 0 ? parseInt(parts[k].replace(/\D/g, ''), 10) : i + 1;
-      return { num, serie: k > 0 ? parts.slice(0, k).join(' | ') : '', nom: k >= 0 && parts[k + 1] ? parts.slice(k + 1).join(' | ') : titre, youtube: r.youtube, date: String(r.date || ''), texte: propre(r.texte) };
+      const k = parts.findIndex((x) => EPISODE.test(x));
+      const m = k >= 0 ? parts[k].match(EPISODE) : null;
+      const nom = [m && m[2] ? m[2].trim() : ''].concat(k >= 0 ? parts.slice(k + 1) : []).filter(Boolean).join(' | ');
+      return { num: m ? parseInt(m[1], 10) : i + 1, serie: k > 0 ? parts.slice(0, k).join(' | ') : '', nom: nom || titre, youtube: r.youtube, date: String(r.date || ''), texte: propre(r.texte) };
     });
   }
 
