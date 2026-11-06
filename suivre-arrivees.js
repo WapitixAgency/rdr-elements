@@ -1,5 +1,5 @@
-/* rdr-elements suivre-arrivees | source route-du-rhum bac3286 | rdr-suivre-arrivees.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-arrivees"]="bac3286";performance.mark("rdr-elements:suivre-arrivees")}catch(e){}
+/* rdr-elements suivre-arrivees | source route-du-rhum 2c69210 | rdr-suivre-arrivees.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["suivre-arrivees"]="2c69210";performance.mark("rdr-elements:suivre-arrivees")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1179,7 +1179,7 @@ function chezSoi() {
   const de = directEtat(maintenant()), live = de === 'live', replay = de === 'replay';
   
 
-  const lien = live ? LIENS.direct || LIENS.youtube.replace(/\/+$/, '') + '/live' : replay ? LIENS.rediffusion || LIENS.youtube : LIENS.youtube;
+  const lien = LIENS.direct || LIENS.youtube;
   return '<div class="chez">' +
     '<a class="direct" href="' + lien + '" target="_blank" rel="noopener"><img src="' + img(MEDIAS.direct, 1100, 760) + '" alt="' + esc(D.alt) + '" loading="lazy">' +
       '<span class="direct-jeu" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>' +
