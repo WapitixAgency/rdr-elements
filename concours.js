@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 1fb364b | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="1fb364b";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 5c415c1 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="5c415c1";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -206,6 +206,11 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
 :is(rdr-concours-photo,.cp-portail) .cp-maintenance i svg{width:15px;height:15px}
 :is(rdr-concours-photo,.cp-portail) .cp-maintenance p{margin:0;font-size:12.5px;line-height:1.45;color:var(--t1)}
 :is(rdr-concours-photo,.cp-portail) .cp-pref-changer{align-self:flex-start;padding:0;border:0;background:none;color:var(--jaune);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+:is(rdr-concours-photo,.cp-portail) .cp-libre{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.22)}
+:is(rdr-concours-photo,.cp-portail) .cp-libre .cp-pref-vignette{cursor:default}
+:is(rdr-concours-photo,.cp-portail) .cp-libre .cp-pref-vignette img{filter:grayscale(1);opacity:.55;box-shadow:0 0 0 2px rgba(255,255,255,.28)}
+:is(rdr-concours-photo,.cp-portail) .cp-libre .cp-pref-vignette i{background:var(--t2)}
+:is(rdr-concours-photo,.cp-portail) .cp-libre .cp-pref-txt b{color:var(--t1)}
 @media (min-width:901px) and (max-height:820px){
   :is(rdr-concours-photo,.cp-portail) .cp-titre{font-size:clamp(36px,4.6vw,62px)}
   :is(rdr-concours-photo,.cp-portail) .cp-accroche{font-size:14.5px;line-height:1.5}
@@ -802,7 +807,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Tout vu': 'All seen',
     'Votre étoile est posée, vous pouvez encore la déplacer.': 'Your star is given, you can still move it.',
     'Votre étoile est de nouveau libre': 'Your star is free again',
-    'La photo que vous aviez étoilée a été retirée après une vérification plus poussée. Notre équipe a dû la retirer pour un manquement au règlement. Nous sommes navrés pour ce désagrément et vous invitons à replacer votre étoile sur votre photo favorite.': 'The photo you had starred has been removed after a closer check. Our team had to remove it for a breach of the rules. We are sorry for the inconvenience and invite you to give your star again to your favourite photo.',
+    "Photo retirée par l'équipe": 'Photo removed by our team',
+    "La photo que vous aviez étoilée ne respectait pas les règles du concours et a été retirée. Nous sommes désolés pour ce désagrément. N'hésitez pas à choisir une nouvelle préférée parmi les photos en ligne.": 'The photo you had starred did not follow the competition rules and has been removed. We are sorry for the inconvenience. Feel free to choose a new favourite among the photos online.',    'La photo que vous aviez étoilée a été retirée après une vérification plus poussée. Notre équipe a dû la retirer pour un manquement au règlement. Nous sommes navrés pour ce désagrément et vous invitons à replacer votre étoile sur votre photo favorite.': 'The photo you had starred has been removed after a closer check. Our team had to remove it for a breach of the rules. We are sorry for the inconvenience and invite you to give your star again to your favourite photo.',
     'Il reste à poser votre étoile sur une seule.': 'All that is left is to give your star to just one.',
     'Vous avez passé toutes les photos. Les prochaines arrivent chaque jour.': 'You have gone through all the photos. New ones arrive every day.',
     'Choisir mon étoile': 'Choose my star',
@@ -2163,6 +2169,17 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       }
       if (etat.etoile) return `<div class="cp-etat">${t('Votre étoile est posée.')}</div>`;
       const pret = etat.coeurs.length > 0;
+      
+
+      if (etat.membre && etat.membre.etoileLiberee) {
+        const ph = etat.membre.etoileLibereePhoto, im = ph ? lireImage(ph.img, ph.l, ph.h) : null;
+        return `<div class="cp-pref cp-libre" role="note">
+          <div class="cp-pref-tete"><span class="cp-pref-vignette">${im ? `<img src="${src(im, 600)}" alt="">` : ''}<i>${ICO.etoile}</i></span>
+          <div class="cp-pref-txt"><b>${t('Votre étoile est de nouveau libre')}</b><small>${t("Photo retirée par l'équipe")}</small></div></div>
+          <p>${t("La photo que vous aviez étoilée ne respectait pas les règles du concours et a été retirée. Nous sommes désolés pour ce désagrément. N'hésitez pas à choisir une nouvelle préférée parmi les photos en ligne.")}</p>
+          <button class="cp-btn cp-btn--or" type="button" ${pret ? 'data-choisir-etoile' : 'data-trier'}>${ICO.etoile} ${pret ? t('Choisir ma préférée') : t('Trouver ma préférée')}</button>
+        </div>`;
+      }
       return `<div class="cp-jure" role="note">
           <div class="cp-jure-tete"><img class="cp-jure-badge" src="${BADGE_JURE}" alt="" width="60" height="60"><div class="cp-jure-txt"><span class="cp-jure-sur">${t('Badge à débloquer')}</span><b>${t('Juré')}</b></div></div>
           <p>${pret ? t('Votre sélection est prête. Posez votre étoile sur votre préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.') : t('Posez votre étoile sur votre photo préférée. Elle seule fait gagner, et elle débloque le badge Juré dans votre Espace Rhum.')}</p>
@@ -2738,7 +2755,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         monVote: m.monVote != null && m.monVote !== '' ? String(m.monVote) : null,
         mesCoeurs: Array.isArray(m.mesCoeurs) ? m.mesCoeurs.map(String).filter(x => ID_PHOTO.test(x)) : [],
          
-        etoileLiberee: m.etoileLiberee === true
+        etoileLiberee: m.etoileLiberee === true,
+        etoileLibereePhoto: m.etoileLibereePhoto && typeof m.etoileLibereePhoto === 'object' && m.etoileLibereePhoto.img ? m.etoileLibereePhoto : null
       };
       if (statut === 'pret') Object.assign(cfg, lireCfg(m, cfg));
       const avant = [...etat.coeurs, etat.etoile];
@@ -2754,10 +2772,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       redessinerGestes([...avant, ...etat.coeurs, etat.etoile]);
       
 
-      if (etat.membre.etoileLiberee && !etat.etoile && votesPossibles() && !etat.liberationDite) {
-        etat.liberationDite = true;
-        toast(t('Votre étoile est de nouveau libre'), t(MESSAGE_LIBEREE));
-      }
     }
     let lienFait = false;
     function ouvrirLienPhoto() {
