@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 493b383 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="493b383";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 85a5f93 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="85a5f93";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -4175,6 +4175,9 @@ function monter(racine, portail, D) {
     const p = coEnAttente;
     minuteurs.push(setTimeout(() => { if (coEnAttente !== p || emEnDirect()) return; coEnAttente = null; changerPhase(p); }, horloge.delai(CO_APRES_DIRECT)));
   }
+  
+
+  const coValide = (l) => !!(l && (l.officiel === 'grand' || l.officiel === 'categorie'));
   const coClasses = () => (coJeu && Array.isArray(coJeu.classes) ? coJeu.classes : []).filter((c) => c && c.nom).map((c) => {
     const lignes = Array.isArray(c.lignes) ? c.lignes : [];
     const rangee = (l) => l && typeof l.rang === 'number' && l.rang > 0;
@@ -4374,7 +4377,7 @@ function monter(racine, portail, D) {
     const fiche = (y) => href(y.fiche || '/skippers');
     return '<article class="tc' + (v ? ' est-or' : '') + '" style="--c:' + esc(c.couleur || '#5DBFC0') + '">' + (c.icone ? '<img class="tc-fanion" src="' + esc(c.icone) + '" alt="' + esc(c.nom) + '">' : '') +
       '<span class="tc-photo">' + (l.photo ? '<picture><source media="(max-width:760px)" srcset="' + coImg(l.photo, 680, 540, 74) + '"><img class="p" src="' + coImg(l.photo, 216, 420, 72) + '" alt="" loading="lazy" decoding="async"></picture>' : '') + '</span>' +
-      '<span class="tc-c"><span class="tc-sur">' + (c.icone ? '<img class="tc-mini" src="' + esc(c.icone) + '" alt="">' : '') + '<b>' + esc(v ? T.vainqueur : T.enTete) + '</b> · ' + esc(c.nom) + '</span><a class="tc-nom"' + fiche(l) + '>' + esc(coNomCourt(l)) + '</a>' + k +
+      '<span class="tc-c"><span class="tc-sur">' + (c.icone ? '<img class="tc-mini" src="' + esc(c.icone) + '" alt="">' : '') + '<b>' + esc(v ? (coValide(v) ? T.vainqueur : (T.premier || T.vainqueur)) : T.enTete) + '</b> · ' + esc(c.nom) + '</span><a class="tc-nom"' + fiche(l) + '>' + esc(coNomCourt(l)) + '</a>' + k +
       '<span class="tc-s">' + suivants.map((y) => '<a' + fiche(y) + '><span class="r">' + coRang(y.rang) + '</span>' + (y.photo ? '<img src="' + coImg(y.photo, 48, 48, 70) + '" alt="" loading="lazy" decoding="async">' : '<span></span>') + '<b>' + esc(coNomCourt(y)) + '</b><em>' +
         (y.statut === 'ARV' ? '+' + coEcart((Number(y.ecartPremier) || 0) / 3600000) : v ? (EN ? '' : 'à ') + coNf(y.dtf) + ' MN' : '+' + coNf(y.dtl, 1) + ' MN') + '</em></a>').join('') + '</span>' +
       '<a class="tc-v"' + href((T.lien || '/classement') + '?classe=' + encodeURIComponent(c.cle || '')) + '>' + esc(coModele(T.lienClasse, { c: c.nom })) + coIco('fleche') + '</a></span></article>';
@@ -4383,8 +4386,8 @@ function monter(racine, portail, D) {
     const items = [], tous = cl.flatMap((x) => x.lignes.map((l) => ({ l, x })));
     const arrives = tous.filter((o) => o.l.statut === 'ARV' && o.l.arrivee).sort((a, b) => Date.parse(a.l.arrivee) - Date.parse(b.l.arrivee));
     const vq = arrives[0];
-    if (vq) items.push([vq.x.c, coModele(F.vainqueur, { n: '<b>' + esc(coNomComplet(vq.l)) + '</b>', t: coDuree(vq.l.temps) })]);
-    cl.forEach((x) => { if (x.arv[0] && (!vq || x.arv[0] !== vq.l)) items.push([x.c, coModele(F.classe, { n: '<b>' + esc(coNomComplet(x.arv[0])) + '</b>', c: esc(x.c.nom), t: coDuree(x.arv[0].temps) })]); });
+    if (vq) items.push([vq.x.c, coModele(vq.l.officiel === 'grand' || !F.premier ? F.vainqueur : F.premier, { n: '<b>' + esc(coNomComplet(vq.l)) + '</b>', t: coDuree(vq.l.temps) })]);
+    cl.forEach((x) => { if (x.arv[0] && (!vq || x.arv[0] !== vq.l)) items.push([x.c, coModele(coValide(x.arv[0]) || !F.classePremier ? F.classe : F.classePremier, { n: '<b>' + esc(coNomComplet(x.arv[0])) + '</b>', c: esc(x.c.nom), t: coDuree(x.arv[0].temps) })]); });
     const rapide = cl.flatMap((x) => x.mer.filter((l) => l.statut === 'RAC' && typeof l.vitesse === 'number').map((l) => ({ l, x }))).sort((a, b) => b.l.vitesse - a.l.vitesse)[0];
     if (rapide) items.push([rapide.x.c, coModele(F.rapide, { n: '<b>' + esc(coNomComplet(rapide.l)) + '</b>', v: coNf(rapide.l.vitesse, 1), k: coKmh(rapide.l.vitesse) })]);
     cl.forEach((x) => {
