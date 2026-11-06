@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 85a5f93 | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="85a5f93";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 3d9b977 | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="3d9b977";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -801,6 +801,8 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     'Belle sélection': 'Nice selection',
     'Tout vu': 'All seen',
     'Votre étoile est posée, vous pouvez encore la déplacer.': 'Your star is given, you can still move it.',
+    'Votre étoile est de nouveau libre': 'Your star is free again',
+    'La photo que vous aviez étoilée a été retirée après une vérification plus poussée. Notre équipe a dû la retirer pour un manquement au règlement. Nous sommes navrés pour ce désagrément et vous invitons à replacer votre étoile sur votre photo favorite.': 'The photo you had starred has been removed after a closer check. Our team had to remove it for a breach of the rules. We are sorry for the inconvenience and invite you to give your star again to your favourite photo.',
     'Il reste à poser votre étoile sur une seule.': 'All that is left is to give your star to just one.',
     'Vous avez passé toutes les photos. Les prochaines arrivent chaque jour.': 'You have gone through all the photos. New ones arrive every day.',
     'Choisir mon étoile': 'Choose my star',
@@ -1971,8 +1973,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       if (!txt) return;
       const tt = $('cp-toast'); tt.textContent = txt;
       if (sous) { const s = document.createElement('small'); s.textContent = sous; tt.appendChild(s); }
-      tt.dataset.on = 1; clearTimeout(toast.t); toast.t = setTimeout(() => { tt.dataset.on = 0; }, sous ? 3800 : Math.max(2600, Math.min(6500, txt.length * 45)));
+      tt.dataset.on = 1; clearTimeout(toast.t); toast.t = setTimeout(() => { tt.dataset.on = 0; }, sous ? Math.max(3800, Math.min(12000, (txt.length + sous.length) * 40)) : Math.max(2600, Math.min(6500, txt.length * 45)));
     }
+    const MESSAGE_LIBEREE = 'La photo que vous aviez étoilée a été retirée après une vérification plus poussée. Notre équipe a dû la retirer pour un manquement au règlement. Nous sommes navrés pour ce désagrément et vous invitons à replacer votre étoile sur votre photo favorite.';
     const RAPPEL_ETOILE = "Pensez à poser votre étoile sur votre préférée, c'est elle qui vote.";
     function ouvrirConnexion() { $('cp-connexion').dataset.ouverte = 1; }
     function exigerCompte() {
@@ -2426,7 +2429,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       const invite = vp && n > 0 && !etat.etoile;
       $('cp-tiroir').dataset.invite = invite ? 1 : 0;
       $('cp-tiroir-rappel').innerHTML = invite
-        ? `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Il reste à poser votre étoile')}</p><p>${t("Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, et la photo la plus étoilée gagne. Votre première étoile débloque le badge Juré.")}</p></div>`
+        ? (etat.membre && etat.membre.etoileLiberee
+          ? `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Votre étoile est de nouveau libre')}</p><p>${t(MESSAGE_LIBEREE)}</p></div>`
+          : `<div class="cp-rappel" role="note"><p class="cp-rappel-t"><i>${ICO.etoile}</i>${t('Il reste à poser votre étoile')}</p><p>${t("Choisissez votre préférée avec l'étoile en haut de sa vignette. C'est votre seul vote, et la photo la plus étoilée gagne. Votre première étoile débloque le badge Juré.")}</p></div>`)
         : (vp && etat.etoile ? `<p class="cp-tiroir-deplacer">${phraseDeplacer()}</p>` : '');
       if (!n) { l.innerHTML = `<div class="cp-tiroir-vide">${t("Aucune photo gardée pour l'instant.<br>Un cœur sur une photo, et elle arrive ici.")}</div>`; return; }
       l.innerHTML = gardees.slice().reverse().map(id => { const p = etat.parId.get(id); const e = etat.etoile === id; return `
@@ -2731,7 +2736,9 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         maPhoto: m.maPhoto && typeof m.maPhoto === 'object' ? m.maPhoto : null,
         peutDeposer: m.peutDeposer === true, raisonPasDeposer: String(m.raisonPasDeposer || ''),
         monVote: m.monVote != null && m.monVote !== '' ? String(m.monVote) : null,
-        mesCoeurs: Array.isArray(m.mesCoeurs) ? m.mesCoeurs.map(String).filter(x => ID_PHOTO.test(x)) : []
+        mesCoeurs: Array.isArray(m.mesCoeurs) ? m.mesCoeurs.map(String).filter(x => ID_PHOTO.test(x)) : [],
+         
+        etoileLiberee: m.etoileLiberee === true
       };
       if (statut === 'pret') Object.assign(cfg, lireCfg(m, cfg));
       const avant = [...etat.coeurs, etat.etoile];
@@ -2745,6 +2752,12 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
       else if (!etat.photos.length) dessinerGrille();
       dessinerChiffres();
       redessinerGestes([...avant, ...etat.coeurs, etat.etoile]);
+      
+
+      if (etat.membre.etoileLiberee && !etat.etoile && votesPossibles() && !etat.liberationDite) {
+        etat.liberationDite = true;
+        toast(t('Votre étoile est de nouveau libre'), t(MESSAGE_LIBEREE));
+      }
     }
     let lienFait = false;
     function ouvrirLienPhoto() {
