@@ -1,5 +1,5 @@
-/* rdr-elements concours | source route-du-rhum 0bc040a | rdr-concours-photo.js AlpinaClock.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="0bc040a";performance.mark("rdr-elements:concours")}catch(e){}
+/* rdr-elements concours | source route-du-rhum 1fb364b | rdr-concours-photo.js AlpinaClock.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["concours"]="1fb364b";performance.mark("rdr-elements:concours")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -763,7 +763,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     "Après deux refus, il n'est plus possible d'en déposer une autre.": 'After two declines, it is no longer possible to submit another one.',
     "Retirée par l'équipe pour « {motif} ».": 'Removed by our team: “{motif}”.',
     "Retirée par l'équipe.": 'Removed by our team.',
-    "Si vous souhaitez contester cette décision, écrivez-nous rapidement à {a} avec tous les éléments qui prouvent que vous êtes l'auteur de cette photo.": 'If you wish to contest this decision, write to us quickly at {a} with everything that shows you are the author of this photo.',
     'Comptée chaque nuit, avec ses cœurs et ses étoiles.': 'Counted every night, with its hearts and stars.',
     "Refusée pour « visage d'un tiers reconnaissable ». Vous pouvez en déposer une autre.": 'Declined: “a third party’s face can be recognised”. You can submit another one.',
     'La photo du jour': 'The photo of the day',
@@ -2185,9 +2184,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
     
 
 
-     
-    const MOTIFS_PROPRIETE = ['Photo qui ne semble pas être la tienne', 'Photo that does not seem to be yours'];
-    const ADRESSE_CONTESTATION = 'routedurhum@ocgroup.com';
     function blocMaPhoto(mp, m) {
       const im = mp.img ? lireImage(mp.img, mp.l, mp.h) : null;
       const eteinte = mp.statut === 'refusee' || mp.statut === 'retiree';
@@ -2205,7 +2201,6 @@ rdr-concours-photo,.cp-portail{--cp-gouttiere:clamp(24px,4.5vw,72px);--cp-colonn
         pill = `<span class="cp-pill cp-pill--refus">${t('Refusée')}</span>`;
       } else if (mp.statut === 'retiree') {
         texte = motif ? t("Retirée par l'équipe pour « {motif} ».", { motif }) : t("Retirée par l'équipe.");
-        if (MOTIFS_PROPRIETE.includes(String(mp.motif || ''))) texte += ' ' + t("Si vous souhaitez contester cette décision, écrivez-nous rapidement à {a} avec tous les éléments qui prouvent que vous êtes l'auteur de cette photo.", { a: '<a href="mailto:' + ADRESSE_CONTESTATION + '">' + ADRESSE_CONTESTATION + '</a>' });
         pill = `<span class="cp-pill cp-pill--refus">${t('Retirée')}</span>`;
       } else {
         texte = t("Relue par l'équipe avant sa mise en ligne. Vous serez prévenu dans votre Espace Rhum.");
