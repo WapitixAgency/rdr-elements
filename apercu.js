@@ -1,5 +1,5 @@
-/* rdr-elements apercu | source route-du-rhum 2f8c394 | rdr-accueil-apercu.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="2f8c394";performance.mark("rdr-elements:apercu")}catch(e){}
+/* rdr-elements apercu | source route-du-rhum 6bfac81 | rdr-accueil-apercu.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["apercu"]="6bfac81";performance.mark("rdr-elements:apercu")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3519,7 +3519,7 @@ function monter(racine, portail, D) {
     if (nouvelle === phase || !Object.prototype.hasOwnProperty.call(PHASES, nouvelle)) return;
      
     if (PHASES[nouvelle].course) {
-      if (emEnDirect()) { coEnAttente = nouvelle; return; }
+      if (emRetientDepart()) { coEnAttente = nouvelle; return; }
       coEnAttente = null;
       phase = nouvelle; racine.dataset.phase = phase;
       rendreHero(); rendreCtas(); rendreDepart(); rendreCourse(); rendreTymal(); rendreFaq(); if (majHorloge) majHorloge();
@@ -4146,6 +4146,9 @@ function monter(racine, portail, D) {
   const coPhrase = (x) => { const t = String(x || '').replace(/\s+/g, ' ').trim(); if (/^(photos?|cr[ée]dits?)\s*(n°|no\.?)\s*\d/i.test(t)) return ''; const m = t.match(/^.{40,}?[.!?…](?=\s+[A-ZÀ-ÖØ-Þ«"“])/); const p = m ? m[0] : t; return p.length > 230 ? p.slice(0, 230).replace(/\s+\S*$/, '') + '…' : p; };
   const coHachis = (x) => { let h = 0; for (const ch of String(x)) h = (h * 31 + ch.charCodeAt(0)) | 0; return ((h >>> 0) % 1000) / 1000; };
   const emEnDirect = () => { const e = emLire(), t = horloge.maintenant(); return !!(e && t >= e.tDebut && t < e.tFin); };
+   
+  const emDuDepart = () => { const e = emLire(), m = D.calendrier && D.calendrier.moments, pc = Date.parse((m && m['passage-course']) || '2026-11-01T13:50:00Z'); return !!(e && Number.isFinite(pc) && e.tDebut < pc); };
+  const emRetientDepart = () => emEnDirect() && emDuDepart();
   const emVisible = () => { const x = $('em'); return !!(x && !x.hidden); };
    
   function montrerHaut(on) {
@@ -4164,7 +4167,7 @@ function monter(racine, portail, D) {
   }
    
   function coVerifierAttente() {
-    if (!estCourse() || !emEnDirect()) return;
+    if (!estCourse() || !emRetientDepart()) return;
     coEnAttente = phase;
     phase = Object.prototype.hasOwnProperty.call(PHASES, 'depart') ? 'depart' : 'village';
     racine.dataset.phase = phase;
