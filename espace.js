@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 8eee34d | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="8eee34d";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 2729cda | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="2729cda";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -11119,7 +11119,14 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-stats-row,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-rang-pop,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-preferences-btn span,
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-btn span,
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-mini span,
       espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-nav-link span { display: none; }
+       
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-btn,
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-mini { justify-content: center; padding: 12px; }
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-btn svg,
+      espace-rhum .er-sidebar:not([data-expanded="true"]) .er-sidebar-pack-mini > svg { width: 18px; height: 18px; }
       espace-rhum .er-sidebar-nav-link { justify-content: center; padding: 12px 0; }
       espace-rhum .er-sidebar-identity { justify-content: center; padding-bottom: 12px; margin-bottom: 12px; }
        
