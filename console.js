@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum ed4cb94 | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ed4cb94";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum ac38d2a | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ac38d2a";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2330,9 +2330,11 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ed4cb94";performan
 
 
 
-        kpi('Membres actifs', nfmt(total), '', k.inscrits
-          ? '<b>' + nfmt(k.inscrits) + '</b> inscrits · ' + nfmt(k.dormants || 0) + ' jamais revenus'
-          : pct(k.actifs, total) + ' % avec au moins une action', 'lead') +
+        
+
+        (k.inscrits
+          ? kpi('Membres inscrits', nfmt(k.inscrits), '', 'environ <b>' + nfmt(Math.round((k.lignesStats || total) / 100) * 100) + '</b> actifs', 'lead')
+          : kpi('Membres actifs', nfmt(total), '', pct(k.actifs, total) + ' % avec au moins une action', 'lead')) +
         kpi('Profils complets', nfmt(k.profilsComplets), '', '<b>' + pct(k.profilsComplets, total) + ' %</b> de la base') +
         kpi('Instagram validés', nfmt(k.instaApproved), '',
             (k.instaPending ? '<b>' + nfmt(k.instaPending) + '</b> en attente' : 'aucune demande en attente'),
@@ -4875,7 +4877,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="ed4cb94";performan
       
 
       push('Membres inscrits', k.inscrits || '', k.inscrits ? '' : 'comptage indisponible');
-      push('Membres actifs', k.total, k.inscrits ? pct(k.total, k.inscrits) + ' % des inscrits' : '');
+      if (k.inscrits) push('Membres inscrits', k.inscrits, '');
+      push('Membres actifs (au moins une action)', k.lignesStats || k.total, k.inscrits ? pct(k.lignesStats || k.total, k.inscrits) + ' % des inscrits' : '');
       push('Avec au moins une action', k.actifs, pct(k.actifs, k.total) + ' % des actifs');
       push('Profils complets', k.profilsComplets, pct(k.profilsComplets, k.total) + ' %');
       push('Instagram validés', k.instaApproved, pct(k.instaApproved, k.total) + ' %');
