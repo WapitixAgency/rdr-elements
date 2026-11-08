@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 485b22c | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="485b22c";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum ed4cb94 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="ed4cb94";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3033,6 +3033,7 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-mes span{min-width:0}
     espace-rhum .jt-mes--attente div{align-items:flex-start}
     espace-rhum .jt-mes--attente img{margin-top:2px}
+    espace-rhum .jt-mes--attente span{flex:1}
     espace-rhum .jt-mes--attente dt{margin-bottom:6px;color:#fff;font-size:12px}
     espace-rhum .jt-mes dd small{display:block;margin-bottom:1px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--er-text-muted)}
     espace-rhum .jt-mes dd.jt-reel{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.1);color:var(--er-amber-bright)}
@@ -3118,6 +3119,10 @@ if (!customElements.get('espace-rhum')) {
       espace-rhum .jt-une--seul{grid-template-columns:minmax(0,1fr)}
       espace-rhum .jt-liste{grid-template-columns:repeat(2,minmax(0,1fr))}
       espace-rhum .jt-mes{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:599px){
+      espace-rhum .jt-mes--attente{grid-template-columns:minmax(0,1fr)}
+      espace-rhum .jt-mes--attente div{padding:10px 12px}
     }
     @media (max-width:767px){
       espace-rhum main.er-dashboard.jt-vue{gap:16px}
