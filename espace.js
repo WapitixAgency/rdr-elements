@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 593b387 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="593b387";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 485b22c | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="485b22c";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3029,9 +3029,14 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-mes div{display:flex;align-items:center;gap:9px;min-width:0;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
     espace-rhum .jt-mes img{width:20px;height:auto;flex:none}
     espace-rhum .jt-mes dt{font-size:11px;font-weight:700;color:var(--er-text-muted)}
-    espace-rhum .jt-mes dd{margin:0;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
-    espace-rhum .jt-mes dd.jt-reel{margin-top:4px;font-size:12px;font-weight:700;color:var(--er-amber-bright)}
-    espace-rhum .jt-mes dd.jt-reel small{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--er-teal)}
+    espace-rhum .jt-mes dd{margin:0;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:normal;overflow-wrap:normal}
+    espace-rhum .jt-mes span{min-width:0}
+    espace-rhum .jt-mes--attente div{align-items:flex-start}
+    espace-rhum .jt-mes--attente img{margin-top:2px}
+    espace-rhum .jt-mes--attente dt{margin-bottom:6px;color:#fff;font-size:12px}
+    espace-rhum .jt-mes dd small{display:block;margin-bottom:1px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--er-text-muted)}
+    espace-rhum .jt-mes dd.jt-reel{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.1);color:var(--er-amber-bright)}
+    espace-rhum .jt-mes dd.jt-reel small{color:var(--er-amber-bright);opacity:.8}
     espace-rhum .jt-affiche{position:relative;z-index:1;margin:-64px 0 -24px;transform:rotate(2.5deg);border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.9);box-shadow:0 26px 60px rgba(0,0,0,.5),0 0 0 1px rgba(252,241,80,.4)}
     espace-rhum .jt-affiche img{display:block;width:100%;height:auto}
 
@@ -21832,7 +21837,7 @@ if (!customElements.get('espace-rhum')) {
       if (p) {
         if (p.phase === 'ouvert') out.cours.push('le-juste-temps');
         else if (p.phase === 'avant') out.avenir.push('le-juste-temps');
-        else if (p.phase !== 'ferme') out.fini.push('le-juste-temps');
+        else if (!(p.phase === 'ferme' && p.joue)) out.fini.push('le-juste-temps');
       }
       
 
@@ -21851,7 +21856,7 @@ if (!customElements.get('espace-rhum')) {
       if (r) (r.peutTourner || this._jrJoueIci ? out.cours : out.fini).unshift('jeu-de-la-roue');
       
 
-      if (p && p.phase === 'ferme') out.cours.push('le-juste-temps');
+      if (p && p.phase === 'ferme' && p.joue) out.cours.push('le-juste-temps');
       return out;
     }
 
@@ -22125,8 +22130,8 @@ if (!customElements.get('espace-rhum')) {
     _jtTemps(sec) {
       const v = jtDecoupe(sec);
       if (!v) return '';
-      if (this._lang() === 'en') return v[0] + 'd ' + jtDeux(v[1]) + 'h ' + jtDeux(v[2]) + 'm' + (v[3] ? ' ' + jtDeux(v[3]) + 's' : '');
-      return v[0] + '\u00a0j ' + jtDeux(v[1]) + '\u00a0h ' + jtDeux(v[2]) + '\u00a0min' + (v[3] ? ' ' + jtDeux(v[3]) + '\u00a0s' : '');
+      if (this._lang() === 'en') return v[0] + 'd\u00a0' + jtDeux(v[1]) + 'h ' + jtDeux(v[2]) + 'm' + (v[3] ? '\u00a0' + jtDeux(v[3]) + 's' : '');
+      return v[0] + '\u00a0j\u00a0' + jtDeux(v[1]) + '\u00a0h ' + jtDeux(v[2]) + '\u00a0min' + (v[3] ? '\u00a0' + jtDeux(v[3]) + '\u00a0s' : '');
     }
 
     _jtRepere(c) {
@@ -22195,11 +22200,11 @@ if (!customElements.get('espace-rhum')) {
         if (Number.isFinite(n) && n >= 0) reste = '<span class="ej-reste">' + jtSvg('<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>') +
           (n === 0 ? (en ? 'Last day' : 'Dernier jour') : n === 1 ? (en ? '1 day left' : 'Plus qu’un jour') : (en ? n + ' days left' : 'Plus que ' + n + ' jours')) + '</span>';
       }
-      const ico = { 'a-faire': '<path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/>', fait: JT_I_OK, info: JT_I_CHRONO }[c.etat[0]] || JT_I_CHRONO;
+      const ico = { 'a-faire': '<path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/>', fait: JT_I_OK, info: JT_I_CHRONO }[c.etat ? c.etat[0] : ''] || JT_I_CHRONO;
       return '<li class="ej-carte' + (c.joue ? ' ej-carte--joue' : '') + '" data-ej-jeu="' + c.id + '">' +
         '<div class="ej-vis ej-vis--' + c.genre + '">' + c.vis + '<span class="ej-etiq">' + escapeHtml(c.etiquette) + '</span>' + reste + '</div>' +
         '<div class="ej-corps"><h3 class="ej-nom">' + escapeHtml(c.nom) + '</h3>' + (c.lot ? '<p class="ej-lot">' + c.lot + '</p>' : '') +
-        '<div class="ej-etat ej-etat--' + c.etat[0] + '">' + jtSvg(ico) + '<div>' + escapeHtml(c.etat[1]) + (c.etat[2] ? '<small>' + escapeHtml(c.etat[2]) + '</small>' : '') + '</div></div>' +
+        (c.etat ? '<div class="ej-etat ej-etat--' + c.etat[0] + '">' + jtSvg(ico) + '<div>' + escapeHtml(c.etat[1]) + (c.etat[2] ? '<small>' + escapeHtml(c.etat[2]) + '</small>' : '') + '</div></div>' : '') +
         '<div class="ej-actions">' + c.bouton + (c.reglement || '') + '</div></div></li>';
     }
 
@@ -22289,15 +22294,10 @@ if (!customElements.get('espace-rhum')) {
       const fl = jrIc(JT_I_FLECHE);
        
       if (p.phase === 'ferme') {
-        this._jtChargerReels();
-        const connus = this._jtClasses().filter((c) => this._jtReels && this._jtReels[c.cle]);
-        const sous = connus.length === 1 ? T('Temps retenu en ' + connus[0].nom + ' : ', 'Official time in ' + connus[0].nom + ': ') + this._jtTemps(this._jtReels[connus[0].cle])
-          : connus.length > 1 ? T(connus.length + ' temps retenus, à revoir avec tes pronos', connus.length + ' official times, next to your picks')
-          : T('Résultat après l’arrivée des vainqueurs', 'Result once the class winners finish');
         return { id: 'le-juste-temps', genre: 'jt', attente: true, vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
           nom: p.libelle || 'Le Juste Temps', etiquette: T('Pronostics', 'Predictions'), fin: null,
           lot: this._ejGagner(T('la montre officielle Route du Rhum x Alpina', 'the official Route du Rhum x Alpina watch')),
-          etat: ['fait', T('Tes pronostics sont enregistrés', 'Your predictions are saved'), sous],
+          etat: null,
           bouton: '<button type="button" class="ej-jouer ej-jouer--voir" data-jt-volet>' + T('Voir mes pronos', 'See my picks') + fl + '</button>',
           reglement: this._ejReglement(this._payload && this._payload.reglements && this._payload.reglements.pronostics) };
       }
@@ -22396,10 +22396,11 @@ if (!customElements.get('espace-rhum')) {
       const p = this._jtEtat();
       const en = this._lang() === 'en';
       const titreMes = jtLib(en, 'Mes pronos', 'My predictions');
-      return '<dl class="jt-mes" aria-label="' + titreMes + '">' + this._jtClasses().map((c) => {
+      const attente = p.phase === 'ferme';
+      return '<dl class="jt-mes' + (attente ? ' jt-mes--attente' : '') + '" aria-label="' + titreMes + '">' + this._jtClasses().map((c) => {
         const choix = (p.mesChoix || {})[c.nom];
         const reel = p.phase === 'ferme' && this._jtReels && this._jtReels[c.cle];
-        return '<div>' + (c.drapeau ? '<img src="' + escapeHtml(c.drapeau) + '" alt="">' : '') + '<span><dt>' + escapeHtml(c.nom) + '</dt><dd>' +
+        return '<div>' + (c.drapeau ? '<img src="' + escapeHtml(c.drapeau) + '" alt="">' : '') + '<span><dt>' + escapeHtml(c.nom) + '</dt><dd>' + (attente ? '<small>' + jtLib(en, 'Ton prono', 'Your pick') + '</small>' : '') +
           escapeHtml(choix ? this._jtTemps(choix.tempsCourseSec) : '-') + '</dd>' +
           (reel ? '<dd class="jt-reel"><small>' + jtLib(en, 'Temps retenu', 'Official time') + '</small>' + escapeHtml(this._jtTemps(reel)) + '</dd>' : '') + '</span></div>';
       }).join('') + '</dl>';
