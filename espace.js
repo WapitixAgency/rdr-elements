@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 0a66d7f | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="0a66d7f";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 8eee34d | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="8eee34d";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -21823,7 +21823,7 @@ if (!customElements.get('espace-rhum')) {
       if (p) {
         if (p.phase === 'ouvert') out.cours.push('le-juste-temps');
         else if (p.phase === 'avant') out.avenir.push('le-juste-temps');
-        else out.fini.push('le-juste-temps');
+        else if (p.phase !== 'ferme') out.fini.push('le-juste-temps');
       }
       
 
@@ -21840,6 +21840,9 @@ if (!customElements.get('espace-rhum')) {
 
       const r = this._jrEtat();
       if (r) (r.peutTourner || this._jrJoueIci ? out.cours : out.fini).unshift('jeu-de-la-roue');
+      
+
+      if (p && p.phase === 'ferme') out.cours.push('le-juste-temps');
       return out;
     }
 
@@ -22271,10 +22274,19 @@ if (!customElements.get('espace-rhum')) {
      
     _ejJusteTemps() {
       const p = this._jtEtat();
-      if (!p || p.phase !== 'ouvert') return null;
+      if (!p || !(p.phase === 'ouvert' || (p.phase === 'ferme' && p.joue))) return null;
       const en = this._lang() === 'en', T = (fr, an) => (en ? an : fr);
       const img = jtImage(p.visuel, 640);
       const fl = jrIc(JT_I_FLECHE);
+       
+      if (p.phase === 'ferme') {
+        return { id: 'le-juste-temps', genre: 'jt', vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
+          nom: p.libelle || 'Le Juste Temps', etiquette: T('Pronostics', 'Predictions'), fin: null,
+          lot: this._ejGagner(T('la montre officielle Route du Rhum x Alpina', 'the official Route du Rhum x Alpina watch')),
+          etat: ['fait', T('Tes pronostics sont enregistrés', 'Your predictions are saved'), T('Résultat après l’arrivée des vainqueurs', 'Result once the class winners finish')],
+          bouton: '<button type="button" class="ej-jouer ej-jouer--voir" data-jt-volet>' + T('Voir mes pronos', 'See my picks') + fl + '</button>',
+          reglement: this._ejReglement(this._payload && this._payload.reglements && this._payload.reglements.pronostics) };
+      }
       return { id: 'le-juste-temps', genre: 'jt', vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
         nom: p.libelle || 'Le Juste Temps', etiquette: T('Pronostics', 'Predictions'), fin: p.fermetureLe || null,
         lot: this._ejGagner(T('la montre officielle Route du Rhum x Alpina', 'the official Route du Rhum x Alpina watch')),
@@ -22347,7 +22359,8 @@ if (!customElements.get('espace-rhum')) {
     _buildJeuxBouton(telephone) {
       const j = this._jeux();
       if (!j.cours.length && !j.avenir.length && !j.fini.length) return '';
-      const en = this._lang() === 'en', n = j.cours.length;
+      const jt = this._jtEtat();
+      const en = this._lang() === 'en', n = j.cours.filter((c) => !(c === 'le-juste-temps' && jt && jt.phase === 'ferme')).length;
       const compteur = n ? '<span class="jt-compteur">' + n + (en ? ' open' : ' ouvert' + (n > 1 ? 's' : '')) + '</span>' : '';
       return '<button type="button" class="er-btn jt-menu-jeux' + (telephone ? ' er-mobile-sheet-jeux' : '') + '" data-jt-volet' +
         (telephone ? '' : ' aria-current="' + (this._jeuxVue === 'jeux' ? 'page' : 'false') + '"') + '>' +
@@ -22380,7 +22393,9 @@ if (!customElements.get('espace-rhum')) {
       const p = this._jtEtat();
       const en = this._lang() === 'en';
       const ouvert = p.phase === 'ouvert';
-      const etat = !ouvert ? '<span class="jt-etat jt-etat--ferme">' + (en ? 'Closed' : 'Fermé') + '</span>'
+      const attente = p.phase === 'ferme';
+      const etat = !ouvert ? (attente && p.joue ? '<span class="jt-etat jt-etat--joue">' + (en ? 'You’re in · result to come' : 'Tu joues · résultat à venir') + '</span>'
+        : '<span class="jt-etat jt-etat--ferme">' + (attente ? (en ? 'Predictions closed' : 'Pronos fermés') : (en ? 'Closed' : 'Fermé')) + '</span>')
         : p.joue ? '<span class="jt-etat jt-etat--joue">' + (en ? 'Predictions saved' : 'Pronos validés') + '</span>'
         : '<span class="jt-etat">' + (en ? 'Open' : 'Ouvert') + '</span>';
       const texte = en
@@ -22394,7 +22409,11 @@ if (!customElements.get('espace-rhum')) {
         const fin = this._jtCompte(p.fermetureLe, p.joue ? (en ? 'Can still be changed' : 'Modifiable encore') : (en ? 'Closes in' : 'Fermeture dans'));
         bas = grand ? fin + actions : '<div class="jt-bas">' + fin + actions + '</div>';
       } else {
-        bas = '<p class="jt-texte">' + (en ? 'Predictions are closed. The winner will be named after the class winners finish.' : 'Les pronos sont fermés. Le gagnant sera désigné après l\'arrivée des vainqueurs.') + '</p>' +
+        const quand = attente && p.joue && p.modifieLe ? this._jtQuand(p.modifieLe) : '';
+        bas = '<p class="jt-texte">' + (attente && p.joue
+          ? (en ? 'Your predictions above have been saved' + (quand ? ' since ' + quand : '') + '. The winner will be named after the class winners finish.'
+                : 'Tes pronos ci-dessus sont enregistrés' + (quand ? ' depuis le ' + quand : '') + '. Le gagnant sera désigné après l\'arrivée des vainqueurs.')
+          : (en ? 'Predictions are closed. The winner will be named after the class winners finish.' : 'Les pronos sont fermés. Le gagnant sera désigné après l\'arrivée des vainqueurs.')) + '</p>' +
           (this._jtReglement() ? '<div class="jt-actions">' + this._jtReglement() + '</div>' : '');
       }
       return '<div class="jt-corps"><div class="jt-etiquettes">' + etat + '<span class="jt-partenaire">' + (en ? 'With Alpina, official timekeeper' : 'Avec Alpina, chronométreur officiel') + '</span></div>' +
