@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum 2729cda | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="2729cda";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum 593b387 | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="593b387";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -3030,6 +3030,8 @@ if (!customElements.get('espace-rhum')) {
     espace-rhum .jt-mes img{width:20px;height:auto;flex:none}
     espace-rhum .jt-mes dt{font-size:11px;font-weight:700;color:var(--er-text-muted)}
     espace-rhum .jt-mes dd{margin:0;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+    espace-rhum .jt-mes dd.jt-reel{margin-top:4px;font-size:12px;font-weight:700;color:var(--er-amber-bright)}
+    espace-rhum .jt-mes dd.jt-reel small{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--er-teal)}
     espace-rhum .jt-affiche{position:relative;z-index:1;margin:-64px 0 -24px;transform:rotate(2.5deg);border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.9);box-shadow:0 26px 60px rgba(0,0,0,.5),0 0 0 1px rgba(252,241,80,.4)}
     espace-rhum .jt-affiche img{display:block;width:100%;height:auto}
 
@@ -22169,7 +22171,7 @@ if (!customElements.get('espace-rhum')) {
       const cartes = [this._ejRoue(), this._ejPhoto(), this._ejTop50(), this._ejJusteTemps(), this._ejMobilite()].filter(Boolean);
       if (!cartes.length) return '';
       const ouvertes = cartes.filter((c) => !c.joue), jouees = cartes.filter((c) => c.joue);
-      const n = ouvertes.length;
+      const n = ouvertes.filter((c) => !c.attente).length;
       const roue = this._jrEtat();
       const appel = roue && roue.peutTourner ? T('ton tour de roue t’attend', 'your wheel spin is waiting')
         : (this._jpEtat() && this._jpEtat().peutDeposer ? T('poste ta photo', 'post your photo') : T('à toi de jouer', 'your move'));
@@ -22287,10 +22289,15 @@ if (!customElements.get('espace-rhum')) {
       const fl = jrIc(JT_I_FLECHE);
        
       if (p.phase === 'ferme') {
-        return { id: 'le-juste-temps', genre: 'jt', vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
+        this._jtChargerReels();
+        const connus = this._jtClasses().filter((c) => this._jtReels && this._jtReels[c.cle]);
+        const sous = connus.length === 1 ? T('Temps retenu en ' + connus[0].nom + ' : ', 'Official time in ' + connus[0].nom + ': ') + this._jtTemps(this._jtReels[connus[0].cle])
+          : connus.length > 1 ? T(connus.length + ' temps retenus, à revoir avec tes pronos', connus.length + ' official times, next to your picks')
+          : T('Résultat après l’arrivée des vainqueurs', 'Result once the class winners finish');
+        return { id: 'le-juste-temps', genre: 'jt', attente: true, vis: img ? '<img class="ej-fond" src="' + escapeHtml(img) + '" alt="" decoding="async">' : '',
           nom: p.libelle || 'Le Juste Temps', etiquette: T('Pronostics', 'Predictions'), fin: null,
           lot: this._ejGagner(T('la montre officielle Route du Rhum x Alpina', 'the official Route du Rhum x Alpina watch')),
-          etat: ['fait', T('Tes pronostics sont enregistrés', 'Your predictions are saved'), T('Résultat après l’arrivée des vainqueurs', 'Result once the class winners finish')],
+          etat: ['fait', T('Tes pronostics sont enregistrés', 'Your predictions are saved'), sous],
           bouton: '<button type="button" class="ej-jouer ej-jouer--voir" data-jt-volet>' + T('Voir mes pronos', 'See my picks') + fl + '</button>',
           reglement: this._ejReglement(this._payload && this._payload.reglements && this._payload.reglements.pronostics) };
       }
@@ -22391,9 +22398,35 @@ if (!customElements.get('espace-rhum')) {
       const titreMes = jtLib(en, 'Mes pronos', 'My predictions');
       return '<dl class="jt-mes" aria-label="' + titreMes + '">' + this._jtClasses().map((c) => {
         const choix = (p.mesChoix || {})[c.nom];
+        const reel = p.phase === 'ferme' && this._jtReels && this._jtReels[c.cle];
         return '<div>' + (c.drapeau ? '<img src="' + escapeHtml(c.drapeau) + '" alt="">' : '') + '<span><dt>' + escapeHtml(c.nom) + '</dt><dd>' +
-          escapeHtml(choix ? this._jtTemps(choix.tempsCourseSec) : '-') + '</dd></span></div>';
+          escapeHtml(choix ? this._jtTemps(choix.tempsCourseSec) : '-') + '</dd>' +
+          (reel ? '<dd class="jt-reel"><small>' + jtLib(en, 'Temps retenu', 'Official time') + '</small>' + escapeHtml(this._jtTemps(reel)) + '</dd>' : '') + '</span></div>';
       }).join('') + '</dl>';
+    }
+
+    
+
+
+    _jtChargerReels() {
+      const p = this._jtEtat();
+      if (!p || p.phase !== 'ferme' || !p.joue || this._jtReelsDemande) return;
+      this._jtReelsDemande = true;
+      const lire = (u) => fetch(u, { credentials: 'omit' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+      const norme = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      lire('/_functions/classement?lang=fr')
+        .then((j) => (j && Array.isArray(j.classes) ? j : lire('https://wapitixagency.github.io/rdr-elements/statique/classement.json')))
+        .then((j) => {
+          if (!j || j.phase !== 'course' || !Array.isArray(j.classes)) return;
+          const reels = {};
+          j.classes.forEach((c) => {
+            const l = (c && c.lignes || []).find((x) => x && x.officiel && x.statut === 'ARV' && typeof x.temps === 'number' && x.temps > 0);
+            if (l) reels[norme(c.cle || c.nom)] = Math.round(l.temps / 1000);
+          });
+          if (!Object.keys(reels).length) return;
+          this._jtReels = reels;
+          this._jeuxRepeindre();
+        });
     }
 
     _jtCorps(grand) {
@@ -22401,6 +22434,7 @@ if (!customElements.get('espace-rhum')) {
       const en = this._lang() === 'en';
       const ouvert = p.phase === 'ouvert';
       const attente = p.phase === 'ferme';
+      if (attente) this._jtChargerReels();
       const etat = !ouvert ? (attente && p.joue ? '<span class="jt-etat jt-etat--joue">' + (en ? 'You’re in · result to come' : 'Tu joues · résultat à venir') + '</span>'
         : '<span class="jt-etat jt-etat--ferme">' + (attente ? (en ? 'Predictions closed' : 'Pronos fermés') : (en ? 'Closed' : 'Fermé')) + '</span>')
         : p.joue ? '<span class="jt-etat jt-etat--joue">' + (en ? 'Predictions saved' : 'Pronos validés') + '</span>'
