@@ -1,5 +1,5 @@
-/* rdr-elements skipper | source route-du-rhum a082340 | rdr-skipper.js skippers-list.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="a082340";performance.mark("rdr-elements:skipper")}catch(e){}
+/* rdr-elements skipper | source route-du-rhum 0a66d7f | rdr-skipper.js skippers-list.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["skipper"]="0a66d7f";performance.mark("rdr-elements:skipper")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -2897,6 +2897,8 @@ customElements.define('skippers-carousel', SkippersCarousel);
       arrive: 'Arrivé', aPap: 'à Pointe-à-Pitre', arriveeLe: (j, h) => 'Arrivé le ' + j + ' à ' + h + ', heure de Paris',
       grandVainqueurSur: 'Grand vainqueur, 1er au scratch', vainqueurCategorie: 'Vainqueur de la catégorie', arriveRang: (r, n) => 'Arrivé ' + r + ' sur ' + n,
       tempsCourse: 'Temps de course', moyenne: 'Moyenne', ecartVainqueur: 'Après le vainqueur', surQui: (q) => 'sur ' + q, premierArrive: 'Premier arrivé', aheadDe: (q) => 'd’avance sur ' + q, kmhMoy: (k) => k + ' km/h de moyenne',
+      secondEnMer: 'Le deuxième est encore en mer', corrAria: (d, penalite) => (penalite ? 'Pénalité de ' : 'Compensation de ') + d + ', voir pourquoi',
+      noteTemps: (d, motif, penalite, brut) => 'Temps officiel après ' + d + (penalite ? ' de pénalité' : ' de compensation') + (motif ? ', ' + motif : '') + '. Avant correction, ' + brut + ' sur l’eau.',
       abandon: 'Abandon', aDeArrivee: (mn, km) => 'à ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée',
       aDeArriveeEnv: (mn, km) => 'à environ ' + mn + ' milles nautiques (' + km + ' km) de l’arrivée, d’après sa dernière position',
       abandonA: 'Abandon à', duParcours: 'du parcours', raison: 'Raison', lireArticle: 'Lire l’article', routeFaite: (p) => p + ' % de la route faite',
@@ -2930,6 +2932,8 @@ customElements.define('skippers-carousel', SkippersCarousel);
       arrive: 'Finished', aPap: 'in Pointe-à-Pitre', arriveeLe: (j, h) => 'Finished on ' + j + ' at ' + h + ', Paris time',
       grandVainqueurSur: 'Overall winner, first across the line', vainqueurCategorie: 'Class winner', arriveRang: (r, n) => 'Finished ' + r + ' of ' + n,
       tempsCourse: 'Race time', moyenne: 'Average', ecartVainqueur: 'Behind the winner', surQui: (q) => 'on ' + q, premierArrive: 'First to finish', aheadDe: (q) => 'ahead of ' + q, kmhMoy: (k) => k + ' km/h average',
+      secondEnMer: 'The runner-up is still at sea', corrAria: (d, penalite) => (penalite ? 'Penalty of ' : 'Time allowance of ') + d + ', see why',
+      noteTemps: (d, motif, penalite, brut) => 'Official time after a ' + d + (penalite ? ' penalty' : ' time allowance') + (motif ? ', ' + motif : '') + '. Before the correction, ' + brut + ' on the water.',
       abandon: 'Retired', aDeArrivee: (mn, km) => mn + ' nautical miles (' + km + ' km) from the finish',
       aDeArriveeEnv: (mn, km) => 'about ' + mn + ' nautical miles (' + km + ' km) from the finish, from their last position',
       abandonA: 'Retired at', duParcours: 'of the course', raison: 'Reason', lireArticle: 'Read the article', routeFaite: (p) => p + ' % of the course sailed',
@@ -3125,6 +3129,10 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const couleurClasse = (V) => /^#[0-9a-f]{3,8}$/i.test(String(V.c.couleur || '')) ? V.c.couleur : '#5DBFC0';
   function visuelVainqueur(V, s, C) {
     const grand = !!V.vainqueurCourse;
+    if (V.l.visuelOfficiel) {
+      return '<div class="skc-visuel-carte est-officiel' + (grand ? ' est-grand' : ' est-classe') + '" role="img" aria-label="' + esc(C.visuelAria([s.prenom, s.nom].join(' '))) + '">' +
+        '<img class="skc-visuel-officiel" src="' + esc(urlImage('wix:image://v1/' + V.l.visuelOfficiel + '/vainqueur.jpg', 864, 1080, 'fill', 'c')) + '" alt="" decoding="async"></div>';
+    }
     return '<div class="skc-visuel-carte' + (grand ? ' est-grand' : ' est-classe') + '" role="img" aria-label="' + esc(C.visuelAria([s.prenom, s.nom].join(' '))) + '" style="--skc-c:' + esc(couleurClasse(V)) + '">' +
       (s.photoProfil ? '<img class="skc-visuel-portrait" src="' + esc(urlImage(s.photoProfil, 864, 1080, 'fill', 't')) + '" alt="" decoding="async">' : '') +
       (grand ? '<img class="skc-visuel-trophee" src="' + esc(TROPHEE) + '" alt="" decoding="async">' : '') +
@@ -3219,9 +3227,9 @@ customElements.define('skippers-carousel', SkippersCarousel);
   const nfc = (C, n, d) => n == null || n === '' || isNaN(n) ? '–' : Number(n).toLocaleString(C.locale, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).replace(/[  ]/g, ' ');
   const kmc = (C, mn) => nfc(C, mn == null ? null : mn * 1.852, mn * 1.852 < 10 ? 1 : 0);
   const kmhc = (C, nd) => nfc(C, nd == null ? null : nd * 1.852, 1);
-  const heureC = (C, iso) => { const s = new Date(iso).toLocaleTimeString(C.locale, { timeZone: 'Europe/Paris', hour: 'numeric', minute: '2-digit' }); return C.locale === 'fr-FR' ? s.replace(':', ' h ').replace(/ h 00$/, ' h') : s; };
+  const heureC = (C, iso) => { const s = new Date(iso).toLocaleTimeString(C.locale, { timeZone: 'Europe/Paris', hour: 'numeric', minute: '2-digit' }); return C.locale === 'fr-FR' ? s.replace(':', ' h ').replace(/ h 00$/, ' h') : s; };
   const jourLongC = (C, iso) => new Date(iso).toLocaleDateString(C.locale, { timeZone: PARIS.timeZone, weekday: 'long', day: 'numeric', month: 'long' });
-  const dureeC = (C, ms, sec) => { let s = Math.round(ms / 1000); const j = Math.floor(s / 86400); s -= j * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60; return (j ? j + (C.locale === 'fr-FR' ? ' j ' : ' d ') : '') + h + ' h ' + String(m).padStart(2, '0') + ' min' + (sec !== false ? ' ' + String(s).padStart(2, '0') + ' s' : ''); };
+  const dureeC = (C, ms, sec) => { let s = Math.round(ms / 1000); const j = Math.floor(s / 86400); s -= j * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60; return (j ? j + (C.locale === 'fr-FR' ? ' j ' : ' d ') : '') + h + ' h ' + String(m).padStart(2, '0') + ' min' + (sec !== false ? ' ' + String(s).padStart(2, '0') + ' s' : ''); };
   const ecartTemps = (h) => { if (h < 1) return Math.round(h * 60) + ' min'; const hh = Math.floor(h); const mm = Math.round((h - hh) * 60); return hh + ' h ' + String(mm).padStart(2, '0'); };
   const titreNom = (t) => String(t || '').trim().replace(/\s+/g, ' ').toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()).replace(/(^|[\s-])(\p{L})([’'])(\p{L})/gu, (m, a, b, q, c) => a + b + q + c.toUpperCase());
   const nomCourt = (l) => (l.prenom ? String(l.prenom).trim()[0] + '. ' : '') + titreNom(l.nom);
@@ -4083,6 +4091,7 @@ customElements.define('skippers-carousel', SkippersCarousel);
     gauche: '<path d="M15 5l-7 7 7 7"/>', droite: '<path d="M9 5l7 7-7 7"/>',
     grille: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
      
+    info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
     chrono: '<line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/>'
   };
   
@@ -5239,6 +5248,13 @@ rdr-skipper .sk.sous-400 .sk-nav-lien{padding:0 10px;letter-spacing:.06em;}
 
 rdr-skipper .sk .skc-bord .sk-bord-mesures .sk-bord-val small{white-space:normal;line-height:1.35;}
 rdr-skipper .sk .skc-bord .sk-bord-val small span{display:block;color:var(--sk-encre-3);font-weight:600;}
+rdr-skipper .sk .skc-bord .skc-corr{display:inline-flex;align-items:center;gap:4px;margin:6px 0 0;padding:3px 7px 3px 8px;border:1px solid rgba(126,217,166,.45);border-radius:999px;background:rgba(126,217,166,.12);color:#7ED9A6;font:700 11px/1.2 Montserrat,sans-serif;letter-spacing:.02em;white-space:nowrap;cursor:pointer;vertical-align:middle;transition:background .15s ease;}
+rdr-skipper .sk .skc-bord .skc-corr svg{width:12px;height:12px;}
+rdr-skipper .sk .skc-bord .skc-corr:hover,rdr-skipper .sk .skc-bord .skc-corr[aria-expanded="true"]{background:rgba(126,217,166,.24);}
+rdr-skipper .sk .skc-bord .skc-corr:focus-visible{outline:2px solid #7ED9A6;outline-offset:2px;}
+rdr-skipper .sk .skc-bord .skc-corr.est-penalite{border-color:rgba(245,158,139,.45);background:rgba(245,158,139,.12);color:#F59E8B;}
+rdr-skipper .sk .skc-bord .skc-corr-note{grid-column:1/-1;margin:0;padding:10px 14px;border-left:2px solid #7ED9A6;border-radius:0 10px 10px 0;background:rgba(126,217,166,.08);font-size:12.5px;font-weight:500;line-height:1.5;color:var(--sk-encre-2);}
+rdr-skipper .sk .skc-bord .skc-corr-note[hidden]{display:none;}
 rdr-skipper .sk .skc-bord .sk-bord-pos.est-argent{color:var(--sk-argent);}
 rdr-skipper .sk .skc-bord .sk-bord-pos.est-bronze{color:var(--sk-bronze);}
 rdr-skipper .sk .skc-bord .sk-bord-pos.est-mer{color:#fff;}
@@ -5576,6 +5592,8 @@ rdr-skipper .sk.sous-860 .skc-visuel{top:calc(var(--e4) + 46px);bottom:calc(12% 
   background:linear-gradient(165deg,color-mix(in srgb,var(--skc-c,#5DBFC0) 72%,#16355D) 0%,#16355D 58%,#0E111D 100%);
   box-shadow:0 30px 60px -22px rgba(0,0,0,.7),inset 0 0 0 2px rgba(252,241,80,.5);font-family:Montserrat,sans-serif;color:#fff;}
 .skc-visuel-carte.est-grand{box-shadow:0 30px 60px -22px rgba(0,0,0,.7),inset 0 0 0 3px #FCF150;}
+ 
+.skc-visuel-carte .skc-visuel-officiel{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;}
  
 .skc-visuel-trophee{position:absolute;z-index:2;top:3.5cqh;right:4.5cqw;width:19cqw;height:auto;border-radius:50%;box-shadow:0 12px 26px -10px rgba(0,0,0,.7);}
 
@@ -6753,11 +6771,14 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{min-height:40px;
       const { c, l } = V;
       const vainqueur = V.arv[0], second = V.arv[1];
       const medaille = l.rang === 1 ? '' : l.rang === 2 ? ' est-argent' : l.rang === 3 ? ' est-bronze' : ' est-mer';
-      const duree = (ms) => dureeC(C, ms, false).replace(/ min$/, '');
+      const duree = (ms) => dureeC(C, ms, false).replace(/\s+min$/, '');
       const ecartCase = l.ecartPremier
         ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.ecartVainqueur) + '</dt><dd class="sk-bord-val" style="--sk-car:8">+' + esc(ecartTemps(l.ecartPremier / 3600000)) + ' <small>' + esc(C.surQui(nomCourt(vainqueur))) + '</small></dd></div>'
         : '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.premierArrive) + '</dt><dd class="sk-bord-val" style="--sk-car:8">' +
-            (second && second.ecartPremier ? esc(ecartTemps(second.ecartPremier / 3600000)) + ' <small>' + esc(C.aheadDe(nomCourt(second))) + '</small>' : esc(C.vainqueurMot)) + '</dd></div>';
+            (second && second.ecartPremier ? esc(ecartTemps(second.ecartPremier / 3600000)) + ' <small>' + esc(C.aheadDe(nomCourt(second))) + '</small>' : esc(C.vainqueurMot) + ' <small>' + esc(C.secondEnMer) + '</small>') + '</dd></div>';
+      const comp = typeof l.compensation === 'number' && Math.abs(l.compensation) >= 60000 ? l.compensation : 0;
+      const motif = comp && l.motifTemps ? String(l.motifTemps[this._lang === 'en' ? 'en' : 'fr'] || '').replace(/(\d) (?=\S)/g, '$1 ').replace(/ (?=\d)/g, ' ') : '';
+      const ecartCorr = comp ? ecartTemps(Math.abs(comp) / 3600000).replace(/ /g, ' ') : '';
       return '<div class="sk-bord skc-bord skc-arrive" data-skc-bord>' +
         '<div class="sk-bord-case sk-bord-rang"><b class="sk-bord-pos' + medaille + '">' + ordinalHtml(l.rang, this._lang) + '</b>' +
           '<div class="sk-bord-rang-textes"><span class="sk-bord-lib">' + esc(C.enClasse(c.nom)) + '</span>' +
@@ -6767,10 +6788,10 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{min-height:40px;
           '<div class="sk-bord-jauge" style="--sk-jauge:100%"><i></i></div>' +
           (l.arrivee ? '<p class="sk-bord-eta"><span>' + esc(C.arriveeLe(jourLongC(C, l.arrivee), heureC(C, l.arrivee))) + '</span></p>' : '') + '</div>' +
         '<dl class="sk-bord-mesures">' +
-          (l.temps ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.tempsCourse) + '</dt><dd class="sk-bord-val" style="--sk-car:' + (duree(l.temps).length + 1) + '">' + esc(duree(l.temps)) + ' <small>' + esc(dureeC(C, l.temps)) + '</small></dd></div>' : '') +
+          (l.temps ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.tempsCourse) + '</dt><dd class="sk-bord-val" style="--sk-car:' + (duree(l.temps).length + 1) + '">' + esc(duree(l.temps)) + ' <small>' + esc(dureeC(C, l.temps)) + (comp ? ' <button type="button" class="skc-corr' + (comp < 0 ? ' est-penalite' : '') + '" data-skc-corr aria-expanded="false" aria-label="' + esc(C.corrAria(ecartCorr + (Math.abs(comp) >= 3600000 ? ' min' : ''), comp < 0)) + '">' + (comp < 0 ? '+' : '−') + esc(ecartCorr) + svg('info') + '</button>' : '') + '</small></dd></div>' : '') +
           (l.vitesseMoy ? '<div class="sk-bord-case"><dt class="sk-bord-lib">' + esc(C.moyenne) + '</dt><dd class="sk-bord-val" style="--sk-car:5">' + esc(nfc(C, l.vitesseMoy, 2)) + ' <small>' + esc(C.nds) + '<span>' + esc(C.kmhMoy(kmhc(C, l.vitesseMoy))) + '</span></small></dd></div>' : '') +
           ecartCase +
-        '</dl>' + this._accesCourse(V, suivre) + this._lignePointage(V) +
+        '</dl>' + (comp ? '<p class="skc-corr-note" data-skc-corr-note hidden>' + esc(C.noteTemps(ecartCorr + (Math.abs(comp) >= 3600000 ? ' min' : ''), motif, comp < 0, dureeC(C, l.temps + comp))) + '</p>' : '') + this._accesCourse(V, suivre) + this._lignePointage(V) +
       '</div>';
     }
     _bordAbandon(V, suivre) {
@@ -6942,7 +6963,7 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{min-height:40px;
         scene.classList.remove('skc-scene--visuel');
         return;
       }
-      const cle = fin + '|' + (V.l.temps || '') + '|' + this._lang;
+      const cle = fin + '|' + (V.l.temps || '') + '|' + this._lang + '|' + (V.l.visuelOfficiel || '');
       if (vieux && vieux.getAttribute('data-cle') === cle) return;
       const html = '<figure class="skc-visuel" data-cle="' + esc(cle) + '">' + visuelVainqueur(V, s, COURSE_T[this._lang]) + '</figure>';
       if (vieux) vieux.outerHTML = html; else scene.insertAdjacentHTML('beforeend', html);
@@ -7863,6 +7884,16 @@ rdr-skipper .sk.sous-860 .est-geovoile .skc-geo-bandeau .sk-btn{min-height:40px;
           });
         }, { passive: true });
       }
+
+       
+      this._ecoute(R, 'click', (ev) => {
+        const b = ev.target.closest('[data-skc-corr]');
+        if (!b) return;
+        const n = b.closest('[data-skc-bord]') && b.closest('[data-skc-bord]').querySelector('[data-skc-corr-note]');
+        if (!n) return;
+        n.hidden = !n.hidden;
+        b.setAttribute('aria-expanded', String(!n.hidden));
+      });
 
        
       this._ecoute(R, 'click', (ev) => {
