@@ -1,537 +1,537 @@
 {
- "genere": "2026-11-11T13:44:01.522Z",
+ "genere": "2026-11-11T13:54:01.286Z",
  "source": "secours-statique",
  "fichiers": {
   "menus-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
    "octets": 7431
   },
   "menu-blog-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
-   "ok": true,
-   "ms": 4,
-   "octets": 14508
-  },
-  "vitrine-skippers-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
+   "octets": 14392
+  },
+  "vitrine-skippers-fr.json": {
+   "genere": "2026-11-11T13:54:01.286Z",
+   "ok": true,
+   "ms": 4,
    "octets": 55863
   },
   "pied-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 4,
    "octets": 29965
   },
   "accueil-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 16,
+   "ms": 17,
    "octets": 25798
   },
   "accueil-jeux-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 4,
    "octets": 1276
   },
   "promos-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 1,
    "octets": 237
   },
   "programme-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 29,
+   "ms": 34,
    "octets": 257052
   },
   "liste-skippers-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 6,
    "octets": 70779
   },
   "dernieres-infos-toutes-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 4,
    "octets": 3003
   },
   "dernieres-infos-accueil-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-classement-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-cartographie-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 0,
+   "ms": 1,
    "octets": 3003
   },
   "dernieres-infos-carte-village-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-suivre-depart-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-programmation-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-venir-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-faq-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 0,
+   "ms": 1,
    "octets": 3003
   },
   "dernieres-infos-espace-rhum-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "dernieres-infos-actualites-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3003
   },
   "f-faq-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 7,
+   "ms": 3,
    "octets": 22670
   },
   "f-bateaux-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 6,
    "octets": 23710
   },
   "f-course-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
    "octets": 13974
   },
   "f-heritage-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 2,
    "octets": 40084
   },
   "f-edition2022-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 24811
   },
   "f-terres-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 2,
    "octets": 11883
   },
   "f-littoral-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 2,
    "octets": 21808
   },
   "f-kitPedagogique-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 3915
   },
   "f-devenirPartenaire-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 4508
   },
   "f-parcours-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 13515
   },
   "f-offresExposants-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3098
   },
   "f-contact-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3077
   },
   "f-licenceMarque-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 7118
   },
   "f-partenaires-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
    "octets": 36765
   },
   "f-espaceSkippers-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 552,
-   "octets": 10625
+   "ms": 432,
+   "octets": 10749
   },
   "f-indexRecherche-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 58,
-   "octets": 183932
+   "ms": 62,
+   "octets": 183914
   },
   "f-suivreDepart-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 4,
    "octets": 20378
   },
   "f-suivreDepartCarte-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 66,
+   "ms": 27,
    "octets": 55614
   },
   "f-destination-saint-malo-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 17,
+   "ms": 7,
    "octets": 7188
   },
   "f-destination-guadeloupe-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 2,
    "octets": 8581
   },
   "accueil-attrs-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
-   "octets": 14071
+   "octets": 14101
   },
   "entete-pied-fr.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 1,
-   "octets": 117394
+   "octets": 117281
   },
   "classement.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 313,
+   "ms": 196,
    "octets": 82158
   },
   "calendrier.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 1261
   },
   "menus-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 7,
+   "ms": 10,
    "octets": 7276
   },
   "menu-blog-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 5,
    "octets": 13446
   },
   "vitrine-skippers-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 2,
    "octets": 55675
   },
   "pied-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 4,
+   "ms": 6,
    "octets": 29601
   },
   "accueil-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 14,
+   "ms": 16,
    "octets": 25220
   },
   "accueil-jeux-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 4,
    "octets": 1247
   },
   "promos-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 1,
    "octets": 237
   },
   "programme-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 26,
+   "ms": 32,
    "octets": 253876
   },
   "liste-skippers-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 6,
+   "ms": 9,
    "octets": 70201
   },
   "dernieres-infos-toutes-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 4,
    "octets": 2854
   },
   "dernieres-infos-accueil-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-classement-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-cartographie-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-carte-village-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 0,
+   "ms": 1,
    "octets": 2854
   },
   "dernieres-infos-suivre-depart-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-programmation-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-venir-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-faq-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-espace-rhum-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "dernieres-infos-actualites-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2854
   },
   "f-faq-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 4,
    "octets": 21380
   },
   "f-bateaux-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 4,
+   "ms": 6,
    "octets": 21677
   },
   "f-course-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
    "octets": 13162
   },
   "f-heritage-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 2,
+   "ms": 3,
    "octets": 39332
   },
   "f-edition2022-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 0,
    "octets": 27806
   },
   "f-terres-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 2,
    "octets": 10454
   },
   "f-littoral-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 3,
    "octets": 20238
   },
   "f-kitPedagogique-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 3761
   },
   "f-devenirPartenaire-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 4136
   },
   "f-parcours-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 12568
   },
   "f-offresExposants-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 0,
+   "ms": 1,
    "octets": 2942
   },
   "f-contact-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 2995
   },
   "f-licenceMarque-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 6809
   },
   "f-partenaires-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 5,
    "octets": 35875
   },
   "f-espaceSkippers-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 397,
-   "octets": 10652
+   "ms": 569,
+   "octets": 10640
   },
   "f-indexRecherche-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 47,
+   "ms": 63,
    "octets": 160160
   },
   "f-suivreDepart-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 4,
    "octets": 18875
   },
   "f-suivreDepartCarte-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 26,
+   "ms": 33,
    "octets": 53745
   },
   "f-destination-saint-malo-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 22,
+   "ms": 32,
    "octets": 6800
   },
   "f-destination-guadeloupe-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 3,
+   "ms": 5,
    "octets": 8235
   },
   "accueil-attrs-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 13717
   },
   "entete-pied-en.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 1,
+   "ms": 2,
    "octets": 115374
   },
   "abord.json": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
-   "ms": 2373,
+   "ms": 3417,
    "octets": 1050948
   },
   "ecoles-classement.csv": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 16385
   },
   "ecoles-carte.csv": {
-   "genere": "2026-11-11T13:44:01.522Z",
+   "genere": "2026-11-11T13:54:01.286Z",
    "ok": true,
    "ms": 0,
    "octets": 12220
