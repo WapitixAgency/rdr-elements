@@ -1,5 +1,5 @@
-/* rdr-elements reglements | source route-du-rhum eb52fbb | rdr-reglements.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";performance.mark("rdr-elements:reglements")}catch(e){}
+/* rdr-elements reglements | source route-du-rhum e97ae74 | rdr-reglements.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="e97ae74";performance.mark("rdr-elements:reglements")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -655,7 +655,8 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";perfor
       debut: '2026-10-20',
       fin: '2026-12-02',
       publieLe: '2026-10-20',
-      version: '2026-10-20',
+       
+      version: '2026-11-25',
       organisateur: 'OC Sport Pen Duick',
       participer: { href: '/mon-espace-rhum', fr: 'Mon Espace Rhum, « Le top 50 des fans »', en: 'My Espace Rhum, “Top 50 fans”' },
       pdf: '',
@@ -700,7 +701,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";perfor
           ]
         },
         {
-          num: '6', icone: 'target', court: 'Désignation des gagnants', titre: 'Désignation des gagnants',
+          num: '6', icone: 'target', court: 'Désignation du gagnant', titre: 'Désignation du gagnant',
           blocs: [
             'Le gagnant sera le Participant inscrit à Mon Espace Rhum ayant accumulé le plus grand nombre de points, sous réserve d’avoir respecté les critères de participation énumérés aux articles 3 et 5 des présentes. Les points sont attribués en fonction des diverses actions et interactions réalisées sur la plateforme. En cas d’égalité, un tirage au sort sera effectué parmi les participants ayant le même nombre de point.',
             'Le gagnant sera informé directement par l’Organisateur par {b}email et/ou appel téléphonique{/b} dans un délai maximal de {b}24{/b} heures suivant la clôture du Jeu.'
@@ -723,7 +724,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";perfor
             ] },
             'Les frais de livraison de la dotation sont pris en charge par l’Organisateur.',
             'Les lots ne sont ni échangeables, ni remboursables, ni cessibles. L’Organisateur se réserve le droit de remplacer les lots par des produits de nature et de valeur équivalentes en cas de nécessité.',
-            '{b}7.2.{/b} Une fois que l’Organisateur aura contacté les gagnants pour les informer, ils devront communiquer à l’Organisateur les éléments suivants :',
+            '{b}7.2.{/b} Une fois que l’Organisateur aura contacté le gagnant pour l’informer, il devra communiquer à l’Organisateur les éléments suivants :',
             { ul: [
               'nom et prénom ;',
               'numéro de téléphone ;',
@@ -735,7 +736,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";perfor
               'Délivrer au Gagnant la Dotations remportée, et ce quelle qu’en soit la cause, l’Organisateur se réserve le droit d’y substituer une Dotation de valeur équivalente, ce que tout Participant consent,',
               'De contacter et d’obtenir les informations susmentionnées de la part du Gagnant dans un délai maximal de 48 heures à compter de la prise de contact par mail ou téléphone l’Organisateur se réserve le droit de remettre la Dotation en jeu.'
             ] },
-            'Aucun message ne sera envoyé aux Participants n’ayant pas remporté les dotations, seuls le Gagnant sera contacté par l’Organisateur.'
+            'Aucun message ne sera envoyé aux Participants n’ayant pas remporté les dotations, seul le Gagnant sera contacté par l’Organisateur.'
           ]
         },
         {
@@ -766,7 +767,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["reglements"]="eb52fbb";perfor
             '{b}9.3.{/b} L’Organisateur collecte et traite des Données des Participants pour les finalités suivantes :',
             { ul: [
               'Enregistrement de la participation des Participants ;',
-              'Prise de contact avec les gagnants et livraison des dotations ;',
+              'Prise de contact avec le gagnant et livraison des dotations ;',
               'Traitement des éventuelles réclamations ;'
             ] },
             '{b}9.4.{/b} Les données personnelles sont destinées à l’Organisateur. Dans la stricte limite des finalités énoncées, elles sont transmises aux sous-traitants suivants :',
