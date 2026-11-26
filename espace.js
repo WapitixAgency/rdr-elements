@@ -1,5 +1,5 @@
-/* rdr-elements espace | source route-du-rhum e97ae74 | espace-rhum.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="e97ae74";performance.mark("rdr-elements:espace")}catch(e){}
+/* rdr-elements espace | source route-du-rhum a70b0dd | espace-rhum.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["espace"]="a70b0dd";performance.mark("rdr-elements:espace")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -18216,24 +18216,38 @@ if (!customElements.get('espace-rhum')) {
         ? `<p class="er-top50-pied er-top50-pied--clos">${ICON_TOP50_HORLOGE}<b>${en ? 'Ranking closed' : 'Classement clos'}</b> ${escapeHtml((r && r.clotureTexte) || '')}</p>`
         : (!chrono ? '' : `
         <p class="er-top50-pied" role="timer" aria-label="${en ? 'Time left before the ranking closes' : 'Temps restant avant la clôture du classement'}">${ICON_TOP50_HORLOGE}<b>${en ? 'Ranking closes' : 'Clôture du classement'}</b> ${escapeHtml(r.clotureTexte || '')} <span class="er-top50-chrono">${chrono}</span></p>`);
-      const sous = clos
-        ? (en ? 'The ranking is closed. Here are the community’s 50 most active members at closing time.' : 'Le classement est clos. Voici les 50 plus actifs de la communauté à la clôture.')
-        : (en ? 'The 50 most active members of the community, recalculated every night. Read, come back, follow your skippers: every move counts.' : 'Les 50 plus actifs de la communauté, recalculés chaque nuit. Lis, reviens, suis tes skippers : chaque geste compte.');
+      
+
+
+
+
+      const fige = clos && t.fige === true;
+      const egauxTete = Number(t.exAequoTete) || 0;
+      const gagnant = fige && egauxTete < 2 && lignes[0] && lignes[0].rang === 1 ? lignes[0] : null;
+      const sous = !clos
+        ? (en ? 'The 50 most active members of the community, recalculated every night. Read, come back, follow your skippers: every move counts.' : 'Les 50 plus actifs de la communauté, recalculés chaque nuit. Lis, reviens, suis tes skippers : chaque geste compte.')
+        : !fige
+          ? (en ? 'The ranking is closed. The final ranking is calculated tonight: the winner will be shown here tomorrow morning.' : 'Le classement est clos. Le classement final se calcule cette nuit : le gagnant s’affiche ici demain matin.')
+          : gagnant && gagnant.moi
+            ? (en ? 'The ranking is closed, and the 2026 Rhum legend is you! Well done: the team will contact you very soon about your prizes.' : 'Le classement est clos, et la légende du Rhum 2026, c’est toi ! Bravo : l’équipe te contacte très vite pour te remettre tes lots.')
+            : gagnant
+              ? (en ? `The ranking is closed. Congratulations to ${escapeHtml(gagnant.nom)}, the 2026 Rhum legend with ${this._top50Nombre(gagnant.score)} points!` : `Le classement est clos. Bravo à ${escapeHtml(gagnant.nom)}, légende du Rhum 2026 avec ${this._top50Nombre(gagnant.score)} points !`)
+              : (en ? `The ranking is closed. ${egauxTete} fans finish level at the top: the winner will be drawn by lot, as the rules provide.` : `Le classement est clos. ${egauxTete} fans finissent à égalité en tête : le gagnant sera tiré au sort, comme le prévoit le règlement.`);
       const reglement = r && r.reglement ? `<button class="er-top50-lien" type="button" data-top50-fen="reglement">${ICON_TOP50_REGLEMENT}${en ? 'Rules' : 'Règlement'}</button>` : '';
       return `
         <div class="er-widget er-widget--top50 er-motif-host" data-slot="leaderboard-teaser" role="region" aria-label="${en ? 'Fan ranking' : 'Classement des fans'}">
           <div class="er-top50-gauche">
             ${tymal && tymal.src ? `<img class="er-top50-tymal" src="${escapeHtml(tymal.src)}" alt="" aria-hidden="true" loading="lazy">` : ''}
             <div class="er-top50-tete">
-              <p class="er-top50-kick">${ICON_TROPHY_LARGE}${en ? 'Competition · Top 50 fans' : 'Jeu concours · Top 50 des fans'}</p>
+              <p class="er-top50-kick">${ICON_TROPHY_LARGE}${clos ? (en ? 'Competition over · Top 50 fans' : 'Jeu concours terminé · Top 50 des fans') : (en ? 'Competition · Top 50 fans' : 'Jeu concours · Top 50 des fans')}</p>
               <h3 class="er-top50-titre">La <em>légende</em> <br>du Rhum</h3>
               <p class="er-top50-sous">${sous}</p>
             </div>
             ${coffre}
             ${this._top50LigneMoi(en)}
-            <button class="er-top50-tout" type="button" data-top50-fen="tableau">${ICON_TOP50_LISTE}${en ? 'See the full ranking' : 'Voir tout le classement'}</button>
+            <button class="er-top50-tout" type="button" data-top50-fen="tableau">${ICON_TOP50_LISTE}${clos ? (en ? 'Discover the ranking' : 'Découvrir le classement') : (en ? 'See the full ranking' : 'Voir tout le classement')}</button>
             <div class="er-top50-liens">
-              <button class="er-top50-lien" type="button" data-action="open-monte" aria-haspopup="dialog">${ICON_TOP50_AIDE}${en ? 'How do I climb?' : 'Comment on monte ?'}</button>
+              ${clos ? '' : `<button class="er-top50-lien" type="button" data-action="open-monte" aria-haspopup="dialog">${ICON_TOP50_AIDE}${en ? 'How do I climb?' : 'Comment on monte ?'}</button>`}
               ${reglement}
             </div>
           </div>
