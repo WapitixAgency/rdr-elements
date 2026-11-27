@@ -1,5 +1,5 @@
-/* rdr-elements console | source route-du-rhum a70b0dd | rdr-console.js */
-try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performance.mark("rdr-elements:console")}catch(e){}
+/* rdr-elements console | source route-du-rhum 3a84119 | rdr-console.js */
+try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="3a84119";performance.mark("rdr-elements:console")}catch(e){}
 ;(function(){
 (function () {
   'use strict';
@@ -1139,7 +1139,9 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
     }).join('');
 
      
-    var VUES = { avant: { de: -12, a: -1 }, course: { de: -3, a: 5 } };
+     
+    var JFIN = Math.max(5, JMAJ);
+    var VUES = { avant: { de: -12, a: -1 }, course: { de: -3, a: JFIN } };
     var vue = (O && O.vue) || 'avant';
     R.querySelectorAll('.seg button').forEach(function (x) { x.classList.toggle('is-on', x.getAttribute('data-vue') === vue); });
     function pas(max) {
@@ -1175,7 +1177,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
       var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" height="' + H + '" role="img" aria-label="Visiteurs par jour en 2026, 2022 et 2018">';
       s += '<defs><pattern id="hach" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="rgba(0,103,110,.09)"/><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,103,110,.2)" stroke-width="2"/></pattern></defs>';
       var demi = (X(v.de + 1) - X(v.de)) / 2;
-      (parVillage ? [{ de: -12, a: -1, t: 'Le village, jusqu’à la veille du dimanche du départ' }] : [{ de: -13, a: -1, t: 'Le village' }, { de: 0, a: 0, t: 'Départ' }, { de: 1, a: 5, t: 'La course' }]).forEach(function (p) {
+      (parVillage ? [{ de: -12, a: -1, t: 'Le village, jusqu’à la veille du dimanche du départ' }] : [{ de: -13, a: -1, t: 'Le village' }, { de: 0, a: 0, t: 'Départ' }, { de: 1, a: JFIN, t: 'La course' }]).forEach(function (p) {
         var a = Math.max(p.de, v.de), b = Math.min(p.a, v.a); if (a > b) return;
         var x1 = Math.max(m.g, X(a) - demi), x2 = Math.min(W - m.d, X(b) + demi);
         if (p.t === 'Départ') s += '<rect x="' + x1 + '" y="' + m.h + '" width="' + (x2 - x1) + '" height="' + (H - m.h - m.b) + '" fill="#FCF150" opacity=".3"/>';
@@ -1317,7 +1319,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
 
      
     var LIGNES = [];
-    for (var J = -13; J <= 5; J++) {
+    for (var J = -13; J <= JFIN; J++) {
       var d = plus(DEPART, J), r = J26[d] || null, a = histT(2022, J), b = histT(2018, J);
       LIGNES.push({ J: J, d: d, r: r, a: a, b: b, note: [NOTES26[d], NOTES_H[a.d] ? '2022 : ' + NOTES_H[a.d] : '', NOTES_H[b.d] ? '2018 : ' + NOTES_H[b.d] : '',
         J === 0 ? '2022 : le dimanche 06/11, dernier jour du village, départ reporté, 58 973' : ''].filter(Boolean).join(' · ') });
@@ -1330,7 +1332,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
         return '<tr class="' + (l.J === 0 ? 'is-j ' : weekend(l.d) ? 'we ' : '') + (avenir ? 'avenir' : '') + '"><td><span class="j">' + lJ(l.J) + '</span>' + sem(l.d) + ' ' + court(l.d) + '</td>' +
           '<td>' + (r ? nf(r.mes) : avenir ? 'à venir' : '') + '</td>' +
           '<td>' + (r && r.fb ? '×' + fx(r.fb) + (r.fh !== r.fb ? ' à ' + fx(r.fh) : '') : '') + '</td>' +
-          '<td class="est">' + (r && r.bas != null ? nf(arr(r.bas)) + ' à ' + nf(arr(r.haut)) : '') + '</td>' +
+          '<td class="est">' + (r && r.bas != null ? nf(arr(r.bas)) + (arr(r.haut) !== arr(r.bas) ? ' à ' + nf(arr(r.haut)) : '') : '') + '</td>' +
           '<td>' + hcel(l.a) + '</td><td>' + hcel(l.b) + '</td><td class="quoi">' + esc(l.note) + '</td></tr>';
       }).join('') + '</tbody>';
 
@@ -1405,15 +1407,19 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
       }
       function barresJours() {
         var W = 960, H = 200, n = JOURS.length, g = W / n, max = Math.max.apply(null, JOURS.map(function (d) { return J26[d].sMil || 0; }));
-        var s = '<svg class="r-graphe" viewBox="0 -26 ' + W + ' ' + (H + 84) + '" preserveAspectRatio="xMidYMid meet" aria-hidden="true">';
+        
+
+        var etroit = g < 44, rangRep = 0;
+        var s = '<svg class="r-graphe" viewBox="0 -26 ' + W + ' ' + (H + 84 + (etroit ? 18 : 0)) + '" preserveAspectRatio="xMidYMid meet" aria-hidden="true">';
         [0.25, 0.5, 0.75, 1].forEach(function (k) { var y = H - H * k; s += '<line x1="0" x2="' + W + '" y1="' + y + '" y2="' + y + '" stroke="#E1E6EE" stroke-width="1"/><text x="0" y="' + (y - 5) + '" class="r-ax">' + mio(max * k) + ' M</text>'; });
         JOURS.forEach(function (d, i) {
           var r = J26[d], v = r.sMil || 0, h = v / max * H, x = i * g + g * 0.16, w = g * 0.68, fort = REC.fort && d === REC.fort.j;
           var c = d < DEPART ? '#5DBFC0' : d === DEPART ? '#00676E' : '#0A1A35';
           s += '<rect x="' + x.toFixed(1) + '" y="' + (H - h).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + Math.max(h, 1.5).toFixed(1) + '" rx="3" fill="' + (fort ? '#FCF150' : c) + '"' + (fort ? ' stroke="#0A1A35" stroke-width="1.5"' : '') + '/>';
-          if (d >= plus(DEPART, -1)) s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - h - 8).toFixed(1) + '" class="r-val" text-anchor="middle">' + (v >= 1e6 ? mio(v) + ' M' : nf(arr(v / 1000)) + ' k') + '</text>';
+          var valeur = d >= plus(DEPART, -1) && (!etroit || d === plus(DEPART, -1) || d === DEPART || fort || i === n - 1);
+          if (valeur) s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - h - 8).toFixed(1) + '" class="r-val" text-anchor="' + (etroit && i === n - 1 ? 'end' : 'middle') + '">' + (v >= 1e6 ? mio(v) + ' M' : nf(arr(v / 1000)) + ' k') + '</text>';
           s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H + 18) + '" class="r-jr" text-anchor="middle">' + +d.slice(8, 10) + '</text>';
-          if (REPERES[d]) s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H + 40) + '" class="r-rep" text-anchor="' + (i < 2 ? 'start' : i > n - 3 ? 'end' : 'middle') + '">' + esc(REPERES[d]) + '</text>';
+          if (REPERES[d]) s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H + 40 + (etroit ? (rangRep++ % 2) * 18 : 0)) + '" class="r-rep" text-anchor="' + (i < 2 ? 'start' : i > n - 3 ? 'end' : 'middle') + '">' + esc(REPERES[d]) + '</text>';
         });
         return s + '</svg>';
       }
@@ -1472,7 +1478,7 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
         REC.pic ? [nf(REC.pic.pic.pages), 'pages ouvertes en une seule minute, le ' + long(REC.pic.j) + ' à ' + REC.pic.pic.heure.replace(':', ' h ') + ', pendant le départ.'] : null
       ].filter(Boolean);
       pages.push(planche(2, 'L’essentiel',
-        '<div class="es"><div class="es-g"><p class="es-chapo">En ' + NJ + ' jours, du village de Saint-Malo aux premiers jours de mer, le site officiel a accueilli un public sans précédent pour la Route du Rhum.</p>' +
+        '<div class="es"><div class="es-g"><p class="es-chapo">En ' + NJ + ' jours, du village de Saint-Malo ' + (JMAJ >= 7 ? 'aux arrivées en Guadeloupe' : 'aux premiers jours de mer') + ', le site officiel a accueilli un public sans précédent pour la Route du Rhum.</p>' +
         '<p class="es-txt">Les chiffres qui suivent comptent aussi les visiteurs qui refusent les cookies, environ un sur deux, invisibles pour les statistiques classiques. Chaque estimation est donnée avec sa fourchette, et la méthode est détaillée en fin de document.</p></div>' +
         '<div class="es-d">' + faits.map(function (f) { return '<div class="fait"><b>' + V(f[0]) + '</b><p>' + f[1] + '</p></div>'; }).join('') + '</div></div>'));
 
@@ -1606,11 +1612,12 @@ try{(window.RDR_ELEMENTS=window.RDR_ELEMENTS||{})["console"]="a70b0dd";performan
       t.push([]);
       t.push(['Jour', 'Jour de la semaine', 'J', 'Visiteurs comptés (cookies acceptés)', 'Sessions comptées', 'Pages vues comptées', 'Pages ouvertes sans cookie (journaux Wix)',
         'Vrais visiteurs pour un compté, carte', 'Vrais visiteurs pour un compté, journaux',
-        'Visiteurs réels estimés (bas)', 'Visiteurs réels estimés (haut)', 'Ouvertures de la carte sans cookie', 'Pages vues de la carte comptées', 'Réponses de ChatGPT avec le site',
+        'Visiteurs réels estimés (bas)', 'Visiteurs réels estimés (haut)', 'Connexions estimées (bas)', 'Connexions estimées (haut)', 'Ouvertures de la carte sans cookie', 'Pages vues de la carte comptées', 'Réponses de ChatGPT avec le site',
         'Visites venues d’une IA', '2022 même moment (date)', '2022 jour de la semaine', '2022 visiteurs', '2018 même moment (date)', '2018 jour de la semaine', '2018 visiteurs', 'Ce qui s’est passé']);
       Object.keys(J26).sort().forEach(function (d) {
         var r = J26[d], J = ecart(d, DEPART), a = histT(2022, J), b = histT(2018, J);
         t.push([d, SEM_L[js(d)], lJ(J), r.mes, r.sessions, r.vues, r.po == null ? '' : r.po, r.fc == null ? '' : fx(r.fc), r.fj == null ? '' : fx(r.fj), r.bas == null ? '' : Math.round(r.bas), r.haut == null ? '' : Math.round(r.haut),
+          r.sBas == null ? '' : Math.round(r.sBas), r.sHaut == null ? '' : Math.round(r.sHaut),
           r.co == null ? '' : r.co, r.gc, r.gpt, r.ia, a.d, SEM_L[js(a.d)], a.v == null ? '' : a.v, b.d, SEM_L[js(b.d)], b.v == null ? '' : b.v, NOTES26[d] || '']);
       });
       var texte = '﻿' + t.map(function (l) { return l.map(function (c) { c = String(c); return /[;"\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(';'); }).join('\r\n');
